@@ -48,22 +48,28 @@ def after_model_callback(callback_context: CallbackContext, llm_response: LlmRes
         modified = False
         new_parts = []
         for p in llm_response.content.parts:
+            # 1. Handle native agent transfer
             if getattr(p, "agent_transfer", None):
                 t = getattr(p.agent_transfer, "agent", "")
                 if t and t not in NATIVE_TRANSFER_TARGETS:
                     new_parts.append(Part.from_agent_transfer(agent=t))
                     modified = True
-                    continue
+                else:
+                    new_parts.append(p)
+                continue
             
-            # Sanitize verbatim response text if LLM attached intro/outro filler text
+            # 2. Handle text parts and sanitize verbatim responses
             if getattr(p, "text", None):
                 txt = p.text
+                sanitized_part = p
                 for v_str in VERBATIM_STRINGS:
                     if v_str in txt and txt.strip() != v_str:
-                        p = Part.from_text(text=v_str)
+                        sanitized_part = Part.from_text(text=v_str)
                         modified = True
                         break
-            new_parts.append(p)
+                new_parts.append(sanitized_part)
+            else:
+                new_parts.append(p)
 
         if modified:
             return LlmResponse.from_parts(parts=new_parts)
