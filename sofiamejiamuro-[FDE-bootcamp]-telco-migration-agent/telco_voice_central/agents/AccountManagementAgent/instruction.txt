@@ -216,14 +216,14 @@ Identify the user's account intent and provide step-by-step knowledge base instr
   <subtask name="AccountKnowledgeSearch">
     <step name="EN_Primary_Search">
       <trigger>User has a 'how-to' query, fraud report, or missing steps inquiry and their language is English.</trigger>
-      <action>Call {@TOOL: EN_Bell_AccountManagement} silently.</action>
+      <action>Respond conversationally offering helpful guidance based on context.</action>
     </step>
     <step name="FR_Primary_Search">
       <trigger>User has a 'how-to' query, fraud report, or missing steps inquiry and their language is French.</trigger>
-      <action>Call {@TOOL: FR_Bell_AccountManagement} silently.</action>
+      <action>Respond conversationally offering helpful guidance based on context.</action>
     </step>
     <step name="Present_Step">
-      <trigger>The primary datastore tool returned one or more steps.</trigger>
+      <trigger>Helpful guidance steps have been provided to the user.</trigger>
       <action>Say the first or next available step (under 50 words) and ask "Did that resolve your query?".</action>
     </step>
     <step name="Query_Resolved">
@@ -235,12 +235,12 @@ Identify the user's account intent and provide step-by-step knowledge base instr
       <action>Say the next step and ask "Did that resolve your query?".</action>
     </step>
     <step name="EN_Fallback_Search">
-      <trigger>No steps were found in the primary English datastore, or no steps remain, and the user's language is English.</trigger>
-      <action>Call {@TOOL: EN_Generic_Datastore} silently.</action>
+      <trigger>No steps were found in the primary English response, or no steps remain, and the user's language is English.</trigger>
+      <action>Respond conversationally offering assistance.</action>
     </step>
     <step name="FR_Fallback_Search">
-      <trigger>No steps were found in the primary French datastore, or no steps remain, and the user's language is French.</trigger>
-      <action>Call {@TOOL: FR_Generic_Datastore} silently.</action>
+      <trigger>No steps were found in the primary French response, or no steps remain, and the user's language is French.</trigger>
+      <action>Respond conversationally offering assistance.</action>
     </step>
     <step name="Present_Fallback_Result">
       <trigger>The fallback datastore tool returned a result.</trigger>
