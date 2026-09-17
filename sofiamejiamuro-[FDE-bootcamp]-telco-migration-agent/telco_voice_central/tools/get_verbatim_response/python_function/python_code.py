@@ -107,14 +107,13 @@ VERBATIM_STORE = {
 }
 
 
-def get_verbatim_response(response_key: str, language: str = "en", **kwargs) -> dict:
+def get_verbatim_response(response_key: str = "", language: str = "") -> dict:
     """
     Returns the exact verbatim string from the single source of truth dictionary.
     
     Args:
         response_key (str): The unique identifier for the verbatim message.
         language (str): Language code ('en', 'fr-CA', etc.).
-        **kwargs: Optional string formatting parameters (e.g. last_4_digits).
         
     Returns:
         dict: {'status': 'success', 'verbatim_text': str}
@@ -123,15 +122,9 @@ def get_verbatim_response(response_key: str, language: str = "en", **kwargs) -> 
     messages = VERBATIM_STORE.get(response_key, {})
     raw_text = messages.get(lang_code, messages.get("en", f"Message for '{response_key}' not found."))
     
-    # Safely format string if kwargs provided
-    try:
-        formatted_text = raw_text.format(**kwargs) if kwargs else raw_text
-    except KeyError:
-        formatted_text = raw_text
-        
     return {
         "status": "success",
         "response_key": response_key,
         "language": lang_code,
-        "verbatim_text": formatted_text
+        "verbatim_text": raw_text
     }
