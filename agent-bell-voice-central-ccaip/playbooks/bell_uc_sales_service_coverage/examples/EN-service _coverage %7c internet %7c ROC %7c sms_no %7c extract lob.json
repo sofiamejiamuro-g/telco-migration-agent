@@ -1,0 +1,87 @@
+{
+  "name": "133a247c-7dc1-4649-a82b-b8b30f601d37",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Which service are you inquiring about?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "I don't really know"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "In order to assist you better"
+    }
+  }, {
+    "playbookInvocation": {
+      "playbook": "bell_uc_ask_LOB",
+      "playbookInput": {
+        "precedingConversationSummary": "user's lob is to be captured",
+        "actionParameters": {
+          "language": "en",
+          "route": "sales_confirm_service_coverage"
+        }
+      },
+      "playbookOutput": {
+        "executionSummary": "User's lob is captured and saved in parameter {lob}",
+        "actionParameters": {
+          "langauge": "en",
+          "lob": "Internet",
+          "route": "sales_confirm_service_coverage"
+        }
+      },
+      "playbookState": "OUTPUT_STATE_OK"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Let's check if we offer Internet and Home phone service in your area. In which province are you looking to get service?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "ROC"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Get blazing-fast speeds on the Bell network with Bell Mobile Internet. Where you can get up to 5G internet connectivity with a mobile hotspot device so you can stay connected at home or on the go.\nI'll send a text to the device you're calling from, so that you can learn more and easily place an order on our website. Is that alright?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "No, thanks"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "en",
+        "route": "sales_confirm_service_coverage",
+        "sms_send_status": "Declined"
+      },
+      "outputActionParameters": {
+        "language": "en"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "User wants to know about service coverage in their area",
+    "actionParameters": {
+      "language": "en",
+      "province": "AB",
+      "route": "sales_confirm_service_coverage",
+      "utterance": "I want to check service coverage"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "When the user asks about service coverage , and then mentions about the line of business {lob}, after checking and extracting the {province} as well, route the user to flow bell_get_sdl_mapping_url and then to bell_Feedback",
+    "actionParameters": {
+      "language": "en",
+      "lob": "Internet",
+      "province": "ROC",
+      "utterance": "I want to check service coverage"
+    }
+  },
+  "displayName": "EN-service _coverage | internet | ROC | sms_no | extract lob",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 589,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

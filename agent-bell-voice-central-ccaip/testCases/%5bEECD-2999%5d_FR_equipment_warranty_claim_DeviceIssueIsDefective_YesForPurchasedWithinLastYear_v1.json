@@ -1,0 +1,173 @@
+{
+  "name": "2a131e85-ec28-4598-8893-183f857a19f1",
+  "displayName": "[EECD-2999]_FR_equipment_warranty_claim_DeviceIssueIsDefective_YesForPurchasedWithinLastYear_v1",
+  "testCaseConversationTurns": [ {
+    "userInput": {
+      "injectedParameters": {
+        "CLID": 9055163171,
+        "tfn": 8000212355
+      },
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "salut"
+        },
+        "languageCode": "fr-ca"
+      }
+    },
+    "virtualAgentOutput": {
+      "sessionParameters": {
+        "CLID": 9055163171,
+        "tfn": 8000212355
+      },
+      "triggeredIntent": {
+        "name": "Default Welcome Intent"
+      },
+      "currentPage": {
+        "name": "Get CX Input",
+        "flow": "bell_Identification"
+      },
+      "textResponses": [ {
+        "text": [ "\u003cspeak\u003eJe suis l'assistant virtuel de Bell, j'utilise l'intelligence artificielle pour apprendre. \u003cbreak time=\"1s\"/\u003e\u003c/speak\u003e" ]
+      }, {
+        "text": [ "Communiquez-vous avez nous au sujet du numéro à partir duquel vous nous appelez présentement?" ],
+        "allowPlaybackInterruption": true
+      } ],
+      "currentFlow": {
+        "name": "bell_Identification"
+      }
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "Oui"
+        },
+        "languageCode": "fr-ca"
+      }
+    },
+    "virtualAgentOutput": {
+      "triggeredIntent": {
+        "name": "context.confirm_yes"
+      },
+      "currentPage": {
+        "name": "Routing Page",
+        "flow": "Default Start Flow"
+      },
+      "textResponses": [ {
+        "text": [ "\u003cspeak\u003eMerci! \u003cbreak time=\"1s\"/\u003e\u003c/speak\u003e" ],
+        "allowPlaybackInterruption": true
+      }, {
+        "text": [ "Comment puis-je t'aider ?" ],
+        "allowPlaybackInterruption": true
+      } ],
+      "currentFlow": {
+        "name": "Default Start Flow"
+      }
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "Le bouton de mon téléphone d’occasion ne fonctionne pas"
+        },
+        "languageCode": "fr-ca"
+      }
+    },
+    "virtualAgentOutput": {
+      "textResponses": [ {
+        "text": [ "Un instant s'il vous plaît" ]
+      }, {
+        "text": [ "Si vous avez acheté un téléphone d’occasion certifié, il est soumis à la garantie limitée de Bell, qui est valide pendant 12 mois à partir de la date d’achat. Si votre téléphone est brisé en raison d’un problème du fabricant dans les 12 mois suivant votre achat, nous remplacerons le téléphone par un appareil semblable.\nAvez-vous acheté votre appareil au cours des 12 derniers mois ?" ]
+      } ]
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "oui"
+        },
+        "languageCode": "fr-ca"
+      }
+    },
+    "virtualAgentOutput": {
+      "triggeredIntent": {
+        "name": "Default Welcome Intent"
+      },
+      "currentPage": {
+        "name": "Confirm customer has access  to OTP device",
+        "flow": "bell_agent_transfer_authentication"
+      },
+      "textResponses": [ {
+        "text": [ "Afin de vous aider, je dois m'assurer de parler à la bonne personne. Nous utilisons maintenant un code de six chiffres pour vérifier votre compte. Avez-vous accès à un téléphone mobile dont le numéro figure à ce compte?" ]
+      } ],
+      "currentFlow": {
+        "name": "bell_agent_transfer_authentication"
+      }
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "oui"
+        },
+        "languageCode": "fr-ca"
+      }
+    },
+    "virtualAgentOutput": {
+      "triggeredIntent": {
+        "name": "custom.yes"
+      },
+      "currentPage": {
+        "name": "Trigger OTP",
+        "flow": "bell_agent_transfer_authentication"
+      },
+      "textResponses": [ {
+        "text": [ "Je vais texter un code de six chiffres au numéro de téléphone mobile figurant à votre dossier." ]
+      }, {
+        "text": [ "Quand vous aurez reçu le code par message texte, vous pourrez me le répéter ou le taper au clavier de votre téléphone." ]
+      } ],
+      "currentFlow": {
+        "name": "bell_agent_transfer_authentication"
+      }
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "581781"
+        },
+        "languageCode": "fr-ca"
+      }
+    },
+    "virtualAgentOutput": {
+      "currentPage": {
+        "name": "Start Page",
+        "flow": "bell_Live Agent Handoff"
+      },
+      "textResponses": [ {
+        "text": [ "Parfait, c'est le bon NIP." ]
+      }, {
+        "text": [ "Laissez-moi vérifier si un agent est disponible. Il se peut que je ne réponde pas pendant un certain temps au cours du transfert.  Vous saurez que l’opération a réussi lorsque nous vous ferons de nouveau signe. Veuillez rester en ligne. Merci!" ],
+        "allowPlaybackInterruption": true
+      } ],
+      "currentFlow": {
+        "name": "bell_Live Agent Handoff"
+      }
+    }
+  } ],
+  "creationTime": {
+    "seconds": 1759833281,
+    "nanos": 197412000
+  },
+  "testConfig": {
+    "flow": "Default Start Flow",
+    "page": "Start Page"
+  },
+  "languageCode": "fr-ca"
+}

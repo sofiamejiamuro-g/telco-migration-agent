@@ -1,0 +1,27 @@
+{
+  "name": "7c244853-df76-4ce4-9b67-d50303d57163",
+  "displayName": "v1/dfcx_support/acut_content_lookup#main-task",
+  "timeout": {
+    "seconds": 5
+  },
+  "serviceDirectory": {
+    "service": "projects/gcp-it-npe-pltfm-apigee/locations/us-central1/namespaces/apigee-nb-usc1-service-dir-namespace/services/apigee-nb-usc1-service",
+    "genericWebService": {
+      "uri": "https://apigee-nane1-uat.int.bell.ca/v1/dfcx_support/content_lookup",
+      "requestHeaders": [ {
+        "key": "x-apikey",
+        "value": "npZmDivP6Hxes3wtQ0tC9RqItjJTY8TgZHbOPNeFwvSYSKPI"
+      } ],
+      "webhookType": "FLEXIBLE",
+      "httpMethod": "POST",
+      "requestBody": "{\n  \"sessionInfo\": {\n    \"dfcx_session_id\": \"$session.params.dfcx_session_id\",\n    \"agent_id\": \"$session.params.agent_id\",\n    \"parameters\": {\n      \"language\": \"$session.params.language\",\n      \"trouble_ticket_state\":\"$session.params.trouble_ticket_state\",\n      \"task_type\": \"$session.params.task_type\"\n    }\n  },\n  \"fulfillmentInfo\": {\n    \"tag\": \"main-task\"\n  },\n  \"languageCode\": \"$request.language\"\n}",
+      "parameterMapping": [ {
+        "key": "acut_main_task_status_response",
+        "value": "sessionInfo.parameters.acut_main_task_status_response"
+      }, {
+        "key": "webhook_success",
+        "value": "sessionInfo.parameters.webhook_success"
+      } ]
+    }
+  }
+}

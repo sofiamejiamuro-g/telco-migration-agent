@@ -1,0 +1,98 @@
+{
+  "name": "e120c505-1e2c-46e5-957e-552ddaae7974",
+  "displayName": "CLID_CIRN_Check",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$sys.func.TO_NUMBER($session.params.CIRN) = $sys.func.TO_NUMBER($session.params.CLID)",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "For extra security, I’ll text you a 6-digit code on your phone." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Par mesure de sécurité, je vais envoyer par texto, un code à six chiffres sur ton téléphone." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetPage": "Webhook send-otp",
+    "name": "7d23ad89-6473-453a-b116-03e4ab5c34ed"
+  }, {
+    "condition": "$sys.func.TO_NUMBER($session.params.CIRN) != $sys.func.TO_NUMBER($session.params.CLID)",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "For extra security, I’ll text you a 6-digit code on the mobile phone we have on file for you" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Par mesure de sécurité, je vais envoyer par texto, un code à six chiffres sur le téléphone mobile que nous avons à ton dossier. " ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetPage": "Webhook send-otp",
+    "name": "d9eb4741-1c84-4bcf-8913-867c9e2003dd"
+  }, {
+    "condition": "$session.params.CIRN = $session.params.service_id OR $session.params.CIRN = $session.params.service_account_number",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "For extra security, I’ll text you a 6-digit code on your phone." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Par mesure de sécurité, je vais envoyer par texto, un code à six chiffres sur ton téléphone." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetPage": "Webhook send-otp",
+    "name": "0d74a740-fab5-440c-9664-44f58c46cce3"
+  }, {
+    "condition": "$session.params.CIRN != $session.params.service_id OR $session.params.CIRN != $session.params.service_account_number",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "For extra security, I’ll text you a 6-digit code on the mobile phone we have on file for you" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Par mesure de sécurité, je vais envoyer par texto, un code à six chiffres sur le téléphone mobile que nous avons à ton dossier. " ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetPage": "Webhook send-otp",
+    "name": "9ecf026c-7b42-4963-b6b1-80796adc35d8"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "e120c505-1e2c-46e5-957e-552ddaae7974"
+      }, {
+        "parameter": "flow_id",
+        "value": "5f8f4b4a-558a-4e66-9d28-a31389981b36"
+      }, {
+        "parameter": "page_name",
+        "value": "CLID_CIRN_Check"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

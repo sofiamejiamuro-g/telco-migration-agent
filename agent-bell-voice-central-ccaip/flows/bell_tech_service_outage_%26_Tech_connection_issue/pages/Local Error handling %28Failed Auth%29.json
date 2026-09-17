@@ -1,0 +1,116 @@
+{
+  "name": "0512d48d-a345-4ba4-8acc-39cf581d3c0b",
+  "displayName": "Local Error handling (Failed Auth)",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.global_error_counter \u003e= 3",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_aqd",
+    "name": "29f48f25-85bf-4168-8ab0-633f14fa1d10"
+  }, {
+    "condition": "$session.params.local_trigger = \"no_input\" AND $session.params.local_noinput_counter = 1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "$request.generative.response" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "$request.generative.response" ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "generators": [ {
+        "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/1b8d360c-c2a0-49b0-9a32-d5542ff42d87",
+        "outputParameter": "$request.generative.response"
+      } ]
+    },
+    "name": "b1f8ff41-8554-4483-af42-70d7827b7cca"
+  }, {
+    "condition": "$session.params.local_trigger = \"no_input\" AND $session.params.local_noinput_counter = 2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "$request.generative.response" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "$request.generative.response" ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "generators": [ {
+        "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/1bcff408-4981-474e-986a-309d3622718f",
+        "outputParameter": "$request.generative.response"
+      } ]
+    },
+    "name": "050d153e-5b40-4bd6-b1f7-aaa25a736b05"
+  }, {
+    "condition": "$session.params.local_trigger = \"no_input\" AND $session.params.local_noinput_counter = 3",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_aqd",
+    "name": "8280e95d-d2ba-40e9-a90b-5514d8b1aba5"
+  }, {
+    "condition": "$session.params.local_trigger = \"no_match\" AND $session.params.local_nomatch_counter = 1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "$request.generative.response" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "$request.generative.response" ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "generators": [ {
+        "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/f7ef68c2-5424-41ab-94dc-f8c07e3164de",
+        "outputParameter": "$request.generative.response"
+      } ]
+    },
+    "name": "3d920635-862d-4486-90fd-7b07db7dcfaf"
+  }, {
+    "condition": "$session.params.local_trigger = \"no_match\" AND $session.params.local_nomatch_counter = 2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "$request.generative.response" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "$request.generative.response" ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "generators": [ {
+        "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/ab9980b0-e324-4bef-8fd6-5e1c1c8d59e1",
+        "outputParameter": "$request.generative.response"
+      } ]
+    },
+    "name": "e15e29aa-2fb1-45f6-b05d-7f638edde9e0"
+  }, {
+    "condition": "$session.params.local_trigger = \"no_match\" AND $session.params.local_nomatch_counter = 3",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_aqd",
+    "name": "0a2d940c-fad2-4213-bb81-f43d58d503e3"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Previous Page",
+    "name": "7f04f041-10df-4041-a9db-8370d524b283"
+  } ]
+}

@@ -1,0 +1,97 @@
+{
+  "name": "2b5f6623-b44b-49cb-990e-801cbc386fcf",
+  "displayName": "Webhook set-auth-status",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "v1/customer-authentication#set-auth-status",
+    "tag": "set-auth-status",
+    "setParameterActions": [ {
+      "parameter": "brand",
+      "value": "$session.params.brand"
+    }, {
+      "parameter": "callKey",
+      "value": "$session.params.auth_options_response.callKey"
+    }, {
+      "parameter": "auth_method",
+      "value": "$session.params.auth_method"
+    }, {
+      "parameter": "status",
+      "value": "$session.params.status"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.webhook_success = \"True\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "auth_status",
+        "value": "Pass"
+      } ]
+    },
+    "targetPage": "End Flow",
+    "name": "adc415a1-1fdc-4144-913c-6c42b34f6109"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "2b5f6623-b44b-49cb-990e-801cbc386fcf"
+      }, {
+        "parameter": "flow_id",
+        "value": "87797521-bad6-4ad0-8ba5-2ff3b1d9bab2"
+      }, {
+        "parameter": "page_name",
+        "value": "Webhook set-auth-status"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Webhook set-auth-status Error",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+    
+    },
+    "name": "2126678a-ac95-46cc-bb27-05845a02fa0a"
+  }, {
+    "targetPage": "Webhook set-auth-status Error",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+    
+    },
+    "name": "ff5147f6-24a5-4aa3-9144-97dd4a9d4fd1"
+  }, {
+    "targetPage": "Webhook set-auth-status Error",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+    
+    },
+    "name": "492f2e46-6019-4081-814e-f3e9a896ad77"
+  }, {
+    "targetPage": "Webhook set-auth-status Error",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+    
+    },
+    "name": "a58cb5d6-93b8-4b83-9efa-1ba90202c9a7"
+  }, {
+    "targetPage": "Webhook set-auth-status Error",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+    
+    },
+    "name": "b1b42a81-b20e-4b2f-afa1-afbec399f7b4"
+  }, {
+    "targetPage": "Webhook set-auth-status Error",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+    
+    },
+    "name": "5546f0bb-e050-43b0-b8da-78d8d06a01f6"
+  } ]
+}

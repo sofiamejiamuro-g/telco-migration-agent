@@ -1,0 +1,55 @@
+{
+  "name": "d1f601b6-9d25-49a0-8e39-6a243dca5a1f",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "brand": "bell",
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "brand": "bell",
+        "language": "fr-ca",
+        "sms_content": "Vous pouvez visiter m.bell.ca/gererloptioninternet pour plus d'information sur les appareils Internet. ( bell.ca/apropos )",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+        "language": "fr-ca"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer wants to order modem or Internet",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "New",
+      "identification_status": "Fail",
+      "language": "fr-ca",
+      "lob": "Modem",
+      "province": "MB",
+      "route": "sales_order_device",
+      "utterance": "Je veux obtenir un modem pour Internet s’il vous plaît"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Since {lob} is captured as \"Internet\" and {device_type} is captured as \"modem\" in utterance route to bell_SMS Trigger flow",
+    "actionParameters": {
+      "brand": "bell",
+      "device_type": "Modem",
+      "language": "fr-ca"
+    }
+  },
+  "displayName": "FR \"sales_order_device\"- ID fail, province MB, Device_type Modem, LOB Internet",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 359,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

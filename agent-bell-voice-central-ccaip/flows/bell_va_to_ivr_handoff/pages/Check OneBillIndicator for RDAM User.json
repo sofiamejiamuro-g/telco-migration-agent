@@ -1,0 +1,51 @@
+{
+  "name": "92e6c72b-4509-4217-981d-77aeca6c9ae7",
+  "displayName": "Check OneBillIndicator for RDAM User",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.onebillindicator = \"Y\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "special_queue",
+        "value": "atl_consolidated"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "3c967f63-7c29-44ba-a737-2d3ad4a28209"
+  }, {
+    "condition": "$session.params.onebillindicator = \"M\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "special_queue",
+        "value": "mts_consolidated"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "02715d4c-a286-4f23-8203-b3ba5f53251b"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "92e6c72b-4509-4217-981d-77aeca6c9ae7"
+      }, {
+        "parameter": "flow_id",
+        "value": "7236071c-1553-4217-a18d-0a64a4737a9a"
+      }, {
+        "parameter": "page_name",
+        "value": "Check OneBillIndicator for RDAM User"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ],
+  "description": "Before sending to AQD. Path 1C in Miro for MTS COnsolodated \u0026 ATL Consolidated"
+}

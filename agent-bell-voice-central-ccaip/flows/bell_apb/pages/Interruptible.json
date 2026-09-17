@@ -1,0 +1,96 @@
+{
+  "name": "f5529020-f638-47ee-8719-591113b35256",
+  "displayName": "Interruptible",
+  "form": {
+    "parameters": [ {
+      "displayName": "interruptibletempinput",
+      "required": true,
+      "entityType": "@sys.any",
+      "fillBehavior": {
+        "initialPromptFulfillment": {
+          "messages": [ {
+            "text": {
+              "text": [ "$session.params.get_ras_apb_response.apb_message" ]
+            },
+            "languageCode": "en"
+          }, {
+            "text": {
+              "text": [ "$session.params.get_ras_apb_response.apb_message" ]
+            },
+            "languageCode": "fr-ca"
+          } ],
+          "advancedSettings": {
+            "playbackInterruptionSettings": {
+              "allowPlaybackInterruption": true
+            }
+          }
+        },
+        "repromptEventHandlers": [ {
+          "targetPage": "Previous Page",
+          "event": "sys.no-input-1",
+          "triggerFulfillment": {
+            "setParameterActions": [ {
+              "parameter": "interruptibletempinput",
+              "value": "no-input"
+            } ]
+          },
+          "name": "a3652a93-9b5c-4099-90b6-41a8d2e5d0c0"
+        } ]
+      }
+    } ]
+  },
+  "entryFulfillment": {
+    "advancedSettings": {
+      "playbackInterruptionSettings": {
+        "allowPlaybackInterruption": true
+      }
+    }
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.hang_up = true AND $page.params.interruptibletempinput != null",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "interruptibletempinput",
+        "value": null
+      } ]
+    },
+    "targetFlow": "bell_End the Conversation",
+    "name": "1d72ad54-9c55-4e22-9a5b-f750944fa1f0"
+  }, {
+    "condition": "$session.params.agent_transfer = true AND $page.params.interruptibletempinput != null",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "apb_skip",
+        "value": true
+      }, {
+        "parameter": "interruptibletempinput",
+        "value": null
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "64bbb12b-a267-4ff2-ba9a-64a5b831bff0"
+  }, {
+    "condition": "$page.params.interruptibletempinput != null",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "interruptibletempinput",
+        "value": null
+      } ]
+    },
+    "targetPage": "End Flow",
+    "name": "14956536-67c3-47e2-a801-e667030051c2"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Previous Page",
+    "event": "sys.no-input-1",
+    "triggerFulfillment": {
+      "advancedSettings": {
+        "playbackInterruptionSettings": {
+          "allowPlaybackInterruption": true,
+          "allowCancellation": true
+        }
+      }
+    },
+    "name": "1c03b679-e3f1-4ef3-87f4-7548f0f5f32d"
+  } ]
+}

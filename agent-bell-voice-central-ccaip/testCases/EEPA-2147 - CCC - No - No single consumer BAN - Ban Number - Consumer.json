@@ -1,0 +1,136 @@
+{
+  "name": "8bb9e255-84ad-4d20-b651-1f78533c1997",
+  "displayName": "EEPA-2147 - CCC - No - No single consumer BAN - Ban Number - Consumer",
+  "testCaseConversationTurns": [ {
+    "userInput": {
+      "injectedParameters": {
+        "clid": "+15194017803",
+        "tfn": 8889992321
+      },
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "hi"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "sessionParameters": {
+        "clid": "+15194017803",
+        "tfn": 8889992321
+      },
+      "triggeredIntent": {
+        "name": "Default Welcome Intent"
+      },
+      "currentPage": {
+        "name": "Get CX Input",
+        "flow": "bell_Identification"
+      },
+      "textResponses": [ {
+        "text": [ "\u003cspeak\u003eI'm Bell's virtual assistant, I use artificial intelligence to learn. \u003cbreak time=\"1s\"/\u003e\u003c/speak\u003e" ]
+      }, {
+        "text": [ "Are you calling about the account associated with the number you’re calling from?" ],
+        "allowPlaybackInterruption": true
+      } ],
+      "currentFlow": {
+        "name": "bell_Identification"
+      }
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "yes"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "triggeredIntent": {
+        "name": "context.confirm_yes"
+      },
+      "currentPage": {
+        "name": "Business BAN Check",
+        "flow": "bell_multiban"
+      },
+      "textResponses": [ {
+        "text": [ "\u003cspeak\u003eThanks! \u003cbreak time=\"1s\"/\u003e\u003c/speak\u003e" ],
+        "allowPlaybackInterruption": true
+      }, {
+        "text": [ "I found several accounts related to your number. So I know we’re talking about the right one, could you tell me whether you're calling about a business account?" ],
+        "allowPlaybackInterruption": true
+      } ],
+      "currentFlow": {
+        "name": "bell_multiban"
+      }
+    }
+  }, {
+    "userInput": {
+      "injectedParameters": {
+        "billing_account_number_list": [ "530773334", "549171272", "512346789" ]
+      },
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "no"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "sessionParameters": {
+        "billing_account_number_list": [ "530773334", "549171272", "512346789" ]
+      },
+      "triggeredIntent": {
+        "name": "custom.no"
+      },
+      "currentPage": {
+        "name": "Account Number",
+        "flow": "bell_multiban"
+      },
+      "textResponses": [ {
+        "text": [ "Could you also tell me your account number, please?" ]
+      } ],
+      "currentFlow": {
+        "name": "bell_multiban"
+      }
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "512346789"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "currentPage": {
+        "name": "Routing Page",
+        "flow": "Default Start Flow"
+      },
+      "textResponses": [ {
+        "text": [ "Thank you. I found the account." ],
+        "allowPlaybackInterruption": true
+      }, {
+        "text": [ "How can I help you?" ],
+        "allowPlaybackInterruption": true
+      } ],
+      "currentFlow": {
+        "name": "Default Start Flow"
+      }
+    }
+  } ],
+  "creationTime": {
+    "seconds": 1759065674,
+    "nanos": 27928000
+  },
+  "testConfig": {
+    "flow": "Default Start Flow",
+    "page": "Start Page"
+  },
+  "languageCode": "en"
+}

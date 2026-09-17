@@ -1,0 +1,81 @@
+{
+  "name": "cbf86960-3a4b-4a04-ac0b-2fd625447076",
+  "displayName": "Check Dispatch Status",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.dispatch_status = \"ENROUTE\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Unfortunately you can not Cancel your appointment as the technician is already on their way. You can advise the technician upon arrival with your concerns." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Malheureusement, vous ne pouvez pas annuler votre rendez-vous, car le ou la technicien(ne) est déjà en route. Vous pouvez faire part de vos préoccupations au ou à la technicien(ne) dès son arrivée." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetFlow": "bell_Feedback",
+    "name": "353aaaa6-c811-42be-9de8-0cd25e450ef4"
+  }, {
+    "condition": "$session.params.dispatch_status = \"ONSITE\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Unfortunately you can not Cancel your appointment as the technician has already arrived, and is probably working outside in the neighborhood connection box. You can advise the technician with your concerns." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Malheureusement, vous ne pouvez pas annuler votre rendez-vous, car le ou la technicien(ne) est déjà arrivé(e) et travaille probablement à l’extérieur, dans le boîtier de raccordement du voisinage. Vous pouvez faire part de vos préoccupations au ou à la technicien(ne)." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetFlow": "bell_Feedback",
+    "name": "d5b95626-06da-4eab-b567-ab0ea11d4c4e"
+  }, {
+    "condition": "$session.params.dispatch_status = \"OPEN\" OR $session.params.dispatch_status = \"REJECTED\" OR $session.params.dispatch_status = \"ASSIGNED\" OR $session.params.dispatch_status = \"SCHEDULED\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "mya_pitch",
+        "value": true
+      } ]
+    },
+    "targetFlow": "bell_appt_mgmt_mya_pitch_1",
+    "name": "c825ed2c-5f3c-4690-ad2f-d4f8a37be896"
+  }, {
+    "condition": "$session.params.mya_pitch = true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "mya_pitch",
+        "value": null
+      } ]
+    },
+    "targetPage": "User Confirmation",
+    "name": "1c871813-702e-4429-8010-230a3c1fb7b4"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "cbf86960-3a4b-4a04-ac0b-2fd625447076"
+      }, {
+        "parameter": "flow_id",
+        "value": "0e7d1e69-bcd3-4477-a0d1-c63b375883d2"
+      }, {
+        "parameter": "page_name",
+        "value": "Check Dispatch Status"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

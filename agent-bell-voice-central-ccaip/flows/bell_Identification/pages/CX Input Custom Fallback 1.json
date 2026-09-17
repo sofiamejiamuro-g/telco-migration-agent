@@ -1,0 +1,110 @@
+{
+  "name": "5f1cb387-d480-467f-bbfd-d0e44dd53780",
+  "displayName": "CX Input Custom Fallback 1",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "setParameterActions": [ {
+      "parameter": "CIRN",
+      "value": null
+    } ],
+    "nextActionOverride": {
+    
+    }
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.No_Match_Counter \u003e= 2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I'm sorry, I can't seem to find this number in our records. But don’t worry, I'll still help you however I can." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Désolé, je ne parviens pas à trouver ce numéro dans nos dossiers. Soyez sans crainte, je ferai quand même de mon mieux pour vous servir." ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "identification_status",
+        "value": "Fail"
+      }, {
+        "parameter": "No_Match_Counter",
+        "value": "$sys.func.ADD($session.params.No_Match_Counter, 1)"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "f6dafaec-7aa3-450b-8e80-354b4d4be5c3"
+  }, {
+    "condition": "$session.params.No_Match_Counter = 1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "$request.generative.response" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Pourriez-vous répéter le numéro de 10 chiffres? Vous pouvez aussi utiliser le clavier de votre téléphone.  Si vous cherchez du soutien pour un compte d'entreprise, veuillez dire « entreprise »." ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "No_Match_Counter",
+        "value": "$sys.func.ADD($session.params.No_Match_Counter, 1)"
+      } ],
+      "generators": [ {
+        "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/2a3fc3f6-86bd-4855-a910-e13f5e42dca6",
+        "outputParameter": "$request.generative.response"
+      } ]
+    },
+    "targetPage": "CIRN Collection Check",
+    "name": "9da70232-3481-40d0-a3bf-22508940c5a0"
+  }, {
+    "condition": "$session.params.No_Match_Counter = 0",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "$request.generative.response" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Pourriez-vous répéter le numéro? Vous pouvez également l'entrer à   l'aide de votre clavier téléphonique si vous préférez. Pour commander un   nouveau service, dites « nouveau service »." ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "No_Match_Counter",
+        "value": "$sys.func.ADD($session.params.No_Match_Counter, 1)"
+      } ],
+      "generators": [ {
+        "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/2a3fc3f6-86bd-4855-a910-e13f5e42dca6",
+        "outputParameter": "$request.generative.response"
+      } ]
+    },
+    "targetPage": "CIRN Collection Check",
+    "name": "e78443b2-2dc9-43be-9379-d4ee2f1d7806"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "5f1cb387-d480-467f-bbfd-d0e44dd53780"
+      }, {
+        "parameter": "flow_id",
+        "value": "8df7f836-8c64-4019-9506-2cedc52519c8"
+      }, {
+        "parameter": "page_name",
+        "value": "CX Input Custom Fallback 1"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

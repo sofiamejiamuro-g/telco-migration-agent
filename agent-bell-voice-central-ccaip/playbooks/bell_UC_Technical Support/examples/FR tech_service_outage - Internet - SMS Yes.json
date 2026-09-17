@@ -1,0 +1,71 @@
+{
+  "name": "8fc0b91f-9dbc-4ae9-bcde-fdeed095acdd",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_tech_intent_apb",
+      "inputActionParameters": {
+      
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Pourriez-vous me dire avec quel service vous rencontrez des problèmes ?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Internet"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Vous pouvez utiliser notre outil virtuel de réparation pour vérifier les pannes de service et dépanner votre équipement.\nJe vais envoyer un texto sur l’appareil au moyen duquel vous appelez, afin que vous puissiez y accéder rapidement. Est-ce que ça vous convient?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "oui"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "fr-ca",
+        "route": "Est-ce qu'il y a une panne?",
+        "sms_content": "Mess. de Bell : Vous pouvez visiter https://m.bell.ca/chatvirtualrepairf pour utiliser l’outil virtuel de réparation. ( bell.ca/apropos )",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+        "language": "fr-ca",
+        "sms_content": "Mess. de Bell : Vous pouvez visiter https://m.bell.ca/chatvirtualrepairf pour utiliser l’outil virtuel de réparation. ( bell.ca/apropos )",
+        "sms_type": "Public"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customers are facing outage in their area, they reported this issue for {lob} = Internet when asked used said yes to the sms",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca",
+      "lob": "Internet",
+      "route": "tech_service_outage",
+      "utterance": "Est-ce qu'il y a une panne?"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "User is redirected sms_trigger flow",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca",
+      "lob": "Internet",
+      "route": "tech_service_outage",
+      "sms_content": "Mess. de Bell : Vous pouvez visiter https://m.bell.ca/chatvirtualrepairf pour utiliser l’outil virtuel de réparation. ( bell.ca/apropos )",
+      "sms_type": "Public",
+      "utterance": "Est-ce qu'il y a une panne?"
+    }
+  },
+  "displayName": "FR tech_service_outage - Internet - SMS Yes",
+  "retrievalStrategy": "NEVER",
+  "tokenCount": 572,
+  "languageCode": "en"
+}

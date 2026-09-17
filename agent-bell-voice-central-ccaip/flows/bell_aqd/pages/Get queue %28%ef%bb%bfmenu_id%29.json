@@ -1,0 +1,115 @@
+{
+  "name": "2bd50265-5d9f-4343-890b-7f7752fd5570",
+  "displayName": "Get queue (﻿menu_id)",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "v1/agent-queue-determination",
+    "tag": "N/A",
+    "setParameterActions": [ {
+      "parameter": "intent",
+      "value": "$sys.func.IF(\"$session.params.route = null\", \"other_speak_to_agent\", $session.params.route)"
+    }, {
+      "parameter": "domain",
+      "value": "$session.params.domain"
+    }, {
+      "parameter": "menu_type",
+      "value": "$session.params.menu_type"
+    }, {
+      "parameter": "customer_type",
+      "value": "$session.params.customer_type"
+    }, {
+      "parameter": "webhook_success",
+      "value": null
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.webhook_success = true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "menu_id",
+        "value": "$session.params.aqd_response.menu_id"
+      }, {
+        "parameter": "menu_id_ref",
+        "value": "$sys.func.CONCATENATE(\"REF\", $sys.func.TO_TEXT($session.params.menu_id))"
+      } ]
+    },
+    "targetPage": "Get IVR queue based on menu_id",
+    "name": "ed2d5744-6b79-4263-bf05-6176fa7e48e9"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "menu_id",
+        "value": "$session.params.DEFAULT_MENU_ID"
+      }, {
+        "parameter": "menu_id_ref",
+        "value": "$sys.func.CONCATENATE(\"REF\", $sys.func.TO_TEXT($session.params.menu_id))"
+      } ]
+    },
+    "targetPage": "Get IVR queue based on menu_id",
+    "name": "310f7cce-2bed-482b-8e0b-28443f428db2"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Get IVR queue based on menu_id",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "menu_id",
+        "value": "$session.params.DEFAULT_MENU_ID"
+      } ]
+    },
+    "name": "4b081a5f-75dd-4d65-9a8d-5f01e6fead22"
+  }, {
+    "targetPage": "Get IVR queue based on menu_id",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "menu_id",
+        "value": "$session.params.DEFAULT_MENU_ID"
+      } ]
+    },
+    "name": "997c10af-4ce0-4953-b51d-7d194c06988c"
+  }, {
+    "targetPage": "Get IVR queue based on menu_id",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "menu_id",
+        "value": "$session.params.DEFAULT_MENU_ID"
+      } ]
+    },
+    "name": "31517102-7184-4643-807e-aa7950344114"
+  }, {
+    "targetPage": "Get IVR queue based on menu_id",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "menu_id",
+        "value": "$session.params.DEFAULT_MENU_ID"
+      } ]
+    },
+    "name": "ef9c80d9-2256-48ee-827a-4515a039b897"
+  }, {
+    "targetPage": "Get IVR queue based on menu_id",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "menu_id",
+        "value": "$session.params.DEFAULT_MENU_ID"
+      } ]
+    },
+    "name": "81cb7662-d6ac-4a8e-9c70-eb007a988759"
+  }, {
+    "targetPage": "Get IVR queue based on menu_id",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "menu_id",
+        "value": "$session.params.DEFAULT_MENU_ID"
+      } ]
+    },
+    "name": "5245ae7b-5ed7-448a-9a67-1e1dd5c64ab4"
+  } ]
+}

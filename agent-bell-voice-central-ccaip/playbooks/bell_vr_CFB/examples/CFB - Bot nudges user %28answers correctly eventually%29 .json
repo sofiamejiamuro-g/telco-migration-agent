@@ -1,0 +1,82 @@
+{
+  "name": "0e7b49cf-2b32-41b9-aad9-84b0c448e5ec",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Can you take a look at your modem and tell me what the lights look like?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Yeah, the lights are flashing green."
+    }
+  }, {
+    "agentUtterance": {
+      "text": "I hear you, but typically I'm looking to see if the lights are solid Blue, Red, Orange, or if they aren't on at all. Could you double-check if they match one of those?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Oh, my bad. Looking closer, they are actually all Blue"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Thanks for letting me know! I'm now checking what the next step is"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_vr_post_answer",
+      "inputActionParameters": {
+        "customer_answer1_id": "0"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "User has some issues with the VA, and the virtual repair agent is invoked",
+    "actionParameters": {
+      "acceptable_answers": [ {
+        "choice": "They’re all blue.",
+        "id": "0",
+        "sub-choices": [ ],
+        "title": ""
+      }, {
+        "choice": "Only the WAN light is red.",
+        "id": "1",
+        "sub-choices": [ ],
+        "title": ""
+      }, {
+        "choice": "Some lights are red or orange.",
+        "id": "2",
+        "sub-choices": [ ],
+        "title": ""
+      }, {
+        "choice": "Only the Internet light is red.",
+        "id": "3",
+        "sub-choices": [ ],
+        "title": ""
+      }, {
+        "choice": "No lights are on.",
+        "id": "4",
+        "sub-choices": [ ],
+        "title": ""
+      }, {
+        "choice": "None of the above.",
+        "id": "5",
+        "sub-choices": [ ],
+        "title": ""
+      } ],
+      "dcx_action_code": "6505",
+      "language": "en",
+      "lob": "Internet",
+      "title": "What colour are the lights on your modem?",
+      "vr_type": "CFB"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "This example demonstrates the \"Critical Pre-Check\" rule for dcx_action_code other than 6590. The user provides a specific technical detail (a color) that is not in the provided list. Instead of mapping it to \"None of the above,\" the bot treats it as an ambiguous response, provides a nudge by summarizing valid choices, and re-asks the question."
+  },
+  "displayName": "CFB - Bot nudges user (answers correctly eventually) ",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 583,
+  "languageCode": "en"
+}

@@ -1,0 +1,34 @@
+{
+  "name": "5d1a9644-0968-43e3-847c-c65a9cebab5e",
+  "displayName": "Language Based SMS (FIB)",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.language = \"en\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "sms_content",
+        "value": "Bell: You can visit bell.ca/fibetvtroubleshooting for more information on troubleshooting your Fibe TV service. ( bell.ca/about-us )"
+      }, {
+        "parameter": "sms_type",
+        "value": "Public"
+      } ]
+    },
+    "targetFlow": "bell_SMS Trigger",
+    "name": "a2976f46-1f93-4c8e-8d61-385537cc19e5"
+  }, {
+    "condition": "$session.params.language = \"fr-ca\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "sms_content",
+        "value": "Bell : Vous pouvez visiter bell.ca/telefibedepannage pour obtenir plus d'information sur le dépannage de votre service Télé Fibe. ( bell.ca/apropos )"
+      }, {
+        "parameter": "sms_type",
+        "value": "Public"
+      } ]
+    },
+    "targetFlow": "bell_SMS Trigger",
+    "name": "be5ab6a4-5816-4b49-91ff-7e8ed79c80b2"
+  } ]
+}

@@ -1,0 +1,70 @@
+{
+  "name": "5a41d215-3fd1-4a86-8fe9-25abdcc88089",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Sure, I can help with that. Why is your service currently suspended?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "I lost my phone"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Thank you. You can easily restore your mobility service in MyBell. I will send a text to the device you're calling from, with a link to do it yourself. Is that alright?"
+    }
+  }, {
+    "userUtterance": {
+    
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_global_error_count_check",
+      "inputActionParameters": {
+        "global_error_counter": "3",
+        "language": "en"
+      },
+      "outputActionParameters": {
+        "global_error_counter": "4",
+        "language": "en"
+      }
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "brand": "bell",
+        "language": "en",
+        "send_sms_status": "Declined",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "User wants to restore their mobility service",
+    "actionParameters": {
+      "brand": "bell",
+      "global_error_counter": "3",
+      "language": "en",
+      "route": "account_restore_service",
+      "unique_services": "MOBILITY",
+      "utterance": "I want to restore my mobility service"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "User is offered for sms and routed to sms flow",
+    "actionParameters": {
+      "brand": "bell",
+      "global_error_counter": "4",
+      "language": "en",
+      "send_sms_status": "Declined"
+    }
+  },
+  "displayName": "Restore Service : Mobility-lost - no input",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 406,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

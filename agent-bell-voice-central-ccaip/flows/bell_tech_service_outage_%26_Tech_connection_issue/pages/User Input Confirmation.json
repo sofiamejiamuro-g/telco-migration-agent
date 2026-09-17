@@ -1,0 +1,95 @@
+{
+  "name": "9acb771d-7330-4a50-86bd-02a6d8ade932",
+  "displayName": "User Input Confirmation",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "messages": [ {
+      "text": {
+        "text": [ "\u003cspeak\u003eI don't see any $session.params.lob outages at the moment. . \u003c/speak\u003e" ]
+      },
+      "languageCode": "en"
+    } ],
+    "conditionalCases": [ {
+      "cases": [ {
+        "condition": "$session.params.lob = \"Homephone\"",
+        "caseContent": [ {
+          "message": {
+            "text": {
+              "text": [ "Je ne vois aucune téléphone résidentiel panne pour le moment." ]
+            },
+            "languageCode": "fr-ca"
+          }
+        } ]
+      }, {
+        "condition": "$session.params.lob = \"Mobility\"",
+        "caseContent": [ {
+          "message": {
+            "text": {
+              "text": [ "Je ne vois aucune mobilité panne pour le moment." ]
+            },
+            "languageCode": "fr-ca"
+          }
+        } ]
+      }, {
+        "condition": "$session.params.lob = \"Internet\" OR $session.params.lob = \"internet\"",
+        "caseContent": [ {
+          "message": {
+            "text": {
+              "text": [ "Je ne vois aucune panne internet pour le moment." ]
+            },
+            "languageCode": "fr-ca"
+          }
+        } ]
+      }, {
+        "condition": "$session.params.tv_sub_type = \"sat\"",
+        "caseContent": [ {
+          "message": {
+            "text": {
+              "text": [ "Je ne vois aucune satellite TV panne pour le moment." ]
+            },
+            "languageCode": "fr-ca"
+          }
+        } ]
+      }, {
+        "condition": "$session.params.tv_sub_type = \"fibe tv app\"",
+        "caseContent": [ {
+          "message": {
+            "text": {
+              "text": [ "Je ne vois aucune application Fibe télé panne pour le moment." ]
+            },
+            "languageCode": "fr-ca"
+          }
+        } ]
+      } ]
+    } ]
+  },
+  "transitionRoutes": [ {
+    "intent": "compenation_request",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Check Outage Status Compensation Handling",
+    "name": "ea0bb1b4-8ff2-4d60-9d5b-61c9de8a069c"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Check LOB (no active outage)",
+    "event": "sys.no-input-1",
+    "triggerFulfillment": {
+    
+    },
+    "name": "c770d352-af08-4b7e-a023-f4a5e0b1515a"
+  } ],
+  "advancedSettings": {
+    "speechSettings": {
+      "endpointerSensitivity": 90,
+      "noSpeechTimeout": {
+        "seconds": 5
+      }
+    }
+  },
+  "speakerIdSettings": {
+  
+  }
+}

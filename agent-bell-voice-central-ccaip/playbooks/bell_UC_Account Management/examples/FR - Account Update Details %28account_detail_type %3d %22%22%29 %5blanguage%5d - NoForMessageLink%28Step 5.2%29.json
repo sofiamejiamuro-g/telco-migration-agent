@@ -1,0 +1,70 @@
+{
+  "name": "4a808298-b808-4adb-91e8-fef0d5d10bef",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "A quels renseignements du compte souhaitez-vous apporter des changements?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "changer de langue"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Bonne nouvelle! Vous pouvez facilement mettre à jour votre profil MonBell en ligne, y compris votre adresse postale et de facturation, et préférences linguistiques. Je vais envoyer un texto à l’appareil au moyen duquel vous appelez, afin que vous puissiez facilement apporter les changements. Est-ce que ça vous convient?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Non"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_get_sdl_mapping_url",
+      "inputActionParameters": {
+        "brand": "bell",
+        "language": "fr-ca",
+        "route": "account_update_details"
+      },
+      "outputActionParameters": {
+        "brand": "bell",
+        "language": "fr-ca"
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Pas de problème. Pour toute autre question, vous pouvez toujours consulter notre site web à l’adresse {faq_link}."
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_Feedback",
+      "inputActionParameters": {
+        "brand": "bell",
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "The customer wants to make update to their account information - including updating name, emails, address, billing address.",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca",
+      "route": "account_update_details",
+      "utterance": "Je veux mettre à jour mes coordonnées de facturation"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "The {update_detail_type} parameter is empty so we prompt the user with appropriate response then the customer says they want to update their language so we prompt the user with the message the user declines to receive a message on their device so we route them to bell_get_sdl_mapping_url flow prompt the user with appropriate {faq_link} prompt and then route then user to bell_Feedback flow.",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca",
+      "route": "account_update_details"
+    }
+  },
+  "displayName": "FR - Account Update Details (account_detail_type = \"\") [language] - NoForMessageLink(Step 5.2)",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 518,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

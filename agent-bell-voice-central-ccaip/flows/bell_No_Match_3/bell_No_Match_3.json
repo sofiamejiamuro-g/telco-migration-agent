@@ -1,0 +1,125 @@
+{
+  "name": "237864cd-f623-4ec1-89d0-ba82bf471fbe",
+  "displayName": "bell_No_Match_3",
+  "transitionRoutes": [ {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_get_sdl_mapping_url",
+    "name": "7c849500-676b-4cbd-be50-bc0b9acf5a7f"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Sorry, I still didn’t get that. You can check out our frequently asked questions at $session.params.faq_link", "Sorry, but I haven't been able to understand you. You can check out our frequently asked questions at $session.params.faq_link" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Désolée, mais je n’ai pas pu vous comprendre. Vous pouvez consulter notre foire aux questions à l’adresse $session.params.faq_link.", "Désolée, je n’ai toujours pas compris. Vous pouvez consulter notre foire aux questions à l’adresse $session.params.faq_link." ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "fallback_3_triggered",
+        "value": true
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "dd6ee3e6-6a3a-4b10-bfad-232d2f16a78f"
+  } ],
+  "eventHandlers": [ {
+    "targetFlow": "bell_aqd",
+    "event": "sys.no-match-default",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I didn't get that. Can you say it again?", "I missed what you said. What was that?", "Sorry, could you say that again?", "Sorry, can you say that again?", "Can you say that again?", "Sorry, I didn't get that. Can you rephrase?", "Sorry, what was that?", "One more time?", "What was that?", "Say that one more time?", "I didn't get that. Can you repeat?", "I missed that, say that again?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "J'ai du mal à comprendre cette question.", "J'ai mal compris votre demande.", "Je n'ai pas saisi ce que vous avez dit.", "Je crois que je ne vous suis pas.", "Je ne comprends pas de quoi vous me parlez." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "J'ai du mal à comprendre cette question.", "J'ai mal compris votre demande.", "Je n'ai pas saisi ce que vous avez dit.", "Je crois que je ne vous suis pas.", "Je ne comprends pas de quoi vous me parlez." ]
+        },
+        "languageCode": "fr"
+      } ]
+    },
+    "name": "f1793e52-d39e-4902-a305-2ba013c91e48"
+  }, {
+    "targetFlow": "bell_aqd",
+    "event": "sys.no-input-default",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I didn't get that. Can you say it again?", "I missed what you said. What was that?", "Sorry, could you say that again?", "Sorry, can you say that again?", "Can you say that again?", "Sorry, I didn't get that. Can you rephrase?", "Sorry, what was that?", "One more time?", "What was that?", "Say that one more time?", "I didn't get that. Can you repeat?", "I missed that, say that again?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "J'ai du mal à comprendre cette question.", "J'ai mal compris votre demande.", "Je n'ai pas saisi ce que vous avez dit.", "Je crois que je ne vous suis pas.", "Je ne comprends pas de quoi vous me parlez." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "J'ai du mal à comprendre cette question.", "J'ai mal compris votre demande.", "Je n'ai pas saisi ce que vous avez dit.", "Je crois que je ne vous suis pas.", "Je ne comprends pas de quoi vous me parlez." ]
+        },
+        "languageCode": "fr"
+      } ]
+    },
+    "name": "fd63ca8a-b5d9-4d29-8b5f-13073cadd98d"
+  }, {
+    "targetPage": "End Session",
+    "event": "wrapup",
+    "triggerFulfillment": {
+    
+    },
+    "name": "9bcf9761-5324-46a4-8e77-07473d3fb0af"
+  } ],
+  "nluSettings": {
+    "modelType": "MODEL_TYPE_CUSTOM",
+    "classificationThreshold": 0.30000001,
+    "modelTrainingMode": "MODEL_TRAINING_MODE_MANUAL"
+  },
+  "advancedSettings": {
+    "enabled": true,
+    "playbackInterruptionSettings": {
+    
+    }
+  },
+  "nluSettingsList": [ {
+    "modelType": "MODEL_TYPE_CUSTOM",
+    "classificationThreshold": 0.30000001,
+    "modelTrainingMode": "MODEL_TRAINING_MODE_MANUAL",
+    "languageCode": "en"
+  }, {
+    "modelType": "MODEL_TYPE_CUSTOM",
+    "classificationThreshold": 0.30000001,
+    "modelTrainingMode": "MODEL_TRAINING_MODE_MANUAL",
+    "languageCode": "fr-ca"
+  } ],
+  "inputParameterDefinitions": [ {
+    "name": "global_error_counter",
+    "description": "Counts the total number of no matches and no inputs given by the customer throughout the conversation",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "NUMBER"
+      }
+    },
+    "parameterType": {
+      "name": "global_error_counter",
+      "openapiJsonSchema": {
+        "type": "number"
+      }
+    }
+  } ],
+  "multiLanguageSettings": {
+  
+  }
+}

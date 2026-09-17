@@ -1,0 +1,63 @@
+{
+  "name": "d59a45e2-b870-47a0-83d3-e002ffaa9cdb",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "brand": "bell",
+        "language": "en"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "playbookInvocation": {
+      "playbook": "bell_UC_Sales",
+      "playbookInput": {
+        "precedingConversationSummary": "Customer wants to order a new device ",
+        "actionParameters": {
+          "brand": "bell",
+          "customer_type": "Existing",
+          "identification_status": "Pass",
+          "language": "en",
+          "line_type": "New",
+          "route": "sales_add_to_existing_account"
+        }
+      },
+      "playbookOutput": {
+        "executionSummary": "Customer is routed to sales_add_to_existing_account as per instructions",
+        "actionParameters": {
+        
+        }
+      },
+      "playbookState": "OUTPUT_STATE_OK"
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer has questions about needing a new device,device availability, device features, cost, related to devices that Bell sells",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "en",
+      "line_type": "New",
+      "route": "sales_order_device",
+      "utterance": "I am Looking for new device"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "set {line_type} = \"New\" as the {utterance} contains the value \"new\" and transition to bell_UC_Sales playbook with {route} = \"sales_add_to_existing_account\"",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "line_type": "New"
+    }
+  },
+  "displayName": "EN sales_order_device\"- ID Pass, line type new, existing customer",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 420,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

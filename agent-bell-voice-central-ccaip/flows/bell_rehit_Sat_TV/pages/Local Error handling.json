@@ -1,0 +1,87 @@
+{
+  "name": "3102b380-9729-4250-bbf8-f5a36d22c1db",
+  "displayName": "Local Error handling",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "global_error_counter",
+        "value": "$sys.func.ADD($session.params.global_error_counter,1)"
+      } ]
+    },
+    "name": "61f9aa7e-e114-41cf-96a8-67ac9870d41b"
+  }, {
+    "condition": "$session.params.global_error_counter \u003e= 3",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "page_sat_tv",
+        "value": null
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "b71f5ecc-f990-4f55-96bb-6f06d0d58802"
+  }, {
+    "condition": "$session.params.bell_rehit_Sat_TV = \"Check CX input \"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "bell_rehit_Sat_TV",
+        "value": null
+      } ]
+    },
+    "targetFlow": "bell_rehit_Check_Subscription",
+    "name": "2596339f-56ac-4c3e-90f9-e93903d02020"
+  }, {
+    "condition": "$session.params.bell_rehit_Sat_TV = \"Follow-up 1\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "bell_rehit_Sat_TV",
+        "value": null
+      } ]
+    },
+    "targetPage": "Follow-up 3",
+    "name": "da51c484-9c5a-44d4-b779-ea6d668fbf83"
+  }, {
+    "condition": "$session.params.bell_rehit_Sat_TV = \"Follow-up 2\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "bell_rehit_Sat_TV",
+        "value": null
+      } ]
+    },
+    "targetPage": "Follow-up 5",
+    "name": "4ed902ba-7fa2-4e2b-8849-ccbcde9e7eaa"
+  }, {
+    "condition": "$session.params.bell_rehit_Sat_TV = \"Follow-up 3\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "bell_rehit_Sat_TV",
+        "value": null
+      } ]
+    },
+    "targetPage": "Follow-up 2",
+    "name": "14dce43a-f9bb-460e-847f-3ee05546fbc2"
+  }, {
+    "condition": "$session.params.bell_rehit_Sat_TV = \"Follow-up 4\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "bell_rehit_Sat_TV",
+        "value": null
+      } ]
+    },
+    "targetFlow": "bell_rehit_Check_Subscription",
+    "name": "30bc00ba-3766-46ae-9b2c-f29331a37421"
+  }, {
+    "condition": "$session.params.bell_rehit_Sat_TV = \"Follow-up 5\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "bell_rehit_Sat_TV",
+        "value": null
+      } ]
+    },
+    "targetPage": "Follow-up 4",
+    "name": "d845a2dc-5c92-4924-ad65-14b7656a7d7d"
+  } ]
+}

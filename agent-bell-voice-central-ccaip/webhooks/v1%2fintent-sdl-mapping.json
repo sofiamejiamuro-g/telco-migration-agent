@@ -1,0 +1,27 @@
+{
+  "name": "90e15fd4-69d7-4cec-a355-257bcf20b296",
+  "displayName": "v1/intent-sdl-mapping",
+  "timeout": {
+    "seconds": 5
+  },
+  "serviceDirectory": {
+    "service": "projects/gcp-it-npe-pltfm-apigee/locations/us-central1/namespaces/apigee-nb-usc1-service-dir-namespace/services/apigee-nb-usc1-service",
+    "genericWebService": {
+      "uri": "https://apigee-nane1-uat.int.bell.ca/v1/intent-sdl-mapping",
+      "requestHeaders": [ {
+        "key": "x-apikey",
+        "value": "npZmDivP6Hxes3wtQ0tC9RqItjJTY8TgZHbOPNeFwvSYSKPI"
+      } ],
+      "webhookType": "FLEXIBLE",
+      "httpMethod": "POST",
+      "requestBody": "{\n  \"sessionInfo\": {\n    \"dfcx_session_id\": \"$session.params.dfcx_session_id\",\n    \"agent_id\": \"$session.params.agent_id\",\n    \"parameters\": {\n      \"brand\": \"$session.params.brand\",\n      \"intent\": \"$session.params.intent\"\n    }\n  },\n  \"fulfillmentInfo\": {\n    \"tag\": \"default\"\n  },\n  \"languageCode\": \"$request.language\"\n}",
+      "parameterMapping": [ {
+        "key": "intent_sdl_map_response",
+        "value": "sessionInfo.parameters.intent_sdl_map_response"
+      }, {
+        "key": "webhook_success",
+        "value": "sessionInfo.parameters.webhook_success"
+      } ]
+    }
+  }
+}

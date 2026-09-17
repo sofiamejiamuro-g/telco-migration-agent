@@ -1,0 +1,123 @@
+{
+  "name": "16700553-d406-4cef-b90b-4017bbf82364",
+  "displayName": "EEPBI-1020",
+  "testCaseConversationTurns": [ {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "hi"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "triggeredIntent": {
+        "name": "Default Welcome Intent"
+      },
+      "currentPage": {
+        "name": "Get CX Input",
+        "flow": "bell_Identification"
+      },
+      "textResponses": [ {
+        "text": [ "\u003cspeak\u003eI'm Bell's virtual assistant. I use AI to offer you assistance, quickly. For your security, please only enter personal information (like your account password) when prompted. \u003cbreak time=\"1s\"/\u003e\u003c/speak\u003e" ]
+      }, {
+        "text": [ "Is this concerning the number you are calling from?" ],
+        "allowPlaybackInterruption": true
+      } ],
+      "currentFlow": {
+        "name": "bell_Identification"
+      }
+    }
+  }, {
+    "userInput": {
+      "injectedParameters": {
+        "caller_channel": "TFN"
+      },
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "no"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "sessionParameters": {
+        "caller_channel": "TFN"
+      },
+      "triggeredIntent": {
+        "name": "context.confirm_no"
+      },
+      "currentPage": {
+        "name": "CX Input Custom Fallback 1",
+        "flow": "bell_Identification"
+      },
+      "textResponses": [ {
+        "text": [ "Okay, so what’s the 10-digit number you’re calling about?" ],
+        "allowPlaybackInterruption": true
+      } ],
+      "currentFlow": {
+        "name": "bell_Identification"
+      }
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "4166151622"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "currentPage": {
+        "name": "Check CX Input",
+        "flow": "bell_Identification"
+      },
+      "textResponses": [ {
+        "text": [ "\u003cspeak\u003eThat was \u003cprosody rate=\"slow\"\u003e\u003csay-as interpret-as='telephone'\u003e4166151622\u003c/say-as\u003e\u003c/prosody\u003e, right?\u003c/speak\u003e" ]
+      } ],
+      "currentFlow": {
+        "name": "bell_Identification"
+      }
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "yes"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "triggeredIntent": {
+        "name": "context.confirm_yes"
+      },
+      "currentPage": {
+        "name": "Routing Page",
+        "flow": "Default Start Flow"
+      },
+      "textResponses": [ {
+        "text": [ "\u003cspeak\u003eThanks! \u003cbreak time=\"1s\"/\u003e\u003c/speak\u003e" ]
+      }, {
+        "text": [ "How can I help you?" ]
+      } ],
+      "currentFlow": {
+        "name": "Default Start Flow"
+      }
+    }
+  } ],
+  "creationTime": {
+    "seconds": 1741870938,
+    "nanos": 167972000
+  },
+  "testConfig": {
+    "flow": "Default Start Flow",
+    "page": "Start Page"
+  },
+  "languageCode": "en"
+}

@@ -1,0 +1,75 @@
+{
+  "name": "95165464-e479-4447-bf46-5be4c4cdecf5",
+  "displayName": "Local Error Handling",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.global_error_counter \u003e= 3",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_aqd",
+    "name": "3b660fb4-00dc-4847-a130-d7868777bc6b"
+  }, {
+    "condition": "$session.params.local_trigger = \"no_match\" AND $session.params.local_nomatch_counter = 1",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_No_Match_3",
+    "name": "4bbd5214-1e7d-47be-ae4d-32e482e18575"
+  }, {
+    "condition": "$session.params.local_trigger = \"no_match\" AND $session.params.local_nomatch_counter = 2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "$request.generative.response" ]
+        },
+        "languageCode": "en"
+      } ],
+      "generators": [ {
+        "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/ab9980b0-e324-4bef-8fd6-5e1c1c8d59e1",
+        "outputParameter": "$request.generative.response"
+      } ]
+    },
+    "name": "8e9da536-b155-4e41-847d-91b389183967"
+  }, {
+    "condition": "$session.params.local_trigger = \"no_match\" AND $session.params.local_nomatch_counter = 3",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_No_Match_3",
+    "name": "13f9f1d1-3e54-40d7-8753-ba1331570527"
+  }, {
+    "condition": "$session.params.local_trigger = \"no_input\" AND $session.params.local_noinput_counter = 1",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_No_Input_3",
+    "name": "2f417367-75f8-4968-b80e-67bf27f537cc"
+  }, {
+    "condition": "$session.params.local_trigger = \"no_input\" AND $session.params.local_noinput_counter = 2",
+    "triggerFulfillment": {
+      "generators": [ {
+        "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/1bcff408-4981-474e-986a-309d3622718f",
+        "outputParameter": "$request.generative.response"
+      } ]
+    },
+    "targetPage": "Local Error Handling",
+    "name": "d4ef8fd6-6a2b-42e8-a1c1-a172efb1af7d"
+  }, {
+    "condition": "$session.params.local_trigger = \"no_input\" AND $session.params.local_noinput_counter = 3",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_No_Input_3",
+    "name": "811df5e3-fead-4864-9793-34e6f696447c"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Previous Page",
+    "name": "16320fe5-9bce-430e-a5fb-cafc47b7a3eb"
+  } ]
+}

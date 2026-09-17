@@ -1,0 +1,81 @@
+{
+  "name": "aae95577-0858-4fd1-a1f8-edaf23eb9315",
+  "displayName": "CX didn't receive SMS Fallback",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.global_error_counter \u003e= 3",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_aqd",
+    "name": "488cf57d-49d1-4e27-ae53-990e7e28f22d"
+  }, {
+    "condition": "$session.params.fallback_counter = 1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Sorry, that doesn't seem right.  Please say the 10-digit number you would like me to send the text to. You can also use your key pad to enter it. " ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Désolé, cela ne semble pas correct. Veuillez dire le numéro à 10 chiffres auquel vous souhaitez que j'envoie le message texte. Vous pouvez également utiliser votre clavier pour l'entrer." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetPage": "Prompt CX for Phone Number",
+    "name": "5b79957e-6e17-4414-9681-081dcb8aaf10"
+  }, {
+    "condition": "$session.params.fallback_counter = 2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Sorry, what's that 10-digit number again? You can also enter it on your phone, if you prefer." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Désolée, quel est ce numéro à 10 chiffres encore une fois? Vous pouvez également le saisir sur votre téléphone, si vous préférez." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetPage": "Prompt CX for Phone Number",
+    "name": "705dba3a-e31d-469d-83be-18ad3065f895"
+  }, {
+    "condition": "$session.params.fallback_counter = 3",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "webhook_success",
+        "value": null
+      } ]
+    },
+    "targetPage": "Webhook intent-sdl-mapping | Fallback",
+    "name": "375c94d8-0772-4ea6-87d5-ab7dd35c9ee0"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "aae95577-0858-4fd1-a1f8-edaf23eb9315"
+      }, {
+        "parameter": "flow_id",
+        "value": "b5addc0e-1d3b-4354-9541-c698dba5f163"
+      }, {
+        "parameter": "page_name",
+        "value": "CX didn't receive SMS Fallback"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

@@ -1,0 +1,63 @@
+{
+  "name": "cf8bd9a4-f868-42d3-9c9e-5ef0d6978419",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Quelle est la raison de la suspension de votre service ?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "J'ai perdu mon téléphone"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Je suis désolé d'entendre cela. As-tu essayé d'utiliser une fonction de locatisation, comme \"Localiser mon iPhone\" ou \"Localiser mon appareil\"?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Non"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Compris, je suggérerais de suspendre temporairement votre service pour éviter une utilisation non autorisée. Je vais envoyer un texte à l’appareil depuis lequel vous appelez, avec un lien pour le faire vous-même, est-ce que ça va ?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Oui"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "brand": "bell",
+        "language": "fr-ca",
+        "sms_content": "Vous pouvez suivre votre appareil en visitant icloud.com/find pour iphone ou google.com/android/find pour Android. Pour suspendre temporairement votre service de mobilité, visitez bell.ca/suspendline et suivez les étapes. (bell.ca/about-us)",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer trying to suspend their service as there device is lost",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca",
+      "route": "account_suspend_service",
+      "utterance": "Suspendre mon service mobile"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Customer query is resolved.",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca",
+      "route": "equipment_report_lost_device"
+    }
+  },
+  "displayName": "FR - Account suspend service - Lost (NO) - Yes",
+  "retrievalStrategy": "NEVER",
+  "tokenCount": 422,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "fr"
+}

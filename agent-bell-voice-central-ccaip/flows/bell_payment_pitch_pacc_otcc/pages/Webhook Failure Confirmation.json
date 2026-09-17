@@ -1,0 +1,149 @@
+{
+  "name": "9f8232b6-7d78-4fcb-a352-7b87b2849d1c",
+  "displayName": "Webhook Failure Confirmation",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "messages": [ {
+      "text": {
+        "text": [ "Thanks for your patience. It looks like I'm having trouble proceeding to the next step right now. There's nothing wrong on your end.\nIf you're not already on pre-authorized payments, it can be an easy way to pay for your bills. I'll send a text to the device you're calling from, so that you can sign up for preauthorized payments yourself in the MyBell App. Is that alright?" ]
+      },
+      "languageCode": "en"
+    }, {
+      "text": {
+        "text": [ "Merci de votre patience. Il semble que j'aie du mal à passer à l'étape suivante pour le moment. Il n'y a aucun problème de votre côté.\nSi vous n’êtes pas déjà inscrit aux paiements préautorisés, cela peut être un moyen facile de payer vos factures. Je vais envoyer un texto à l’appareil à partir duquel vous appelez, afin que vous puissiez vous inscrire vous-même aux paiements préautorisés dans l’Appli MonBell. Est-ce que ça va?" ]
+      },
+      "languageCode": "fr-ca"
+    } ],
+    "setParameterActions": [ {
+      "parameter": "card_number",
+      "value": null
+    }, {
+      "parameter": "cc_token",
+      "value": null
+    }, {
+      "parameter": "expiry_date",
+      "value": null
+    }, {
+      "parameter": "expiry_month",
+      "value": null
+    }, {
+      "parameter": "expiry_year",
+      "value": null
+    }, {
+      "parameter": "security_code",
+      "value": null
+    }, {
+      "parameter": "cvv_number",
+      "value": null
+    }, {
+      "parameter": "cc_from_utterance",
+      "value": null
+    } ]
+  },
+  "transitionRoutes": [ {
+    "intent": "context.confirm_yes",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Language Based SMS",
+    "name": "eed9f6f5-b6ca-40b1-a4e7-c7f98c5ce585"
+  }, {
+    "intent": "context.confirm_no",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Intent SDL Mapping",
+    "name": "e86c3ddf-77a3-47fb-ad1c-db59f01fe6fc"
+  }, {
+    "intent": "context.different_number",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "different_number",
+        "value": true
+      } ]
+    },
+    "targetPage": "Language Based SMS",
+    "name": "46152dc8-09ee-45b9-bffc-9843fd0b3411"
+  } ],
+  "eventHandlers": [ {
+    "event": "sys.no-input-1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I didn't quite get that. Can you try again?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je n’ai pas tout à fait compris. Pouvez-vous réessayer?" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "9125e8ff-8f93-4cd7-b81a-de5b7a747c10"
+  }, {
+    "event": "sys.no-input-2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I still didn't get that" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je n’ai toujours pas compris" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "f4894c44-5223-4446-8bc2-218edf54c945"
+  }, {
+    "targetFlow": "bell_determine_handover",
+    "event": "sys.no-input-3",
+    "triggerFulfillment": {
+    
+    },
+    "name": "e5c50136-ead2-493b-a5f5-ef0dd0ddc4c3"
+  }, {
+    "event": "sys.no-match-1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I didn't quite get that. Can you try again?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je n’ai pas tout à fait compris. Pouvez-vous réessayer?" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "a23e6b8a-31ca-43ef-94c2-6d4df29ebfed"
+  }, {
+    "event": "sys.no-match-2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I still didn't get that" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je n’ai toujours pas compris" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "3ec2f623-0663-4b8e-8aba-8f7391be2f7f"
+  }, {
+    "targetFlow": "bell_determine_handover",
+    "event": "sys.no-match-3",
+    "triggerFulfillment": {
+    
+    },
+    "name": "847ab695-b3d4-480c-82dd-4ca3640a73d8"
+  } ]
+}

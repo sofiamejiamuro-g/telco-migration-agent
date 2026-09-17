@@ -1,0 +1,204 @@
+{
+  "name": "75666b0a-b52a-477e-bc00-120879745f90",
+  "displayName": "ID or Auth or NM1 or PACC or Webhook Failure Confirmation",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "conditionalCases": [ {
+      "cases": [ {
+        "condition": "$session.params.identification_status = \"Fail\" OR $session.params.auth_status = \"Fail\"",
+        "caseContent": [ {
+          "message": {
+            "text": {
+              "text": [ "Since I was unable to verify your account, I'll send a text to the device you're calling from so that you can get update pre-authorized payment in the MyAccount app. Is that alright?" ]
+            },
+            "languageCode": "en"
+          }
+        }, {
+          "message": {
+            "text": {
+              "text": [ "Comme je n’ai pas pu vérifier votre compte, j’enverrai un texto à l’appareil au moyen duquel vous appelez afin que vous puissiez mettre à jour le paiement pré-autorisé dans l’appli Mon compte. Est-ce que ça vous convient?" ]
+            },
+            "languageCode": "fr-ca"
+          }
+        } ]
+      }, {
+        "condition": "$session.params.webhook_success = \"false\"",
+        "caseContent": [ {
+          "message": {
+            "text": {
+              "text": [ "I'm unable to retrieve your account information at this time. I'll send a text to the device you're calling from so that you can update pre-authorized payment on MyAccount app. Is that alright?" ]
+            },
+            "languageCode": "en"
+          }
+        }, {
+          "message": {
+            "text": {
+              "text": [ "Je ne suis pas en mesure de récupérer les informations relatives à votre compte pour le moment. Je vais envoyer un texto à l’appareil au moyen duquel vous appelez afin que vous puissiez mettre à jour le paiement pré-autorisé dans l’appli Mon compte. Est-ce que ça vous convient?" ]
+            },
+            "languageCode": "fr-ca"
+          }
+        } ]
+      }, {
+        "condition": "$session.params.webhook_success = \"nm1\"",
+        "caseContent": [ {
+          "message": {
+            "text": {
+              "text": [ "We are currently performing maintenance on our systems so unfortunately I am unable to proceed with updating your pre authorized payments. I'll send a text to the device you're calling from, so that you can proceed with this step. Is that alright?" ]
+            },
+            "languageCode": "en"
+          }
+        }, {
+          "message": {
+            "text": {
+              "text": [ "Malheureusement, une maintenance de nos systèmes est en cours, ce qui m'empêche de mettre à jour vos paiements pré-autorisés. Je vais envoyer un texto à l'appareil au moyen duquel vous appelez afin que vous puissiez passer à cette étape. Est-ce que ça vous convient?" ]
+            },
+            "languageCode": "fr-ca"
+          }
+        } ]
+      }, {
+        "condition": "$session.params.eligInd = \"N\"",
+        "caseContent": [ {
+          "message": {
+            "text": {
+              "text": [ "Unfortunately changes to your credit card payments are blocked for your account. At the moment you can only make payments through your financial intuition, or you can sign up for preauthorized bank payments. I'll send a text to the device you're calling from so that you can set up for pre-authorized debit. Is that alright?" ]
+            },
+            "languageCode": "en"
+          }
+        }, {
+          "message": {
+            "text": {
+              "text": [ "Malheureusement, la modification des paiements par carte de crédit est bloquée pour votre compte. Pour le moment, vous ne pouvez effectuer des paiements que par l’intermédiaire de votre institution financière ou vous inscrire au programme de prélèvement bancaire automatique. Je vais envoyer un texto à l’appareil au moyen duquel vous appelez afin que vous puissiez configurer le débit pré-autorisé. Est-ce que ça vous convient?" ]
+            },
+            "languageCode": "fr-ca"
+          }
+        } ]
+      } ]
+    } ]
+  },
+  "transitionRoutes": [ {
+    "intent": "context.sms_yes",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Language Based Message",
+    "name": "ca5e9df5-799a-4e89-aa7c-fbf0c68fa264"
+  }, {
+    "intent": "context.sms_no",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Intent SDL Mapping",
+    "name": "df6399bc-0cf9-4490-8916-13bce7929fab"
+  }, {
+    "intent": "context.different_number",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "different_number",
+        "value": true
+      } ]
+    },
+    "targetPage": "Language Based Message",
+    "name": "7fd1faa8-1b2e-4930-8bf5-3180e815aa39"
+  } ],
+  "eventHandlers": [ {
+    "event": "sys.no-input-1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I didn't quite get that. Can you try again?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je n’ai pas tout à fait compris. Pouvez-vous réessayer?" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "c8467c2f-88d5-4ab0-a606-80a8a372531f"
+  }, {
+    "event": "sys.no-match-1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I didn't quite get that. Can you try again?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je n’ai pas tout à fait compris. Pouvez-vous réessayer?" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "1a032b60-e3ae-42a3-9000-c11ba0b7d08d"
+  }, {
+    "event": "sys.no-input-2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I still didn't get that" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je n’ai toujours pas compris." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "b4b7ca68-0da1-4d6c-9b75-e6c4a4c6c11b"
+  }, {
+    "event": "sys.no-match-2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I still didn't get that" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je n’ai toujours pas compris." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "8c3b1009-a52c-4941-be01-2862be0747f3"
+  }, {
+    "targetFlow": "bell_Feedback",
+    "event": "sys.no-match-3",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "If you'd still like to update Pre-Authorized payments, you can do so in MyBell. Please visit bell.ca/support on how to update Pre-Authorized payments" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "D’accord. Si vous souhaitez toujours mettre à jour vos détails de paiement, vous pouvez le faire dans l’appli Mon compte. Veuillez visiter  bell.ca/soutien  pour en savoir plus." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "2b282d4c-9512-4c3c-b478-0231fbce71b6"
+  }, {
+    "targetFlow": "bell_Feedback",
+    "event": "sys.no-input-3",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "If you'd still like to update Pre-Authorized payments, you can do so in MyBell. Please visit bell.ca/support on how to update Pre-Authorized payments" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "D’accord. Si vous souhaitez toujours mettre à jour vos détails de paiement, vous pouvez le faire dans l’appli Mon compte. Veuillez visiter  bell.ca/soutien  pour en savoir plus." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "d8b062a5-9468-4f19-965e-0036caca81f7"
+  } ]
+}

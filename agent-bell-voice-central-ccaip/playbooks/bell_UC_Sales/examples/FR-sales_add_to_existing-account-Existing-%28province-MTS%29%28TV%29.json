@@ -1,0 +1,67 @@
+{
+  "name": "9dbb401a-28f4-4fc7-93e8-806eca7c9cc7",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+        "language": "fr-ca"
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Bien sûr, laissez-moi vous aider.\nDésirez-vous ajouter un nouveau service ou modifier votre service actuel?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "les deux lignes"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Commençons par vous aideZ avec votre nouvelle demande de service."
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_aqd",
+      "inputActionParameters": {
+        "language": "fr-ca",
+        "line_type": "New",
+        "lob": "TV",
+        "province": "MTS",
+        "special_queue": "bell_sales_to_mts"
+      },
+      "outputActionParameters": {
+        "language": "fr-ca"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "customer is inquiring about adding a new tv line and {province} is \"MTS\" from id flow",
+    "actionParameters": {
+      "brand": "bell",
+      "identification_status": "Pass",
+      "language": "fr-ca",
+      "lob": "TV",
+      "province": "MTS",
+      "route": "sales_add_to_existing_account",
+      "utterance": "À partir du mois prochain, je souhaite ajouter le service de télévision à mon forfait."
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "as {lob} is tv and {province} is MTS we are transferring to aqd",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca",
+      "line_type": "New",
+      "lob": "TV",
+      "province": "MTS"
+    }
+  },
+  "displayName": "FR-sales_add_to_existing-account-Existing-(province-MTS)(TV)",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 431,
+  "languageCode": "fr"
+}

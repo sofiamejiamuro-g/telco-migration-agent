@@ -1,0 +1,88 @@
+{
+  "name": "dd1e0c45-75ff-46f3-bb08-9f209b16433f",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Hmmm, je n'ai pas bien compris. Pourriez-vous réessayer?"
+    }
+  }, {
+    "userUtterance": {
+    
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_global_error_count_check",
+      "inputActionParameters": {
+        "global_error_counter": "0"
+      },
+      "outputActionParameters": {
+        "global_error_counter": "1"
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Êtes-vous toujours là? Pouvez-vous répèter?"
+    }
+  }, {
+    "userUtterance": {
+    
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_global_error_count_check",
+      "inputActionParameters": {
+        "global_error_counter": "1"
+      },
+      "outputActionParameters": {
+        "global_error_counter": "2"
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "\u003cspeak\u003eVous pouvez consulter notre foire aux questions sur \u003csay-as interpret-as=\"url\"\u003ebell.ca/soutien-prepaye\u003c/say-as\u003e\u003c/speak\u003e"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_global_error_count_check",
+      "inputActionParameters": {
+        "global_error_counter": "2"
+      },
+      "outputActionParameters": {
+        "global_error_counter": "3"
+      }
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_No_Input_3",
+      "inputActionParameters": {
+        "brand": "bell",
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+        "brand": "bell",
+        "language": "fr-ca"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "the user sends No input",
+    "actionParameters": {
+      "brand": "bell",
+      "global_error_counter": "0",
+      "language": "fr-ca",
+      "utterance": ""
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "The customer is not giving any input,  so flow virgin_global_error_count_check is called each time and VA responds as per instructions and on 3rd time call the bell_no_input_3 flow",
+    "actionParameters": {
+      "brand": "bell",
+      "global_error_counter": "3",
+      "language": "fr-ca"
+    }
+  },
+  "displayName": "FR - No Input",
+  "retrievalStrategy": "NEVER",
+  "tokenCount": 567,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

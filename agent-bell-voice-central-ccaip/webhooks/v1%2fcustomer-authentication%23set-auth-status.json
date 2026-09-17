@@ -1,0 +1,27 @@
+{
+  "name": "5fc17374-ec4d-49fb-b2b8-2a4a012ee6e2",
+  "displayName": "v1/customer-authentication#set-auth-status",
+  "timeout": {
+    "seconds": 30
+  },
+  "serviceDirectory": {
+    "service": "projects/gcp-it-npe-pltfm-apigee/locations/us-central1/namespaces/apigee-nb-usc1-service-dir-namespace/services/apigee-nb-usc1-service",
+    "genericWebService": {
+      "uri": "https://apigee-nane1-uat.int.bell.ca/v1/customer-authentication",
+      "requestHeaders": [ {
+        "key": "x-apikey",
+        "value": "npZmDivP6Hxes3wtQ0tC9RqItjJTY8TgZHbOPNeFwvSYSKPI"
+      } ],
+      "webhookType": "FLEXIBLE",
+      "httpMethod": "POST",
+      "requestBody": "{\n  \"sessionInfo\": {\n    \"dfcx_session_id\": \"$session.params.dfcx_session_id\",\n    \"agent_id\": \"$session.params.agent_id\",\n    \"parameters\": {\n      \"brand\": \"$session.params.brand\",\n      \"callKey\": \"$session.params.callKey\",\n      \"status\": \"$session.params.status\",\n      \"auth_method\": \"$session.params.auth_method\"\n    }\n  },\n  \"fulfillmentInfo\": {\n    \"tag\": \"set-auth-status\"\n  },\n  \"languageCode\": \"$request.language\"\n}",
+      "parameterMapping": [ {
+        "key": "set_auth_status_response",
+        "value": "sessionInfo.parameters.set_auth_status_response"
+      }, {
+        "key": "webhook_success",
+        "value": "sessionInfo.parameters.webhook_success"
+      } ]
+    }
+  }
+}

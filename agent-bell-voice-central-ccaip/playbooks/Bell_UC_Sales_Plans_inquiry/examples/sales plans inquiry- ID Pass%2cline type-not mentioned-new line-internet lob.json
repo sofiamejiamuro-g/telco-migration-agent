@@ -1,0 +1,64 @@
+{
+  "name": "e13d58ff-66e3-499e-8ca9-e72107289e8b",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Désirez-vous ajouter un nouveau service ou modifier votre service actuel?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "nouveau plan"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "sales_add_to_existing_account_flow",
+      "inputActionParameters": {
+        "customer_type": "Existing",
+        "identification_status": "Pass",
+        "language": "fr-ca",
+        "line_type": "New",
+        "lob": "Internet",
+        "province": "MB",
+        "route": "sales_add_to_existing-account"
+      },
+      "outputActionParameters": {
+        "language": "fr-ca"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "customer is asking \"can i get an internet service\" and lob is \"Internet\" and province is not mentioned",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "Existing",
+      "language": "fr-ca",
+      "route": "sales_plans_inquiry",
+      "utterance": "Je voudrais souscrire à un service internet."
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "from the identification flow, know the customer_type as \"Existing\", as we don't know the line type, we need to ask the customer, if customer says that they are looking to make changes in the new plan, we need to set \"line_type\" as \"New\" ",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca",
+      "line_type": "New",
+      "lob": "Internet",
+      "route": "sales_add_to_existing_account"
+    }
+  },
+  "displayName": "sales plans inquiry- ID Pass,line type-not mentioned-new line-internet lob",
+  "retrievalStrategy": "STATIC",
+  "tokenCount": 432,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

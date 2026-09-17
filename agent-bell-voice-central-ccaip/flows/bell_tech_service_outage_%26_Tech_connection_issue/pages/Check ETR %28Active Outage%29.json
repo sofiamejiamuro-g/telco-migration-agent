@@ -1,0 +1,88 @@
+{
+  "name": "16a6c27b-3845-4da9-927e-fba0972c6c40",
+  "displayName": "Check ETR (Active Outage)",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "setParameterActions": [ {
+      "parameter": "etr_time",
+      "value": "$session.params.client_local_time_response.current_date_time"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "from_date",
+        "value": "$sys.func.MID($session.params.longest_etr_from, 1, 10)"
+      }, {
+        "parameter": "to_date",
+        "value": "$sys.func.MID($session.params.longest_etr_to, 1, 10)"
+      }, {
+        "parameter": "from_time",
+        "value": "$sys.func.MID($session.params.longest_etr_from, 12, 5)"
+      }, {
+        "parameter": "to_time",
+        "value": "$sys.func.MID($session.params.longest_etr_to, 12, 5)"
+      }, {
+        "parameter": "current_date",
+        "value": "$sys.func.MID($session.params.etr_time, 1, 10)"
+      }, {
+        "parameter": "current_time",
+        "value": "$sys.func.MID($session.params.etr_time, 12, 5)"
+      }, {
+        "parameter": "new_date",
+        "value": "$sys.func.MID($sys.func.TO_TEXT($session.params.etr_time), 1, 10)"
+      }, {
+        "parameter": "new_time",
+        "value": "$sys.func.MID($sys.func.TO_TEXT($session.params.etr_time), 12, 8)"
+      } ],
+      "generators": [ {
+        "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/d85ecd9a-ce23-4a95-8500-f2fd313c17e4",
+        "inputParameters": [ {
+          "key": "from_time",
+          "value": "$session.params.from_time"
+        }, {
+          "key": "to_time",
+          "value": "$session.params.to_time"
+        } ],
+        "outputParameter": "$request.generative.formatted_time"
+      } ]
+    },
+    "name": "d77db6f0-75af-4d51-9220-8b0ca95b7ebb"
+  }, {
+    "condition": "$session.params.longest_etr_from \u003e= $session.params.etr_time",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "formatted_time_obj",
+        "value": "$request.generative.formatted_time"
+      }, {
+        "parameter": "formatted_time",
+        "value": "$sys.func.TO_OBJECT($session.params.formatted_time_obj)"
+      }, {
+        "parameter": "from_time",
+        "value": "$session.params.formatted_time.fromTime"
+      }, {
+        "parameter": "to_time",
+        "value": "$session.params.formatted_time.toTime"
+      }, {
+        "parameter": "from_Time_fr",
+        "value": "$session.params.formatted_time.fromTime_fr"
+      }, {
+        "parameter": "to_time_fr",
+        "value": "$session.params.formatted_time.toTime_fr"
+      } ]
+    },
+    "targetPage": "Check LOB #1 (Active Outage)",
+    "name": "55e5636a-9bd3-4470-87c7-b4ccfe800f9b"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Check LOB #2 (Active Outage)",
+    "name": "1c38628d-1028-4024-93c1-04e049a1862f",
+    "description": "ETR start time IS in the past"
+  } ]
+}

@@ -1,0 +1,56 @@
+{
+  "name": "c74de366-9bb1-4e96-a00f-b085c30b546c",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Je suis désolé d’entendre cela. Avez-vous essayé d’utiliser une option de suivi comme « Trouver mon iPhone » ou « Trouver mon appareil »?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Non"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "C’est noté. Je vous suggère de suspendre temporairement votre service pour empêcher toute utilisation non autorisée. Je vais envoyer un texto à l’appareil à partir duquel vous appelez qui contient un lien pour le faire vous-même. Est-ce que cela vous convient?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "oui"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "brand": "bell",
+        "language": "fr-ca",
+        "route": "equipment_report_lost_device",
+        "sms_content": "Mess. de Bell: Vous pouvez localiser votre téléphone au icloud.com/find si vous avez un iPhone, ou au google.com/android/find si vous avez un Android. Pour suspendre temporairement votre service cellulaire, rendez-vous au bell.ca/suspendreligne et suivez les étapes. ( bell.ca/apropos )",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+        "brand": "bell",
+        "language": "fr-ca"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer to report about a device lost or stolen",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca",
+      "route": "equipment_report_lost_device",
+      "utterance": "J’ai perdu mon téléphone."
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "First inform the user that \"Je suis désolé d’entendre cela. Avez-vous essayé d’utiliser une option de suivi comme « Trouver mon iPhone » ou « Trouver mon appareil »?\" when user say No then the customer has been redirected to \"Steering_SMS Trigger\" playbook",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca"
+    }
+  },
+  "displayName": "FR Equipment Report Lost Device - No",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 471,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

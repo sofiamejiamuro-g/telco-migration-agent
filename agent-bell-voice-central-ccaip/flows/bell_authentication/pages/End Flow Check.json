@@ -1,0 +1,31 @@
+{
+  "name": "eab283a0-cc34-4db4-ae77-5ce84542923f",
+  "displayName": "End Flow Check",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "($session.params.NGA = true OR $session.params.NGA = \"true\") AND $session.params.handoff_to = \"authentication\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "handoff_from",
+        "value": "authentication"
+      } ]
+    },
+    "targetFlow": "nga_handling",
+    "name": "85fcbcc4-52a9-4987-9d3e-dac4effb0e9d"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "local_nomatch_counter",
+        "value": 0
+      }, {
+        "parameter": "local_noinput_counter",
+        "value": 0
+      } ]
+    },
+    "targetPage": "End Flow",
+    "name": "185c61a3-aa46-4e0f-837a-994aa85f77f2"
+  } ]
+}

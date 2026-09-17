@@ -1,0 +1,28 @@
+{
+  "name": "470f5ee5-8eea-4029-b18a-7970be4b1051",
+  "displayName": "Check LOB",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$sys.func.UPPER($session.params.lob) = \"HOMEPHONE\" OR $sys.func.UPPER($session.params.lob) = \"WIRELINE\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "lob_list",
+        "value": "['WIRELINE','Wireline','wireline','Homephone','HOMEPHONE','homephone']"
+      } ]
+    },
+    "targetPage": "LOB based redirect",
+    "name": "e9bb7dd5-984d-4be4-b3b5-aae5b224fde7"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "lob_list",
+        "value": "['$session.params.lob', '$sys.func.LOWER($session.params.lob)', '$sys.func.UPPER($session.params.lob)']"
+      } ]
+    },
+    "targetPage": "LOB based redirect",
+    "name": "191dd1a3-a847-4c2a-8236-906eae381c92"
+  } ]
+}

@@ -1,0 +1,61 @@
+{
+  "name": "9e572c0a-9dc2-4cba-9a1e-09aea7106c1e",
+  "displayName": "Distributel_collection\u0026others",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "setParameterActions": [ {
+      "parameter": "network_type",
+      "value": "$session.params.customer_id_search_response.users[0].billing_accounts[0].services[0].network_type"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.internet = true AND $session.params.network_type = \"Distributel Cable\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "check_deai_flag",
+    "name": "45f8b13a-072a-452a-b065-cabc1a71210d"
+  }, {
+    "condition": "($session.params.mobility = true OR $session.params.tv = true OR $session.params.internet = true OR $session.params.smarthome = true OR $session.params.homephone = true) AND $session.params.internet = false AND $session.params.network_type != \"Distributel Cable\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "suspended_fraud",
+    "name": "688a4b39-f566-4694-8e70-dc03a55595ee"
+  }, {
+    "condition": "$session.params.tv = true OR $session.params.internet = true OR $session.params.smarthome = true OR $session.params.homephone = true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "suspended_fraud",
+    "name": "2162868d-fab0-41f5-847f-7d580c99c9d7"
+  }, {
+    "condition": "$session.params.internet = false OR $session.params.network_type != \"Distributel Cabel\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "suspended_fraud",
+    "name": "1e1b7529-33e1-4494-b7c6-8c54eb653953"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "9e572c0a-9dc2-4cba-9a1e-09aea7106c1e"
+      }, {
+        "parameter": "flow_id",
+        "value": "d35b61b6-c884-44f8-b5c7-aed63cc356ab"
+      }, {
+        "parameter": "page_name",
+        "value": "Distributel_collection\u0026others"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

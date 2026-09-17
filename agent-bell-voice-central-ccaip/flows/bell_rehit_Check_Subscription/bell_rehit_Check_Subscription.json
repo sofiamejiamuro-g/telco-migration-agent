@@ -1,0 +1,128 @@
+{
+  "name": "78aae120-e384-4b28-aef7-c3398a072711",
+  "displayName": "bell_rehit_Check_Subscription",
+  "transitionRoutes": [ {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "local_noinput_counter",
+        "value": 0
+      }, {
+        "parameter": "local_nomatch_counter",
+        "value": 0
+      } ]
+    },
+    "targetPage": "Follow-up 1",
+    "name": "a302e18f-b3bf-4421-a33f-4c511fc9b26a"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Global Error Handling",
+    "event": "sys.no-match-default",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "J'ai du mal à comprendre cette question.", "J'ai mal compris votre demande.", "Je n'ai pas saisi ce que vous avez dit.", "Je crois que je ne vous suis pas.", "Je ne comprends pas de quoi vous me parlez." ]
+        },
+        "languageCode": "fr"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "global_error_counter",
+        "value": "$sys.func.ADD($session.params.global_error_counter,1)"
+      }, {
+        "parameter": "local_trigger",
+        "value": "no_match"
+      }, {
+        "parameter": "local_nomatch_counter",
+        "value": "$sys.func.ADD($session.params.local_nomatch_counter,1)"
+      } ]
+    },
+    "name": "33d171b1-b36c-415d-8134-dda27e861e54"
+  }, {
+    "targetPage": "Global Error Handling",
+    "event": "sys.no-input-default",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "J'ai du mal à comprendre cette question.", "J'ai mal compris votre demande.", "Je n'ai pas saisi ce que vous avez dit.", "Je crois que je ne vous suis pas.", "Je ne comprends pas de quoi vous me parlez." ]
+        },
+        "languageCode": "fr"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "global_error_counter",
+        "value": "$sys.func.ADD($session.params.global_error_counter,1)"
+      }, {
+        "parameter": "local_trigger",
+        "value": "no_input"
+      }, {
+        "parameter": "local_noinput_counter",
+        "value": "$sys.func.ADD($session.params.local_noinput_counter,1)"
+      } ]
+    },
+    "name": "79bd4980-6b35-4cd8-8912-c5e8d03e0d0c"
+  }, {
+    "targetPage": "End Session",
+    "event": "wrapup",
+    "triggerFulfillment": {
+    
+    },
+    "name": "5bce5202-8cd0-4ef2-8111-8cd4983618b6"
+  } ],
+  "nluSettings": {
+    "modelType": "MODEL_TYPE_CUSTOM",
+    "classificationThreshold": 0.30000001,
+    "modelTrainingMode": "MODEL_TRAINING_MODE_MANUAL"
+  },
+  "advancedSettings": {
+    "enabled": true,
+    "playbackInterruptionSettings": {
+    
+    }
+  },
+  "nluSettingsList": [ {
+    "modelType": "MODEL_TYPE_CUSTOM",
+    "classificationThreshold": 0.30000001,
+    "modelTrainingMode": "MODEL_TRAINING_MODE_MANUAL",
+    "customConfigKey": "709a7908-b396-4b80-b845-b2940a938c29",
+    "languageCode": "en"
+  }, {
+    "modelType": "MODEL_TYPE_CUSTOM",
+    "classificationThreshold": 0.30000001,
+    "modelTrainingMode": "MODEL_TRAINING_MODE_MANUAL",
+    "customConfigKey": "709a7908-b396-4b80-b845-b2940a938c29",
+    "languageCode": "fr-ca"
+  } ],
+  "agentTransitionRouteGroups": [ "HI_account", "HI_billing", "HI_disconnect", "HI_equipment", "HI_faq", "HI_other", "HI_payment", "HI_sales", "HI_service", "HI_techsupport" ],
+  "inputParameterDefinitions": [ {
+    "name": "global_error_counter",
+    "description": "Counts the total number of no matches and no inputs given by the customer throughout the conversation",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "NUMBER"
+      }
+    },
+    "parameterType": {
+      "name": "global_error_counter",
+      "openapiJsonSchema": {
+        "type": "number"
+      }
+    }
+  } ],
+  "outputParameterDefinitions": [ {
+    "name": "global_error_counter",
+    "description": "Counts the total number of no matches and no inputs given by the customer throughout the conversation",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "NUMBER"
+      }
+    },
+    "parameterType": {
+      "name": "global_error_counter",
+      "openapiJsonSchema": {
+        "type": "number"
+      }
+    }
+  } ],
+  "multiLanguageSettings": {
+  
+  }
+}

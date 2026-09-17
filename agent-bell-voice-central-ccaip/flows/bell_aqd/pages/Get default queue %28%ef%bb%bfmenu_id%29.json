@@ -1,0 +1,95 @@
+{
+  "name": "b758ffdb-4b1c-479d-9d80-c500b2908dab",
+  "displayName": "Get default queue (﻿menu_id)",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "v2/get-configs-for-dialogflow",
+    "tag": "default",
+    "setParameterActions": [ {
+      "parameter": "domain",
+      "value": "Consumer"
+    }, {
+      "parameter": "menu_type",
+      "value": "$session.params.menu_type"
+    }, {
+      "parameter": "brand",
+      "value": "Bell"
+    } ],
+    "generators": [ {
+      "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/6a22d5bd-bc91-49ad-b1af-a4d0f3d3242c",
+      "outputParameter": "$request.generative.aqd_lob"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.webhook_success = true AND $session.params.config.DEFAULT_MENU_ID != null",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "DEFAULT_MENU_ID",
+        "value": "$session.params.config.DEFAULT_MENU_ID"
+      }, {
+        "parameter": "DEFAULT_DEPARTMENT_ID",
+        "value": "$session.params.config.DEFAULT_DEPARTMENT_ID"
+      }, {
+        "parameter": "menu_id_ref",
+        "value": "$sys.func.CONCATENATE(\"REF\", $sys.func.TO_TEXT($session.params.DEFAULT_MENU_ID))"
+      }, {
+        "parameter": "deparment_id_ref",
+        "value": "$sys.func.CONCATENATE(\"REF\", $sys.func.TO_TEXT($session.params.DEFAULT_DEPARTMENT_ID))"
+      } ]
+    },
+    "targetPage": "Check for LOB in Conversation",
+    "name": "5a3ac1b9-7a7b-4e3b-9f23-e3ffcc64313e"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "AQD Error",
+    "name": "36ba151a-d712-42bc-8d3f-d3fc29d4bbfb"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "AQD Error",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+    
+    },
+    "name": "34fdfbfd-9fa8-4cd7-bafd-f2f46ed59437"
+  }, {
+    "targetPage": "AQD Error",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+    
+    },
+    "name": "a6be5241-a4c6-4a70-8a0e-d834430b539f"
+  }, {
+    "targetPage": "AQD Error",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+    
+    },
+    "name": "c2ef453a-6c69-4b3e-b325-9f468972b444"
+  }, {
+    "targetPage": "AQD Error",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+    
+    },
+    "name": "a4361080-cc77-4995-8425-e86343981724"
+  }, {
+    "targetPage": "AQD Error",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+    
+    },
+    "name": "9deca31c-9b9a-461e-860f-02befc963ef1"
+  }, {
+    "targetPage": "AQD Error",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+    
+    },
+    "name": "b942b686-a903-418a-9dbe-4080751e3a79"
+  } ]
+}

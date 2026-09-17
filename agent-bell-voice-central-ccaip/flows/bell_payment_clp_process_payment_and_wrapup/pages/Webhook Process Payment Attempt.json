@@ -1,0 +1,207 @@
+{
+  "name": "2f8d01aa-3187-4849-aade-9ed2723cb68b",
+  "displayName": "Webhook Process Payment Attempt",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "v1/one-time-payment#submit-order",
+    "tag": "submit-order",
+    "returnPartialResponses": true
+  },
+  "transitionRoutes": [ {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "errorCodeID",
+        "value": "$session.params.submit_one_time_pmt_response.errorCodeID"
+      }, {
+        "parameter": "webhook_success",
+        "value": "$session.params.webhook_success"
+      } ]
+    },
+    "name": "0ce6876f-e167-41b1-ac2b-4b45b81299e0"
+  }, {
+    "condition": "$session.params.webhook_success = false",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Failure Confirmation",
+    "name": "0964e22f-242f-4575-b6ea-fba5e42331cf"
+  }, {
+    "condition": "$session.params.webhook_success = true AND $session.params.errorCodeID = \"\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Your payment was successful. Please check your email for your confirmation number." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Votre paiement a été effectué avec succès. Veuillez consulter votre courriel pour votre numéro de confirmation." ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "confirmationCode",
+        "value": "$session.params.submit_one_time_pmt_response.ConfirmationNo"
+      }, {
+        "parameter": "dueAmount",
+        "value": "$session.params.submit-one-time-pmt-response.accountBill.DueAmount"
+      } ]
+    },
+    "targetPage": "Webhook Get Ban Profile",
+    "name": "1c78ccb8-bf97-449d-8fc3-159acac1962b"
+  }, {
+    "condition": "$session.params.webhook_success = true AND $session.params.errorCodeID = null",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Your payment was successful. Please check your email for your confirmation number." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Votre paiement a été effectué avec succès. Veuillez consulter votre courriel pour votre numéro de confirmation." ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "confirmationCode",
+        "value": "$session.params.submit_one_time_pmt_response.ConfirmationNo"
+      }, {
+        "parameter": "dueAmount",
+        "value": "$session.params.submit-one-time-pmt-response.accountBill.DueAmount"
+      } ]
+    },
+    "targetPage": "Webhook Get Ban Profile",
+    "name": "99dce604-cdd4-4cb5-acd9-6e3351ab31d4"
+  }, {
+    "condition": "$session.params.webhook_success = true AND $session.params.errorCodeID != null",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "expiry_year",
+        "value": null
+      }, {
+        "parameter": "credit_card_number",
+        "value": null
+      }, {
+        "parameter": "cc_type",
+        "value": null
+      }, {
+        "parameter": "card_expiry_date",
+        "value": null
+      }, {
+        "parameter": "expiry_month",
+        "value": null
+      }, {
+        "parameter": "security_code",
+        "value": null
+      }, {
+        "parameter": "cc_token",
+        "value": null
+      }, {
+        "parameter": "card_number",
+        "value": null
+      } ]
+    },
+    "targetPage": "CC Declined",
+    "name": "2e98948c-81c2-4963-810c-d4a875d66ec0"
+  }, {
+    "condition": "$session.params.webhook_success = true AND $session.params.errorCodeID != \"\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "expiry_year",
+        "value": null
+      }, {
+        "parameter": "cc_type",
+        "value": null
+      }, {
+        "parameter": "expiry_month",
+        "value": null
+      }, {
+        "parameter": "security_code",
+        "value": null
+      }, {
+        "parameter": "cc_token",
+        "value": null
+      }, {
+        "parameter": "card_number",
+        "value": null
+      }, {
+        "parameter": "expiry_date",
+        "value": null
+      }, {
+        "parameter": "cvv_number",
+        "value": null
+      }, {
+        "parameter": "cc_from_utterance",
+        "value": null
+      } ]
+    },
+    "targetPage": "CC Declined",
+    "name": "6cf284a5-fafe-46b3-8232-2e59ca9dc234"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "2f8d01aa-3187-4849-aade-9ed2723cb68b"
+      }, {
+        "parameter": "flow_id",
+        "value": "d810bc76-3e37-4bbb-a2ef-ad430f390435"
+      }, {
+        "parameter": "page_name",
+        "value": "Webhook Process Payment Attempt"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Webhook Failure Confirmation",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+    
+    },
+    "name": "f67658fe-5bb9-4155-bd12-c29de0d74971"
+  }, {
+    "targetPage": "Webhook Failure Confirmation",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+    
+    },
+    "name": "ceffa6f0-f47f-41f3-bccf-9745acea2f6c"
+  }, {
+    "targetPage": "Webhook Failure Confirmation",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+    
+    },
+    "name": "3cf39fc4-2bb2-40cb-a746-67872d518d52"
+  }, {
+    "targetPage": "Webhook Failure Confirmation",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+    
+    },
+    "name": "38bc4e8c-1643-4eed-a004-be89733a1c31"
+  }, {
+    "targetPage": "Webhook Failure Confirmation",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+    
+    },
+    "name": "90bc8e15-d31d-4361-ba80-46e751c3420f"
+  }, {
+    "targetPage": "Webhook Failure Confirmation",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+    
+    },
+    "name": "0ab65589-db12-4870-bd34-78ff5088ae23"
+  } ]
+}

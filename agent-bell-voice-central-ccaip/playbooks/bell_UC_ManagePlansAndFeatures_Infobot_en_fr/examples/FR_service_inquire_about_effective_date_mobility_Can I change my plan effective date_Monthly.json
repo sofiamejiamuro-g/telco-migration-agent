@@ -1,0 +1,97 @@
+{
+  "name": "aa1bd2f6-57c3-485e-9650-efcc516fb51d",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70024",
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+        "language": "fr-ca"
+      }
+    }
+  }, {
+    "playbookInvocation": {
+      "playbook": "bell_uc_ask_LOB",
+      "playbookInput": {
+        "actionParameters": {
+          "language": "fr-ca",
+          "utterance": "Puis-je modifier la date d’entrée en vigueur de mon forfait?"
+        }
+      },
+      "playbookOutput": {
+        "actionParameters": {
+          "language": "fr-ca"
+        }
+      },
+      "playbookState": "OUTPUT_STATE_OK"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Avez-vous un forfait prépayé ou un forfait mensuel ?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "forfait menusuel"
+    }
+  }, {
+    "toolUse": {
+      "tool": "FR_Bell_Manage_plans_and_features",
+      "action": "FR_Bell_Manage_plans_and_features",
+      "inputActionParameters": {
+        "requestBody": {
+          "query": "Puis-je modifier la date d’entrée en vigueur de mon forfait? forfait mensuel"
+        }
+      },
+      "outputActionParameters": {
+        "200": {
+          "answer": "",
+          "snippets": [ ]
+        }
+      }
+    }
+  }, {
+    "toolUse": {
+      "tool": "FR_Generic_Datastore",
+      "action": "FR_Generic_Datastore",
+      "inputActionParameters": {
+        "requestBody": {
+          "query": "Puis-je modifier la date d’entrée en vigueur de mon forfait? forfait mensuel"
+        }
+      },
+      "outputActionParameters": {
+        "200": {
+          "answer": "",
+          "snippets": [ ]
+        }
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Je comprends que cela puisse être frustrant. Malheureusement, je n'ai pas trouvé de solution immédiate. Cependant, je peux vous mettre en contact avec un agent qui pourra vous aider à trouver les informations dont vous avez besoin. Souhaitez-vous contacter un agent ?"
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer is asking whether he can change his plan's effective date",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca",
+      "lob": "mobility",
+      "route": "service_inquire_about_effective_date",
+      "utterance": "Puis-je modifier la date d’entrée en vigueur de mon forfait?"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "First,  flow \"bell_apb\" is called and then playbook \"bell_uc_ask_LOB\". Then user is prompted whether he is having prepaid or monthly postpaid plan. Append user input to user utterance and then trigger data store for updated utterance",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca"
+    }
+  },
+  "displayName": "FR_service_inquire_about_effective_date_mobility_Can I change my plan effective date_Monthly",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 680,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

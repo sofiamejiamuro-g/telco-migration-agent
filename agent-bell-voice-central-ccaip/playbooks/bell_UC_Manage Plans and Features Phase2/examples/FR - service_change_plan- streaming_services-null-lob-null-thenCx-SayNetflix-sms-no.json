@@ -1,0 +1,75 @@
+{
+  "name": "6c181647-8cdb-43bb-96d8-ef5992f3caa7",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70011",
+        "brand": "bell",
+        "language": "fr-ca",
+        "route": "service_change_plan"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Pour quel service appelez-vous?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Je souhaite mettre à niveau mon compte Netflix"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Je vais envoyer un texto à l’appareil au moyen duquel vous appelez, afin que vous puissiez consulter toutes les options de lecture en continu. Est-ce que ça vous convient?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "non, je ne veux pas de texte"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "fr-ca",
+        "route": "service_change_plan",
+        "sms_send_status": "Declined"
+      },
+      "outputActionParameters": {
+        "language": "fr-ca"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "The {identification_status} is \"Pass\", {customer_type} is \"Existing\", {streaming_services} is null or {lob} is null so, we will prompt user to ask \"Which service are you calling about?\" and once user reply then please analyze the user response and based on that please set {lob} or {streaming_services} based on instruction provided in playbook on how to set {lob} and {streaming_services} within {route} = \"service_change_plan\"",
+    "actionParameters": {
+      "apb_location_id": "70011",
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "fr-ca",
+      "route": "service_change_plan",
+      "utterance": "J'aimerais beaucoup améliorer mon plan"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "As, the {streaming_services} is null or {lob} is null so, we will prompt user to ask \"Which service are you calling about?\" and if user reply then please analyze the user {utterance} and if the response is lob related then SET parameter {lob} and if it is related to streaming service then SET parameter {streaming_services} with correct value provided in playbook instruction within {route} = \"service_change_plan\"",
+    "actionParameters": {
+      "apb_location_id": "70011",
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "fr-ca",
+      "route": "service_change_plan",
+      "streaming_services": "netflix",
+      "utterance": "Je souhaite mettre à niveau mon compte Netflix"
+    }
+  },
+  "displayName": "FR - service_change_plan- streaming_services-null-lob-null-thenCx-SayNetflix-sms-no",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 652,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

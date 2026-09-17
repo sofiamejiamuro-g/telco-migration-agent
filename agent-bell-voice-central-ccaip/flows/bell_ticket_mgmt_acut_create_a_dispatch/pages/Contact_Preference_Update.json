@@ -1,0 +1,38 @@
+{
+  "name": "4f0c28b2-19fe-4467-9012-4d0f2ad5a60a",
+  "displayName": "Contact_Preference_Update",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$sys.func.UPPER($session.params.stored_contact_type) = \"SMS\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "contact_preference",
+        "value": "CONTPFR1"
+      } ]
+    },
+    "targetPage": "Webhook - ACUT Modify",
+    "name": "da6dd7d8-6519-4841-8763-e2f78003fc20"
+  }, {
+    "condition": "$sys.func.UPPER($session.params.stored_contact_type) = \"EMAIL\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "contact_preference",
+        "value": "CONTPFR2"
+      } ]
+    },
+    "targetPage": "Webhook - ACUT Modify",
+    "name": "51649ca7-7db2-4d8c-93bc-c5cd47222399"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "contact_preference",
+        "value": "CONTPFR3"
+      } ]
+    },
+    "targetPage": "Webhook - ACUT Modify",
+    "name": "f8471ece-c0f0-455a-9c04-c64b2048c4f4"
+  } ]
+}

@@ -1,0 +1,27 @@
+{
+  "name": "9d3c9226-b623-4275-be2b-7175972ebeab",
+  "displayName": "v1/ibm_mw/nm1_get#pa-eligibility",
+  "timeout": {
+    "seconds": 30
+  },
+  "serviceDirectory": {
+    "service": "projects/gcp-it-npe-pltfm-apigee/locations/us-central1/namespaces/apigee-nb-usc1-service-dir-namespace/services/apigee-nb-usc1-service",
+    "genericWebService": {
+      "uri": "https://apigee-nane1-uat.int.bell.ca/v1/ibm_mw/nm1_get",
+      "requestHeaders": [ {
+        "key": "x-apikey",
+        "value": "npZmDivP6Hxes3wtQ0tC9RqItjJTY8TgZHbOPNeFwvSYSKPI"
+      } ],
+      "webhookType": "FLEXIBLE",
+      "httpMethod": "POST",
+      "requestBody": "{\n  \"sessionInfo\": {\n    \"dfcx_session_id\": \"$session.params.dfcx_session_id\",\n    \"agent_id\": \"$session.params.agent_id\",\n    \"parameters\": {\n      \"billing_account\": \"$session.params.billing_account\",\n      \"ibm_application_id\": \"$session.params.ibm_application_id\",\n      \"language\": \"$session.params.language\"\n    }\n  },\n  \"fulfillmentInfo\": {\n    \"tag\": \"pa-eligibility\"\n  },\n  \"languageCode\": \"$request.language\"\n}",
+      "parameterMapping": [ {
+        "key": "nm1_get_pa_eligibility_response",
+        "value": "sessionInfo.parameters.nm1_get_pa_eligibility_response"
+      }, {
+        "key": "webhook_success",
+        "value": "sessionInfo.parameters.webhook_success"
+      } ]
+    }
+  }
+}

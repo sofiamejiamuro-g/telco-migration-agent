@@ -1,0 +1,59 @@
+{
+  "name": "16df9374-83b5-45bc-94f5-0bceae011f1b",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Connaissez-vous l'adresse courriel avec laquelle vous vous êtes inscrit ?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Je ne peux pas accéder à cet email"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Je vais envoyer un texto à l’appareil au moyen duquel vous appelez, afin que vous puissiez facilement récupérer votre mot de passe ou votre nom d’utilisateur. Est-ce que ça vous convient ?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Oui"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "brand": "bell",
+        "language": "fr-ca",
+        "route": "account_login_assistance",
+        "sms_content": "Vouz pouvez visiter https://m.bell.ca/mybellloginrecoveryf pour réinitialiser vos informations de connexion pour l'appli MonBell. (bell.ca/apropos)",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+        "brand": "bell",
+        "language": "fr-ca"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "The customer is trying to recover their username or password with email.",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "Existing",
+      "language": "fr-ca",
+      "route": "account_login_assistance",
+      "utterance": "J’ai oublié mon nom d’utilisateur"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "The customer wants to recover their username with email, the customer is identified as a Existing customer and if the customer agrees to receive a text on their device route them to bell_SMS trigger flow",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca",
+      "route": "account_login_assistance",
+      "utterance": "J’ai oublié mon nom d’utilisateur"
+    }
+  },
+  "displayName": "FR_account_login_assistance_ExistingCust_MFAIsEmpty_IForgotMyUsername_YesForEmailAddress(ICantAccessThatEmail)_YesForText",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 411,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

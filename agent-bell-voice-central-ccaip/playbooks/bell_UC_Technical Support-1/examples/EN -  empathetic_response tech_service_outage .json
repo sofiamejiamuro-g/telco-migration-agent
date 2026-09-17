@@ -1,0 +1,60 @@
+{
+  "name": "38526dfd-c7d5-49d5-8e6b-df033f76cd45",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_tech_intent_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70012",
+        "language": "en",
+        "lob": "mobility",
+        "utterance": "my phone is not getting any signal."
+      },
+      "outputActionParameters": {
+        "lob": "mobility"
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "I’m truly sorry for the challenges you’re facing; please know I’m here to support you and make things easier however I can. We're sorry to hear you're having issues with your phone. You can easily check for service outages on our website. I'll send a text to the device you're calling from so you can access it quickly. Is that alright?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "yes"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "en",
+        "sms_content": "Bell msg: You can visit https://support.bell.ca/outage-check to check for service outages in your area. ( bell.ca/about-us )",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "customer is having no phone signals",
+    "actionParameters": {
+      "apb_location_id": "70012",
+      "language": "en",
+      "lob": "mobility",
+      "route": "tech_service_outage",
+      "utterance": "my husband's phone is not getting any signal he is really upset."
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "customer is transferred to tech_intent_apb for lob",
+    "actionParameters": {
+      "apb_location_id": "70012",
+      "language": "en",
+      "lob": "mobility"
+    }
+  },
+  "displayName": "EN -  empathetic_response tech_service_outage ",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 449,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

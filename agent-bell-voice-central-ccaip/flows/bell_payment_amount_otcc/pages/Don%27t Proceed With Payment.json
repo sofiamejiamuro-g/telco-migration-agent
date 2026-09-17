@@ -1,0 +1,25 @@
+{
+  "name": "0901ee00-c195-4a0a-be72-d405d06d2012",
+  "displayName": "Don't Proceed With Payment",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.bad_amount \u003c= 2",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "other_payment_amount",
+        "value": null
+      } ]
+    },
+    "targetPage": "Prompt Other Amount",
+    "name": "8b4c42a1-0f43-46a0-94f7-74140053093c"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_Feedback",
+    "name": "2dc39c23-d01e-488c-ac0f-894d6e833fda"
+  } ]
+}

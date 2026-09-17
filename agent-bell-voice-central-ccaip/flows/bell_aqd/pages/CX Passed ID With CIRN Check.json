@@ -1,0 +1,59 @@
+{
+  "name": "aba65085-f205-4de5-a72d-6b6aa2da7acd",
+  "displayName": "CX Passed ID With CIRN Check",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "setParameterActions": [ {
+      "parameter": "id_cirn_check",
+      "value": false
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.identification_status = \"Pass\" AND $session.params.CIRN != null",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "id_cirn_check",
+        "value": true
+      } ]
+    },
+    "name": "18060ad9-dc5c-4aa4-9974-6cadd8d9ebfb",
+    "description": "WARNING: Do not delete this route as this path is to check: Cx passed identification and CIRN !=null. If so, then creating a flag \"id_cirn_check\" and setting to \u003ctrue\u003e. So, that later on in \"Preferred\" and in \"Escelation\" we again need not to do the same check."
+  }, {
+    "condition": "$session.params.id_cirn_check = false",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Check Special Queue | Other Logic",
+    "name": "4ebca4e0-bce8-4e7c-af88-d8b3e4a2cca9",
+    "description": "If Identification with CIRN check failed then directly sending to \"Other Logic\" section"
+  }, {
+    "condition": "$session.params.id_cirn_check = true AND ($session.params.oneBillIndicator != \"M\" OR $session.params.oneBillIndicator != M)",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Preferred Building",
+    "name": "8101a914-bf45-496c-9199-dfb541096eca"
+  }, {
+    "condition": "$session.params.id_cirn_check = true AND ($session.params.oneBillIndicator = \"M\" OR $session.params.oneBillIndicator = M) AND ($session.params.segment != \"Care\" OR $session.params.segment != \"Loyalty\")",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Preferred Building",
+    "name": "3f7086e8-ca81-4051-ba23-0908abb54d36"
+  }, {
+    "condition": "$session.params.id_cirn_check = true AND ($session.params.oneBillIndicator = \"M\" OR $session.params.oneBillIndicator = M) AND ($session.params.segment = \"Care\" OR $session.params.segment = \"Loyalty\")",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "brand",
+        "value": "Bell MTS"
+      }, {
+        "parameter": "l2_brand",
+        "value": "Bell MTS"
+      } ]
+    },
+    "targetPage": "Get queue (﻿menu_id)",
+    "name": "ccc61eff-9f05-4d5e-ba82-8988ba1c29a5"
+  } ]
+}

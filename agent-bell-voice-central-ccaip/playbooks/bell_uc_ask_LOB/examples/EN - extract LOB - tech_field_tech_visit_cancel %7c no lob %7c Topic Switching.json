@@ -1,0 +1,54 @@
+{
+  "name": "59c72258-dca5-4975-bc8e-5f6a658ec115",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Could you tell me which service you're having issues with? Mobility, Internet, TV, or Homephone?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Just cancel appointment for me."
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Could you specify the type of service you're inquiring about? Internet, TV, or Homephone?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "I want to update my account details first"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "Routing only",
+      "inputActionParameters": {
+        "language": "en",
+        "utterance": "I want to update my account details first"
+      },
+      "outputActionParameters": {
+        "language": "en",
+        "utterance": "I want to update my account details first"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "User wants to cancel the appointment, but does not mention LOB",
+    "actionParameters": {
+      "language": "en",
+      "route": "tech_field_tech_visit_cancel",
+      "utterance": "I want to cancel my appointment"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "The user failed to specify their lob when prompted, instead insisting twice on discussing about an appointment , user wants to update account details, so route to Routing only flow",
+    "actionParameters": {
+      "apb_location_id": "70014",
+      "language": "en",
+      "lob": "Internet",
+      "route": "tech_field_tech_visit_cancel"
+    }
+  },
+  "displayName": "EN - extract LOB - tech_field_tech_visit_cancel | no lob | Topic Switching",
+  "retrievalStrategy": "NEVER",
+  "tokenCount": 338,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

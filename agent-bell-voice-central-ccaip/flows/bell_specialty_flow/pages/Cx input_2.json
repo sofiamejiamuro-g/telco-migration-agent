@@ -1,0 +1,85 @@
+{
+  "name": "a5f1378a-8277-42d9-97e5-08d297a127a8",
+  "displayName": "Cx input_2",
+  "form": {
+    "parameters": [ {
+      "displayName": "cx_input_wait",
+      "required": true,
+      "entityType": "@sys.any",
+      "fillBehavior": {
+        "initialPromptFulfillment": {
+        
+        },
+        "repromptEventHandlers": [ {
+          "targetFlow": "bell_aqd",
+          "event": "sys.no-input-1",
+          "triggerFulfillment": {
+          
+          },
+          "name": "32d256ac-00e8-42f7-b353-cd5839ea8ebf"
+        }, {
+          "targetFlow": "bell_aqd",
+          "event": "sys.no-match-1",
+          "triggerFulfillment": {
+          
+          },
+          "name": "8af461eb-3a29-4eba-90df-ee058db7d919"
+        } ]
+      }
+    } ]
+  },
+  "entryFulfillment": {
+    "messages": [ {
+      "text": {
+        "text": [ "Un instant s'il vous plaît" ]
+      },
+      "languageCode": "fr-ca"
+    }, {
+      "text": {
+        "text": [ "One moment please" ]
+      },
+      "languageCode": "en"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$page.params.cx_input_wait = 1",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_aqd",
+    "name": "c2ad959a-853e-4426-b809-0da710e53001"
+  } ],
+  "eventHandlers": [ {
+    "targetFlow": "bell_aqd",
+    "event": "sys.no-input-1",
+    "triggerFulfillment": {
+    
+    },
+    "name": "06d0480a-1ece-49ab-8887-cb78b27ed787"
+  }, {
+    "targetFlow": "bell_aqd",
+    "event": "sys.no-match-1",
+    "triggerFulfillment": {
+    
+    },
+    "name": "8209a0b2-9253-450a-b4fb-65e147b2c187"
+  } ],
+  "advancedSettings": {
+    "speechSettings": {
+      "endpointerSensitivity": 90,
+      "noSpeechTimeout": {
+        "seconds": 3
+      },
+      "models": [ {
+        "key": "en",
+        "value": "telephony_short"
+      }, {
+        "key": "fr-ca",
+        "value": "telephony_short"
+      } ]
+    }
+  },
+  "speakerIdSettings": {
+  
+  }
+}

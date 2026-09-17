@@ -1,0 +1,162 @@
+{
+  "name": "3c353b3f-aa97-4ee5-bb20-c150a23d78f7",
+  "displayName": "Ban-Profile Webhook Check",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "/v1/ibm_mw/nm1_get#ban-profile",
+    "tag": "ban-profile",
+    "setParameterActions": [ {
+      "parameter": "billing_account",
+      "value": "$session.params.billing_account"
+    }, {
+      "parameter": "ibm_application_id ",
+      "value": "$sys.func.IF(\"$session.params.intake_routing_lookup_response.va_ibm_id = null\", LUC_Entry, $session.params.intake_routing_lookup_response.va_ibm_id)"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "onebillindicator",
+        "value": "$session.params.nm1_get_ban_profile_response.oneBillIndicator"
+      }, {
+        "parameter": "errorCode",
+        "value": "$session.params.nm1_get_ban_profile_response.returnCode"
+      }, {
+        "parameter": "Bantype",
+        "value": "$session.params.nm1_get_ban_profile_response.accountType"
+      }, {
+        "parameter": "Bansubtype",
+        "value": "$session.params.nm1_get_ban_profile_response.accountSubType"
+      } ]
+    },
+    "name": "40362883-82ba-410a-8bf4-c528bd0647b5"
+  }, {
+    "condition": "$session.params.webhook_success = \"false\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "ID or Auth or NM1 or PACC or Webhook Failure Confirmation",
+    "name": "0a899c5a-7542-4d52-b16d-e82a1b6593d5"
+  }, {
+    "condition": "$session.params.errorCode = \"0\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "webhook_success",
+        "value": "false"
+      } ]
+    },
+    "targetPage": "ID or Auth or NM1 or PACC or Webhook Failure Confirmation",
+    "name": "13fcb593-227e-4825-87ad-763747081092"
+  }, {
+    "condition": "$session.params.onebillindicator = \"Y\" OR $session.params.onebillindicator = \"M\" OR $session.params.onebillindicator = \"N\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "webhook_success",
+        "value": null
+      } ]
+    },
+    "targetPage": "Consolidated Customers",
+    "name": "4accc0a4-d87a-479e-8222-abb584c4b736"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "3c353b3f-aa97-4ee5-bb20-c150a23d78f7"
+      }, {
+        "parameter": "flow_id",
+        "value": "00208917-47d8-4e61-a709-01d206b91ce4"
+      }, {
+        "parameter": "page_name",
+        "value": "Ban-Profile Webhook Check"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "ID or Auth or NM1 or PACC or Webhook Failure Confirmation",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "webhook_success",
+        "value": "nm1"
+      }, {
+        "parameter": "preauth_exit_4",
+        "value": true
+      } ]
+    },
+    "name": "20525742-24a5-4524-a56a-b51fff6ed812"
+  }, {
+    "targetPage": "ID or Auth or NM1 or PACC or Webhook Failure Confirmation",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "webhook_success",
+        "value": "nm1"
+      }, {
+        "parameter": "preauth_exit_4",
+        "value": true
+      } ]
+    },
+    "name": "4fc33295-96ed-4016-a77a-9239b41b8bf8"
+  }, {
+    "targetPage": "ID or Auth or NM1 or PACC or Webhook Failure Confirmation",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "webhook_success",
+        "value": "nm1"
+      }, {
+        "parameter": "preauth_exit_4",
+        "value": true
+      } ]
+    },
+    "name": "60e93cb2-3a02-4a5b-b7de-2811a2672f1e"
+  }, {
+    "targetPage": "ID or Auth or NM1 or PACC or Webhook Failure Confirmation",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "webhook_success",
+        "value": "nm1"
+      }, {
+        "parameter": "preauth_exit_4",
+        "value": true
+      } ]
+    },
+    "name": "794a82a9-7a55-4814-b747-dd060d398b37"
+  }, {
+    "targetPage": "ID or Auth or NM1 or PACC or Webhook Failure Confirmation",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "webhook_success",
+        "value": "nm1"
+      }, {
+        "parameter": "preauth_exit_4",
+        "value": true
+      } ]
+    },
+    "name": "e2e097d5-bbf3-4492-a3a2-d5b68cac0962"
+  }, {
+    "targetPage": "ID or Auth or NM1 or PACC or Webhook Failure Confirmation",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "webhook_success",
+        "value": "nm1"
+      }, {
+        "parameter": "preauth_exit_4",
+        "value": true
+      } ]
+    },
+    "name": "73edd29b-5997-4f47-b837-a93d6445baa3"
+  } ]
+}

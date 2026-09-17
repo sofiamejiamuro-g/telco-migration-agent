@@ -1,0 +1,73 @@
+{
+  "name": "0dfc9b7c-e8f2-4975-aa92-95e59e6f9d7c",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70011",
+        "brand": "bell",
+        "language": "en",
+        "route": "service_change_plan"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Sure, you can easily manage your Mobility plan and add-ons at anytime using MyBell. I'll send a text to the device you're calling from, so that you can easily make changes to your Mobility features or add-ons. Is that alright?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "yes"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "en",
+        "route": "service_add_feature",
+        "sms_content": "You can visit https://m.bell.ca/myfeatures to view or make changes to your phone add-ons in the MyBell app. ( bell.ca/about-us )",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+        "language": "en"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "The {identification_status} is \"Pass\", {customer_type} is \"Existing\", {streaming_services} is null and {ppv} is null and {lob} is null and {mobility_sub_type} is null and {add_ons} = \"Mobility Regular Feature\" then we will prompt user to confirm if they are talking about \"prepaid\" or \"postpaid\" service and then based on user response will set parameter {mobility_sub_type}",
+    "actionParameters": {
+      "add_ons": "Mobility Regular Feature",
+      "apb_location_id": "70011",
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "en",
+      "route": "service_add_feature",
+      "sms_content": "Bell: You can visit https://m.bell.ca/myfeatures to view or make changes to your phone add-ons in the MyBell app. ( bell.ca/about-us )",
+      "sms_type": "Public",
+      "utterance": "Can I get Can-Wide calls"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "As the {lob} is null and {mobility_sub_type} is null and {add_ons} = \"Mobility Regular Feature\" then, prompt user with message \"ASK customer \"Are you looking to make changes to your prepaid or monthly service?\" and then based on user response set parameter {mobility_sub_type} based on instruction given in playbook.",
+    "actionParameters": {
+      "add_ons": "Mobility Regular Feature",
+      "apb_location_id": "70011",
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "en",
+      "route": "service_add_feature",
+      "sms_content": "Bell: You can visit https://m.bell.ca/myfeatures to view or make changes to your phone add-ons in the MyBell app. ( bell.ca/about-us )",
+      "sms_type": "Public",
+      "utterance": "Can I get Can-Wide calls"
+    }
+  },
+  "displayName": "EN - service_add_feature- streaming_services,ppv - null-add_ons-MRF-mobility_sub_type-null-postpaid",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 756,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

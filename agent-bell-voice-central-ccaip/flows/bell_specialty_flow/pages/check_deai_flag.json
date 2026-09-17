@@ -1,0 +1,48 @@
+{
+  "name": "6b5f40e3-7c7f-49e4-91d5-04a7a4eb8bf4",
+  "displayName": "check_deai_flag",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "setParameterActions": [ {
+      "parameter": "coll_flg",
+      "value": "$session.params.deai_search_by_tn_response.shr_int_partner_nw_coll_flg"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.coll_flg = 1",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "special_queue",
+        "value": "cable_internet"
+      }, {
+        "parameter": "intent",
+        "value": "other_speak_to_agent"
+      } ]
+    },
+    "targetPage": "Cx input_2",
+    "name": "e6902721-cc46-41a9-8792-f6fed1c2f3a7"
+  }, {
+    "condition": "$session.params.coll_flg != 1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Comment puis-je vous aider?" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "How can I help you?" ]
+        },
+        "languageCode": "en"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "special_queue",
+        "value": "cable_internet"
+      } ]
+    },
+    "targetPage": "cx input",
+    "name": "bcd813f5-d56f-4662-85ff-ddcd0d9de406"
+  } ]
+}

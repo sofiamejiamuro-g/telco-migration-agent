@@ -1,0 +1,81 @@
+{
+  "name": "d07578a9-9474-4448-b336-b363d9f63420",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Puis-tu regarder la télé ?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Qu'est-ce qu'une télé ?"
+    }
+  }, {
+    "toolUse": {
+      "tool": "FR_Bell_vr_cfl_faq",
+      "action": "FR_Bell_vr_cfl_faq",
+      "inputActionParameters": {
+        "requestBody": {
+          "query": "6507"
+        }
+      },
+      "outputActionParameters": {
+        "200": {
+          "answer": "",
+          "snippets": [ {
+            "text": "",
+            "title": "6507",
+            "uri": ""
+          } ]
+        }
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Je comprends que vous avez une question, et bien que je n'aie pas cette information spécifique, savoir si vous pouvez regarder la télé est la prochaine étape pour nous permettre de résoudre le problème. Pourriez-vous me faire savoir si vous pouvez regarder la télé ?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "J'ai besoin de l'info pour compléter l'étape."
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Merci de me l'avoir fait savoir."
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_vr_post_answer",
+      "inputActionParameters": {
+        "customer_answer1_id": "1"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer having an issue with the service, starts the Virtual repair process.",
+    "actionParameters": {
+      "acceptable_answers": [ {
+        "choice": "Yes",
+        "id": 0,
+        "sub-choices": [ ],
+        "title": ""
+      }, {
+        "choice": "No",
+        "id": 1,
+        "sub-choices": [ ],
+        "title": ""
+      } ],
+      "dcx_action_code": "6507",
+      "more_info": [ ],
+      "title": "Are you able to watch live TV?",
+      "vr_type": "CFB"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "The agent initiates by asking, \"Are you able to watch TV?\", a key diagnostic question. However, the user's immediate counter-question, \"what's a tv?\", indicates a fundamental semantic barrier.\n\nIn response, the system invokes the vr_cfl_faq_en tool. Critically, the agent's subsequent utterance, \"I understand you have a question, and while I don't have that specific information, knowing whether you can watch TV is the next step for us to solve the issue. Could you please let me know if you can watch the TV?\", explicitly confirms that the vr_cfl_faq_en tool failed to provide the necessary information to answer the user's \"what's a tv?\" query. This forces the agent to re-prompt the original question, despite the user's clear lack of understanding.\n\nThe user's final reply, \"I need the info to complete the step.\", underscores their inability to proceed without a definition of \"TV.\" The conversation ends with a VR_post_answer "
+  },
+  "displayName": "CFB - User asks a question (No answer) (French)",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 708,
+  "languageCode": "en"
+}

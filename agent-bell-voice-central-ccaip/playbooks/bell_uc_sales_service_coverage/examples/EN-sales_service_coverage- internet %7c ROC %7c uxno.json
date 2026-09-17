@@ -1,0 +1,67 @@
+{
+  "name": "e47ac006-4e18-4784-9849-1242b4632318",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "language": "en",
+        "lob": "internet"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Sure, let me help you with that.\nLet's check if we offer Internet and Home phone service in your area. In which province are you looking to get service?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Northwest Territories"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Get blazing-fast speeds on the Bell network with Bell Mobile Internet. Where you can get up to 5G internet connectivity with a mobile hotspot device so you can stay connected at home or on the go.\nI'll send a text to the device you're calling from, so that you can learn more and easily place an order on our website. Is that alright?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "No"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "en",
+        "route": "sales_confirm_service_coverage",
+        "sms_send_status": "Declined"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "The customer is asking whether the provider's service is offered at an address or location.",
+    "actionParameters": {
+      "language": "en",
+      "lob": "Internet",
+      "province": "BC",
+      "route": "sales_confirm_service_coverage",
+      "utterance": "Do you have internet service at my location"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "If any of the streaming services is NOT captured like Disney, Netflix or crave and service type {lob} is homephone or tv or homephone,  {province} is anything other than ROC or if province is NOT captured then ask user which province are they looking for, if the province captured is {province}=ROC and {lob}=internet then ask agent if they want to receive SMS and if user replies no or disagrees or does not respond then call bell_SMS Trigger flow.",
+    "actionParameters": {
+      "language": "en",
+      "lob": "Internet",
+      "province": "ROC",
+      "utterance": "Do you have internet service at my location"
+    }
+  },
+  "displayName": "EN-sales_service_coverage- internet | ROC | uxno",
+  "retrievalStrategy": "STATIC",
+  "tokenCount": 554,
+  "languageCode": "en"
+}

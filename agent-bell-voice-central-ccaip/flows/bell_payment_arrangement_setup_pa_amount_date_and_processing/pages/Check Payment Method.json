@@ -1,0 +1,221 @@
+{
+  "name": "bf034884-e3ff-4620-8f87-ff206b2842d0",
+  "displayName": "Check Payment Method",
+  "form": {
+    "parameters": [ {
+      "displayName": "pmtMethodInput",
+      "required": true,
+      "entityType": "@payment_method",
+      "fillBehavior": {
+        "initialPromptFulfillment": {
+        
+        },
+        "repromptEventHandlers": [ {
+          "event": "sys.no-input-1",
+          "triggerFulfillment": {
+            "messages": [ {
+              "text": {
+                "text": [ "Je n’ai pas tout à fait compris. Pouvez-vous réessayer?" ]
+              },
+              "languageCode": "fr-ca"
+            }, {
+              "text": {
+                "text": [ "I didn't quite get that. Can you try again?" ]
+              },
+              "languageCode": "en"
+            } ]
+          },
+          "name": "a3b2f54f-f31d-45a8-bc4f-2eb6ee0f7f72"
+        }, {
+          "event": "sys.no-input-2",
+          "triggerFulfillment": {
+            "messages": [ {
+              "text": {
+                "text": [ "Je n’ai toujours pas compris" ]
+              },
+              "languageCode": "fr-ca"
+            }, {
+              "text": {
+                "text": [ "I still didn't get that" ]
+              },
+              "languageCode": "en"
+            } ]
+          },
+          "name": "021fd213-bae0-45cd-9f8a-f11c5e2eb1c5"
+        }, {
+          "targetFlow": "bell_aqd",
+          "event": "sys.no-input-3",
+          "triggerFulfillment": {
+          
+          },
+          "name": "efb2ec4f-8976-438c-8832-73b1b0f359fb"
+        }, {
+          "event": "sys.no-match-1",
+          "triggerFulfillment": {
+            "messages": [ {
+              "text": {
+                "text": [ "Je n’ai pas tout à fait compris. Pouvez-vous réessayer?" ]
+              },
+              "languageCode": "fr-ca"
+            }, {
+              "text": {
+                "text": [ "I didn't quite get that. Can you try again?" ]
+              },
+              "languageCode": "en"
+            } ]
+          },
+          "name": "7fb7a50c-113f-4990-adeb-b2f8463f1ddc"
+        }, {
+          "event": "sys.no-match-2",
+          "triggerFulfillment": {
+            "messages": [ {
+              "text": {
+                "text": [ "Je n’ai toujours pas compris" ]
+              },
+              "languageCode": "fr-ca"
+            }, {
+              "text": {
+                "text": [ "I still didn't get that" ]
+              },
+              "languageCode": "en"
+            } ]
+          },
+          "name": "fefe39a9-e832-43c0-82b9-eb1a7efec484"
+        }, {
+          "targetFlow": "bell_aqd",
+          "event": "sys.no-match-3",
+          "triggerFulfillment": {
+          
+          },
+          "name": "868c5392-0c67-4f53-b21f-04477f35c7b8"
+        } ]
+      }
+    } ]
+  },
+  "entryFulfillment": {
+    "messages": [ {
+      "text": {
+        "text": [ "\u003cspeak\u003e Okay. The payment date is set for \u003csay-as interpret-as=\"date\" format=\"md\" detail=\"2\"\u003e$session.params.calculated_payment_date \u003c/say-as\u003e. Will you be paying through your bank or credit card? \u003c/speak\u003e" ]
+      },
+      "languageCode": "en"
+    } ],
+    "conditionalCases": [ {
+      "cases": [ {
+        "condition": "$session.params.paDaysResponse != null",
+        "caseContent": [ {
+          "message": {
+            "text": {
+              "text": [ "D'accord. La date de paiement est fixée au $sys.func.TO_NUMBER($session.params.paDaysResponse). Prévoyez-vous de payer par virement bancaire ou par carte de crédit?" ]
+            },
+            "languageCode": "fr-ca"
+          }
+        } ]
+      }, {
+        "caseContent": [ {
+          "message": {
+            "text": {
+              "text": [ "Prévoyez-vous de payer par virement bancaire ou par carte de crédit?" ]
+            },
+            "languageCode": "fr-ca"
+          }
+        } ]
+      } ]
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.pmtMethodInput = \"Debit\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "payment_method",
+        "value": "DirectDebit"
+      }, {
+        "parameter": "payment_type",
+        "value": "Debit"
+      } ]
+    },
+    "targetPage": "Webhook-Update Order",
+    "name": "bbe71bba-5596-4c04-9fe2-2a38c0f2c0cc"
+  }, {
+    "condition": "$session.params.pmtMethodInput = \"Credit Card\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "payment_method",
+        "value": "DirectDebit"
+      }, {
+        "parameter": "payment_type",
+        "value": "Credit"
+      } ]
+    },
+    "targetPage": "Webhook-Update Order",
+    "name": "ab446d02-80e1-4d68-9861-985a207b9ff2"
+  }, {
+    "condition": "$session.params.pmtMethodInput = \"Others\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "payment_method",
+        "value": "Regular"
+      } ]
+    },
+    "targetPage": "Webhook-Update Order",
+    "name": "8c4ad2e6-52c3-4493-a0d7-d85ba6c9c38f"
+  } ],
+  "eventHandlers": [ {
+    "event": "sys.no-match-1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I didn't quite get that. Can you try again?" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "9f83d666-7306-444f-bf00-7f6f27a5fb18"
+  }, {
+    "event": "sys.no-match-2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I still didn't get that" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "6c2b4605-55b4-4134-b6c1-b0e1d569f081"
+  }, {
+    "targetFlow": "bell_aqd",
+    "event": "sys.no-match-3",
+    "triggerFulfillment": {
+    
+    },
+    "name": "c3dca3c0-e415-4a5d-90fd-e74b80e80910"
+  }, {
+    "event": "sys.no-input-1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I didn't quite get that. Can you try again?" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "e6880190-9807-44a3-882f-075a9f2af122"
+  }, {
+    "event": "sys.no-input-2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I still didn't get that" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "7624f84f-8a2e-4b5e-bf8d-27ba4ec06e11"
+  }, {
+    "targetFlow": "bell_aqd",
+    "event": "sys.no-input-3",
+    "triggerFulfillment": {
+    
+    },
+    "name": "831e2bf4-579d-4900-875c-e4ad14b06bad"
+  } ]
+}

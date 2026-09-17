@@ -1,0 +1,101 @@
+{
+  "name": "1d30d9a2-180c-4e12-9287-aea3bd1e5f53",
+  "displayName": "Webhook - WFAS Cancel",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "/v1/ticket_management/wfas#cancel",
+    "tag": "cancel",
+    "setParameterActions": [ {
+      "parameter": "menu_type",
+      "value": "$session.params.menu_type"
+    }, {
+      "parameter": "released_preferred",
+      "value": "Y"
+    }, {
+      "parameter": "wfas_context_raw",
+      "value": "$session.params.wfas_availability_response.wfas_context"
+    }, {
+      "parameter": "wfas_context",
+      "value": "$sys.func.TO_OBJECT($session.params.wfas_context_raw)"
+    }, {
+      "parameter": "webhook_success",
+      "value": null
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "webhook_success",
+        "value": "$session.params.webhook_success"
+      } ]
+    },
+    "name": "1da923f3-02d7-43c9-853b-0ecce21ce7e1"
+  }, {
+    "condition": "$session.params.webhook_success = true",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_aqd",
+    "name": "48edd6a4-c0ea-4db0-9b40-4ad4d9ee0203"
+  }, {
+    "condition": "$session.params.webhook_success = false",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Failure 2 - ACUT",
+    "name": "642e5cf4-1788-4e46-b35a-82fa6cb5334f"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Failure 2 - ACUT",
+    "name": "619ba1d4-c518-44bb-a2b2-e721cbcddc29"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Webhook Failure 2 - ACUT",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+    
+    },
+    "name": "74d8f992-90b8-4ee0-93b8-7c128ebc10ce"
+  }, {
+    "targetPage": "Webhook Failure 2 - ACUT",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+    
+    },
+    "name": "c78978ff-3d28-48fa-9254-4b5b0acf0f72"
+  }, {
+    "targetPage": "Webhook Failure 2 - ACUT",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+    
+    },
+    "name": "3924ac26-788d-4554-b741-d50cf2a34da5"
+  }, {
+    "targetPage": "Webhook Failure 2 - ACUT",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+    
+    },
+    "name": "6cafc85e-e2cf-4f78-a9f5-312d0a3ef22b"
+  }, {
+    "targetPage": "Webhook Failure 2 - ACUT",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+    
+    },
+    "name": "acd32928-c590-459b-a422-4fcfe7e9514e"
+  }, {
+    "targetPage": "Webhook Failure 2 - ACUT",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+    
+    },
+    "name": "4ce49826-7c81-4dee-9337-405fe8f3de10"
+  } ]
+}

@@ -1,0 +1,109 @@
+{
+  "name": "666e6dfb-b71a-485e-9bbf-44e5889f98f8",
+  "displayName": "Confirm Number",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "messages": [ {
+      "outputAudioText": {
+        "ssml": "\u003cspeak\u003eThat was \u003cprosody rate=\"70%\"\u003e\u003csay-as interpret-as=\"telephone\"\u003e$session.params.cirn_grp1\u003c/say-as\u003e\u003cbreak time=\"300ms\"/\u003e\u003csay-as interpret-as=\"telephone\"\u003e$session.params.cirn_grp2\u003c/say-as\u003e\u003cbreak time=\"300ms\"/\u003e\u003csay-as interpret-as=\"telephone\"\u003e$session.params.cirn_grp3\u003c/say-as\u003e\u003cbreak time=\"300ms\"/\u003e\u003csay-as interpret-as=\"telephone\"\u003e$session.params.cirn_grp4\u003c/say-as\u003e\u003cbreak time=\"200ms\"/\u003e\u003c/prosody\u003e, right?\u003c/speak\u003e"
+      },
+      "languageCode": "en"
+    }, {
+      "text": {
+        "text": [ "\u003cspeak\u003eThat was \u003cprosody rate=\"70%\"\u003e\u003csay-as interpret-as=\"telephone\"\u003e$session.params.cirn_grp1\u003c/say-as\u003e\u003cbreak time=\"300ms\"/\u003e\u003csay-as interpret-as=\"telephone\"\u003e$session.params.cirn_grp2\u003c/say-as\u003e\u003cbreak time=\"300ms\"/\u003e\u003csay-as interpret-as=\"telephone\"\u003e$session.params.cirn_grp3\u003c/say-as\u003e\u003cbreak time=\"300ms\"/\u003e\u003csay-as interpret-as=\"telephone\"\u003e$session.params.cirn_grp4\u003c/say-as\u003e\u003c/prosody\u003e, right?\u003c/speak\u003e" ]
+      },
+      "languageCode": "en"
+    }, {
+      "outputAudioText": {
+        "ssml": "\u003cspeak\u003eC’était bien le \u003cprosody rate=\"70%\"\u003e\u003csay-as interpret-as=\"telephone\"\u003e$session.params.cirn_grp1\u003c/say-as\u003e\u003cbreak time=\"300ms\"/\u003e\u003csay-as interpret-as=\"telephone\"\u003e$session.params.cirn_grp2\u003c/say-as\u003e\u003cbreak time=\"300ms\"/\u003e\u003csay-as interpret-as=\"telephone\"\u003e$session.params.cirn_grp3\u003c/say-as\u003e\u003cbreak time=\"300ms\"/\u003e\u003csay-as interpret-as=\"telephone\"\u003e$session.params.cirn_grp4\u003c/say-as\u003e\u003cbreak time=\"200ms\"/\u003e\u003c/prosody\u003e, n'est-ce pas?\u003c/speak\u003e"
+      },
+      "languageCode": "fr-ca"
+    }, {
+      "text": {
+        "text": [ "\u003cspeak\u003eC’était bien le \u003cprosody rate=\"70%\"\u003e\u003csay-as interpret-as=\"telephone\"\u003e$session.params.cirn_grp1\u003c/say-as\u003e\u003cbreak time=\"300ms\"/\u003e\u003csay-as interpret-as=\"telephone\"\u003e$session.params.cirn_grp2\u003c/say-as\u003e\u003cbreak time=\"300ms\"/\u003e\u003csay-as interpret-as=\"telephone\"\u003e$session.params.cirn_grp3\u003c/say-as\u003e\u003cbreak time=\"300ms\"/\u003e\u003csay-as interpret-as=\"telephone\"\u003e$session.params.cirn_grp4\u003c/say-as\u003e\u003cbreak time=\"200ms\"/\u003e\u003c/prosody\u003e, n'est-ce pas?\u003c/speak\u003e" ]
+      },
+      "languageCode": "fr-ca"
+    } ],
+    "setParameterActions": [ {
+      "parameter": "cirn_grp1",
+      "value": "$sys.func.MID($session.params.phone_number,1,3)"
+    }, {
+      "parameter": "cirn_grp2",
+      "value": "$sys.func.MID($session.params.phone_number,4,3)"
+    }, {
+      "parameter": "cirn_grp3",
+      "value": "$sys.func.MID($session.params.phone_number,7,2)"
+    }, {
+      "parameter": "cirn_grp4",
+      "value": "$sys.func.MID($session.params.phone_number,9,2)"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "intent": "context.confirm_yes",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "webhook_success",
+        "value": null
+      }, {
+        "parameter": "telephone_number",
+        "value": "$session.params.phone_number"
+      } ]
+    },
+    "targetPage": "Trigger SMS to Provided Number",
+    "name": "a86738cb-970a-419a-95e6-44613c7b64a9"
+  }, {
+    "intent": "context.confirm_no",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Use different Number",
+    "name": "c8143e5c-7d77-4259-b257-581843332c54"
+  }, {
+    "intent": "context.sms_different_number",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Use different Number",
+    "name": "3ef32257-d91d-4eee-a14a-43d4d4d0cbfc"
+  }, {
+    "condition": "$session.params.global_error_counter \u003e= 3",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_aqd",
+    "name": "e06c5cdd-1e25-4fd6-917f-9f9839f64f07"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Use different Number",
+    "event": "sys.no-match-1",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "global_error_counter",
+        "value": "$sys.func.ADD($session.params.global_error_counter,1)"
+      } ]
+    },
+    "name": "03fae897-f159-482f-8319-358f0dc746b4"
+  }, {
+    "targetPage": "Confirm Number",
+    "event": "sys.no-input-1",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "global_error_counter",
+        "value": "$sys.func.ADD($session.params.global_error_counter,1)"
+      } ]
+    },
+    "name": "fa0d4ec2-7886-47e6-b6aa-67f9e5d82faf"
+  }, {
+    "targetPage": "Use different Number",
+    "event": "sys.no-input-2",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "global_error_counter",
+        "value": "$sys.func.ADD($session.params.global_error_counter,1)"
+      } ]
+    },
+    "name": "42583f86-4359-45cd-ab51-ce979327f0f0"
+  } ]
+}

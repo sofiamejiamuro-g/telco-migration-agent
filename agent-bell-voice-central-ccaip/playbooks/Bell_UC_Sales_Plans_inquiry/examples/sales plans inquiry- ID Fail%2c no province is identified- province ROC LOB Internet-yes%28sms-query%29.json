@@ -1,0 +1,84 @@
+{
+  "name": "28b58a18-ed7c-4439-b11d-1ac7bee56bf4",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "language": "en"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Sure, let me help you with that.\n\nWhich service are you inquiring about?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "internet"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Let’s check if we offer Internet and Home phone service in your area. In which province are you looking to get service?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "ROC"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Get blazing-fast speeds on the Bell network with Bell Mobile Internet. Where you can get up to 5G internet connectivity with a mobile hotspot device so that you can stay connected at home or on the go.\nI'll send a text to the device you're calling from, so that you can learn more about mobile internet on our website. Is that alright?\n"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Is the link safe to click?"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Yes, absolutely. The link is an official, secure URL and leads directly to your requested information. Can I send the text to the device you're calling from?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "yes"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "en",
+        "sms_content": "Bell: You can visit bell.ca/mobileinternetdevices to view our Mobile Internet devices. ( bell.ca/about-us )",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customers want to know about different plans or compare different plans that Bell has and lob identified as \" Internet\" OR \"TV\" OR \"Homephone\" AND province is any synonym of \"ROC\" and also more information about SMS",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "New",
+      "language": "en",
+      "province": "AB",
+      "route": "sales_plans_inquiry",
+      "utterance": "I need a plan"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "We need ask LOB if service is not identified- and if LOB is internet\" and We need to check the result from identification flow from the webhook NPANXX, If no province is identified then we need ask them and if it is \"ROC\",  Customer asked a question regarding SMS so VA answered them and prompted again for SMS. User then said yes so we route accordingly ",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "lob": "internet",
+      "province": "ROC"
+    }
+  },
+  "displayName": "sales plans inquiry- ID Fail, no province is identified- province ROC LOB Internet-yes(sms-query)",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 662,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

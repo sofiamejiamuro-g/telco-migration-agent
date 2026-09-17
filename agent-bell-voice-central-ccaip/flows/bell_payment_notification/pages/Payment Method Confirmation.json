@@ -1,0 +1,200 @@
+{
+  "name": "a2c7644c-7ce1-46f8-bddf-0b331041a2c0",
+  "displayName": "Payment Method Confirmation",
+  "form": {
+    "parameters": [ {
+      "displayName": "payment_method",
+      "required": true,
+      "entityType": "@payment_method",
+      "fillBehavior": {
+        "initialPromptFulfillment": {
+        
+        },
+        "repromptEventHandlers": [ {
+          "event": "sys.no-input-1",
+          "triggerFulfillment": {
+            "messages": [ {
+              "text": {
+                "text": [ "I didn't quite get that.Can you try again?" ]
+              },
+              "languageCode": "en"
+            } ]
+          },
+          "name": "9e7ffa9a-e46a-48b8-a16b-8682f42d3cc6"
+        }, {
+          "event": "sys.no-match-1",
+          "triggerFulfillment": {
+            "messages": [ {
+              "text": {
+                "text": [ "I didn't quite get that.Can you try again?" ]
+              },
+              "languageCode": "en"
+            } ]
+          },
+          "name": "3b9a5341-8c07-46e3-99f6-6b6ce213af54"
+        }, {
+          "event": "sys.no-input-2",
+          "triggerFulfillment": {
+            "messages": [ {
+              "text": {
+                "text": [ "I still didn't get that." ]
+              },
+              "languageCode": "en"
+            } ]
+          },
+          "name": "64b9aea6-0d3c-4ff9-8090-8073f6f167da"
+        }, {
+          "event": "sys.no-match-2",
+          "triggerFulfillment": {
+            "messages": [ {
+              "text": {
+                "text": [ "I still didn't get that." ]
+              },
+              "languageCode": "en"
+            } ]
+          },
+          "name": "ba530006-db24-45c6-9e49-02f5b0dd7ca1"
+        }, {
+          "targetFlow": "bell_aqd",
+          "event": "sys.no-input-3",
+          "triggerFulfillment": {
+          
+          },
+          "name": "4e73da19-d2ee-464d-8985-740c8783173a"
+        }, {
+          "targetFlow": "bell_aqd",
+          "event": "sys.no-match-3",
+          "triggerFulfillment": {
+          
+          },
+          "name": "add64c4c-ab33-4519-a9b7-465d536c8d02"
+        } ]
+      }
+    } ]
+  },
+  "entryFulfillment": {
+    "messages": [ {
+      "text": {
+        "text": [ "Was that done through your bank or by credit card?" ]
+      },
+      "languageCode": "en"
+    }, {
+      "text": {
+        "text": [ "Cela a-t-il été fait par votre banque ou par carte de crédit?" ]
+      },
+      "languageCode": "fr-ca"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "intent": "other_speak_to_agent",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_determine_handover",
+    "name": "55bc1407-01a2-4a9e-bb0d-1a6944bb4161"
+  }, {
+    "condition": "$session.params.payment_method = \"Debit\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "payment_method",
+        "value": "DirectDebit"
+      } ]
+    },
+    "name": "07bb4862-cc77-4f43-b97b-79c7e202d35a"
+  }, {
+    "condition": "$session.params.payment_method = \"Credit Card\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "payment_method",
+        "value": "CreditCard"
+      } ]
+    },
+    "name": "90ef3f27-3bf0-43a6-b20d-2aa4b7a1db50"
+  }, {
+    "condition": "$session.params.payment_method = \"DirectDebit\" OR $session.params.payment_method = \"CreditCard\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Update Order",
+    "name": "afce5efc-bbac-48f0-bbe7-2c4440b22170"
+  } ],
+  "eventHandlers": [ {
+    "event": "sys.no-input-1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I didn't quite get that. Can you try again?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je n’ai pas tout à fait compris. Pouvez-vous réessayer?" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "d70a94eb-1ecf-4729-8620-d8859a97bfdb"
+  }, {
+    "event": "sys.no-match-1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I didn't quite get that. Can you try again?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je n’ai pas tout à fait compris. Pouvez-vous réessayer?" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "94a8d21f-7800-4b16-ad2e-c5b466166c48"
+  }, {
+    "event": "sys.no-input-2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I still didn't get that." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je n’ai toujours pas compris." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "ecc104b7-472a-4d24-bf7b-5bfb6d91e21c"
+  }, {
+    "event": "sys.no-match-2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I still didn't get that." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je n’ai toujours pas compris." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "623c4cac-c79e-420a-8c65-c1bfae373fa2"
+  }, {
+    "targetFlow": "bell_determine_handover",
+    "event": "sys.no-input-3",
+    "triggerFulfillment": {
+    
+    },
+    "name": "e43baed9-ef45-4737-8fe8-132bbc69feaa"
+  }, {
+    "targetFlow": "bell_determine_handover",
+    "event": "sys.no-match-3",
+    "triggerFulfillment": {
+    
+    },
+    "name": "7c616edd-897a-442e-91ab-6d1765fd327c"
+  } ]
+}

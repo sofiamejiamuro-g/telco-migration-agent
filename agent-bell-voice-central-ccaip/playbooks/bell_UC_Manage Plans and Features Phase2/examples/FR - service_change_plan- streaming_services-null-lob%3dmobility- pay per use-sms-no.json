@@ -1,0 +1,69 @@
+{
+  "name": "f4283307-37f1-4844-94e7-4068ac19eaa9",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70011",
+        "brand": "bell",
+        "language": "en",
+        "lob": "Mobility",
+        "route": "service_change_plan"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Bien sûr, vous pouvez facilement gérer votre forfait Mobilité et vos options en tout temps au moyen de MonBell. Je vais envoyer un texto à l’appareil au moyen duquel vous appelez, afin que vous puissiez facilement modifier votre forfait Mobilité. Est-ce que ça vous convient?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "non merci."
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "fr-ca",
+        "route": "service_change_plan",
+        "sms_send_status": "Declined"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "The {identification_status} is \"Pass\", {customer_type} is \"Existing\", {streaming_services} is null or {lob} is equal to \"Mobility\" so, check for {streaming_services} based on instruction provided in playbook on how to set {streaming_services} within {route} = \"service_change_plan\"",
+    "actionParameters": {
+      "apb_location_id": "70011",
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "fr-ca",
+      "lob": "Mobility",
+      "route": "service_change_plan",
+      "utterance": "je veux savoir des infos sur itinérance facturée à l’usage"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "The user asked about roaming charged based on usage, and the LOB was identified as Mobility. We checked the route, which corresponds to ‘service_change_plan’, and displayed a response. We then asked the user if we could send them an SMS; the user declined, so we routed to the bell_SMS trigger flow with the appropriate parameters.",
+    "actionParameters": {
+      "apb_location_id": "70011",
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "fr-ca",
+      "lob": "Mobility",
+      "route": "service_change_plan",
+      "utterance": "je veux savoir des infos sur itinérance facturée à l’usage"
+    }
+  },
+  "displayName": "FR - service_change_plan- streaming_services-null-lob=mobility- pay per use-sms-no",
+  "retrievalStrategy": "STATIC",
+  "tokenCount": 594,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

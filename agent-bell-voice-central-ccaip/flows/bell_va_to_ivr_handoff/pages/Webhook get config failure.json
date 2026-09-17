@@ -1,0 +1,99 @@
+{
+  "name": "cc2c388b-15cc-4786-b872-53b11868e88a",
+  "displayName": "Webhook get config failure",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "conditionalCases": [ {
+      "cases": [ {
+        "condition": "$session.params.business_type = \"CCC\"",
+        "caseContent": [ {
+          "message": {
+            "text": {
+              "text": [ "Sorry, I couldn’t transfer you just now. Please try again later." ]
+            },
+            "languageCode": "en"
+          }
+        }, {
+          "message": {
+            "text": {
+              "text": [ "Je ne peux malheureusement pas effectuer votre transfert pour le moment. Veuillez réessayer un peu plus tard." ]
+            },
+            "languageCode": "fr-ca"
+          }
+        } ]
+      }, {
+        "condition": "$session.params.region = \"ATL\" OR $session.params.onebillindicator = \"Y\"",
+        "caseContent": [ {
+          "message": {
+            "text": {
+              "text": [ "Sorry, I couldn’t transfer you just now. Please call 1-866-425-4268 for support." ]
+            },
+            "languageCode": "en"
+          }
+        }, {
+          "message": {
+            "text": {
+              "text": [ "Je ne peux malheureusement pas effectuer votre transfert pour le moment. Veuillez composer le 1-866-425-4268 pour obtenir de l’aide." ]
+            },
+            "languageCode": "fr-ca"
+          }
+        } ]
+      }, {
+        "condition": "$session.params.business_type = \"MTS\" OR $session.params.onebillindicator = \"M\"",
+        "caseContent": [ {
+          "message": {
+            "text": {
+              "text": [ "Sorry, I couldn’t transfer you just now. Please call 1-800-883-2054 for support." ]
+            },
+            "languageCode": "en"
+          }
+        }, {
+          "message": {
+            "text": {
+              "text": [ "Je ne peux malheureusement pas effectuer votre transfert pour le moment. Veuillez composer le 1-800-883-2054 pour obtenir de l’aide." ]
+            },
+            "languageCode": "fr-ca"
+          }
+        } ]
+      }, {
+        "caseContent": [ {
+          "message": {
+            "text": {
+              "text": [ "Sorry, I couldn’t transfer you just now. Please try again later." ]
+            },
+            "languageCode": "en"
+          }
+        }, {
+          "message": {
+            "text": {
+              "text": [ "Je ne peux malheureusement pas effectuer votre transfert pour le moment. Veuillez réessayer un peu plus tard." ]
+            },
+            "languageCode": "fr-ca"
+          }
+        } ]
+      } ]
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "true",
+    "triggerFulfillment": {
+      "conditionalCases": [ {
+        "cases": [ {
+          "condition": "$session.params.business_type = \"CCC\"",
+          "caseContent": [ {
+            "message": {
+              "text": {
+                "text": [ "Je ne peux malheureusement pas effectuer votre transfert pour le moment. Veuillez réessayer un peu plus tard." ]
+              },
+              "languageCode": "fr-ca"
+            }
+          } ]
+        } ]
+      } ]
+    },
+    "targetFlow": "bell_wrapup",
+    "name": "54d43a38-9e24-40f0-ae4e-69a2a6c7875c"
+  } ]
+}

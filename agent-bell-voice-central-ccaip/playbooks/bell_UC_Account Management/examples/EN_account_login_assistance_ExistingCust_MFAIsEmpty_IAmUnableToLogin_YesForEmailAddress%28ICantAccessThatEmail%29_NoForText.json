@@ -1,0 +1,71 @@
+{
+  "name": "b1ef73d9-3718-424c-a1a4-ac25174aaafd",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Do you know the email address you registered with?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "I can't access that email"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "I'll send a text to the device you're calling from, so that you can easily recover your password or username. Is that alright?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "No"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_get_sdl_mapping_url",
+      "inputActionParameters": {
+        "brand": "bell",
+        "language": "en",
+        "route": "account_login_assistance"
+      },
+      "outputActionParameters": {
+        "brand": "bell",
+        "language": "en"
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "No problem at all. For any other questions you can always visit our website at {faq_link}."
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_Feedback",
+      "inputActionParameters": {
+        "brand": "bell",
+        "language": "en"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "The customer is trying to recover their username or password with email.",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "Existing",
+      "language": "en",
+      "route": "account_login_assistance",
+      "utterance": "I am unable to login"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "The customer wants to recover their username with email, the customer is identified as a Existing customer and if the customer disagrees to receive a text on their device route them to bell_get_sdl_mapping_url flow then prompt the user appropriate message and then call bell_feedback flow.",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "route": "account_login_assistance"
+    }
+  },
+  "displayName": "EN_account_login_assistance_ExistingCust_MFAIsEmpty_IAmUnableToLogin_YesForEmailAddress(ICantAccessThatEmail)_NoForText",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 439,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

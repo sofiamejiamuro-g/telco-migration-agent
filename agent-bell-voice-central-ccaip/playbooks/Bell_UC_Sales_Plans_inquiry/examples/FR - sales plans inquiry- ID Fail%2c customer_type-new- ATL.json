@@ -1,0 +1,59 @@
+{
+  "name": "8ad3dc0d-b558-4f58-aa06-63273f8d3185",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Bien sûr, laissez-moi vous aider.\n\nÀ propos de quel service communiquez-vous avec nous?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "internet"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_aqd",
+      "inputActionParameters": {
+        "language": "fr-ca",
+        "lob": "internet",
+        "special_queue": "bell_sales_to_atl"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customers want to know about different plans or compare different plans that Bell has and lob identified as \" Internet\" OR \"TV\" OR \"Homephone\"",
+    "actionParameters": {
+      "customer_type": "New",
+      "language": "fr-ca",
+      "province": "ATL",
+      "route": "sales_plans_inquiry",
+      "utterance": "j'ai besoin d'un nouveau plan"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "We need to check the result from identification flow from the webhook NPANXX, if it is \"ATL\" then call bell_aqd flow and set special_queue =\nbell_sales_to_atl",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca",
+      "lob": "internet",
+      "province": "ATL"
+    }
+  },
+  "displayName": "FR - sales plans inquiry- ID Fail, customer_type-new- ATL",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 393,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "fr"
+}

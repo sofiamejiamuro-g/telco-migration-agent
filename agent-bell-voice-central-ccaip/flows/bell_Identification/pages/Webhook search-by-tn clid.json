@@ -1,0 +1,136 @@
+{
+  "name": "ce8d8323-5712-415d-ba69-f1a8a70ff299",
+  "displayName": "Webhook search-by-tn clid",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "v1/customer-identification#search-by-tn",
+    "tag": "search-by-tn",
+    "setParameterActions": [ {
+      "parameter": "telephone_number",
+      "value": "$session.params.clid"
+    }, {
+      "parameter": "webhook_success",
+      "value": null
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.webhook_success = \"True\" OR $session.params.webhook_success = \"true\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "webhook_success",
+        "value": null
+      }, {
+        "parameter": "clid_pass",
+        "value": true
+      } ],
+      "conditionalCases": [ {
+        "cases": [ {
+          "condition": "$session.params.id_again != yes",
+          "caseContent": [ {
+            "message": {
+              "text": {
+                "text": [ "Communiquez-vous avec nous au sujet du numéro à partir duquel vous nous appelez présentement?" ]
+              },
+              "languageCode": "fr-ca"
+            }
+          }, {
+            "message": {
+              "text": {
+                "text": [ "Are you calling about the account associated with the number you’re calling from?" ]
+              },
+              "languageCode": "en"
+            }
+          } ]
+        } ]
+      } ]
+    },
+    "targetPage": "Get CX Input",
+    "name": "e44c0852-7892-4667-9cda-adae8da43daf"
+  }, {
+    "condition": "$session.params.webhook_success = \"False\" OR $session.params.webhook_success = \"false\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "webhook_success",
+        "value": null
+      }, {
+        "parameter": "clid_not_found",
+        "value": true
+      }, {
+        "parameter": "different_cirn",
+        "value": "yes"
+      }, {
+        "parameter": "nm1_grant",
+        "value": true
+      }, {
+        "parameter": "regional_grant",
+        "value": true
+      } ]
+    },
+    "targetPage": "Regional Webhook",
+    "name": "4f8a0ea5-694a-481f-8116-56bfbb92132b"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "ce8d8323-5712-415d-ba69-f1a8a70ff299"
+      }, {
+        "parameter": "flow_id",
+        "value": "8df7f836-8c64-4019-9506-2cedc52519c8"
+      }, {
+        "parameter": "page_name",
+        "value": "Webhook search-by-tn clid"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Regional Webhook",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+    
+    },
+    "name": "7a845a39-d4ba-4b11-9a80-a8cb45286bf9"
+  }, {
+    "targetPage": "Regional Webhook",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+    
+    },
+    "name": "b8ba8f26-708d-42b3-ba7f-29f3882f7683"
+  }, {
+    "targetPage": "Regional Webhook",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+    
+    },
+    "name": "4fca8500-7b4b-45c5-b742-f81ce5d04a3b"
+  }, {
+    "targetPage": "Regional Webhook",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+    
+    },
+    "name": "0f5a8a77-a43c-4070-9e62-4fa59ffa3f8c"
+  }, {
+    "targetPage": "Regional Webhook",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+    
+    },
+    "name": "b4709375-85c4-4b2a-aad7-98efda0bce2d"
+  }, {
+    "targetPage": "Regional Webhook",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+    
+    },
+    "name": "c0be76c6-91ac-44dc-9982-f905c9ef5fce"
+  } ]
+}

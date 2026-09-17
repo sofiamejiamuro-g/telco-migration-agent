@@ -1,0 +1,291 @@
+{
+  "name": "3c7a6898-5854-41b5-900b-4554be02d70d",
+  "displayName": "bell_payment_pitch_one_time_CC_payment",
+  "transitionRoutes": [ {
+    "intent": "context.repeat",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "$request.generative.repeat_response" ]
+        },
+        "languageCode": "en"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "repeat_flag",
+        "value": 1
+      } ],
+      "generators": [ {
+        "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/d2573b7b-849d-43d3-8c64-867837bd84d2",
+        "inputParameters": [ {
+          "key": "request-last-agent-utterance",
+          "value": "$request.last-agent-utterance"
+        } ],
+        "outputParameter": "$request.generative.repeat_response"
+      } ]
+    },
+    "name": "c3c3034d-4761-49de-b762-952ccc28ad31"
+  }, {
+    "intent": "global_events_full_startover",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "event_type",
+        "value": "full start over"
+      } ]
+    },
+    "targetFlow": "Default Start Flow",
+    "name": "ef98b6d2-fe92-42c6-8db9-04b4a1931752"
+  }, {
+    "intent": "global_events_partial_start_over",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "event_type",
+        "value": "partial start over"
+      } ]
+    },
+    "targetFlow": "Default Start Flow",
+    "name": "4717037c-a42a-40e7-b9e7-2847afdfe191"
+  }, {
+    "intent": "other_speak_to_agent",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_aqd",
+    "name": "1176015f-1cfc-4925-9888-87327892ffe4"
+  }, {
+    "intent": "context.clp_faq",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "$request.generative.clp_faq" ]
+        },
+        "languageCode": "en"
+      } ],
+      "generators": [ {
+        "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/45ed42d5-4f0d-4f53-8f4c-d8d604cc3439",
+        "outputParameter": "$request.generative.clp_faq"
+      } ]
+    },
+    "name": "df57e378-2b2d-4088-8e51-512304cdf1ea"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Check Balance",
+    "name": "84a89f23-7ace-44d3-80bc-337ebaea2d32"
+  } ],
+  "eventHandlers": [ {
+    "event": "sys.no-match-default",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "J'ai du mal à comprendre cette question.", "J'ai mal compris votre demande.", "Je n'ai pas saisi ce que vous avez dit.", "Je crois que je ne vous suis pas.", "Je ne comprends pas de quoi vous me parlez." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "I didn't get that. Can you say it again?", "I missed what you said. What was that?", "Sorry, could you say that again?", "Sorry, can you say that again?", "Can you say that again?", "Sorry, I didn't get that. Can you rephrase?", "Sorry, what was that?", "One more time?", "What was that?", "Say that one more time?", "I didn't get that. Can you repeat?", "I missed that, say that again?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "J'ai du mal à comprendre cette question.", "J'ai mal compris votre demande.", "Je n'ai pas saisi ce que vous avez dit.", "Je crois que je ne vous suis pas.", "Je ne comprends pas de quoi vous me parlez." ]
+        },
+        "languageCode": "fr"
+      } ]
+    },
+    "name": "8a8d4c62-add1-4266-b015-a8cb1dda9ff5"
+  }, {
+    "event": "sys.no-input-default",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "J'ai du mal à comprendre cette question.", "J'ai mal compris votre demande.", "Je n'ai pas saisi ce que vous avez dit.", "Je crois que je ne vous suis pas.", "Je ne comprends pas de quoi vous me parlez." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "I didn't get that. Can you say it again?", "I missed what you said. What was that?", "Sorry, could you say that again?", "Sorry, can you say that again?", "Can you say that again?", "Sorry, I didn't get that. Can you rephrase?", "Sorry, what was that?", "One more time?", "What was that?", "Say that one more time?", "I didn't get that. Can you repeat?", "I missed that, say that again?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "J'ai du mal à comprendre cette question.", "J'ai mal compris votre demande.", "Je n'ai pas saisi ce que vous avez dit.", "Je crois que je ne vous suis pas.", "Je ne comprends pas de quoi vous me parlez." ]
+        },
+        "languageCode": "fr"
+      } ]
+    },
+    "name": "620f5cee-64d8-44a1-88b4-4f91eb39273c"
+  }, {
+    "event": "sys.no-input-1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "$request.generative.response" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "$request.generative.response" ]
+        },
+        "languageCode": "en"
+      } ],
+      "advancedSettings": {
+        "playbackInterruptionSettings": {
+        
+        },
+        "dtmfSettings": {
+          "useSystemEntityRule": false
+        }
+      },
+      "generators": [ {
+        "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/1b8d360c-c2a0-49b0-9a32-d5542ff42d87",
+        "outputParameter": "$request.generative.response"
+      } ],
+      "nextActionOverride": {
+      
+      }
+    },
+    "name": "5a6d5dcb-4ddb-4413-b3f8-48f4320de14d"
+  }, {
+    "event": "sys.no-input-2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "$request.generative.response" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "$request.generative.response" ]
+        },
+        "languageCode": "en"
+      } ],
+      "advancedSettings": {
+        "playbackInterruptionSettings": {
+        
+        },
+        "dtmfSettings": {
+          "useSystemEntityRule": false
+        }
+      },
+      "generators": [ {
+        "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/1bcff408-4981-474e-986a-309d3622718f",
+        "outputParameter": "$request.generative.response"
+      } ],
+      "nextActionOverride": {
+      
+      }
+    },
+    "name": "d3e6e7de-cfd5-4468-8ab4-398e1aef27f2"
+  }, {
+    "event": "sys.no-match-1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "$request.generative.response" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "$request.generative.response" ]
+        },
+        "languageCode": "en"
+      } ],
+      "advancedSettings": {
+        "playbackInterruptionSettings": {
+        
+        },
+        "dtmfSettings": {
+          "useSystemEntityRule": false
+        }
+      },
+      "generators": [ {
+        "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/f7ef68c2-5424-41ab-94dc-f8c07e3164de",
+        "outputParameter": "$request.generative.response"
+      } ],
+      "nextActionOverride": {
+      
+      }
+    },
+    "name": "da10f5e0-9559-4652-8d37-a6d10797e36e"
+  }, {
+    "event": "sys.no-match-2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "$request.generative.response" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "$request.generative.response" ]
+        },
+        "languageCode": "en"
+      } ],
+      "advancedSettings": {
+        "playbackInterruptionSettings": {
+        
+        },
+        "dtmfSettings": {
+          "useSystemEntityRule": false
+        }
+      },
+      "generators": [ {
+        "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/ab9980b0-e324-4bef-8fd6-5e1c1c8d59e1",
+        "outputParameter": "$request.generative.response"
+      } ],
+      "nextActionOverride": {
+      
+      }
+    },
+    "name": "875912f7-2e6d-44c9-b88c-4d7b301535fe"
+  }, {
+    "targetFlow": "bell_No_Match_3",
+    "event": "sys.no-match-3",
+    "triggerFulfillment": {
+    
+    },
+    "name": "ab562055-df67-4710-b5f8-4fcbba9c04b3"
+  }, {
+    "targetFlow": "bell_No_Input_3",
+    "event": "sys.no-input-3",
+    "triggerFulfillment": {
+    
+    },
+    "name": "9d75a7d3-2970-4cf2-8da8-448833cf0864"
+  }, {
+    "targetPage": "End Session",
+    "event": "wrapup",
+    "triggerFulfillment": {
+    
+    },
+    "name": "1f895353-fccf-44a5-837f-2f387f552136"
+  } ],
+  "nluSettings": {
+    "modelType": "MODEL_TYPE_CUSTOM",
+    "classificationThreshold": 0.30000001,
+    "modelTrainingMode": "MODEL_TRAINING_MODE_MANUAL"
+  },
+  "advancedSettings": {
+    "enabled": true,
+    "playbackInterruptionSettings": {
+    
+    }
+  },
+  "nluSettingsList": [ {
+    "modelType": "MODEL_TYPE_CUSTOM",
+    "classificationThreshold": 0.30000001,
+    "modelTrainingMode": "MODEL_TRAINING_MODE_MANUAL",
+    "languageCode": "fr-ca"
+  }, {
+    "modelType": "MODEL_TYPE_CUSTOM",
+    "classificationThreshold": 0.30000001,
+    "modelTrainingMode": "MODEL_TRAINING_MODE_MANUAL",
+    "languageCode": "en"
+  } ],
+  "agentTransitionRouteGroups": [ "HI_account", "HI_billing", "HI_disconnect", "HI_equipment", "HI_faq", "HI_other", "HI_sales", "HI_service", "HI_techsupport" ],
+  "multiLanguageSettings": {
+  
+  }
+}

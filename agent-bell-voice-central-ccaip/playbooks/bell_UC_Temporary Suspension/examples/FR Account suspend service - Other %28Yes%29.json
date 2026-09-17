@@ -1,0 +1,56 @@
+{
+  "name": "a2facdb7-3f1b-4af3-bd28-4a63aaccb774",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Saviez-vous que vous pouvez utiliser votre téléphone en voyage ? Souhaitez-vous en savoir plus ?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "oui"
+    }
+  }, {
+    "playbookInvocation": {
+      "playbook": "bell_UC_Manage Plans and Features Phase2",
+      "playbookInput": {
+        "precedingConversationSummary": "User wants to to learn more about using phone while travelling",
+        "actionParameters": {
+          "brand": "bell",
+          "language": "fr-ca",
+          "lob": "Mobility",
+          "route": "service_add_feature"
+        }
+      },
+      "playbookOutput": {
+        "executionSummary": "User rerouted to \"bell_UC_Manage Plans and Features\" playbook with route as \"service_add_feature\"",
+        "actionParameters": {
+        
+        }
+      },
+      "playbookState": "OUTPUT_STATE_OK"
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer trying to suspend their service with route \"account_suspend_service\"",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca",
+      "route": "account_suspend_service",
+      "unique_services": "Mobility",
+      "utterance": "Suspendre mon service de mobilité car j'ai une raison personnelle"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "here customer did not  mention the unique services, hence we need to ask the customer for the unique service and follow the steps and redirect them to \"bell_UC_Manage Plans and Features\" playbook",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca",
+      "lob": "Mobility",
+      "suspension_type": "travel"
+    }
+  },
+  "displayName": "FR Account suspend service - Other (Yes)",
+  "retrievalStrategy": "NEVER",
+  "tokenCount": 361,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

@@ -1,0 +1,197 @@
+{
+  "name": "8bbd628a-4ab4-44af-a0d9-d8073d409fcc",
+  "displayName": "Paid Amount Confirmation Prompt",
+  "form": {
+    "parameters": [ {
+      "displayName": "amount_paid_by_user",
+      "required": true,
+      "entityType": "@sys.number",
+      "fillBehavior": {
+        "initialPromptFulfillment": {
+        
+        },
+        "repromptEventHandlers": [ {
+          "event": "sys.no-input-1",
+          "triggerFulfillment": {
+            "messages": [ {
+              "text": {
+                "text": [ "I didn't quite get that. Can you try again?" ]
+              },
+              "languageCode": "en"
+            } ]
+          },
+          "name": "b1df5391-39be-40d8-9e21-bf44b2f71090"
+        }, {
+          "event": "sys.no-input-2",
+          "triggerFulfillment": {
+            "messages": [ {
+              "text": {
+                "text": [ "I still didn't get that." ]
+              },
+              "languageCode": "en"
+            } ]
+          },
+          "name": "fa5d43b7-8410-49a9-818c-e11d63073038"
+        }, {
+          "event": "sys.no-match-1",
+          "triggerFulfillment": {
+            "messages": [ {
+              "text": {
+                "text": [ "I didn't quite get that. Can you try again?" ]
+              },
+              "languageCode": "en"
+            } ]
+          },
+          "name": "2c56a8aa-6c8b-42a4-b78e-fb39366ba319"
+        }, {
+          "event": "sys.no-match-2",
+          "triggerFulfillment": {
+            "messages": [ {
+              "text": {
+                "text": [ "I still didn't get that." ]
+              },
+              "languageCode": "en"
+            } ]
+          },
+          "name": "3a2e62db-e13c-4b55-bad3-a71e6ea10d29"
+        }, {
+          "targetFlow": "bell_aqd",
+          "event": "sys.no-input-3",
+          "triggerFulfillment": {
+          
+          },
+          "name": "5e0f678b-baff-446f-b101-aabbe94b6a36"
+        }, {
+          "targetFlow": "bell_aqd",
+          "event": "sys.no-match-3",
+          "triggerFulfillment": {
+          
+          },
+          "name": "a91e3ae2-9e7f-4fcd-a036-d86939003b9c"
+        } ]
+      },
+      "description": "Collect amount Paid by user"
+    } ]
+  },
+  "entryFulfillment": {
+    "messages": [ {
+      "text": {
+        "text": [ "Your current balance is $ $session.params.current_balance and its due on $session.params.due_date. What was the amount paid?" ]
+      },
+      "languageCode": "en"
+    }, {
+      "text": {
+        "text": [ "Votre solde actuel est de $ $session.params.current_balance et il est dû le $session.params.due_date. Quel a été le montant payé?" ]
+      },
+      "languageCode": "fr-ca"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "intent": "other_speak_to_agent",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_determine_handover",
+    "name": "25977364-c8fe-4a24-8fc0-9a61d8552e41"
+  }, {
+    "intent": "context.amount_confirmation",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "amount_paid_by_user",
+        "value": "$session.params.current_balance"
+      } ]
+    },
+    "name": "fe26f5c7-6b2c-42f6-9e1c-c760662e0aa3"
+  }, {
+    "condition": "$session.params.amount_paid_by_user != null OR $session.params.amount_paid_by_user \u003e 0",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Okay $ $session.params.amount_paid_by_user" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "targetPage": "Payment Method Confirmation",
+    "name": "7a8b89b6-aa6b-4670-acef-016d2233f9bb"
+  } ],
+  "eventHandlers": [ {
+    "event": "sys.no-input-1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I didn't quite get that. Can you try again?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je n’ai pas tout à fait compris. Pouvez-vous réessayer?" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "a81bb330-fb13-4897-bef3-047a9e52f259"
+  }, {
+    "event": "sys.no-input-2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I still didn't get that." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je n’ai toujours pas compris" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "034a21c0-054a-42d5-9ff0-bc42285ab58a"
+  }, {
+    "targetFlow": "bell_determine_handover",
+    "event": "sys.no-input-3",
+    "triggerFulfillment": {
+    
+    },
+    "name": "a62ef5f0-7614-457d-836d-a70ed2210fc2"
+  }, {
+    "event": "sys.no-match-1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I didn't quite get that. Can you try again?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je n’ai pas tout à fait compris. Pouvez-vous réessayer?" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "369bd6de-ff74-4b3a-a3e4-5d3b9d6975a0"
+  }, {
+    "event": "sys.no-match-2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I still didn't get that." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je n’ai toujours pas compris" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "cee39cd9-5058-4baa-954d-fbe3cc900598"
+  }, {
+    "targetFlow": "bell_determine_handover",
+    "event": "sys.no-match-3",
+    "triggerFulfillment": {
+    
+    },
+    "name": "81a4fca7-331f-4573-b8c3-670bac391ed9"
+  } ]
+}

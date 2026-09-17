@@ -1,0 +1,96 @@
+{
+  "name": "0084f40c-a30a-4b7e-9609-addfe0c6af35",
+  "displayName": "Webhook intent-sdl-mapping | Fallback",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "v1/intent-sdl-mapping",
+    "tag": "default",
+    "setParameterActions": [ {
+      "parameter": "brand",
+      "value": "bell"
+    }, {
+      "parameter": "intent",
+      "value": "$session.params.route"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.webhook_success = True",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Sorry, we’re having difficulty sending the text.\n\nYou can check out our frequently asked questions at $session.params.intent_sdl_map_response.url" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Désolée, nous éprouvons des difficultés à envoyer le message texte. Vous pouvez consulter notre foire aux questions à l’adresse $session.params.intent_sdl_map_response.url." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "fc009775-dce7-4e54-a477-f0d0463b2ddb"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Sorry, we’re having difficulty sending the text.\n\nYou can check out our frequently asked questions at $session.params.intent_sdl_map_response.url" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Désolée, nous éprouvons des difficultés à envoyer le message texte. Vous pouvez consulter notre foire aux questions à l’adresse bell.ca/soutien" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "4bee9885-5be2-44bf-b7e2-af558011f9b2"
+  } ],
+  "eventHandlers": [ {
+    "targetFlow": "bell_aqd",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+    
+    },
+    "name": "b10ce1d5-e6a2-40a8-98cc-f77bf34ee660"
+  }, {
+    "targetFlow": "bell_aqd",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+    
+    },
+    "name": "c2818e1d-86fa-44fb-8324-9b6f342450a8"
+  }, {
+    "targetFlow": "bell_aqd",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+    
+    },
+    "name": "0e5b5a52-3421-4ce3-84e4-c21ca58ece7e"
+  }, {
+    "targetFlow": "bell_aqd",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+    
+    },
+    "name": "47794a29-c2b7-48a4-bf9e-55be141851a8"
+  }, {
+    "targetFlow": "bell_aqd",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+    
+    },
+    "name": "ac7afd20-2a2d-4e08-a8ea-0252605114d5"
+  }, {
+    "targetFlow": "bell_aqd",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+    
+    },
+    "name": "5c91835f-d117-4566-9430-b9c74f648196"
+  } ]
+}

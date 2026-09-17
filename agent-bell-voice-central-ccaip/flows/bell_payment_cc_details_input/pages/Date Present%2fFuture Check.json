@@ -1,0 +1,243 @@
+{
+  "name": "2b23437d-a49f-4871-ad76-fe948a29b2b9",
+  "displayName": "Date Present/Future Check",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.expiry_month = \"0\" OR $session.params.expiry_month = 0",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "expiry_date",
+        "value": null
+      }, {
+        "parameter": "n_incorrect_date",
+        "value": "$sys.func.ADD($session.params.n_incorrect_date,1)"
+      } ],
+      "conditionalCases": [ {
+        "cases": [ {
+          "condition": "$session.params.n_incorrect_date \u003c 2",
+          "caseContent": [ {
+            "message": {
+              "text": {
+                "text": [ "Cela ne semble pas exact. Pourriez-vous répéter la date d'expiration?" ]
+              },
+              "languageCode": "fr-ca"
+            }
+          }, {
+            "message": {
+              "text": {
+                "text": [ "That doesn't seem right. What's the expiry date again?" ]
+              },
+              "languageCode": "en"
+            }
+          } ]
+        }, {
+          "caseContent": [ {
+            "message": {
+              "text": {
+                "text": [ "Pour assurer la sécurité, nous vous demandons d'essayer de nouveau plus tard. Vous pouvez également effectuer un palement à tout moment à l'aide de l'appli Mon Compte." ]
+              },
+              "languageCode": "fr-ca"
+            }
+          }, {
+            "message": {
+              "text": {
+                "text": [ "To keep things secure, we ask that you please try again later. You can also make a payment at any point using the My Account app." ]
+              },
+              "languageCode": "en"
+            }
+          } ]
+        } ]
+      } ]
+    },
+    "targetPage": "Incorrect counter check",
+    "name": "ec3be4fc-2c7d-4aa3-8883-720acaba6e08"
+  }, {
+    "condition": "$session.params.expiry_year \u003c $session.params.year_today",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "n_incorrect_date",
+        "value": "$sys.func.ADD($session.params.n_incorrect_date,1)"
+      }, {
+        "parameter": "expiry_date",
+        "value": null
+      } ],
+      "conditionalCases": [ {
+        "cases": [ {
+          "condition": "$session.params.n_incorrect_date \u003c 2",
+          "caseContent": [ {
+            "message": {
+              "text": {
+                "text": [ "Cela ne semble pas exact. Pourriez-vous répéter la date d'expiration?" ]
+              },
+              "languageCode": "fr-ca"
+            }
+          }, {
+            "message": {
+              "text": {
+                "text": [ "That doesn't seem right. What's the expiry date again?" ]
+              },
+              "languageCode": "en"
+            }
+          } ]
+        }, {
+          "caseContent": [ {
+            "message": {
+              "text": {
+                "text": [ "Pour assurer la sécurité, nous vous demandons d'essayer de nouveau plus tard. Vous pouvez également effectuer un palement à tout moment à l'aide de l'appli Mon Compte." ]
+              },
+              "languageCode": "fr-ca"
+            }
+          }, {
+            "message": {
+              "text": {
+                "text": [ "To keep things secure, we ask that you please try again later. You can also make a payment at any point using the MyBell app." ]
+              },
+              "languageCode": "en"
+            }
+          } ]
+        } ]
+      } ]
+    },
+    "targetPage": "Incorrect counter check",
+    "name": "81512c2c-eda7-474c-99ff-e95091a31345"
+  }, {
+    "condition": "$session.params.expiry_year = $session.params.year_today AND $session.params.expiry_month \u003c $session.params.month_today",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "expiry_date",
+        "value": null
+      }, {
+        "parameter": "n_incorrect_date",
+        "value": "$sys.func.ADD($session.params.n_incorrect_date,1)"
+      } ],
+      "conditionalCases": [ {
+        "cases": [ {
+          "condition": "$session.params.n_incorrect_date \u003c 2",
+          "caseContent": [ {
+            "message": {
+              "text": {
+                "text": [ "Cela ne semble pas exact. Pourriez-vous répéter la date d'expiration?" ]
+              },
+              "languageCode": "fr-ca"
+            }
+          }, {
+            "message": {
+              "text": {
+                "text": [ "That doesn't seem right. What's the expiry date again?" ]
+              },
+              "languageCode": "en"
+            }
+          } ]
+        }, {
+          "caseContent": [ {
+            "message": {
+              "text": {
+                "text": [ "Pour assurer la sécurité, nous vous demandons d'essayer de nouveau plus tard. Vous pouvez également effectuer un palement à tout moment à l'aide de l'appli Mon Compte." ]
+              },
+              "languageCode": "fr-ca"
+            }
+          }, {
+            "message": {
+              "text": {
+                "text": [ "To keep things secure, we ask that you please try again later. You can also make a payment at any point using the MyBell app." ]
+              },
+              "languageCode": "en"
+            }
+          } ]
+        } ]
+      } ]
+    },
+    "targetPage": "Incorrect counter check",
+    "name": "732435d7-83bd-44d9-956b-5684dcdb0c6f"
+  }, {
+    "condition": "$session.params.expiry_month \u003e 12 AND $session.params.no_match_counter \u003c 2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Cela ne semble pas exact. Pourriez-vous entrer le mois et l’année en quatre chiffres? Par exemple, si votre date d’expiration est janvier 2030, vous pouvez me l’indiquer en disant ou en entrant 0130." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "That doesn't seem right. Could you enter the month and year as four digits? For example, if your expiry date is January 2030, you can let me know by saying or entering 0130." ]
+        },
+        "languageCode": "en"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "no_match_counter",
+        "value": "$sys.func.ADD($session.params.no_match_counter,1)"
+      }, {
+        "parameter": "expiry_date",
+        "value": null
+      } ]
+    },
+    "targetPage": "Prompt expiry date",
+    "name": "b08cf544-7277-4143-b5e7-58e7f496b473"
+  }, {
+    "condition": "$session.params.expiry_month \u003e 12 AND $session.params.no_match_counter \u003e= 2",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "no_match_counter",
+        "value": "$sys.func.ADD($session.params.no_match_counter,1)"
+      }, {
+        "parameter": "expiry_date",
+        "value": null
+      } ],
+      "conditionalCases": [ {
+        "cases": [ {
+          "condition": "$session.params.route = \"payment_make_payment\"",
+          "caseContent": [ {
+            "message": {
+              "text": {
+                "text": [ "To keep things secure, we ask that you please try again later. You can also make a payment at any point using the MyBell app." ]
+              },
+              "languageCode": "en"
+            }
+          } ]
+        }, {
+          "condition": "$session.params.route = \"payment_update_autopay\" OR \"payment_setup_autopay\"",
+          "caseContent": [ {
+            "message": {
+              "text": {
+                "text": [ "To keep things secure, we ask that you please try again later. You can also set up your pre-authorized payment at any point using the MyBell app." ]
+              },
+              "languageCode": "en"
+            }
+          } ]
+        }, {
+          "caseContent": [ {
+            "message": {
+              "text": {
+                "text": [ "To keep things secure, we ask that you please try again later. You can call back later or you can also easily complete this step using the MyBell app." ]
+              },
+              "languageCode": "en"
+            }
+          } ]
+        } ]
+      } ]
+    },
+    "targetPage": "Prompt CX SMS",
+    "name": "76e3f88c-9e17-489b-b34f-297dca7a46b7"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "no_match_counter",
+        "value": 0
+      }, {
+        "parameter": "expiry_month",
+        "value": "$sys.func.MID($sys.func.TO_TEXT($session.params.expiry_date),1,2)"
+      }, {
+        "parameter": "expiry_year",
+        "value": "$sys.func.MID($sys.func.TO_TEXT($session.params.expiry_date),3,2)"
+      } ]
+    },
+    "targetPage": "Check Card Brand",
+    "name": "0467d533-a5b4-4649-bebd-024ebfe2240c"
+  } ]
+}

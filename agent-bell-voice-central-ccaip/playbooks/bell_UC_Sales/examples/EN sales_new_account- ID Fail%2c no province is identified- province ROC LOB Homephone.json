@@ -1,0 +1,68 @@
+{
+  "name": "1fd84253-93ab-45a9-a81c-86702865bcb7",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "language": "en"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Sure, let me help you with that.\nLet's check if we offer Internet and Home phone service in your area. In\nwhich province are you looking to get service?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "ROC"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Sorry, we don't offer Home phone service in your area just yet. But, good news, Bell offers amazing mobile phone service, which covers over 99 percent of the population. I can connect you with one of our agents to learn more.\nWould you like that?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "yes"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_aqd",
+      "inputActionParameters": {
+        "language": "en"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "The Customer wants to sign up or open a new account with Bell",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "New",
+      "language": "en",
+      "lob": "Homephone",
+      "province": "BC",
+      "route": "sales_new_account"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "We need ask LOB if service is not identified- and if LOB is \"Homephone\" and We need to check the result from identification flow from the webhook NPANXX, If no province is identified then we need ask them and if it is \"ROC\" then call bell_aqd flow",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "New",
+      "identification_status": "Fail",
+      "language": "en",
+      "lob": "Homephone",
+      "province": "ROC"
+    }
+  },
+  "displayName": "EN sales_new_account- ID Fail, no province is identified- province ROC LOB Homephone",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 476,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

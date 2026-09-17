@@ -1,0 +1,56 @@
+{
+  "name": "f3a6518f-ac6f-4865-b14a-40b54e4b05d6",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70011",
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Vous pouvez facilement gérer votre forfait Internet ou vos options à tout moment en utilisant MonBell. Je vais envoyer un texto à l’appareil au moyen duquel vous appelez, afin que vous puissiez facilement modifier votre forfait Internet. Est-ce que ça vous convient?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "envoyer le texte"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "sms_content": "Bell: Vous pouvez visiter https://m.bell.ca/gererloptioninternet pour apporter des changements à vos options Internet dans l'appli MonBell. ( bell.ca/apropos)",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "The {identification_status} is \"Pass\", {customer_type} is \"Existing\", {streaming_services} is null and {lob} is \"Internet\" so, we will prompt user for send SMS confirmation and if user say \"yes\" or anything affirmative then route to \"bell_SMS Trgigger\" flow.",
+    "actionParameters": {
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "fr-ca",
+      "route": "service_remove_feature",
+      "utterance": "supprimer la fonctionnalité Internet"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "As the {lob} is \"Internet\" and {streaming_services} is null then we will prompt user to send SMS and if user say \"yes\" or anything affirmative then send the user to \"bell_SMS Trigger\" flow",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca"
+    }
+  },
+  "displayName": "FR - service_remove_feature - Internet",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 471,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "fr"
+}

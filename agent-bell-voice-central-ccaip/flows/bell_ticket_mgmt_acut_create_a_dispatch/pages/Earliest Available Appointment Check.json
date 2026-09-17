@@ -1,0 +1,76 @@
+{
+  "name": "b9036bbd-606b-4b0f-9b2b-9ab8f0184f6b",
+  "displayName": "Earliest Available Appointment Check",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.availability_check_second_time = \"true\" AND ($session.params.dates_array_count \u003e 0 OR $session.params.dates_available = \"true\")",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "availability_check_second_time",
+        "value": null
+      } ]
+    },
+    "targetPage": "Earliest Available Appointment Details",
+    "name": "af3fa50c-159c-4f91-a2ed-78cf33d90636"
+  }, {
+    "condition": "$session.params.dates_array_count \u003e 0 OR $session.params.dates_available = \"true\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Earliest Available Appointment Details",
+    "name": "cab703f3-854c-4979-b13d-02a32a8d0cca"
+  }, {
+    "condition": "$session.params.availability_check_second_time = \"true\" AND ($session.params.dates_array_count = 0 OR $session.params.dates_available = \"false\")",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "availability_check_second_time",
+        "value": null
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "512579b5-1df4-4759-8470-12adfb8dd659"
+  }, {
+    "condition": "$session.params.dates_array_count = 0 OR $session.params.dates_available = \"false\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "availability_check_second_time",
+        "value": "true"
+      }, {
+        "parameter": "date_range_begin",
+        "value": "$sys.func.FORMAT_DATE($sys.func.ADD_DATE($sys.func.NOW(), 14, \"DAYS\"), \"yyyy-MM-dd\", $session.params.language)"
+      }, {
+        "parameter": "date_range_end",
+        "value": "$sys.func.FORMAT_DATE($sys.func.ADD_DATE($sys.func.NOW(), 28, \"DAYS\"), \"yyyy-MM-dd\", $session.params.language)\""
+      }, {
+        "parameter": "brand",
+        "value": "$session.params.brand"
+      }, {
+        "parameter": "ivr_menu",
+        "value": "$session.params.ivr_menu"
+      } ]
+    },
+    "targetPage": "Webhook - WFAS Check Availability",
+    "name": "5b5b28c8-e25b-4714-a320-0533b21c5513"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "b9036bbd-606b-4b0f-9b2b-9ab8f0184f6b"
+      }, {
+        "parameter": "flow_id",
+        "value": "daa61f2b-2d60-44bf-9fc3-b0d8955f384d"
+      }, {
+        "parameter": "page_name",
+        "value": "Earliest Available Appointment Check"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "06dfeccd-4177-4a27-8a45-9ecf7c706362"
+  } ]
+}

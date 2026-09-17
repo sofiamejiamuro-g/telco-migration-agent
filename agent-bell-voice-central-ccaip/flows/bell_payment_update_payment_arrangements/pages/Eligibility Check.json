@@ -1,0 +1,125 @@
+{
+  "name": "ea7589d5-d0c4-4633-ac0f-ba78f70c95cc",
+  "displayName": "Eligibility Check",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "v1/payment-arrangement#get-eligibility-criteria",
+    "tag": "get-eligibility-criteria",
+    "setParameterActions": [ {
+      "parameter": "brand",
+      "value": "$session.params.brand"
+    }, {
+      "parameter": "menu_type",
+      "value": "$session.params.menu_type"
+    }, {
+      "parameter": "billing_account",
+      "value": "$session.params.billing_account_number"
+    } ],
+    "returnPartialResponses": true
+  },
+  "transitionRoutes": [ {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "installmentDetails",
+        "value": "$session.params.pmt_arrangement_eligibility_response.installmentDetails"
+      }, {
+        "parameter": "webhook_success",
+        "value": "$session.params.webhook_success"
+      }, {
+        "parameter": "installmentCheck",
+        "value": "$sys.func.COUNT($session.params.pmt_arrangement_eligibility_response.installmentDetails)"
+      } ]
+    },
+    "name": "43a2ba12-08d3-41db-be9f-4619e6422748"
+  }, {
+    "condition": "$session.params.webhook_success = \"true\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Installment Count",
+    "name": "21e7fe6a-7d1d-44d3-b9c8-ba7e628a88e6"
+  }, {
+    "condition": "$session.params.webhook_success = \"false\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I am unable to verify your account" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "4c980037-8302-4499-865b-06ad551ed699"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "ea7589d5-d0c4-4633-ac0f-ba78f70c95cc"
+      }, {
+        "parameter": "flow_id",
+        "value": "27d30ebb-004e-434a-98f4-e2c03fd42fcf"
+      }, {
+        "parameter": "page_name",
+        "value": "Eligibility Check"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ],
+  "eventHandlers": [ {
+    "event": "sys.no-input-1",
+    "triggerFulfillment": {
+    
+    },
+    "name": "716a2344-6c00-40fe-ba20-427be3e80544"
+  }, {
+    "targetPage": "Webhook Failure NM1 Outage",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+    
+    },
+    "name": "960353fd-e1ba-416e-80fc-ae32b023ceb7"
+  }, {
+    "targetPage": "Webhook Failure NM1 Outage",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+    
+    },
+    "name": "2748fec1-a1a8-43b2-ae74-4f00e60ec154"
+  }, {
+    "targetPage": "Webhook Failure NM1 Outage",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+    
+    },
+    "name": "aa341c78-0d24-4709-ad80-528349022ea5"
+  }, {
+    "targetPage": "Webhook Failure NM1 Outage",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+    
+    },
+    "name": "0feb0239-fe9b-4ac2-a4cf-22a057fcc0c7"
+  }, {
+    "targetPage": "Webhook Failure NM1 Outage",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+    
+    },
+    "name": "c1eae407-8a4d-430e-90d1-888f3ec24a1f"
+  }, {
+    "targetPage": "Webhook Failure NM1 Outage",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+    
+    },
+    "name": "af64a2e3-a598-4595-a136-6257d85016a3"
+  } ]
+}

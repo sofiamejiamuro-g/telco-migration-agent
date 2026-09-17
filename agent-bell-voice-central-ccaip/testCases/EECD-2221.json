@@ -1,0 +1,236 @@
+{
+  "name": "cb40f115-41dc-46c0-b002-da8756e7ff1f",
+  "tags": [ "#bell", "#request_bill_statement" ],
+  "displayName": "EECD-2221",
+  "testCaseConversationTurns": [ {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "languageCode": "en",
+        "event": {
+          "event": "greet"
+        }
+      }
+    },
+    "virtualAgentOutput": {
+      "sessionParameters": {
+        "Agent_Counter": 0,
+        "CLID": 4155547622,
+        "brand": "bell",
+        "caller_channel": "TFN",
+        "language": "en"
+      },
+      "differences": [ {
+        "type": "PAGE",
+        "description": "Page mismatch:\nExpected: \nActual:   Routing Page",
+        "assertionType": "EQUAL",
+        "expectedValue": "",
+        "actualValue": "Routing Page"
+      }, {
+        "type": "UTTERANCE",
+        "description": "Agent response mismatch",
+        "warning": true,
+        "assertionType": "EQUAL",
+        "expectedValue": "",
+        "actualValue": "Welcome. I’m Bell’s virtual assistant. it’s nice to e-meet you. I use AI to offer you help quickly when you need it. How Can I help you?"
+      } ],
+      "currentPage": {
+        "name": "Routing Page",
+        "flow": "Default Start Flow"
+      },
+      "textResponses": [ {
+        "text": [ "Welcome. I’m Bell’s virtual assistant. it’s nice to e-meet you. I use AI to offer you help quickly when you need it. How Can I help you?" ]
+      } ],
+      "currentFlow": {
+        "name": "Default Start Flow"
+      },
+      "actions": [ {
+        "event": {
+          "event": "greet"
+        }
+      }, {
+        "agentUtterance": {
+          "text": "Welcome. I’m Bell’s virtual assistant. it’s nice to e-meet you. I use AI to offer you help quickly when you need it. How Can I help you?"
+        }
+      } ]
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "i want a copy of my bill statement"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "sessionParameters": {
+        "Agent_Counter": 0,
+        "CLID": 4155547622,
+        "brand": "bell",
+        "caller_channel": "TFN",
+        "language": "en",
+        "route": "bill_view_bill",
+        "utterance": "i want a copy of my bill statement"
+      },
+      "differences": [ {
+        "type": "UTTERANCE",
+        "description": "Agent response mismatch",
+        "warning": true,
+        "assertionType": "EQUAL",
+        "expectedValue": "",
+        "actualValue": "You can easily view your prepaid balance and payment history online or with the My Bell app. I'll send you a text now with further details.Would you like to receive an SMS with a link to view your prepaid balance and top up history?"
+      } ],
+      "textResponses": [ {
+        "text": [ "You can easily view your prepaid balance and payment history online or with the My Bell app. I'll send you a text now with further details." ],
+        "allowPlaybackInterruption": true
+      }, {
+        "text": [ "Would you like to receive an SMS with a link to view your prepaid balance and top up history?" ],
+        "allowPlaybackInterruption": true
+      } ],
+      "actions": [ {
+        "userUtterance": {
+          "text": "i want a copy of my bill statement"
+        }
+      }, {
+        "playbookInvocation": {
+          "playbook": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/playbooks/6e2e1da9-34e8-4a99-9e06-7966359b7509",
+          "playbookInput": {
+            "actionParameters": {
+              "CLID": 4155547622,
+              "brand": "bell",
+              "caller_channel": "TFN",
+              "language": "en",
+              "route": "bill_view_bill",
+              "utterance": "i want a copy of my bill statement"
+            }
+          },
+          "playbookState": "OUTPUT_STATE_PENDING"
+        }
+      }, {
+        "agentUtterance": {
+          "text": "You can easily view your prepaid balance and payment history online or with the My Bell app. I'll send you a text now with further details."
+        }
+      }, {
+        "playbookInvocation": {
+          "playbook": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/playbooks/bb0845d7-9539-472c-89a2-4f884ec919ef",
+          "playbookInput": {
+            "precedingConversationSummary": "Ask for the customer's confirmation whether they are ok to receive an SMS.",
+            "actionParameters": {
+              "BAN": 4162675927163,
+              "CLID": 4155547622,
+              "brand": "bell",
+              "caller_channel": "TFN",
+              "language": "en",
+              "route": "bill_view_bill",
+              "sms_content": "Click here \u003cURL\u003e to view your prepaid balance and top up history online or in the My Bell account app. \u003cURL\u003e",
+              "sms_type": "Public"
+            }
+          },
+          "playbookState": "OUTPUT_STATE_PENDING"
+        }
+      }, {
+        "agentUtterance": {
+          "text": "Would you like to receive an SMS with a link to view your prepaid balance and top up history?"
+        }
+      } ]
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "ok"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "sessionParameters": {
+        "Agent_Counter": 0,
+        "BAN": 4162675927163,
+        "CLID": 4155547622,
+        "Loud_Counter": 0,
+        "Mistake_Counter": 0,
+        "More_Time_Counter": 0,
+        "SMS_Counter": 0,
+        "brand": "bell",
+        "caller_channel": "TFN",
+        "language": "en",
+        "message_text": "Click here \u003cURL\u003e to view your prepaid balance and top up history online or in the My Bell account app. \u003cURL\u003e",
+        "route": "bill_view_bill",
+        "sms_content": "Click here \u003cURL\u003e to view your prepaid balance and top up history online or in the My Bell account app. \u003cURL\u003e",
+        "sms_send_status": "Success",
+        "sms_type": "Public",
+        "telephone_number": 4155547622,
+        "utterance": "i want a copy of my bill statement"
+      },
+      "differences": [ {
+        "type": "PAGE",
+        "description": "Page mismatch:\nExpected: \nActual:   SMS Sent",
+        "assertionType": "EQUAL",
+        "expectedValue": "",
+        "actualValue": "SMS Sent"
+      }, {
+        "type": "INTENT",
+        "description": "Intent mismatch:\nExpected: \nActual:   Default Welcome Intent",
+        "assertionType": "EQUAL",
+        "expectedValue": "",
+        "actualValue": "Default Welcome Intent"
+      }, {
+        "type": "UTTERANCE",
+        "description": "Agent response mismatch",
+        "warning": true,
+        "assertionType": "EQUAL",
+        "expectedValue": "",
+        "actualValue": "The text was sent. If you didn't receive it, please let me know."
+      } ],
+      "triggeredIntent": {
+        "name": "Default Welcome Intent"
+      },
+      "currentPage": {
+        "name": "f4402326-3b4a-4d30-aafb-254a948a4991",
+        "flow": "bell_sms_trigger - old"
+      },
+      "textResponses": [ {
+        "text": [ "The text was sent. If you didn't receive it, please let me know." ],
+        "allowPlaybackInterruption": true
+      } ],
+      "currentFlow": {
+        "name": "bell_sms_trigger - old"
+      },
+      "actions": [ {
+        "userUtterance": {
+          "text": "ok"
+        }
+      }, {
+        "flowInvocation": {
+          "flow": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/flows/0a1510a2-b7b1-4626-b66b-8387cabd9a94",
+          "flowState": "OUTPUT_STATE_PENDING",
+          "inputActionParameters": {
+            "BAN": 4162675927163,
+            "CLID": 4155547622,
+            "brand": "bell",
+            "caller_channel": "TFN",
+            "sms_content": "Click here \u003cURL\u003e to view your prepaid balance and top up history online or in the My Bell account app. \u003cURL\u003e",
+            "sms_type": "Public"
+          }
+        }
+      }, {
+        "agentUtterance": {
+          "text": "The text was sent. If you didn't receive it, please let me know."
+        }
+      } ]
+    }
+  } ],
+  "creationTime": {
+    "seconds": 1730206227,
+    "nanos": 236856000
+  },
+  "testConfig": {
+    "flow": "Default Start Flow",
+    "page": "Start Page"
+  },
+  "languageCode": "en"
+}

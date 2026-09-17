@@ -1,0 +1,115 @@
+{
+  "name": "e8c036e2-7acb-4881-b594-e8400914a846",
+  "displayName": "Trigger SMS to CLID",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "v2/self-help-messaging",
+    "tag": "sms",
+    "setParameterActions": [ {
+      "parameter": "telephone_number",
+      "value": "$session.params.clid"
+    }, {
+      "parameter": "brand",
+      "value": "bell"
+    }, {
+      "parameter": "message_text",
+      "value": "$session.params.sms_content"
+    }, {
+      "parameter": "tag",
+      "value": "sms"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.webhook_success = \"True\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "\u003cspeak\u003e I've just sent you the text message. It may take a moment to arrive. \u003cbreak time=\"2s\"/\u003e Please let me know if you don't receive it, or if you just need more time to review it. \u003c/speak\u003e" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "\u003cspeak\u003e Je viens de vous envoyer un message texte. Il peut prendre quelques instants avant d’arriver. \u003cbreak time=\"2s\"/\u003e Veuillez m'aviser si vous ne le recevez pas, ou si vous avez simplement besoin de plus de temps pour le consulter. \u003c/speak\u003e" ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "sms_sending",
+        "value": "Success"
+      } ]
+    },
+    "targetPage": "SMS Confirmation",
+    "name": "3829981e-0824-4ff6-87b4-65e5f01826f0"
+  }, {
+    "condition": "$session.params.webhook_success = \"false\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Bell Feedback",
+    "name": "81276597-1445-447b-a484-8a9e566a6c8d"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "e8c036e2-7acb-4881-b594-e8400914a846"
+      }, {
+        "parameter": "flow_id",
+        "value": "b5addc0e-1d3b-4354-9541-c698dba5f163"
+      }, {
+        "parameter": "page_name",
+        "value": "Trigger SMS to CLID"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Bell Feedback",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+    
+    },
+    "name": "e44a703e-77c8-4769-b937-6e5745d78c22"
+  }, {
+    "targetPage": "Bell Feedback",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+    
+    },
+    "name": "65756b5f-7e63-487d-8e2c-ab092f4f2e6a"
+  }, {
+    "targetPage": "Bell Feedback",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+    
+    },
+    "name": "763c060f-853e-4a84-8d38-bc24c4370dc7"
+  }, {
+    "targetPage": "Bell Feedback",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+    
+    },
+    "name": "b04067ab-36c4-472c-afd2-672aaa7add8c"
+  }, {
+    "targetPage": "Bell Feedback",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+    
+    },
+    "name": "26cd39b9-b0de-4458-89d8-3dbad3bacf67"
+  }, {
+    "targetPage": "Bell Feedback",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+    
+    },
+    "name": "ef00768d-6f96-49a8-9909-4e099d5a35c6"
+  } ]
+}

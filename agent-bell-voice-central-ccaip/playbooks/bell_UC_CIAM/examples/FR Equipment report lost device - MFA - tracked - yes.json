@@ -1,0 +1,49 @@
+{
+  "name": "280d3d4b-7513-44f8-8a7b-0cc1ba85f891",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Je suis désolée d’entendre cela. Cela peut certainement être frustrant, surtout si vous l’utilisez pour recevoir des codes de vérification uniques. La prochaine fois que vous ouvrirez une session dans MonBell, nous vous offrirons la possibilité de recevoir votre code de vérification par courriel plutôt que par téléphone. De cette façon, vous pourrez tout de même ouvrir une session en toute sécurité. Pour en savoir plus sur l’AMF, vous pouvez visiter le site bell.ca/mybellmfa. Avez-vous essayé d’utiliser une option de suivi comme \" Trouver mon iPhone \" ou \" Trouver mon appareil \"?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Oui, je l'ai déjà fait"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "C’est noté. Je vous suggère de suspendre temporairement votre service pour empêcher toute utilisation non autorisée. Je vais envoyer un texto à l’appareil à partir duquel vous appelez, avec un lien pour le faire vous-même. Est-ce que cela vous convient?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "D'accord, bien sûr"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "fr-ca",
+        "sms_content": "Bell: To temporarily suspend your service, you can visit bell.ca/suspendline and follow the steps. ( bell.ca/about-us )",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "User has lost their mfa device",
+    "actionParameters": {
+      "language": "fr-ca",
+      "mfa": "mfa",
+      "route": "equipment_report_lost_device",
+      "utterance": "J'ai perdu mon appareil multifactoriel"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "We sympathise and inform them more about MFA, VA asks user if they have tracked their phone. User says yes so we suggest them to suspend their service and prompt them for SMS with link. User agrees on SMS so we send them SMS with link to suspend their service"
+  },
+  "displayName": "FR Equipment report lost device - MFA - tracked - yes",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 488,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

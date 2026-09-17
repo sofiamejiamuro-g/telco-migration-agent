@@ -1,0 +1,107 @@
+{
+  "name": "a6c42a70-f0d0-49b1-9cc2-b374298963ce",
+  "displayName": "bell_payment_billing_consolidated_flow_identification",
+  "transitionRoutes": [ {
+    "intent": "other_speak_to_agent",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_determine_handover",
+    "name": "86153f55-8ba7-4faa-81f1-c88008dca99f"
+  }, {
+    "intent": "global_events_full_startover",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "event_type",
+        "value": "full start over"
+      } ]
+    },
+    "targetFlow": "Default Start Flow",
+    "name": "fe84475a-8e61-4b91-9c9d-6accb4cda9d7"
+  }, {
+    "intent": "global_events_partial_start_over",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "event_type",
+        "value": "partial start over"
+      } ]
+    },
+    "targetFlow": "Default Start Flow",
+    "name": "aed34190-22e9-4f71-87ae-cdc5f5355810"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "ID Check",
+    "name": "bf76214b-42a5-41bc-9c8b-faa658fdb1e1"
+  } ],
+  "eventHandlers": [ {
+    "event": "sys.no-match-default",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I didn't get that. Can you say it again?", "I missed what you said. What was that?", "Sorry, could you say that again?", "Sorry, can you say that again?", "Can you say that again?", "Sorry, I didn't get that. Can you rephrase?", "Sorry, what was that?", "One more time?", "What was that?", "Say that one more time?", "I didn't get that. Can you repeat?", "I missed that, say that again?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "J'ai du mal à comprendre cette question.", "J'ai mal compris votre demande.", "Je n'ai pas saisi ce que vous avez dit.", "Je crois que je ne vous suis pas.", "Je ne comprends pas de quoi vous me parlez." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "J'ai du mal à comprendre cette question.", "J'ai mal compris votre demande.", "Je n'ai pas saisi ce que vous avez dit.", "Je crois que je ne vous suis pas.", "Je ne comprends pas de quoi vous me parlez." ]
+        },
+        "languageCode": "fr"
+      } ]
+    },
+    "name": "98038115-72e8-41f7-89f2-2e9f28be5d8b"
+  }, {
+    "event": "sys.no-input-default",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I didn't get that. Can you say it again?", "I missed what you said. What was that?", "Sorry, could you say that again?", "Sorry, can you say that again?", "Can you say that again?", "Sorry, I didn't get that. Can you rephrase?", "Sorry, what was that?", "One more time?", "What was that?", "Say that one more time?", "I didn't get that. Can you repeat?", "I missed that, say that again?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "J'ai du mal à comprendre cette question.", "J'ai mal compris votre demande.", "Je n'ai pas saisi ce que vous avez dit.", "Je crois que je ne vous suis pas.", "Je ne comprends pas de quoi vous me parlez." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "J'ai du mal à comprendre cette question.", "J'ai mal compris votre demande.", "Je n'ai pas saisi ce que vous avez dit.", "Je crois que je ne vous suis pas.", "Je ne comprends pas de quoi vous me parlez." ]
+        },
+        "languageCode": "fr"
+      } ]
+    },
+    "name": "6ae9844e-be80-4cd1-82a7-8d931bc5edef"
+  }, {
+    "targetPage": "End Session",
+    "event": "wrapup",
+    "triggerFulfillment": {
+    
+    },
+    "name": "fad16f5e-9d4a-4689-b940-0be506d4d6ad"
+  } ],
+  "nluSettings": {
+    "modelType": "MODEL_TYPE_CUSTOM",
+    "classificationThreshold": 0.30000001,
+    "modelTrainingMode": "MODEL_TRAINING_MODE_MANUAL"
+  },
+  "nluSettingsList": [ {
+    "modelType": "MODEL_TYPE_CUSTOM",
+    "classificationThreshold": 0.30000001,
+    "modelTrainingMode": "MODEL_TRAINING_MODE_MANUAL",
+    "customConfigKey": "89586dda-5171-43b2-8f13-dc1b0b7b6440",
+    "languageCode": "en"
+  }, {
+    "modelType": "MODEL_TYPE_CUSTOM",
+    "classificationThreshold": 0.30000001,
+    "modelTrainingMode": "MODEL_TRAINING_MODE_MANUAL",
+    "customConfigKey": "89586dda-5171-43b2-8f13-dc1b0b7b6440",
+    "languageCode": "fr-ca"
+  } ]
+}

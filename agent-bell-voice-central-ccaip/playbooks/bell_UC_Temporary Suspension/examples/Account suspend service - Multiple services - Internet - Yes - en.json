@@ -1,0 +1,57 @@
+{
+  "name": "80487239-8bb6-428b-9967-b46088148273",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Sure, I can help with that. Could you please confirm which service you are looking to suspend?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "I want to suspend my internet service"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Thank you. You can temporarily suspend your residential services in MyBell. I will send a text to the device you're calling from, with a link to do it yourself. Is that alright?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Yes"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "brand": "bell",
+        "language": "en",
+        "route": "account_suspend_service",
+        "sms_content": "Bell msg: You can visit m.bell.ca/temporarysuspension to temporarily suspend your residential service in MyBell. ( bell.ca/about-us )",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+        "brand": "bell",
+        "language": "en"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer trying to suspend their service ",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "route": "account_suspend_service",
+      "unique_services": "Internet, Tv, WIRELINE",
+      "utterance": "Suspend my service"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Customer query is resolved.",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en"
+    }
+  },
+  "displayName": "Account suspend service - Multiple services - Internet - Yes - en",
+  "retrievalStrategy": "NEVER",
+  "tokenCount": 343,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

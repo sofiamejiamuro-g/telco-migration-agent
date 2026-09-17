@@ -1,0 +1,60 @@
+{
+  "name": "2f339a1f-b5cf-4419-ba16-746450ebf406",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_tech_intent_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70012",
+        "language": "en",
+        "lob": "mobility",
+        "utterance": "I'm having trouble making phone calls."
+      },
+      "outputActionParameters": {
+        "lob": "mobility"
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Vous pouvez facilement vérifier les pannes de service sur notre site web. Je vous enverrai un SMS sur l'appareil depuis lequel vous appelez afin que vous puissiez y accéder rapidement. Cela vous convient-il ?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Puis-je d'abord vérifier le statut de mon paiement ?"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "Routing only",
+      "inputActionParameters": {
+        "language": "fr-ca",
+        "utterance": "Puis-je d'abord vérifier le statut de mon paiement ?"
+      },
+      "outputActionParameters": {
+        "language": "fr-ca",
+        "utterance": "Puis-je d'abord vérifier le statut de mon paiement ?"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "customer is having no phone signals",
+    "actionParameters": {
+      "apb_location_id": "70012",
+      "language": "fr-ca",
+      "lob": "mobility",
+      "route": "tech_service_outage",
+      "utterance": "J'ai des difficultés à passer des appels téléphoniques.."
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "customer wants to first know about payment status, hence transfer them to Routing only flow",
+    "actionParameters": {
+      "apb_location_id": "70012",
+      "language": "fr-ca",
+      "lob": "mobility"
+    }
+  },
+  "displayName": "FR tech_service_outage - {lob-mobility} | topic switching",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 423,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

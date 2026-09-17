@@ -1,0 +1,61 @@
+{
+  "name": "6c80b2ab-bb43-4897-a4d4-2d469c8af8a6",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Bien sûr, je peux vous aider. Souhaitez-vous obtenir des renseignements sur l'utilisation excédentaire d’Internet ou des services de mobilité?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Internet"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Des frais excédentaires se produisent lorsque vous dépassez votre allocation mensuelle d’utilisation des données Internet. Vous pouvez facilement consulter et suivre votre utilisation des données Internet dans MonBell. Je vais envoyer un texto sur l’appareil à partir duquel vous appelez, avec un lien expliquant les étapes à suivre. Est-ce que cela vous convient?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Mais cela sera-t-il sûr"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Je vous assure que le lien que je vous envoie est sécurisé et vous mènera directement à la page MonBell où vous pourrez consulter votre consommation de données Internet. Souhaitez-vous que je vous l'envoie ?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "oui"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "fr-ca",
+        "sms_content": "Bell : Vous pouvez visiter https://m.bell.ca/monutilisationinternet pour voir votre utilisation de données Internet dans l'appli MonBell. ( bell.ca/apropos )",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "User has a question regarding their usage overage and also more information about SMS",
+    "actionParameters": {
+      "language": "fr-ca",
+      "route": "account_usage_overage",
+      "utterance": "J’ai une question au sujet d’une utilisation excédentaire sur mon compte"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Disambiguate for LOB then VA offers sms. Customer asked a contextual questions so VA answered them and then user said yes so we route accordingly",
+    "actionParameters": {
+      "language": "fr-ca",
+      "sms_content": "Bell : Vous pouvez visiter https://m.bell.ca/monutilisationinternet pour voir votre utilisation de données Internet dans l'appli MonBell. ( bell.ca/apropos )",
+      "sms_type": "Public"
+    }
+  },
+  "displayName": "FR account_usage_overage - Internet - SMS - Yes- Contextual 2",
+  "retrievalStrategy": "STATIC",
+  "tokenCount": 518,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

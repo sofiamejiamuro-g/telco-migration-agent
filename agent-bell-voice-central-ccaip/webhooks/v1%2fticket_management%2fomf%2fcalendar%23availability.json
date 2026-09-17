@@ -1,0 +1,27 @@
+{
+  "name": "13966b91-10fd-497d-bbf8-1d5c3f61b5a8",
+  "displayName": "v1/ticket_management/omf/calendar#availability",
+  "timeout": {
+    "seconds": 30
+  },
+  "serviceDirectory": {
+    "service": "projects/gcp-it-npe-pltfm-apigee/locations/us-central1/namespaces/apigee-nb-usc1-service-dir-namespace/services/apigee-nb-usc1-service",
+    "genericWebService": {
+      "uri": "https://apigee-nane1-uat.int.bell.ca/v1/ticket_management/omf/calendar",
+      "requestHeaders": [ {
+        "key": "x-apikey",
+        "value": "npZmDivP6Hxes3wtQ0tC9RqItjJTY8TgZHbOPNeFwvSYSKPI"
+      } ],
+      "webhookType": "FLEXIBLE",
+      "httpMethod": "POST",
+      "requestBody": "{\n  \"sessionInfo\": {\n    \"dfcx_session_id\": \"$session.params.dfcx_session_id\",\n    \"agent_id\": \"$session.params.agent_id\",\n    \"parameters\": {\n      \"brand\": \"$session.params.brand\",\n      \"menu_type\": \"$session.params.menu_type\",\n      \"callKey\": \"$session.params.callKey\",\n      \"order_identifier\": \"$session.params.order_identifier\",\n      \"startDate\": \"$session.params.startDate\",\n      \"endDate\": \"$session.params.endDate\",\n      \"intervals\": \"$session.params.intervals\",\n      \"accountNumber\": \"$session.params.accountNumber\",\n      \"calendar_context\": \"$session.params.calendar_context\",\n      \"merged_calendar_context\": \"$session.params.merged_calendar_context\",\n      \"subscriber_number\": \"$session.params.subscriber_number\"\n    }\n  },\n  \"fulfillmentInfo\": {\n    \"tag\": \"availability\"\n  },\n  \"languageCode\": \"$request.language\"\n}",
+      "parameterMapping": [ {
+        "key": "omf_calendaring_response",
+        "value": "sessionInfo.parameters.omf_calendaring_response"
+      }, {
+        "key": "webhook_success",
+        "value": "sessionInfo.parameters.webhook_success"
+      } ]
+    }
+  }
+}

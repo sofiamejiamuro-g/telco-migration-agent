@@ -1,0 +1,38 @@
+{
+  "name": "de6e86b2-a0eb-464d-91b3-5924d28338da",
+  "displayName": "Offer SMS - en",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "messages": [ {
+      "text": {
+        "text": [ "Are you aware of our Manage Your Appointment App? It is a convenient way to view, reschedule, or cancel your appointment directly from your phone. I'll send you a text to the device you're calling from, so that you can get started. Is that alright?" ]
+      },
+      "languageCode": "en"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "intent": "context.confirm_yes",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "sms_content",
+        "value": "Bell: You can visit $session.params.mya_information_response.notification[0].MYAApplicationUrl to manage your appointment in the My Bell app. (bell.ca/about-us)"
+      } ]
+    },
+    "targetFlow": "bell_SMS Trigger",
+    "name": "b4fbea29-b1bb-4155-950a-2ae8cc6e2383"
+  }, {
+    "intent": "context.confirm_no",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "No problem, let's continue." ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "targetPage": "End Flow",
+    "name": "04c8841b-0c48-4642-be76-b36d7f00a475"
+  } ]
+}

@@ -1,0 +1,69 @@
+{
+  "name": "dfe4a3db-296d-49c5-b151-81632d477a3c",
+  "displayName": "Force Self Serve 2",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "messages": [ {
+      "text": {
+        "text": [ "Okay, but our agents will only be able to guide you through the self-serve process online. Do you still want to talk to an agent?" ]
+      },
+      "languageCode": "en"
+    }, {
+      "text": {
+        "text": [ "D'accord, mais nos agents pourront seulement vous aider à utiliser les options libre-service en ligne. Voulez-vous toujours leur parler?" ]
+      },
+      "languageCode": "fr-ca"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "intent": "context.agent_confirm",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_aqd",
+    "name": "94e3eff6-008c-4d8b-a336-a76f9c30e95d"
+  }, {
+    "intent": "custom.no",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Okay." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "D'accord." ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "event_type",
+        "value": "anything else start over"
+      } ],
+      "advancedSettings": {
+        "dtmfSettings": {
+          "useSystemEntityRule": false
+        }
+      }
+    },
+    "targetFlow": "bell_Feedback",
+    "name": "aef1a2e8-d387-4e27-8aa5-a63913222001"
+  }, {
+    "intent": "context.exception",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_aqd",
+    "name": "ba9bc558-76e9-4b58-a95c-3faba77b8b4c"
+  } ],
+  "eventHandlers": [ {
+    "targetFlow": "bell_Feedback",
+    "event": "sys.no-input-1",
+    "triggerFulfillment": {
+    
+    },
+    "name": "520f31b3-e969-488c-8fd6-5eeaf9252a0a"
+  } ]
+}

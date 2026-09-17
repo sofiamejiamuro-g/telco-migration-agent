@@ -1,0 +1,43 @@
+{
+  "name": "6705efb2-3b85-4f2a-b9c0-54446342a261",
+  "displayName": "Multiple ACUT tickets",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "setParameterActions": [ {
+      "parameter": "recent_ticket_creation_time",
+      "value": "$session.params.acut_find_response.ticket_summaries[0].ticket_creation_time"
+    } ],
+    "generators": [ {
+      "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/c8d9aa7a-0227-4da7-8256-fd4d68a2aa75",
+      "inputParameters": [ {
+        "key": "date-time",
+        "value": "$session.params.recent_ticket_creation_time"
+      } ],
+      "outputParameter": "$request.generative.recent_ticket_creation_time_obj1"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "true",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I see you have a ticket that was opened on $session.params.recent_ticket_creation_time_obj1.day, $session.params.recent_ticket_creation_time_obj1.month $session.params.recent_ticket_creation_time_obj1.date, $session.params.recent_ticket_creation_time_obj1.year. \nIs this the ticket you are calling about?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je vois que vous avez un billet qui a été ouvert $session.params.recent_ticket_creation_time_obj1.day_fr, $session.params.recent_ticket_creation_time_obj1.month_fr $session.params.recent_ticket_creation_time_obj1.date, $session.params.recent_ticket_creation_time_obj1.year. \nEst-ce le billet à propos duquel vous appelez?" ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "recent_ticket_creation_time_obj1",
+        "value": "$sys.func.TO_OBJECT($request.generative.recent_ticket_creation_time_obj1)"
+      } ]
+    },
+    "targetPage": "If correct ACUT ticket?",
+    "name": "3fc1c085-f546-4e91-b9d4-97ee7f06379b"
+  } ]
+}

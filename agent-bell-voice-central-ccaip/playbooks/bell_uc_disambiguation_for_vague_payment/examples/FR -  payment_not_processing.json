@@ -1,0 +1,47 @@
+{
+  "name": "8503f9d2-82ad-4864-9693-5d11faf49cfe",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Pourriez-vous décrire le problème lié au paiement que vous rencontrez ?  Votre paiement n’est-il pas traité ou s’agit-il d’autre chose ?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Ce que je dis, c'est que j'ai payé la facture, mais ils m'ont dit que le paiement n'avait pas été effectué."
+    }
+  }, {
+    "playbookInvocation": {
+      "playbook": "bell_UC_Payments",
+      "playbookInput": {
+        "precedingConversationSummary": "Customer payment is not processing",
+        "actionParameters": {
+          "language": "fr-ca",
+          "route": "payment_not_processing",
+          "utterance": "Ce que je dis, c'est que j'ai payé la facture, mais ils m'ont dit que le paiement n'avait pas été effectué."
+        }
+      },
+      "playbookOutput": {
+        "executionSummary": "Customer query is addresses and then routed to \"bell_UC_payment\" playbook for further help",
+        "actionParameters": {
+          "language": "fr-ca"
+        }
+      },
+      "playbookState": "OUTPUT_STATE_OK"
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer query about \"Payment related issue\" is addressed",
+    "actionParameters": {
+      "langauge": "fr-ca",
+      "route": "payment_vague",
+      "utterance": "Problème lié au paiement"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Customer query is addresses and then routed to \"bell_UC_payment\" playbook for further help"
+  },
+  "displayName": "FR -  payment_not_processing",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 352,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

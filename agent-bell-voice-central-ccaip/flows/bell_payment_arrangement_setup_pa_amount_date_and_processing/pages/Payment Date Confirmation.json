@@ -1,0 +1,104 @@
+{
+  "name": "dbba1baf-13f0-4b2e-8968-b30ed8231855",
+  "displayName": "Payment Date Confirmation",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "intent": "custom.yes",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Check Payment Method",
+    "name": "5213173f-877b-4c18-abb6-adcd3904ba6b"
+  }, {
+    "intent": "custom.no",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_aqd",
+    "name": "2fbd7523-747e-4f52-aa73-baf7c41f4f2c"
+  } ],
+  "eventHandlers": [ {
+    "event": "sys.no-input-1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Je n'ai pas tout à fait compris. Pouvez-vous effectuer un paiement d'ici le $session.params.calculated_payment_date" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "I didn't quite get that. Can you make a payment by $session.params.calculated_payment_date" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "bd0128bd-2c4a-4471-b904-be3af534ce5d"
+  }, {
+    "event": "sys.no-match-1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Je n'ai pas tout à fait compris. Pouvez-vous effectuer un paiement d'ici le $session.params.calculated_payment_date" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "I didn't quite get that. Can you make a payment by $session.params.calculated_payment_date?" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "eff57924-702f-43d7-a781-8fd361f59432"
+  }, {
+    "event": "sys.no-match-2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Je n'ai toujours pas compris" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "I still didn't get that" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "063936d4-67e5-4f1a-aebd-48cf26509074"
+  }, {
+    "event": "sys.no-input-2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Je n'ai toujours pas compris" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "I still didn't get that" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "e2362d05-f2c1-4ac0-9f56-b2f458cce99b"
+  }, {
+    "targetFlow": "bell_aqd",
+    "event": "sys.no-input-3",
+    "triggerFulfillment": {
+    
+    },
+    "name": "49674d0c-8f1a-48b5-b810-6d94abbe62d6"
+  }, {
+    "targetFlow": "bell_aqd",
+    "event": "sys.no-match-3",
+    "triggerFulfillment": {
+    
+    },
+    "name": "2318beec-1f66-4b17-b93f-d77e0601865a"
+  } ]
+}

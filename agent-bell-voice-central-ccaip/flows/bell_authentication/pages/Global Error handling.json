@@ -1,0 +1,119 @@
+{
+  "name": "37fb2ac9-16b8-406e-9c05-03ce5701376c",
+  "displayName": "Global Error handling",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.global_error_counter \u003e= 3",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_aqd",
+    "name": "6762fc41-8af0-412a-adac-053fc2a7c684"
+  }, {
+    "condition": "$session.params.local_trigger = \"no_input\" AND $session.params.local_noinput_counter = 1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "$request.generative.response" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "$request.generative.response" ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "generators": [ {
+        "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/1b8d360c-c2a0-49b0-9a32-d5542ff42d87",
+        "outputParameter": "$request.generative.response"
+      } ]
+    },
+    "name": "2e22cde0-d096-487d-87d1-bcdb0794c8ba"
+  }, {
+    "condition": "$session.params.local_trigger = \"no_input\" AND $session.params.local_noinput_counter = 2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "$request.generative.response" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "$request.generative.response" ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "generators": [ {
+        "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/1bcff408-4981-474e-986a-309d3622718f",
+        "outputParameter": "$request.generative.response"
+      } ]
+    },
+    "name": "aa95295b-692c-441d-baf2-b3caee26edb3"
+  }, {
+    "condition": "$session.params.local_trigger = \"no_input\" AND $session.params.local_noinput_counter \u003e= 3",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_No_Input_3",
+    "name": "91d09191-b4fe-4297-9467-092624dd7d4c"
+  }, {
+    "condition": "$session.params.local_trigger = \"no_match\" AND $session.params.local_nomatch_counter = 1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "$request.generative.response" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "$request.generative.response" ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "generators": [ {
+        "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/f7ef68c2-5424-41ab-94dc-f8c07e3164de",
+        "outputParameter": "$request.generative.response"
+      } ]
+    },
+    "name": "d531f48c-c7c2-48d8-9e7b-bf7865260578"
+  }, {
+    "condition": "$session.params.local_trigger = \"no_match\" AND $session.params.local_nomatch_counter = 2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "$request.generative.response" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "$request.generative.response" ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "generators": [ {
+        "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/ab9980b0-e324-4bef-8fd6-5e1c1c8d59e1",
+        "outputParameter": "$request.generative.response"
+      } ]
+    },
+    "name": "b2042f07-016a-43ca-869f-cfa6377628a7"
+  }, {
+    "condition": "$session.params.local_trigger = \"no_match\" AND $session.params.local_nomatch_counter \u003e= 3",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "auth_status",
+        "value": "Fail"
+      } ]
+    },
+    "targetFlow": "bell_No_Match_3",
+    "name": "80e64e5d-ebb3-424a-98cd-cfa841bdd7cb"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Previous Page",
+    "name": "aed7e3dc-0cc7-47e0-ba04-b096017a24fd"
+  } ]
+}

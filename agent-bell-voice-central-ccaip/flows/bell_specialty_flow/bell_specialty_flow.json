@@ -1,0 +1,220 @@
+{
+  "name": "d35b61b6-c884-44f8-b5c7-aed63cc356ab",
+  "displayName": "bell_specialty_flow",
+  "transitionRoutes": [ {
+    "intent": "context.repeat",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "$request.generative.repeat_response" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "$request.generative.repeat_response" ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "repeat_flag",
+        "value": 1
+      } ],
+      "generators": [ {
+        "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/d2573b7b-849d-43d3-8c64-867837bd84d2",
+        "inputParameters": [ {
+          "key": "request-last-agent-utterance",
+          "value": "$request.generative.repeat_response"
+        } ],
+        "outputParameter": "$request.generative.repeat_response"
+      } ]
+    },
+    "targetFlow": "Default Start Flow",
+    "name": "3f4c920c-9488-481b-a58b-78c1dc949e0d"
+  }, {
+    "intent": "global_events_full_startover",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "event_type",
+        "value": "full start over"
+      } ]
+    },
+    "targetFlow": "Default Start Flow",
+    "name": "afe083db-c320-4c57-a1ff-ad50fede78e1"
+  }, {
+    "intent": "global_events_partial_start_over",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "event_type",
+        "value": "partial start over"
+      } ]
+    },
+    "targetFlow": "Default Start Flow",
+    "name": "79aadd5f-fd52-49cd-b8d6-0fe7cf9188e0"
+  }, {
+    "intent": "other_speak_to_agent",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_aqd",
+    "name": "5776812f-ccdb-487c-b93a-934a27dcadd7"
+  }, {
+    "condition": "$session.params.NGA = true OR $session.params.NGA = \"true\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "NGA handling",
+    "name": "04fcea11-89f8-4509-9492-0516d7d3dd31"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "local_noinput_counter",
+        "value": 0
+      }, {
+        "parameter": "local_nomatch_counter",
+        "value": 0
+      } ]
+    },
+    "name": "da7ec839-55c2-4ad8-9da5-87477f40c5a1"
+  }, {
+    "condition": "$session.params.speciality_flow = \"true\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "returnFromPayment",
+    "name": "11b6ecef-4b69-4125-93be-3499a9bbd988"
+  }, {
+    "condition": "$session.params.speciality_1 = \"true\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Head intent Trigger",
+    "name": "7bf0b2bd-408e-43ea-a2e6-edd298508168"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "repeat_flag",
+        "value": 0
+      }, {
+        "parameter": "Loud_Counter",
+        "value": 0
+      }, {
+        "parameter": "CPM_Invalid_Counter",
+        "value": 0
+      } ]
+    },
+    "targetPage": "Webhook call search by tn -Specialty Start",
+    "name": "69ee26e9-8132-4ce1-b0c0-5eb1332aaec0"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Global Error Handling",
+    "event": "sys.no-match-default",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "J'ai du mal à comprendre cette question.", "J'ai mal compris votre demande.", "Je n'ai pas saisi ce que vous avez dit.", "Je crois que je ne vous suis pas.", "Je ne comprends pas de quoi vous me parlez." ]
+        },
+        "languageCode": "fr"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "global_error_counter",
+        "value": "$sys.func.ADD($session.params.global_error_counter,1)"
+      }, {
+        "parameter": "local_trigger",
+        "value": "no_match"
+      }, {
+        "parameter": "local_nomatch_counter",
+        "value": "$sys.func.ADD($session.params.local_nomatch_counter,1)"
+      } ]
+    },
+    "name": "1cee403e-79c7-4935-8eb7-1cd0592929aa"
+  }, {
+    "targetPage": "Global Error Handling",
+    "event": "sys.no-input-default",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "J'ai du mal à comprendre cette question.", "J'ai mal compris votre demande.", "Je n'ai pas saisi ce que vous avez dit.", "Je crois que je ne vous suis pas.", "Je ne comprends pas de quoi vous me parlez." ]
+        },
+        "languageCode": "fr"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "global_error_counter",
+        "value": "$sys.func.ADD($session.params.global_error_counter,1)"
+      }, {
+        "parameter": "local_trigger",
+        "value": "no_input"
+      }, {
+        "parameter": "local_noinput_counter",
+        "value": "$sys.func.ADD($session.params.local_noinput_counter,1)"
+      } ]
+    },
+    "name": "8423da24-dd21-48d8-99b0-3600c101f7d1"
+  }, {
+    "targetPage": "End Session",
+    "event": "wrapup",
+    "triggerFulfillment": {
+    
+    },
+    "name": "078521b5-3b88-48e9-93c5-5f53a9ce33f7"
+  } ],
+  "nluSettings": {
+    "modelType": "MODEL_TYPE_CUSTOM",
+    "classificationThreshold": 0.30000001,
+    "modelTrainingMode": "MODEL_TRAINING_MODE_MANUAL"
+  },
+  "advancedSettings": {
+    "enabled": true,
+    "playbackInterruptionSettings": {
+    
+    },
+    "speechAdaptationSettings": {
+    
+    }
+  },
+  "nluSettingsList": [ {
+    "modelType": "MODEL_TYPE_CUSTOM",
+    "classificationThreshold": 0.30000001,
+    "modelTrainingMode": "MODEL_TRAINING_MODE_MANUAL",
+    "languageCode": "en"
+  }, {
+    "modelType": "MODEL_TYPE_CUSTOM",
+    "classificationThreshold": 0.30000001,
+    "modelTrainingMode": "MODEL_TRAINING_MODE_MANUAL",
+    "languageCode": "fr-ca"
+  } ],
+  "inputParameterDefinitions": [ {
+    "name": "global_error_counter",
+    "description": "Counts the total number of no matches and no inputs given by the customer throughout the conversation",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "NUMBER"
+      }
+    },
+    "parameterType": {
+      "name": "global_error_counter",
+      "openapiJsonSchema": {
+        "type": "number"
+      }
+    }
+  } ],
+  "outputParameterDefinitions": [ {
+    "name": "global_error_counter",
+    "description": "Counts the total number of no matches and no inputs given by the customer throughout the conversation",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "NUMBER"
+      }
+    },
+    "parameterType": {
+      "name": "global_error_counter",
+      "openapiJsonSchema": {
+        "type": "number"
+      }
+    }
+  } ],
+  "multiLanguageSettings": {
+  
+  }
+}

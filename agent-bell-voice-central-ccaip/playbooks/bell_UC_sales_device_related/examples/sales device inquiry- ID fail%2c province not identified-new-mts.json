@@ -1,0 +1,62 @@
+{
+  "name": "79076a42-141b-4fcf-b270-f6a1e760911d",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "brand": "bell",
+        "language": "en"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Which service are you Inquiring about?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Internet"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Let's check if we offer Internet and Home phone service in your area. In\nwhich province are you looking to get service?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "MTS"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_aqd",
+      "inputActionParameters": {
+        "special_queue": "bell_sales_to_mts"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer has questions about device availability, device features, cost, related to devices that Bell sells, here we know the {lob} is Internet",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "New",
+      "language": "en",
+      "lob": "Internet",
+      "province": "MTS",
+      "route": "sales_device_inquiry",
+      "utterance": "I have questions about device availability"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "We need to ask the customer which province they are looking for and if it is \"MTS\" then call bell_aqd flow and set special_queue =\nbell_sales_to_mts"
+  },
+  "displayName": "sales device inquiry- ID fail, province not identified-new-mts",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 395,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

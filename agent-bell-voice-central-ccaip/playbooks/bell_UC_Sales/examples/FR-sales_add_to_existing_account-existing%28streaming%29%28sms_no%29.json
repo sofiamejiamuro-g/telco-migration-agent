@@ -1,0 +1,77 @@
+{
+  "name": "9c351a4d-33fc-4f54-8213-0234d2a3beaf",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+        "language": "fr-ca"
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Bien sûr, laissez-moi vous aider.\nDésirez-vous ajouter un nouveau service ou modifier votre service actuel?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "nouveau plan"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "À propos de quel service communiquez-vous avec nous?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "basic crave netflix disney plus"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Je vais envoyer un texto à l’appareil au moyen duquel vous appelez, afin que vous puissiez consulter toutes les options de lecture en continu. Est-ce que ça vous convient?\n\n"
+    }
+  }, {
+    "userUtterance": {
+      "text": "non"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "fr-ca",
+        "line_type": "New",
+        "route": "sales_add_to_existing_account",
+        "sms_send_status": "Declined"
+      },
+      "outputActionParameters": {
+        "language": "fr-ca"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "customer wants to add streaming services like crave,Netflix,Disney,basic, premiun",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "fr-ca",
+      "route": "sales_add_to_existing_account",
+      "utterance": "Ajouter une ligne pour les enfants"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "customer is asked about sms and is agreed to receive the sms",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca",
+      "line_type": "New",
+      "streaming_services": "basic"
+    }
+  },
+  "displayName": "FR-sales_add_to_existing_account-existing(streaming)(sms_no)",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 477,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

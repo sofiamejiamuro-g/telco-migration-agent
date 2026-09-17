@@ -1,0 +1,148 @@
+{
+  "name": "994ab64d-9071-4083-8a8c-3a5e8e5c5861",
+  "displayName": "Check CX input ",
+  "form": {
+    "parameters": [ {
+      "displayName": "internet_issue_error_code_param",
+      "required": true,
+      "entityType": "@internet_issue_error_code",
+      "fillBehavior": {
+        "initialPromptFulfillment": {
+        
+        },
+        "repromptEventHandlers": [ {
+          "targetPage": "Local Error Handling (Check CX Input) (No Active Outage)",
+          "event": "sys.no-input-1",
+          "triggerFulfillment": {
+            "setParameterActions": [ {
+              "parameter": "global_error_counter",
+              "value": "$sys.func.ADD($session.params.global_error_counter,1)"
+            }, {
+              "parameter": "local_noinput_counter",
+              "value": "$sys.func.ADD($session.params.local_noinput_counter,1)"
+            }, {
+              "parameter": "local_trigger",
+              "value": "no_input"
+            } ]
+          },
+          "name": "c037eefa-1fce-42c6-974a-aca037244db9"
+        }, {
+          "targetPage": "Local Error Handling (Check CX Input) (No Active Outage)",
+          "event": "sys.no-match-1",
+          "triggerFulfillment": {
+            "setParameterActions": [ {
+              "parameter": "global_error_counter",
+              "value": "$sys.func.ADD($session.params.global_error_counter,1)"
+            }, {
+              "parameter": "local_nomatch_counter",
+              "value": "$sys.func.ADD($session.params.local_nomatch_counter,1)"
+            }, {
+              "parameter": "local_trigger",
+              "value": "no-match"
+            } ]
+          },
+          "name": "0f406cef-cf57-46a3-a05c-920870bb2720"
+        } ]
+      }
+    } ]
+  },
+  "entryFulfillment": {
+    "messages": [ {
+      "text": {
+        "text": [ "I don't see any outages at the moment." ]
+      },
+      "languageCode": "en"
+    }, {
+      "text": {
+        "text": [ "Could you tell me a bit more about the issue you're experiencing? For example, are you seeing any error codes on the screen, missing any TV channels, or also having trouble with your Internet service? " ]
+      },
+      "languageCode": "en"
+    }, {
+      "text": {
+        "text": [ "Je ne vois aucune panne pour le moment." ]
+      },
+      "languageCode": "fr-ca"
+    }, {
+      "text": {
+        "text": [ "Pourriez-vous m’en dire un peu plus sur le problème que vous éprouvez? Par exemple, voyez-vous des codes d’erreur à l’écran ou des chaînes de télévision manquantes ou avez-vous également des problèmes avec votre service Internet?" ]
+      },
+      "languageCode": "fr-ca"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "intent": "context.tv_not_working",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_VR",
+    "name": "70e10243-2003-490e-8bef-c6f3f133ff5c"
+  }, {
+    "intent": "tech_missing_channel_package",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_rehit",
+    "name": "f910acb6-e2bf-442e-aaa5-051e5ee3589e"
+  }, {
+    "intent": "context.confirm_yes",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_VR",
+    "name": "01e6961b-8b62-4ce0-b7ea-28c01451b758"
+  }, {
+    "intent": "context.confirm_no",
+    "triggerFulfillment": {
+    
+    },
+    "name": "bcd6bc48-1a4f-4d1b-ad39-38024cd0930b",
+    "targetPlaybook": "Bell_UC_Technical_Support_Infobot"
+  }, {
+    "intent": "context.internet_issue",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_VR",
+    "name": "17799f7d-e8c1-4dca-b0e1-0e64e76dabde"
+  }, {
+    "condition": "$session.params.internet_issue_error_code_param = \"yes\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_VR",
+    "name": "19568508-d990-4d50-9716-a86aa511146e"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Local Error Handling (Check CX Input) (No Active Outage)",
+    "event": "sys.no-input-default",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "global_error_counter",
+        "value": "$sys.func.ADD($session.params.global_error_counter,1)"
+      }, {
+        "parameter": "local_noinput_counter",
+        "value": "$sys.func.ADD($session.params.local_noinput_counter,1)"
+      }, {
+        "parameter": "local_trigger",
+        "value": "no_input"
+      } ]
+    },
+    "name": "0b529078-c80a-4668-927d-ce10665c55d0"
+  }, {
+    "targetPage": "Local Error Handling (Check CX Input) (No Active Outage)",
+    "event": "sys.no-match-default",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "global_error_counter",
+        "value": "$sys.func.ADD($session.params.global_error_counter,1)"
+      }, {
+        "parameter": "local_nomatch_counter",
+        "value": "$sys.func.ADD($session.params.local_nomatch_counter,1)"
+      }, {
+        "parameter": "local_trigger",
+        "value": "no_match"
+      } ]
+    },
+    "name": "be678b38-4800-418c-9508-33e1ec6f254a"
+  } ]
+}

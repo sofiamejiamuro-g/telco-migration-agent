@@ -1,0 +1,206 @@
+{
+  "name": "67023dd7-5c7b-42c1-a2ea-2dc979e67ad3",
+  "displayName": "webhook- DEAI- Distributel_pending_order",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "v1/deai-customer-information",
+    "tag": "NA",
+    "setParameterActions": [ {
+      "parameter": "telephone_number",
+      "value": "$session.params.clid"
+    }, {
+      "parameter": "dfcx_session_id",
+      "value": "$request.session-id"
+    }, {
+      "parameter": "$session.params.webhook_success",
+      "value": null
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.clid != null",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "pending_order",
+        "value": "$session.params.deai_search_by_tn_response.shr_int_partner_nw_pend_ord_flg"
+      } ]
+    },
+    "name": "f6bfd3a4-58eb-498c-b858-b5ebf807cb94"
+  }, {
+    "condition": "$session.params.pending_order = 1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Are you calling about a pending internet order?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Appelez-vous au sujet d'une commande internet en cours ?" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetPage": "confirm_pending_order",
+    "name": "cac20921-3b1e-465b-8d62-aaecbb4eb347"
+  }, {
+    "condition": "$session.params.pending_order != 1",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "webhook_success",
+        "value": null
+      } ]
+    },
+    "targetFlow": "bell_Identification",
+    "name": "19e9ba12-23ad-4505-af7f-d6afcf7d81b2"
+  }, {
+    "condition": "$session.params.CIRN != null OR $session.params.clid = null",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_Identification",
+    "name": "57c2fc43-41bf-4431-aa08-93c78a956ab5"
+  }, {
+    "condition": "$session.params.identification_status = \"Pass\" AND $session.params.customer_id_search_response != null",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "is_cornerstone_value_list",
+        "value": "$sys.func.FILTER(\"$session.params.customer_id_search_response\", \"$.users[*].billing_accounts[?(@.billing_account_number == '$session.params.billing_account_number')].services[*].is_cornerstone\")"
+      } ]
+    },
+    "name": "da591f78-aedf-497d-aa6d-4f89322f2941"
+  }, {
+    "condition": "$session.params.is_cornerstone_value_list : true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "cx_cornerstone",
+        "value": true
+      } ]
+    },
+    "name": "762c5092-d01c-4912-8652-85428d692171"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "npe_cs_friendlies",
+        "value": [ "4374229552", "5142091738", "6478644430", "2896236076", "5145730578", "4162002827" ]
+      }, {
+        "parameter": "prod_cs_friendlies",
+        "value": [ "4037633654", "6043569784", "2509179193", "7802358636", "5874357672", "2363301312", "6043797026", "2366606180", "7783211096", "7787076626", "6046787467", "7802311510", "2507778889", "4034103711", "2508585973", "6048166294", "7809193091", "2503030465", "9025790132", "7059887276", "4033334695", "7809829474", "4039238386", "7782317522", "7802377228", "7802320713", "4034798934", "4037104321", "6394707576", "6043559442", "4038300515", "5879304035", "5872813077", "4035420915", "7804054570", "4039233985", "7803995859", "6046268808", "4035898496", "7809027401", "6047871500", "4036889986", "4039217916", "6047872669", "6043401244", "6726677222", "4034732231", "4034611011", "2365145347", "2509459094", "2503274027", "5873407955", "2506410501", "2508583714", "7803400056", "6043408618", "6048306593", "7804096917", "4036512058", "7783250440", "4038897234", "6046538002", "7809535735", "4038272547", "9027186613", "2506151068", "7093301560", "5874351696", "2502533051", "6047825716", "5142387482", "6477020922", "4038292713", "4038371213", "6048666335", "4169894009", "7806607095", "4035858045", "2502647659", "2504096666", "2508699844", "4038050998", "4038357347", "2365082174", "7782296693", "7782776370", "2509384444", "2505163043", "6045060103", "7804909280", "4035614243", "2506826785", "6045617064", "6043139445", "6046794800", "4033711207", "6046191098", "6043401230", "5874333422", "4038270275", "7783787348", "4165703148", "7787728759", "6047299216", "7782290009", "4162703735", "6047808969", "2505160530", "4034621520", "4039212700", "5874345084", "2367852331", "6043402063", "4039702106", "7788788700", "6043538431", "7789577004", "6049920495", "6043122314", "2506865275", "2508580218", "7788854711", "7787913113", "7788745743", "2509799999", "4035857698", "4035893544", "7782285977", "6043404614", "7788830305", "6047872770", "6043172346", "2507197955", "7782271286", "6045053432", "4039231671", "5145784597", "7782291825", "2262242491", "2504870888", "7787122676", "7782276060", "5872244387", "4038369038", "7785587411", "4034616167", "6048371800", "4038370058", "2503201326", "7807074960", "4038308888", "7788398649", "7785336106", "7782287307", "7782289267", "2505883837", "7788372263", "7782318854", "5149419809", "4035062309", "6043155353", "4164072928", "4034615812", "5149499494", "5142330016", "2049819808", "4163537905", "6473541473", "2049819808", "8196846693", "4377708348", "4374229552", "5142091738", "6478644430", "2896236076", "5145730578", "4162002827" ]
+      }, {
+        "parameter": "prod_project_id",
+        "value": "gcp-it-prod-va-dlgflw"
+      }, {
+        "parameter": "cs_friendlies",
+        "value": "$sys.func.IF(\"$request.project-id = $session.params.prod_project_id\", $session.params.prod_cs_friendlies, $session.params.npe_cs_friendlies)"
+      }, {
+        "parameter": "npe_cs_friendlies",
+        "value": null
+      }, {
+        "parameter": "prod_cs_friendlies",
+        "value": null
+      } ]
+    },
+    "name": "089125af-d42f-4943-9c6a-e136aae01d30",
+    "description": "May: list of 10‑digit friendlies\nJune: NPA-NXX\n----------------------------------------------------------\nDefining the list of 10‑digit friendlies"
+  }, {
+    "condition": "$session.params.identification_status = \"Pass\" AND $session.params.CIRN != null AND $session.params.cs_friendlies : $session.params.CIRN",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "wml_eligible",
+        "value": 1
+      } ]
+    },
+    "name": "36c5c61a-e10c-499b-a97b-4b0d4cd33edf"
+  }, {
+    "condition": "$session.params.identification_status = \"Fail\" AND $session.params.clid != null AND $session.params.cs_friendlies : $session.params.clid",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "wml_eligible",
+        "value": 1
+      } ]
+    },
+    "name": "030f5794-b8d5-40d3-a318-ef0747511361"
+  }, {
+    "condition": "$session.params.identification_status = \"Pass\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook- comcentric_ban-profile",
+    "name": "59e50f0e-7693-4cf7-8a04-14f589434707"
+  }, {
+    "condition": "$session.params.identification_status = \"Fail\" AND $session.params.CIRN != null",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "webhook- DEAI- Distributel_pending_order-CIRN",
+    "name": "c5480abf-aa49-4516-946a-286d1d03ca76"
+  }, {
+    "condition": "$session.params.identification_status = Fail",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "End flow handling",
+    "name": "ec8672b2-02df-4a21-82f2-f95e6326b5d8"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "flow_id",
+        "value": "d35b61b6-c884-44f8-b5c7-aed63cc356ab"
+      }, {
+        "parameter": "page_name",
+        "value": "webhook- DEAI- Distributel_pending_order"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "890367ce-b0ee-4028-9bb8-aa2987dba539"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "ID Status Check",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+    
+    },
+    "name": "b20ddb24-c541-4a4a-8d66-18a4721e733a"
+  }, {
+    "targetPage": "ID Status Check",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+    
+    },
+    "name": "c7814436-a404-4f17-ab77-5901bad0949d"
+  }, {
+    "targetPage": "ID Status Check",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+    
+    },
+    "name": "0c9fd055-f7fc-40cc-be19-2f1304c9da3c"
+  }, {
+    "targetPage": "ID Status Check",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+    
+    },
+    "name": "b877fef8-fc57-4ecb-89b7-5d163b80d727"
+  }, {
+    "targetPage": "ID Status Check",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+    
+    },
+    "name": "1eb5a75d-6314-48be-b0da-66d3777cd3d1"
+  }, {
+    "targetPage": "ID Status Check",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+    
+    },
+    "name": "7dc61ed9-6df2-41fc-8db7-59007549ff8f"
+  } ]
+}

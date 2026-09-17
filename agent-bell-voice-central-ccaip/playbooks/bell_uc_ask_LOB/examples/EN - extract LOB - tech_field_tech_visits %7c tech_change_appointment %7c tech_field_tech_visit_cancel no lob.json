@@ -1,0 +1,58 @@
+{
+  "name": "8a3fd376-7104-4446-9546-516dd9354019",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Could you tell me which service you'd like to cancel an appointment for? Internet, TV, or Homephone?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "I want to talk to agent"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Could you specify the type of service you're inquiring about? Internet, TV, or Homephone?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Agent Please"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_aqd",
+      "inputActionParameters": {
+        "apb_location_id": "70014",
+        "language": "en",
+        "lob": "Internet",
+        "route": "tech_field_tech_visit_cancel"
+      },
+      "outputActionParameters": {
+        "apb_location_id": "70014",
+        "language": "en",
+        "lob": "Internet",
+        "route": "tech_field_tech_visit_cancel"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "User wants to cancel the appointment, but does not mention LOB",
+    "actionParameters": {
+      "language": "en",
+      "route": "tech_field_tech_visit_cancel",
+      "utterance": "I want to cancel my appointment."
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "User wants to modify, or which can be any of these routes or intent (tech_field_tech_visits | tech_change_appointment | tech_field_tech_visit_cancel), but does not mention LOB , so route ask them about lob and extract the lob if mentioned",
+    "actionParameters": {
+      "apb_location_id": "70014",
+      "language": "en",
+      "lob": "Internet",
+      "route": "tech_field_tech_visit_cancel"
+    }
+  },
+  "displayName": "EN - extract LOB - tech_field_tech_visits | tech_change_appointment | tech_field_tech_visit_cancel no lob",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 406,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

@@ -1,0 +1,63 @@
+{
+  "name": "5965e137-c89c-4661-9483-fb4d19f3f7fc",
+  "displayName": "Amount Check for Past Due",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "paDays",
+        "value": "$session.params.start_pmt_arrangement_response.paDays"
+      } ]
+    },
+    "name": "626aff9c-b587-40e3-8733-b2971cb0f39f"
+  }, {
+    "condition": "$session.params.payment_amount \u003c $session.params.pastDueAmount",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_aqd",
+    "name": "40ffc88d-bad6-4643-b4f8-95c4c597d6ea"
+  }, {
+    "condition": "$session.params.payment_amount \u003e= $session.params.pastDueAmount",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ " To confirm, the payment arrangement amount you're committing to is $$session.params.payment_amount?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Pour confirmer, le montant de l'entente de paiement auquel vous vous engagez est de $session.params.payment_amount." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetPage": "Final confirmation from user",
+    "name": "71865765-78e6-4edf-9380-d13b450be1b8"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "5965e137-c89c-4661-9483-fb4d19f3f7fc"
+      }, {
+        "parameter": "flow_id",
+        "value": "f769e9bc-195d-4bb3-a5d0-6244de842e69"
+      }, {
+        "parameter": "page_name",
+        "value": "Amount Check for Past Due"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

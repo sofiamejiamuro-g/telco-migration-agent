@@ -1,0 +1,110 @@
+{
+  "name": "b83bc753-bc31-4b7f-ab3e-a520ebdf0ddb",
+  "displayName": "suspended_fraud",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "setParameterActions": [ {
+      "parameter": "status_suspended",
+      "value": "$sys.func.CONTAIN(   $session.params.billing_status_list,   \"suspended\" )"
+    }, {
+      "parameter": "sus_code1",
+      "value": "$sys.func.CONTAIN($session.params.billing_reason_code_list, \"FRD\")"
+    }, {
+      "parameter": "sus_code2",
+      "value": "$sys.func.CONTAIN($session.params.billing_reason_code_list, \"FRA\")"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.banStatus = \"S\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "suspendedFraud_statActvRsnCode_check",
+    "name": "97fd3f02-2486-4d80-98ac-403ef62bbaeb"
+  }, {
+    "condition": "($session.params.mobility = true OR $session.params.tv = true OR $session.params.internet = true OR $session.params.smarthome = true OR $session.params.homephone = true) AND $session.params.banStatus != \"S\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook-AUL Data Check- soc-info-list",
+    "name": "37a1cc92-20f5-49de-a630-815206bfdaa9"
+  }, {
+    "condition": "($session.params.tv = true OR $session.params.internet = true OR $session.params.smarthome = true OR $session.params.homephone = true) AND $session.params.banStatus! = \"S\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "COL_SUS_Check",
+    "name": "81fae11b-1838-49f4-b52f-e9aaa4993daf"
+  }, {
+    "condition": "$session.params.banStatus != \"S\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook-AUL Data Check- soc-info-list",
+    "name": "213c2e8a-1b37-4968-b22e-59c484962dfb"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "b83bc753-bc31-4b7f-ab3e-a520ebdf0ddb"
+      }, {
+        "parameter": "flow_id",
+        "value": "d35b61b6-c884-44f8-b5c7-aed63cc356ab"
+      }, {
+        "parameter": "page_name",
+        "value": "suspended_fraud"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Webhook-AUL Data Check- soc-info-list",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+    
+    },
+    "name": "8ab843b8-761a-4fd8-98fd-a319e9f2c501"
+  }, {
+    "targetPage": "Webhook-AUL Data Check- soc-info-list",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+    
+    },
+    "name": "feae729e-3489-44a9-8d10-caca76383095"
+  }, {
+    "targetPage": "Webhook-AUL Data Check- soc-info-list",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+    
+    },
+    "name": "456ce320-0523-4ed5-8121-3e33a837be8b"
+  }, {
+    "targetPage": "Webhook-AUL Data Check- soc-info-list",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+    
+    },
+    "name": "f65e25d8-8447-4c1b-8540-085c3f57d384"
+  }, {
+    "targetPage": "Webhook-AUL Data Check- soc-info-list",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+    
+    },
+    "name": "db643e71-3863-4aa8-b300-926a059be43e"
+  }, {
+    "targetPage": "Webhook-AUL Data Check- soc-info-list",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+    
+    },
+    "name": "3f508dd5-9dc8-4c1a-b04a-ef1818780883"
+  } ]
+}

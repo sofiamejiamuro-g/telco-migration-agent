@@ -1,0 +1,137 @@
+{
+  "name": "fd61b5a7-975d-4af2-946b-7c52bda1ff1c",
+  "displayName": "Customer-profile Webhook",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "/v1/ibm_mw/nm1_get#customer-profile",
+    "tag": "customer-profile"
+  },
+  "transitionRoutes": [ {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "Bantype",
+        "value": "$session.params.nm1_get_cust_profile_response.banType"
+      }, {
+        "parameter": "Bansubtype",
+        "value": "$session.params.nm1_get_cust_profile_response.banSubType"
+      }, {
+        "parameter": "errorCode",
+        "value": "$session.params.nm1_get_cust_profile_response.returnCode"
+      }, {
+        "parameter": "onebillindicator",
+        "value": "$session.params.nm1_get_cust_profile_response.oneBill"
+      } ]
+    },
+    "name": "b7c3a825-b631-4df3-9df9-7b46e93ae71b"
+  }, {
+    "condition": "$session.params.webhook_success = \"false\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Failure NM1 Outage",
+    "name": "280156b8-dea8-4ca0-87f4-3283d0920570"
+  }, {
+    "condition": "$session.params.errorCode = \"0\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "webhook_success",
+        "value": "false"
+      } ]
+    },
+    "targetPage": "Webhook Failure NM1 Outage",
+    "name": "336d51f8-1153-4063-aec7-b160dbd1dd94"
+  }, {
+    "condition": "$session.params.onebillindicator = \"Y\" OR $session.params.onebillindicator = \"M\" OR $session.params.onebillindicator = \"N\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "webhook_success",
+        "value": null
+      } ]
+    },
+    "targetPage": "Consolidated Customers",
+    "name": "686a6e3e-6290-4e17-84d6-6e560bd96fb7"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "fd61b5a7-975d-4af2-946b-7c52bda1ff1c"
+      }, {
+        "parameter": "flow_id",
+        "value": "2270f500-41b4-45fb-89ed-e16938ec3cea"
+      }, {
+        "parameter": "page_name",
+        "value": "Customer-profile Webhook"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Webhook Failure NM1 Outage",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "webhook_success",
+        "value": "nm1"
+      } ]
+    },
+    "name": "83f8b4fc-afbf-45d7-8cd8-e4e40c797657"
+  }, {
+    "targetPage": "Webhook Failure NM1 Outage",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "webhook_success",
+        "value": "nm1"
+      } ]
+    },
+    "name": "174e1d93-8d44-4f38-84c5-49989707591b"
+  }, {
+    "targetPage": "Webhook Failure NM1 Outage",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "webhook_success",
+        "value": "nm1"
+      } ]
+    },
+    "name": "b3441f3f-447e-4151-ab4a-1302c7cfa79b"
+  }, {
+    "targetPage": "Webhook Failure NM1 Outage",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "webhook_success",
+        "value": "nm1"
+      } ]
+    },
+    "name": "20a54b63-28eb-46cf-b3d7-a7dd51cf7ea8"
+  }, {
+    "targetPage": "Webhook Failure NM1 Outage",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "webhook_success",
+        "value": "nm1"
+      } ]
+    },
+    "name": "ded19be4-f476-4ffc-949b-25974da0005f"
+  }, {
+    "targetPage": "Webhook Failure NM1 Outage",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "webhook_success",
+        "value": "nm1"
+      } ]
+    },
+    "name": "516a685d-6032-4a88-9677-5d2dffd53409"
+  } ]
+}

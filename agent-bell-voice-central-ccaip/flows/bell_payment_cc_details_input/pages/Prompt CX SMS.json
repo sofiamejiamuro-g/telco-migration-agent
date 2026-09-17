@@ -1,0 +1,161 @@
+{
+  "name": "8ac5b216-2e31-4dd7-a889-ab3919ea31f2",
+  "displayName": "Prompt CX SMS",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "setParameterActions": [ {
+      "parameter": "card_number",
+      "value": null
+    } ],
+    "conditionalCases": [ {
+      "cases": [ {
+        "condition": "$session.params.route = \"payment_make_payment\"",
+        "caseContent": [ {
+          "message": {
+            "text": {
+              "text": [ "Unfortunately I'm unable to proceed with your request right now. You can visit the MyBell app to proceed with your payment. I'll send a text to the device you're calling from, so that you can complete this yourself. Is that alright?" ]
+            },
+            "languageCode": "en"
+          }
+        }, {
+          "message": {
+            "text": {
+              "text": [ "Malheureusement, je ne peux pas donner suite à votre demande pour le moment. Vous pouvez consulter l’Appli MonBell pour effectuer votre paiement. Je vais envoyer un Texto à l’appareil à partir duquel vous appelez, afin que vous puissiez effectuer cette opération vous-même. Est-ce que cela vous convient?" ]
+            },
+            "languageCode": "fr-ca"
+          }
+        } ]
+      }, {
+        "condition": "$session.params.route = \"payment_update_autopay\"",
+        "caseContent": [ {
+          "message": {
+            "text": {
+              "text": [ "Unfortunately I'm unable to proceed with your request right now. You can visit the MyBell app to proceed with setting up your pre-authorized payment. I'll send a text to the device you're calling from, so that you can complete this yourself. Is that alright?" ]
+            },
+            "languageCode": "en"
+          }
+        }, {
+          "message": {
+            "text": {
+              "text": [ "Nous sommes malheureusement dans l’impossibilité de traiter votre demande pour le moment. Vous pouvez visiter l’appli MonBell pour configurer votre paiement préautorisé. Je vais envoyer un texto à l’appareil à partir duquel vous appelez afin que vous puissiez le faire vous-même. Cela vous convient-il?" ]
+            },
+            "languageCode": "fr-ca"
+          }
+        } ]
+      }, {
+        "condition": "$session.params.route = \"payment_setup_autopay\"",
+        "caseContent": [ {
+          "message": {
+            "text": {
+              "text": [ "Unfortunately I'm unable to proceed with your request right now. You can visit the MyBell app to proceed with setting up your pre-authorized payment. I'll send a text to the device you're calling from, so that you can complete this yourself. Is that alright?" ]
+            },
+            "languageCode": "en"
+          }
+        }, {
+          "message": {
+            "text": {
+              "text": [ "Nous sommes malheureusement dans l’impossibilité de traiter votre demande pour le moment. Vous pouvez visiter l’appli MonBell pour configurer votre paiement préautorisé. Je vais envoyer un texto à l’appareil à partir duquel vous appelez afin que vous puissiez le faire vous-même. Cela vous convient-il?" ]
+            },
+            "languageCode": "fr-ca"
+          }
+        } ]
+      } ]
+    } ]
+  },
+  "transitionRoutes": [ {
+    "intent": "context.sms_yes + topup_yes + autopay_yes + auto_pay_update_yes ",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Language Based SMS",
+    "name": "8349b296-c05d-4963-808f-96c53be12ad5"
+  }, {
+    "intent": "context.sms_no",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Intent SDL Mapping",
+    "name": "2006f010-007f-4f5e-b645-e79aa07a217e"
+  } ],
+  "eventHandlers": [ {
+    "event": "sys.no-input-1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I didn't quite get that. Can you try again?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je n’ai pas tout à fait compris. Pouvez-vous réessayer?" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "ac8608f1-c325-4bd1-b46f-111a94b88706"
+  }, {
+    "event": "sys.no-input-2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I still didn't get that" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je n’ai toujours pas compris" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "2c2e3466-abf1-4eba-a8d8-7c469fa0eb22"
+  }, {
+    "targetFlow": "bell_determine_handover",
+    "event": "sys.no-input-3",
+    "triggerFulfillment": {
+    
+    },
+    "name": "3bf83713-92d7-45fb-aebb-79da0b235a6f"
+  }, {
+    "event": "sys.no-match-1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I didn't quite get that. Can you try again?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je n’ai pas tout à fait compris. Pouvez-vous réessayer?" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "4c1b5356-9576-49bc-aa05-c30e102c23b0"
+  }, {
+    "event": "sys.no-match-2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I still didn't get that" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je n’ai toujours pas compris" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "69a5d43d-5b57-4e95-a303-f98273d975a3"
+  }, {
+    "targetFlow": "bell_determine_handover",
+    "event": "sys.no-match-3",
+    "triggerFulfillment": {
+    
+    },
+    "name": "851a390e-a7c6-4fde-abfc-89ae42d36cf8"
+  } ]
+}

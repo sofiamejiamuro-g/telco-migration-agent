@@ -1,0 +1,109 @@
+{
+  "name": "64c9f1ad-883a-4af6-9348-0e1d5ff18ffb",
+  "displayName": "Webhook Get Segment",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "v1/aqd-support#get-segment",
+    "tag": "get-segment",
+    "setParameterActions": [ {
+      "parameter": "brand",
+      "value": "$session.params.brand"
+    }, {
+      "parameter": "menu_type",
+      "value": "$session.params.menu_type"
+    }, {
+      "parameter": "webhook_success",
+      "value": null
+    }, {
+      "parameter": "_empty_string",
+      "value": ""
+    }, {
+      "parameter": "intent",
+      "value": "$sys.func.IF(\"$session.params.route = $session.params._empty_string\" , other_speak_to_agent, $session.params.route)"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.webhook_success = true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "segment",
+        "value": "$session.params.get_segment_response.segment"
+      } ]
+    },
+    "targetPage": "Check Special Status",
+    "name": "5dbe237e-9c4c-4af6-a7ad-02b54d60c67e"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "segment",
+        "value": "Care"
+      } ]
+    },
+    "targetPage": "Check Special Status",
+    "name": "0609509b-7cae-41a3-b23c-84b8dcb3737a"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Check Special Status",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "segment",
+        "value": "Care"
+      } ]
+    },
+    "name": "185dd568-23ca-4f7e-a75b-4500155f9b0c"
+  }, {
+    "targetPage": "Check Special Status",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "segment",
+        "value": "Care"
+      } ]
+    },
+    "name": "3df890bb-78c5-4197-916d-271d56165d1f"
+  }, {
+    "targetPage": "Check Special Status",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "segment",
+        "value": "Care"
+      } ]
+    },
+    "name": "8e08db59-ff8f-465f-9d05-d1f036d331a5"
+  }, {
+    "targetPage": "Check Special Status",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "segment",
+        "value": "Care"
+      } ]
+    },
+    "name": "603e40ac-17c7-4d38-a362-a05b1b8e9c67"
+  }, {
+    "targetPage": "Check Special Status",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "segment",
+        "value": "Care"
+      } ]
+    },
+    "name": "82c1a708-d6eb-4656-8d37-5ac17332f499"
+  }, {
+    "targetPage": "Check Special Status",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "segment",
+        "value": "Care"
+      } ]
+    },
+    "name": "c103dbe9-cc83-46c2-a6af-6075b846d00b"
+  } ]
+}

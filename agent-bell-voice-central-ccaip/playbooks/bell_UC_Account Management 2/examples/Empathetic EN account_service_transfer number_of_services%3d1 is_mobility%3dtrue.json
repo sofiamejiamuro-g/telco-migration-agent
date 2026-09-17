@@ -1,0 +1,44 @@
+{
+  "name": "01570a39-094c-4ee7-b743-e821b95a49e0",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "I am so sorry to hear you've been affected by the earthquake. I hope you and your family are safe.\nGreat news! Bell Mobility service continues to work uninterrupted throughout Canada and many plans have Canada-wide calling. Refer to your plan details to see what's included."
+    }
+  }, {
+    "playbookInvocation": {
+      "playbook": "bell_UC_Account Management",
+      "playbookInput": {
+        "precedingConversationSummary": "Set route to account_update_details and execute instructions",
+        "actionParameters": {
+          "language": "en",
+          "route": "account_update_details"
+        }
+      },
+      "playbookOutput": {
+        "executionSummary": "execute playbook",
+        "actionParameters": {
+        
+        }
+      },
+      "playbookState": "OUTPUT_STATE_OK"
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "route=account_service_transfer number_of_services=1 is_mobility=true. Customer wants to transfer services and route=account_service_transfer number_of_services=1 is_mobility=true.",
+    "actionParameters": {
+      "is_mobility": "true",
+      "language": "en",
+      "number_of_services": "1",
+      "route": "account_service_transfer",
+      "utterance": "I need to update my service address due to an earthquake in my area."
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Set route to account_update_details and call ${PLAYBOOK:bell_UC_Account Management}"
+  },
+  "displayName": "Empathetic EN account_service_transfer number_of_services=1 is_mobility=true",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 341,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

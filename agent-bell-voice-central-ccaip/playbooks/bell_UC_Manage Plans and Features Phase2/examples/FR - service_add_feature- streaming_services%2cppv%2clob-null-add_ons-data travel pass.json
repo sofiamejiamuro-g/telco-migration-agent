@@ -1,0 +1,80 @@
+{
+  "name": "a49af349-db17-4b16-9835-da1f84561b52",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70011",
+        "brand": "bell",
+        "language": "fr-ca",
+        "lob": "Mobility",
+        "route": "service_add_feature"
+      },
+      "outputActionParameters": {
+        "lob": "Mobility"
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Vous pouvez consulter les options de voyage offertes dans MonBell. Je vais envoyer un texto avec un lien à l’appareil au moyen duquel vous appelez. Est-ce que ça vous convient?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "oui"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "add_ons": "travel pass",
+        "language": "fr-ca",
+        "route": "service_add_feature",
+        "sms_content": "Vous pouvez visiter https://m.bell.ca/voyage pour voir vos options de voyage disponibles dans l'appli MonBell. ( bell.ca/apropos )",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+        "language": "fr-ca"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "The {identification_status} is \"Pass\", {customer_type} is \"Existing\", {streaming_services} is null and {ppv} is null and {add_ons} is \"travel pass\" so STRICTLY set {lob} as \"Mobility\" then, we will prompt user for send SMS confirmation and if user say \"yes\" or anything affirmative then route to \"bell_SMS Trgigger\" flow.",
+    "actionParameters": {
+      "add_ons": "travel pass",
+      "apb_location_id": "70011",
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "is_prepaid": "false",
+      "language": "fr-ca",
+      "mobility_sub_type": "postpaid",
+      "route": "service_add_feature",
+      "sms_content": "Vous pouvez visiter https://m.bell.ca/voyage pour voir vos options de voyage disponibles dans l'appli MonBell. ( bell.ca/apropos )",
+      "sms_type": "Public",
+      "utterance": "Je veux ajouter le grand voyageur"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "As {streaming_services}, {ppv} is null and as {add_ons} = \"travel pass\" STRICTLY set {lob}=\"Mobility\" then we will prompt user to send SMS and if user say \"yes\" or anything affirmative then send the user to \"bell_SMS Trigger\" flow",
+    "actionParameters": {
+      "add_ons": "travel pass",
+      "apb_location_id": "70011",
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "is_prepaid": "false",
+      "language": "fr-ca",
+      "lob": "Mobility",
+      "mobility_sub_type": "postpaid",
+      "route": "service_add_feature",
+      "sms_content": "Vous pouvez visiter https://m.bell.ca/voyage pour voir vos options de voyage disponibles dans l'appli MonBell. ( bell.ca/apropos )",
+      "sms_type": "Public",
+      "utterance": "Je veux ajouter le grand voyageur"
+    }
+  },
+  "displayName": "FR - service_add_feature- streaming_services,ppv,lob-null-add_ons-data travel pass",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 765,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "fr-ca"
+}

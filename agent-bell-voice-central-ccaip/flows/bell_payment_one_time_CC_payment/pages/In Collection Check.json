@@ -1,0 +1,63 @@
+{
+  "name": "a6a13da8-6e9d-49d7-89b1-a882fb5261e9",
+  "displayName": "In Collection Check",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.special_status = \"bell_col_sus\" OR $session.params.special_status = \"bell_col_aul\" OR $session.params.special_status = \"bell_col_delinquent\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "OK, let me to get someone to assist you" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "D'accord, je vais faire appel à quelqu'un qui pourra vous aider." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "16e740c3-f30b-4ac4-9f94-cd65da993a40"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "conditionalCases": [ {
+        "cases": [ {
+          "condition": "$session.params.id_auth_fail = true",
+          "caseContent": [ {
+            "message": {
+              "text": {
+                "text": [ "Okay. If you'd still like to make a payment you can easily do so in the MyBell app" ]
+              },
+              "languageCode": "en"
+            }
+          } ]
+        }, {
+          "caseContent": [ {
+            "message": {
+              "text": {
+                "text": [ "Okay, you can always manage your payments in the MyBell app." ]
+              },
+              "languageCode": "en"
+            }
+          }, {
+            "message": {
+              "text": {
+                "text": [ "D'accord. Si vous souhaitez toujours effectuer un paiement, vous pouvez facilement le faire dans l'appli MonBell." ]
+              },
+              "languageCode": "fr-ca"
+            }
+          } ]
+        } ]
+      } ]
+    },
+    "targetFlow": "bell_Feedback",
+    "name": "0f687b29-d2ea-4244-b41f-1a66cbad39cc"
+  } ]
+}

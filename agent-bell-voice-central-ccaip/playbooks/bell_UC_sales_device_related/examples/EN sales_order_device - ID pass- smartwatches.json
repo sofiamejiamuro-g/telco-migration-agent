@@ -1,0 +1,64 @@
+{
+  "name": "5d8c0cea-c717-4815-ab66-cb80f7e47589",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "brand": "bell",
+        "language": "en"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "I'll send a text to the device you're calling from, so that you can check out Bell's mobility devices such as phones, tablets, smartwatches, and mobile internet. Is that alright?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "yes"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "brand": "bell",
+        "language": "en",
+        "sms_content": "You can visit https://www.bell.ca/Mobility/Smartphones and mobile internet devices to find out more about Bell mobility devices. (bell.ca/about-us)",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+        "language": "en"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer has questions about needing a device, device availability, device features, cost, related to devices that Bell sells",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "Existing",
+      "device_type": "Smart Watch",
+      "identification_status": "Pass",
+      "language": "en",
+      "route": "sales_order_device",
+      "utterance": "I want to purchase an Apple watch seven."
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "if device_type is Smartwatch then give corresponding response",
+    "actionParameters": {
+      "brand": "bell",
+      "device_type": "Smart Watch",
+      "language": "en",
+      "line_type": "New",
+      "route": "sales_order_device"
+    }
+  },
+  "displayName": "EN sales_order_device - ID pass- smartwatches",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 427,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

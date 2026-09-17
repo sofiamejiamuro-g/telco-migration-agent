@@ -1,0 +1,68 @@
+{
+  "name": "586cb4f3-04cb-46c8-90e2-b2276aa0f24f",
+  "actions": [ {
+    "agentUtterance": {
+      "text": " Bien sûr, je peux vous aider. Pourriez-vous confirmer le service que vous souhaitez suspendre?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Mobility"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Merci. Quelle est la raison de la suspension de votre service?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Je vais voyager. "
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Saviez-vous que vous pouvez utiliser votre téléphone pendant vos déplacements? Aimeriez-vous en savoir plus? "
+    }
+  }, {
+    "userUtterance": {
+      "text": "oui"
+    }
+  }, {
+    "playbookInvocation": {
+      "playbook": "bell_UC_Manage Plans and Features Phase2",
+      "playbookInput": {
+        "actionParameters": {
+          "add_ons": "roaming",
+          "brand": "bell",
+          "language": "fr-ca",
+          "route": "service_add_feature"
+        }
+      },
+      "playbookOutput": {
+        "actionParameters": {
+        
+        }
+      },
+      "playbookState": "OUTPUT_STATE_OK"
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer trying to suspend their service as there device is stolen",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca",
+      "route": "account_suspend_service",
+      "utterance": "Je veux suspendre mon ou mes service"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Customer disagrees with the tracking feature and we update {route} = \"equipment_report_lost_device\"",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca",
+      "route": "service_add_feature"
+    }
+  },
+  "displayName": "FR- Account suspend service -  Travel",
+  "retrievalStrategy": "NEVER",
+  "tokenCount": 366,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "fr"
+}

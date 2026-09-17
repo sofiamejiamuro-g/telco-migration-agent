@@ -1,0 +1,136 @@
+{
+  "name": "b90b4f5e-0d90-4586-906d-c5f47538777b",
+  "displayName": "FR - EEPA-2147 - CCC - No - No single consumer BAN - Ban Number - Consumer",
+  "testCaseConversationTurns": [ {
+    "userInput": {
+      "injectedParameters": {
+        "clid": "+15194017803",
+        "tfn": 8889992321
+      },
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "bonjour"
+        },
+        "languageCode": "fr-ca"
+      }
+    },
+    "virtualAgentOutput": {
+      "sessionParameters": {
+        "clid": "+15194017803",
+        "tfn": 8889992321
+      },
+      "triggeredIntent": {
+        "name": "Default Welcome Intent"
+      },
+      "currentPage": {
+        "name": "Get CX Input",
+        "flow": "bell_Identification"
+      },
+      "textResponses": [ {
+        "text": [ "\u003cspeak\u003eJe suis l'assistant virtuel de Bell, j'utilise l'intelligence artificielle pour apprendre. \u003cbreak time=\"1s\"/\u003e\u003c/speak\u003e" ]
+      }, {
+        "text": [ "Communiquez-vous avez nous au sujet du numéro à partir duquel vous nous appelez présentement?" ],
+        "allowPlaybackInterruption": true
+      } ],
+      "currentFlow": {
+        "name": "bell_Identification"
+      }
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "oui"
+        },
+        "languageCode": "fr-ca"
+      }
+    },
+    "virtualAgentOutput": {
+      "triggeredIntent": {
+        "name": "context.confirm_yes"
+      },
+      "currentPage": {
+        "name": "Business BAN Check",
+        "flow": "bell_multiban"
+      },
+      "textResponses": [ {
+        "text": [ "\u003cspeak\u003eMerci! \u003cbreak time=\"1s\"/\u003e\u003c/speak\u003e" ],
+        "allowPlaybackInterruption": true
+      }, {
+        "text": [ " J’ai trouvé plusieurs comptes associés à votre numéro. Pour nous assurer que nous parlons du bon compte, pourriez-vous confirmer si vous appelez au sujet d’un compte d’entreprise?" ],
+        "allowPlaybackInterruption": true
+      } ],
+      "currentFlow": {
+        "name": "bell_multiban"
+      }
+    }
+  }, {
+    "userInput": {
+      "injectedParameters": {
+        "billing_account_number_list": [ "530773334", "549171272", "512346789" ]
+      },
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "non"
+        },
+        "languageCode": "fr-ca"
+      }
+    },
+    "virtualAgentOutput": {
+      "sessionParameters": {
+        "billing_account_number_list": [ "530773334", "549171272", "512346789" ]
+      },
+      "triggeredIntent": {
+        "name": "custom.no"
+      },
+      "currentPage": {
+        "name": "Account Number",
+        "flow": "bell_multiban"
+      },
+      "textResponses": [ {
+        "text": [ "Pourriez-vous également fournir votre numéro de compte?" ]
+      } ],
+      "currentFlow": {
+        "name": "bell_multiban"
+      }
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "512346789"
+        },
+        "languageCode": "fr-ca"
+      }
+    },
+    "virtualAgentOutput": {
+      "currentPage": {
+        "name": "Routing Page",
+        "flow": "Default Start Flow"
+      },
+      "textResponses": [ {
+        "text": [ "Merci. J’ai trouvé le compte." ],
+        "allowPlaybackInterruption": true
+      }, {
+        "text": [ "Comment puis-je t'aider ?" ],
+        "allowPlaybackInterruption": true
+      } ],
+      "currentFlow": {
+        "name": "Default Start Flow"
+      }
+    }
+  } ],
+  "creationTime": {
+    "seconds": 1759503873,
+    "nanos": 57901000
+  },
+  "testConfig": {
+    "flow": "Default Start Flow",
+    "page": "Start Page"
+  },
+  "languageCode": "fr-ca"
+}

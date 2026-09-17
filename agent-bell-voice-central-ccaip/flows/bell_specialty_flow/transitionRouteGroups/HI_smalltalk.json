@@ -1,0 +1,252 @@
+{
+  "name": "35dbd7aa-7372-4b4d-828c-b8895a56f71c",
+  "displayName": "HI_smalltalk",
+  "transitionRoutes": [ {
+    "intent": "small_talk.agent.acquaintance",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "A virtual assistant uses AI to provide quick assistance. It can help with various issues, including troubleshooting internet, Fibe TV, and home phone services." ]
+        },
+        "languageCode": "en"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "route",
+        "value": "small_talk.agent.acquaintance"
+      }, {
+        "parameter": "utterance",
+        "value": "$request.user-utterance"
+      } ],
+      "advancedSettings": {
+        "playbackInterruptionSettings": {
+        
+        }
+      }
+    },
+    "name": "a17dc58c-8ac4-4c61-a085-fff77cfc949d"
+  }, {
+    "intent": "small_talk.agent.annoying",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I apologize for the trouble you're having. Let's start over. What do you need help with?" ]
+        },
+        "languageCode": "en"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "route",
+        "value": "small_talk.agent.annoying"
+      }, {
+        "parameter": "utterance",
+        "value": "$request.user-utterance"
+      } ]
+    },
+    "name": "92516900-fd04-4918-bfac-ed0d71a7c756"
+  }, {
+    "intent": "small_talk.agent.bad",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I apologize for the trouble you're having. Let's start over. What do you need help with?" ]
+        },
+        "languageCode": "en"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "route",
+        "value": "small_talk.agent.bad"
+      }, {
+        "parameter": "utterance",
+        "value": "$request.user-utterance"
+      } ]
+    },
+    "name": "bbb7e69e-5005-4d55-b217-56a23fcdc5de"
+  }, {
+    "intent": "small_talk.agent.good",
+    "condition": "$session.params.route = \"small_talk\\.agent\\.good\" AND $session.params.event_type = \"anything else start over\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "route",
+        "value": "small_talk.agent.good"
+      }, {
+        "parameter": "utterance",
+        "value": "$request.user-utterance"
+      } ],
+      "advancedSettings": {
+        "playbackInterruptionSettings": {
+        
+        }
+      }
+    },
+    "name": "63118d6f-5069-4710-88b1-2348ee9a5e31",
+    "targetPlaybook": "bell_Steering_Wrap-up"
+  }, {
+    "intent": "small_talk.appraisal.thank_you",
+    "condition": "$session.params.route = \"small_talk\\.appraisal\\.thank_you\" AND $session.params.event_type = \"anything else start over\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "route",
+        "value": "small_talk.appraisal.thank_you"
+      }, {
+        "parameter": "utterance",
+        "value": "$request.user-utterance"
+      } ]
+    },
+    "name": "80a4a077-ebc0-48b9-a196-e67da4bab4a5",
+    "targetPlaybook": "bell_Steering_Wrap-up"
+  }, {
+    "intent": "small_talk.appraisal.well_done",
+    "condition": "$session.params.route = \"small_talk\\.appraisal\\.well_done\" AND $session.params.event_type = \"anything else start over\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "route",
+        "value": "small_talk.appraisal.well_done"
+      }, {
+        "parameter": "utterance",
+        "value": "$request.user-utterance"
+      } ]
+    },
+    "name": "c3fff047-9a1a-4c95-b828-c0ee0e35c429",
+    "targetPlaybook": "bell_Steering_Wrap-up"
+  }, {
+    "intent": "small_talk.dialog.wrong",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Oh, I’m sorry! I seem to have gotten that wrong. Can you tell me more about it?" ]
+        },
+        "languageCode": "en"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "route",
+        "value": "small_talk.dialog.wrong"
+      }, {
+        "parameter": "utterance",
+        "value": "$request.user-utterance"
+      } ]
+    },
+    "name": "44cd5c42-6aa9-4e19-bd1f-91a9b58382ba"
+  }, {
+    "intent": "small_talk.greetings.bye",
+    "condition": "$session.params.route = \"small_talk\\.greetings\\.bye\" AND $session.params.event_type = \"anything else start over\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "route",
+        "value": "small_talk.greetings.bye"
+      }, {
+        "parameter": "utterance",
+        "value": "$request.user-utterance"
+      } ]
+    },
+    "name": "8139844e-f6ae-4ee2-9a02-ec9f94c5a66e",
+    "targetPlaybook": "bell_Steering_Wrap-up"
+  }, {
+    "intent": "small_talk.greetings.hello",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Hi, how can I help you?\r\n" ]
+        },
+        "languageCode": "en"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "route",
+        "value": "small_talk.greetings.hello"
+      }, {
+        "parameter": "utterance",
+        "value": "$request.user-utterance"
+      } ]
+    },
+    "name": "ba64975f-3430-4af7-a058-6cd1c609ee74"
+  }, {
+    "intent": "small_talk.user.angry",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I apologize for the trouble you're having. Let's start over. What do you need help with?" ]
+        },
+        "languageCode": "en"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "route",
+        "value": "small_talk.user.angry"
+      }, {
+        "parameter": "utterance",
+        "value": "$request.user-utterance"
+      } ]
+    },
+    "name": "d2c9f6a5-6c6a-4895-ae46-d9412d97323e"
+  }, {
+    "intent": "small_talk.greetings.nice_to_meet_you",
+    "condition": "$session.params.route = \"small_talk\\.greetings\\.nice_to_meet_you\" AND $session.params.event_type = \"anything else start over\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "route",
+        "value": "small_talk.greetings.nice_to_meet_you"
+      }, {
+        "parameter": "utterance",
+        "value": "$request.user-utterance"
+      } ]
+    },
+    "name": "27c5d480-66cb-4453-8898-b16deadf1932",
+    "targetPlaybook": "bell_Steering_Wrap-up"
+  }, {
+    "intent": "small_talk.agent.AI",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "AI, or artificial intelligence, helps our virtual assistant understand your request and quickly give you the information you need or connect you to the right live agent." ]
+        },
+        "languageCode": "en"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "route",
+        "value": "small_talk.agent.AI"
+      }, {
+        "parameter": "utterance",
+        "value": "$request.user-utterance"
+      } ],
+      "advancedSettings": {
+        "playbackInterruptionSettings": {
+        
+        }
+      }
+    },
+    "name": "fe82945b-846c-4fa0-9068-ee8a946cfe8e"
+  }, {
+    "intent": "small_talk.hangup_apology",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I’m sorry to hear that your call dropped. Unfortunately I don’t have details about your last communication. Can you please give me context about the reason of that call and I’ll do my best to help you?" ]
+        },
+        "languageCode": "en"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "route",
+        "value": "small_talk.hangup_apology"
+      }, {
+        "parameter": "utterance",
+        "value": "$request.user-utterance"
+      } ]
+    },
+    "name": "2dfbf949-64e9-467f-a8aa-b88748d41a0d"
+  }, {
+    "intent": "small_talk.outbound_call",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Thanks for calling us back. Unfortunately I don’t have any details why we’ve reached out but, if you need help with a specific topic, please let me know." ]
+        },
+        "languageCode": "en"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "route",
+        "value": "small_talk.outbound_call"
+      }, {
+        "parameter": "utterance",
+        "value": "$request.user-utterance"
+      } ]
+    },
+    "name": "22ef126f-3fe0-4163-9ec9-98e0682d0734"
+  } ]
+}

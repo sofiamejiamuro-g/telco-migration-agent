@@ -1,0 +1,60 @@
+{
+  "name": "b8bfe0a2-ae46-4c6b-a437-843e6985ef24",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Bien sûr, laissez-moi vous aider.\n\n\nVérifions si nous offrons des services Internet ou de téléphonie\nrésidentielle dans votre secteur. Dans quelle province avez-vous besoin de\nservices?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "ontorio"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_aqd",
+      "inputActionParameters": {
+        "language": "fr-ca",
+        "lob": "internet"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customers want to know about different plans or compare different plans that Bell has and lob identified as \" Internet\" OR \"TV\" OR \"Homephone\"",
+    "actionParameters": {
+      "customer_type": "New",
+      "identification_status": "Fail",
+      "language": "fr-ca",
+      "lob": "internet",
+      "province": "ROC",
+      "route": "sales_plans_inquiry",
+      "utterance": "je viens de déménager puis j'aimerais ça me faire rentrer l'Internet chez moi"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "\nWhen province is anything other than ON and QC or is null or empty, ask user for province, extract in {province} parameter and further route based on province",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca",
+      "lob": "internet",
+      "province": "ON"
+    }
+  },
+  "displayName": "FR - sales plans inquiry- ID Fail, customer_type-new- province not identified-ON",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 417,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "fr"
+}

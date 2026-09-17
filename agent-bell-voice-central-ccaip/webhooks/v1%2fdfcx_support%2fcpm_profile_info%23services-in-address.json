@@ -1,0 +1,27 @@
+{
+  "name": "f954c749-bdb4-4059-92eb-076638ec7c58",
+  "displayName": "v1/dfcx_support/cpm_profile_info#services-in-address",
+  "timeout": {
+    "seconds": 30
+  },
+  "serviceDirectory": {
+    "service": "projects/gcp-it-npe-pltfm-apigee/locations/us-central1/namespaces/apigee-nb-usc1-service-dir-namespace/services/apigee-nb-usc1-service",
+    "genericWebService": {
+      "uri": "https://apigee-nane1-uat.int.bell.ca/v1/dfcx-support/cpm-profile-info",
+      "requestHeaders": [ {
+        "key": "x-apikey",
+        "value": "npZmDivP6Hxes3wtQ0tC9RqItjJTY8TgZHbOPNeFwvSYSKPI"
+      } ],
+      "webhookType": "FLEXIBLE",
+      "httpMethod": "POST",
+      "requestBody": "{\n  \"sessionInfo\": {\n    \"dfcx_session_id\": \"$session.params.dfcx_session_id\",\n    \"agent_id\": \"$session.params.agent_id\",\n    \"parameters\": {\n      \"postal_code\": \"$session.params.postal_code\",\n      \"billing_account_number\": \"$session.params.billing_account_number\",\n      \"customer_profile\": \"$session.params.customer_profile\"\n    }\n  },\n  \"fulfillmentInfo\": {\n    \"tag\": \"services-in-address\"\n  },\n  \"languageCode\": \"$request.language\"\n}",
+      "parameterMapping": [ {
+        "key": "services_in_address_response",
+        "value": "sessionInfo.parameters.services_in_address_response"
+      }, {
+        "key": "webhook_success",
+        "value": "sessionInfo.parameters.webhook_success"
+      } ]
+    }
+  }
+}

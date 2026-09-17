@@ -1,0 +1,50 @@
+{
+  "name": "96428dce-b3a7-45ce-a945-acdcee70d2f6",
+  "displayName": "Route Based Redirect",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "security_code",
+        "value": "$session.params.cvv_number"
+      } ]
+    },
+    "name": "9d7c814f-7e1c-4d52-a225-1a9a75ab82ba"
+  }, {
+    "condition": "$session.params.route = \"payment_update_autopay\" OR $session.params.route = \"payment_setup_autopay\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "cc_type",
+        "value": "$sys.func.IF(\"$session.params.card_brand=VISA OR $session.params.card_brand=Visa\",VI,$sys.func.IF(\"$session.params.card_brand=MasterCard OR $session.params.card_brand=MC\",MC,$sys.func.IF(\"$session.params.card_brand=AMEX OR $session.params.card_brand=Amex\",AX,$session.params.card_brand)))"
+      } ]
+    },
+    "targetPage": "Webhook CC Payment Details",
+    "name": "cb2385a7-f8e8-4ef0-8439-d158443b4bfd"
+  }, {
+    "condition": "$session.params.spending_limit \u003e 0 OR $session.params.special_status = \"bell_clp_aul\" OR $session.params.special_status = \"bell_clp_sus\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "cc_type",
+        "value": "$sys.func.IF(\"$session.params.card_brand=VISA OR $session.params.card_brand=Visa\",VI,$sys.func.IF(\"$session.params.card_brand=MasterCard OR $session.params.card_brand=MC\",MC,$sys.func.IF(\"$session.params.card_brand=AMEX OR $session.params.card_brand=Amex\",AX,$session.params.card_brand)))"
+      } ]
+    },
+    "targetFlow": "bell_payment_clp_process_payment_and_wrapup",
+    "name": "a4da3938-281d-422c-9986-19c3b922adfd"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "cc_type",
+        "value": "$sys.func.IF(\"$session.params.card_brand=VISA OR $session.params.card_brand=Visa\",VI,$sys.func.IF(\"$session.params.card_brand=MasterCard OR $session.params.card_brand=MC\",MC,$sys.func.IF(\"$session.params.card_brand=AMEX OR $session.params.card_brand=Amex\",AX,$session.params.card_brand)))"
+      } ]
+    },
+    "targetFlow": "bell_payment_process_payment_and_wrapup",
+    "name": "c3651358-246d-477b-bf3a-e7ed0a51b541"
+  } ]
+}

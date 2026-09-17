@@ -1,0 +1,59 @@
+{
+  "name": "0c00be2c-5b9b-43d3-a2c2-8f2893a4f7a7",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "To fix this issue, you need to perform this step now. Please try restarting the device you’re having issues with, such as your phone or computer, and reconnect to your Bell WiFi network. Once you're connected, try using the Internet. Please perform that step and let me know when you are done."
+    }
+  }, {
+    "userUtterance": {
+      "text": "Will restarting my phone delete my photos?"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "I understand you have a question, and while I don't have that specific information, performing the given step is nessasary. Please let me know if you are unable to proceed without an answer to that question."
+    }
+  }, {
+    "userUtterance": {
+      "text": "I need answer to that question."
+    }
+  }, {
+    "agentUtterance": {
+      "text": "No worries, let's see how we can help with that."
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_vr_post_answer",
+      "inputActionParameters": {
+        "customer_answer1_id": "1"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "User having a problem with the service and initiating Virtual repair session.",
+    "actionParameters": {
+      "acceptable_answers": [ {
+        "choice": "user_completed_entire_solution",
+        "id": "0"
+      }, {
+        "choice": "user_is_stuck_further_help_requested",
+        "id": "1"
+      } ],
+      "dcx_action_code": "6013",
+      "description": "",
+      "eta_CDA": "Approx. 2 minutes",
+      "faq_question_answer": "Q: How long should I wait before plugging it back in?\nA: Please wait 15 seconds before reconnecting the power supply. \n\nQ: What lights or messages should I see while it restarts?\nA: The lights during a restart will vary and flash differently depending on the status. The lights indicate status of the device during reboot there are different statuses.\n\nQ: How long can that take?\nA: A restart can vary by device. It can usually take 3-5minutes for the reboot to finish and for the device to be re configured.\n\nQ: What website can I check?\nA: You can try navigating to www.bell.ca\n\nQ: What website do you want me to check?\nA: You can try checking the www.bell.ca website.\n\nQ: What device do you want me to check it on?\nA: You can try the one we are troubleshooting with are you able to browse\n\nQ: What browser should I use?\nA: You can pick any browser you like.\n\nQ: What is a browser?\nA: A browser is an app that you use to access websites. For example Chrome, Edge or Safari.\n\nQ: How do I restart my device?\nA: You can restart your device by selecting restart or powering it off and then back on.\n\nQ: Where is the restart button?\nA: The restart button varies by device, for mobile devices you can swipe down from the top and there should be a restart option or you can try powering it off and then back on again.",
+      "language": "en",
+      "title": "Try restarting the device you’re having issues with, such as your phone or computer, and reconnect to your Bell WiFi network. Once you're connected, try using the Internet."
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Tool Evaluation (Stage A): The system called the FAQ tool and received a valid response.\n\nSemantic Search (Stage B, Step 1): The system compared the user's query regarding \"deleting photos\" against every Q in the datastore (which included questions about button locations, browser definitions, and wait times).\n\nMatch Failure: No question in the datastore provided a high-confidence semantic match to the user's specific concern about data loss. Consequently, found_answer remained null.\n\nConstraint Application (Stage B, Step 2): Because found_answer was null, the system was strictly forbidden from generating a generative response based on general knowledge.\n\nFallback Trigger: The system immediately triggered the \"Answer Not Found Fallback\" flow. It output the mandatory, pre-scripted fallback phrase (\"I understand you have a question, and while I don't have that specific information...\") to acknowledge the user's hesitation without fabricating an answer."
+  },
+  "displayName": "CDA - User questions from FAQ (Not match)",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 977,
+  "languageCode": "en"
+}

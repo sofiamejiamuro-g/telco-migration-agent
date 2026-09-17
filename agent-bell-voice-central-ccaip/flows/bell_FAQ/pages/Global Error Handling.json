@@ -1,0 +1,100 @@
+{
+  "name": "f78f91a2-9c57-4f16-a8fb-f15ee91c123d",
+  "displayName": "Global Error Handling",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.global_error_counter \u003e= 3",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_aqd",
+    "name": "331bf60f-8087-40a1-aa95-bb8509aef314"
+  }, {
+    "condition": "$session.params.local_trigger = \"no_match\" AND $session.params.local_nomatch_counter = 1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Je suis désolé, je n'ai pas bien saisie. Qu'est-ce que vous avez dit?" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "Sorry, I didn't understand. What was that?" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "c76ac58c-9c7b-4c01-b309-e881c7b96e76"
+  }, {
+    "condition": "$session.params.local_nomatch_counter = 2 AND $session.params.local_trigger = \"no_match\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "J’ai de la difficulté à comprendre. Pouvez-vous répéter, s’il vous plaît?" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "I’m having trouble understanding. Can you repeat please?" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "e7cc67f8-3bc0-402d-ba32-c3d0a16075c5"
+  }, {
+    "condition": "$session.params.local_nomatch_counter = 3 AND $session.params.local_trigger = \"no_match\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_No_Match_3",
+    "name": "df025aa5-dcc3-4fff-b388-ace3c6320b33"
+  }, {
+    "condition": "$session.params.local_noinput_counter = 1 AND $session.params.local_trigger = \"no_input\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Désolé, je n’ai pas tout à fait compris. Pouvez-vous réessayer?" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "Sorry, I didn’t quite get that. Can you try again?" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "d5c296b2-71a7-4183-954e-a1e7231033ca"
+  }, {
+    "condition": "$session.params.local_noinput_counter = 2 AND $session.params.local_trigger = \"no_input\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Êtes-vous toujours là? Pouvez-vous répéter s'il vous plaît?" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "Are you still there? Can you repeat please?" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "c09da19a-9447-4218-ac73-9f870be0e7fc"
+  }, {
+    "condition": "$session.params.local_noinput_counter = 3 AND $session.params.local_trigger = \"no_input\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_No_Input_3",
+    "name": "aab97143-edd4-4887-94cf-02c2316dc401"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Previous Page",
+    "name": "aa99e65b-e3db-45c6-b7a8-8c0307dbfc51"
+  } ]
+}

@@ -1,0 +1,133 @@
+{
+  "name": "d770f33a-0ab5-4e29-b301-247610e55291",
+  "displayName": "bell_tech_change_appointment_flow",
+  "transitionRoutes": [ {
+    "intent": "global_events_full_startover",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "event_type",
+        "value": "full start over"
+      } ]
+    },
+    "targetFlow": "Default Start Flow",
+    "name": "34a66fd3-617e-483d-8e00-8c38b573ec94"
+  }, {
+    "intent": "global_events_partial_start_over",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "event_type",
+        "value": "partial start over"
+      } ]
+    },
+    "targetFlow": "Default Start Flow",
+    "name": "e1ae7623-0712-4e80-8c5f-99616ba5842f"
+  }, {
+    "condition": "$session.params.auth_status = null",
+    "triggerFulfillment": {
+    
+    },
+    "name": "cbf5df31-cd8b-405b-b0ab-864f68851507"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "service_identifier",
+        "value": "$session.params.billing_account_info_list.services[0].service_id"
+      } ]
+    },
+    "targetPage": "Webhook MYA Eligibility",
+    "name": "0d999b1c-6c5f-4897-aea7-bc61eea77f5d"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Webhook MYA Eligibility",
+    "event": "sys.no-match-default",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "J'ai du mal à comprendre cette question.", "J'ai mal compris votre demande.", "Je n'ai pas saisi ce que vous avez dit.", "Je crois que je ne vous suis pas.", "Je ne comprends pas de quoi vous me parlez." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "I didn't get that. Can you say it again?", "I missed what you said. What was that?", "Sorry, could you say that again?", "Sorry, can you say that again?", "Can you say that again?", "Sorry, I didn't get that. Can you rephrase?", "Sorry, what was that?", "One more time?", "What was that?", "Say that one more time?", "I didn't get that. Can you repeat?", "I missed that, say that again?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "J'ai du mal à comprendre cette question.", "J'ai mal compris votre demande.", "Je n'ai pas saisi ce que vous avez dit.", "Je crois que je ne vous suis pas.", "Je ne comprends pas de quoi vous me parlez." ]
+        },
+        "languageCode": "fr"
+      } ]
+    },
+    "name": "4c9642ce-6608-4a38-a5d0-c97eb233e216"
+  }, {
+    "event": "sys.no-input-default",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "J'ai du mal à comprendre cette question.", "J'ai mal compris votre demande.", "Je n'ai pas saisi ce que vous avez dit.", "Je crois que je ne vous suis pas.", "Je ne comprends pas de quoi vous me parlez." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "I didn't get that. Can you say it again?", "I missed what you said. What was that?", "Sorry, could you say that again?", "Sorry, can you say that again?", "Can you say that again?", "Sorry, I didn't get that. Can you rephrase?", "Sorry, what was that?", "One more time?", "What was that?", "Say that one more time?", "I didn't get that. Can you repeat?", "I missed that, say that again?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "J'ai du mal à comprendre cette question.", "J'ai mal compris votre demande.", "Je n'ai pas saisi ce que vous avez dit.", "Je crois que je ne vous suis pas.", "Je ne comprends pas de quoi vous me parlez." ]
+        },
+        "languageCode": "fr"
+      } ]
+    },
+    "name": "44063395-8044-43ea-9c97-dac41e3af39b"
+  }, {
+    "targetPage": "End Session",
+    "event": "wrapup",
+    "triggerFulfillment": {
+    
+    },
+    "name": "3d4b8662-3870-4ce7-9a7e-4253676e8b6f"
+  } ],
+  "nluSettings": {
+    "modelType": "MODEL_TYPE_CUSTOM",
+    "classificationThreshold": 0.30000001,
+    "modelTrainingMode": "MODEL_TRAINING_MODE_MANUAL"
+  },
+  "advancedSettings": {
+    "enabled": true,
+    "playbackInterruptionSettings": {
+    
+    }
+  },
+  "nluSettingsList": [ {
+    "modelType": "MODEL_TYPE_CUSTOM",
+    "classificationThreshold": 0.30000001,
+    "modelTrainingMode": "MODEL_TRAINING_MODE_MANUAL",
+    "languageCode": "fr-ca"
+  }, {
+    "modelType": "MODEL_TYPE_CUSTOM",
+    "classificationThreshold": 0.30000001,
+    "modelTrainingMode": "MODEL_TRAINING_MODE_MANUAL",
+    "languageCode": "en"
+  } ],
+  "agentTransitionRouteGroups": [ "HI_account", "HI_billing", "HI_disconnect", "HI_equipment", "HI_faq", "HI_other", "HI_payment", "HI_sales", "HI_service" ],
+  "inputParameterDefinitions": [ {
+    "name": "ticket_lob",
+    "description": "ticket_lob",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "STRING"
+      }
+    },
+    "parameterType": {
+      "name": "ticket_lob",
+      "openapiJsonSchema": {
+        "type": "string"
+      }
+    }
+  } ],
+  "multiLanguageSettings": {
+  
+  }
+}

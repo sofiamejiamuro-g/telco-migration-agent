@@ -1,0 +1,66 @@
+{
+  "name": "28ed167a-eb10-49d9-ad79-7be84635a92d",
+  "displayName": "Webhook Error NM1 Outage",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "messages": [ {
+      "text": {
+        "text": [ "We are currently performing maintenance on our systems so unfortunately I am unable to proceed with canceling your pre authorized payments. I'll send a text to the device you're calling from, so that you can proceed with this step. Is that alright?" ]
+      },
+      "languageCode": "en"
+    }, {
+      "text": {
+        "text": [ "Nous effectuons actuellament des travaux de maintenance sur nos systèmes, donic malheureusemerit, je ne peux pas procéder à l'annulation de vos paiements prèautorisés. Je vous enverrai un texto à l'appareil à partir duquel vous appelez, afin que vous puissiez procéder à cette étape. Cela vous va?" ]
+      },
+      "languageCode": "fr-ca"
+    } ],
+    "setParameterActions": [ {
+      "parameter": "preauth_exit_3",
+      "value": true
+    } ]
+  },
+  "transitionRoutes": [ {
+    "intent": "context.confirm_no",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Okay. If you'd still like to cancel Pre-Authorized payment, you can do so in MyBell. Please visit bell.ca/support for more information." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "D'accord. Si vous souhaitez coujours annuler le paiement préautorisé, vous pouvez le faire dans MonBell. Veuillez consulter bell.ca/soutien pour en savoir plus." ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "sms_send_status",
+        "value": "Declined"
+      } ]
+    },
+    "targetFlow": "bell_Feedback",
+    "name": "8bca2cb4-c1b8-4995-9e95-db410b938441"
+  }, {
+    "intent": "context.confirm_yes",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "sms_type",
+        "value": "Public"
+      } ]
+    },
+    "targetPage": "Lang based SMS",
+    "name": "c71e6d9f-bb93-4b35-b250-1574d917648a"
+  }, {
+    "intent": "context.different_number",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "different_number",
+        "value": true
+      } ]
+    },
+    "targetPage": "Lang based SMS",
+    "name": "f202081d-b114-4550-9afc-aa91f5f09851"
+  } ]
+}

@@ -1,0 +1,38 @@
+{
+  "name": "b8398435-525c-4538-9fff-66cd40146266",
+  "displayName": "Routing Page",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "intent": "context.No_further_help_needed",
+    "condition": "$session.params.event_type = \"anything else start over\"",
+    "triggerFulfillment": {
+    
+    },
+    "name": "a1b4e7dd-ef0f-4c31-8421-2fabcd285e0e"
+  }, {
+    "intent": "other_speak_to_agent",
+    "condition": "$session.params.speak_to_agent_counter = 2",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_aqd",
+    "name": "eb046d37-4631-4238-b14c-f51ca5f20cc0"
+  }, {
+    "intent": "other_speak_to_agent",
+    "condition": "$session.params.speak_to_agent_counter = 1",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "speak_to_agent_counter",
+        "value": 2
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "64ebed46-3c48-42e7-a9f5-5caf2cf56b50"
+  } ],
+  "transitionRouteGroups": [ "HI_account", "HI_disconnect", "HI_billing", "HI_equipment", "HI_other", "HI_sales", "HI_service", "HI_techsupport", "HI_smalltalk", "HI_faq" ]
+}

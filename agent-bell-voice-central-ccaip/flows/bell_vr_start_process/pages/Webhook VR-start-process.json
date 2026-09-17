@@ -1,0 +1,150 @@
+{
+  "name": "66f4a9e0-980f-4af4-8348-8cc08e8401c8",
+  "displayName": "Webhook VR-start-process",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "messages": [ {
+      "payload": {
+        "service_id": "$session.params.service_id",
+        "sp_id": "$session.params.vr_context.sp_id"
+      },
+      "languageCode": "en"
+    }, {
+      "text": {
+        "text": [ "The service id  is $session.params.service_id" ]
+      },
+      "languageCode": "fr-ca"
+    }, {
+      "payload": {
+        "service_id": "$session.params.service_id",
+        "sp_id": "$session.params.vr_context.sp_id"
+      },
+      "languageCode": "fr-ca"
+    } ],
+    "webhook": "v1/bell-vr#start-process",
+    "tag": "start-process",
+    "setParameterActions": [ {
+      "parameter": "webhook_success",
+      "value": null
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.webhook_success = \"true\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "webhook_success",
+        "value": null
+      }, {
+        "parameter": "vr_context",
+        "value": "$sys.func.GET_FIELD($session.params.vr_start_response, \"vr_context\")"
+      }, {
+        "parameter": "counter_start_task",
+        "value": 0
+      }, {
+        "parameter": "from_vr",
+        "value": true
+      }, {
+        "parameter": "prev_ms_dcx_action_code",
+        "value": ""
+      }, {
+        "parameter": "prev_cfb_dcx_action_code",
+        "value": ""
+      }, {
+        "parameter": "prev_cda_dcx_action_code",
+        "value": ""
+      }, {
+        "parameter": "faq_question_answer",
+        "value": ""
+      }, {
+        "parameter": "vr_no_input",
+        "value": "false"
+      }, {
+        "parameter": "6590_customer_answer1_id",
+        "value": null
+      } ]
+    },
+    "targetFlow": "bell_vr_next_task",
+    "name": "14ec72bc-ebda-4a57-a9a9-7a4fce7fc912"
+  }, {
+    "condition": "$session.params.webhook_success = \"false\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Oops! Something went wrong on my end. I need to connect you to an agent." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Oups! Une erreur est survenue de mon côté. Je vais vous mettre en relation avec un agent." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "a8779ae8-56e3-47bc-bc23-275f8b692033"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "66f4a9e0-980f-4af4-8348-8cc08e8401c8"
+      }, {
+        "parameter": "flow_id",
+        "value": "c5f4dcf8-f212-456a-89ce-2985cb1e6e42"
+      }, {
+        "parameter": "page_name",
+        "value": "Webhook VR-start-process"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Error_handler",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+    
+    },
+    "name": "342eb2b1-d503-441f-9290-e3c79db72516"
+  }, {
+    "targetPage": "Error_handler",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+    
+    },
+    "name": "e6aaf7c8-fac0-485f-9872-6705d05de49b"
+  }, {
+    "targetPage": "Error_handler",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+    
+    },
+    "name": "51fecbe5-87d2-47d3-b03c-9c6578f167dc"
+  }, {
+    "targetPage": "Error_handler",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+    
+    },
+    "name": "4c928236-46b2-49b0-a1b2-fa3e4b404a6c"
+  }, {
+    "targetPage": "Error_handler",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+    
+    },
+    "name": "f1b76c86-717d-4d5b-a2f4-157c4610d6c9"
+  }, {
+    "targetPage": "Error_handler",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+    
+    },
+    "name": "afc517da-658e-464b-a8e6-3c11932ab54f"
+  } ]
+}

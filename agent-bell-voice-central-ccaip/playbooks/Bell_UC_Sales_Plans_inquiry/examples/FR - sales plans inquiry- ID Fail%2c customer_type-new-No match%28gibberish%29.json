@@ -1,0 +1,102 @@
+{
+  "name": "f4211e4b-ae8a-4d0e-aeb2-4add494952a6",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Bien sûr, laissez-moi vous aider.\n\nÀ propos de quel service communiquez-vous avec nous?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "wl;hdceflj"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_global_error_count_check",
+      "inputActionParameters": {
+        "global_error_counter": "1"
+      },
+      "outputActionParameters": {
+        "global_error_counter": "2"
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Désolée, je n’ai pas compris. De quoi s’agissait-il?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "klwaefh"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_global_error_count_check",
+      "inputActionParameters": {
+        "global_error_counter": "2"
+      },
+      "outputActionParameters": {
+        "global_error_counter": "3"
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "J’ai du mal à comprendre. Pouvez-vous répéter, s’il vous plaît?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "klesfgu"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_global_error_count_check",
+      "inputActionParameters": {
+        "global_error_counter": "3"
+      },
+      "outputActionParameters": {
+        "global_error_counter": "4"
+      }
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_No_Match_3",
+      "inputActionParameters": {
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "The customer is giving gibberish response",
+    "actionParameters": {
+      "customer_type": "New",
+      "global_error_counter": "1",
+      "language": "fr-ca",
+      "route": "sales_plans_inquiry",
+      "utterance": "j'ai besoin d'un nouveau plan"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "The customer says nonsensical/gibberish information 3 times so flow bell_global_error_count_check is called each time and VA responds as per instructions",
+    "actionParameters": {
+      "brand": "bell",
+      "global_error_counter": "4",
+      "language": "fr-ca"
+    }
+  },
+  "displayName": "FR - sales plans inquiry- ID Fail, customer_type-new-No match(gibberish)",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 666,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "fr"
+}

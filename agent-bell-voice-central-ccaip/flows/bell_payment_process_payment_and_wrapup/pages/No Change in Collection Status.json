@@ -1,0 +1,94 @@
+{
+  "name": "403cdeea-2e32-48ca-a68e-9ae987bab8e8",
+  "displayName": "No Change in Collection Status",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "no_change_col_status",
+        "value": true
+      } ]
+    },
+    "name": "54bb9566-d6c7-44b1-b947-2720dc70e138"
+  }, {
+    "condition": "$session.params.accountBalance = 0",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "You're all paid up and don't have any further balance owing at this time." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Tout est payé et vous n'avez plus de solde à payer.\nLe solde de votre compte sera mis à jour dans quelques heures." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetFlow": "bell_payment_pitch_pacc_otcc",
+    "name": "8cb24485-12b3-41c9-a3f2-4d8f93aac739"
+  }, {
+    "condition": "$session.params.accountBalance \u003e 0",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "You have a remaining balance owing of $ $session.params.accountBalance. Make sure to pay that before your next bill date in order to avoid being charged late payment fees." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Il vous reste un solde impayé de $$session.params.pastDueAmount. Assurez-vous de le payer avant la prochaine date de facturation pour éviter les frais de retard de paiement.\nLe solde de votre compte sera mis à jour dans quelques heures." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetFlow": "bell_payment_pitch_pacc_otcc",
+    "name": "481ffa17-4a1e-4310-ad4f-4419eaee37ce"
+  }, {
+    "condition": "$session.params.accountBalance \u003c 0",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Your updated credit balance is $ $session.params.accountBalance" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Votre solde créditeur mis à jour est de $$session.params.accountBalance" ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "accountBalance",
+        "value": "$sys.func.MULTIPLY($session.params.accountBalance, -1)"
+      } ]
+    },
+    "targetFlow": "bell_payment_pitch_pacc_otcc",
+    "name": "089ff661-4953-474e-a607-5011a569b818"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "403cdeea-2e32-48ca-a68e-9ae987bab8e8"
+      }, {
+        "parameter": "flow_id",
+        "value": "15649ac7-20d9-448b-a12c-b86f9480280b"
+      }, {
+        "parameter": "page_name",
+        "value": "No Change in Collection Status"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

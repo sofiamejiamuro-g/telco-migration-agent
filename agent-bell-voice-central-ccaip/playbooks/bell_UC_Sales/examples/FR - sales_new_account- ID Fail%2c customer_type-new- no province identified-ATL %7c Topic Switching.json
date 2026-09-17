@@ -1,0 +1,64 @@
+{
+  "name": "fcab5b20-2004-4524-aae8-aa1c0c427758",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Vérifions si nous offrons des services Internet ou de téléphonie résidentielle dans votre secteur. Dans quelle province avez-vous besoin de\nservices?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Puis-je consulter mon solde en attente avant ?"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "Routing only",
+      "inputActionParameters": {
+        "language": "fr-ca",
+        "utterance": "Puis-je consulter mon solde en attente avant ?"
+      },
+      "outputActionParameters": {
+        "language": "fr-ca",
+        "utterance": "Puis-je consulter mon solde en attente avant ?"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "The Customer wants to sign up or open a new account with Bell and province is not identified, but {lob} is identified as \"Internet\"",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "New",
+      "identification_status": "Fail",
+      "language": "fr-ca",
+      "lob": "Internet",
+      "province": "BC",
+      "route": "sales_new_account",
+      "utterance": "j'aimerais faire affaire avec vous pour mon internet"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "We need to check the result from identification flow from the webhook NPANXX, If no province is identified then we need ask them what province they are looking for and if it is \"ATL\" then call Routing only flow and set special_queue =\nbell_sales_to_atl as user wnats to check balance before proceeding",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "New",
+      "identification_status": "Fail",
+      "language": "fr-ca",
+      "lob": "Internet",
+      "province": "ATL"
+    }
+  },
+  "displayName": "FR - sales_new_account- ID Fail, customer_type-new- no province identified-ATL | Topic Switching",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 479,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

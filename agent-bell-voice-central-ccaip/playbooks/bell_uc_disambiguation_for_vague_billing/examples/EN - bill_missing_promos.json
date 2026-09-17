@@ -1,0 +1,48 @@
+{
+  "name": "c749ae31-2bf5-451f-a626-3c9523c95fdb",
+  "actions": [ {
+    "agentUtterance": {
+      "text": " I can help with several billing topics. To get you to the right place, please tell me more about your request. For example, you could say, 'a specific charge' or 'my total balance'."
+    }
+  }, {
+    "userUtterance": {
+      "text": "I'm missing the credits and promotions that I should've received this month, and I'd appreciate help resolving this as well as any information on when future promotions will be applied to my account."
+    }
+  }, {
+    "playbookInvocation": {
+      "playbook": "bell_UC_Billing",
+      "playbookInput": {
+        "precedingConversationSummary": "Customers are looking to know about their incorrect charges or charge related disputes",
+        "actionParameters": {
+          "language": "en",
+          "route": "bill_missing_promos",
+          "utterance": "I'm missing the credits and promotions that I should've received this month, and I'd appreciate help resolving this as well as any information on when future promotions will be applied to my account."
+        }
+      },
+      "playbookOutput": {
+        "executionSummary": "Customer query got resolved",
+        "actionParameters": {
+          "language": "en",
+          "route": "bill_missing_promos"
+        }
+      },
+      "playbookState": "OUTPUT_STATE_OK"
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer query about \"Question about changes on my bill\" is addressed",
+    "actionParameters": {
+      "language": "en",
+      "route": "bill_vague",
+      "utterance": "Question about changes on my bill"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Customer query is addressed and then transferred to \"lucky_UC_Billing\" playbook for further conversation"
+  },
+  "displayName": "EN - bill_missing_promos",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 377,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

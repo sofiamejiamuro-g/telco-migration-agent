@@ -1,0 +1,304 @@
+{
+  "name": "1ecd0a71-8b39-47fa-8bfa-16c0e2425d74",
+  "displayName": "bell_multiban",
+  "transitionRoutes": [ {
+    "condition": "$session.params.global_error_counter \u003e= 3",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_aqd",
+    "name": "b26b13f1-ae05-4fd1-8f35-c0806d53405c"
+  }, {
+    "condition": "$session.params.NGA = true OR $session.params.NGA = \"true\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "NGA Handling",
+    "name": "9d2254a8-19d9-4cf5-b447-dc103e81e6f0"
+  }, {
+    "condition": "$session.params.db_get_bbm_mkseg_dip_response.found = true AND $session.params.va_entry_flow = CCC",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "smb_ban",
+        "value": "$session.params.db_get_bbm_mkseg_dip_response.def5"
+      }, {
+        "parameter": "billing_account_number_list",
+        "value": "$sys.func.REMOVE($session.params.billing_account_number_list, $session.params.smb_ban)"
+      } ]
+    },
+    "targetPage": "Profile Scenarios",
+    "name": "1d090f97-ce68-45b3-b6a9-94465c1e14c0"
+  }, {
+    "condition": "$session.params.banType = C AND ($session.params.banSubType = 5 OR $session.params.banSubType = R OR $session.params.banSubType = Z OR $session.params.banSubType = U OR $session.params.banSubType = G OR $session.params.banSubType = F OR $session.params.marketSegment = ENT OR $session.params.marketSegment = MED) AND $session.params.va_entry_flow = BUS",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "cc_ban",
+        "value": "$session.params.nm1_get_cust_profile_response.banNumber"
+      }, {
+        "parameter": "billing_account_number_list",
+        "value": "$sys.func.REMOVE($session.params.billing_account_number_list, $session.params.cc_ban)"
+      } ]
+    },
+    "targetPage": "Profile Scenarios",
+    "name": "d945b711-efc0-4a8c-b116-fbf29bce3cd8"
+  }, {
+    "condition": "$session.params.banType = C AND ($session.params.banSubType = 5 OR $session.params.banSubType = R OR $session.params.banSubType = Z OR $session.params.banSubType = U OR $session.params.banSubType = G OR $session.params.banSubType = F OR $session.params.marketSegment = ENT OR $session.params.marketSegment = MED) AND $session.params.db_get_bbm_mkseg_dip_response.found = true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "ccc_ban",
+        "value": "$session.params.nm1_get_cust_profile_response.banNumber"
+      }, {
+        "parameter": "smb_ban",
+        "value": "$session.params.db_get_bbm_mkseg_dip_response.def5"
+      } ]
+    },
+    "targetPage": "Business BAN Check",
+    "name": "d7a95182-6ded-4b4a-9c1d-999699e2437a"
+  }, {
+    "condition": "$session.params.banType = C AND ($session.params.banSubType = 5 OR $session.params.banSubType = R OR $session.params.banSubType = Z OR $session.params.banSubType = U OR $session.params.banSubType = G OR $session.params.banSubType = F) AND ($session.params.marketSegment = ENT OR $session.params.marketSegment = MED)",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "ccc_ban",
+        "value": "$session.params.nm1_get_cust_profile_response.banNumber"
+      } ]
+    },
+    "targetPage": "Business BAN Check",
+    "name": "e268cb24-5393-441a-80a8-19ca35519bd8"
+  }, {
+    "condition": "$session.params.db_get_bbm_mkseg_dip_response.found = true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "billing_account_number_list",
+        "value": "$sys.func.FILTER(\"$session.params.customer_id_search_response\", \"$..billing_account_number\")"
+      }, {
+        "parameter": "no_match_counter",
+        "value": 0
+      }, {
+        "parameter": "repeat_flag",
+        "value": 0
+      }, {
+        "parameter": "smb_ban",
+        "value": "$session.params.db_get_bbm_mkseg_dip_response.def5"
+      } ]
+    },
+    "targetPage": "Business BAN Check",
+    "name": "ad15abd8-433a-4590-861d-3d9b40736403"
+  }, {
+    "condition": "$session.params.non_central = true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "billing_account_number_list",
+        "value": "$sys.func.FILTER(\"$session.params.customer_id_search_response\", \"$..billing_account_number\")"
+      }, {
+        "parameter": "no_match_counter",
+        "value": 0
+      }, {
+        "parameter": "repeat_flag",
+        "value": 0
+      } ]
+    },
+    "targetPage": "Regional BAN Check (TBD)",
+    "name": "ee2d4fb7-7022-440f-b5da-da10a66441fd"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "no_match_counter",
+        "value": 0
+      }, {
+        "parameter": "repeat_flag",
+        "value": 0
+      }, {
+        "parameter": "billing_account_number_list",
+        "value": "$sys.func.FILTER(\"$session.params.customer_id_search_response\", \"$..billing_account_number\")"
+      }, {
+        "parameter": "s2a_counter",
+        "value": 0
+      } ]
+    },
+    "targetPage": "Profile Scenarios",
+    "name": "08ebc350-cfb1-4aa9-961f-4eedc4dead06"
+  } ],
+  "eventHandlers": [ {
+    "event": "sys.no-match-default",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I didn't get that. Can you say it again?", "I missed what you said. What was that?", "Sorry, could you say that again?", "Sorry, can you say that again?", "Can you say that again?", "Sorry, I didn't get that. Can you rephrase?", "Sorry, what was that?", "One more time?", "What was that?", "Say that one more time?", "I didn't get that. Can you repeat?", "I missed that, say that again?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "J'ai du mal à comprendre cette question.", "J'ai mal compris votre demande.", "Je n'ai pas saisi ce que vous avez dit.", "Je crois que je ne vous suis pas.", "Je ne comprends pas de quoi vous me parlez." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "J'ai du mal à comprendre cette question.", "J'ai mal compris votre demande.", "Je n'ai pas saisi ce que vous avez dit.", "Je crois que je ne vous suis pas.", "Je ne comprends pas de quoi vous me parlez." ]
+        },
+        "languageCode": "fr"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "global_error_counter",
+        "value": "$sys.func.ADD($session.params.global_error_counter,1)"
+      } ]
+    },
+    "name": "017533e3-1d06-4eab-b8c1-218c59c9eefa"
+  }, {
+    "event": "sys.no-input-default",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I didn't get that. Can you say it again?", "I missed what you said. What was that?", "Sorry, could you say that again?", "Sorry, can you say that again?", "Can you say that again?", "Sorry, I didn't get that. Can you rephrase?", "Sorry, what was that?", "One more time?", "What was that?", "Say that one more time?", "I didn't get that. Can you repeat?", "I missed that, say that again?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "J'ai du mal à comprendre cette question.", "J'ai mal compris votre demande.", "Je n'ai pas saisi ce que vous avez dit.", "Je crois que je ne vous suis pas.", "Je ne comprends pas de quoi vous me parlez." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "J'ai du mal à comprendre cette question.", "J'ai mal compris votre demande.", "Je n'ai pas saisi ce que vous avez dit.", "Je crois que je ne vous suis pas.", "Je ne comprends pas de quoi vous me parlez." ]
+        },
+        "languageCode": "fr"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "global_error_counter",
+        "value": "$sys.func.ADD($session.params.global_error_counter,1)"
+      } ]
+    },
+    "name": "675e1840-51cc-47dd-99b2-941701f9e1f6"
+  }, {
+    "targetPage": "End Session",
+    "event": "wrapup",
+    "triggerFulfillment": {
+    
+    },
+    "name": "25c9952d-18b8-47be-8eff-f8fb85e02f8c"
+  } ],
+  "nluSettings": {
+    "modelType": "MODEL_TYPE_CUSTOM",
+    "classificationThreshold": 0.30000001,
+    "modelTrainingMode": "MODEL_TRAINING_MODE_MANUAL"
+  },
+  "advancedSettings": {
+    "enabled": true,
+    "playbackInterruptionSettings": {
+    
+    },
+    "speechAdaptationSettings": {
+      "enableManualSpeechAdaptation": true,
+      "biasingPhraseSets": [ {
+        "biasingPhrases": [ {
+          "value": "$POSTALCODE",
+          "boost": 15
+        }, {
+          "value": "$OOV_CLASS_POSTALCODE",
+          "boost": 20
+        } ],
+        "displayName": "canadian_postal_code"
+      } ]
+    }
+  },
+  "nluSettingsList": [ {
+    "modelType": "MODEL_TYPE_CUSTOM",
+    "classificationThreshold": 0.30000001,
+    "modelTrainingMode": "MODEL_TRAINING_MODE_MANUAL",
+    "languageCode": "en"
+  }, {
+    "modelType": "MODEL_TYPE_CUSTOM",
+    "classificationThreshold": 0.30000001,
+    "modelTrainingMode": "MODEL_TRAINING_MODE_MANUAL",
+    "languageCode": "fr-ca"
+  } ],
+  "inputParameterDefinitions": [ {
+    "name": "language",
+    "description": "language",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "STRING"
+      }
+    },
+    "parameterType": {
+      "name": "language",
+      "openapiJsonSchema": {
+        "type": "string"
+      }
+    }
+  }, {
+    "name": "global_error_counter",
+    "description": "Counts the total number of no matches and no inputs given by the customer throughout the conversation",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "NUMBER"
+      }
+    },
+    "parameterType": {
+      "name": "global_error_counter",
+      "openapiJsonSchema": {
+        "type": "number"
+      }
+    }
+  } ],
+  "outputParameterDefinitions": [ {
+    "name": "language",
+    "description": "language",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "STRING"
+      }
+    },
+    "parameterType": {
+      "name": "language",
+      "openapiJsonSchema": {
+        "type": "string"
+      }
+    }
+  }, {
+    "name": "lob",
+    "description": "line of business",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "STRING"
+      }
+    },
+    "parameterType": {
+      "name": "lob",
+      "openapiJsonSchema": {
+        "type": "string"
+      }
+    }
+  }, {
+    "name": "postcode",
+    "description": "Canadian Postal code",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "STRING"
+      }
+    },
+    "parameterType": {
+      "name": "postcode",
+      "openapiJsonSchema": {
+        "type": "string"
+      }
+    }
+  }, {
+    "name": "global_error_counter",
+    "description": "Counts the total number of no matches and no inputs given by the customer throughout the conversation",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "NUMBER"
+      }
+    },
+    "parameterType": {
+      "name": "global_error_counter",
+      "openapiJsonSchema": {
+        "type": "number"
+      }
+    }
+  } ],
+  "multiLanguageSettings": {
+  
+  }
+}

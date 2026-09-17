@@ -1,0 +1,63 @@
+{
+  "name": "2fd9395b-7c68-4d81-bf01-e8ae595626ac",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Si vous avez acheté un téléphone d’occasion certifié, il est soumis à la garantie limitée de Bell, qui est valide pendant 12 mois à partir de la date d’achat. Si votre téléphone est brisé en raison d’un problème du fabricant dans les 12 mois suivant votre achat, nous remplacerons le téléphone par un appareil semblable.\nAvez-vous acheté votre appareil au cours des 12 derniers mois ?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Non"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Avez-vous adhéré à notre programme d'entretien de téléphone intelligent ?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Oui"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Lorsque vous soumettez une demande en ligne ou que vous appelez le Centre d’entretien de téléphone intelligent, votre demande sera traitée par Asurion, l’administrateur du programme d’entretien de téléphone intelligent. \nJe peux vous envoyer un lien pour soumettre votre demande. Est-ce que ça vous convient ?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Non"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "brand": "bell",
+        "language": "fr-ca",
+        "sms_send_status": "Declined"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer asking about Preloved phone button not working with route \"equipment_warranty_claim\"",
+    "actionParameters": {
+      "brand": "bell",
+      "device_issue": "Defective",
+      "language": "fr-ca",
+      "route": "equipment_warranty_claim",
+      "utterance": "Le bouton de mon téléphone d’occasion ne fonctionne pas"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Customer is responded with apt message for \"Defective\" issue and then user is prompted to tell whether he purchased the device within last 12 months. User says \"No\", so he is rerouted to SMART CARE COVERAGE LOGIC",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca",
+      "route": "equipment_warranty_claim"
+    }
+  },
+  "displayName": "FR_equipment_warranty_claim_DeviceIssueIsDefective_NoForPurchasedWithinLastYear_YesForSmartCarePgm_NoForLink",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 486,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

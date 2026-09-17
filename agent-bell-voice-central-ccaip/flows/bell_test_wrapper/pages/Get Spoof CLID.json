@@ -1,0 +1,202 @@
+{
+  "name": "61e164be-02b6-4e5a-a23a-44e62fb02593",
+  "displayName": "Get Spoof CLID",
+  "form": {
+    "parameters": [ {
+      "displayName": "spoof_clid",
+      "required": true,
+      "entityType": "@sys.phone-number",
+      "fillBehavior": {
+        "initialPromptFulfillment": {
+          "messages": [ {
+            "text": {
+              "text": [ "Veuillez saisir le faux CLID pour votre test." ]
+            },
+            "languageCode": "fr-ca"
+          }, {
+            "text": {
+              "text": [ "Please enter the spoof CLID for your test." ]
+            },
+            "languageCode": "en"
+          } ]
+        },
+        "repromptEventHandlers": [ {
+          "event": "sys.no-input-1",
+          "triggerFulfillment": {
+            "messages": [ {
+              "text": {
+                "text": [ "Veuillez saisir le faux CLID pour votre test." ]
+              },
+              "languageCode": "fr-ca"
+            }, {
+              "text": {
+                "text": [ "Please enter the spoof CLID for your test." ]
+              },
+              "languageCode": "en"
+            } ]
+          },
+          "name": "79639cd2-fa46-4766-b4e8-78c3e2946f4f"
+        }, {
+          "event": "sys.no-input-2",
+          "triggerFulfillment": {
+            "messages": [ {
+              "text": {
+                "text": [ "Veuillez saisir le faux CLID pour votre test." ]
+              },
+              "languageCode": "fr-ca"
+            }, {
+              "text": {
+                "text": [ "Please enter the spoof CLID for your test." ]
+              },
+              "languageCode": "en"
+            } ]
+          },
+          "name": "9b92e64d-863d-4977-afaa-20624fb3cf88"
+        }, {
+          "targetPage": "End Flow",
+          "event": "sys.no-input-3",
+          "triggerFulfillment": {
+            "messages": [ {
+              "text": {
+                "text": [ "Vous n'avez pas saisi un faux CLID. Nous quittons maintenant test wrapper." ]
+              },
+              "languageCode": "fr-ca"
+            }, {
+              "text": {
+                "text": [ "You have not entered a spoof CLID. Exiting test wrapper." ]
+              },
+              "languageCode": "en"
+            } ]
+          },
+          "name": "5ee3e24d-7495-4661-b78b-64829489bfd2"
+        }, {
+          "event": "sys.no-match-1",
+          "triggerFulfillment": {
+            "messages": [ {
+              "text": {
+                "text": [ "Veuillez saisir un numéro valide à 10 chiffres" ]
+              },
+              "languageCode": "fr-ca"
+            }, {
+              "text": {
+                "text": [ "Please enter valid 10 digit number" ]
+              },
+              "languageCode": "en"
+            } ]
+          },
+          "name": "0ef90b8a-7442-4740-b567-c7015c5b8d5f"
+        }, {
+          "targetPage": "End Flow",
+          "event": "sys.no-match-2",
+          "triggerFulfillment": {
+            "messages": [ {
+              "text": {
+                "text": [ "Vous n'avez pas saisi un faux TFN. Nous quittons maintenant test wrapper." ]
+              },
+              "languageCode": "fr-ca"
+            }, {
+              "text": {
+                "text": [ "You have not entered a spoof CLID. Exiting test wrapper." ]
+              },
+              "languageCode": "en"
+            } ]
+          },
+          "name": "14997ecc-62fb-4ac3-bab5-226b3af816c1"
+        } ]
+      },
+      "advancedSettings": {
+        "dtmfSettings": {
+          "enabled": true,
+          "maxDigits": 10,
+          "useSystemEntityRule": false,
+          "interdigitTimeoutDuration": {
+            "seconds": 10
+          },
+          "endpointingTimeoutDuration": {
+            "seconds": 10
+          }
+        }
+      }
+    } ]
+  },
+  "entryFulfillment": {
+    "setParameterActions": [ {
+      "parameter": "spoof_clid",
+      "value": null
+    } ],
+    "advancedSettings": {
+      "playbackInterruptionSettings": {
+      
+      },
+      "dtmfSettings": {
+        "useSystemEntityRule": false
+      }
+    }
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.spoof_clid != null AND $sys.func.LEN($sys.func.TO_TEXT($session.params.spoof_clid)) != 10",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Veuillez saisir un numéro à 10 chiffres." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "Please enter a 10 digit number." ]
+        },
+        "languageCode": "en"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "spoof_clid",
+        "value": null
+      } ],
+      "advancedSettings": {
+        "dtmfSettings": {
+          "useSystemEntityRule": false
+        }
+      }
+    },
+    "targetPage": "Current Page",
+    "name": "543da562-810b-40c6-983f-307cafc72b71"
+  }, {
+    "condition": "$session.params.spoof_clid != null AND $sys.func.LEN($sys.func.TO_TEXT($session.params.spoof_clid)) = 10",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "clid",
+        "value": "$session.params.spoof_clid"
+      }, {
+        "parameter": "Flag",
+        "value": ""
+      } ],
+      "advancedSettings": {
+        "dtmfSettings": {
+          "useSystemEntityRule": false
+        }
+      }
+    },
+    "targetPage": "Get Infobot Flag",
+    "name": "36738525-ac1b-4b86-a72e-156549aee968"
+  } ],
+  "advancedSettings": {
+    "speechSettings": {
+      "endpointerSensitivity": 70,
+      "noSpeechTimeout": {
+        "seconds": 30
+      },
+      "models": [ {
+        "key": "en",
+        "value": "telephony_short"
+      }, {
+        "key": "fr",
+        "value": ""
+      }, {
+        "key": "fr-ca",
+        "value": "telephony_short"
+      } ]
+    }
+  },
+  "speakerIdSettings": {
+  
+  }
+}

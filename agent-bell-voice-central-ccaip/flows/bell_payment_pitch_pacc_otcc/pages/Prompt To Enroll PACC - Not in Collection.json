@@ -1,0 +1,149 @@
+{
+  "name": "92846716-9849-4fab-b5db-f191cb0b5f01",
+  "displayName": "Prompt To Enroll PACC - Not in Collection",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "messages": [ {
+      "text": {
+        "text": [ "Pre-authorized payments are an easy way to pay for your bills. Would you like all future invoices to be automatically paid with the credit card you just used?" ]
+      },
+      "languageCode": "en"
+    }, {
+      "text": {
+        "text": [ "Les paiements préautorisés sont un moyen facile de payer vos factures. Souhaitez-vous que toutes vos factures futures soient automatiquement payées avec la carte de crédit que vous venez d’utiliser?" ]
+      },
+      "languageCode": "fr-ca"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "intent": "context.confirm_yes",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Create Order",
+    "name": "740d6a19-10d0-43b5-a4c9-f50e73cf1e3a"
+  }, {
+    "intent": "context.confirm_no",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "OK.  You can always use the MyBell app to enroll for automatic bank or credit card payments at any time." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "D’accord. Vous pouvez toujours utiliser l’appli MonBell pour vous inscrire aux paiements bancaires ou par carte de crédit automatiques à tout moment." ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "card_number",
+        "value": null
+      }, {
+        "parameter": "cc_token",
+        "value": null
+      }, {
+        "parameter": "expiry_date",
+        "value": null
+      }, {
+        "parameter": "expiry_month",
+        "value": null
+      }, {
+        "parameter": "expiry_year",
+        "value": null
+      }, {
+        "parameter": "security_code",
+        "value": null
+      }, {
+        "parameter": "cvv_number",
+        "value": null
+      }, {
+        "parameter": "cc_from_utterance",
+        "value": null
+      } ]
+    },
+    "targetFlow": "bell_Feedback",
+    "name": "92c0ed1e-f7f8-4168-8ff3-d5758f37e8c0"
+  } ],
+  "eventHandlers": [ {
+    "event": "sys.no-input-1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I didn't quite get that. Can you try again?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je n’ai pas tout à fait compris. Pouvez-vous réessayer?" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "e7cc0c9c-e27c-485d-bc67-f4042709d10f"
+  }, {
+    "event": "sys.no-input-2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I still didn't get that" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je n’ai toujours pas compris" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "e5630e23-1b3d-4b2d-9752-4f30d932d40e"
+  }, {
+    "targetFlow": "bell_determine_handover",
+    "event": "sys.no-input-3",
+    "triggerFulfillment": {
+    
+    },
+    "name": "908c92a8-e932-4b03-8677-b48862ac6479"
+  }, {
+    "event": "sys.no-match-1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I didn't quite get that. Can you try again?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je n’ai pas tout à fait compris. Pouvez-vous réessayer?" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "54fc260b-5f29-49b5-9c90-6244a615cb22"
+  }, {
+    "event": "sys.no-match-2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I still didn't get that" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je n’ai toujours pas compris" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "6e3fb2bd-6763-4654-9bc4-b92d91cf912f"
+  }, {
+    "targetFlow": "bell_determine_handover",
+    "event": "sys.no-match-3",
+    "triggerFulfillment": {
+    
+    },
+    "name": "f5fe86c0-f409-4302-a37b-4243725883c7"
+  } ]
+}

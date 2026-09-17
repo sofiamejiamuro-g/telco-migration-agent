@@ -1,0 +1,74 @@
+{
+  "name": "0294dc45-0691-470b-abf0-c664aac763e7",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "brand": "bell",
+        "language": "en"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Let's check if we offer Internet and Home phone service in your area. In which province are you looking to get service?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Delta"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Get blazing-fast speeds on the Bell network with Bell Mobile Internet. Where you can get up to 5G internet connectivity with a mobile hotspot device so you can stay connected at home or on the go. I'll send a text to the device you're calling from,so that you can learn more and easily place an order on our website. Is that alright?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "no"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "device_type": "Modem",
+        "language": "en",
+        "lob": "Internet",
+        "sms_send_status": "Declined"
+      },
+      "outputActionParameters": {
+        "language": "en"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer wants to order a new modem",
+    "actionParameters": {
+      "brand": "bell",
+      "device_type": "Receiver",
+      "identification_status": "Fail",
+      "language": "en",
+      "lob": "Internet",
+      "province": "AB",
+      "route": "sales_order_device",
+      "utterance": "I want to get a new receiver, please."
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "We need to check the result from identification flow from the webhook NPANXX for identification_status \"fail\", here province is \"Delta\" (which is BC), so we need to ask the province and respond apt message as per device_type \"receiver\" and province mentioned by user \"British Columbia\" (which is BC), then here customer wants to receive message, so call bell_SMS Trigger with apt sms_content",
+    "actionParameters": {
+      "brand": "bell",
+      "device_type": "Receiver",
+      "language": "en",
+      "lob": "Internet",
+      "province": "BC",
+      "route": "sales_order_device"
+    }
+  },
+  "displayName": "EN_sales_order_device_IDIsFail | Receiver | ProvinceAsked ROC (BC)",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 540,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

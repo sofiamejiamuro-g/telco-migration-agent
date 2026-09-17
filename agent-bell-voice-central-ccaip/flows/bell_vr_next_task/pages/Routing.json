@@ -1,0 +1,389 @@
+{
+  "name": "c8ced75a-552e-405c-b845-8601cfa6fca3",
+  "displayName": "Routing",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "setParameterActions": [ {
+      "parameter": "vr_context",
+      "value": "$sys.func.GET_FIELD($session.params.vr_next_task_response, \"vr_context\")"
+    }, {
+      "parameter": "is_expecting_answer",
+      "value": "$sys.func.GET_FIELD($session.params.vr_context, \"is_expecting_answer\")"
+    }, {
+      "parameter": "vr_type",
+      "value": "$sys.func.GET_FIELD($session.params.vr_context, \"type\")"
+    }, {
+      "parameter": "is_finished",
+      "value": "$sys.func.GET_FIELD($session.params.vr_context, \"is_finished\")"
+    }, {
+      "parameter": "sp_id",
+      "value": "$sys.func.GET_FIELD($session.params.vr_context, \"sp_id\")"
+    }, {
+      "parameter": "dcx_action_code",
+      "value": "$sys.func.GET_FIELD($session.params.vr_context, \"dcx_action_code\")"
+    }, {
+      "parameter": "acceptable_answers",
+      "value": "$sys.func.GET_FIELD($session.params.vr_next_task_response, \"acceptable_answers\")"
+    }, {
+      "parameter": "title",
+      "value": "$sys.func.GET_FIELD($session.params.vr_next_task_response.step_verbiage, \"title\")"
+    }, {
+      "parameter": "description",
+      "value": "$sys.func.GET_FIELD($session.params.vr_next_task_response.step_verbiage, \"description\")"
+    }, {
+      "parameter": "eta_microservice",
+      "value": "$sys.func.GET_FIELD($session.params.vr_context, \"solution_eta\")"
+    }, {
+      "parameter": "more_info",
+      "value": "$sys.func.GET_FIELD($session.params.vr_next_task_response.step_verbiage, \"more_info\")"
+    }, {
+      "parameter": "eta_CDA",
+      "value": "$sys.func.GET_FIELD($session.params.vr_context, \"solution_eta\")"
+    }, {
+      "parameter": "status_changed",
+      "value": "$sys.func.GET_FIELD($session.params.vr_context, \"status_changed\")"
+    }, {
+      "parameter": "sms_content",
+      "value": "$sys.func.GET_FIELD($session.params.vr_next_task_response.acceptable_answers[0], \"deep_link\")"
+    }, {
+      "parameter": "dcx_action_code_ref",
+      "value": "$sys.func.CONCATENATE(\"REF\", $sys.func.TO_TEXT($session.params.dcx_action_code))"
+    } ],
+    "returnPartialResponses": true
+  },
+  "transitionRoutes": [ {
+    "condition": "((($session.params.vr_type = \"CFB\" AND $session.params.prev_cfb_dcx_action_code != $session.params.dcx_action_code) OR ($session.params.vr_type = \"CDA\" AND $session.params.prev_cda_dcx_action_code != $session.params.dcx_action_code)) AND $session.params.is_expecting_answer = \"true\") OR ($session.params.microservice_counter = 24 AND $session.params.vr_type = \"Microservice\" AND $session.params.status_changed = \"false\" AND $session.params.microservice_aqd_counter \u003c 8 AND $session.params.prev_ms_dcx_action_code != $session.params.dcx_action_code)",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Get FAQ",
+    "name": "1da4692f-afbc-46a5-9b76-dba0cb6f8d00"
+  }, {
+    "condition": "$session.params.vr_type = \"sharpStarting\" AND $session.params.status_changed = \"false\" AND $session.params.counter_sharp \u003c 24",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "\u003cspeak\u003e\u003cbreak time=\"5s\"/\u003e\u003c/speak\u003e" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "\u003cspeak\u003e\u003cbreak time=\"5s\"/\u003e\u003c/speak\u003e" ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "counter_sharp",
+        "value": "$sys.func.ADD($session.params.counter_sharp,1)"
+      } ]
+    },
+    "targetPage": "Webhook VR-next-task",
+    "name": "4efcf42a-c036-4baf-ad3e-cc0afcfdda76"
+  }, {
+    "condition": "$session.params.vr_type = \"sharpStarting\" AND $session.params.status_changed = \"false\" AND $session.params.counter_sharp = 24",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "The Virtual Repair tool is taking a bit longer than usual to start. So, I'll connect you with an agent who can help you." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "L'outil de réparation virtuelle prend un peu plus de temps que d'habitude pour démarrer. Je vais donc vous mettre en relation avec un agent qui pourra vous aider." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "0fb5aaa2-3f46-4ce6-831e-d1fa46a86eaa"
+  }, {
+    "condition": "$session.params.is_finished = \"true\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "vr_next_task_response_PB",
+        "value": "$session.params.vr_next_task_response"
+      }, {
+        "parameter": "status_changed",
+        "value": "$session.params.status_changed"
+      }, {
+        "parameter": "is_expecting_answer",
+        "value": "$session.params.is_expecting_answer"
+      }, {
+        "parameter": "vr_type",
+        "value": "$session.params.vr_type"
+      }, {
+        "parameter": "is_finished",
+        "value": "$session.params.is_finished"
+      }, {
+        "parameter": "category",
+        "value": "$session.params.category"
+      }, {
+        "parameter": "sub_category",
+        "value": "$session.params.sub_category"
+      } ]
+    },
+    "targetFlow": "bell_vr_kickout",
+    "name": "58f12f14-6c23-4745-b112-a13cad521979"
+  }, {
+    "condition": "$session.params.vr_type = \"Microservice\" AND $session.params.status_changed = \"true\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "$request.generative.microservice" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "\u003cspeak\u003e\u003cbreak time=\"5s\"/\u003e\u003c/speak\u003e" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "$request.generative.microservice" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "\u003cspeak\u003e\u003cbreak time=\"5s\"/\u003e\u003c/speak\u003e" ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "microservice_counter",
+        "value": 1
+      }, {
+        "parameter": "description_microservice",
+        "value": "$session.params.description"
+      }, {
+        "parameter": "title_microservice",
+        "value": "$session.params.title"
+      }, {
+        "parameter": "microservice_aqd_counter",
+        "value": 0
+      }, {
+        "parameter": "vr_counter",
+        "value": 0
+      } ],
+      "generators": [ {
+        "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/5b028e1b-b807-4226-a2cf-389725ae3079",
+        "inputParameters": [ {
+          "key": "eta_microservice",
+          "value": "$session.params.eta_microservice"
+        }, {
+          "key": "title",
+          "value": "$session.params.title"
+        } ],
+        "outputParameter": "$request.generative.microservice"
+      } ]
+    },
+    "targetPage": "Webhook VR-next-task",
+    "name": "d49fabcc-7324-45ac-bb97-571b81077d39"
+  }, {
+    "condition": "$session.params.microservice_counter \u003c 24 AND $session.params.vr_type = \"Microservice\" AND $session.params.status_changed = \"false\" AND $session.params.microservice_aqd_counter \u003c 8",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "\u003cspeak\u003e\u003cbreak time=\"5s\"/\u003e\u003c/speak\u003e" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "\u003cspeak\u003e\u003cbreak time=\"5s\"/\u003e\u003c/speak\u003e" ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "microservice_counter",
+        "value": "$sys.func.ADD($session.params.microservice_counter,1)"
+      } ]
+    },
+    "targetPage": "Webhook VR-next-task",
+    "name": "29b4493b-c940-49af-9a60-5a29cb40fbd9"
+  }, {
+    "condition": "$session.params.microservice_counter = 24 AND $session.params.vr_type = \"Microservice\" AND $session.params.status_changed = \"false\" AND $session.params.microservice_aqd_counter \u003c 8",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "microservice_counter",
+        "value": 0
+      }, {
+        "parameter": "microservice_aqd_counter",
+        "value": "$sys.func.ADD($session.params.microservice_aqd_counter,1)"
+      }, {
+        "parameter": "vr_counter",
+        "value": 0
+      } ]
+    },
+    "name": "3cb3e8b3-8eb7-4afe-b44a-329b8640a0a0",
+    "targetPlaybook": "bell_vr_microservice"
+  }, {
+    "condition": "$session.params.microservice_aqd_counter = 8 AND $session.params.vr_type = \"Microservice\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "This step is taking longer than usual, so I need to put you in contact with an agent for assistance" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Cette étape prend plus de temps que d'habitude, je dois donc vous mettre en relation avec un agent pour une assistance supplémentaire." ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "microservice_aqd_counter",
+        "value": 0
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "6d41a0ac-61f3-40bb-a170-60f91b8a5b47"
+  }, {
+    "condition": "$session.params.6590_customer_answer1_id != null AND $session.params.vr_type = \"CFB\" AND $session.params.is_expecting_answer = \"true\" AND $session.params.dcx_action_code = \"6590\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "customer_answer1_id",
+        "value": "$session.params.6590_customer_answer1_id"
+      }, {
+        "parameter": "customer_answer2_id",
+        "value": "$session.params.6590_customer_answer2_id"
+      } ]
+    },
+    "targetFlow": "bell_vr_post_answer",
+    "name": "73794f56-47c6-4a90-bbdd-3caf091ce118"
+  }, {
+    "condition": "($session.params.vr_type = \"CFB\" AND $session.params.is_expecting_answer = \"true\") OR ($session.params.vr_type = \"CFB\" AND $session.params.dcx_action_code = \"6590\" AND $session.params.6590_customer_answer1_id = null)",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "vr_counter",
+        "value": 0
+      }, {
+        "parameter": "cdo_start_time",
+        "value": "$sys.func.NOW()"
+      } ]
+    },
+    "name": "08ca6f5f-a52c-48d2-adc1-928e8102d5a3",
+    "targetPlaybook": "bell_vr_CFB"
+  }, {
+    "condition": "$session.params.vr_type = \"CDA\" AND $session.params.is_expecting_answer = \"true\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "vr_next_task_response_PB",
+        "value": "$session.params.vr_next_task_response"
+      }, {
+        "parameter": "status_changed",
+        "value": "$session.params.status_changed"
+      }, {
+        "parameter": "vr_counter",
+        "value": 0
+      }, {
+        "parameter": "cdo_start_time",
+        "value": "$sys.func.NOW()"
+      } ]
+    },
+    "name": "a24c4fcc-05bc-40fa-939d-15ba88ea0e0f",
+    "targetPlaybook": "bell_vr_CDA"
+  }, {
+    "condition": "$session.params.is_expecting_answer = \"false\" AND $session.params.status_changed = \"true\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "The backend process is still running. Please hold on." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "\u003cspeak\u003e\u003cbreak time=\"5s\"/\u003e\u003c/speak\u003e" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ " Le processus d'exécution est toujours en cours. Veuillez patienter" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "\u003cspeak\u003e\u003cbreak time=\"5s\"/\u003e\u003c/speak\u003e" ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "vr_counter",
+        "value": 1
+      } ]
+    },
+    "targetPage": "Webhook VR-next-task",
+    "name": "f142ccc1-3277-4cf2-9c06-2938977db9ac"
+  }, {
+    "condition": "$session.params.is_expecting_answer = \"false\" AND $session.params.status_changed = \"false\" AND $session.params.vr_counter \u003c 24",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "\u003cspeak\u003e\u003cbreak time=\"5s\"/\u003e\u003c/speak\u003e" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "\u003cspeak\u003e\u003cbreak time=\"5s\"/\u003e\u003c/speak\u003e" ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "vr_counter",
+        "value": "$sys.func.ADD($session.params.vr_counter,1)"
+      } ]
+    },
+    "targetPage": "Webhook VR-next-task",
+    "name": "852e9562-8b41-4d84-b020-d5e202465ead"
+  }, {
+    "condition": "$session.params.status_changed = \"false\" AND $session.params.is_expecting_answer = \"false\" AND $session.params.vr_counter = 24",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "The backend process is still running. Be assured that the resolution is on its way." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "\u003cspeak\u003e\u003cbreak time=\"5s\"/\u003e\u003c/speak\u003e" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Le processus d'exécution est toujours en cours. Soyez assuré que le problème est en cours de résolution." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "\u003cspeak\u003e\u003cbreak time=\"5s\"/\u003e\u003c/speak\u003e" ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "vr_counter",
+        "value": 0
+      } ]
+    },
+    "targetPage": "Webhook VR-next-task",
+    "name": "69b1fdff-a5ef-4740-a031-4a24829906ea"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "c8ced75a-552e-405c-b845-8601cfa6fca3"
+      }, {
+        "parameter": "flow_id",
+        "value": "175e5696-986b-4b0a-b9da-5fb5efa67a73"
+      }, {
+        "parameter": "page_name",
+        "value": "Routing"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

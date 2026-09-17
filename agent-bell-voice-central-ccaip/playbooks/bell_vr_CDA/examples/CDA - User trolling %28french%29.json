@@ -1,0 +1,59 @@
+{
+  "name": "68877ad7-391b-4c8a-b9e4-9b6083b58cfa",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Pour résoudre ce problème, vous devez effectuer cette étape maintenant. Veuillez vérifier si le voyant d'alimentation à l'avant du modem est blanc fixe. Veuillez effectuer cette étape et me faire savoir quand vous aurez terminé."
+    }
+  }, {
+    "userUtterance": {
+      "text": "Je pense que mon modem est en fait un grille-pain spatial et il est en train de me faire un sandwich au fromage fondu."
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Hmm, ce serait certainement un grille-pain de haute technologie ! Cependant, je veux m'assurer que votre connexion internet fonctionne à nouveau, alors concentrons-nous sur le modem un instant. Êtes-vous en mesure de voir si ce voyant d'alimentation est blanc fixe pour moi ?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Le sandwich est prêt mais la lune est faite de raisins bleus aujourd'hui."
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Je vois que nous avons du mal à communiquer. Je vais vous transférer à un agent qui pourra mieux vous aider."
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_aqd",
+      "inputActionParameters": {
+      
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "User having a problem with the service and initiating Virtual repair session.",
+    "actionParameters": {
+      "acceptable_answers": [ {
+        "choice": "user_completed_entire_solution",
+        "id": "0"
+      }, {
+        "choice": "user_is_stuck_further_help_requested",
+        "id": "1"
+      } ],
+      "dcx_action_code": "6051",
+      "description": "",
+      "eta_CDA": "Approx. 7 minutes",
+      "language": "fr-ca",
+      "title": "Modem Power Light Check",
+      "vr_type": "CDA"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "detects gibberish or trolling by isolating irrelevant inputs into a final priority case. On the first instance, the bot acknowledges the remark and uses a hard pivot to restate the technical directive; on the second, it automatically triggers a transfer to an agent via ${FLOW:bell_aqd}. This prevents infinite loops and ensures the bot only entertains non-sequiturs for a maximum of one turn before escalating."
+  },
+  "displayName": "CDA - User trolling (french)",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 516,
+  "languageCode": "en"
+}

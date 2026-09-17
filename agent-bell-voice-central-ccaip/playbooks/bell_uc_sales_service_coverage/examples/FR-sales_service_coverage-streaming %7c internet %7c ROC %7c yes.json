@@ -1,0 +1,70 @@
+{
+  "name": "91219f57-19a1-4db8-858a-9160685c3430",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "language": "fr-ca",
+        "lob": "internet",
+        "province": "ROC"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Bien sûr, laissez-moi vous aider.\nVérifions si nous offrons des services Internet ou de téléphonie résidentielle dans votre secteur. Dans quelle province avez-vous besoin de services?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "ROC"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Obtenez des vitesses ultrarapides sur le réseau de Bell grâce au service Internet mobile de Bell. Vous pouvez bénéficier d'une connectivité Internet allant jusqu'à 5G avec un point d'accès sans fil mobile afin de rester connecté à la maison ou lors de vos déplacements.\nJe vais envoyer un texto à l'appareil au moyen duquel vous appelez, afin que vous puissiez en savoir plus sur le service Internet mobile sur notre site Web. Est-ce que ça vous convient?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Oui"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "fr-ca",
+        "lob": "internet",
+        "province": "ROC",
+        "sms_content": "Bell: Vous pouvez visiter bell.ca/mobileinternetdevices pour consulter nos appareils avec Internet mobile.( bell.ca/apropos )",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "The customer is asking whether the provider's service is offered at an address or location.",
+    "actionParameters": {
+      "language": "fr-ca",
+      "lob": "Internet",
+      "province": "BC",
+      "route": "sales_confirm_service_coverage",
+      "utterance": "Avez-vous un service Internet à mon emplacement?"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "If any of the streaming services is NOT captured like Disney, Netflix or crave and service type {lob} is internet or tv or homephone,  {province} is anything other than ROC or if province is NOT captured then ask user which province are they looking for, if the province captured is {province}=ROC and {lob}=internet then ask agent if they want to receive SMS and if user replies yes or agrees then call bell_SMS Trigger flow.",
+    "actionParameters": {
+      "language": "fr-ca",
+      "lob": "Internet",
+      "province": "ROC",
+      "utterance": "Avez-vous un service Internet à mon emplacement?"
+    }
+  },
+  "displayName": "FR-sales_service_coverage-streaming | internet | ROC | yes",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 624,
+  "languageCode": "en"
+}

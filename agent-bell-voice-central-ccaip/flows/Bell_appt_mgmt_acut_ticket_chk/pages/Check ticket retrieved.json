@@ -1,0 +1,65 @@
+{
+  "name": "d761b9ea-5aec-47ee-9fb7-f5f43f092a50",
+  "displayName": "Check ticket retrieved",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.acut_retrieve_response != null AND $session.params.acut_retrieve_response != \"\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "categoryValue",
+        "value": "$session.params.acut_retrieve_response.acutContext.categoryValue"
+      }, {
+        "parameter": "active_dispatch_count",
+        "value": "$session.params.acut_find_response.ticket_summaries[0].active_dispatch_count"
+      }, {
+        "parameter": "trouble_type_code",
+        "value": "$session.params.acut_retrieve_response.troubleTicketInteractionType"
+      }, {
+        "parameter": "task_type",
+        "value": "$session.params.acut_retrieve_response.serviceCategory"
+      }, {
+        "parameter": "filter_dispatch",
+        "value": "$sys.func.FILTER(\"$session.params.acut_retrieve_response.dispatch\", \"$.[?(@.dispatchStatus != 'CREATION')]\")"
+      }, {
+        "parameter": "trouble_ticket_state",
+        "value": "$session.params.acut_retrieve_response.acutContext.troubleTicketState"
+      }, {
+        "parameter": "notificationDetails",
+        "value": "$sys.func.FILTER(\"$session.params.acut_retrieve_response.notificationDetails\", \"$.[?(@.type == 'PatternNotification')]\")"
+      }, {
+        "parameter": "pattern_id",
+        "value": "$session.params.notificationDetails[0].characteristicSpecification.patternID"
+      }, {
+        "parameter": "dispatch_type",
+        "value": "$session.params.filter_dispatch[0].dispatchType"
+      }, {
+        "parameter": "dispatch_status",
+        "value": "$session.params.filter_dispatch[0].dispatchStatus"
+      } ]
+    },
+    "targetPage": "Check categories",
+    "name": "b825b5fe-9cff-4683-9802-55c975ac0986",
+    "description": "If webhooks are successful, setting params here."
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "d761b9ea-5aec-47ee-9fb7-f5f43f092a50"
+      }, {
+        "parameter": "flow_id",
+        "value": "8a90f25b-071b-4fb8-b4f6-490bf1aaf589"
+      }, {
+        "parameter": "page_name",
+        "value": "Check ticket retrieved"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

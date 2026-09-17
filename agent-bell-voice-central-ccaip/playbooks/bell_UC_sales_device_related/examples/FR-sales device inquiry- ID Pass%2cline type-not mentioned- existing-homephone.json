@@ -1,0 +1,75 @@
+{
+  "name": "9cd75a4f-3585-4d2b-ba95-b23a212eb70e",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "brand": "bell",
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Désirez-vous ajouter un nouveau service ou modifier votre service\nactuel?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Je veux en savoir plus sur le service actuel"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "À propos de quel service communiquez- vous avec nous?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "téléphone résidentiel"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Malheureusement, nous ne vendons pas\nd'équipement de téléphonie résidentielle.\nCependant, nous offrons le service de téléphonie\nrésidentielle. Est-ce que je vous mets en contact\navec un de nos agents, qui pourra vous en dire\ndavantage sur nos forfaits de téléphonie\nrésidentlelle?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "oui"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_aqd",
+      "inputActionParameters": {
+        "language": "fr-ca",
+        "lob": "Homephone"
+      },
+      "outputActionParameters": {
+        "language": "fr-ca"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer has questions about device availability, device features, cost, related to devices that Bell sells",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "fr-ca",
+      "route": "sales_device_inquiry",
+      "utterance": "J'ai des questions sur la disponibilité des appareils"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "if lob captured is Homephone then reroute to sms_trigger if customer says \"yes\"",
+    "actionParameters": {
+      "language": "fr-ca",
+      "line_type": "Existing",
+      "lob": "Homephone"
+    }
+  },
+  "displayName": "FR-sales device inquiry- ID Pass,line type-not mentioned- existing-homephone",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 500,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

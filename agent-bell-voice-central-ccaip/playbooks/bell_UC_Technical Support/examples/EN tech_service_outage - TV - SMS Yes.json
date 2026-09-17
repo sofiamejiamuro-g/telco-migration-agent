@@ -1,0 +1,72 @@
+{
+  "name": "c7d77f61-10c9-4ca3-bcc7-703442a775b0",
+  "actions": [ {
+    "agentUtterance": {
+      "text": " Can you tell me which service you need help with?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "TV"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70015",
+        "language": "en"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "You can use our Virtual Repair tool to check for service outages and troubleshoot your equipment. I'll send a text to the device you're calling from so you can access it quickly. Is that alright?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "yes"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "en",
+        "route": "tech_service_outage",
+        "sms_content": "Bell msg: You can visit https://m.bell.ca/chatvirtualrepaire to access the Virtual repair tool. ( bell.ca/about-us )",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+        "language": "en",
+        "sms_content": "Bell msg: You can visit https://m.bell.ca/chatvirtualrepaire to access the Virtual repair tool. ( bell.ca/about-us )",
+        "sms_type": "Public"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customers are facing connections issues, they reported this issue for {lob} = TV when asked used said yes to the sms",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "lob": "TV",
+      "route": "tech_connection_issue",
+      "utterance": "I'm having connection issues"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "User is redirected sms_trigger flow",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "lob": "TV",
+      "route": "tech_connection_issue",
+      "sms_content": "Bell msg: You can visit https://m.bell.ca/chatvirtualrepaire to access the Virtual repair tool. ( bell.ca/about-us )",
+      "sms_type": "Public",
+      "utterance": "I'm having connection issues"
+    }
+  },
+  "displayName": "EN tech_service_outage - TV - SMS Yes",
+  "retrievalStrategy": "NEVER",
+  "tokenCount": 537,
+  "languageCode": "en"
+}

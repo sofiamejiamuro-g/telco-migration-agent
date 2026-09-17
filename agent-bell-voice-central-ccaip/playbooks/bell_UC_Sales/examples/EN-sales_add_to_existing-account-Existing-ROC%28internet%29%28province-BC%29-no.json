@@ -1,0 +1,80 @@
+{
+  "name": "d04b16ce-16c1-4c14-97fb-4c73c4c270a3",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "language": "en"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Sure, let me help you with that.\nAre you inquiring about new service or do you want to make changes to your current service?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "new service"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Let’s check if we offer Internet and Home phone service in your area. In which province are you looking to get service?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Campbell River"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Get blazing-fast speeds on the Bell network with Bell Mobile Internet. Where you can get up to 5G internet connectivity with a mobile hotspot device so you can stay connected at home or on the go.\nI'll send a text to the device you're calling from, so that you can learn more and easily place an order on our website. Is that alright?\n"
+    }
+  }, {
+    "userUtterance": {
+      "text": "no"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "en",
+        "line_type": "New",
+        "route": "sales_add_to_existing_account",
+        "sms_send_status": "Declined"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "customer wants to add a new internet line and {province} is \"ROC\" or \"BC\" OR \"AB\"",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "en",
+      "lob": "Internet",
+      "province": "AB",
+      "route": "sales_add_to_existing_account",
+      "utterance": "how do I add internet service to my account?"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "customer is asked {province} and is asked about sms and as user agrees to sms we are transferring user to sms flow",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "line_type": "New",
+      "lob": "Internet",
+      "province": "BC"
+    }
+  },
+  "displayName": "EN-sales_add_to_existing-account-Existing-ROC(internet)(province-BC)-no",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 555,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

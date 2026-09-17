@@ -1,0 +1,51 @@
+{
+  "name": "6f13aaf6-5b57-4f3e-9a9d-2b00116d8fbe",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Are you looking for support on Satellite TV or Fibe TV or Fibe TV app?\n"
+    }
+  }, {
+    "userUtterance": {
+      "text": "homephone"
+    }
+  }, {
+    "playbookInvocation": {
+      "playbook": "Bell_UC_Technical_Support_Infobot",
+      "playbookInput": {
+        "precedingConversationSummary": "User mentions lob other than TV and no TV subtype is mentioned. Hence invoke this playbook",
+        "actionParameters": {
+          "language": "en",
+          "lob": "Homephone",
+          "route": "tech_missing_channel_package"
+        }
+      },
+      "playbookOutput": {
+        "actionParameters": {
+          "language": "en",
+          "lob": "Homephone",
+          "route": "tech_missing_channel_package"
+        }
+      },
+      "playbookState": "OUTPUT_STATE_OK"
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "customer has some missing package issue",
+    "actionParameters": {
+      "language": "en",
+      "utterance": "My package is missing the channels I subscribed to a year ago."
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "customer is asked about the service type , but user mentions OTHER than TV, hence route to \"Bell_UC_Technical_Support_Infobot\" playbook",
+    "actionParameters": {
+      "language": "en",
+      "lob": "Homephone"
+    }
+  },
+  "displayName": "EN-(lob=null) and (tv_sub_type=null) | Infobot routing",
+  "retrievalStrategy": "STATIC",
+  "tokenCount": 294,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

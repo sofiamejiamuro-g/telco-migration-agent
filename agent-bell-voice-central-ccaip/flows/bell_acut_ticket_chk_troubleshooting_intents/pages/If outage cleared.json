@@ -1,0 +1,44 @@
+{
+  "name": "d844c820-557b-4146-be71-5274a88dbb49",
+  "displayName": "If outage cleared",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.notificationDetails[0].characteristicSpecification.patternClearFlag = \"0\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Check pattern time",
+    "name": "a2c79ebc-9574-45e3-a870-cdf929b0b1ca"
+  }, {
+    "condition": "$session.params.notificationDetails[0].characteristicSpecification.patternClearFlag = \"1\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "[whk] Acut trouble type",
+    "name": "dcdec096-d6ee-4660-98d4-092b407975c1"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "d844c820-557b-4146-be71-5274a88dbb49"
+      }, {
+        "parameter": "flow_id",
+        "value": "8ac2c857-8d2c-4fa2-8970-f1c302db570b"
+      }, {
+        "parameter": "page_name",
+        "value": "If outage cleared"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

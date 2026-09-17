@@ -1,0 +1,60 @@
+{
+  "name": "3ac818f7-74eb-4aac-aaec-d90fd53282dc",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "You can check out your upgrade eligibility as well as available devices and pricing in My Bell. I'll send you a text to the device you're calling from with a link to self serve. Is that alright?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Yes"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "en",
+        "route": "equipment_upgrade_device",
+        "sms_content": "Bell: You can visit https://m.bell.ca/managemydevice to check your upgrade eligibility in the My Account app. (bell.ca/about-us)",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+        "language": "en",
+        "route": "equipment_upgrade_device",
+        "sms_content": "Bell: You can visit https://m.bell.ca/chatorderhuge to check your upgrade eligibility in the My Account app. (bell.ca/about-us)",
+        "sms_type": "Public"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customers want to upgrade their mobility device",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "Existing",
+      "device_type": "Mobile Phone",
+      "identification_status": "Pass",
+      "language": "en",
+      "line_type": "existing",
+      "route": "equipment_upgrade_device",
+      "utterance": "I want to upgrade my mobility device"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Bot asked the confirmation to receive the SMS and when customer said yes then bot called the flow bell_SMS_Trigger.",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "Existing",
+      "device_type": "Mobile Phone",
+      "language": "en",
+      "line_type": "existing",
+      "lob": "Mobility",
+      "route": "equipment_upgrade_device",
+      "sms_content": "Bell: You can visit https://m.bell.ca/managemydevice to check your upgrade eligibility in the My Account app. (bell.ca/about-us)",
+      "sms_type": "Public"
+    }
+  },
+  "displayName": "EN - equipment_upgrade_device - ID Pass - Existing - Utterance mentioned Mobility - Agrees on SMS 1B - 3A",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 470,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

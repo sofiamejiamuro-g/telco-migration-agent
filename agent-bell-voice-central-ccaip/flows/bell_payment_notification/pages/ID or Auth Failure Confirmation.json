@@ -1,0 +1,143 @@
+{
+  "name": "5d613370-d8cf-4560-a555-781d1a310938",
+  "displayName": "ID or Auth Failure Confirmation",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "messages": [ {
+      "text": {
+        "text": [ "Since I was unable to verify your account, I'Il send a text to the device you're calling from so that you can review your payment notification on the MyBell app. Is that alright?" ]
+      },
+      "languageCode": "en"
+    }, {
+      "text": {
+        "text": [ "Comme je n'ai pas pu vérifier votre compte, j'enverrai un texto à l'appareil à partir duquel vous appelez afin que vous puissiez passer en revue votre avis de paiement sur l'application MonBell. Est-ce bien?" ]
+      },
+      "languageCode": "fr-ca"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "intent": "context.sms_no",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Delinquency Check",
+    "name": "2f541930-cc2c-4dc6-8ef0-129a377c2863"
+  }, {
+    "intent": "context.sms_yes",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Language Based SMS",
+    "name": "aee66dcc-4bab-4be6-a568-0ad475dc0cfc"
+  }, {
+    "intent": "context.different_number",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Language Based SMS",
+    "name": "5bb3ef33-c53d-4e3f-8efa-55f2651add7b"
+  }, {
+    "intent": "other_speak_to_agent",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_determine_handover",
+    "name": "5057a5e2-1330-4dc3-a521-e9e04b4dd3a9"
+  } ],
+  "eventHandlers": [ {
+    "event": "sys.no-input-1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I didn't quite get that. Can you try again?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "I didn't quite get that. Can you try again?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je n’ai pas tout à fait compris. Pouvez-vous réessayer?" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "1df3f4b1-343e-43cc-b11c-e0b531f38239"
+  }, {
+    "event": "sys.no-match-1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I didn't quite get that. Can you try again?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "I didn't quite get that. Can you try again?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je n’ai pas tout à fait compris. Pouvez-vous réessayer?" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "a248ca22-5890-439d-a11f-5bddb12daf6d"
+  }, {
+    "event": "sys.no-input-2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I still didn't get that." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "I still didn't get that." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je n’ai toujours pas compris" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "8b8127fb-e0c9-4e0c-83f7-165c311c6710"
+  }, {
+    "event": "sys.no-match-2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I still didn't get that." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je n’ai toujours pas compris" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "7b0c9ddb-2e21-4aa1-807d-8b36a149bc04"
+  }, {
+    "targetFlow": "bell_determine_handover",
+    "event": "sys.no-input-3",
+    "triggerFulfillment": {
+    
+    },
+    "name": "ddf7a717-6d5f-4263-9f50-4419e1b399ca"
+  }, {
+    "targetFlow": "bell_determine_handover",
+    "event": "sys.no-match-3",
+    "triggerFulfillment": {
+    
+    },
+    "name": "5e981bc8-6aaf-4edc-996e-2eb5c744f5b3"
+  } ]
+}

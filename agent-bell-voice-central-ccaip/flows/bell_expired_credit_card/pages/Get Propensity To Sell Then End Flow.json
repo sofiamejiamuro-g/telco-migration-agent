@@ -1,0 +1,82 @@
+{
+  "name": "79ddcfb7-60eb-455f-be31-17ddf843d3f6",
+  "displayName": "Get Propensity To Sell Then End Flow",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "v1/deai-customer-information",
+    "tag": "N/A",
+    "setParameterActions": [ {
+      "parameter": "language",
+      "value": "$session.params.language"
+    }, {
+      "parameter": "telephone_number",
+      "value": "$session.params.CIRN"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "($session.params.webhook_success = true OR $session.params.webhook_success = \"true\" OR $session.params.webhook_success = \"True\") AND (deai_search_by_tn_response.sales_propensity_bell_internet_cross_sell_flg = 1 OR deai_search_by_tn_response.sales_propensity_bell_second_line_sell_flg = 1 OR deai_search_by_tn_response.sales_propensity_bell_tv_cross_sell_flg = 1)",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "serve_to_check",
+        "value": "Fail"
+      } ]
+    },
+    "targetPage": "End Flow",
+    "name": "9de83bb4-6445-4fca-a5c1-5f3e5fccc0a5"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "serve_to_check",
+        "value": "Fail"
+      } ]
+    },
+    "targetPage": "End Flow",
+    "name": "10f10d59-8449-4458-8732-5b4065f71de0"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "End Flow",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+    
+    },
+    "name": "54f3d873-7c14-4bf9-9cee-3b29537aa33f"
+  }, {
+    "targetPage": "End Flow",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+    
+    },
+    "name": "08757182-1622-4bd9-98c5-788605baa8ad"
+  }, {
+    "targetPage": "End Flow",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+    
+    },
+    "name": "e8d368a3-1667-46df-b755-7615e1302369"
+  }, {
+    "targetPage": "End Flow",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+    
+    },
+    "name": "6168afa3-f809-4bef-ab7d-ddf6c96f7010"
+  }, {
+    "targetPage": "End Flow",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+    
+    },
+    "name": "da75ce62-ad71-4b6f-be1a-a3d03607b981"
+  }, {
+    "targetPage": "End Flow",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+    
+    },
+    "name": "c4010844-b8e1-4fc9-b73e-2352be42575f"
+  } ]
+}

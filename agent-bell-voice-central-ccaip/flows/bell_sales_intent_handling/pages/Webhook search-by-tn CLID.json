@@ -1,0 +1,110 @@
+{
+  "name": "8e8777ac-abd8-4cee-b772-f6a11a8e923e",
+  "displayName": "Webhook search-by-tn CLID",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "v1/customer-identification#search-by-tn",
+    "tag": "search-by-tn",
+    "setParameterActions": [ {
+      "parameter": "telephone_number",
+      "value": "$session.params.clid"
+    }, {
+      "parameter": "tag",
+      "value": "search-by-tn"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.webhook_success = \"True\" OR $session.params.webhook_success = \"true\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "webhook_success",
+        "value": null
+      } ]
+    },
+    "targetPage": "Confirm CX Account",
+    "name": "307705a3-0b8e-4f6e-a2b6-5e7c222ff5ac"
+  }, {
+    "condition": "$session.params.webhook_success = \"False\" OR $session.params.webhook_success = \"false\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "webhook_success",
+        "value": null
+      }, {
+        "parameter": "identification_status",
+        "value": "Fail"
+      }, {
+        "parameter": "line_type",
+        "value": "New"
+      }, {
+        "parameter": "customer_type",
+        "value": "New"
+      } ]
+    },
+    "targetPage": "Webhook npa-nxx-lookup",
+    "name": "3f62c015-f79c-4d17-a111-c9ceafcb719c"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "8e8777ac-abd8-4cee-b772-f6a11a8e923e"
+      }, {
+        "parameter": "flow_id",
+        "value": "77cfa112-7fcc-4226-9d68-33bdee616f44"
+      }, {
+        "parameter": "page_name",
+        "value": "Webhook search-by-tn CLID"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Webhook search-by-tn CLID Error",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+    
+    },
+    "name": "947c99f1-e5c3-4805-9bb5-fc17b918f3ef"
+  }, {
+    "targetPage": "Webhook search-by-tn CLID Error",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+    
+    },
+    "name": "f75720cf-378f-48b0-a744-b011dcf0133d"
+  }, {
+    "targetPage": "Webhook search-by-tn CLID Error",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+    
+    },
+    "name": "876a2956-39b8-43d6-ba35-6a18025a5280"
+  }, {
+    "targetPage": "Webhook search-by-tn CLID Error",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+    
+    },
+    "name": "becb1507-e8d6-4cea-a72f-0783e50a3410"
+  }, {
+    "targetPage": "Webhook search-by-tn CLID Error",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+    
+    },
+    "name": "57a1b7f1-9853-46da-b5a0-c5b260f13b80"
+  }, {
+    "targetPage": "Webhook search-by-tn CLID Error",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+    
+    },
+    "name": "833b8143-2be9-45a0-bbe6-465b4932c77b"
+  } ]
+}

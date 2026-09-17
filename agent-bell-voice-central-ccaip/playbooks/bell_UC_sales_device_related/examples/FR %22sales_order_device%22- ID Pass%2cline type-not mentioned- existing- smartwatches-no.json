@@ -1,0 +1,77 @@
+{
+  "name": "40d7e3f9-6f15-4397-b696-201d6ce8a706",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "brand": "bell",
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Désirez-vous ajouter un nouveau service ou modifier votre service\nactuel?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Je veux en savoir plus sur le service actuel"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "À propos de quel service communiquez- vous avec nous?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "téléphone à la maison"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Je vais envoyer un texto à l'appareil au moyen\nduquel vous appelez, afin que vous puissiez\ndécouvrir les appareils mobiles de Bell, comme\nles téléphones, les tablettes et les montres\nintelligentes, ainsi que le service Internet mobile.\nEst-ce que ça vous convient?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "non"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "brand": "bell",
+        "language": "fr-ca",
+        "route": "sales_order_device",
+        "sms_send_status": "Declined"
+      },
+      "outputActionParameters": {
+        "language": "fr-ca"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer has questions about device availability, device features, cost, related to devices that Bell sells",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "fr-ca",
+      "route": "sales_order_device",
+      "utterance": "Je souhaite commander un nouvel appareil"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "if lob is Homephone then give corresponding response, and route to sms trigger",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca",
+      "line_type": "Existing"
+    }
+  },
+  "displayName": "FR \"sales_order_device\"- ID Pass,line type-not mentioned- existing- smartwatches-no",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 496,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

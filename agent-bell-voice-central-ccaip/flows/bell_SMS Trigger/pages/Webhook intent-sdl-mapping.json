@@ -1,0 +1,85 @@
+{
+  "name": "25de49cb-94f6-44d1-b958-5dc206707967",
+  "displayName": "Webhook intent-sdl-mapping",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "v1/intent-sdl-mapping",
+    "tag": "default",
+    "setParameterActions": [ {
+      "parameter": "intent",
+      "value": "$session.params.route"
+    }, {
+      "parameter": "brand",
+      "value": "$session.params.brand"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.webhook_success = true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "vanity_link",
+        "value": "$session.params.intent_sdl_map_response.url"
+      }, {
+        "parameter": "webhook_success",
+        "value": null
+      }, {
+        "parameter": "faq_link",
+        "value": "$sys.func.GET_FIELD($session.params.intent_sdl_map_response, \"url\")"
+      } ]
+    },
+    "targetPage": "Declined SMS Generator Reply",
+    "name": "9b5928c1-34b6-4ecb-8821-100a0ad83bf5"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Error Webhook intent-sdl-mapping",
+    "name": "71a9aee4-ac5f-4629-9430-72e9c77e98b8"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Error Webhook intent-sdl-mapping",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+    
+    },
+    "name": "d64fa113-53fe-4f4b-b681-cc13927bbcdb"
+  }, {
+    "targetPage": "Error Webhook intent-sdl-mapping",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+    
+    },
+    "name": "3f151239-495a-49dd-9fc9-edd1cd69c1fd"
+  }, {
+    "targetPage": "Error Webhook intent-sdl-mapping",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+    
+    },
+    "name": "8233fd25-ec57-4c98-9b60-c6bf30852e1b"
+  }, {
+    "targetPage": "Error Webhook intent-sdl-mapping",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+    
+    },
+    "name": "49e0f9c1-814c-4a0a-bc0a-e3d8f1494247"
+  }, {
+    "targetPage": "Error Webhook intent-sdl-mapping",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+    
+    },
+    "name": "2b34295b-f0d1-4917-93b0-d92b6112526b"
+  }, {
+    "targetPage": "Error Webhook intent-sdl-mapping",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+    
+    },
+    "name": "c18f0858-65d1-4a35-8724-581c2ba5e81b"
+  } ]
+}

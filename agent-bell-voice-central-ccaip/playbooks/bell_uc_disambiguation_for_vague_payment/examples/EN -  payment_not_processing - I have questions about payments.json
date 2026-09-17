@@ -1,0 +1,49 @@
+{
+  "name": "fa256e3e-f382-4477-b1f2-63ea01fb8840",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "I can help with several payment topics. To get you to the right place, please tell me more about your request. For example, you could say, 'make a payment' or 'set up preauthorized payments.'"
+    }
+  }, {
+    "userUtterance": {
+      "text": "What I'm saying is I paid the bill, but they told me the payment didn't go through."
+    }
+  }, {
+    "playbookInvocation": {
+      "playbook": "bell_UC_Payments",
+      "playbookInput": {
+        "precedingConversationSummary": "Customer payment is not processing",
+        "actionParameters": {
+          "language": "en",
+          "route": "payment_not_processing",
+          "utterance": "What I'm saying is I paid the bill, but they told me the payment didn't go through."
+        }
+      },
+      "playbookOutput": {
+        "executionSummary": "Customer query is addresses and then routed to \"bell_UC_payment\" playbook for further help",
+        "actionParameters": {
+          "language": "en",
+          "route": "payment_not_processing"
+        }
+      },
+      "playbookState": "OUTPUT_STATE_OK"
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer query about \"I have questions about payments\" is addressed",
+    "actionParameters": {
+      "brand": "bell",
+      "langauge": "en",
+      "route": "payment_vague",
+      "utterance": "I have questions about payments"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Customer query is addresses and then routed to \"bell_UC_payment\" playbook for further help"
+  },
+  "displayName": "EN -  payment_not_processing - I have questions about payments",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 350,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

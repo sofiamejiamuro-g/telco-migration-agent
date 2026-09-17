@@ -1,0 +1,47 @@
+{
+  "name": "dcadb6ff-c6b2-4a79-9c11-aae15f53d4d0",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Je suis profondément touché par votre perte. Veuillez accepter mes plus sincères condoléances à vous et à votre famille en ces moments difficiles.\nJe suis désolée d’entendre cela. Avez-vous essayé d’utiliser une option de suivi comme \" Trouver mon iPhone \" ou \" Trouver mon appareil \"?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Non"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "C’est noté. Je vous suggère de suspendre temporairement votre service pour empêcher toute utilisation non autorisée. Je vais envoyer un texto à l’appareil à partir duquel vous appelez qui contient un lien pour le faire vous-même. Est-ce que cela vous convient?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Pas maintenant, peut-être"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "fr-ca",
+        "sms_send_status": "Declined"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "User has lost their device",
+    "actionParameters": {
+      "language": "fr-ca",
+      "route": "equipment_report_lost_device",
+      "utterance": "J'ai perdu mon téléphone quand mon père est décédé"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "VA asks user if they have tracked their phone. User denies so we suggest them to suspend their service and prompt them for SMS with link. User denies so we call SMS_flow with sms_send_status as \"Declined\""
+  },
+  "displayName": "Empathetic FR Equipment report lost device - no MFA - Not tracked - no ",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 369,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

@@ -1,0 +1,105 @@
+{
+  "name": "b0ab4634-735e-4c3c-9b3d-11534a6081cf",
+  "tags": [ "#Default_start_flow", "#Specialty", "#Final_checks", "#Fraud_Flag_check" ],
+  "displayName": "[EEPA - 1855] Specialty Flow Test 3",
+  "testCaseConversationTurns": [ {
+    "userInput": {
+      "injectedParameters": {
+        "clid": "+14162090791",
+        "tfn": "+18338858259"
+      },
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "Hi"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "sessionParameters": {
+        "clid": "+14162090791",
+        "tfn": "+18338858259"
+      },
+      "triggeredIntent": {
+        "name": "Default Welcome Intent"
+      },
+      "currentPage": {
+        "name": "Get CX Input",
+        "flow": "bell_Identification"
+      },
+      "textResponses": [ {
+        "text": [ "this is after language APB check" ]
+      }, {
+        "text": [ "Are you calling about the account associated with number you’re calling from?" ],
+        "allowPlaybackInterruption": true
+      } ],
+      "currentFlow": {
+        "name": "bell_Identification"
+      }
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "yes"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "triggeredIntent": {
+        "name": "context.confirm_yes"
+      },
+      "currentPage": {
+        "name": "Routing Page",
+        "flow": "Default Start Flow"
+      },
+      "textResponses": [ {
+        "text": [ "\u003cspeak\u003eThanks! \u003cbreak time=\"1s\"/\u003e\u003c/speak\u003e" ],
+        "allowPlaybackInterruption": true
+      }, {
+        "text": [ "this is before intent APB check" ],
+        "allowPlaybackInterruption": true
+      }, {
+        "text": [ "How can I help you?" ],
+        "allowPlaybackInterruption": true
+      } ],
+      "currentFlow": {
+        "name": "Default Start Flow"
+      }
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "specialty"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "triggeredIntent": {
+        "name": "dummy testing"
+      },
+      "currentPage": {
+        "name": "Fraud flag check",
+        "flow": "bell_specialty_flow"
+      },
+      "currentFlow": {
+        "name": "bell_specialty_flow"
+      }
+    }
+  } ],
+  "creationTime": {
+    "seconds": 1753870088,
+    "nanos": 136456000
+  },
+  "testConfig": {
+    "flow": "Default Start Flow",
+    "page": "Start Page"
+  },
+  "languageCode": "en"
+}

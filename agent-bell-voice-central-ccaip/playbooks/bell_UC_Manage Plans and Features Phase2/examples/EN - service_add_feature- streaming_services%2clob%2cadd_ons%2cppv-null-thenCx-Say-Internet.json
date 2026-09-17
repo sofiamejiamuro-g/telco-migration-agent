@@ -1,0 +1,78 @@
+{
+  "name": "07d9419a-7015-4f48-b031-5623a389b33d",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70011",
+        "brand": "bell",
+        "language": "en",
+        "route": "service_add_feature"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Which service are you calling about?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "i want to add an internet feature"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "You can easily manage your Internet package and features at anytime using MyBell. I'll send a text to the device you're calling from, so that you can easily make changes to your Internet package. Is that alright?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "yes"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "en",
+        "route": "service_add_feature",
+        "sms_content": "Bell: You can visit  https://m.bell.ca/manageinternetfeatures to make changes to your Internet features in the MyBell app. ( bell.ca/about-us )",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+        "language": "en"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "The {identification_status} is \"Pass\", {customer_type} is \"Existing\", {streaming_services}, {lob}, {ppv}, {add-ons} is null so, we will prompt user to ask \"Which service are you calling about?\" and once user reply then please analyze the user response and based on that please set {lob} or {streaming_services} or {ppv} or {add_ons} based on instruction provided in playbook on how to set {lob} or {streaming_services} or {ppv} or {add_ons} within {route} = \"service_add_feature\"",
+    "actionParameters": {
+      "apb_location_id": "70011",
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "en",
+      "route": "service_add_feature",
+      "utterance": "I want to add the unlimited data plan to my account"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "As, the {streaming_services},{lob}, {ppv}, {add_ons} is null so, we will prompt user to ask \"Which service are you calling about?\" and if user reply then please analyze the user {utterance} and if the response is lob related then SET parameter {lob} and if it is related to streaming service then SET parameter {streaming_services} with correct value and if the response is related to add_ons then will SET {add_ons} to correct value provided in playbook instruction within {route} = \"service_add_feature\"",
+    "actionParameters": {
+      "apb_location_id": "70011",
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "en",
+      "lob": "Internet",
+      "route": "service_add_feature",
+      "sms_content": "Bell: You can visit  https://m.bell.ca/manageinternetfeatures to make changes to your Internet features in the MyBell app. ( bell.ca/about-us )",
+      "sms_type": "Public",
+      "utterance": "i want to add an internet feature"
+    }
+  },
+  "displayName": "EN - service_add_feature- streaming_services,lob,add_ons,ppv-null-thenCx-Say-Internet",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 797,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

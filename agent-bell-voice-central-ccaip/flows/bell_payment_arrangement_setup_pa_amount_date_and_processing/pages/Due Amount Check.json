@@ -1,0 +1,125 @@
+{
+  "name": "21006594-da36-47a2-89f3-20533a3efa50",
+  "displayName": "Due Amount Check",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "intent": "custom.yes",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Pour confirmer, le montant de l'entente de paiement auquel vous vous engagez est de $session.params.payment_amount." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "\u003cspeak\u003e The latest date you can commit to making a payment arrangement is on  \u003csay-as interpret-as=\"date\" format=\"md\" detail=\"2\"\u003e$session.params.calculated_payment_date\u003c/say-as\u003e. Can you make a payment by then? \u003c/speak\u003e" ]
+        },
+        "languageCode": "en"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "payment_amount",
+        "value": "$session.params.pastDueAmount"
+      } ]
+    },
+    "targetPage": "Final confirmation from user",
+    "name": "1efdc835-6ba0-4ea2-8d8e-e08af534a5a7"
+  }, {
+    "intent": "context.pa_amount",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Amount Check for Past Due",
+    "name": "68e7366e-22b6-423f-8348-c4916e644c42"
+  }, {
+    "intent": "context.pa_no",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_aqd",
+    "name": "2dde6012-64ec-4a9d-b9bd-987ad3fdec89"
+  } ],
+  "eventHandlers": [ {
+    "event": "sys.no-input-1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Je n’ai pas tout à fait compris. Pouvez-vous réessayer?" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "I didn't quite get that. Can you try again?" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "93f3e3a6-d3b6-4e5d-9c4d-554e465ef2ec"
+  }, {
+    "event": "sys.no-match-1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Je n’ai pas tout à fait compris. Pouvez-vous réessayer?" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "I didn't quite get that. Can you try again?" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "aba68179-47dc-41fe-8835-ac4c7f11c179"
+  }, {
+    "event": "sys.no-input-2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Je n’ai toujours pas compris" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "I still didn't get that" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "9afd4814-30f0-4d96-8900-9692d47be050"
+  }, {
+    "event": "sys.no-match-2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Je n’ai toujours pas compris" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "I still didn't get that" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "d32e548d-0d0a-4657-9c95-a79200897baa"
+  }, {
+    "targetFlow": "bell_aqd",
+    "event": "sys.no-input-3",
+    "triggerFulfillment": {
+    
+    },
+    "name": "adfc3b48-9d8e-45b9-87d8-353a2f604781"
+  }, {
+    "targetFlow": "bell_aqd",
+    "event": "sys.no-match-3",
+    "triggerFulfillment": {
+    
+    },
+    "name": "f08c6860-0e11-4584-8590-05a6f097e406"
+  } ]
+}

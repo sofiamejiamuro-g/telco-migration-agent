@@ -1,0 +1,288 @@
+{
+  "name": "a73979e0-9211-40dc-a45c-365dd679c8a7",
+  "displayName": "Trigger NGA",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "intent": "Default Welcome Intent",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Coming From NGA",
+    "name": "9fd40ade-23f1-43f4-89f1-6f0ec371e82a"
+  }, {
+    "condition": "$session.params.handoff_from = \"Conversation Start\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "payload": {
+          "ignoreSessionParameters": true,
+          "transferToNga": "$session.params.nga_agent_id",
+          "variables": {
+            "brand": "$session.params.brand",
+            "clid_tmp": "$session.params.clid_tmp",
+            "dfcx_session_id": "$session.params.dfcx_session_id",
+            "language": "$session.params.language",
+            "menu_type": "$session.params.menu_type",
+            "tfn_tmp": "$session.params.tfn_tmp"
+          }
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "payload": {
+          "ignoreSessionParameters": true,
+          "transferToNga": "$session.params.nga_agent_id",
+          "variables": {
+            "brand": "$session.params.brand",
+            "clid_tmp": "$session.params.clid_tmp",
+            "dfcx_session_id": "$session.params.dfcx_session_id",
+            "language": "$session.params.language",
+            "menu_type": "$session.params.menu_type",
+            "tfn_tmp": "$session.params.tfn_tmp"
+          }
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "3012368e-5272-42bd-882a-e9b9d9ebdb50"
+  }, {
+    "condition": "$session.params.handoff_from = \"Default Start Flow\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "payload": {
+          "ignoreSessionParameters": true,
+          "transferToNga": "$session.params.nga_agent_id",
+          "variables": {
+            "brand": "$session.params.brand",
+            "clid_tmp": "$session.params.clid_tmp",
+            "dfcx_session_id": "$session.params.dfcx_session_id",
+            "event_type": "$session.params.event_type",
+            "ivr_va_get_did_fail": "$session.params.ivr_va_get_did_fail",
+            "language": "$session.params.language",
+            "no_match_1": "$session.params.no_match_1",
+            "no_match_2": "$session.params.no_match_2",
+            "skip_id": "$session.params.skip_id",
+            "speciality": "$session.params.speciality",
+            "tfn_tmp": "$session.params.tfn_tmp"
+          }
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "payload": {
+          "ignoreSessionParameters": true,
+          "transferToNga": "$session.params.nga_agent_id",
+          "variables": {
+            "brand": "$session.params.brand",
+            "clid_tmp": "$session.params.clid_tmp",
+            "dfcx_session_id": "$session.params.dfcx_session_id",
+            "event_type": "$session.params.event_type",
+            "ivr_va_get_did_fail": "$session.params.ivr_va_get_did_fail",
+            "language": "$session.params.language",
+            "no_match_1": "$session.params.no_match_1",
+            "no_match_2": "$session.params.no_match_2",
+            "skip_id": "$session.params.skip_id",
+            "speciality": "$session.params.speciality",
+            "tfn_tmp": "$session.params.tfn_tmp"
+          }
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "139e9dfb-2b89-4edc-87d9-7a689ee2e870",
+    "description": "ivr_va_get_did_fail from bell_ivr_to_va_handoff going to DSF\n\ntmp language, clid, "
+  }, {
+    "condition": "$session.params.handoff_from = \"bell_Identification\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "payload": {
+          "ignoreSessionParameters": true,
+          "transferToNga": "$session.params.nga_agent_id",
+          "variables": {
+            "cirn": "$session.params.cirn",
+            "dfcx_session_id": "$session.params.dfcx_session_id",
+            "handoff_from": "$session.params.handoff_from",
+            "handoff_to": null,
+            "identification_status": "$session.params.identification_status",
+            "ivr_handoff": "$session.params.ivr_handoff",
+            "ivr_handoff_identification": "$session.params.ivr_handoff_identification",
+            "ivr_va_cpm_check_fail": "$session.params.ivr_va_cpm_check_fail",
+            "phone_number": "$session.params.phone_number",
+            "route": "$session.params.route",
+            "tv_sub_type": "$session.params.tv_sub_type"
+          }
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "payload": {
+          "ignoreSessionParameters": true,
+          "transferToNga": "$session.params.nga_agent_id",
+          "variables": {
+            "cirn": "$session.params.cirn",
+            "dfcx_session_id": "$session.params.dfcx_session_id",
+            "handoff_from": "$session.params.handoff_from",
+            "handoff_to": null,
+            "identification_status": "$session.params.identification_status",
+            "ivr_handoff": "$session.params.ivr_handoff",
+            "ivr_handoff_identification": "$session.params.ivr_handoff_identification",
+            "ivr_va_cpm_check_fail": "$session.params.ivr_va_cpm_check_fail",
+            "phone_number": "$session.params.phone_number",
+            "route": "$session.params.route",
+            "tv_sub_type": "$session.params.tv_sub_type"
+          }
+        },
+        "languageCode": "en"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "handoff_to",
+        "value": null
+      } ]
+    },
+    "name": "55536b11-d8f6-4d38-a3f4-dc931ce44edb",
+    "description": "route, ivr_handoff_identification, identification_status needed for bell_va_to_ivr_handoff_prepaid\ntv_sub_type needed for bell_va_to_ivr_handoff\nphone_number needed for va_to_ivr_business_id_sales\nivr_handoff needed for bell_va_to_ivr_handoff\nivr_va_cpm_check_fail needed for bell_ivr_to_va_handoff\n"
+  }, {
+    "condition": "$session.params.handoff_from = \"bell_multiban\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "payload": {
+          "ignoreSessionParameters": true,
+          "transferToNga": "$session.params.nga_agent_id",
+          "variables": {
+            "dfcx_session_id": "$session.params.dfcx_session_id",
+            "handoff_from": "$session.params.handoff_from",
+            "handoff_to": null,
+            "ivr_handoff_identification": "$session.params.ivr_handoff_identification"
+          }
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "payload": {
+          "ignoreSessionParameters": true,
+          "transferToNga": "$session.params.nga_agent_id",
+          "variables": {
+            "dfcx_session_id": "$session.params.dfcx_session_id",
+            "handoff_from": "$session.params.handoff_from",
+            "handoff_to": null,
+            "ivr_handoff_identification": "$session.params.ivr_handoff_identification"
+          }
+        },
+        "languageCode": "en"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "handoff_to",
+        "value": null
+      } ]
+    },
+    "name": "cf50c8da-ef5c-4607-ab65-35499f577c6e"
+  }, {
+    "condition": "$session.params.handoff_from = \"bell_specialty_flow\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "payload": {
+          "ignoreSessionParameters": true,
+          "transferToNga": "$session.params.nga_agent_id",
+          "variables": {
+            "auth_status": "$session.params.auth_status",
+            "dfcx_session_id": "$session.params.dfcx_session_id",
+            "handoff_from": "$session.params.handoff_from",
+            "handoff_to": null,
+            "identification_status": "$session.params.identification_status",
+            "speciality_1": "$session.params.speciality_1",
+            "speciality_flow": "$session.params.speciality_flow"
+          }
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "payload": {
+          "ignoreSessionParameters": true,
+          "transferToNga": "$session.params.nga_agent_id",
+          "variables": {
+            "auth_status": "$session.params.auth_status",
+            "dfcx_session_id": "$session.params.dfcx_session_id",
+            "handoff_from": "$session.params.handoff_from",
+            "handoff_to": null,
+            "identification_status": "$session.params.identification_status",
+            "speciality_1": "$session.params.speciality_1",
+            "speciality_flow": "$session.params.speciality_flow"
+          }
+        },
+        "languageCode": "en"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "handoff_to",
+        "value": null
+      } ]
+    },
+    "name": "0c8f2d18-b217-4f73-a3d0-42170dadb706"
+  }, {
+    "condition": "$session.params.handoff_from = \"authentication\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "payload": {
+          "ignoreSessionParameters": true,
+          "transferToNga": "$session.params.nga_agent_id",
+          "variables": {
+            "auth_status": "$session.params.auth_status",
+            "dfcx_session_id": "$session.params.dfcx_session_id"
+          }
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "payload": {
+          "ignoreSessionParameters": true,
+          "transferToNga": "$session.params.nga_agent_id",
+          "variables": {
+            "auth_status": "$session.params.auth_status",
+            "dfcx_session_id": "$session.params.dfcx_session_id"
+          }
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "eb9a52be-9293-4d8c-8bc0-e44c1dde72c7"
+  }, {
+    "condition": "$session.params.handoff_from = \"feedback\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "payload": {
+          "ignoreSessionParameters": true,
+          "transferToNga": "$session.params.nga_agent_id",
+          "variables": {
+            "dfcx_session_id": "$session.params.dfcx_session_id",
+            "global_error_counter": 0,
+            "handoff_from": "$session.params.handoff_from",
+            "route": null,
+            "speak_to_agent_counter": 0
+          }
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "payload": {
+          "ignoreSessionParameters": true,
+          "transferToNga": "$session.params.nga_agent_id",
+          "variables": {
+            "dfcx_session_id": "$session.params.dfcx_session_id",
+            "global_error_counter": 0,
+            "handoff_from": "$session.params.handoff_from",
+            "route": null,
+            "speak_to_agent_counter": 0
+          }
+        },
+        "languageCode": "en"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "handoff_to",
+        "value": null
+      }, {
+        "parameter": "route",
+        "value": null
+      }, {
+        "parameter": "global_error_counter",
+        "value": 0
+      }, {
+        "parameter": "speak_to_agent_counter",
+        "value": 0
+      } ]
+    },
+    "name": "67bc38c4-07e6-4062-82b3-b8bda62f3659"
+  } ]
+}

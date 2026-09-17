@@ -1,0 +1,65 @@
+{
+  "name": "79cfaa4d-c45e-4cf1-9400-6bec9f69228c",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "brand": "bell",
+        "language": "en"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "playbookInvocation": {
+      "playbook": "bell_UC_Sales",
+      "playbookInput": {
+        "precedingConversationSummary": "Customer wants to order a new device ",
+        "actionParameters": {
+          "brand": "bell",
+          "customer_type": "Existing",
+          "identification_status": "Pass",
+          "language": "en",
+          "line_type": "New",
+          "province": "AB",
+          "route": "sales_add_to_existing_account"
+        }
+      },
+      "playbookOutput": {
+        "executionSummary": "Customer is routed to sales_add_to_existing_account as per instructions",
+        "actionParameters": {
+        
+        }
+      },
+      "playbookState": "OUTPUT_STATE_OK"
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer has questions about needing a new device,device availability, device features, cost, related to devices that Bell sells",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "en",
+      "line_type": "New",
+      "province": "AB",
+      "route": "sales_order_device",
+      "utterance": "Looking for new device"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "set {line_type} = \"New\" as the {utterance} contains the value \"new\" and transition to bell_UC_Sales playbook with {route} = \"sales_add_to_existing_account\"",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "line_type": "New"
+    }
+  },
+  "displayName": "\"sales_order_device\"- ID Pass, line type new",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 428,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

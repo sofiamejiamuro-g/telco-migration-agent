@@ -1,0 +1,64 @@
+{
+  "name": "892a29c4-3518-4157-bd5e-bcead9cf3120",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Which device are you looking to check the status of?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "its regarding my mobile phone"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Are you inquiring about device upgrade, new device, or a repair order?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "device upgrade"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Got it, you can view and check the status of your device order in MyBell. I'll send a text to the device you are calling from, so that you can track your shipment. Is that alright?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "yes"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "en",
+        "sms_content": "Bell: You can visit https://m.bell.ca/managemydevice to track your order in the MyBell app.(bell.ca/about-us)",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+        "language": "en",
+        "sms_content": "Bell: You can visit https://m.bell.ca/managemydevice to track your order in the MyBell app.(bell.ca/about-us)",
+        "sms_type": "Public"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "customer is inquiring about their order status and lob and {device_type} are null",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "route": "equipment_order_status",
+      "utterance": "I want to track my order"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "customer is asked device_type and then proceeds as per instructions",
+    "actionParameters": {
+      "brand": "bell",
+      "device_type": "Mobile Phone",
+      "language": "en"
+    }
+  },
+  "displayName": "EN equipment_order_status (mobile phone)-(device upgrade)-(sms-yes)",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 415,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

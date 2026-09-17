@@ -1,0 +1,107 @@
+{
+  "name": "24dcbe26-0062-41f2-b417-c2b546142d51",
+  "displayName": "Province Look-up Webhook",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "v1/npa-nxx-lookup",
+    "tag": "N/A",
+    "setParameterActions": [ {
+      "parameter": "temp_number",
+      "value": "$sys.func.IF(\"$session.params.CIRN = null\" , $sys.func.TO_TEXT($session.params.clid), $sys.func.TO_TEXT($session.params.CIRN))"
+    }, {
+      "parameter": "npa",
+      "value": "$sys.func.MID($session.params.temp_number, 1, 3)"
+    }, {
+      "parameter": "nxx",
+      "value": "$sys.func.MID($session.params.temp_number, 4, 3)"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "Province",
+        "value": "$session.params.npa_nxx_lookup_response.province"
+      } ]
+    },
+    "name": "d810c76b-e2fd-4471-9b45-3e42231d6141"
+  }, {
+    "condition": "$session.params.webhook_success = \"false\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "CX input",
+    "name": "4cf4e9fb-d90d-42ef-9bb7-a5b7674b3ad7"
+  }, {
+    "condition": "$session.params.onebillindicator = \"Y\" AND ($session.params.Province = \"NB\" OR $session.params.Province = \"NL\" OR $session.params.Province = \"NS\" OR $session.params.Province = \"PE\")",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_va_to_ivr_handoff",
+    "name": "5662bb4a-2813-4914-a174-3ac045d365cc"
+  }, {
+    "condition": "$session.params.onebillindicator = \"N\" AND $session.params.Province != \"NB\" AND $session.params.Province != \"NL\" AND $session.params.Province != \"NS\" AND $session.params.Province != \"PE\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "CX input",
+    "name": "c95497c0-587a-4170-969a-8da77c738d7c"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "24dcbe26-0062-41f2-b417-c2b546142d51"
+      }, {
+        "parameter": "flow_id",
+        "value": "b97b2c8b-45a9-4e1d-ac6a-ad5b875f881e"
+      }, {
+        "parameter": "page_name",
+        "value": "Province Look-up Webhook"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "CX input",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+    
+    },
+    "name": "38c5a670-41d0-4e72-a498-4913a6353ba0"
+  }, {
+    "targetPage": "CX input",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+    
+    },
+    "name": "18be40d9-5b58-486a-9dc5-ccabf148b301"
+  }, {
+    "targetPage": "CX input",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+    
+    },
+    "name": "dd1d73ad-673a-4192-ac67-859bcaeeec44"
+  }, {
+    "targetPage": "CX input",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+    
+    },
+    "name": "02b3a72f-b589-484d-b38b-94aedee3532d"
+  }, {
+    "targetPage": "CX input",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+    
+    },
+    "name": "24b8d68a-5de0-4e15-b28f-6cd750c4eae1"
+  } ]
+}

@@ -1,0 +1,48 @@
+{
+  "name": "896c7209-c3f9-4a52-a2ff-e1a205ecdc3d",
+  "displayName": "Global Error handling",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.global_error_counter \u003e= 3",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_aqd",
+    "name": "49fbb538-fcac-48cc-a2fb-c6173d551e0e"
+  }, {
+    "condition": "$session.params.local_trigger = \"no_match\" AND $session.params.local_nomatch_counter \u003c 3",
+    "triggerFulfillment": {
+    
+    },
+    "name": "0002a2ed-23bf-456e-a33a-ef2a7e87792d"
+  }, {
+    "condition": "$session.params.local_trigger = \"no_input\" AND $session.params.local_nomatch_counter \u003c 3",
+    "triggerFulfillment": {
+    
+    },
+    "name": "9c845a10-20b1-4aa4-b150-d74a963f0cb9"
+  }, {
+    "condition": "$session.params.local_noinput_counter \u003e= 3 AND $session.params.local_trigger = \"no_input\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_No_Input_3",
+    "name": "187387d9-95df-419b-badd-f798bbaa9c5c"
+  }, {
+    "condition": "$session.params.local_trigger = \"no_match\" AND $session.params.local_nomatch_counter \u003e= 3",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_No_Match_3",
+    "name": "0ae4e234-1fd6-4cae-89a6-4aad78d96241"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Previous Page",
+    "name": "e544ae19-c14c-464d-b3d7-ed91f6790053"
+  } ]
+}

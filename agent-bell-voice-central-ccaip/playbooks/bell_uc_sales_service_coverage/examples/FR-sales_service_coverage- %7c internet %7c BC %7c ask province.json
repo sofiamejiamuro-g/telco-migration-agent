@@ -1,0 +1,69 @@
+{
+  "name": "5649b07c-e8ad-4006-a245-a95bfbcd6d44",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "language": "fr-ca",
+        "lob": "internet",
+        "province": "ROC"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Bien sûr, laissez-moi vous aider.\nVérifions si nous offrons des services Internet ou de téléphonie résidentielle dans votre secteur. Dans quelle province avez-vous besoin de services?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Richmond"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Obtenez des vitesses ultrarapides sur le réseau de Bell grâce au service Internet mobile de Bell. Vous pouvez bénéficier d'une connectivité Internet allant jusqu'à 5G avec un point d'accès sans fil mobile afin de rester connecté à la maison ou lors de vos déplacements.\nJe vais envoyer un texto à l'appareil au moyen duquel vous appelez, afin que vous puissiez en savoir plus sur le service Internet mobile sur notre site Web. Est-ce que ça vous convient?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "oui"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "fr-ca",
+        "lob": "Internet",
+        "sms_content": "Bell: Vous pouvez visiter bell.ca/mobileinternetdevices pour consulter nos appareils avec Internet mobile.( bell.ca/apropos )",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "The customer is asking whether the provider's internet service is offered at an address or location.",
+    "actionParameters": {
+      "language": "fr-ca",
+      "lob": "Internet",
+      "province": "BC",
+      "route": "sales_confirm_service_coverage",
+      "utterance": "Avez-vous un service Internet à mon emplacement?"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "When province is anything other than ON and QC or is null or empty, ask user for province, extract in {province} parameter and further route based on province",
+    "actionParameters": {
+      "language": "fr-ca",
+      "lob": "Internet",
+      "province": "BC",
+      "utterance": "Avez-vous un service Internet à mon emplacement?"
+    }
+  },
+  "displayName": "FR-sales_service_coverage- | internet | BC | ask province",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 560,
+  "languageCode": "en"
+}

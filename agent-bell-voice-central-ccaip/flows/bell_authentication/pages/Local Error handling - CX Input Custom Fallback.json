@@ -1,0 +1,76 @@
+{
+  "name": "757d1892-fada-4942-bb43-6174ea37bed5",
+  "displayName": "Local Error handling - CX Input Custom Fallback",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.global_error_counter \u003e= 3",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_aqd",
+    "name": "d4e63acd-d758-44b4-9a5d-158a4946aff4"
+  }, {
+    "condition": "$session.params.local_trigger = \"no_input\" AND $session.params.local_noinput_counter \u003e= 1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "That still does not seem right." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Cela ne semble toujours pas correct." ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "auth_status",
+        "value": "Fail"
+      } ]
+    },
+    "targetPage": "End Flow Check",
+    "name": "d6688090-47b1-40ba-8cb9-e1c4974cf9fe"
+  }, {
+    "condition": "$session.params.local_trigger = \"no_match\" AND $session.params.local_nomatch_counter \u003e= 1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "That still does not seem right." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Cela ne semble toujours pas correct." ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "auth_status",
+        "value": "Fail"
+      } ]
+    },
+    "targetPage": "End Flow Check",
+    "name": "715089e6-c2c3-46ad-affd-3c7be859e0ae"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "757d1892-fada-4942-bb43-6174ea37bed5"
+      }, {
+        "parameter": "flow_id",
+        "value": "5f8f4b4a-558a-4e66-9d28-a31389981b36"
+      }, {
+        "parameter": "page_name",
+        "value": "Local Error handling - CX Input Custom Fallback"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

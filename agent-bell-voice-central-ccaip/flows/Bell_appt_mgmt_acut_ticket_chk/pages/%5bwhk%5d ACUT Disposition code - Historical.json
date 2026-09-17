@@ -1,0 +1,76 @@
+{
+  "name": "33ddb9ed-e145-49f9-884d-0eacd22e1839",
+  "displayName": "[whk] ACUT Disposition code - Historical",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "v1/dfcx_support/content_lookup#disposition-code",
+    "tag": "disposition-code"
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.webhook_success = true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Closed ticket message - Historical",
+    "name": "2d1eac01-9175-40cf-9314-06e408c59a7c"
+  }, {
+    "condition": "$session.params.webhook_success = false",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Failure - ACUT",
+    "name": "832fba74-4c54-42ee-bb6a-b99475547227"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Failure - ACUT",
+    "name": "cleanup-hardstop-route"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Webhook Failure - ACUT",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+    
+    },
+    "name": "cc532a8e-e247-4607-b136-e8867a7451a7"
+  }, {
+    "targetPage": "Webhook Failure - ACUT",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+    
+    },
+    "name": "95f5b5b5-06ed-4e1e-bf5e-17489565bf37"
+  }, {
+    "targetPage": "Webhook Failure - ACUT",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+    
+    },
+    "name": "ed7ae143-d1b9-41bc-b7fd-534a060612ca"
+  }, {
+    "targetPage": "Webhook Failure - ACUT",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+    
+    },
+    "name": "105c55a4-8cba-457e-bed8-c2cd216abc08"
+  }, {
+    "targetPage": "Webhook Failure - ACUT",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+    
+    },
+    "name": "e7d50c4b-40ae-4445-9572-f0d6dcb5d388"
+  }, {
+    "targetPage": "Webhook Failure - ACUT",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+    
+    },
+    "name": "ba17f41c-12bd-4cd7-827b-4a10cd879e88"
+  } ]
+}

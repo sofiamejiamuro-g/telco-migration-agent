@@ -1,0 +1,115 @@
+{
+  "name": "c2a08f8f-799d-4c61-b894-2a2f49ee47d3",
+  "displayName": "Webhook VR-next-task",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "messages": [ {
+      "text": {
+        "text": [ "stub vr_next_task_response" ]
+      },
+      "languageCode": "fr"
+    } ],
+    "webhook": "v1/bell-vr#next-task",
+    "tag": "next-task",
+    "setParameterActions": [ {
+      "parameter": "webhook_success",
+      "value": null
+    } ],
+    "returnPartialResponses": true
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.webhook_success = \"true\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "counter_next_task",
+        "value": 0
+      }, {
+        "parameter": "webhook_success",
+        "value": null
+      } ]
+    },
+    "targetPage": "No Input Pass through",
+    "name": "f1d4e834-67a0-4b2c-a5ab-968a65a1800f"
+  }, {
+    "condition": "$session.params.webhook_success = \"false\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Oops! Something went wrong on my end. I need to connect you to an agent." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Oups! Une erreur est survenue de mon côté. Je vais vous mettre en relation avec un agent." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "91b613b4-97e3-44e4-a698-a3f29a287b1d"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "c2a08f8f-799d-4c61-b894-2a2f49ee47d3"
+      }, {
+        "parameter": "flow_id",
+        "value": "175e5696-986b-4b0a-b9da-5fb5efa67a73"
+      }, {
+        "parameter": "page_name",
+        "value": "Webhook VR-next-task"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Error_handler",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+    
+    },
+    "name": "639736af-bd49-4a3f-9dea-367883de5705"
+  }, {
+    "targetPage": "Error_handler",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+    
+    },
+    "name": "1f082e8e-951a-4d90-a5d7-bbca8f2dcc9e"
+  }, {
+    "targetPage": "Error_handler",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+    
+    },
+    "name": "eba7a90c-42a8-4687-8b95-44437a01fd6c"
+  }, {
+    "targetPage": "Error_handler",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+    
+    },
+    "name": "3e1c5381-8957-4cf8-89d0-16119962cca5"
+  }, {
+    "targetPage": "Error_handler",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+    
+    },
+    "name": "d53268f7-de8c-4baa-adf7-85bb883aa280"
+  }, {
+    "targetPage": "Error_handler",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+    
+    },
+    "name": "fe3daa06-abb8-4d5e-96c9-de9de23df84e"
+  } ]
+}

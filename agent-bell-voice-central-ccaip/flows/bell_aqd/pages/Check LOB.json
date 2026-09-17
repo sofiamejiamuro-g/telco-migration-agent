@@ -1,0 +1,178 @@
+{
+  "name": "5968a2aa-e977-4969-b2a4-0ea7ab70f095",
+  "displayName": "Check LOB",
+  "form": {
+    "parameters": [ {
+      "displayName": "lob",
+      "required": true,
+      "entityType": "@lob",
+      "fillBehavior": {
+        "initialPromptFulfillment": {
+          "conditionalCases": [ {
+            "cases": [ {
+              "condition": "$session.params.lob = null AND $session.params.device_type = null",
+              "caseContent": [ {
+                "message": {
+                  "text": {
+                    "text": [ "Pour vous aider à trouver le bon agent, pouvez-vous me dire avec quel service vous avez besoin d'aide aujourd'hui? Mobilité, Internet ou Télé?" ]
+                  },
+                  "languageCode": "fr-ca"
+                }
+              }, {
+                "message": {
+                  "text": {
+                    "text": [ "To help you get to the right agent, can you tell me which service you need help with today? Mobility, Internet, or TV?" ]
+                  },
+                  "languageCode": "en"
+                }
+              } ]
+            } ]
+          } ]
+        },
+        "repromptEventHandlers": [ {
+          "event": "sys.no-input-1",
+          "triggerFulfillment": {
+            "messages": [ {
+              "text": {
+                "text": [ "Pourriez-vous préciser le type de service qui vous intéresse Mobilité, Internet ou Télé?" ]
+              },
+              "languageCode": "fr-ca"
+            }, {
+              "text": {
+                "text": [ "Could you specify the type of service you're inquiring about? Mobility, Internet, TV, or Homephone?" ]
+              },
+              "languageCode": "en"
+            } ]
+          },
+          "name": "a7101735-b8c6-44ff-8eb0-ff508f671f95"
+        }, {
+          "event": "sys.no-match-1",
+          "triggerFulfillment": {
+            "messages": [ {
+              "text": {
+                "text": [ "Pourriez-vous préciser le type de service qui vous intéresse Mobilité, Internet ou Télé?" ]
+              },
+              "languageCode": "fr-ca"
+            }, {
+              "text": {
+                "text": [ "Could you specify the type of service you're inquiring about? Mobility, Internet, TV, or Homephone?" ]
+              },
+              "languageCode": "en"
+            } ]
+          },
+          "name": "73cef800-ee0b-4a88-b599-5897e88bb8b6"
+        }, {
+          "targetPage": "Set params for v1/agent-queue-determination",
+          "event": "sys.no-input-2",
+          "triggerFulfillment": {
+            "setParameterActions": [ {
+              "parameter": "lob",
+              "value": "Internet"
+            }, {
+              "parameter": "l2_brand",
+              "value": "Bell Residential Services"
+            }, {
+              "parameter": "apb_location_id",
+              "value": 70014
+            } ]
+          },
+          "name": "1d3eb247-5390-45ad-8650-57cc810fd310"
+        }, {
+          "targetPage": "Set params for v1/agent-queue-determination",
+          "event": "sys.no-match-2",
+          "triggerFulfillment": {
+            "setParameterActions": [ {
+              "parameter": "lob",
+              "value": "Internet"
+            }, {
+              "parameter": "l2_brand",
+              "value": "Bell Residential Services"
+            }, {
+              "parameter": "apb_location_id",
+              "value": 70014
+            } ]
+          },
+          "name": "532a76bc-0463-4b81-bc5e-6b4af7a8910d"
+        } ]
+      }
+    } ]
+  },
+  "entryFulfillment": {
+    "setParameterActions": [ {
+      "parameter": "unique_service_count",
+      "value": "$sys.func.COUNT($session.params.unique_services)"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.lob = null AND $session.params.unique_service_count = 1",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "lob",
+        "value": "$sys.func.LOWER($session.params.unique_services[0])"
+      } ]
+    },
+    "name": "7640cad1-8fa2-435f-8423-c78716de89bf"
+  }, {
+    "condition": "$session.params.lob = \"mobility\" OR $session.params.lob = \"Mobility\" OR $session.params.lob = \"MOBILITY\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "l2_brand",
+        "value": "Bell Mobility"
+      } ]
+    },
+    "targetPage": "Check Prepaid",
+    "name": "861b3ffe-7a95-48a8-9aec-900721ae4ad3"
+  }, {
+    "condition": "$session.params.lob = \"internet\" OR $session.params.lob = \"tv\" OR $session.params.lob = \"Internet\" OR $session.params.lob = \"TV\" OR $session.params.lob = \"INTERNET\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "l2_brand",
+        "value": "Bell Residential Services"
+      } ]
+    },
+    "targetPage": "Set params for v1/agent-queue-determination",
+    "name": "297454c9-b001-4072-b37c-96f5c528e212"
+  }, {
+    "condition": "$session.params.lob = \"homephone\" OR $session.params.lob = \"Homephone\" OR $session.params.lob = \"HOMEPHONE\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "l2_brand",
+        "value": "Bell Residential Services"
+      } ]
+    },
+    "targetPage": "Set params for v1/agent-queue-determination",
+    "name": "1fc1e2e9-02c1-4242-a988-ef320fc07d73"
+  }, {
+    "condition": "$session.params.lob != null AND $session.params.lob != \"\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "l2_brand",
+        "value": "Bell Mobility"
+      } ]
+    },
+    "targetPage": "Set params for v1/agent-queue-determination",
+    "name": "7fe17b98-779f-4846-b459-7120759d0872"
+  }, {
+    "condition": "$session.params.lob = \"mobilite\" AND $session.params.language = \"fr-CA\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Check Prepaid",
+    "name": "4350846e-24ba-47f7-9af7-6edabdf23e8d"
+  } ],
+  "advancedSettings": {
+    "speechAdaptationSettings": {
+      "enableManualSpeechAdaptation": true,
+      "biasingPhraseSets": [ {
+        "biasingPhrases": [ {
+          "value": "mobility service",
+          "boost": 5
+        } ],
+        "displayName": "mobility"
+      } ]
+    }
+  },
+  "speakerIdSettings": {
+  
+  }
+}

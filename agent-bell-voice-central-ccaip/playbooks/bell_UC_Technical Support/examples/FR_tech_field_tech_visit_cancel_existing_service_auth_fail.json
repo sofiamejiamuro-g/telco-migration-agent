@@ -1,0 +1,94 @@
+{
+  "name": "92d0d4c3-9db3-4f61-a438-3a76448807e7",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70012"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "playbookInvocation": {
+      "playbook": "bell_uc_ask_LOB",
+      "playbookInput": {
+        "precedingConversationSummary": "Customer wants to cancel the appointment, but does not mention lob",
+        "actionParameters": {
+          "language": "en",
+          "route": "tech_field_tech_visit_cancel"
+        }
+      },
+      "playbookOutput": {
+        "executionSummary": "When user does not provide lob, prompt them to understand what kind of service they are looking for, if the user mentions lob then return lob to the originating Playbook, if not set the default lob and return back",
+        "actionParameters": {
+          "language": "en",
+          "lob": "Internet",
+          "route": "tech_field_tech_visit_cancel"
+        }
+      },
+      "playbookState": "OUTPUT_STATE_OK"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "S'agit-il de réparer un service existant ?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "existing service"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_authentication",
+      "inputActionParameters": {
+      
+      },
+      "outputActionParameters": {
+        "auth_status": "Fail"
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Saviez-vous que vous pouvez consulter, reporter ou annuler votre rendez-vous dans l'application « Gérer vos rendez-vous » ? Je vous enverrai un SMS sur l'appareil depuis lequel vous appelez pour que vous puissiez commencer. Est-ce que cela vous convient ?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "oui"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "sms_content": "You can visit https://m.bell.ca/mylogin and click the tile with your appointment information to manage your appointment in the My Bell app.   ( bell.ca/about-us )",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer wants to cancel the appointment",
+    "actionParameters": {
+      "language": "fr-ca",
+      "route": "tech_field_tech_visit_cancel",
+      "utterance": "Je souhaite annuler mon rendez-vous."
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "User does not  mention lob so call bell_uc_ask_LOB playbook and extract the lob, and return to this playbook . \nTrigger bell_SMS trigger flow at the end",
+    "actionParameters": {
+      "auth_status": "Fail",
+      "language": "fr-ca",
+      "lob": "Internet",
+      "route": "tech_field_tech_visit_cancel",
+      "utterance": "I want to cancel my appointment"
+    }
+  },
+  "displayName": "FR_tech_field_tech_visit_cancel_existing_service_auth_fail",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 717,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

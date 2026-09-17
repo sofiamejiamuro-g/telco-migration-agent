@@ -1,0 +1,87 @@
+{
+  "name": "21a85c37-40be-4032-83c5-1af03d87f9cc",
+  "displayName": "Check BAN Count",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.ivr_va_ban_count = 1",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "va_ivr_cpm_route",
+        "value": true
+      }, {
+        "parameter": "ivr_to_va_entry",
+        "value": true
+      } ]
+    },
+    "targetFlow": "bell_Identification",
+    "name": "78f3df99-7138-4bae-9785-934ccc25cd66"
+  }, {
+    "condition": "$session.params.ivr_to_va_entry = true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "End Flow",
+    "name": "c34c79f5-1eb0-4dff-bc4d-96d49e7744b0"
+  }, {
+    "condition": "$session.params.ivr_va_ban_count \u003e 1 AND $session.params.lob != null",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_multiban",
+    "name": "7a3a3c67-26cb-4354-a207-a36d0a399afc"
+  }, {
+    "condition": "$session.params.ivr_va_ban_count \u003e 1 AND $session.params.lob != null",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "End Flow",
+    "name": "532ebedf-3aa4-4402-8c09-f2d3ad1d6d18"
+  }, {
+    "condition": "$session.params.ivr_va_ban_count \u003e 1 AND $session.params.lob = null",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_multiban",
+    "name": "c3c4e5db-f57b-4a55-88f3-cda209e1a80a"
+  }, {
+    "condition": "$session.params.ivr_va_ban_count \u003e 1 AND $session.params.lob = null",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "End Flow",
+    "name": "05c11a51-dd8b-456b-9d15-1b182e084a22"
+  }, {
+    "condition": "$session.params.ivr_va_no_ban_counter \u003e= 1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Sorry, I can't seem to find that number in our records. However, I'll still do my best to help you. " ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Désolé, je ne parviens pas à trouver ce numéro dans nos dossiers. Soyez sans crainte, je ferai quand même de mon mieux pour vous servir." ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "identification_status",
+        "value": "Fail"
+      }, {
+        "parameter": "ivr_va_cpm_check_fail",
+        "value": true
+      } ]
+    },
+    "targetFlow": "Default Start Flow",
+    "name": "e7dd026a-970f-4ddf-b9bb-039272faa37c"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Prompt For Phone Number",
+    "name": "4d37f14e-57c3-43ad-835a-392ace20917c"
+  } ]
+}

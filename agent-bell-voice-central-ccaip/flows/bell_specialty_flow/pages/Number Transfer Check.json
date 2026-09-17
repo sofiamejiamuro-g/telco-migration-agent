@@ -1,0 +1,77 @@
+{
+  "name": "a469d613-1fbd-41f7-8488-24f70b4ae237",
+  "displayName": "Number Transfer Check",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "messages": [ {
+      "text": {
+        "text": [ "Are you calling about transferring your number from another service provider?" ]
+      },
+      "languageCode": "en"
+    }, {
+      "text": {
+        "text": [ "Appelez-vous pour le transfert de votre numéro d'un autre fournisseur de services ?" ]
+      },
+      "languageCode": "fr-ca"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "intent": "context.confirm_yes",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "special_queue",
+        "value": "sales_port_ncs"
+      }, {
+        "parameter": "intent",
+        "value": "sales_port_in_service"
+      }, {
+        "parameter": "route",
+        "value": "sales_port_in_service"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "48c899b8-9d3f-4c69-b8aa-80ef6af34020"
+  }, {
+    "intent": "context.confirm_no",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Upfront Sales pitch",
+    "name": "89f56027-9452-4dfc-b679-9001aeaa37b1"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Local Error Handling Number Transfer Check",
+    "event": "sys.no-input-default",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "global_error_counter",
+        "value": "$sys.func.ADD($session.params.global_error_counter,1)"
+      }, {
+        "parameter": "local_trigger",
+        "value": "no_input"
+      }, {
+        "parameter": "local_noinput_counter",
+        "value": "$sys.func.ADD($session.params.local_noinput_counter,1)"
+      } ]
+    },
+    "name": "d8aeda44-2d38-45c1-a494-5845ffc3ab97"
+  }, {
+    "targetPage": "Local Error Handling Number Transfer Check",
+    "event": "sys.no-match-default",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "global_error_counter",
+        "value": "$sys.func.ADD($session.params.global_error_counter,1)"
+      }, {
+        "parameter": "local_trigger",
+        "value": "no_match"
+      }, {
+        "parameter": "local_nomatch_counter",
+        "value": "$sys.func.ADD($session.params.local_nomatch_counter,1)"
+      } ]
+    },
+    "name": "45461e68-5a80-4fcb-97f7-c77a32ec4d5b"
+  } ]
+}

@@ -1,0 +1,162 @@
+{
+  "name": "dec50294-619e-49c1-88ab-f996c1633327",
+  "displayName": "Ban-Profile Webhook Check",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "/v1/ibm_mw/nm1_get#ban-profile",
+    "tag": "ban-profile",
+    "setParameterActions": [ {
+      "parameter": "billing_account",
+      "value": "$session.params.billing_account"
+    }, {
+      "parameter": "ibm_application_id ",
+      "value": "$sys.func.IF(\"$session.params.intake_routing_lookup_response.va_ibm_id = null\", LUC_Entry, $session.params.intake_routing_lookup_response.va_ibm_id)"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "onebillindicator",
+        "value": "$session.params.nm1_get_ban_profile_response.oneBillIndicator"
+      }, {
+        "parameter": "errorCode",
+        "value": "$session.params.nm1_get_ban_profile_response.returnCode"
+      }, {
+        "parameter": "Bantype",
+        "value": "$session.params.nm1_get_ban_profile_response.accountType"
+      }, {
+        "parameter": "Bansubtype",
+        "value": "$session.params.nm1_get_ban_profile_response.accountSubType"
+      } ]
+    },
+    "name": "9d5fc0db-6364-4ff2-9f5b-c3946c2028c8"
+  }, {
+    "condition": "$session.params.webhook_success = \"false\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "PAD Self-Service SMS Confirmation",
+    "name": "71f2b704-d654-469a-8c43-2aa38477464f"
+  }, {
+    "condition": "$session.params.errorCode = \"0\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "webhook_success",
+        "value": "false"
+      } ]
+    },
+    "targetPage": "PAD Self-Service SMS Confirmation",
+    "name": "a9c418e7-7140-456f-b71b-a09f77a3fe17"
+  }, {
+    "condition": "$session.params.onebillindicator = \"Y\" OR $session.params.onebillindicator = \"M\" OR $session.params.onebillindicator = \"N\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "webhook_success",
+        "value": null
+      } ]
+    },
+    "targetPage": "Consolidated Customers",
+    "name": "5789d868-337c-40bb-bad7-98768d5ad2f2"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "dec50294-619e-49c1-88ab-f996c1633327"
+      }, {
+        "parameter": "flow_id",
+        "value": "97702c6e-5d8f-4b0b-a549-7650c14df7ab"
+      }, {
+        "parameter": "page_name",
+        "value": "Ban-Profile Webhook Check"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "PAD Self-Service SMS Confirmation",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "webhook_success",
+        "value": "nm1"
+      }, {
+        "parameter": "preauth_exit_1",
+        "value": true
+      } ]
+    },
+    "name": "2501f0a4-b14e-493e-a9cc-6a61c2d30e0b"
+  }, {
+    "targetPage": "PAD Self-Service SMS Confirmation",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "webhook_success",
+        "value": "nm1"
+      }, {
+        "parameter": "preauth_exit_1",
+        "value": true
+      } ]
+    },
+    "name": "1d889dc3-fc7b-4db2-8de9-b2929ed1ec3d"
+  }, {
+    "targetPage": "PAD Self-Service SMS Confirmation",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "webhook_success",
+        "value": "nm1"
+      }, {
+        "parameter": "preauth_exit_1",
+        "value": true
+      } ]
+    },
+    "name": "1b09ddc9-2266-451d-88bc-a2ccfb24ba06"
+  }, {
+    "targetPage": "PAD Self-Service SMS Confirmation",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "webhook_success",
+        "value": "nm1"
+      }, {
+        "parameter": "preauth_exit_1",
+        "value": true
+      } ]
+    },
+    "name": "4f20f08c-3f97-413a-b854-4d7458290290"
+  }, {
+    "targetPage": "PAD Self-Service SMS Confirmation",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "webhook_success",
+        "value": "nm1"
+      }, {
+        "parameter": "preauth_exit_1",
+        "value": true
+      } ]
+    },
+    "name": "fbb96279-d451-48b3-b68b-0b183432f4ea"
+  }, {
+    "targetPage": "PAD Self-Service SMS Confirmation",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "webhook_success",
+        "value": "nm1"
+      }, {
+        "parameter": "preauth_exit_1",
+        "value": true
+      } ]
+    },
+    "name": "204a7918-358c-4f88-b977-37da6550202b"
+  } ]
+}

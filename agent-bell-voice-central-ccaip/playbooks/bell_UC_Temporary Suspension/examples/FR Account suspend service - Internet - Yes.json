@@ -1,0 +1,56 @@
+{
+  "name": "fa8ce3d4-d468-4fe2-8b2d-508532bd12a7",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Bien sûr, je peux vous aider. Pourriez-vous confirmer le service que vous souhaitez suspendre?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Internet"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Merci. Vous pouvez suspendre temporairement vos services résidentiels dans MonBell. Je vais envoyer un texto à l’appareil à partir duquel vous appelez qui contient un lien pour le faire vous-même. Est-ce que cela vous convient?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "oui"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "fr-ca",
+        "sms_content": "Mess. de Bell: Vous pouvez visiter m.bell.ca/suspensiontemporaire pour suspendre temporairement votre service residentiel dans MonBell. ( bell.ca/apropos )",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+        "brand": "bell",
+        "language": "fr-ca"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer trying to suspend their service as there device is lost",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca",
+      "route": "account_suspend_service",
+      "unique_services": "Internet, Tv, Homephone",
+      "utterance": "Je veux suspendre mon ou mes service"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Customer query is resolved.",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca",
+      "sms_send_status": "Declined"
+    }
+  },
+  "displayName": "FR Account suspend service - Internet - Yes",
+  "retrievalStrategy": "NEVER",
+  "tokenCount": 361,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

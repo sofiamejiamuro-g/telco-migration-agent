@@ -1,0 +1,80 @@
+{
+  "name": "17524a13-efe2-48d5-8e03-d54c40a5f556",
+  "displayName": "[whk] ACUT Search Find - Home phone",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "/v1/ticket_management/acut/search#find-wireline_telephone_number",
+    "tag": "find",
+    "setParameterActions": [ {
+      "parameter": "webhook_success",
+      "value": null
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.webhook_success = true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Check Find response",
+    "name": "28756ddc-a7e9-4fa1-b148-f2bd257b5992"
+  }, {
+    "condition": "$session.params.webhook_success = false",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Failure - Troubleshooting Intents",
+    "name": "2db83e1a-b643-4a93-b573-19fd2cc30126"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Failure - Troubleshooting Intents",
+    "name": "cleanup-hardstop-route"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Webhook Failure - Troubleshooting Intents",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+    
+    },
+    "name": "68d94213-2a12-4bb3-b686-eeb96474e41e"
+  }, {
+    "targetPage": "Webhook Failure - Troubleshooting Intents",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+    
+    },
+    "name": "0a29b339-8391-44e5-8f27-f95f7408a4b5"
+  }, {
+    "targetPage": "Webhook Failure - Troubleshooting Intents",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+    
+    },
+    "name": "ca3a34bc-7646-45ff-a933-17e09aa521e4"
+  }, {
+    "targetPage": "Webhook Failure - Troubleshooting Intents",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+    
+    },
+    "name": "2685fcab-b8c4-4413-9020-c265dc5c8c0c"
+  }, {
+    "targetPage": "Webhook Failure - Troubleshooting Intents",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+    
+    },
+    "name": "95059aed-f695-4e81-9e67-ebf38a5f7a20"
+  }, {
+    "targetPage": "Webhook Failure - Troubleshooting Intents",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+    
+    },
+    "name": "49b075b7-91a1-4beb-a3ff-2b6bcbecc667"
+  } ]
+}

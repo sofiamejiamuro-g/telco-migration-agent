@@ -1,0 +1,123 @@
+{
+  "name": "e35c7898-19a2-41ce-a11a-1adf0304c970",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Okay, just to better understand your issue, are you experiencing image quality issues, are your Bell Fibe TV apps not working, or is it something else?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "I'm not sure"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Thanks for letting me know. I'm now checking what the next step is."
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_vr_post_answer",
+      "inputActionParameters": {
+        "customer_answer1_id": "2",
+        "customer_answer2_id": "5"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "User having a problem with the service and initiating Virtual repair session.",
+    "actionParameters": {
+      "acceptable_answers": [ {
+        "choice": "Home phone",
+        "id": "0",
+        "sub-choices": [ {
+          "choice": "My Home Phone has no dial tone.",
+          "id": "0"
+        }, {
+          "choice": "My Home Phone line is noisy.",
+          "id": "1"
+        }, {
+          "choice": "My Home Phone features aren’t working.",
+          "id": "2"
+        }, {
+          "choice": "I can’t receive phone calls.",
+          "id": "3"
+        }, {
+          "choice": "I'm not sure what's wrong.",
+          "id": "4"
+        }, {
+          "choice": "None of the above.",
+          "id": "5"
+        } ],
+        "title": "What type of problem are you experiencing with your Home phone service?"
+      }, {
+        "choice": "Internet",
+        "id": "1",
+        "sub-choices": [ {
+          "choice": "My modem won't turn on.",
+          "id": "0"
+        }, {
+          "choice": "I’m experiencing frequent disconnections.",
+          "id": "1"
+        }, {
+          "choice": "My Internet service is slow.",
+          "id": "2"
+        }, {
+          "choice": "My streaming services don’t work.",
+          "id": "3"
+        }, {
+          "choice": "I'm not sure what's wrong.",
+          "id": "4"
+        }, {
+          "choice": "None of the above.",
+          "id": "5"
+        } ],
+        "title": "What type of problem are you experiencing with your Internet service?"
+      }, {
+        "choice": "TV",
+        "id": "2",
+        "sub-choices": [ {
+          "choice": "Image quality issues.",
+          "id": "0"
+        }, {
+          "choice": "My Bell Fibe TV apps aren’t working.",
+          "id": "1"
+        }, {
+          "choice": "Some of my channels are missing or not working.",
+          "id": "2"
+        }, {
+          "choice": "My receiver isn’t working.",
+          "id": "3"
+        }, {
+          "choice": "My Bell Fibe TV remote isn’t working.",
+          "id": "4"
+        }, {
+          "choice": "None of the above.",
+          "id": "5"
+        } ],
+        "title": "What type of problem are you experiencing with your TV service?"
+      }, {
+        "choice": "All services",
+        "id": "3",
+        "sub-choices": [ ],
+        "title": ""
+      } ],
+      "dcx_action_code": "6590",
+      "language": "en",
+      "lob": "TV",
+      "title": "my TV is not working",
+      "vr_type": "CFB"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Context Recognition: The conversation was in the Clarification State (Step 1 of the \"Two-Strike Rule\"). The bot had previously identified the LOB as \"TV\" (ID 2) but needed to narrow down the specific issue from the abstract utterance \"my TV is not working\"\n\n2. Semantic Matching (Two-Strike Rule #1): The bot analyzed the user's response (\"I'm not sure\") against the sub-choices provided for the TV LOB.\n\nUser Input: \"I'm not sure\"\n\nTarget Sub-choice: \"None of the above.\" (ID 5)\n\nResult: This was identified as a High-Confidence Match.\n\n3. Variable Assignment: Based on the match, the bot assigned the ID variables as defined in the instructions:\n\ncustomer_answer1_id = 2 (The Parent LOB ID for TV).\n\ncustomer_answer2_id = 5 (The specific sub-choice ID for none of the above).\n\n4. Response Generation: Because a high-confidence match was found, the bot triggered the mandatory accepted answer phrase: \"Thanks for letting me know. I'm now checking what the next step is.\"\n\n5. Flow Trigger: The bot immediately triggered ${FLOW:bell_vr_post_answer} to proceed with the specific troubleshooting logic for streaming issues.",
+    "actionParameters": {
+    
+    }
+  },
+  "displayName": "CFB - 6590 - Disambiguation (TV)",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 1047,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

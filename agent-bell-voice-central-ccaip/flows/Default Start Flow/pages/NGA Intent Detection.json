@@ -1,0 +1,63 @@
+{
+  "name": "31829aae-c6a8-479c-8a18-c6cd954732f7",
+  "displayName": "NGA Intent Detection",
+  "form": {
+    "parameters": [ {
+      "displayName": "utterance",
+      "required": true,
+      "entityType": "@sys.any",
+      "fillBehavior": {
+        "initialPromptFulfillment": {
+        
+        },
+        "repromptEventHandlers": [ {
+          "event": "sys.long-utterance",
+          "triggerFulfillment": {
+            "messages": [ {
+              "payload": {
+                "transferToNga": "$session.params.nga_agent_id",
+                "variables": {
+                  "customer_type": "$session.params.customer_type",
+                  "dfcx_session_id": "$session.params.dfcx_session_id",
+                  "language": "$session.params.language",
+                  "utterance": "$session.params.utterance"
+                }
+              },
+              "languageCode": "en"
+            } ],
+            "setParameterActions": [ {
+              "parameter": "utterance",
+              "value": "$request.user-utterance"
+            } ]
+          },
+          "name": "8e1c870e-308d-454d-9916-1cad1f8e0f9e"
+        } ]
+      }
+    } ]
+  },
+  "transitionRoutes": [ {
+    "intent": "Default Welcome Intent",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "NGA UC Routing Page",
+    "name": "b126bd0c-ff6c-4b31-80b9-328f45d1c947"
+  }, {
+    "condition": "$session.params.utterance != null AND $session.params.language != null",
+    "triggerFulfillment": {
+      "messages": [ {
+        "payload": {
+          "transferToNga": "$session.params.nga_agent_id",
+          "variables": {
+            "customer_type": "$session.params.customer_type",
+            "dfcx_session_id": "$session.params.dfcx_session_id",
+            "language": "$session.params.language",
+            "utterance": "$session.params.utterance"
+          }
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "a0d350c8-2a8e-47a4-8353-3eb51fe96e4a"
+  } ]
+}

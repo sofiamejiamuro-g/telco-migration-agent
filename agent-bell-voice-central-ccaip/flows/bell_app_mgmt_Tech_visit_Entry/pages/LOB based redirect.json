@@ -1,0 +1,81 @@
+{
+  "name": "fe3e3103-2d68-48ad-bd47-f8c4b73292bd",
+  "displayName": "LOB based redirect",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "setParameterActions": [ {
+      "parameter": "lob_service_ids",
+      "value": "$sys.func.FILTER(\"$session.params.billing_account_info_list\", \"$..services[?(@.service_type in $session.params.lob_list)].service_id\")"
+    }, {
+      "parameter": "_lob_count",
+      "value": "$sys.func.COUNT($session.params.lob_service_ids)"
+    }, {
+      "parameter": "lob_count",
+      "value": "$sys.func.TO_NUMBER($session.params._lob_count)"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.lob_count \u003e 1 OR $session.params.lob_count = 0",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Intent determination for AQD",
+    "name": "28cb4e21-c088-4f4c-92eb-fe23c274a437"
+  }, {
+    "condition": "$session.params.lob = \"Mobility\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "route",
+        "value": "sales_plans_inquiry"
+      } ]
+    },
+    "name": "f35037fb-53e6-4136-b18f-e566dc9caab6",
+    "targetPlaybook": "Bell_UC_Sales_Plans_inquiry"
+  }, {
+    "condition": "$sys.func.UPPER($session.params.lob) = \"HOMEPHONE\" OR $session.params.lob = \"Internet\" OR $session.params.lob = \"TV\" OR $session.params.lob = \"internet\" OR $sys.func.UPPER($session.params.lob) = \"WIRELINE\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_app_mgmt_change_contact_method",
+    "name": "198edc4b-b11c-4331-94af-7b7350bf883a"
+  }, {
+    "condition": "$sys.func.UPPER($session.params.lob) = \"TV\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "tv_account_number",
+        "value": "$sys.func.GET($session.params.lob_service_ids,0)"
+      } ]
+    },
+    "targetPage": "Webhook omf order-summary",
+    "name": "59deb6dd-1370-4a28-a715-771344d502de"
+  }, {
+    "condition": "$sys.func.UPPER($session.params.lob) = \"INTERNET\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "internet_account_number",
+        "value": "$sys.func.GET($session.params.lob_service_ids,0)"
+      } ]
+    },
+    "targetPage": "Webhook omf order-summary",
+    "name": "3f8423c7-2688-40d3-a849-9f17a7ae0221"
+  }, {
+    "condition": "$sys.func.UPPER($session.params.lob) = \"HOMEPHONE\" OR $sys.func.UPPER($session.params.lob) = \"WIRELINE\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "wireline_telephone_number",
+        "value": "$sys.func.GET($session.params.lob_service_ids,0)"
+      } ]
+    },
+    "targetPage": "Webhook omf order-summary",
+    "name": "53b40afd-2caa-4739-9f54-4449f8da6075"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Check appointment type entity",
+    "name": "0fa02a3b-0121-4ac7-8080-2b2eebc24560"
+  } ]
+}

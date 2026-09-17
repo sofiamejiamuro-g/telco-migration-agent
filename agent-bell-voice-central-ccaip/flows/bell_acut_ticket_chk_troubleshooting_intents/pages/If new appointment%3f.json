@@ -1,0 +1,54 @@
+{
+  "name": "8cfff736-51a5-48de-8a8a-077eea53d066",
+  "displayName": "If new appointment?",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "messages": [ {
+      "text": {
+        "text": [ "$session.params.acut_trouble_type_response.trouble_type_message  $session.params.acut_main_task_status_response.main_task_status_message" ]
+      },
+      "languageCode": "fr-ca"
+    }, {
+      "text": {
+        "text": [ "Souhaitez-vous planifier un nouveau rendez-vous maintenant?" ]
+      },
+      "languageCode": "fr-ca"
+    }, {
+      "text": {
+        "text": [ "$session.params.acut_trouble_type_response.trouble_type_message  $session.params.acut_main_task_status_response.main_task_status_message" ]
+      },
+      "languageCode": "en"
+    }, {
+      "text": {
+        "text": [ "Would you like to schedule a new appointment now?" ]
+      },
+      "languageCode": "en"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "intent": "context.confirm_yes",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "street_number",
+        "value": "$session.params.acut_retrieve_response.acutContext.geographicAddress.urbanPropertyAddress.streetNrFirst"
+      }, {
+        "parameter": "street_name",
+        "value": "$session.params.acut_retrieve_response.acutContext.geographicAddress.urbanPropertyAddress.streetName"
+      }, {
+        "parameter": "sub_unit",
+        "value": "$sys.func.IF(\"$session.params.acut_retrieve_response.acutContext.geographicAddress.urbanPropertyAddress.subUnitNr != null\", $session.params.acut_retrieve_response.acutContext.geographicAddress.urbanPropertyAddress.subUnitNr,\"\")"
+      } ]
+    },
+    "targetFlow": "bell_app_mgmt_create_dispatch_start",
+    "name": "69565d06-621c-4ab7-ae3f-db7356f55cfb"
+  }, {
+    "intent": "context.confirm_no",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_aqd",
+    "name": "ce33daf7-bf93-4a95-b8a1-f286293bfe29"
+  } ]
+}

@@ -1,0 +1,81 @@
+{
+  "name": "ddbb3685-2a27-4f8f-b8cf-7a17860d1da0",
+  "displayName": "Check for Existing Number",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "setParameterActions": [ {
+      "parameter": "local_trigger",
+      "value": null
+    }, {
+      "parameter": "local_noinput_counter",
+      "value": 0
+    }, {
+      "parameter": "local_nomatch_counter",
+      "value": 0
+    }, {
+      "parameter": "is_clid_wsn",
+      "value": "$sys.func.CONTAIN($session.params.otp_number_list, $session.params.clid)"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.contact_method_completed = true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "End Flow Check",
+    "name": "fea5011f-e2df-489e-9850-6ebc0de7cfa6"
+  }, {
+    "condition": "$session.params.telephone_otp != null",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Before we get started, we'll need a contact number that we can reach you on regarding your service issue, if necessary. Would you like to re-use the number you have already provided?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Avant de commencer, nous aurons besoin d’un numéro de téléphone où nous pouvons vous joindre au sujet de votre problème de service, si nécessaire. Souhaitez-vous réutiliser le numéro que vous avez déjà fourni?" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetPage": "Confirmation of CLID_wsn",
+    "name": "23ae2dd9-11c6-4458-aa8f-57fa9df7a748"
+  }, {
+    "condition": "$session.params.is_clid_wsn = True",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Before we get started, we'll need a contact number that we can reach you on regarding your service issue, if necessary.  Would you like to use the number you are calling from?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Avant de commencer, nous aurons besoin d’un numéro de téléphone où nous pouvons vous joindre au sujet de votre problème de service, si nécessaire. Souhaitez-vous utiliser le numéro à partir duquel vous appelez?" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetPage": "Confirmation of CLID_wsn",
+    "name": "df5d3260-a18d-4b4c-9d21-086c20e1e7af"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Before we get started, we'll need a contact number that we can reach you on regarding your service issue, if necessary. What mobile number can we reach you on?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Avant de commencer, nous aurons besoin d’un numéro de téléphone où nous pouvons vous joindre au sujet de votre problème de service, si nécessaire. Quel numéro de cellulaire pouvons-nous utiliser pour vous joindre?" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetPage": "Contact method",
+    "name": "32832de7-ab36-4773-89ea-10a40209201a"
+  } ]
+}

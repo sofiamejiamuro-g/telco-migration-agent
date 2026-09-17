@@ -1,0 +1,98 @@
+{
+  "name": "27f7aa04-2175-4145-8735-0a9f21f32e9a",
+  "displayName": "Check LOB (Failed Outage Check)",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.route = tech_service_outage AND ($session.params.lob = Internet OR $session.params.lob = internet OR $session.params.lob = INTERNET OR $session.params.lob = Homephone OR $session.params.lob = homephone OR $session.params.tv_sub_type = fibe OR $session.params.tv_sub_type = \"fibe tv app\") AND ($session.params.province = ON OR $session.params.province = QC)",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Je suis désolé, en raison d'un problème de système inattendu, je nʼai pas pu vérifier s'il y a une panne active dans votre secteur. Mais ne vous inquiétez pas, voyons comment je peux vous aider davantage." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "Sorry, due to an unexpected system issue, I was unable to check if there's any active outage in your area. But don't worry, let's see how I can help you further." ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "targetFlow": "bell_VR",
+    "name": "92aeef5c-4023-404c-89ec-a98ac1404881"
+  }, {
+    "condition": "$session.params.route = tech_service_outage AND ($session.params.lob = Internet OR $session.params.lob = internet OR $session.params.lob = INTERNET OR $session.params.lob = Homephone OR $session.params.lob = homephone OR $session.params.tv_sub_type = fibe OR $session.params.tv_sub_type = \"fibe tv app\")",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Désolée, en raison d'un problème de système inattendu, je n'ai pas pu vérifier s'il y a une panne en cours dans votre région. Mais vous pouvez facilement vérifier vous-même les pannes de service sur notre site Web." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "Je vais envoyer un texto sur l’appareil au moyen duquel vous appelez, afin que vous puissiez y accéder rapidement. Est-ce que ça vous convient?" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "Sorry, due to an unexpected system issue, I was unable to verify if there's any active outage in your area. But you can easily check for service outages yourself on our website" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ " I'll send a text to the device you're calling from so you can access it quickly. Is that alright?" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "targetPage": "CX Confirmation (Failed Outage Check)",
+    "name": "bad858a9-f0a4-4b63-a340-26e8071e55ea"
+  }, {
+    "condition": "$session.params.route = tech_service_outage AND ($session.params.lob = \"Mobility\" OR $session.params.lob = \"mobility\" OR $session.params.lob = \"MOBILITY\" OR $session.params.tv_sub_type = \"sat\")",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Désolée, en raison d'un problème de système inattendu, je n'ai pas pu vérifier s'il y a une panne en cours dans votre région. Mais vous pouvez facilement vérifier vous-même les pannes de service sur notre site Web." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "Je vais envoyer un texto sur l’appareil au moyen duquel vous appelez, afin que vous puissiez y accéder rapidement. Est-ce que ça vous convient?" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "Sorry, due to an unexpected system issue, I was unable to verify if there's any active outage in your area. But you can easily check for service outages yourself on our website." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ " I'll send a text to the device you're calling from so you can access it quickly. Is that alright?" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "targetPage": "CX Confirmation (Failed Outage Check)",
+    "name": "890f550c-259b-41ad-ba4a-c847045d82a5"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "27f7aa04-2175-4145-8735-0a9f21f32e9a"
+      }, {
+        "parameter": "flow_id",
+        "value": "94d32e37-496f-4fa3-81e8-18fd95281a52"
+      }, {
+        "parameter": "page_name",
+        "value": "Check LOB (Failed Outage Check)"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

@@ -1,0 +1,184 @@
+{
+  "name": "cfef16fd-92b1-40e2-8382-ff87ee597497",
+  "tags": [ "#3_time_VA_response" ],
+  "displayName": "EEPA - 2552 - SMS trigger - Private message check",
+  "testCaseConversationTurns": [ {
+    "userInput": {
+      "injectedParameters": {
+        "auth_status": "Pass",
+        "clid": 6479915002,
+        "identification_status": "Pass",
+        "test_private_sms": true,
+        "tfn": "+18338858259"
+      },
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "hi"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "sessionParameters": {
+        "auth_status": "Pass",
+        "clid": 6479915002,
+        "identification_status": "Pass",
+        "test_private_sms": true,
+        "tfn": "+18338858259"
+      },
+      "triggeredIntent": {
+        "name": "Default Welcome Intent"
+      },
+      "currentPage": {
+        "name": "Routing Page",
+        "flow": "Default Start Flow"
+      },
+      "textResponses": [ {
+        "text": [ "\u003cspeak\u003eI'm Bell's virtual assistant, I use artificial intelligence to learn. \u003cbreak time=\"1s\"/\u003e\u003c/speak\u003e" ]
+      }, {
+        "text": [ "How can I help you?" ]
+      } ],
+      "currentFlow": {
+        "name": "Default Start Flow"
+      }
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "what is my account number"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "textResponses": [ {
+        "text": [ "You can easily view your account details such as account and contact number in your MyBell. I'll send a text to the device you're calling from, so you can easily view your account information. Is that alright?" ],
+        "allowPlaybackInterruption": true
+      } ]
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "yes"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "triggeredIntent": {
+        "name": "Default Welcome Intent"
+      },
+      "currentPage": {
+        "name": "SMS Confirmation",
+        "flow": "bell_SMS Trigger"
+      },
+      "textResponses": [ {
+        "text": [ "The text was sent. If you didn't receive it, please let me know. If you require additional time to review the content, please advise." ],
+        "allowPlaybackInterruption": true
+      } ],
+      "currentFlow": {
+        "name": "bell_SMS Trigger"
+      }
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "I didn't received a text"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "triggeredIntent": {
+        "name": "context.sms_not_received"
+      },
+      "currentPage": {
+        "name": "Confirm Text Message Sent",
+        "flow": "bell_SMS Trigger"
+      },
+      "textResponses": [ {
+        "text": [ "Oh... Let me try sending it again to the same number." ]
+      }, {
+        "text": [ "I've sent you another text. If you didn't receive it, please let me know." ],
+        "allowPlaybackInterruption": true
+      } ],
+      "currentFlow": {
+        "name": "bell_SMS Trigger"
+      }
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "I didn't received a text"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "triggeredIntent": {
+        "name": "context.sms_not_received"
+      },
+      "currentPage": {
+        "name": "Confirm Text Message Sent",
+        "flow": "bell_SMS Trigger"
+      },
+      "textResponses": [ {
+        "text": [ "Oh... Let me try sending it again to the same number.\n" ],
+        "allowPlaybackInterruption": true
+      }, {
+        "text": [ "I've sent you another text. If you didn't receive it, please let me know." ],
+        "allowPlaybackInterruption": true
+      } ],
+      "currentFlow": {
+        "name": "bell_SMS Trigger"
+      }
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "I didn't received a text"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "triggeredIntent": {
+        "name": "context.sms_not_received"
+      },
+      "currentPage": {
+        "name": "End Session",
+        "flow": "bell_aqd"
+      },
+      "textResponses": [ {
+        "text": [ "Sorry, we’re having difficulty sending the text.\n\nYou can check out our frequently asked questions at vpc.ca/support" ],
+        "allowPlaybackInterruption": true
+      }, {
+        "text": [ "Sorry, I'm unable to transfer you to an agent due to an unexpected system issue. Please try calling us back later." ],
+        "allowPlaybackInterruption": true
+      } ],
+      "currentFlow": {
+        "name": "bell_aqd"
+      }
+    }
+  } ],
+  "creationTime": {
+    "seconds": 1756392615,
+    "nanos": 887930000
+  },
+  "testConfig": {
+    "flow": "Default Start Flow",
+    "page": "Start Page"
+  },
+  "languageCode": "en"
+}

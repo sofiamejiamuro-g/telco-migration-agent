@@ -1,0 +1,37 @@
+{
+  "name": "17370609-0711-439d-a762-692244debabf",
+  "displayName": "Send HOOP SMS",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.language = \"fr-ca\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "sms_type",
+        "value": "Public"
+      }, {
+        "parameter": "sms_content",
+        "value": "Bell : Vous pouvez visiter soutien.bell.ca/contactez-nous pour consulter nos heures d’ouverture. ( bell.ca/apropos )"
+      } ]
+    },
+    "targetFlow": "bell_SMS Trigger",
+    "name": "f6512596-7f82-47cd-9d64-b2ee52e36ca7"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "sms_type",
+        "value": "Public"
+      }, {
+        "parameter": "sms_content",
+        "value": "Bell: You can visit support.bell.ca/contact-us to find our hours of operation. ( bell.ca/about-us )"
+      } ]
+    },
+    "targetFlow": "bell_SMS Trigger",
+    "name": "cc5a539e-f420-4c1a-a647-6f681cda1f36"
+  } ]
+}

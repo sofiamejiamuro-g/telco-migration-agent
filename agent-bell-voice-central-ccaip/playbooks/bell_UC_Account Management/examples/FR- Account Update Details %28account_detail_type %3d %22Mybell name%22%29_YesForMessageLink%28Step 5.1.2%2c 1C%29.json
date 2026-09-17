@@ -1,0 +1,54 @@
+{
+  "name": "a9bc518b-22a1-420d-8044-e8429c4597bd",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "N'oubliez pas que le changement de nom dans MonBell n'a aucune incidence sur vos renseignements de facturation. Si vous devez changer le nom sur votre facture en raison d’un changement de nom légal, ou si vous souhaitez transférer la propriété du compte, vous devrez parler à un agent. Voulez-vous changer votre nom d’affichage MonBell ou le nom figurant sur votre facture ?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "mybell nom"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Je vais envoyer un texto à l’appareil au moyen duquel vous appelez, afin que vous puissiez changer le nom d’affichage pour MonBell. Est-ce que ca vous convient ?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Oui"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "brand": "bell",
+        "language": "fr-ca",
+        "sms_content": "Vous pouvez visiter https://m.bell.ca/gererprofil pour mettre à jour vos informations de profil dans l'appli MonBell. (bell.ca/apropos)",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "The customer wants to make update to their account information - including updating name, emails, address, billing address.",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca",
+      "route": "account_update_details",
+      "utterance": "Je veux un changement de nom"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "The {update_detail_type} parameter is empty so we prompt the user with appropriate response then the customer says they want to update their Mybell name so we prompt the user with the message the user declines to receive a message on their device so we route them to bell_get_sdl_mapping_url flow prompt the user with appropriate {faq_link} prompt and then route then user to bell_Feedback flow.",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca"
+    }
+  },
+  "displayName": "FR- Account Update Details (account_detail_type = \"Mybell name\")_YesForMessageLink(Step 5.1.2, 1C)",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 472,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

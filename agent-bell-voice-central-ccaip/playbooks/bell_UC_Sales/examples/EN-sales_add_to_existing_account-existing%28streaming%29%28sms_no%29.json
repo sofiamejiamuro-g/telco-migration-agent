@@ -1,0 +1,77 @@
+{
+  "name": "f61ae82d-a203-4b0e-a454-3e116fe6fe6e",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "language": "en"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Sure, Let me help you with that.\nAre you inquiring about new service or do you want to make changes to your current service?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "new line"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Which service are you inquiring about?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "crave netflix premium"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "I'll send a text to the device you're calling from, so that you can easily view all streaming options. Is that alright?\n"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Yes"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "en",
+        "line_type": "New",
+        "route": "sales_add_to_existing_account",
+        "sms_send_status": "Declined"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "customer wants to add streaming services like crave,Netflix,Disney,basic, premiun",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "en",
+      "route": "sales_add_to_existing_account",
+      "utterance": "Well basically, I need to get another line."
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "customer is asked about sms and is agreed to receive the sms",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "line_type": "New",
+      "streaming_services": "premium"
+    }
+  },
+  "displayName": "EN-sales_add_to_existing_account-existing(streaming)(sms_no)",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 456,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

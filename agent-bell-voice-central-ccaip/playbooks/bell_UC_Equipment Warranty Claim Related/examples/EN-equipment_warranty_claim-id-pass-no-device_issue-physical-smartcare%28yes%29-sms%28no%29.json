@@ -1,0 +1,71 @@
+{
+  "name": "aef297a1-6310-4531-9c1a-21393254f4b9",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Can you briefly describe your problem?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "My screen is cracked, i need warranty."
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Have you enrolled in our SmartCare Program?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "why screen cracks are not under warranty"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Unfortunately damages such as screen cracks, liquid exposures, modifications would not be covered under the warranty. Please find a copy of manufacturer's warranty in your mobile phone's box for detail .\nHave you enrolled in our SmartCare Program?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "yes"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "When submitting a request online or calling the Smart Phone Care Center, your request will be processed by Asurion, the administrator of the Smartphone Care program. I can send you a link to submit your request. Is that alright?\n"
+    }
+  }, {
+    "userUtterance": {
+      "text": "no"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "en",
+        "sms_send_status": "Declined"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "customer is asking \" hi my phone is not working I need a warranty\"",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "route": "equipment_warranty_claim",
+      "utterance": "Hi I need warranty for my phone, it is not working."
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "customer is asked device_issue and proceed further the smart care logic",
+    "actionParameters": {
+      "brand": "bell",
+      "device_issue": "Physical Damage",
+      "language": "en",
+      "route": "equipment_warranty_claim",
+      "sms_send_status": "Declined"
+    }
+  },
+  "displayName": "EN-equipment_warranty_claim-id-pass-no-device_issue-physical-smartcare(yes)-sms(no)",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 431,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

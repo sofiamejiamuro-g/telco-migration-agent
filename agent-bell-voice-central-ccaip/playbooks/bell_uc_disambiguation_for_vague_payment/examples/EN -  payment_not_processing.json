@@ -1,0 +1,47 @@
+{
+  "name": "501ec5ab-dce4-4d34-8c81-3276fc244877",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Could you describe the payment-related issue you're experiencing?  Is your payment not processing or is it something else?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "What I'm saying is I paid the bill, but they told me the payment didn't go through."
+    }
+  }, {
+    "playbookInvocation": {
+      "playbook": "bell_UC_Payments",
+      "playbookInput": {
+        "precedingConversationSummary": "Customer payment is not processing",
+        "actionParameters": {
+          "language": "en",
+          "route": "payment_not_processing",
+          "utterance": "What I'm saying is I paid the bill, but they told me the payment didn't go through."
+        }
+      },
+      "playbookOutput": {
+        "executionSummary": "Customer query is addresses and then routed to \"bell_UC_payment\" playbook for further help",
+        "actionParameters": {
+          "language": "en"
+        }
+      },
+      "playbookState": "OUTPUT_STATE_OK"
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer query about \"Payment related issue\" is addressed",
+    "actionParameters": {
+      "langauge": "en",
+      "route": "payment_vague",
+      "utterance": "Payment related issue"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Customer query is addresses and then routed to \"bell_UC_payment\" playbook for further help"
+  },
+  "displayName": "EN -  payment_not_processing",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 313,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

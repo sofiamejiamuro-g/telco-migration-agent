@@ -1,0 +1,121 @@
+{
+  "name": "44e898e8-3c2d-407b-aaba-774f0f662a6e",
+  "displayName": "Home Connection Check",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "setParameterActions": [ {
+      "parameter": "input_time_string",
+      "value": "$sys.func.FORMAT_DATE($sys.func.NOW(), \"yyyy-MM-dd'T'HH:mm:ssXXX\")"
+    }, {
+      "parameter": "input_date_string",
+      "value": "$sys.func.NOW()"
+    } ],
+    "generators": [ {
+      "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/cd3d6f08-0412-43c3-b04a-d354c348e691",
+      "inputParameters": [ {
+        "key": "input_time_string",
+        "value": "$session.params.input_time_string"
+      } ],
+      "outputParameter": "$request.generative.current_time"
+    }, {
+      "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/1c952ea5-26e0-45e2-a082-58b65e67719b",
+      "inputParameters": [ {
+        "key": "text",
+        "value": "$session.params.input_date_string"
+      } ],
+      "outputParameter": "$request.generative.current_date"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "current_time_utc",
+        "value": "$request.generative.current_time"
+      }, {
+        "parameter": "cutoff_time_utc",
+        "value": "$session.params.cutoff_time"
+      }, {
+        "parameter": "current_date_utc",
+        "value": "$request.generative.current_date"
+      }, {
+        "parameter": "cutoff_date_utc",
+        "value": "$sys.func.MID($session.params.order_detail_response.calendar_context[0].date, 1, 10)"
+      } ]
+    },
+    "name": "d1ab8308-cd04-4e97-a7ff-3b6ffb844555"
+  }, {
+    "condition": "$session.params.current_date_utc \u003e $session.params.cutoff_date_utc",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "After cutoff time",
+    "name": "8705ea7d-8ab2-480a-9613-00882748f245",
+    "description": "This represents the \"After Due Date\" condition."
+  }, {
+    "condition": "$session.params.current_date_utc \u003c $session.params.cutoff_date_utc",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "\u003cspeak\u003eI found an order to install a jack for your $session.params.line_of_business service. Your appointment is on $session.params.day_of_week, $session.params.month_name \u003csay-as interpret-as=\"ordinal\"\u003e$session.params.date_of_month\u003c/say-as\u003e. The Technician can arrive any time between $session.params.startTime and $session.params.endTime, and remember, an appointment scheduled from $session.params.startTime to $session.params.endTime can start at $session.params.endTimeUpdated and finish later. After the technician finishes, you'll be able to set up your equipment to start using your services.\u003c/speak\u003e" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "\u003cspeak\u003eJ’ai trouvé une commande pour installer une prise pour votre service $session.params.line_of_business. Votre rendez-vous est prévu le $session.params.day_of_week, le \u003csay-as interpret-as=\"cardinal\"\u003e$session.params.date_of_month\u003c/say-as\u003e $session.params.month_name. Le ou la technicien(ne) peut arriver à tout moment entre $session.params.startTime et $session.params.endTime. Et n’oubliez pas qu’un rendez-vous prévu entre $session.params.startTime et $session.params.endTime peut commencer à $session.params.endTimeUpdated et se terminer plus tard. Une fois que le ou la technicien(ne) aura terminé, vous pourrez configurer votre équipement pour commencer à utiliser vos services.\u003c/speak\u003e" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetPage": "Intent Check - Before cutoff time",
+    "name": "9c1e1c30-d8e8-4ee2-b5b9-183878320efd",
+    "description": "This represents the \"Before Due Date\" condition."
+  }, {
+    "condition": "$session.params.current_date_utc = $session.params.cutoff_date_utc AND $session.params.current_time_utc \u003e $session.params.cutoff_time_utc",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "After cutoff time",
+    "name": "8f1c2074-31eb-4e29-8729-deae56d821d7",
+    "description": "This represents the \"On Due Date and After Cutoff Time\" condition."
+  }, {
+    "condition": "$session.params.current_date_utc = $session.params.cutoff_date_utc AND $session.params.current_time_utc \u003c= $session.params.cutoff_time_utc",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "\u003cspeak\u003eI found an order to install a jack for your $session.params.line_of_business service. Your appointment is on $session.params.day_of_week, $session.params.month_name \u003csay-as interpret-as=\"ordinal\"\u003e$session.params.date_of_month\u003c/say-as\u003e. The Technician can arrive any time between $session.params.startTime and $session.params.endTime, and remember, an appointment scheduled from $session.params.startTime to $session.params.endTime can start at $session.params.endTimeUpdated and finish later. After the technician finishes, you'll be able to set up your equipment to start using your services.\u003c/speak\u003e" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "\u003cspeak\u003eJ’ai trouvé une commande pour installer une prise pour votre service $session.params.line_of_business. Votre rendez-vous est prévu le $session.params.day_of_week, le \u003csay-as interpret-as=\"cardinal\"\u003e$session.params.date_of_month\u003c/say-as\u003e $session.params.month_name. Le ou la technicien(ne) peut arriver à tout moment entre $session.params.startTime et $session.params.endTime. Et n’oubliez pas qu’un rendez-vous prévu entre $session.params.startTime et $session.params.endTime peut commencer à $session.params.endTimeUpdated et se terminer plus tard. Une fois que le ou la technicien(ne) aura terminé, vous pourrez configurer votre équipement pour commencer à utiliser vos services.\u003c/speak\u003e" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetPage": "Intent Check - Before cutoff time",
+    "name": "14088196-6c5b-4187-8c48-b9b322f09b61",
+    "description": "This represents the \"On Due Date and Before Cutoff Time\" condition."
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "44e898e8-3c2d-407b-aaba-774f0f662a6e"
+      }, {
+        "parameter": "flow_id",
+        "value": "918644a0-f504-4e8f-91eb-c311a5082207"
+      }, {
+        "parameter": "page_name",
+        "value": "Home Connection Check"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

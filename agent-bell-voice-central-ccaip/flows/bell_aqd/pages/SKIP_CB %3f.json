@@ -1,0 +1,31 @@
+{
+  "name": "45174292-b1ef-487b-98c3-384aa5b0f877",
+  "displayName": "SKIP_CB ?",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.intake_routing_lookup_response.va_caller_channel = \"SKIP_CB\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "additional_info",
+        "value": "SKIPCB=Y"
+      } ]
+    },
+    "targetPage": "Get Authentication Status",
+    "name": "7a750f35-874e-4c93-a45b-28b6647d1479"
+  }, {
+    "condition": "$session.params.intake_routing_lookup_response.va_caller_channel != \"SKIP_CB\" OR $session.params.intake_routing_lookup_response.va_caller_channel = null",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "additional_info",
+        "value": ""
+      } ]
+    },
+    "targetPage": "Check department_id",
+    "name": "478d4656-91d7-4b32-b0d9-bb1ee818fc39"
+  } ]
+}

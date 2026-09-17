@@ -1,0 +1,37 @@
+{
+  "name": "92908d06-47e5-4417-8084-7316600226e8",
+  "displayName": "Set params for /v1/ivr-transfer/send-transfer-data#agent-transfer",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "setParameterActions": [ {
+      "parameter": "dam_id",
+      "value": "XFER"
+    }, {
+      "parameter": "account_type",
+      "value": "Consumer"
+    }, {
+      "parameter": "cti_at",
+      "value": "VAAT"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.route = null",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "segment",
+        "value": "Care"
+      } ]
+    },
+    "targetPage": "Check Special Status",
+    "name": "c38f572c-a16a-4087-ab19-819c78c20dcd"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Get Segment",
+    "name": "674062eb-274f-432d-9a50-c0129c1bda08"
+  } ]
+}

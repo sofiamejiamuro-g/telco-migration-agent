@@ -1,0 +1,39 @@
+{
+  "name": "1d66921a-d4d5-4d00-a470-79b902573b84",
+  "displayName": "Local Error Handling- Routing Page",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.global_error_counter \u003e= 3",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_aqd",
+    "name": "e559476f-126d-4132-8e8b-996d8883ddf6"
+  }, {
+    "condition": "$session.params.local_trigger = \"no_match\" AND $session.params.local_nomatch_counter = 1",
+    "triggerFulfillment": {
+      "generators": [ {
+        "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/f7ef68c2-5424-41ab-94dc-f8c07e3164de",
+        "outputParameter": "$request.generative."
+      } ]
+    },
+    "name": "c30df59b-dd0c-4954-91f6-0d30e793eb51",
+    "targetPlaybook": "bell_NLU_Query_Rewriter"
+  }, {
+    "condition": "$session.params.local_trigger = \"no_input\" AND $session.params.local_noinput_counter = 1",
+    "triggerFulfillment": {
+    
+    },
+    "name": "e41f6540-9f75-4467-9f44-eff09cf1bbf9",
+    "targetPlaybook": "bell_NLU_Query_Rewriter"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Previous Page",
+    "name": "700ae10b-be6f-4782-b074-a5ec2e197de6"
+  } ]
+}

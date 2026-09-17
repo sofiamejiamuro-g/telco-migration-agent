@@ -1,0 +1,51 @@
+{
+  "name": "9dda41bc-60fe-434b-8efd-bd3b14e9dafa",
+  "displayName": "Check LOB #1 (Active Outage)",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.lob = \"Mobility\" OR $session.params.lob = \"Homephone\" OR $session.params.lob = \"Internet\" OR $session.params.tv_sub_type = \"sat\" OR $session.params.lob = \"homephone\" OR $session.params.lob = \"internet\" OR $session.params.lob = \"mobility\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Dynamic ETR Response (Active Outage)",
+    "name": "dc709572-b55b-4297-baf3-d4818b74e26e"
+  }, {
+    "condition": "$session.params.tv_sub_type = \"fibe\" OR $session.params.tv_sub_type = \"fibe tv app\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Dynamic ETR Response #2 (Active Outage)",
+    "name": "8e942ac9-9942-40f5-a5c3-02d75fc6312f"
+  }, {
+    "condition": "$session.params.lob = \"TV\" OR $session.params.lob = \"tv\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Dynamic ETR Response (Active Outage)",
+    "name": "0c7c8eee-12a7-4560-852c-239aad1d4cca"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "9dda41bc-60fe-434b-8efd-bd3b14e9dafa"
+      }, {
+        "parameter": "flow_id",
+        "value": "94d32e37-496f-4fa3-81e8-18fd95281a52"
+      }, {
+        "parameter": "page_name",
+        "value": "Check LOB #1 (Active Outage)"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

@@ -1,0 +1,74 @@
+{
+  "name": "24047516-602e-41be-ae1f-34f5f32c14ec",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70011",
+        "brand": "bell",
+        "language": "fr-ca",
+        "route": "service_add_feature"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "ous pouvez modifier votre forfait de programmation Bell Télé en tout temps à l’aide de MonBell. Je vais envoyer un texto à l’appareil au moyen duquel vous appelez, afin que vous puissiez facilement apporter des changements à votre programmation. Est-ce que ça vous convient?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "ouais bien sûr"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "fr-ca",
+        "lob": "TV",
+        "route": "service_add_feature",
+        "sms_content": "Bell: Vous pouvez visiter https://m.bell.ca/modifierchoixdecanaux pour modifier votre programmation télé dans l'appli MonBell. (bell.ca/apropos)",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+        "language": "fr-ca"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "The {identification_status} is \"Pass\", {customer_type} is \"Existing\", {streaming_services} is null and {ppv} is null and {add_ons} is null and {lob} is \"TV\" so, we will prompt user for send SMS confirmation and if user say \"yes\" or anything affirmative then route to \"bell_SMS Trgigger\" flow.",
+    "actionParameters": {
+      "apb_location_id": "70011",
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "fr-ca",
+      "lob": "TV",
+      "route": "service_add_feature",
+      "sms_content": "Bell: Vous pouvez visiter https://m.bell.ca/modifierchoixdecanaux pour modifier votre programmation télé dans l'appli MonBell. (bell.ca/apropos)",
+      "sms_type": "Public",
+      "utterance": "J'aimerais avoir les chaînes americaines avec mon forfait."
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "As the {lob} is \"TV\" and {streaming_services}, {add_ons}, {ppv} is null then we will prompt user to send SMS and if user say \"yes\" or anything affirmative then send the user to \"bell_SMS Trigger\" flow",
+    "actionParameters": {
+      "apb_location_id": "70011",
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "fr-ca",
+      "lob": "TV",
+      "route": "service_add_feature",
+      "sms_content": "Bell: Vous pouvez visiter https://m.bell.ca/modifierchoixdecanaux pour modifier votre programmation télé dans l'appli MonBell. (bell.ca/apropos)",
+      "sms_type": "Public",
+      "utterance": "J'aimerais avoir les chaînes americaines avec mon forfait."
+    }
+  },
+  "displayName": "FR - service_add_feature- streaming_services,ppv,add_ons - null-lob-TV-yes",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 736,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

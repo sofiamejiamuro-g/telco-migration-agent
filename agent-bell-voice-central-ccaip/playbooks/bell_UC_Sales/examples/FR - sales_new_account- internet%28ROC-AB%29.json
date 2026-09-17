@@ -1,0 +1,72 @@
+{
+  "name": "22aea5d4-1493-47e9-b2ec-d070c0434db7",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Vérifions si nous offrons des services Internet ou de téléphonie résidentielle dans votre secteur. Dans quelle province avez-vous besoin de\nservices?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Calgary"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Obtenez des vitesses ultra rapides sur le réseau de Bell grâce au service Internet mobile de Bell. Vous pouvez bénéficier d’une connectivité Internet allant jusqu'à 5G avec un point d'accès sans fil mobile afin de rester connecté à la maison ou lors de voS déplacements. Je vais envoyer un texto à l'appareil au moyen duquel vous appelez, afin que vous puissiez en savoir plus sur le service Internet mobile sur notre site Web. Est-ce que ça vous convient?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "non"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "fr-ca",
+        "lob": "Internet",
+        "sms_send_status": "Declined"
+      },
+      "outputActionParameters": {
+        "language": "fr-ca"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "The Customer wants to sign up or open a new account with Bell and lob identified as \" Internet\" OR \"TV\" OR \"Homephone\"",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "New",
+      "identification_status": "Fail",
+      "language": "fr-ca",
+      "lob": "Internet",
+      "province": "ROC",
+      "route": "sales_new_account",
+      "utterance": "je voulais faire affaire avec vous pour avoir l'Internet c'est possible"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "customer is asked {province} and if province is among AB, BC or ROC the user is asked about sms and along with user response we are transferring user to bell_SMS Trigger flow",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "New",
+      "identification_status": "Fail",
+      "language": "fr-ca",
+      "lob": "Internet",
+      "province": "AB"
+    }
+  },
+  "displayName": "FR - sales_new_account- internet(ROC-AB)",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 546,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

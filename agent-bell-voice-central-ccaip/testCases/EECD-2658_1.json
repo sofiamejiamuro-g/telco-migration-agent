@@ -1,0 +1,289 @@
+{
+  "name": "35772d94-ec28-45e9-8297-83ae0064285a",
+  "displayName": "EECD-2658_1",
+  "testCaseConversationTurns": [ {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "hi"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "triggeredIntent": {
+        "name": "Default Welcome Intent"
+      },
+      "currentPage": {
+        "name": "Get Tester Id",
+        "flow": "bell_test_wrapper"
+      },
+      "textResponses": [ {
+        "text": [ "Please enter your Tester ID using the phone's keypad now." ],
+        "allowPlaybackInterruption": true
+      } ],
+      "currentFlow": {
+        "name": "bell_test_wrapper"
+      }
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "146"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "currentPage": {
+        "name": "Get Spoof TFN",
+        "flow": "bell_test_wrapper"
+      },
+      "textResponses": [ {
+        "text": [ "Tester ID lookup webhook succeeded." ],
+        "allowPlaybackInterruption": true
+      }, {
+        "text": [ "Welcome ARAVIND!" ],
+        "allowPlaybackInterruption": true
+      }, {
+        "text": [ "Please enter the spoof TFN for your test." ],
+        "allowPlaybackInterruption": true
+      } ],
+      "currentFlow": {
+        "name": "bell_test_wrapper"
+      }
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "8334880363"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "currentPage": {
+        "name": "Get Spoof CLID",
+        "flow": "bell_test_wrapper"
+      },
+      "textResponses": [ {
+        "text": [ "TFN lookup Webhook succeeded." ]
+      }, {
+        "text": [ "Please enter the spoof CLID for your test." ],
+        "allowPlaybackInterruption": true
+      } ],
+      "currentFlow": {
+        "name": "bell_test_wrapper"
+      }
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "4169880145"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "currentPage": {
+        "name": "CIRN Collection Check",
+        "flow": "bell_Identification"
+      },
+      "textResponses": [ {
+        "text": [ "\u003cspeak\u003eI'm Bell's virtual assistant, I use artificial intelligence to learn. \u003cbreak time=\"1s\"/\u003e\u003c/speak\u003e" ]
+      }, {
+        "text": [ "Are you calling about the account associated with number you’re calling from? " ]
+      } ],
+      "currentFlow": {
+        "name": "bell_Identification"
+      }
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "yes"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "triggeredIntent": {
+        "name": "context.confirm_yes"
+      },
+      "currentPage": {
+        "name": "Routing Page",
+        "flow": "Default Start Flow"
+      },
+      "textResponses": [ {
+        "text": [ "\u003cspeak\u003eThanks! \u003cbreak time=\"1s\"/\u003e\u003c/speak\u003e" ],
+        "allowPlaybackInterruption": true
+      }, {
+        "text": [ "How can I help you?" ],
+        "allowPlaybackInterruption": true
+      } ],
+      "currentFlow": {
+        "name": "Default Start Flow"
+      }
+    }
+  }, {
+    "userInput": {
+      "injectedParameters": {
+        "digital_tools_phase2": true
+      },
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "outage"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "sessionParameters": {
+        "digital_tools_phase2": true
+      },
+      "triggeredIntent": {
+        "name": "dummy testing"
+      },
+      "currentPage": {
+        "name": "9e8500ed-7468-4e9d-a5bb-c083d9e2a7ac",
+        "flow": "Default Start Flow"
+      },
+      "textResponses": [ {
+        "text": [ "You can communicate your concern here." ]
+      } ],
+      "currentFlow": {
+        "name": "Default Start Flow"
+      }
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "I have problem with my internet. Can you help me?"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "triggeredIntent": {
+        "name": "tech_connection_issue"
+      },
+      "currentPage": {
+        "name": "Confirm Customer has OTP device",
+        "flow": "bell_authentication"
+      },
+      "textResponses": [ {
+        "text": [ "Before I can continue, I need to verify I’m speaking with the correct person. We use a 6-digit code for this—do you have the mobile phone on your account with you?" ]
+      } ],
+      "currentFlow": {
+        "name": "bell_authentication"
+      }
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "yes"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "triggeredIntent": {
+        "name": "custom.yes"
+      },
+      "currentPage": {
+        "name": "Trigger_OTP",
+        "flow": "bell_authentication"
+      },
+      "textResponses": [ {
+        "text": [ "I’ll text a 6-digit code to the mobile phone on your account." ]
+      }, {
+        "text": [ "Once you receive the verification code by text, please say it back to me or enter it on your phone keypad." ],
+        "allowPlaybackInterruption": true
+      } ],
+      "currentFlow": {
+        "name": "bell_authentication"
+      }
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "581781"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "currentPage": {
+        "name": "Check CX input? (Active outage)",
+        "flow": "bell_tech_service_outage_\u0026_Tech_connection_issue"
+      },
+      "textResponses": [ {
+        "text": [ "Thanks, that's the correct code." ],
+        "allowPlaybackInterruption": true
+      }, {
+        "text": [ "Just a moment while I check if there are any outage in your area." ],
+        "allowPlaybackInterruption": true
+      }, {
+        "text": [ "Unfortunately, there is currently an Internet outage in your area. But don't worry, our teams are working to restore your service as soon as possible." ],
+        "allowPlaybackInterruption": true
+      }, {
+        "text": [ "I'll send a text to the device you're calling from, so you can easily track the status of this outage. Is that alright?" ],
+        "allowPlaybackInterruption": true
+      } ],
+      "currentFlow": {
+        "name": "bell_tech_service_outage_\u0026_Tech_connection_issue"
+      }
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "yes"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "triggeredIntent": {
+        "name": "context.sms_yes"
+      },
+      "currentPage": {
+        "name": "SMS Confirmation",
+        "flow": "bell_SMS Trigger"
+      },
+      "textResponses": [ {
+        "text": [ "The text was sent. If you didn't receive it, please let me know. If you require additional time to review the content, please advise." ],
+        "allowPlaybackInterruption": true
+      } ],
+      "currentFlow": {
+        "name": "bell_SMS Trigger"
+      }
+    }
+  } ],
+  "creationTime": {
+    "seconds": 1759236820,
+    "nanos": 806111000
+  },
+  "testConfig": {
+    "flow": "Default Start Flow",
+    "page": "Start Page"
+  },
+  "languageCode": "en"
+}

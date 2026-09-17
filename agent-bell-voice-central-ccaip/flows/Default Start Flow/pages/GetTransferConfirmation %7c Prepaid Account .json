@@ -1,0 +1,89 @@
+{
+  "name": "fb6dd118-940e-4411-a59d-9374b7d6d652",
+  "displayName": "GetTransferConfirmation | Prepaid Account ",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "conditionalCases": [ {
+      "cases": [ {
+        "condition": "$session.params.va_entry_flow = \"IBM_transfer\"",
+        "caseContent": [ {
+          "message": {
+            "text": {
+              "text": [ "For help with prepaid services, I need to transfer you to our prepaid support agents.  Are you ready to be transferred, or do you have a question about another service?" ]
+            },
+            "languageCode": "en"
+          }
+        }, {
+          "message": {
+            "text": {
+              "text": [ "Pour de l’aide au sujet des services prépayés, je dois vous transférer à notre système de soutien des services prépayés. Êtes-vous prêt à être transféré, ou avez-vous une question sur un autre service?" ]
+            },
+            "languageCode": "fr-ca"
+          }
+        } ]
+      }, {
+        "caseContent": [ {
+          "message": {
+            "text": {
+              "text": [ "For help with prepaid services, I need to transfer you to our prepaid support system.  Are you ready to be transferred, or do you have a question about another service?" ]
+            },
+            "languageCode": "en"
+          }
+        }, {
+          "message": {
+            "text": {
+              "text": [ "Pour de l’aide au sujet des services prépayés, je dois vous transférer à nos agents de soutien des services prépayés. Êtes-vous prêt à être transféré, ou avez-vous une question sur un autre service?" ]
+            },
+            "languageCode": "fr-ca"
+          }
+        } ]
+      } ]
+    } ]
+  },
+  "transitionRoutes": [ {
+    "intent": "context.agent_confirm",
+    "condition": "$session.params.va_entry_flow = \"IBM_transfer\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ " \u003cspeak\u003eOkay, I’ll transfer you now. There may be a moment of silence while I do so. In the future, please call \u003cprosody rate=\"x-slow\"\u003e\u003csay-as interpret-as=\"telephone\"\u003e1-888-537-9999\u003c/say-as\u003e\u003c/prosody\u003e for Bell Prepaid support.\u003c/speak\u003e" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "\u003cspeak\u003eD’accord, je vous transfère maintenant. Ce sera peut-être silencieux pendant un moment lors du transfert. À l’avenir, veuillez composer le \u003cprosody rate=\"x-slow\"\u003e\u003csay-as interpret-as=\"telephone\"\u003e1-888-537-9999\u003c/say-as\u003e\u003c/prosody\u003e pour obtenir de l’aide au sujet du service prépayé de Bell.\u003c/speak\u003e" ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "special_queue",
+        "value": "bell_prepaid"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "781bd409-6076-4b12-ab3a-a79b3a4176b2"
+  }, {
+    "intent": "context.agent_confirm",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook get-configs",
+    "name": "fbb8b8c1-388d-41f1-b2d2-7e5dc370dcc1"
+  }, {
+    "intent": "custom.no",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_Feedback",
+    "name": "4718fbae-82a8-48c3-8e0a-bd8c54363848"
+  }, {
+    "intent": "context.different_service",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_Feedback",
+    "name": "71fb97af-cb8e-4f6b-a958-95ed3d152bb6"
+  } ]
+}

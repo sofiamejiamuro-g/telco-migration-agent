@@ -1,0 +1,78 @@
+{
+  "name": "52a6f2ab-9c64-4c57-9967-840a3639454e",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Thank you. What is the reason for suspending your service?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "My phone is lost"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Understood. Have you tried using a tracking feature like \"Find my iPhone\" or \"Find my Device\"?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "No"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Understood, I would suggest temporarily suspending your service to prevent unauthorized use. I will send a text to the device you are calling from, with a link to do it yourelf, is that alright?\""
+    }
+  }, {
+    "userUtterance": {
+      "text": "No"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "brand": "bell",
+        "language": "en",
+        "sms_send_status": "Declined"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "No problem at all. For any other questions you can always visit our website at {faq_link}"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_Feedback",
+      "inputActionParameters": {
+        "brand": "bell",
+        "language": "en"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer trying to suspend their service as there device is lost",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "route": "account_suspend_service",
+      "unique_services": "Mobility, Internet, Tv",
+      "utterance": "I would like to suspend our mobility service for the next 3 months, please."
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Customer query is resolved and we update the {route} as \"equipment_report_lost_device\"",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "route": "equipment_report_lost_device"
+    }
+  },
+  "displayName": "Account suspend service already said - Lost (No) - No",
+  "retrievalStrategy": "NEVER",
+  "tokenCount": 466,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

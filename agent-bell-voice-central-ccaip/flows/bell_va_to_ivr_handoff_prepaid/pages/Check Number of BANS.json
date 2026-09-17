@@ -1,0 +1,110 @@
+{
+  "name": "0cb05b37-5853-4466-b74f-122b8525b5e3",
+  "displayName": "Check Number of BANS",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "setParameterActions": [ {
+      "parameter": "_billing_accounts",
+      "value": "$sys.func.FILTER(\"$session.params.customer_id_search_response\", \"$.users[*].billing_accounts[*]\")"
+    }, {
+      "parameter": "_other_services",
+      "value": "$sys.func.FILTER(\"$session.params._billing_accounts\", \"$.[*].services[*]\")"
+    }, {
+      "parameter": "ban_with_lob",
+      "value": "$sys.func.FILTER(\"$session.params._other_services\", \"$.[?(@.service_type == '$session.params.lob')]\")"
+    }, {
+      "parameter": "n_ban_with_lob",
+      "value": "$sys.func.COUNT($session.params.ban_with_lob)"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.NGA = true OR $session.params.NGA = \"true\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "handoff_from",
+        "value": "ivr_prepaid_handoff"
+      } ]
+    },
+    "targetFlow": "nga_handling",
+    "name": "d6dd322b-050b-43f2-b8dd-250320e088ac"
+  }, {
+    "condition": "$session.params.n_ban_with_lob = null OR $session.params.n_ban_with_lob = 0",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Aucun compte $sys.func.LOWER($session.params.lob) n’apparaît sur le compte." ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "identification_status",
+        "value": null
+      }, {
+        "parameter": "ivr_handoff_identification",
+        "value": true
+      }, {
+        "parameter": "route",
+        "value": "$sys.func.IF(\"$session.params.route =  other_speak_to_agent\", null, $session.params.route)"
+      } ]
+    },
+    "targetFlow": "bell_Identification",
+    "name": "41727e76-fc2f-45ba-af01-231f7ccd294e"
+  }, {
+    "condition": "$session.params.n_ban_with_lob = 1",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "identification_status",
+        "value": null
+      }, {
+        "parameter": "ivr_handoff_identification",
+        "value": true
+      }, {
+        "parameter": "route",
+        "value": "$sys.func.IF(\"$session.params.route =  other_speak_to_agent\", null, $session.params.route)"
+      } ]
+    },
+    "targetFlow": "bell_Identification",
+    "name": "20070585-c5b0-4758-9ebe-be3e764a2f62"
+  }, {
+    "condition": "$session.params.n_ban_with_lob \u003e 1",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "ivr_handoff_identification",
+        "value": true
+      } ]
+    },
+    "targetFlow": "bell_multiban",
+    "name": "bc26d0f2-7a1c-4c0d-8a54-e49d497f7787"
+  }, {
+    "condition": "$session.params.ivr_handoff_identification = true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "event_type",
+        "value": "anything else start over"
+      } ]
+    },
+    "targetFlow": "Default Start Flow",
+    "name": "964dc97c-edf5-4921-a572-20774b547536"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "0cb05b37-5853-4466-b74f-122b8525b5e3"
+      }, {
+        "parameter": "flow_id",
+        "value": "fe6d8a4b-9e84-44d3-9af5-4a5a77d347ab"
+      }, {
+        "parameter": "page_name",
+        "value": "Check Number of BANS"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

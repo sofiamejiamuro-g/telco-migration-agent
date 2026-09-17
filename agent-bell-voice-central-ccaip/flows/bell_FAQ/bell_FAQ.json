@@ -1,0 +1,242 @@
+{
+  "name": "5cdd2f01-b83d-470c-86c5-368354a50ccb",
+  "displayName": "bell_FAQ",
+  "transitionRoutes": [ {
+    "intent": "context.repeat",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "$request.generative.repeat_response" ]
+        },
+        "languageCode": "en"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "repeat_flag",
+        "value": 0
+      } ],
+      "advancedSettings": {
+        "playbackInterruptionSettings": {
+        
+        },
+        "dtmfSettings": {
+          "useSystemEntityRule": false
+        }
+      },
+      "generators": [ {
+        "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/d2573b7b-849d-43d3-8c64-867837bd84d2",
+        "inputParameters": [ {
+          "key": "request-last-agent-utterance",
+          "value": "$request.last-agent-utterance"
+        } ],
+        "outputParameter": "$request.generative.repeat_response"
+      } ]
+    },
+    "name": "04cf14de-5b4b-46e1-9133-aaba101f8b87"
+  }, {
+    "intent": "other_speak_to_agent",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_determine_handover",
+    "name": "0701cb2c-db57-4ac6-8392-82c111770b8f"
+  }, {
+    "intent": "global_events_full_startover",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "event_type",
+        "value": "full start over"
+      } ]
+    },
+    "targetFlow": "Default Start Flow",
+    "name": "5af4dd42-1ede-4742-b243-54b88d2b3f17"
+  }, {
+    "intent": "global_events_partial_start_over",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "event_type",
+        "value": "partial start over"
+      } ]
+    },
+    "targetFlow": "Default Start Flow",
+    "name": "467fb369-ad33-4b62-8d50-e0255c2b85ec"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "local_nomatch_counter",
+        "value": 0
+      }, {
+        "parameter": "local_noinput_counter",
+        "value": 0
+      } ]
+    },
+    "name": "7e53037d-1527-40a9-a4e9-8de38aca9b75"
+  }, {
+    "condition": "$session.params.route = \"faq_ownership\"",
+    "triggerFulfillment": {
+      "advancedSettings": {
+        "playbackInterruptionSettings": {
+        
+        },
+        "dtmfSettings": {
+          "useSystemEntityRule": false
+        }
+      }
+    },
+    "targetPage": "Ownership",
+    "name": "6f6bcbda-7463-446f-a7b1-b5035db934e7"
+  }, {
+    "condition": "$session.params.route = \"faq_brand_comparison\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Brand Comparison",
+    "name": "ee48eb85-cff8-4f0b-90c7-51b01866d8c2"
+  }, {
+    "condition": "$session.params.route = \"faq_price_increase\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Price Increase",
+    "name": "9850c703-cf14-4022-9095-46a5421cda6f"
+  }, {
+    "condition": "$session.params.route = \"faq_sell_overseas\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "utterance",
+        "value": "Thanks"
+      } ],
+      "advancedSettings": {
+        "playbackInterruptionSettings": {
+        
+        },
+        "dtmfSettings": {
+          "useSystemEntityRule": false
+        }
+      }
+    },
+    "targetPage": "Sell Overseas",
+    "name": "2e7b5abc-9939-4d67-8ed4-ac4c3a95b518"
+  }, {
+    "condition": "$session.params.route = \"faq_store_locator\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Store Locator",
+    "name": "434c5743-5ae9-422c-881b-5738d2cfa9db"
+  }, {
+    "condition": "$session.params.route = \"faq_hoop\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "HOOP",
+    "name": "06120f0e-4512-43bc-b48a-cba3e882a202"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Global Error Handling",
+    "event": "sys.no-match-default",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "J'ai du mal à comprendre cette question.", "J'ai mal compris votre demande.", "Je n'ai pas saisi ce que vous avez dit.", "Je crois que je ne vous suis pas.", "Je ne comprends pas de quoi vous me parlez." ]
+        },
+        "languageCode": "fr"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "global_error_counter",
+        "value": "$sys.func.ADD($session.params.global_error_counter,1)"
+      }, {
+        "parameter": "local_trigger",
+        "value": "no_match"
+      }, {
+        "parameter": "local_nomatch_counter",
+        "value": "$sys.func.ADD($session.params.local_nomatch_counter,1)"
+      } ]
+    },
+    "name": "2eb12e64-dc4a-412c-bd66-b54e05cbcf63"
+  }, {
+    "targetPage": "Global Error Handling",
+    "event": "sys.no-input-default",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "J'ai du mal à comprendre cette question.", "J'ai mal compris votre demande.", "Je n'ai pas saisi ce que vous avez dit.", "Je crois que je ne vous suis pas.", "Je ne comprends pas de quoi vous me parlez." ]
+        },
+        "languageCode": "fr"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "global_error_counter",
+        "value": "$sys.func.ADD($session.params.global_error_counter,1)"
+      }, {
+        "parameter": "local_trigger",
+        "value": "no_input"
+      }, {
+        "parameter": "local_noinput_counter",
+        "value": "$sys.func.ADD($session.params.local_noinput_counter,1)"
+      } ]
+    },
+    "name": "5a95bb1e-ebc0-431e-93b2-f59c215b609d"
+  }, {
+    "targetPage": "End Session",
+    "event": "wrapup",
+    "triggerFulfillment": {
+    
+    },
+    "name": "105f6a2f-281e-4b04-8a0b-685bb270a5c8"
+  } ],
+  "nluSettings": {
+    "modelType": "MODEL_TYPE_CUSTOM",
+    "classificationThreshold": 0.30000001,
+    "modelTrainingMode": "MODEL_TRAINING_MODE_MANUAL"
+  },
+  "advancedSettings": {
+    "enabled": true,
+    "playbackInterruptionSettings": {
+    
+    }
+  },
+  "nluSettingsList": [ {
+    "modelType": "MODEL_TYPE_CUSTOM",
+    "classificationThreshold": 0.30000001,
+    "modelTrainingMode": "MODEL_TRAINING_MODE_MANUAL",
+    "languageCode": "en"
+  }, {
+    "modelType": "MODEL_TYPE_CUSTOM",
+    "classificationThreshold": 0.30000001,
+    "modelTrainingMode": "MODEL_TRAINING_MODE_MANUAL",
+    "languageCode": "fr-ca"
+  } ],
+  "inputParameterDefinitions": [ {
+    "name": "global_error_counter",
+    "description": "Counts the total number of no matches and no inputs given by the customer throughout the conversation",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "NUMBER"
+      }
+    },
+    "parameterType": {
+      "name": "global_error_counter",
+      "openapiJsonSchema": {
+        "type": "number"
+      }
+    }
+  } ],
+  "outputParameterDefinitions": [ {
+    "name": "global_error_counter",
+    "description": "Counts the total number of no matches and no inputs given by the customer throughout the conversation",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "NUMBER"
+      }
+    },
+    "parameterType": {
+      "name": "global_error_counter",
+      "openapiJsonSchema": {
+        "type": "number"
+      }
+    }
+  } ],
+  "multiLanguageSettings": {
+  
+  }
+}

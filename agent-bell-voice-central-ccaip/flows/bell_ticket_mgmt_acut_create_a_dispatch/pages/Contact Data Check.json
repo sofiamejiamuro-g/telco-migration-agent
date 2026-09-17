@@ -1,0 +1,73 @@
+{
+  "name": "6c2fc3d3-c2d4-4e3a-acde-24679c18273d",
+  "displayName": "Contact Data Check",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "setParameterActions": [ {
+      "parameter": "date_range_begin",
+      "value": "$sys.func.FORMAT_DATE($sys.func.NOW(), \"yyyy-MM-dd\", $session.params.language)"
+    }, {
+      "parameter": "date_range_end",
+      "value": "$sys.func.FORMAT_DATE($sys.func.ADD_DATE($sys.func.NOW(), 14, \"DAYS\"), \"yyyy-MM-dd\", $session.params.language)"
+    }, {
+      "parameter": "brand",
+      "value": "$session.params.brand"
+    }, {
+      "parameter": "menu_type",
+      "value": "$session.params.menu_type"
+    }, {
+      "parameter": "telephone_number",
+      "value": "$session.params.telephone_number"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.contact_number_on_file = $session.params.stored_contact_number AND $session.params.contact_type_on_file = \"Phone\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook - WFAS Check Availability",
+    "name": "ff5dfa0c-aca4-4900-a068-c9ee57aa9632"
+  }, {
+    "condition": "($session.params.contact_number_on_file = $session.params.stored_contact_number AND $session.params.contact_type_on_file = $session.params.stored_contact_type) OR ($session.params.stored_contact_number = \"\" OR $session.params.stored_contact_number = null)",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook - WFAS Check Availability",
+    "name": "6a617c72-bd05-4329-9d06-94438db88320"
+  }, {
+    "condition": "($session.params.contact_number_on_file != $session.params.stored_contact_number OR $session.params.contact_type_on_file != $session.params.stored_contact_type) AND ($session.params.contact_type_on_file = \"SMS\" AND $session.params.stored_contact_type = \"Phone\")",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook - WFAS Check Availability",
+    "name": "b64b7fb9-196f-44e7-b6e4-2fa38ba06a54"
+  }, {
+    "condition": "$session.params.contact_number_on_file != $session.params.stored_contact_number OR $session.params.contact_type_on_file != $session.params.stored_contact_type",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Update Contact Method Confirmation",
+    "name": "68fa675f-c71e-41e7-84b4-ad0da4aa0a96"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "6c2fc3d3-c2d4-4e3a-acde-24679c18273d"
+      }, {
+        "parameter": "flow_id",
+        "value": "daa61f2b-2d60-44bf-9fc3-b0d8955f384d"
+      }, {
+        "parameter": "page_name",
+        "value": "Contact Data Check"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

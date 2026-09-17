@@ -1,0 +1,58 @@
+{
+  "name": "402dfb30-9a9e-4d90-9322-7fc61af400e1",
+  "actions": [ {
+    "agentUtterance": {
+      "text": " Bien sûr, je peux vous aider. Pourriez-vous confirmer le service que vous souhaitez rétablir?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Internet"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Merci. Vous pouvez facilement rétablir vos services résidentiels dans MonBell. Je vais envoyer un texto à l’appareil à partir duquel vous appelez qui contient un lien pour le faire vous-même. Est-ce que cela vous convient?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "non"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "brand": "bell",
+        "language": "fr-ca",
+        "route": "account_restore_service",
+        "sms_send_status": "Declined",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "User wants to restore their service",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca",
+      "route": "account_restore_service",
+      "unique_services": "MOBILITY, INTERNET, TV",
+      "utterance": "I want to restore my service"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "User declines sms and routed to sms flow",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca",
+      "route": "account_restore_service",
+      "sms_send_status": "Declined"
+    }
+  },
+  "displayName": "FR Restore Service : Ask service - Internet - No SMS",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 336,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

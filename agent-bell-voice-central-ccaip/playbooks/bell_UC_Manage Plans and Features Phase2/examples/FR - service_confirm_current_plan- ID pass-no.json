@@ -1,0 +1,73 @@
+{
+  "name": "abd2f762-0d5d-4a85-8bd5-756fe16de6f0",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "brand": "bell",
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "je vais envoyer un texto à l'appareil au moyen duquel vous appelez, afin que vous puissiez facilement consulter et gérer vos forfaits dans MonBell. Est-ce que ça vous convient?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "non"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_get_sdl_mapping_url",
+      "inputActionParameters": {
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Pas de problème. Pour toute autre question, vous pouvez toujours consulter notre site Web à l'adresse {faq_link}"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_Feedback",
+      "inputActionParameters": {
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "customer wants to know about the details of their current subscription",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "Existing",
+      "faq_link": "bell.ca/support",
+      "identification_status": "Pass",
+      "language": "fr-ca",
+      "route": "service_confirm_current_plan",
+      "utterance": "Je voudrais savoir à quoi je suis abonné ?"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Ask if user wants to receives the sms, if customer disagreed then call the sdl_mapping flow and call feedback",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "fr-ca"
+    }
+  },
+  "displayName": "FR - service_confirm_current_plan- ID pass-no",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 461,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

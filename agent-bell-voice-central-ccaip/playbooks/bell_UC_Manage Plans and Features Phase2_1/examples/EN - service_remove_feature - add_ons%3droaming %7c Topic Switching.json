@@ -1,0 +1,57 @@
+{
+  "name": "4cb862d0-1d82-4e3f-ac37-d6563698aadd",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70011",
+        "brand": "bell",
+        "language": "en"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Roam Better is for when you're roaming in a Roam Better destination. You won't be charged for Roam Better when you're not roaming. Do you still want to remove roaming?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "I want to update my account details first"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "Routing only",
+      "inputActionParameters": {
+        "utterance": "I want to update my account details first"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "As, {identification_status} is \"Pass\" and {add-ons}= \"roaming\" AND {lob} is not equal to \"Prepaid\" ",
+    "actionParameters": {
+      "add_ons": "roaming",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "en",
+      "route": "service_remove_feature",
+      "utterance": "How do I get off the roaming charges?"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "user wants to update account details, so route to Routing only flow",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en"
+    }
+  },
+  "displayName": "EN - service_remove_feature - add_ons=roaming | Topic Switching",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 370,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

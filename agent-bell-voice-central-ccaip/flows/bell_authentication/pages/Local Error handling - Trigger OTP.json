@@ -1,0 +1,59 @@
+{
+  "name": "904584e6-bfd3-406b-b3a1-95c4447f543d",
+  "displayName": "Local Error handling - Trigger OTP",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.global_error_counter \u003e= 3",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_aqd",
+    "name": "a4aa1729-35a0-4d50-b6e6-dc8b6760f9fe"
+  }, {
+    "condition": "$session.params.local_noinput_counter = 1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "That doesn't seem right. Please say or key in the 6-digit code I sent you." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Cela ne semble pas exact. Veuillez dire ou entrer le code de six chiffres que je vous ai envoyé." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "2dced177-f0c2-4148-b7ff-a50c4aa590fe"
+  }, {
+    "condition": "$session.params.local_noinput_counter \u003e= 2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "That still doesn’t seem right." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Cela ne semble toujours pas exact." ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "auth_status",
+        "value": "Fail"
+      } ]
+    },
+    "targetPage": "End Flow Check",
+    "name": "52f2db35-8ae6-4ba6-a42a-717b663768eb"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Previous Page",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

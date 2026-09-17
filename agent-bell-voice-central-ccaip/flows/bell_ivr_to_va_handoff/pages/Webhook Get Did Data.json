@@ -1,0 +1,122 @@
+{
+  "name": "9e368600-9346-47b8-81ad-ff7ebee4c946",
+  "displayName": "Webhook Get Did Data",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "/v1/ivr-transfer/get-did-data",
+    "tag": "N/A",
+    "setParameterActions": [ {
+      "parameter": "did_number",
+      "value": "$session.params.tfn"
+    }, {
+      "parameter": "webhook_success",
+      "value": null
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.webhook_success = False OR $session.params.webhook_success = false",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "ivr_va_get_did_fail",
+        "value": true
+      } ]
+    },
+    "targetFlow": "Default Start Flow",
+    "name": "4e403d98-8af8-4ea1-b2b6-aedff83ed920"
+  }, {
+    "condition": "$session.params.webhook_success = True OR $session.params.webhook_success = true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "lob_from_ivr",
+        "value": "$session.params.get_did_data_response.lob"
+      }, {
+        "parameter": "cirn",
+        "value": "$session.params.get_did_data_response.cirn"
+      } ]
+    },
+    "targetPage": "Check LOB Passed From IVR",
+    "name": "b68aa2f8-fce2-431a-a1ff-6bd15f0bdbfb"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "9e368600-9346-47b8-81ad-ff7ebee4c946"
+      }, {
+        "parameter": "flow_id",
+        "value": "01d23b20-9932-49f4-b5ee-333b5eafd8fe"
+      }, {
+        "parameter": "page_name",
+        "value": "Webhook Get Did Data"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ],
+  "eventHandlers": [ {
+    "targetFlow": "Default Start Flow",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "ivr_va_get_did_fail",
+        "value": true
+      } ]
+    },
+    "name": "2d23a15b-85ed-46b3-af10-b2e94102a7a5"
+  }, {
+    "targetFlow": "Default Start Flow",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "ivr_va_get_did_fail",
+        "value": true
+      } ]
+    },
+    "name": "98da8bfa-5f73-4e09-aca0-fcee043d6289"
+  }, {
+    "targetFlow": "Default Start Flow",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "ivr_va_get_did_fail",
+        "value": true
+      } ]
+    },
+    "name": "05057093-adcc-48ee-9bf2-e99f34592a48"
+  }, {
+    "targetFlow": "Default Start Flow",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "ivr_va_get_did_fail",
+        "value": true
+      } ]
+    },
+    "name": "b5939979-4e68-4bcb-a217-a6ad35c2e467"
+  }, {
+    "targetFlow": "Default Start Flow",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "ivr_va_get_did_fail",
+        "value": true
+      } ]
+    },
+    "name": "b5032746-9857-4aae-a2eb-eca26383e2be"
+  }, {
+    "targetFlow": "Default Start Flow",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "ivr_va_get_did_fail",
+        "value": true
+      } ]
+    },
+    "name": "8043a4da-df7a-4bbd-ad92-1a698d4a341e"
+  } ]
+}

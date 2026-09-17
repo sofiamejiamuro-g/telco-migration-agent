@@ -1,0 +1,70 @@
+{
+  "name": "03eaead2-222c-46ab-8399-e4b6d1f36643",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+        "language": "fr-ca"
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Bien sûr, laissez-moi vous aider.\nDésirez-vous ajouter un nouveau service ou modifier votre service actuel?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "nouveau plan"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "À propos de quel service communiquez-vous avec nous?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "tv"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_aqd",
+      "inputActionParameters": {
+        "language": "fr-ca",
+        "line_type": "New",
+        "lob": "TV",
+        "province": "ROC"
+      },
+      "outputActionParameters": {
+        "language": "fr-ca"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "customer wants to add a new internet line and {province} is \"ROC\" or null from identification flow",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "fr-ca",
+      "province": "ROC",
+      "route": "sales_add_to_existing_account",
+      "utterance": "Comment puis-je ajouter un service à mon compte ?"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "AS {lob} is tv and {province} is ROC from id flow we are transferring agent to aqd",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca",
+      "line_type": "New",
+      "lob": "TV",
+      "province": "ROC"
+    }
+  },
+  "displayName": "FR-sales_add_to_existing-account-Existing-ROC(tv)",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 428,
+  "languageCode": "en"
+}

@@ -1,0 +1,131 @@
+{
+  "name": "70d157ab-d9dc-4c5a-bbc0-8e4a5bf72f6e",
+  "displayName": "Webhook Failure NM1 Outage",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "messages": [ {
+      "text": {
+        "text": [ "We are currently performing maintenance on our systems so unfortunately I am unable to proceed with your request at this time. I'll send a text to the device you're calling from, so that you can view your payment notification yourself in the MyBell App. Is that alright?" ]
+      },
+      "languageCode": "en"
+    }, {
+      "text": {
+        "text": [ "Nous effectuons actuellement une maintenance sur nos systemes. Malheureusement, je ne suis pas en mesure de procéder au réapprovisionnement de votre carte de crédit pour le moment. J'enverrai un message texte à l'appareil à partir duquel vous appelez afin que vous puissiez consulter vous-même votre notification de paiement dans l'appli MonBell. Est-ce que cela vous convient?" ]
+      },
+      "languageCode": "fr-ca"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "intent": "context.sms_no",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Okay, you can always view your payment notification details yourself in the MyBell app." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "D'accord, vous pouvez toujours consulter vous-même les détails de votre notification de paiement dans l'application MyBell." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetFlow": "bell_Feedback",
+    "name": "75bea079-67b8-41bd-9a5b-727c931974c4"
+  }, {
+    "intent": "context.sms_yes",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Language Based SMS",
+    "name": "83584255-1e83-48db-8ab4-3c8bccd6ea5f"
+  }, {
+    "intent": "other_speak_to_agent",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_determine_handover",
+    "name": "b487c415-28ae-4f5f-8dee-b4b4f7c15adc"
+  } ],
+  "eventHandlers": [ {
+    "event": "sys.no-input-1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I didn't quite get that. Can you try again?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je n’ai pas tout à fait compris. Pouvez-vous réessayer?" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "f7e9ff8b-c6e8-419e-b2f4-58a2627a86eb"
+  }, {
+    "event": "sys.no-input-2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I still didnt get that" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je n’ai toujours pas compris" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "3f1a203f-70b6-47ca-86ad-1374efd53914"
+  }, {
+    "event": "sys.no-match-1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I didn't quite get that. Can you try again?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je n’ai pas tout à fait compris. Pouvez-vous réessayer?" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "5855ba81-5c7b-46e9-b646-739ca384ddcd"
+  }, {
+    "event": "sys.no-match-2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I still didnt get that" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je n’ai toujours pas compris" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "19f9bc6e-9af0-4273-8298-a1597d8bd63d"
+  }, {
+    "targetFlow": "bell_determine_handover",
+    "event": "sys.no-input-3",
+    "triggerFulfillment": {
+    
+    },
+    "name": "8109cdf1-b63a-40cf-bac1-aa8f6f20f258"
+  }, {
+    "targetFlow": "bell_determine_handover",
+    "event": "sys.no-match-3",
+    "triggerFulfillment": {
+    
+    },
+    "name": "58664dce-21e3-4d25-994c-1928aead1f09"
+  } ]
+}

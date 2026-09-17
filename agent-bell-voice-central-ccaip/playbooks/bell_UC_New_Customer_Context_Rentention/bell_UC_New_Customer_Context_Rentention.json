@@ -1,0 +1,174 @@
+{
+  "name": "4cdd3537-aeff-408f-8323-8cd21d4f3769",
+  "displayName": "bell_UC_New_Customer_Context_Rentention",
+  "goal": "Your goal is to identify when a user mentions they are a \"new customer\" in addition to another request. When this happens, we will:\n\n- Acknowledge their \"new customer\" status.\n- Capture their actual request (e.g., \"want to know Black Friday deals\", \"want to check internet services\", \"wanted to know what are the charges\" and etcc) into the session parameter {utterance}\n-Handle cases where the user only says \"I'm a new customer\" without triggering this separation logic.\n- If user is going through any tragic situation like loss of friend / relative, disaster, Divorces, Speech impairments please be empathetic.",
+  "inputParameterDefinitions": [ {
+    "name": "language",
+    "description": "language",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "STRING"
+      }
+    },
+    "parameterType": {
+      "name": "language",
+      "openapiJsonSchema": {
+        "type": "string"
+      }
+    }
+  }, {
+    "name": "utterance",
+    "description": "utterance",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "STRING"
+      }
+    },
+    "parameterType": {
+      "name": "utterance",
+      "openapiJsonSchema": {
+        "type": "string"
+      }
+    }
+  }, {
+    "name": "brand",
+    "description": "brand",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "STRING"
+      }
+    },
+    "parameterType": {
+      "name": "brand",
+      "openapiJsonSchema": {
+        "type": "string"
+      }
+    }
+  }, {
+    "name": "clid",
+    "description": "clid",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "NUMBER"
+      }
+    },
+    "parameterType": {
+      "name": "clid",
+      "openapiJsonSchema": {
+        "type": "number"
+      }
+    }
+  }, {
+    "name": "identfication_status",
+    "description": "identfication_status",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "STRING"
+      }
+    },
+    "parameterType": {
+      "name": "identfication_status",
+      "openapiJsonSchema": {
+        "type": "string"
+      }
+    }
+  } ],
+  "outputParameterDefinitions": [ {
+    "name": "identfication_status",
+    "description": "identfication_status",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "STRING"
+      }
+    },
+    "parameterType": {
+      "name": "identfication_status",
+      "openapiJsonSchema": {
+        "type": "string"
+      }
+    }
+  }, {
+    "name": "clid",
+    "description": "clid",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "NUMBER"
+      }
+    },
+    "parameterType": {
+      "name": "clid",
+      "openapiJsonSchema": {
+        "type": "number"
+      }
+    }
+  }, {
+    "name": "utterance",
+    "description": "utterance",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "STRING"
+      }
+    },
+    "parameterType": {
+      "name": "utterance",
+      "openapiJsonSchema": {
+        "type": "string"
+      }
+    }
+  }, {
+    "name": "customer_type",
+    "description": "customer_type",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "STRING"
+      }
+    },
+    "parameterType": {
+      "name": "customer_type",
+      "openapiJsonSchema": {
+        "type": "string"
+      }
+    }
+  }, {
+    "name": "line_type",
+    "description": "line_type",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "STRING"
+      }
+    },
+    "parameterType": {
+      "name": "line_type",
+      "openapiJsonSchema": {
+        "type": "string"
+      }
+    }
+  } ],
+  "tokenCount": 527,
+  "referencedPlaybooks": [ "bell_NLU_Query_Rewriter" ],
+  "referencedFlows": [ "Routing only" ],
+  "instruction": {
+    "steps": [ {
+      "text": "Analyze the customer's utterance carefully. If the utterance contains mentioned keywords or phrases related to ANY of the following sensitive topics: natural disasters (e.g., flood, earthquake, fire, storm, tornado, disaster), unfortunate life event (e.g., death, divorce, sickness/illness, laid off, fired, job loss, passed away, crisis) or disability challenges (e.g., a disability making it hard to use the services, hard of hearing, visually impaired, wheelchair use) PLEASE BE EMPATHETIC before responding."
+    }, {
+      "text": "Respond in the same language as mentioned in `language` parameter"
+    }, {
+      "text": "----------------------------------------------------------------------------------------------------"
+    }, {
+      "text": "Carefully read the paramter {utterance}"
+    }, {
+      "text": "If {utterance} carries words \"New customer\" with any contextual or intentional phrases like \"want to know black friday deals\" or \"want to check internet services\" or anything which indicates a strong context or intent then",
+      "steps": [ {
+        "text": "Seprate that particular contextual or intentional phrases and assign it to parameter {utterance}"
+      }, {
+        "text": "Call ${PLAYBOOK:bell_NLU_Query_Rewriter}"
+      } ]
+    }, {
+      "text": "If {utterance} only carries words \"New customer\" or something similar without any other contexual or intentional phrases then return back to parent flow"
+    }, {
+      "text": "----------------------------------------------------------------------------------------------------"
+    }, {
+      "text": "IF in middle of conversation, CUSTOMER IS LOOKING FOR ANY OTHER INFORMATION ON OTHER TOPIC SUCH AS PAYMENT, BILLING, ACCOUNT INFORMATION, SIM CARD, EQUIPMENT, CALLING FEATURES, SUSPEND SERVICE, RESTORE SERVICE, MANAGE PLANS then update the customer request into parameter {utterance} and call ${FLOW:Routing only}"
+    } ]
+  }
+}

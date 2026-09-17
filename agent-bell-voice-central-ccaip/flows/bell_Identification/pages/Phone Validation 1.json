@@ -1,0 +1,240 @@
+{
+  "name": "1300cf8f-d3e4-46d1-93cc-60a5da90849a",
+  "displayName": "Phone Validation 1",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "setParameterActions": [ {
+      "parameter": "CIRN_1",
+      "value": "$sys.func.SUBSTITUTE($session.params.CIRN, \"[^0-9]\", \"\")"
+    }, {
+      "parameter": "CIRN_Len",
+      "value": "$sys.func.LEN($session.params.CIRN_1)"
+    }, {
+      "parameter": "CIRN_1st_Pos",
+      "value": "$sys.func.MID($session.params.CIRN_1, 1, 1)"
+    }, {
+      "parameter": "CIRN_11_digit_Valid",
+      "value": "$sys.func.IF(\"$session.params.CIRN_1st_Pos =  1  AND $session.params.CIRN_Len = 11\", $sys.func.MID($session.params.CIRN_1,2,10), \"\")"
+    }, {
+      "parameter": "CIRN_11_digit_Invalid",
+      "value": "$sys.func.IF(\"$session.params.CIRN_1st_Pos !=  1 AND $session.params.CIRN_Len = 11\", \"\", \"\")"
+    }, {
+      "parameter": "CIRN_10_digit_Valid",
+      "value": "$sys.func.IF(\"$session.params.CIRN_Len = 10\", $session.params.CIRN_1, \"\")"
+    }, {
+      "parameter": "CIRN_Invalid",
+      "value": "$sys.func.IF(\"$session.params.CIRN_Len != 10 OR $session.params.CIRN_Len != 11\", \"\", \"\")"
+    }, {
+      "parameter": "CIRN_10",
+      "value": "$sys.func.IF(\"$sys.func.LEN($session.params.CIRN_10_digit_Valid) = 10\", \"$session.params.CIRN_10_digit_Valid\", \"\")"
+    }, {
+      "parameter": "CIRN",
+      "value": "$sys.func.IF(\"$sys.func.LEN($session.params.CIRN_11_digit_Valid) = 10\", \"$session.params.CIRN_11_digit_Valid\", \"$session.params.CIRN_10\")"
+    }, {
+      "parameter": "CIRN",
+      "value": "$sys.func.IF(\"($session.params.CIRN:0000000000) OR ($session.params.CIRN:1111111111) OR ($session.params.CIRN:2222222222) OR ($session.params.CIRN:3333333333) OR ($session.params.CIRN:4444444444) OR ($session.params.CIRN:5555555555) OR ($session.params.CIRN:6666666666) OR ($session.params.CIRN:7777777777) OR ($session.params.CIRN:8888888888) OR ($session.params.CIRN:9999999999)\", \"\", $session.params.CIRN)"
+    }, {
+      "parameter": "CIRN_flag",
+      "value": "$sys.func.IS_PHONE_NUMBER($session.params.CIRN, \"CA\")"
+    }, {
+      "parameter": "nm1_grant",
+      "value": null
+    }, {
+      "parameter": "CIRN_999",
+      "value": "$sys.func.MID($session.params.CIRN_1, 1, 3)"
+    }, {
+      "parameter": "ban_provided_instead_cirn",
+      "value": false
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.semantic_void = 3 AND ($session.params.CPM_Invalid_Counter \u003c= 2 OR $session.params.PHN_Invalid_Counter \u003c= 2)",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Sorry, I can't seem to find that number in our records.  But don’t worry, I'll still help you however I can." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Désolé, je ne parviens pas à trouver ce numéro dans nos dossiers. Soyez sans crainte, je ferai quand même de mon mieux pour vous servir." ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "identification_status",
+        "value": "Fail"
+      } ]
+    },
+    "targetPage": "End Flow Check",
+    "name": "2319cb49-d7f3-40b8-8efd-06a83aeef887"
+  }, {
+    "condition": "$session.params.clid = $session.params.CIRN",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "CPM_DB_Check",
+    "name": "9e801eb6-c454-433e-8b4a-0e4ae5a7af41"
+  }, {
+    "condition": "$session.params.CIRN_Len = 9",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "BAN",
+        "value": "$session.params.CIRN_1"
+      }, {
+        "parameter": "CIRN",
+        "value": null
+      }, {
+        "parameter": "ban_provided_instead_cirn",
+        "value": true
+      } ]
+    },
+    "targetPage": "CPM_DB_Check",
+    "name": "aa88a848-fabb-4a97-8635-a32b0447efbd"
+  }, {
+    "condition": "$session.params.CIRN_flag = true AND (($sys.func.LEN($session.params.CIRN) = 10 AND $sys.func.TO_NUMBER($session.params.CIRN) = $sys.func.TO_NUMBER($session.params.CLID)) OR ($sys.func.LEN($session.params.CIRN) = 10 AND $session.params.counter = 1))",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "CPM_DB_Check",
+    "name": "2eccc809-e858-478e-a68e-bec7887d7c41"
+  }, {
+    "condition": "$session.params.CIRN_flag = true AND $sys.func.LEN($session.params.CIRN) = 10",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "\u003cspeak\u003eThat was \u003cprosody rate=\"70%\"\u003e\u003csay-as interpret-as=\"telephone\"\u003e$session.params.cirn_grp1\u003c/say-as\u003e\u003cbreak time=\"300ms\"/\u003e\u003csay-as interpret-as=\"telephone\"\u003e$session.params.cirn_grp2\u003c/say-as\u003e\u003cbreak time=\"300ms\"/\u003e\u003csay-as interpret-as=\"telephone\"\u003e$session.params.cirn_grp3\u003c/say-as\u003e\u003cbreak time=\"300ms\"/\u003e\u003csay-as interpret-as=\"telephone\"\u003e$session.params.cirn_grp4\u003c/say-as\u003e\u003c/prosody\u003e, right?\u003c/speak\u003e" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "\u003cspeak\u003eJ'ai compris \u003cprosody rate=\"70%\"\u003e\u003csay-as interpret-as=\"telephone\"\u003e$session.params.cirn_grp1\u003c/say-as\u003e\u003cbreak time=\"300ms\"/\u003e\u003csay-as interpret-as=\"telephone\"\u003e$session.params.cirn_grp2\u003c/say-as\u003e\u003cbreak time=\"300ms\"/\u003e\u003csay-as interpret-as=\"telephone\"\u003e$session.params.cirn_grp3\u003c/say-as\u003e\u003cbreak time=\"300ms\"/\u003e\u003csay-as interpret-as=\"telephone\"\u003e$session.params.cirn_grp4\u003c/say-as\u003e\u003c/prosody\u003e, n'est-ce pas?\u003c/speak\u003e" ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "PHN_Incorrect_Counter",
+        "value": 0
+      }, {
+        "parameter": "PHN_Invalid_Counter",
+        "value": 0
+      }, {
+        "parameter": "counter",
+        "value": 1
+      }, {
+        "parameter": "cirn_grp1",
+        "value": "$sys.func.MID($session.params.CIRN,1,3)"
+      }, {
+        "parameter": "cirn_grp2",
+        "value": "$sys.func.MID($session.params.CIRN,4,3)"
+      }, {
+        "parameter": "cirn_grp3",
+        "value": "$sys.func.MID($session.params.CIRN,7,2)"
+      }, {
+        "parameter": "cirn_grp4",
+        "value": "$sys.func.MID($session.params.CIRN,9,2)"
+      } ]
+    },
+    "targetPage": "Check CX Input",
+    "name": "dc6558bf-195f-44f2-bf46-c226a5403ee7"
+  }, {
+    "condition": "($session.params.CIRN_flag = false AND $session.params.PHN_Invalid_Counter \u003e= 2) OR ($sys.func.LEN($session.params.CIRN) != 10 AND $session.params.PHN_Invalid_Counter \u003e= 2)",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I'm sorry, I can't seem to find this number in our records. But don’t worry, I'll still help you however I can." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Désolé, je ne parviens pas à trouver ce numéro dans nos dossiers. Soyez sans crainte, je ferai quand même de mon mieux pour vous servir." ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "identification_status",
+        "value": "Fail"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "65366c19-9fea-4166-a689-24361d10a082"
+  }, {
+    "condition": "($session.params.CIRN_flag = false AND $session.params.PHN_Invalid_Counter = 1) OR ($sys.func.LEN($session.params.CIRN) != 10 AND $session.params.PHN_Invalid_Counter = 1)",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "$request.generative.response" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "$request.generative.response" ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "PHN_Invalid_Counter",
+        "value": "$sys.func.ADD(1, $session.params.PHN_Invalid_Counter)"
+      }, {
+        "parameter": "CIRN",
+        "value": null
+      }, {
+        "parameter": "aqd_counter",
+        "value": "$sys.func.ADD($session.params.aqd_counter, 1)"
+      } ],
+      "generators": [ {
+        "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/2a3fc3f6-86bd-4855-a910-e13f5e42dca6",
+        "outputParameter": "$request.generative.response"
+      } ]
+    },
+    "targetPage": "CIRN Collection Check",
+    "name": "7a57bf39-0110-4c14-85f1-b56b48be8511"
+  }, {
+    "condition": "$session.params.test4806 = true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "CPM_DB_Check",
+    "name": "e0953466-da23-4578-a417-a63128c2ece9"
+  }, {
+    "condition": "$session.params.CIRN_flag = false OR $sys.func.LEN($session.params.CIRN) != 10",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "PHN_Invalid_Counter",
+        "value": "$sys.func.ADD(1, $session.params.PHN_Invalid_Counter)"
+      }, {
+        "parameter": "CIRN",
+        "value": null
+      }, {
+        "parameter": "semantic_void",
+        "value": "$sys.func.ADD(1, $session.params.semantic_void)"
+      }, {
+        "parameter": "aqd_counter",
+        "value": "$sys.func.ADD($session.params.aqd_counter, 1)"
+      } ]
+    },
+    "targetPage": "Global ID Error Check",
+    "name": "b5dca8b7-bcee-4048-b153-039e5b815bd1"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "1300cf8f-d3e4-46d1-93cc-60a5da90849a"
+      }, {
+        "parameter": "flow_id",
+        "value": "8df7f836-8c64-4019-9506-2cedc52519c8"
+      }, {
+        "parameter": "page_name",
+        "value": "Phone Validation 1"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

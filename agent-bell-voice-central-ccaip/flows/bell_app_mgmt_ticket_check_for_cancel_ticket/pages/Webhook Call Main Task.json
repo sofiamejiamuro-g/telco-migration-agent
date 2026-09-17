@@ -1,0 +1,105 @@
+{
+  "name": "20a75ed2-3279-40df-8d58-1d43a467cb62",
+  "displayName": "Webhook Call Main Task",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "v1/dfcx_support/acut_content_lookup#main-task",
+    "tag": "main-task"
+  },
+  "transitionRoutes": [ {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "webhook_success",
+        "value": "$session.params.webhook_success"
+      }, {
+        "parameter": "main_task_status_message",
+        "value": "$session.params.acut_main_task_status_response.main_task_status_message"
+      } ]
+    },
+    "name": "cc7479bd-6c24-4948-8426-583e072ff821"
+  }, {
+    "condition": "$session.params.webhook_success = true AND $session.params.ticket_dispatch_status = \"all_without_dispatch\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Je n’ai pas trouvé de billet avec la planification d’un(e) technicien(ne). $session.params.trouble_type_message  $session.params.main_task_status_message. Est-ce la raison de votre appel?" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "I have not found a ticket with a technician scheduled however,$session.params.trouble_type_message  $session.params.main_task_status_message. Is this what your calling about?" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "targetPage": "User Confirmation for without dispatch ticket",
+    "name": "0dfaaa72-b9e5-47f3-9755-a52bd5044c49"
+  }, {
+    "condition": "$session.params.webhook_success = true AND $session.params.ticket_dispatch_status = \"historical/closed\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Call Acut Disposition Code",
+    "name": "5160e9d2-789b-422d-a5fa-5a975d73910b"
+  }, {
+    "condition": "$session.params.webhook_success = false OR $session.params.webhook_success = \"false\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Failure - ACUT",
+    "name": "ef7e764e-2dfc-41d3-886b-249e5440b4aa"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Failure - ACUT",
+    "name": "4971a44b-5675-41ba-8f5d-c34034bd05d6"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Webhook Failure - ACUT",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+    
+    },
+    "name": "287a1b39-0bc3-4a95-b093-86fe11dbfb07"
+  }, {
+    "targetPage": "Webhook Failure - ACUT",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+    
+    },
+    "name": "491f53f6-7e67-441e-8a56-65c6d0e1fee5"
+  }, {
+    "targetPage": "Webhook Failure - ACUT",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+    
+    },
+    "name": "54adafe0-0e46-4116-a0b6-be98e7f3254d"
+  }, {
+    "targetPage": "Webhook Failure - ACUT",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+    
+    },
+    "name": "f4301837-5b0d-45ae-8ff3-79f9d85dc105"
+  }, {
+    "targetPage": "Webhook Failure - ACUT",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+    
+    },
+    "name": "bedd6d0d-8fa8-4889-be23-70d087671315"
+  }, {
+    "targetPage": "Webhook Failure - ACUT",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+    
+    },
+    "name": "f0b12288-a7ea-489f-958c-f8896a6a0426"
+  } ]
+}

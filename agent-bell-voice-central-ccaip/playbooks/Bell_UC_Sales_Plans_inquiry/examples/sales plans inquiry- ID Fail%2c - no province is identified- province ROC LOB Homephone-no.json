@@ -1,0 +1,75 @@
+{
+  "name": "5b9407b8-5dd1-4472-b9bd-9aae545b11f3",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "language": "en"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Sure, let me help you with that.\n\nWhich service are you inquiring about?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "a homephone"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Let’s check if we offer Internet and Home phone service in your area. In which province are you looking to get service?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Northwest Territories"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Sorry, we don't offer Home phone service in your area just yet. But, good news, Bell offers amazing mobile phone service, which covers over 99 percent of the population. I can connect you with one of our agents to learn more. Would you like that?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "NO"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_Feedback",
+      "inputActionParameters": {
+        "language": "en"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customers want to know about different plans or compare different plans that Bell has and lob identified as \" Internet\" OR \"TV\" OR \"Homephone\"",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "New",
+      "identification_status": "Fail",
+      "language": "en",
+      "province": "AB",
+      "route": "sales_plans_inquiry",
+      "utterance": "could you get me a new plan"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "If lob is not mentioned, ask for it and route to bell_uc_ask_LOB if user does not mention it, \nWhen province is anything other than ON and QC or is null or empty, ask user for province, extract in {province} parameter and further route based on province",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "lob": "homephone",
+      "province": "ROC"
+    }
+  },
+  "displayName": "sales plans inquiry- ID Fail, - no province is identified- province ROC LOB Homephone-no",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 519,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

@@ -1,0 +1,28 @@
+{
+  "name": "41335da7-296c-410c-a4dc-7f43f2100ba6",
+  "displayName": "Result Check Consolidated Bill",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "setParameterActions": [ {
+      "parameter": "error_return_code",
+      "value": "$session.params.nm1_get_cust_profile_response.returnCode"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "($session.params.accountType = \"I\" AND ($session.params.accountSubType = \"R\" OR $session.params.accountSubType = \"P\" OR $session.params.accountSubType = \"N\" OR $session.params.accountSubType = \"B\" OR $session.params.accountSubType = \"5\" OR $session.params.accountSubType = \"E\")) OR ($session.params.accountType = \"C\" AND ($session.params.accountSubType = \"P\" OR $session.params.accountSubType = \"V\" OR $session.params.accountSubType = \"T\")) OR ($session.params.oneBillIndicator = \"M\" OR $session.params.oneBillIndicator = \"Y\")",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook NPA XX Lookup",
+    "name": "70012d37-bf92-4892-82fa-eedd0f5ff27d"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Failure NM1 Outage",
+    "name": "21e0c1b3-f97a-49bb-b7d3-0e574cdceff1"
+  } ]
+}

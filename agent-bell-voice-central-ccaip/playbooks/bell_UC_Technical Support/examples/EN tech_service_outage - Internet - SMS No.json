@@ -1,0 +1,67 @@
+{
+  "name": "45e451a2-0b90-463e-a4b3-aa15304807c8",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Could you tell me which service you're having trouble with?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Internet"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70014",
+        "language": "en"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "You can use our Virtual Repair tool to check for service outages and troubleshoot your equipment. I'll send a text to the device you're calling from so you can access it quickly. Is that alright?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "no"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_aqd",
+      "inputActionParameters": {
+        "language": "en",
+        "route": "tech_service_outage"
+      },
+      "outputActionParameters": {
+        "language": "en",
+        "sms_send_status": "Declined"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customers are facing outage in their area, they reported this issue for {lob} = Internet when asked used said No to the sms trigger flow",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "lob": "Internet",
+      "route": "tech_service_outage",
+      "utterance": "Is there outage in my area?"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "User is redirected sms_trigger flow",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "lob": "Internet",
+      "route": "tech_service_outage",
+      "utterance": "Is there outage in my area?"
+    }
+  },
+  "displayName": "EN tech_service_outage - Internet - SMS No",
+  "retrievalStrategy": "NEVER",
+  "tokenCount": 413,
+  "languageCode": "en"
+}

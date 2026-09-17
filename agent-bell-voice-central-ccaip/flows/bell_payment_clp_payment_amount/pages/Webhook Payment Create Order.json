@@ -1,0 +1,97 @@
+{
+  "name": "efa0f0ee-6d3f-4c35-bcc0-861944044548",
+  "displayName": "Webhook Payment Create Order",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "v1/one-time-payment#create-order",
+    "tag": "N/A"
+  },
+  "transitionRoutes": [ {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "name": "0965abba-4e90-45b9-90d0-5d1307a7dcd9"
+  }, {
+    "condition": "$session.params.webhook_success = false",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Failure",
+    "name": "111f0e77-8bfc-4ed2-97c2-c4223d19f9c4"
+  }, {
+    "condition": "$session.params.webhook_success = true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "transaction_id",
+        "value": "$session.params.start_one_time_pmt_response.OrderFormId"
+      } ]
+    },
+    "targetPage": "Check CLP Balance",
+    "name": "f04e655f-2210-4775-982e-041365697f68"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "efa0f0ee-6d3f-4c35-bcc0-861944044548"
+      }, {
+        "parameter": "flow_id",
+        "value": "70646c3b-7bf8-461e-8396-107d863a809e"
+      }, {
+        "parameter": "page_name",
+        "value": "Webhook Payment Create Order"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Webhook Failure",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+    
+    },
+    "name": "9d86ef26-a82c-4242-856b-0f005b1a93a7"
+  }, {
+    "targetPage": "Webhook Failure",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+    
+    },
+    "name": "ff4b2eff-b120-413a-9dcc-ab827cf7955b"
+  }, {
+    "targetPage": "Webhook Failure",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+    
+    },
+    "name": "369ef157-bc0c-495f-b312-081ea3b87647"
+  }, {
+    "targetPage": "Webhook Failure",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+    
+    },
+    "name": "ef15f338-f63a-47a6-8ebc-33c774b14db7"
+  }, {
+    "targetPage": "Webhook Failure",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+    
+    },
+    "name": "567c7f7b-eca1-4246-b590-4aee50f923ed"
+  }, {
+    "targetPage": "Webhook Failure",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+    
+    },
+    "name": "922fd88d-3c02-457c-8f0b-b5422726f574"
+  } ]
+}

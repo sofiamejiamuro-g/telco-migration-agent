@@ -1,0 +1,77 @@
+{
+  "name": "9a03c9cd-4300-4144-a95b-e0f742060cf3",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70011",
+        "brand": "bell",
+        "language": "fr-ca",
+        "route": "service_add_feature"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Vous pouvez consulter les options de voyage offertes dans MonBell. Je vais envoyer un texto avec un lien à l’appareil au moyen duquel vous appelez. Est-ce que ça vous convient?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "oui"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "add_ons": "travel pass",
+        "language": "fr-ca",
+        "route": "service_add_feature",
+        "sms_content": "Bell : Vous pouvez visiter https://m.bell.ca/voyage pour voir vos options de voyage disponibles dans l'appli MonBell. ( bell.ca/apropos )",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+        "language": "fr-ca"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "The {identification_status} is \"Pass\", {customer_type} is \"Existing\", {streaming_services} is null and {ppv} is null and {add_ons} is \"travel pass\" and {lob} is \"Mobility\", we will prompt user for send SMS confirmation and if user say \"yes\" or anything affirmative then route to \"bell_SMS Trigger\" flow.",
+    "actionParameters": {
+      "add_ons": "travel pass",
+      "apb_location_id": "70011",
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "fr-ca",
+      "lob": "Mobility",
+      "route": "service_add_feature",
+      "sms_content": "Bell : Vous pouvez visiter https://m.bell.ca/voyage pour voir vos options de voyage disponibles dans l'appli MonBell. ( bell.ca/apropos )",
+      "sms_type": "Public",
+      "utterance": "Quelle est la différence entre les forfaits « Roaming » et « Passes Voyage »?"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "The {identification_status} is \"Pass\", {customer_type} is \"Existing\", {streaming_services} is null and {ppv} is null and {add_ons} is \"travel pass\" and {lob} is \"Mobility\", we will prompt user for send SMS confirmation and then user say \"yes\"  then route to \"bell_SMS Trigger\" flow with the content.",
+    "actionParameters": {
+      "add_ons": "travel pass",
+      "apb_location_id": "70011",
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "is_prepaid": "false",
+      "language": "fr-ca",
+      "lob": "Mobility",
+      "route": "service_add_feature",
+      "sms_content": "Bell : Vous pouvez visiter https://m.bell.ca/voyage pour voir vos options de voyage disponibles dans l'appli MonBell. ( bell.ca/apropos )",
+      "sms_type": "Public",
+      "utterance": "Quelle est la différence entre les forfaits « Roaming » et « Passes Voyage »?"
+    }
+  },
+  "displayName": "FR - service_add_feature - Roaming - Mobility - pay per use",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 778,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

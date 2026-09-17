@@ -1,0 +1,60 @@
+{
+  "name": "80cada59-6ed8-42f1-b53d-bae9a5d5bead",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "brand": "bell",
+        "language": "en"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "playbookInvocation": {
+      "playbook": "Bell_UC_Sales_Plans_inquiry",
+      "playbookInput": {
+        "precedingConversationSummary": "here we have the identification_status is \"Fail\" and customer_type is \"New\" hence we need to reroute to \"Bell_UC_Sales_Plans_inquiry\" with the route \"sales_plans_inquiry\"",
+        "actionParameters": {
+          "customer_type": "New",
+          "identification_status": "Fail",
+          "language": "en",
+          "route": "sales_plans_inquiry"
+        }
+      },
+      "playbookOutput": {
+        "executionSummary": "Follow the instructions under sales_plans_inquiry",
+        "actionParameters": {
+        
+        }
+      },
+      "playbookState": "OUTPUT_STATE_OK"
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "customer wants to add a new mobile line and the route is \"sales_add_to_existing_account\" and the utterance is \"I want to add a new service.\" and since you don't know the value of identification_status you can assign the the value of identification_status is \"null\" and customer_type is \"New\"",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "New",
+      "identification_status": "Fail",
+      "language": "en",
+      "route": "sales_add_to_existing_account",
+      "utterance": "I am interested in getting another service"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "here we have the identification_status is \"Fail\" and customer_type is \"New\" hence we need to reroute to \"Bell_UC_Sales_Plans_inquiry\" with the route \"sales_plans_inquiry\"",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "route": "sales_plans_inquiry"
+    }
+  },
+  "displayName": "EN-sales_add_to_existing_account-existing- id FAIL",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 486,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

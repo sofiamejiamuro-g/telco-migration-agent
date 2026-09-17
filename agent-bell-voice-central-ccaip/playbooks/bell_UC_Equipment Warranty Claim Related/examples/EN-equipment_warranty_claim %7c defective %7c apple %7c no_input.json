@@ -1,0 +1,88 @@
+{
+  "name": "9d38700e-517e-49e6-ba24-6627544a7871",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Who is the manufacturer?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "apple"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Most devices purchased through Bell come within the limited manufacturer's warranty. Did you purchase your device within the last 12 months?\n"
+    }
+  }, {
+    "userUtterance": {
+    
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_global_error_count_check",
+      "inputActionParameters": {
+        "global_error_counter": "1"
+      },
+      "outputActionParameters": {
+        "global_error_counter": "2"
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Have you enrolled in our SmartCare Program?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "yes"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "When submitting a request online or calling the Smart Phone Care Center, your request will be processed by Asurion, the administrator of the Smartphone Care program. I can send you a link to submit your request. Is that alright?\n"
+    }
+  }, {
+    "userUtterance": {
+      "text": "no"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "en",
+        "route": "equipment_warranty_calim",
+        "sms_send_status": "Declined"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "customer is inquiring about device_issue=\"defective\"",
+    "actionParameters": {
+      "brand": "bell",
+      "device_issue": "Defective",
+      "global_error_counter": "1",
+      "language": "en",
+      "noinput_flag": "True",
+      "route": "equipment_warranty_claim",
+      "utterance": "Hi my phone is having a poor battery life I need a replacement, is it covered under warranty"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "customer is asked manufacturer and proceed further manufacturer warranty logic. When they gave IRRELEVANT response and no input, flow bell_global_error_counter_check and here the \"noinput_flag\" is True so ask the customer if they enrolled in smartcare program and based on response, transition further to bell_sms trigger",
+    "actionParameters": {
+      "brand": "bell",
+      "device_issue": "Defective",
+      "global_error_counter": "2",
+      "language": "en",
+      "manufacturer": "Apple",
+      "noinput_flag": "True",
+      "route": "equipment_warranty_claim",
+      "sms_send_status": "Declined"
+    }
+  },
+  "displayName": "EN-equipment_warranty_claim | defective | apple | no_input",
+  "retrievalStrategy": "STATIC",
+  "tokenCount": 586,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

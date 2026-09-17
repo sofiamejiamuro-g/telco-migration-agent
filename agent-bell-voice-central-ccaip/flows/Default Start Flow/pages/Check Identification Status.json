@@ -1,0 +1,74 @@
+{
+  "name": "cc374146-339c-42c9-8983-afe25af65145",
+  "displayName": "Check Identification Status",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.identification_status = null OR $session.params.identification_status = \"Fail\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Sure, what else can I help you with?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Bien sûr, avec quoi d'autre puis-je vous aider ?" ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "advancedSettings": {
+        "dtmfSettings": {
+          "useSystemEntityRule": false
+        }
+      }
+    },
+    "targetPage": "Routing Page",
+    "name": "7c44eaac-f6de-48ed-b6cf-a50d6f6db085"
+  }, {
+    "condition": "$session.params.identification_status = \"Pass\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Of course, and it's still for this phone number, right?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Bien sûr, et c'est toujours pour le même numéro de téléphone ?" ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "advancedSettings": {
+        "dtmfSettings": {
+          "useSystemEntityRule": false
+        }
+      }
+    },
+    "targetPage": "Same/Different Number",
+    "name": "449d8962-abda-47e1-80ae-39adefa2e834"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "cc374146-339c-42c9-8983-afe25af65145"
+      }, {
+        "parameter": "flow_id",
+        "value": "00000000-0000-0000-0000-000000000000"
+      }, {
+        "parameter": "page_name",
+        "value": "Check Identification Status"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

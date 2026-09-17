@@ -1,0 +1,69 @@
+{
+  "name": "413f6e05-be9a-4dd3-a6ed-fae962a4c77a",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Quel est le fabricant?\n"
+    }
+  }, {
+    "userUtterance": {
+      "text": "samsung"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "La plupart des appareils achetés par l’intermédiaire de Bell sont couverts par une garantie limitée du fabricant. Avez-vous acheté votre appareil au cours des 12 derniers mois?\n\n"
+    }
+  }, {
+    "userUtterance": {
+      "text": "300 jours"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Les spécialistes de notre Centre de réparation pourront vous aider.Permettez-moi de vous envoyer un lien pour rechercher un centre de réparation Bell Mobile près de chez vous. Est-ce que ça vous convient?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "oui"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "fr-ca",
+        "sms_content": "Bell : Vous pouvez visiter bell.ca/localisation_de_magasins pour trouver un magasin avec un centre de réparation d'appareils mobiles près de chez vous.",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "customer is inquiring about defective device",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "Existing",
+      "device_issue": "Defective",
+      "identification_status": "Pass",
+      "language": "fr-ca",
+      "noinput_flag": "True",
+      "route": "equipment_warranty_claim",
+      "utterance": "les boutons ne fonctionnent pas"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "customer is asked manufacturer and proceed further manufacturer warranty logic",
+    "actionParameters": {
+      "brand": "bell",
+      "device_issue": "Defective",
+      "language": "fr-ca",
+      "manufacturer": "Other",
+      "noinput_flag": "True",
+      "route": "equipment_warranty_claim"
+    }
+  },
+  "displayName": "FR-equipment_warranty_claim-id-pass-device-issue-defective-no-manufacturer-samsung-sms(yes)",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 433,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "fr"
+}

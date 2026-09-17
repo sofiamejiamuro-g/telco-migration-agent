@@ -1,0 +1,37 @@
+{
+  "name": "1417c105-c851-4bff-87af-a2c215375733",
+  "displayName": "SMS with Vanity",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "v1/intent-sdl-mapping",
+    "tag": "NA"
+  },
+  "transitionRoutes": [ {
+    "condition": "True",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "url",
+        "value": "$session.params.intent_sdl_map_response.url"
+      } ]
+    },
+    "name": "916b1939-b497-40b4-9a46-6ed10683cef7"
+  }, {
+    "condition": "True",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I didn't receive your response.\nYou can check out our frequently asked questions at $session.params.url. Or you can use the keypad to complete your request." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "e n’ai pas reçu ta réponse.\nTu peux consulter notre foire aux questions sur $session.params.url. Ou tu peux utiliser le clavier pour compléter ta demande." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "9e271bbf-d53c-4e57-910e-a20eec7d6844"
+  } ]
+}

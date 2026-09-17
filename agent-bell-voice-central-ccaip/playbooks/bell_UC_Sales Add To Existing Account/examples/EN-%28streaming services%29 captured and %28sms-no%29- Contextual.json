@@ -1,0 +1,67 @@
+{
+  "name": "641837ff-a1d5-4dc7-8fa6-5c6618ec5fca",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "language": "en"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": " I'll send a text to the device you're calling from, so that you can easily view all streaming options. Is that alright?\n"
+    }
+  }, {
+    "userUtterance": {
+      "text": "What will be the SMS charge?"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "There will be no SMS charge. Would you like to receive the SMS?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "yes"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "en",
+        "route": "sales_add_to_existing_account",
+        "sms_send_status": "Declined"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "customer wants to add a new  line and {lob} is null and also more information about SMS",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "en",
+      "streaming_services": "basic",
+      "utterance": "I want to add two basic lines for my parents under the BYO plan."
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "customer is asked about service type and then follows the instructions Customer asked a question regarding SMS so VA answered them and prompted again for SMS. User then said yes so we route accordingly",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "streaming_services": "basic"
+    }
+  },
+  "displayName": "EN-(streaming services) captured and (sms-no)- Contextual",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 425,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

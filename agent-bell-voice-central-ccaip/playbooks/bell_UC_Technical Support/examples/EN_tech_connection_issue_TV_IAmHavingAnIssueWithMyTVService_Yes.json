@@ -1,0 +1,86 @@
+{
+  "name": "77dfb609-3990-4198-ad49-913a22cb1fad",
+  "actions": [ {
+    "playbookInvocation": {
+      "playbook": "bell_UC_Get_LOB",
+      "playbookInput": {
+        "actionParameters": {
+          "language": "en",
+          "utterance": "I am having an issue with my TV service"
+        }
+      },
+      "playbookOutput": {
+        "actionParameters": {
+          "lob": "TV"
+        }
+      },
+      "playbookState": "OUTPUT_STATE_OK"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70012",
+        "language": "en"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70015",
+        "language": "en"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "You can use our Virtual repair tool to check for service outages and troubleshoot your equipment. I'll send a text to the device you're calling from so you can access it quickly. \nIs that alright?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Yes"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "sms_content": "Hey Bell Member, You can visit https://m.bell.ca/chatvirtualrepaire to access the Virtual repair tool. (bell.ca/aboutus)",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer asking about Internet network issue",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "lob": "TV",
+      "route": "tech_connection_issue",
+      "utterance": "I am having an issue with my TV service"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Customer is given the resolution for internet network issue",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "lob": "TV",
+      "route": "tech_connection_issue",
+      "utterance": "I am having an issue with my TV service"
+    }
+  },
+  "displayName": "EN_tech_connection_issue_TV_IAmHavingAnIssueWithMyTVService_Yes",
+  "retrievalStrategy": "NEVER",
+  "tokenCount": 563,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

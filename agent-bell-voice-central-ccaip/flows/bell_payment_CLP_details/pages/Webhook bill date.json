@@ -1,0 +1,171 @@
+{
+  "name": "e0d0e164-25c5-4411-8f39-b3c9bc4cbf8c",
+  "displayName": "Webhook bill date",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "/v1/ibm_mw/nm1_get#bill-details",
+    "tag": "bill-details",
+    "returnPartialResponses": true
+  },
+  "transitionRoutes": [ {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "bill_date",
+        "value": "$session.params.nm1_get_bill_details_response.billDate"
+      }, {
+        "parameter": "bill_date",
+        "value": "$sys.func.IF(\"$session.params.bypass_wh=true\", \"20200101\", $session.params.bill_date)"
+      } ]
+    },
+    "name": "6002bbb0-bbbc-4abe-bbd0-ac4cacde7caf"
+  }, {
+    "condition": "$session.params.webhook_success = true OR $session.params.webhook_success = \"true\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Check Bill Date \u0026 Last Bill Run",
+    "name": "41d0a4fb-ab94-4594-af6a-070ccf5cecb0"
+  }, {
+    "condition": "$session.params.webhook_success = \"false\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I'm sorry, I can't help you with confirming your Credit Limit Balance or account details at this time." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je suis désolée, je ne suis pas en mesure de vous aider à confirmer le solde de votre limite de crédit ou les détails de votre compte pour le moment. " ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetFlow": "bell_Feedback",
+    "name": "d5fdde86-9a15-4613-a2ba-24a71d31b78c"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "e0d0e164-25c5-4411-8f39-b3c9bc4cbf8c"
+      }, {
+        "parameter": "flow_id",
+        "value": "475ba791-1044-4806-ba00-57e97f0a5e24"
+      }, {
+        "parameter": "page_name",
+        "value": "Webhook bill date"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ],
+  "eventHandlers": [ {
+    "targetFlow": "bell_Feedback",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I'm sorry, I can't help you with confirming your Credit Limit Balance or account details at this time." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je suis désolée, je ne suis pas en mesure de vous aider à confirmer le solde de votre limite de crédit ou les détails de votre compte pour le moment. " ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "41c06e89-c99f-4c8d-9d6e-c0104c731548"
+  }, {
+    "targetFlow": "bell_Feedback",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I'm sorry, I can't help you with confirming your Credit Limit Balance or account details at this time." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je suis désolée, je ne suis pas en mesure de vous aider à confirmer le solde de votre limite de crédit ou les détails de votre compte pour le moment. " ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "8d5eb5f2-6a88-4926-8a50-fccb76202435"
+  }, {
+    "targetFlow": "bell_Feedback",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I'm sorry, I can't help you with confirming your Credit Limit Balance or account details at this time." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je suis désolée, je ne suis pas en mesure de vous aider à confirmer le solde de votre limite de crédit ou les détails de votre compte pour le moment. " ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "de892e85-21db-4e54-ba68-b37fc32053a3"
+  }, {
+    "targetFlow": "bell_Feedback",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I'm sorry, I can't help you with confirming your Credit Limit Balance or account details at this time." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je suis désolée, je ne suis pas en mesure de vous aider à confirmer le solde de votre limite de crédit ou les détails de votre compte pour le moment. " ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "1d8172dc-c682-4444-9dc2-e0f079ef1dd1"
+  }, {
+    "targetFlow": "bell_Feedback",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I'm sorry, I can't help you with confirming your Credit Limit Balance or account details at this time." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je suis désolée, je ne suis pas en mesure de vous aider à confirmer le solde de votre limite de crédit ou les détails de votre compte pour le moment. " ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "c39f8202-0b6a-4621-bb78-8af447da8fa1"
+  }, {
+    "targetFlow": "bell_Feedback",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I'm sorry, I can't help you with confirming your Credit Limit Balance or account details at this time." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je suis désolée, je ne suis pas en mesure de vous aider à confirmer le solde de votre limite de crédit ou les détails de votre compte pour le moment. " ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "9c14349c-4039-4215-b4e0-56f2521d0a3a"
+  } ]
+}

@@ -1,0 +1,88 @@
+{
+  "name": "128bcb9f-70a3-4447-8cd7-2697548c07f5",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "De quelle aide avez-vous besoin ?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "le Canada est grand"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_global_error_count_check",
+      "inputActionParameters": {
+        "global_error_counter": "0"
+      },
+      "outputActionParameters": {
+        "global_error_counter": "1"
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": " Désolé, je n'ai pas bien compris. Pouvez-vous reformuler votre demande d'assistance pour votre service, s'il vous plaît?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "canada est le deuxième plus grand pays du monde"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_global_error_count_check",
+      "inputActionParameters": {
+        "global_error_counter": "1"
+      },
+      "outputActionParameters": {
+        "global_error_counter": "2"
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Je suis désolé, je n'ai toujours pas saisi. Pouvez-vous reformuler votre demande d'assistance pour votre service, s'il vous plaît?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "le ciel est bleu"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_global_error_count_check",
+      "inputActionParameters": {
+        "global_error_counter": "2"
+      },
+      "outputActionParameters": {
+        "global_error_counter": "3"
+      }
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_No_Match_3",
+      "inputActionParameters": {
+      
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "The user's input is gibberish or unintelligible",
+    "actionParameters": {
+      "global_error_counter": "3",
+      "language": "fr-ca",
+      "utterance": "le Canada est grand"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Customer says nonsense or gibberish.  so flow bell_global_error_count_check is called each time  and respond as per instructions.",
+    "actionParameters": {
+      "global_error_counter": "4",
+      "route": "fr-ca"
+    }
+  },
+  "displayName": "FR - NO MATCH (IRRELEVANT)",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 565,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "fr"
+}

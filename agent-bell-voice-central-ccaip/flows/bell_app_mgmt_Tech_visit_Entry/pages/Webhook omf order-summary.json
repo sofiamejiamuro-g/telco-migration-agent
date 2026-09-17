@@ -1,0 +1,132 @@
+{
+  "name": "1e9c0722-512d-41dd-bcf3-fabfaa8031c4",
+  "displayName": "Webhook omf order-summary",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$sys.func.UPPER($session.params.lob) = \"TV\"",
+    "triggerFulfillment": {
+      "webhook": "/v1/ticket_management/omf/order#summary-TV",
+      "tag": "summary"
+    },
+    "name": "1b688915-857d-45ea-9e4c-0335c0612830"
+  }, {
+    "condition": "$sys.func.UPPER($session.params.lob) = \"HOMEPHONE\" OR $sys.func.UPPER($session.params.lob) = \"WIRELINE\"",
+    "triggerFulfillment": {
+      "webhook": "/v1/ticket_management/omf/order#summary-Homephone",
+      "tag": "summary"
+    },
+    "name": "63c8555c-636b-4f41-b3e5-79c0e6d8690c"
+  }, {
+    "condition": "$sys.func.UPPER($session.params.lob) = \"INTERNET\"",
+    "triggerFulfillment": {
+      "webhook": "/v1/ticket_management/omf/order#summary-Internet",
+      "tag": "summary"
+    },
+    "name": "4826b9c0-f6d4-4a17-8726-5ad8070fff33"
+  }, {
+    "condition": "$session.params.webhook_success = True",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "order_summaries",
+        "value": "$sys.func.GET_FIELD($session.params.order_summary_response, \"order_summaries\")"
+      }, {
+        "parameter": "n_omf_tickets",
+        "value": "$sys.func.COUNT($session.params.order_summaries)"
+      }, {
+        "parameter": "recent_order1",
+        "value": "$sys.func.GET($session.params.order_summaries,0)"
+      }, {
+        "parameter": "recent_service_type1",
+        "value": "$session.params.recent_order1.serviceAttributes[0].lineOfBusiness"
+      }, {
+        "parameter": "recent_order2",
+        "value": "$sys.func.GET($session.params.order_summaries,1)"
+      }, {
+        "parameter": "recent_service_type2",
+        "value": "$sys.func.GET($session.params.recent_order2,0)"
+      }, {
+        "parameter": "recent_service_type2",
+        "value": "$session.params.recent_service_type2.lineOfBusiness"
+      }, {
+        "parameter": "order_identifier1",
+        "value": "$session.params.recent_order1.orderIdentifier"
+      }, {
+        "parameter": "order_identifier2",
+        "value": "$session.params.recent_order2.orderIdentifier"
+      }, {
+        "parameter": "internet_order_reference1",
+        "value": "$session.params.recent_order1.serviceAttributes[0].legacyOrderIdentifier.internetOrderReference"
+      }, {
+        "parameter": "internet_order_reference2",
+        "value": "$session.params.recent_order2.serviceAttributes[0].legacyOrderIdentifier.internetOrderReference"
+      }, {
+        "parameter": "recent_service_type2",
+        "value": "$session.params.recent_order2.serviceAttributes[0].lineOfBusiness"
+      } ]
+    },
+    "targetPage": "Webhook ACUT search - find",
+    "name": "aa0256a4-ba3f-45fe-9dee-8a643067059c"
+  }, {
+    "condition": "$session.params.webhook_success = False",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook ACUT search - find",
+    "name": "e51644df-68fd-489e-8081-f6dad47780fc"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook failure Omf order summary ",
+    "name": "80207817-55d6-4225-abac-44486c5c9508"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Webhook failure Omf order summary ",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+    
+    },
+    "name": "5c6101b4-5bb2-4e8a-b125-93961588aaae"
+  }, {
+    "targetPage": "Webhook failure Omf order summary ",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+    
+    },
+    "name": "3f6653c3-ab3e-4348-b46c-93f20621d892"
+  }, {
+    "targetPage": "Webhook failure Omf order summary ",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+    
+    },
+    "name": "dae62d93-73fb-4164-b0de-e171b8891b1d"
+  }, {
+    "targetPage": "Webhook failure Omf order summary ",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+    
+    },
+    "name": "05e89b42-c8a2-4a91-88bc-89885684bb7f"
+  }, {
+    "targetPage": "Webhook failure Omf order summary ",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+    
+    },
+    "name": "e9b71ca8-fdab-4fd4-b5b5-3d2695b2f2ee"
+  }, {
+    "targetPage": "Webhook failure Omf order summary ",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+    
+    },
+    "name": "7657b7cb-7229-4198-9340-aeb6296803f5"
+  } ]
+}

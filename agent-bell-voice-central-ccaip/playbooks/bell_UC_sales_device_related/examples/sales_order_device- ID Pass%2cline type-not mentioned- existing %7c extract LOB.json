@@ -1,0 +1,100 @@
+{
+  "name": "6900e3b5-2680-4d47-98ac-6ac8f3780fe1",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "brand": "bell",
+        "language": "en"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Are you inquiring about a new service or do you want to make changes to your current service?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "I want to know about current service"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Which service are you inquiring about?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "a new service"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "In order to assist you better."
+    }
+  }, {
+    "playbookInvocation": {
+      "playbook": "bell_uc_ask_LOB",
+      "playbookInput": {
+        "precedingConversationSummary": "Customer has questions about needing a new device, device availability, device features, cost, related to devices that Bell sells",
+        "actionParameters": {
+          "language": "en",
+          "route": "sales_order_device"
+        }
+      },
+      "playbookOutput": {
+        "executionSummary": "User does not mention LOB, hence route to bell_uc_ask_LOB playbook, ask relevant question and along with LOB return back to this playbook",
+        "actionParameters": {
+          "language": "en",
+          "lob": "Homephone",
+          "route": "sales_order_device"
+        }
+      },
+      "playbookState": "OUTPUT_STATE_OK"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Sorry, we don't sell any Home phone equipment. However, we do offer Home phone service. Can I connect you with an agent to learn more about our Home phone packages?\n"
+    }
+  }, {
+    "userUtterance": {
+      "text": "yes"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_aqd",
+      "inputActionParameters": {
+        "language": "en",
+        "lob": "Homephone"
+      },
+      "outputActionParameters": {
+        "language": "en"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer has questions about needing a new device, device availability, device features, cost, related to devices that Bell sells",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "en",
+      "route": "sales_order_device",
+      "utterance": "I want to order a device"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "User does not mention LOB, hence route to bell_uc_ask_LOB playbook, ask relevant question and along with LOB return back to this playbook, if lob is Homephone then give corresponding response",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "line_type": "Existing",
+      "lob": "Homephone"
+    }
+  },
+  "displayName": "sales_order_device- ID Pass,line type-not mentioned- existing | extract LOB",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 658,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

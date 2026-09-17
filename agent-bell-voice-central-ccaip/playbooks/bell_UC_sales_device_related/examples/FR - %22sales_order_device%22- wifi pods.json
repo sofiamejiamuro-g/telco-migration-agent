@@ -1,0 +1,62 @@
+{
+  "name": "b6bbe11d-35f3-444f-91fb-1fcc95113c25",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "brand": "bell",
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Je vais envoyer un texto à l’appareil au moyen duquel vous appelez, afin que vous puissiez découvrir les capsules Wi-Fi de Bell. Est-ce que ça vous convient?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "ok"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "brand": "bell",
+        "language": "fr-ca",
+        "sms_content": "Bell: You can visit m.bell.ca/manageinternetfeatures for information about Wi-Fi pods. ( bell.ca/about-us )",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+        "language": "fr-ca"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "The customer wants to order accessories like wifi pods",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "New",
+      "device_type": "wifi pods",
+      "language": "fr-ca",
+      "line_type": "New",
+      "route": "sales_order_device",
+      "utterance": "Je cherche à commander une borne Wi-Fi pour mon Internet."
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Because the utterance identified the device as a wifi pods, the user was initially directed to the bell_apb flow. After the user agreed to receive a text message, they were then transferred to the bell_SMS Trigger flow.",
+    "actionParameters": {
+      "brand": "bell",
+      "device_type": "wifi pods",
+      "language": "fr-ca"
+    }
+  },
+  "displayName": "FR - \"sales_order_device\"- wifi pods",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 436,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

@@ -1,0 +1,51 @@
+{
+  "name": "06d62da7-35a9-41cd-a682-0cdbd60a1a03",
+  "displayName": "Is Prepaid?",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.ivr_handoff_identification = true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "End Flow",
+    "name": "ba018f21-c6d4-4d5c-bd92-a570e8fd339c"
+  }, {
+    "condition": "$session.params.is_prepaid = true",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_va_to_ivr_handoff_prepaid",
+    "name": "221d8ff2-cbff-4a3e-b2f0-b5a3e684199d"
+  }, {
+    "condition": "$session.params.is_prepaid != true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "End Flow",
+    "name": "c7a53c1b-03e8-4a61-bfad-4a90eead8a07"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "06d62da7-35a9-41cd-a682-0cdbd60a1a03"
+      }, {
+        "parameter": "flow_id",
+        "value": "1ecd0a71-8b39-47fa-8bfa-16c0e2425d74"
+      }, {
+        "parameter": "page_name",
+        "value": "Is Prepaid?"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

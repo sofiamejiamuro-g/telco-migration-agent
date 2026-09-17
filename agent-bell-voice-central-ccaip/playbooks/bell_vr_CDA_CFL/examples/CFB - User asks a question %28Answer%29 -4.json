@@ -1,0 +1,76 @@
+{
+  "name": "c77911a6-5ec3-4138-93d7-631f79ff0375",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Can you confirm if you see any instruction on your TV?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "What instructions do you mean?"
+    }
+  }, {
+    "toolUse": {
+      "tool": "EN_Bell_vr_cfl_faq",
+      "action": "EN_Bell_vr_cfl_faq",
+      "inputActionParameters": {
+        "requestBody": {
+          "query": "6502"
+        }
+      },
+      "outputActionParameters": {
+        "200": {
+          "answer": "Q:  What instructions do you mean? A: A: We're looking for connection instructions to connect your Bell receiver or streamer to your modem, this should be displayed on your TV, is it being displayed?. Q: What does my modem look like? A: A modem is a rectangular device that allows you to connect to the internet. It should be standing up right, and have at least 2 cables plugged into the ports on the back of it.",
+          "snippets": [ {
+            "text": "",
+            "title": "6502",
+            "uri": ""
+          } ]
+        }
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "We're looking for connection instructions to connect your Bell receiver or streamer to your modem, this should be displayed on your TV, is it being displayed? Now, Can you confirm if you see any instruction on your TV?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Yes"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Thank you for letting me know. I'm checking now what will be the next step."
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_vr_post_answer",
+      "inputActionParameters": {
+        "customer_answer1_id": "0"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer having an issue with the service, starts the Virtual repair process.",
+    "actionParameters": {
+      "acceptable_answers": [ {
+        "choice": "Yes",
+        "id": 0
+      }, {
+        "choice": "No",
+        "id": 1
+      } ],
+      "dcx_action_code": "6502",
+      "title": "Cna you confirm if you see any instruction on your TV?",
+      "vr_type": "CFB"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "This Dialogflow CX execution outlines a modem troubleshooting flow. The agent initiates by asking the user to describe their modem's lights.\n\nHowever, the user responds by asking, \"What is a modem?\" This immediately triggers a call to the vr_cfl_faq_en tool. Crucially, the vr_cfl_faq_en tool successfully provides the necessary definition for \"modem,\" addressing the user's fundamental knowledge gap. This successful intervention by the tool sets the stage for the conversation to potentially proceed with the original troubleshooting query."
+  },
+  "displayName": "CFB - User asks a question (Answer) -4",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 653,
+  "languageCode": "en"
+}

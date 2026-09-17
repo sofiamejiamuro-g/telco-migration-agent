@@ -1,0 +1,690 @@
+{
+  "name": "309a7b7f-0495-4c6a-ae5e-aac576649575",
+  "displayName": "Get CX Input",
+  "form": {
+    "parameters": [ {
+      "displayName": "CIRN",
+      "required": true,
+      "entityType": "@sys.phone-number",
+      "fillBehavior": {
+        "initialPromptFulfillment": {
+        
+        },
+        "repromptEventHandlers": [ {
+          "targetPage": "Local Error Handling",
+          "event": "sys.no-input-1",
+          "triggerFulfillment": {
+            "setParameterActions": [ {
+              "parameter": "speak_to_agent_counter",
+              "value": "$sys.func.ADD(1, $session.params.speak_to_agent_counter)"
+            }, {
+              "parameter": "global_error_counter",
+              "value": "$sys.func.ADD($session.params.global_error_counter,1)"
+            }, {
+              "parameter": "local_trigger",
+              "value": "no_input"
+            }, {
+              "parameter": "local_noinput_counter",
+              "value": "$sys.func.ADD($session.params.local_noinput_counter,1)"
+            }, {
+              "parameter": "aqd_counter",
+              "value": "$sys.func.ADD($session.params.aqd_counter,1)"
+            } ],
+            "generators": [ {
+              "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/7be942f9-6872-4334-8700-688c4635b495",
+              "outputParameter": "$request.generative.response"
+            } ]
+          },
+          "name": "35660b80-aacb-4099-b837-b3b4290fe63b"
+        }, {
+          "event": "sys.no-input-2",
+          "triggerFulfillment": {
+            "messages": [ {
+              "text": {
+                "text": [ "$request.generative.response" ]
+              },
+              "languageCode": "fr-ca"
+            }, {
+              "text": {
+                "text": [ "$request.generative.response" ]
+              },
+              "languageCode": "en"
+            } ],
+            "setParameterActions": [ {
+              "parameter": "speak_to_agent_counter",
+              "value": "$sys.func.ADD(1, $session.params.speak_to_agent_counter)"
+            }, {
+              "parameter": "PHN_Invalid_Counter",
+              "value": "$sys.func.ADD(1, $session.params.PHN_Invalid_Counter)"
+            } ],
+            "generators": [ {
+              "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/7be942f9-6872-4334-8700-688c4635b495",
+              "outputParameter": "$request.generative.response"
+            } ]
+          },
+          "name": "375d2d16-dbae-4771-a9c7-6ac2e8f0ae93"
+        }, {
+          "targetPage": "Local Error Handling",
+          "event": "sys.no-match-1",
+          "triggerFulfillment": {
+            "setParameterActions": [ {
+              "parameter": "PHN_Invalid_Counter",
+              "value": "$sys.func.ADD(1, $session.params.PHN_Invalid_Counter)"
+            }, {
+              "parameter": "global_error_counter",
+              "value": "$sys.func.ADD($session.params.global_error_counter,1)"
+            }, {
+              "parameter": "local_trigger",
+              "value": "no_match"
+            }, {
+              "parameter": "local_nomatch_counter",
+              "value": "$sys.func.ADD($session.params.local_nomatch_counter,1)"
+            }, {
+              "parameter": "aqd_counter",
+              "value": "$sys.func.ADD($session.params.aqd_counter,1)"
+            }, {
+              "parameter": "semantic_void",
+              "value": "$sys.func.ADD($session.params.semantic_void,1)"
+            } ],
+            "generators": [ {
+              "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/0b25479b-53f1-48d8-b334-f7b14d626fcb",
+              "outputParameter": "$request.generative.response"
+            } ]
+          },
+          "name": "0f825f2b-1808-4cb3-9431-cac94d207e9f"
+        }, {
+          "event": "sys.no-match-2",
+          "triggerFulfillment": {
+            "messages": [ {
+              "text": {
+                "text": [ "$request.generative.response" ]
+              },
+              "languageCode": "fr-ca"
+            }, {
+              "text": {
+                "text": [ "$request.generative.response" ]
+              },
+              "languageCode": "en"
+            } ],
+            "setParameterActions": [ {
+              "parameter": "speak_to_agent_counter",
+              "value": "$sys.func.ADD(1, $session.params.speak_to_agent_counter)"
+            }, {
+              "parameter": "PHN_Invalid_Counter",
+              "value": "$sys.func.ADD(1, $session.params.speak_to_agent_counter)"
+            } ],
+            "generators": [ {
+              "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/0b25479b-53f1-48d8-b334-f7b14d626fcb",
+              "outputParameter": "$request.generative.response"
+            } ]
+          },
+          "name": "a34622a0-8f93-49b7-b905-a2fbd02d77dc"
+        }, {
+          "targetFlow": "bell_End the Conversation",
+          "event": "sys.no-input-3",
+          "triggerFulfillment": {
+            "messages": [ {
+              "text": {
+                "text": [ "\u003cspeak\u003eSorry, I still didn't get that. You can visit \u003csay-as interpret-as=\"url\"\u003ebell.ca/support\u003c/say-as\u003e for help \u003cbreak time=\"1s\"/\u003eThanks for calling us, and have a great day! \u003c/speak\u003e" ]
+              },
+              "languageCode": "en"
+            } ],
+            "setParameterActions": [ {
+              "parameter": "identification_status",
+              "value": "Fail"
+            } ]
+          },
+          "name": "d908740f-96ea-43d3-901e-476efa99d39f"
+        }, {
+          "targetFlow": "bell_aqd",
+          "event": "sys.no-match-3",
+          "triggerFulfillment": {
+            "messages": [ {
+              "text": {
+                "text": [ "Sorry, I can't seem to find that number in our records.  But don’t worry, I'll still help you however I can.\n" ]
+              },
+              "languageCode": "en"
+            } ],
+            "setParameterActions": [ {
+              "parameter": "identification_status",
+              "value": "Fail"
+            } ]
+          },
+          "name": "799c513f-a6a2-4932-ae26-3bcd5905a086"
+        } ]
+      },
+      "advancedSettings": {
+        "dtmfSettings": {
+          "enabled": true,
+          "maxDigits": 11,
+          "finishDigit": "#",
+          "useSystemEntityRule": false,
+          "interdigitTimeoutDuration": {
+            "seconds": 5
+          },
+          "endpointingTimeoutDuration": {
+            "seconds": 5
+          }
+        }
+      }
+    } ]
+  },
+  "entryFulfillment": {
+    "setParameterActions": [ {
+      "parameter": "CIRN",
+      "value": null
+    }, {
+      "parameter": "unique_service_count",
+      "value": "$sys.func.COUNT($sys.func.UNIQUE($session.params.active_lob))"
+    }, {
+      "parameter": "unique_services",
+      "value": "$sys.func.UNIQUE($session.params.active_lob)"
+    }, {
+      "parameter": "lob",
+      "value": "$sys.func.IF(“$session.params.unique_service_count=1”, $session.params.unique_services[0] , null)"
+    }, {
+      "parameter": "local_trigger",
+      "value": null
+    }, {
+      "parameter": "local_noinput_counter",
+      "value": 0
+    }, {
+      "parameter": "local_nomatch_counter",
+      "value": 0
+    } ],
+    "nextActionOverride": {
+    
+    }
+  },
+  "transitionRoutes": [ {
+    "intent": "context.new_customer",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "$request.generative.newcustomer" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "$request.generative.newcustomer" ]
+        },
+        "languageCode": "en"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "line_type",
+        "value": "New"
+      }, {
+        "parameter": "customer_type",
+        "value": "New"
+      }, {
+        "parameter": "identification_status",
+        "value": "Fail"
+      }, {
+        "parameter": "identification_fallback_flag",
+        "value": null
+      }, {
+        "parameter": "utterance",
+        "value": "$request.user-utterance"
+      }, {
+        "parameter": "cirn",
+        "value": null
+      } ],
+      "generators": [ {
+        "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/31701192-f4df-4d79-b2f8-5ddae4fad69a",
+        "outputParameter": "$request.generative.newcustomer"
+      } ]
+    },
+    "targetPage": "CIRN Collection Check | Webhook npa_xx_lookup",
+    "name": "0e628b5d-014d-4e37-a9f1-190625fcacd2"
+  }, {
+    "intent": "context.confirm_yes",
+    "condition": "$session.params.PHN_Invalid_Counter \u003e= 2 AND $session.params.ban_yes = true",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "\u003cspeak\u003eDésolé, je n'ai toujours pas compris. Vous pouvez vous rendre à l'adresse \u003csay-as interpret-as=\"url\"\u003ebell.ca/soutien\u003c/say-as\u003e\u003cbreak time=\"1s\"/\u003e Merci d'avoir appelé et passer une bonne journée !\u003c/speak\u003e " ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "\u003cspeak\u003eSorry, I still didn't get that. You can visit \u003csay-as interpret-as=\"url\"\u003ebell.ca/support\u003c/say-as\u003e for help \u003cbreak time=\"1s\"/\u003eThanks for calling us, and have a great day! \u003c/speak\u003e" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "targetFlow": "bell_End the Conversation",
+    "name": "b0c350e1-a2fd-434a-bd05-0478021f6d43"
+  }, {
+    "intent": "context.confirm_yes",
+    "condition": "$session.params.clid_not_found != null OR $session.params.ban_yes = true",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "$request.generative.response" ]
+        },
+        "languageCode": "en"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "PHN_Invalid_Counter",
+        "value": "$sys.func.ADD(1, $session.params.PHN_Invalid_Counter)"
+      }, {
+        "parameter": "ban_yes",
+        "value": true
+      } ],
+      "generators": [ {
+        "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/85105abd-9d74-4f1b-90a7-c0fd71998805",
+        "outputParameter": "$request.generative.response"
+      } ]
+    },
+    "name": "5ef1cafa-cde8-4b16-b9c6-373ab07747fe"
+  }, {
+    "intent": "context.confirm_yes",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "CIRN",
+        "value": "$session.params.CLID"
+      } ]
+    },
+    "targetPage": "CPM_DB_Check",
+    "name": "129ad971-9151-40bc-b16f-990c62a9a9f0"
+  }, {
+    "intent": "context.dont_wanna_tell_you",
+    "condition": "$session.params.dwt_counter = 2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Désolé, je ne parviens pas à trouver ce numéro dans nos dossiers. Soyez sans crainte, je ferai quand même de mon mieux pour vous servir." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "I'm sorry, I can't seem to find this number in our records. But don’t worry, I'll still help you however I can." ]
+        },
+        "languageCode": "en"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "identification_status",
+        "value": "Fail"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "938d9186-409d-4868-8475-19e75054a266"
+  }, {
+    "intent": "context.dont_wanna_tell_you",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "$request.generative.response" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "$request.generative.response" ]
+        },
+        "languageCode": "en"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "dwt_counter",
+        "value": "$sys.func.ADD(1, $session.params.dwt_counter)"
+      } ],
+      "generators": [ {
+        "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/0b25479b-53f1-48d8-b334-f7b14d626fcb",
+        "outputParameter": "$request.generative.response"
+      } ]
+    },
+    "name": "09c68ce0-3c9f-40e6-a978-0c322633bf6c"
+  }, {
+    "intent": "context.confirm_no",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Pour commander un nouveau service, veuillez dire « nouveau service ». Sinon, quel est le numéro de téléphone de 10 chiffres associé à votre service?\n" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "If you're looking to order a new service, please say 'new service.'  Otherwise, what’s the 10-digit phone number associated with your service?" ]
+        },
+        "languageCode": "en"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "identification_repeat",
+        "value": 0
+      }, {
+        "parameter": "ban_yes",
+        "value": ""
+      }, {
+        "parameter": "PHN_Incorrect_Counter",
+        "value": "$sys.func.ADD(1, $session.params.PHN_Incorrect_Counter)"
+      } ]
+    },
+    "name": "655c246b-d030-4f94-b858-016f2a8d9cdc"
+  }, {
+    "intent": "context.confirm_user_ban",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "stt_count",
+        "value": 0
+      } ]
+    },
+    "targetPage": "Ask CX BAN",
+    "name": "6b5a395e-1fb8-4c2d-9635-5806603be32a"
+  }, {
+    "intent": "small_talk.agent.acquaintance",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "$request.generative.response" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "Communiquez-vous avez nous au sujet du numéro à partir duquel vous nous appelez présentement?" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "$request.generative.response" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Are you calling about the account associated with number you’re calling from?" ]
+        },
+        "languageCode": "en"
+      } ],
+      "generators": [ {
+        "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/0d0e9c48-7f68-45b5-a777-aa591f2042ad",
+        "outputParameter": "$request.generative.response"
+      } ]
+    },
+    "targetPage": "Current Page",
+    "name": "a07d5d93-c676-4639-905b-61432f439aee"
+  }, {
+    "intent": "context.business_account",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "route",
+        "value": "business_account"
+      } ]
+    },
+    "targetFlow": "va_to_ivr_business_id_sales",
+    "name": "0d029645-367f-45f9-866b-e8319a6d065c"
+  }, {
+    "intent": "other_speak_to_agent",
+    "condition": "$session.params.speak_to_agent_counter \u003e= 2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "\u003cspeak\u003eJe n'ai malheureusement pas pu trouver votre compte. Vous pouvez vous rendre à l'adresse \u003csay-as interpret-as=\"url\"\u003ebell.ca/soutien\u003c/say-as\u003e pour de l'aide. Vous pouvez aussi rester en ligne et nous vous mettrons en contact avec un agent.\u003c/speak\u003e" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "\u003cspeak\u003eSorry, I couldn’t find your account. You can visit \u003csay-as interpret-as=\"url\"\u003ebell.ca/support\u003c/say-as\u003e for help. Or you can stay on the line and we'll connect you with an agent.\u003c/speak\u003e" ]
+        },
+        "languageCode": "en"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "aqd_counter",
+        "value": "$sys.func.ADD(1, $session.params.aqd_counter)"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "7a554e56-0ab1-4d93-b51f-d714ac8503e2"
+  }, {
+    "intent": "other_speak_to_agent",
+    "condition": "$session.params.speak_to_agent_counter = 1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "$request.generative.response" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "$request.generative.response" ]
+        },
+        "languageCode": "en"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "speak_to_agent_counter",
+        "value": "$sys.func.ADD(1, $session.params.speak_to_agent_counter)"
+      }, {
+        "parameter": "semantic_void",
+        "value": "$sys.func.ADD(1, $session.params.semantic_void)"
+      }, {
+        "parameter": "aqd_counter",
+        "value": "$sys.func.ADD(1, $session.params.aqd_counter)"
+      } ],
+      "generators": [ {
+        "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/c3aeeb56-ae5b-4a83-9a12-b878ebeef038",
+        "outputParameter": "$request.generative.response"
+      } ]
+    },
+    "name": "50ef24a6-1375-498f-8e0e-e297d618c0b3"
+  }, {
+    "intent": "other_speak_to_agent",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "$request.generative.response" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "$request.generative.response" ]
+        },
+        "languageCode": "en"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "speak_to_agent_counter",
+        "value": "$sys.func.ADD(1, $session.params.speak_to_agent_counter)"
+      }, {
+        "parameter": "semantic_void",
+        "value": "$sys.func.ADD(1, $session.params.semantic_void)"
+      }, {
+        "parameter": "aqd_counter",
+        "value": "$sys.func.ADD(1, $session.params.aqd_counter)"
+      } ],
+      "generators": [ {
+        "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/c3aeeb56-ae5b-4a83-9a12-b878ebeef038",
+        "outputParameter": "$request.generative.response"
+      } ]
+    },
+    "name": "a38c6dbd-275b-4d23-ac3f-736ea53ab0ea"
+  }, {
+    "intent": "context.user_asks_more_time",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Absolument. Veuillez prendre un instant pour trouver votre numéro." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "Absolutely. Please take a moment to find your number." ]
+        },
+        "languageCode": "en"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "More_Time_Counter",
+        "value": "$sys.func.ADD(1, $session.params.More_Time_Counter)"
+      } ]
+    },
+    "name": "88fbc73e-7638-44ec-a8d1-4cefa8278dc7"
+  }, {
+    "intent": "context.cant_say_out_loud",
+    "condition": "$session.params.Loud_Counter \u003e= 5",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "\u003cspeak\u003eJe n'ai pas reçu votre réponse. Vous pouvez consulter notre foire aux questions sur \u003csay-as interpret-as=\"url\"\u003ebell.ca/soutien\u003c/say-as\u003e\u003c/speak\u003e" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "\u003cspeak\u003eI didn't receive your response. You can check out our frequently asked questions at \u003csay-as interpret-as=\"url\"\u003ebell.ca/support\u003c/say-as\u003e\u003c/speak\u003e" ]
+        },
+        "languageCode": "en"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "identification_repeat",
+        "value": 0
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "f8eb3f1e-dc85-44f5-a309-9bf1eb295386"
+  }, {
+    "intent": "context.cant_say_out_loud",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Pas de problème, si vous ne pouvez pas lire votre numéro à voix haute, vous pouvez le saisir à l'aide de votre clavier." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "No worries, if you can't read your number out loud, you can enter it using your key pad." ]
+        },
+        "languageCode": "en"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "Loud_Counter",
+        "value": "$sys.func.ADD(1, $session.params.Loud_Counter)"
+      } ]
+    },
+    "name": "59481eb9-7ac8-4c04-a40f-a35cee671188"
+  }, {
+    "intent": "context.user_makes_mistake",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Pas de souci, veuillez dire ou entrer à nouveau votre numéro lorsque vous serez prêt." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "No worries, please say or re-enter your number when ready." ]
+        },
+        "languageCode": "en"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "Mistake_Counter",
+        "value": "No worries, please say or re-enter your number when ready."
+      } ]
+    },
+    "name": "b43809f5-d497-444b-809d-00da9cf9a0bd"
+  }, {
+    "intent": "small_talk.agent.AI",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "L’IA, ou intelligence artificielle, aide notre assistant virtuel à comprendre votre demande et à vous fournir rapidement les renseignements dont vous avez besoin ou à vous mettre en contact avec le bon agent en direct." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "AI, or artificial intelligence, helps our virtual assistant understand your request and quickly give you the information you need or connect you to the right live agent." ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "a2044121-c9d6-48f1-a2b7-2289b9801d8d"
+  }, {
+    "intent": "context.same_number",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "CIRN",
+        "value": "$session.params.CLID"
+      } ]
+    },
+    "targetPage": "CPM_DB_Check",
+    "name": "55e0a4fd-ea5d-49fb-a8ee-a9548b90b1e7"
+  }, {
+    "condition": "$session.params.lob = null AND $session.params.unique_service_count = 1",
+    "triggerFulfillment": {
+    
+    },
+    "name": "27d9afe6-1e04-4d01-ad8b-1089a108b757"
+  }, {
+    "condition": "$session.params.semantic_void = 3",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Je suis désolé, je ne semble pas trouver ce numéro dans nos dossiers. Mais ne vous inquiétez pas, je vais quand même vous aider du mieux que je peux." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "I'm sorry, I can't seem to find this number in our records. But don’t worry, I'll still help you however I can." ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "d6b8eed8-4075-4894-bb6f-8a75544cf53a"
+  }, {
+    "condition": "$session.params.CIRN != null",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Phone Validation 1",
+    "name": "2470a31f-412b-47d9-80bd-ab8f96f71e47"
+  }, {
+    "condition": "$session.params.event_other_number = \"cirn_identification\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "event_other_number",
+        "value": null
+      } ]
+    },
+    "targetPage": "End Flow Check",
+    "name": "ad509857-b006-4ea0-a480-560d741f7335"
+  } ],
+  "transitionRouteGroups": [ "HI_sales" ],
+  "advancedSettings": {
+    "speechSettings": {
+      "endpointerSensitivity": 70,
+      "noSpeechTimeout": {
+        "seconds": 10
+      },
+      "models": [ {
+        "key": "en",
+        "value": "telephony_short"
+      }, {
+        "key": "fr",
+        "value": ""
+      }, {
+        "key": "fr-ca",
+        "value": "telephony_short"
+      } ],
+      "overrideRequestSpeechModel": true
+    },
+    "speechAdaptationSettings": {
+      "enableManualSpeechAdaptation": true,
+      "biasingPhraseSets": [ {
+        "biasingPhrases": [ {
+          "value": "$OOV_CLASS_DIGIT_SEQUENCE",
+          "boost": 20
+        } ],
+        "displayName": "digit"
+      }, {
+        "biasingPhrases": [ {
+          "value": "do not",
+          "boost": 20
+        }, {
+          "value": "DO NOT",
+          "boost": 20
+        }, {
+          "value": "I do not want to tell",
+          "boost": 20
+        } ],
+        "displayName": "do-not"
+      } ]
+    }
+  },
+  "speakerIdSettings": {
+  
+  }
+}

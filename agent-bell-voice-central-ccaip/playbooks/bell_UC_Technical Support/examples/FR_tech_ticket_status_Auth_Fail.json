@@ -1,0 +1,75 @@
+{
+  "name": "b19eade6-2df1-4215-92bb-3c20eed84302",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70012",
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+        "language": "fr-ca"
+      }
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_authentication",
+      "inputActionParameters": {
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+        "auth_status": "Fail",
+        "language": "fr-ca"
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Comme je n’ai pas pu vous authentifier, Je ne peux pas vérifier s’il y a un rendez-vous actif dans votre compte. Saviez-vous que vous pouvez consulter, reporter ou annuler votre rendez-vous dans l’appli Gérez votre rendez-vous? Je vais envoyer un texto sur l’appareil au moyen duquel vous appelez, afin de vous permettre de commencer. Est-ce que ça vous convient? "
+    }
+  }, {
+    "userUtterance": {
+      "text": "Non"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Est-ce pour réparer un service existant?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Non"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_aqd",
+      "inputActionParameters": {
+        "language": "fr-ca",
+        "special_queue": "tech_to_care"
+      },
+      "outputActionParameters": {
+        "language": "fr-ca"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer wants information about his appointment",
+    "actionParameters": {
+      "language": "fr-ca",
+      "route": "tech_ticket_status",
+      "utterance": "Je veux des informations sur mon rendez-vous."
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "The user was sent to flow bell_apb and bell_authentication and since auth_status = \"Fail\" , asked the user for sms and he said no then asked further query and after the user said no  transferred to bell_aqd",
+    "actionParameters": {
+      "auth_status": "Fail",
+      "language": "fr-ca",
+      "route": "tech_ticket_status",
+      "utterance": "Je veux des informations sur mon rendez-vous."
+    }
+  },
+  "displayName": "FR_tech_ticket_status_Auth_Fail",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 553,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "fr"
+}

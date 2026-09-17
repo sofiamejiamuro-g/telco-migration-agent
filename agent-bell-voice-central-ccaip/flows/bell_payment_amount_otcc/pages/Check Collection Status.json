@@ -1,0 +1,89 @@
+{
+  "name": "55d451dc-6a34-42f6-b79c-a3604ab86cf9",
+  "displayName": "Check Collection Status",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "($session.params.special_status = \"bell_col_aul\" OR $session.params.special_status = \"bell_col_sus\") AND $session.params.other_amount_value \u003e= $session.params.due_amount",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "other_payment_amount",
+        "value": "$session.params.other_amount_value"
+      } ]
+    },
+    "targetPage": "Amount Already Provided",
+    "name": "01bd2e7a-1284-44bf-9854-01195394e9b9"
+  }, {
+    "condition": "$session.params.special_status = \"bell_col_delinquent\" AND $session.params.other_amount_value \u003e= $session.params.due_amount",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "other_payment_amount",
+        "value": "$session.params.other_amount_value"
+      } ]
+    },
+    "targetPage": "Amount Already Provided",
+    "name": "d484b6e5-8221-4c7f-8c73-c815980b2171"
+  }, {
+    "condition": "($session.params.special_status = \"bell_col_aul\" OR $session.params.special_status = \"bell_col_sus\") AND $session.params.other_amount_value \u003c $session.params.due_amount",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "other_payment_amount",
+        "value": "$session.params.other_amount_value"
+      } ]
+    },
+    "targetPage": "Prompt Pay Past Due Amount",
+    "name": "b05729f1-0651-4096-adc5-6a5031353879"
+  }, {
+    "condition": "$session.params.special_status = \"bell_col_delinquent\" AND $session.params.other_amount_value \u003c $session.params.due_amount",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "other_payment_amount",
+        "value": "$session.params.other_amount_value"
+      } ]
+    },
+    "targetPage": "Prompt Past Due Amount Dlqt",
+    "name": "b7b995b9-3ff3-4a10-9d6c-6f8d1a75cf7c"
+  }, {
+    "condition": "$session.params.special_status = \"bell_col_aul\" OR $session.params.special_status = \"bell_col_sus\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Prompt Pay Past Due Amount",
+    "name": "4d65f9ba-8080-400c-84c5-999b87116855"
+  }, {
+    "condition": "$session.params.special_status = \"bell_col_delinquent\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Prompt Past Due Amount Dlqt",
+    "name": "c6465fde-36c9-4ff6-93b9-ca1334e2ac95"
+  }, {
+    "condition": "$session.params.other_amount_value != null",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "other_payment_amount",
+        "value": "$session.params.other_amount_value"
+      } ],
+      "generators": [ {
+        "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/699af4a5-d41f-47b3-a735-9489ddc4be5f",
+        "outputParameter": "$session.params.other_payment_amount"
+      } ]
+    },
+    "targetPage": "Amount Already Provided",
+    "name": "4cd126a1-cfab-41c7-ba15-c6669d2408fb"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "message_type_group",
+        "value": 0
+      } ]
+    },
+    "targetPage": "Prompt Other Amount",
+    "name": "9f256514-411f-4ded-be66-2bd2b14c476f"
+  } ]
+}

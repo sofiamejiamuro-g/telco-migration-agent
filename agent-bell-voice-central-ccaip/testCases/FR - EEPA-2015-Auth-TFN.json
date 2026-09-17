@@ -1,0 +1,189 @@
+{
+  "name": "e56062e9-421b-4440-b0c6-61a2709a3631",
+  "tags": [ "#FR" ],
+  "displayName": "FR - EEPA-2015-Auth-TFN",
+  "testCaseConversationTurns": [ {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "bonjour"
+        },
+        "languageCode": "fr-ca"
+      }
+    },
+    "virtualAgentOutput": {
+      "triggeredIntent": {
+        "name": "Default Welcome Intent"
+      },
+      "currentPage": {
+        "name": "Routing Page",
+        "flow": "Default Start Flow"
+      },
+      "textResponses": [ {
+        "text": [ "Accueillir. Je suis l'assistant virtuel de Bell. c'est un plaisir de vous rencontrer par voie électronique. J'utilise l'IA pour vous proposer de l'aide rapidement lorsque vous en avez besoin. Comment puis-je t'aider?" ]
+      } ],
+      "currentFlow": {
+        "name": "Default Start Flow"
+      }
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "faire un paiement"
+        },
+        "languageCode": "fr-ca"
+      }
+    },
+    "virtualAgentOutput": {
+      "triggeredIntent": {
+        "name": "payment_make_payment"
+      },
+      "currentPage": {
+        "name": "Get CX Input",
+        "flow": "bell_Identification"
+      },
+      "textResponses": [ {
+        "text": [ "Est-ce concernant le numéro à partir duquel vous appelez?" ],
+        "allowPlaybackInterruption": true
+      } ],
+      "currentFlow": {
+        "name": "bell_Identification"
+      }
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "non"
+        },
+        "languageCode": "fr-ca"
+      }
+    },
+    "virtualAgentOutput": {
+      "triggeredIntent": {
+        "name": "context.confirm_no"
+      },
+      "currentPage": {
+        "name": "CX Input Custom Fallback 1",
+        "flow": "bell_Identification"
+      },
+      "textResponses": [ {
+        "text": [ "Pas de trouble. Alors pour quel numéro de téléphone appellez-vous?" ],
+        "allowPlaybackInterruption": true
+      } ],
+      "currentFlow": {
+        "name": "bell_Identification"
+      }
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "5147158884"
+        },
+        "languageCode": "fr-ca"
+      }
+    },
+    "virtualAgentOutput": {
+      "currentPage": {
+        "name": "Check CX Input",
+        "flow": "bell_Identification"
+      },
+      "textResponses": [ {
+        "text": [ "\u003cspeak\u003eC'était bien le \u003csay-as interpret-as='telephone'\u003e5147158884\u003c/say-as\u003e, n'est-ce pas?\u003c/speak\u003e" ],
+        "allowPlaybackInterruption": true
+      } ],
+      "currentFlow": {
+        "name": "bell_Identification"
+      }
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "oui"
+        },
+        "languageCode": "fr-ca"
+      }
+    },
+    "virtualAgentOutput": {
+      "triggeredIntent": {
+        "name": "context.confirm_yes"
+      },
+      "currentPage": {
+        "name": "Trigger_OTP",
+        "flow": "bell_authentication"
+      },
+      "textResponses": [ {
+        "text": [ "Merci!" ],
+        "allowPlaybackInterruption": true
+      }, {
+        "text": [ "Pour plus de sécurité, je vais vous envoyer un code à six chiffres par message texte, sur le téléphone mobile que nous avons à votre dossier" ],
+        "allowPlaybackInterruption": true
+      }, {
+        "text": [ "Veuillez me le donner lorsque vous l'aurez reçu." ],
+        "allowPlaybackInterruption": true
+      } ],
+      "currentFlow": {
+        "name": "bell_authentication"
+      }
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "j'ai pas le message"
+        },
+        "languageCode": "fr-ca"
+      }
+    },
+    "virtualAgentOutput": {
+      "currentPage": {
+        "name": "CX Input Custom Fallback",
+        "flow": "bell_authentication"
+      },
+      "textResponses": [ {
+        "text": [ "Quel est le code de vérification de 6 chiffres que je vous ai envoyée? Vous pouvez l'entrer à l'aide du clavier de votre téléphone." ],
+        "allowPlaybackInterruption": true
+      } ],
+      "currentFlow": {
+        "name": "bell_authentication"
+      }
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "581781"
+        },
+        "languageCode": "fr-ca"
+      }
+    },
+    "virtualAgentOutput": {
+      "textResponses": [ {
+        "text": [ "Parfait, c'est le bon code!" ],
+        "allowPlaybackInterruption": true
+      }, {
+        "text": [ "Qu'est-ce que je peux faire d'autre pour vous aider aujourd'hui?" ],
+        "allowPlaybackInterruption": true
+      } ]
+    }
+  } ],
+  "creationTime": {
+    "seconds": 1738076299,
+    "nanos": 679658000
+  },
+  "testConfig": {
+    "flow": "Default Start Flow",
+    "page": "Start Page"
+  },
+  "languageCode": "fr-ca"
+}

@@ -1,0 +1,77 @@
+{
+  "name": "4dac9053-fee0-4ec9-a170-cce402531314",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "To fix this issue, you need to perform this step now. Please check if the battery is inserted and charging in the modem. Please perform that step and let me know when you are done."
+    }
+  }, {
+    "userUtterance": {
+      "text": "What is a modem?"
+    }
+  }, {
+    "toolUse": {
+      "tool": "EN_Bell_vr_cda_faq",
+      "action": "EN_Bell_vr_cda_faq",
+      "inputActionParameters": {
+        "requestBody": {
+          "query": "6000"
+        }
+      },
+      "outputActionParameters": {
+        "200": {
+          "answer": "Q: What is a Modem? A: device that allows you to connect to the Internet. Q: What is a Power cord? A: small black cord with a round end which plugs into a power outlet and provides power to the modem. Q: What is a Fibre port? A: hidden port on the back of the modem where the fibre cable (white or black) is plugged in. It provides an Internet connection to the modem. Q: What are LAN ports? A: yellow ports on the back of the modem which allow you to directly connect your devices to the Internet. Q: How does this affect my services? A: If any cables are unplugged accidentally, your services may be temporarily unavailable.Q: What are we doing in these steps? A: We’re checking to see if your modem and cables are properly connected in order to eliminate this as the possible cause of the problem. Q: What if these instructions don't match my setup? A: Just confirm whether the lights on your modem are all solid white. Q: How do I perform Step 1? A: Locate your modem. Q: How do I perform Step 2? A: Ensure that one end of the power cable is connected to your modem and the other end is plugged directly into a wall outlet. Q: How do I perform Step 3? A: Check if there’s a fibre cable connected to the port labelled “Fibre” on the back of your modem. Do not remove the cable. Q: How do I perform Step 4? A: If you’re using a wired connection, ensure that one end of the Ethernet cable is plugged into the yellow port labelled “LAN” and the other end is connected to your device.",
+          "snippets": [ {
+            "text": "",
+            "title": "6000",
+            "uri": ""
+          } ]
+        }
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "A modem is device that allows you to connect to the Internet.\nWhen you’re ready, can you take a look and let me know if you were able to complete the check?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Okay, done with it."
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Thank you for letting me know. I'm checking now what will be the next step."
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_vr_post_answer",
+      "inputActionParameters": {
+        "customer_answer1_id": "0"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "User having a problem with the service and initiating Virtual repair session.",
+    "actionParameters": {
+      "acceptable_answers": [ {
+        "choice": "CDA:endNow:success",
+        "id": 0
+      }, {
+        "choice": "CDA:gotoStep1",
+        "id": 1
+      } ],
+      "dcx_action_code": "6000",
+      "more_info": "",
+      "title": "Checking if the battery is inserted and charging in the modem",
+      "vr_type": "CDA"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "The bot prompted a troubleshooting step. The user interrupted with an FAQ, which the bot addressed via the ${TOOL:EN_Bell_vr_cda_faq} tool. Following the response, the user acknowledged that the step was completed."
+  },
+  "displayName": "CDA - User asks a relevant question (FAQ) - 2",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 881,
+  "languageCode": "en"
+}

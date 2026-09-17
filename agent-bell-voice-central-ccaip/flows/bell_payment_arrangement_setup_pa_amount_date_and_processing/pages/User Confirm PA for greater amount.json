@@ -1,0 +1,49 @@
+{
+  "name": "205cbd4d-fc8a-4427-82b3-a98b16936ccd",
+  "displayName": "User Confirm PA for greater amount",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "intent": "context.confirm_yes",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "\u003cspeak\u003eLa dernière date pour laquelle vous pouvez vous engager à effectuer un versement pour votre entente de paiement est le \u003csay-as interpret-as=\"date\" format=\"md\" detail=\"2\"\u003e$session.params.calculated_payment_date \u003c/say-as\u003e. Pouvez-vous effectuer un paiement d’ici là?\u003c/speak\u003e" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "\u003cspeak\u003e The latest date you can commit to making a payment arrangement is on  \u003csay-as interpret-as=\"date\" format=\"md\" detail=\"2\"\u003e$session.params.calculated_payment_date\u003c/say-as\u003e. Can you make a payment by then? \u003c/speak\u003e" ]
+        },
+        "languageCode": "en"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "amount",
+        "value": "$session.params.payment_amount"
+      } ]
+    },
+    "targetPage": "Payment Date Confirmation",
+    "name": "06732929-0081-4de0-a69e-65873b6161d8"
+  }, {
+    "intent": "context.confirm_no",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Pour établir des modalités de paiement, le montant minimum requis est de $$session.params.pastDueAmount, Souhaitez-vous vous engager à payer ce montant?" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "To set up payment arrangement, the minimum amount required is $$session.params.pastDueAmount, would you like to commit to paying this amount?" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "targetPage": "Due Amount Check",
+    "name": "d2b6547b-ccd9-46f7-8c36-7e43c3055cc8"
+  } ]
+}

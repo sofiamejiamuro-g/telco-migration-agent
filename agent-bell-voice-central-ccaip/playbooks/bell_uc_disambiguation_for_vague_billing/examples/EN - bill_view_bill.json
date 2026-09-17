@@ -1,0 +1,49 @@
+{
+  "name": "9ec27d36-1404-4311-af4e-33a2c2cd0c16",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "I can help with several billing topics. To get you to the right place, please tell me more about your request. For example, you could say, 'a specific charge' or 'my total balance.'"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Can you display my billing history?"
+    }
+  }, {
+    "playbookInvocation": {
+      "playbook": "bell_UC_Billing",
+      "playbookInput": {
+        "precedingConversationSummary": "Customers is looking to add a community promotion, rewards or offers from bell brand",
+        "actionParameters": {
+          "route": "bill_view_bill",
+          "utterance": "Can you display my billing history?"
+        }
+      },
+      "playbookOutput": {
+        "executionSummary": "Customer query got resolved",
+        "actionParameters": {
+          "language": "en"
+        }
+      },
+      "playbookState": "OUTPUT_STATE_OK"
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customers is looking to view their bill",
+    "actionParameters": {
+      "language": "en",
+      "route": "bill_vague",
+      "utterance": "Can you display my billing history?"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Customer query is addressed and then directed to \"lucky_uc_billing\" playbook",
+    "actionParameters": {
+      "route": "bill_view_bill"
+    }
+  },
+  "displayName": "EN - bill_view_bill",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 299,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

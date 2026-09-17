@@ -1,0 +1,74 @@
+{
+  "name": "92e23f54-6de8-414c-bf5d-44f34fbcc60a",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70011",
+        "brand": "bell",
+        "language": "fr-ca",
+        "route": "service_add_feature"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Bien sûr, vous pouvez facilement gérer votre forfait Mobilité et vos options en tout temps au moyen de MonBell. Je vais envoyer un texto à l’appareil au moyen duquel vous appelez, afin que vous puissiez facilement modifier vos options ou ajouts Mobilité. Est-ce que ça vous convient?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "oui"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "fr-ca",
+        "route": "service_add_feature",
+        "sms_content": "Vous pouvez visiter https://m.bell.ca/monoption pour voir ou modifier vos options téléphoniques dans l'appli MonBell. ( bell.ca/apropos )",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+        "language": "fr-ca"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "The {identification_status} is \"Pass\", {customer_type} is \"Existing\", {streaming_services} is null and {ppv} is null and {lob} is null and {mobility_sub_type} is null and {add_ons} = \"Mobility Regular Feature\" then we will prompt user to confirm if they are talking about \"prepaid\" or \"postpaid\" service and then based on user response will set parameter {mobility_sub_type}",
+    "actionParameters": {
+      "add_ons": "Mobility Regular Feature",
+      "apb_location_id": "70011",
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "fr-ca",
+      "route": "service_add_feature",
+      "sms_content": "Vous pouvez visiter https://m.bell.ca/monoption pour voir ou modifier vos options téléphoniques dans l'appli MonBell. ( bell.ca/apropos )",
+      "sms_type": "Public",
+      "utterance": "J'ai besoin d'un petit remontant de données"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "As the {lob} is null and {mobility_sub_type} is null and {add_ons} = \"Mobility Regular Feature\" then, prompt user with message \"ASK customer \"Are you looking to make changes to your prepaid or monthly service?\" and then based on user response set parameter {mobility_sub_type} based on instruction given in playbook.",
+    "actionParameters": {
+      "add_ons": "Mobility Regular Feature",
+      "apb_location_id": "70011",
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "fr-ca",
+      "mobility_sub_type": "postpaid",
+      "route": "service_add_feature",
+      "sms_content": "Vous pouvez visiter https://m.bell.ca/monoption pour voir ou modifier vos options téléphoniques dans l'appli MonBell. ( bell.ca/apropos )",
+      "sms_type": "Public",
+      "utterance": "J'ai besoin d'un petit remontant de données"
+    }
+  },
+  "displayName": "FR - service_add_feature- streaming_services,ppv - null-add_ons-MRF-mobility_sub_type-null-postpaid",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 778,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

@@ -1,0 +1,81 @@
+{
+  "name": "ca2060c4-1caf-43b3-97ce-301163033873",
+  "displayName": "Check Card Brand",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.card_brand = \"VISA\" OR $session.params.card_brand = \"Visa\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Enfin, quel est le code de sécurité à trois chiffres qui figure au dos de votre carte Visa?" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "Lastly what is the 3 digit security code on the back\r\nof your Visa card? " ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "targetPage": "Prompt CVV Number",
+    "name": "81fedb4b-db7d-44a4-957b-21ed5fdd2850"
+  }, {
+    "condition": "$session.params.card_brand = \"MC\" OR $session.params.card_brand = \"MasterCard\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Enfin, quel est le code de sécurité à trois chiffres qui figure au dos de votre carte MasterCard?" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "Lastly what is the 3 digit security code on the back\r\nof your Master Card? " ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "targetPage": "Prompt CVV Number",
+    "name": "bf62dd60-04eb-4102-aaf4-6c2471a33c19"
+  }, {
+    "condition": "$session.params.card_brand = \"AMEX\" OR $session.params.card_brand = \"Amex\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Enfin, quel est le code de sécurité à quatre chiffres qui figure sur le devant de votre carte American Express?" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "Lastly what is the 4 digit security code on the front\r\nof your American Express card? " ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "targetPage": "Prompt CVV Number",
+    "name": "fccdd81a-3125-4747-9a71-20dd48b46155"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "ca2060c4-1caf-43b3-97ce-301163033873"
+      }, {
+        "parameter": "flow_id",
+        "value": "a059ee3e-a2ae-4118-bc6a-65f7330baa63"
+      }, {
+        "parameter": "page_name",
+        "value": "Check Card Brand"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

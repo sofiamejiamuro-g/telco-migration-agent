@@ -1,0 +1,48 @@
+{
+  "name": "c1d92882-9e39-413c-bce2-c80c47895d6c",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Je peux vous aider avec plusieurs sujets de paiement. Pour vous diriger au bon endroit, veuillez me donner plus de détails sur votre demande. Par exemple, vous pourriez dire 'faire un paiement' ou 'configurer des paiements préautorisés'."
+    }
+  }, {
+    "userUtterance": {
+      "text": "Je veux payer mes factures automatiquement"
+    }
+  }, {
+    "playbookInvocation": {
+      "playbook": "bell_UC_Payments",
+      "playbookInput": {
+        "precedingConversationSummary": "Customer looking to setup a autopay to make their payments",
+        "actionParameters": {
+          "language": "fr-ca",
+          "route": "payment_setup_autopay",
+          "utterance": "Je veux payer mes factures automatiquement"
+        }
+      },
+      "playbookOutput": {
+        "executionSummary": "Customer query is addresses and then routed to \"bell_UC_payment\" playbook for further help",
+        "actionParameters": {
+          "language": "fr-ca"
+        }
+      },
+      "playbookState": "OUTPUT_STATE_OK"
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer query about \"I need help with my payment\" is addressed",
+    "actionParameters": {
+      "brand": "bell",
+      "langauge": "fr-ca",
+      "route": "payment_vague",
+      "utterance": "J'ai besoin d'aide pour mon paiement"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Customer query is addresses and then routed to \"bell_UC_payment\" playbook for further help"
+  },
+  "displayName": "FR - payment_setup_autopay - I need help with my payment",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 333,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

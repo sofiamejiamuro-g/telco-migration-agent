@@ -1,0 +1,47 @@
+{
+  "name": "05f7b62c-3e81-4718-bd9d-a232cd0405f7",
+  "displayName": "CLP_SUS_Deliquent_check",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "setParameterActions": [ {
+      "parameter": "flagD",
+      "value": "$sys.func.FILTER(   \"$session.params.customer_id_search_response\",   \"$..billing_accounts[*].delinquent_flag\" )"
+    }, {
+      "parameter": "sus_deliquent",
+      "value": "$sys.func.CONTAIN(   $session.params.flag_D,   \"D\" )"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.sus_deliquent = true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "special_status",
+        "value": "bell_clp_sus"
+      }, {
+        "parameter": "special_queue",
+        "value": "bell_collections"
+      } ]
+    },
+    "targetFlow": "bell_authentication",
+    "name": "410cd0e2-cb5f-4fd7-a41c-5f15eb0db8cf"
+  }, {
+    "condition": "$session.params.sus_deliquent = false",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "special_status",
+        "value": "bell_clp_sus"
+      } ]
+    },
+    "targetFlow": "bell_authentication",
+    "name": "61d98c65-e95f-4710-b996-e9b36f31134c"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "CLP_SUS_status_reason_check",
+    "name": "88065b89-d791-4408-b96a-4f18e56bb362"
+  } ]
+}

@@ -1,0 +1,70 @@
+{
+  "name": "75415004-3d32-48c9-b7ad-357565bf6156",
+  "displayName": "Amount Already Provided",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "conditionalCases": [ {
+      "cases": [ {
+        "condition": "$session.params.from_restricted = true",
+        "caseContent": [ {
+          "message": {
+            "text": {
+              "text": [ "OK, $ $session.params.other_payment_amount. We can proceed with your payment but it won't be enough to restore your services." ]
+            },
+            "languageCode": "en"
+          }
+        }, {
+          "message": {
+            "text": {
+              "text": [ "OK, $ $session.params.other_payment_amount. Nous pouvons procéder au paiement, mais cela ne suffira pas à rétablir vos services." ]
+            },
+            "languageCode": "fr-ca"
+          }
+        } ]
+      }, {
+        "condition": "$session.params.from_non_restricted = true",
+        "caseContent": [ {
+          "message": {
+            "text": {
+              "text": [ "OK, $ $session.params.other_payment_amount. We can proceed with your payment but it won't be enough to cover the past due amount. To avoid possible suspension of your services, please consider an additional payment." ]
+            },
+            "languageCode": "en"
+          }
+        }, {
+          "message": {
+            "text": {
+              "text": [ "D’accord, $ $session.params.other_payment_amount, nous pouvons procéder à votre paiement, mais ce ne sera pas suffisant pour couvrir le montant en souffrance. Pour éviter une éventuelle suspension de vos services, veuillez envisager un paiement supplémentaire." ]
+            },
+            "languageCode": "fr-ca"
+          }
+        } ]
+      }, {
+        "condition": "$session.params.amount_correction_required = null",
+        "caseContent": [ {
+          "message": {
+            "text": {
+              "text": [ "Ok $$session.params.other_payment_amount" ]
+            },
+            "languageCode": "en"
+          }
+        } ]
+      } ]
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "amount_paid",
+        "value": "$session.params.other_payment_amount"
+      }, {
+        "parameter": "from_already_provided",
+        "value": true
+      } ]
+    },
+    "targetPage": "Amount Validation",
+    "name": "5001f994-697d-45fe-bf13-d8b6ad679a6e"
+  } ]
+}

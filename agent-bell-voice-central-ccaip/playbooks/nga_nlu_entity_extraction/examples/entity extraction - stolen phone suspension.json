@@ -1,0 +1,53 @@
+{
+  "name": "5bf04d17-8733-46b1-b541-4e83aa390a32",
+  "actions": [ {
+    "toolUse": {
+      "tool": "inline-action",
+      "action": "extract_entities",
+      "inputActionParameters": {
+        "language": "en",
+        "route": "account_suspend_service",
+        "utterance": "my phone was stolen I want to suspend my service"
+      },
+      "outputActionParameters": {
+        "result": ""
+      }
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_Query_Rewriter",
+      "inputActionParameters": {
+        "language": "en",
+        "route": "account_suspend_service",
+        "suspension_type": "lost/stolen",
+        "utterance": "my phone was stolen I want to suspend my service"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "User utterance indicating stolen phone and suspension request",
+    "actionParameters": {
+      "language": "en",
+      "route": "account_suspend_service",
+      "utterance": "my phone was stolen I want to suspend my service"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Entities extracted from utterance and passed to session",
+    "actionParameters": {
+      "language": "en",
+      "lob": "mobility",
+      "route": "account_suspend_service",
+      "suspension_type": "lost/stolen",
+      "utterance": "my phone was stolen I want to suspend my service"
+    }
+  },
+  "displayName": "entity extraction - stolen phone suspension",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 283,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

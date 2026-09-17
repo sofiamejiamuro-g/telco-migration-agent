@@ -1,0 +1,58 @@
+{
+  "name": "a122e8ac-a1d0-4850-9103-d968e872165f",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "language": "en"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Are you inquiring about a new service or do you want to make changes to your current service?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "I want to change my plan"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "service_change_plan_flow",
+      "inputActionParameters": {
+        "language": "en"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customers want to know about d plans or compare plans that Bell has",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "Existing",
+      "language": "en",
+      "province": "ON",
+      "route": "sales_plans_inquiry",
+      "utterance": "i want a plan"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "from the identification flow, know the customer_type as \"Existing\", as we don't know the line type, we need to ask the customer, if customer says that they are looking to make changes in the current service, we need to set \"line_type\" as \"Existing\" and reroute to \"service_change_plan\" ",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "line_type": "Existing",
+      "route": "service_change_plan"
+    }
+  },
+  "displayName": "sales plans inquiry- ID Pass,line type-not mentioned- existing 2",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 379,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

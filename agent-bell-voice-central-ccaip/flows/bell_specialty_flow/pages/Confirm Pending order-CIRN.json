@@ -1,0 +1,73 @@
+{
+  "name": "c10caed3-0d62-49e2-944b-7d11be2ca915",
+  "displayName": "Confirm Pending order-CIRN",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "setParameterActions": [ {
+      "parameter": "local_trigger",
+      "value": null
+    }, {
+      "parameter": "local_nomatch_counter",
+      "value": 0
+    }, {
+      "parameter": "local_noinput_counter",
+      "value": 0
+    } ]
+  },
+  "transitionRoutes": [ {
+    "intent": "context.confirm_yes",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "special_queue",
+        "value": "cable_internet"
+      }, {
+        "parameter": "intent",
+        "value": "other_speak_to_agent"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "46d0ef57-7b50-404b-8379-52fe329882e3"
+  }, {
+    "intent": "context.confirm_no",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "End flow handling",
+    "name": "599b53d7-ee07-47c5-b05d-19562a7d221e"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Local Error Handling",
+    "event": "sys.no-input-default",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "local_noinput_counter",
+        "value": "$sys.func.ADD($session.params.local_noinput_counter,1)"
+      }, {
+        "parameter": "global_error_counter",
+        "value": "$sys.func.ADD($session.params.global_error_counter,1)"
+      }, {
+        "parameter": "local_trigger",
+        "value": "no_input"
+      } ]
+    },
+    "name": "41cccaee-d8b8-4bb7-9d89-10eaf47a5326"
+  }, {
+    "targetPage": "Local Error Handling",
+    "event": "sys.no-match-default",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "global_error_counter",
+        "value": "$sys.func.ADD($session.params.global_error_counter,1)"
+      }, {
+        "parameter": "local_trigger",
+        "value": "no_match"
+      }, {
+        "parameter": "local_nomatch_counter",
+        "value": "$sys.func.ADD($session.params.local_nomatch_counter,1)"
+      } ]
+    },
+    "name": "f86f7248-f23b-4fac-8ae0-497bab788c78"
+  } ]
+}

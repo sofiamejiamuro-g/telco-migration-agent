@@ -1,0 +1,61 @@
+{
+  "name": "3a2f6ceb-bb20-48d1-b435-208ff30abfbc",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Merci. Quelle est la raison de la suspension de votre service?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "On m'a volé mon cellulaire."
+    }
+  }, {
+    "agentUtterance": {
+      "text": "C’est noté. Avez-vous essayé d’utiliser une option de suivi comme « Trouver mon iPhone » ou « Trouver mon appareil »?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "oui"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "C'est compris, je vous suggère de suspendre temporairement votre service pour éviter toute utilisation non autorisée. Je vais envoyer un SMS sur l'appareil depuis lequel vous appelez avec un lien pour le faire vous-même, est-ce que cela vous convient ?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "oui"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "sms_content": "You can visit bell.ca/suspendline to temporarily suspend your mobility service in MyBell. (bell.ca/about-us)"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer trying to suspend their service as there device is stolen",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca",
+      "route": "account_suspend_service",
+      "unique_services": "Mobility",
+      "utterance": "Je veux suspendre mon ou mes service"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "VA understood the {utterance} and confirmed that {unique_services} has one unique value equal to Mobility , Then asked the user for the reason behind the suspension of his service, user confirmed that his device was stolen and the VA asks if it can send the user an SMS to the number the user is calling from, user confirms and gets routed to bell_SMS Trigger flow",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca",
+      "suspension_type": "stolen"
+    }
+  },
+  "displayName": "Account suspend service - Unique service - Mobility - Stolen - FR",
+  "retrievalStrategy": "NEVER",
+  "tokenCount": 453,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "fr"
+}

@@ -1,0 +1,44 @@
+{
+  "name": "2b04d1e3-7939-4be7-a633-dd6bc1b7848f",
+  "displayName": "Check RDAM Eligibility",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.va_entry_flow != \"IBM_transfer\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "User Check for Question Type after RDAM Confirmation",
+    "name": "f34bd338-da33-4094-8b19-148c8aab08b9"
+  }, {
+    "condition": "$session.params.va_entry_flow = \"IBM_transfer\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "User Confirm Question Type",
+    "name": "72fc73dc-9784-4c42-bd70-ace1de984fd8"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "2b04d1e3-7939-4be7-a633-dd6bc1b7848f"
+      }, {
+        "parameter": "flow_id",
+        "value": "7236071c-1553-4217-a18d-0a64a4737a9a"
+      }, {
+        "parameter": "page_name",
+        "value": "Check RDAM Eligibility"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

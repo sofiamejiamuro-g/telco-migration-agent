@@ -1,0 +1,202 @@
+{
+  "name": "4290e7f8-4895-4a5f-a259-17071a9c2985",
+  "displayName": "Webhook-AUL Data Check- soc-info-list",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "setParameterActions": [ {
+      "parameter": "billing_account",
+      "value": "$session.params.billing_account_number"
+    }, {
+      "parameter": "application_id",
+      "value": "$session.params.ibm_application_id"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.CIRN != null",
+    "triggerFulfillment": {
+      "webhook": "/v1/ibm_mw/nm1_get#soc-info-list",
+      "tag": "soc-info-list",
+      "setParameterActions": [ {
+        "parameter": "phone",
+        "value": "$session.params.CIRN"
+      } ]
+    },
+    "name": "1c9f5d55-cb7e-4a8d-9360-665f275ac349"
+  }, {
+    "condition": "$session.params.CIRN = null",
+    "triggerFulfillment": {
+      "webhook": "/v1/ibm_mw/nm1_get#soc-info-list",
+      "tag": "soc-info-list",
+      "setParameterActions": [ {
+        "parameter": "phone",
+        "value": "$session.params.clid"
+      } ]
+    },
+    "name": "8e03cf85-6b3f-45cc-b128-9fb862c7ab4c"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "soc",
+        "value": "$sys.func.FILTER(\"$session.params.nm1_get_soc_info_list_response\", \"$..socInfoList[*].soc\")"
+      }, {
+        "parameter": "soc_aul",
+        "value": "$sys.func.CONTAIN($session.params.soc, AULDATA)"
+      }, {
+        "parameter": "soc_COLAUL",
+        "value": "$sys.func.CONTAIN($session.params.soc, AULCOL)"
+      }, {
+        "parameter": "soc_ITP",
+        "value": "$sys.func.CONTAIN($session.params.soc, ITP_SOC)"
+      } ]
+    },
+    "targetPage": "test input",
+    "name": "a8995434-ead3-4d61-8cb2-277636bd03b8"
+  }, {
+    "condition": "$session.params.cx_cornerstone = true AND ($session.params.banStatus = \"S\" OR $session.params.soc_COLAUL = true)",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "special_queue",
+        "value": "bell_collections"
+      }, {
+        "parameter": "special_status",
+        "value": "bell_col_cs"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "1cf8793b-16cc-4e91-9c9d-90bee9d7c126"
+  }, {
+    "condition": "$session.params.soc_aul = true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "special_queue",
+        "value": "bell_auldata"
+      }, {
+        "parameter": "special_status",
+        "value": "bell_auldata"
+      } ]
+    },
+    "targetFlow": "bell_authentication",
+    "name": "4b7872b5-e5aa-441c-b173-d894142ae61c"
+  }, {
+    "condition": "($session.params.mobility = true OR $session.params.tv = true OR $session.params.internet = true OR $session.params.smarthome = true OR $session.params.homephone = true) AND $session.params.soc_aul = false",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "CLP SUS Check",
+    "name": "6f803101-96c5-4106-9976-af226120c2f7"
+  }, {
+    "condition": "$session.params.mobility = true AND $session.params.soc_aul = false",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "CLP SUS Check",
+    "name": "6b8f80a8-4a79-4cb8-9018-aae0c5048c7d"
+  }, {
+    "condition": "$session.params.auth_status = \"Pass\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "It looks like your data is currently blocked because of excessive usage." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Il semble que vos données soient actuellement bloquées en raison d'une utilisation excessive." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cf4a4b40-3e64-4bc2-b33a-fcbd538ca0cf"
+  }, {
+    "condition": "$session.params.auth_status = \"Fail\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Don't worry, let's continue." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Ne vous inquiétez pas, continuons." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "9e5ac193-04b7-4f3f-b417-2bbc5f9548fb"
+  }, {
+    "condition": "$session.params.soc_aul = false",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "CLP SUS Check",
+    "name": "69ebcada-8dbe-415c-937a-b17f7cd6a4e7"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "4290e7f8-4895-4a5f-a259-17071a9c2985"
+      }, {
+        "parameter": "flow_id",
+        "value": "d35b61b6-c884-44f8-b5c7-aed63cc356ab"
+      }, {
+        "parameter": "page_name",
+        "value": "Webhook-AUL Data Check- soc-info-list"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "CLP SUS Check",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+    
+    },
+    "name": "783a91dd-8a10-4894-a871-00943bcbb452"
+  }, {
+    "targetPage": "CLP SUS Check",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+    
+    },
+    "name": "b0d6172a-d486-406b-aa3d-662521b05546"
+  }, {
+    "targetPage": "CLP SUS Check",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+    
+    },
+    "name": "2d5ad017-b1ba-4f0b-bc9c-01b2374efa81"
+  }, {
+    "targetPage": "CLP SUS Check",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+    
+    },
+    "name": "e6a2dde6-756c-4bc8-a4ee-409a086d6143"
+  }, {
+    "targetPage": "CLP SUS Check",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+    
+    },
+    "name": "02401f55-a33d-42b3-a6ec-91635018d946"
+  }, {
+    "targetPage": "CLP SUS Check",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+    
+    },
+    "name": "b69a4f43-9964-43b3-93d4-cab3749b5a84"
+  } ],
+  "description": "soc-info-list webhook"
+}

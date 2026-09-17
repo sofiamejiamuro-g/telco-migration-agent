@@ -1,0 +1,41 @@
+{
+  "name": "0dfcc8fc-ad60-4254-a80a-4d1cd8ad91d4",
+  "displayName": "Monthly Charge Date",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "setParameterActions": [ {
+      "parameter": "dueDateFull",
+      "value": "$sys.func.GET($sys.func.SPLIT($session.params.dueDateFull, \"T\"),0)"
+    }, {
+      "parameter": "dueDate",
+      "value": "$sys.func.GET($sys.func.SPLIT($session.params.dueDate, \"T\"),0)"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.start_one_time_pmt_response.accountBill.dueDate = null",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_aqd",
+    "name": "67ed2384-43fc-45ba-a2f8-da4e5f35840e"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Ta date de facturation mensuelle est le $session.params.dueDate. Tu peux toujours vérifier ces détails dans l’application MonBell." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "Your monthly charge date is $session.params.dueDate. You can always check these details in the MyBell app as well." ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "targetFlow": "bell_Feedback",
+    "name": "2f64aad7-d9d0-4ce3-a1f9-acd7dd516f68"
+  } ]
+}

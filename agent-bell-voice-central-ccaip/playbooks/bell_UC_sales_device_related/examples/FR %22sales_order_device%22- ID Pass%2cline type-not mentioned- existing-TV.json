@@ -1,0 +1,78 @@
+{
+  "name": "35aa22f5-0dbd-4486-ab94-c4e770866744",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "brand": "bell",
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Désirez-vous ajouter un nouveau service ou modifier votre service\nactuel?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Je veux en savoir plus sur le service actuel"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "À propos de quel service communiquez- vous avec nous?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "TV"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Je vais envoyer un texto à l'appareil au moyen duquel vous appelez, afin que vous puissiez découvrir les appareils télé de Bell. Est-ce que ça\nvous convient?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Oui"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "brand": "bell",
+        "language": "fr-ca",
+        "sms_content": "Bell: Vous pouvez visiter bell.ca/equipementtelefibe pour vous procurer de l'équipement Télé Fibe, ou bell.ca/satellitetvequipment pour de l'équipement Télé Satellite. (bell.ca/apropos )",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+        "language": "fr-ca"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer has questions about needing a new device, device availability, device features, cost, related to devices that Bell sells",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "fr-ca",
+      "route": "sales_order_device",
+      "utterance": "Je souhaite commander un nouvel appareil"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "from the identification flow, know the customer_type as \"Existing\",if in the utterance or user says that they are looking for{lob} is \"TV\" or {device_type} is\"satellite dish\" or \"receiver\" then ask if they send a text if they agrees call \"bell_sms_trigger\"",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca",
+      "line_type": "Existing",
+      "lob": "TV"
+    }
+  },
+  "displayName": "FR \"sales_order_device\"- ID Pass,line type-not mentioned- existing-TV",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 569,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

@@ -1,0 +1,140 @@
+{
+  "name": "1ee5f8d2-5d6c-49b5-966d-903f89250218",
+  "displayName": "Earliest Available Appointment Offering",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "messages": [ {
+      "text": {
+        "text": [ "\u003cspeak\u003eThe next available time slot is $session.params.day_of_week, $session.params.month \u003csay-as interpret-as=\"ordinal\"\u003e$session.params.date_of_month\u003c/say-as\u003e between $session.params.start_time_2 and $session.params.end_time_2. Does that work for you?\u003c/speak\u003e" ]
+      },
+      "languageCode": "en"
+    }, {
+      "text": {
+        "text": [ "\u003cspeak\u003eLa prochaine plage horaire disponible est le $session.params.day_of_week_fr, le \u003csay-as interpret-as=\"cardinal\"\u003e$session.params.date_of_month\u003c/say-as\u003e $session.params.month_fr entre $session.params.start_time_fr_2 et $session.params.end_time_fr_2. Est-ce que cela vous convient?\u003c/speak\u003e" ]
+      },
+      "languageCode": "fr-ca"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "intent": "context.confirm_yes",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "selected_date",
+        "value": "$session.params.date"
+      }, {
+        "parameter": "selected_start_time",
+        "value": "$session.params.start_time"
+      }, {
+        "parameter": "selected_end_time",
+        "value": "$session.params.end_time"
+      }, {
+        "parameter": "selected_interval_name",
+        "value": "$session.params.interval_name"
+      }, {
+        "parameter": "wfas_context_raw",
+        "value": "$session.params.wfas_availability_response.wfas_context"
+      }, {
+        "parameter": "wfas_context",
+        "value": "$sys.func.TO_OBJECT($session.params.wfas_context_raw)"
+      } ]
+    },
+    "targetPage": "Webhook - WFAS Appointment",
+    "name": "92c98dba-b379-4c65-98f0-6a264895a39c"
+  }, {
+    "intent": "context.confirm_no",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "rejected_date",
+        "value": "$session.params.date"
+      } ],
+      "generators": [ {
+        "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/b0cb025a-aac0-472d-96d2-ca481f609082",
+        "inputParameters": [ {
+          "key": "availability",
+          "value": "$session.params.availability"
+        }, {
+          "key": "original_end_date",
+          "value": "$session.params.original_end_date"
+        }, {
+          "key": "original_start_date",
+          "value": "$session.params.original_start_date"
+        }, {
+          "key": "rejected_date",
+          "value": "$session.params.rejected_date"
+        } ],
+        "outputParameter": "$request.generative.appointment_date_range"
+      } ]
+    },
+    "targetPage": "Ask What Day Works",
+    "name": "0b116184-293b-43f7-be5b-47956468a8cf"
+  }, {
+    "intent": "context.reject_timeslot",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "rejected_date",
+        "value": "$session.params.date"
+      } ],
+      "generators": [ {
+        "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/b0cb025a-aac0-472d-96d2-ca481f609082",
+        "inputParameters": [ {
+          "key": "availability",
+          "value": "$session.params.availability"
+        }, {
+          "key": "original_end_date",
+          "value": "$session.params.original_end_date"
+        }, {
+          "key": "original_start_date",
+          "value": "$session.params.original_start_date"
+        }, {
+          "key": "rejected_date",
+          "value": "$session.params.rejected_date"
+        } ],
+        "outputParameter": "$request.generative.appointment_date_range"
+      } ]
+    },
+    "targetPage": "Ask What Day Works",
+    "name": "1bc82089-0dea-44f4-8fe0-808a1589cf9a"
+  }, {
+    "intent": "context.other_date",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Date Formatter 2",
+    "name": "960b9d29-efa3-45f1-8628-a87cc3292a6d"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Local Error handling + Earliest Available Appointment Offering",
+    "event": "sys.no-input-1",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "global_error_counter",
+        "value": "$sys.func.ADD($session.params.global_error_counter,1)"
+      }, {
+        "parameter": "local_trigger",
+        "value": "no_input"
+      }, {
+        "parameter": "local_noinput_counter",
+        "value": "$sys.func.ADD($session.params.local_noinput_counter,1)"
+      } ]
+    },
+    "name": "b88890a8-2d7a-4628-86b0-ce6217606325"
+  }, {
+    "targetPage": "Local Error handling + Earliest Available Appointment Offering",
+    "event": "sys.no-match-1",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "global_error_counter",
+        "value": "$sys.func.ADD($session.params.global_error_counter,1)"
+      }, {
+        "parameter": "local_trigger",
+        "value": "no_match"
+      }, {
+        "parameter": "local_nomatch_counter",
+        "value": "$sys.func.ADD($session.params.local_nomatch_counter,1)"
+      } ]
+    },
+    "name": "0fe85c69-f881-4778-b63b-3d2d4506cac5"
+  } ]
+}

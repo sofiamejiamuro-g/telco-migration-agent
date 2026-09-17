@@ -1,0 +1,60 @@
+{
+  "name": "3691d5c0-c0bb-458a-aa70-a9d5b25da1a5",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "language": "en"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Sure, let me help you with that.\nWhich service are you inquiring about?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Mobility\n"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "With Canada's largest 4G, LTE and Wi-Fi networks, Bell covers 99 percent of the Canadian population. We also offer 5G in select areas across Canada. Can I connect you with an agent to learn more about Bell Mobility service?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Yes"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_aqd",
+      "inputActionParameters": {
+        "language": "en"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "The customer is asking whether the provider's service is offered at an address or location.",
+    "actionParameters": {
+      "language": "en",
+      "route": "sales_confirm_service_coverage",
+      "utterance": "Is it possible to get network coverage in this place"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "lob is not provided so ask for it and extract in {lob}\nWhen province is anything other than ON and QC or is null or empty, ask user for province, extract in {province} parameter and further route based on province",
+    "actionParameters": {
+      "language": "en",
+      "lob": "Mobility"
+    }
+  },
+  "displayName": "EN-sales_service_coverage-no lob | mobility | yes",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 416,
+  "languageCode": "en"
+}

@@ -1,0 +1,740 @@
+{
+  "name": "8df7f836-8c64-4019-9506-2cedc52519c8",
+  "displayName": "bell_Identification",
+  "transitionRoutes": [ {
+    "intent": "global_events_full_startover",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "event_type",
+        "value": "full start over"
+      } ],
+      "nextActionOverride": {
+      
+      }
+    },
+    "targetFlow": "Default Start Flow",
+    "name": "6c4150ee-4d0a-4251-8624-4ce3d8da660e"
+  }, {
+    "intent": "global_events_partial_start_over",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "event_type",
+        "value": "partial start over"
+      } ],
+      "nextActionOverride": {
+      
+      }
+    },
+    "targetFlow": "Default Start Flow",
+    "name": "8e1cbb7d-95ac-4918-bad9-296997b76f76"
+  }, {
+    "intent": "other_speak_to_agent",
+    "condition": "$session.params.Agent_Counter \u003e= 1",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "route",
+        "value": "other_speak_to_agent"
+      }, {
+        "parameter": "utterance",
+        "value": "$request.user-utterance"
+      } ],
+      "nextActionOverride": {
+      
+      }
+    },
+    "name": "ef5e6520-992c-4e35-9589-ae8bee51df6a",
+    "targetPlaybook": "bell_UC_Other"
+  }, {
+    "intent": "other_speak_to_agent",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "To ensure we provide you with the right support, please use short, concise sentences to any prompts you receive." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Pour garantir que nous vous fournissons l'assistance appropriée, veuillez utiliser des phrases courtes et concises pour toutes les invites que vous recevez." ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "Agent_Counter",
+        "value": "$sys.func.ADD(1, $session.params.Agent_Counter)"
+      }, {
+        "parameter": "semantic_void",
+        "value": "$sys.func.ADD(1, $session.params.semantic_void)"
+      } ],
+      "nextActionOverride": {
+      
+      }
+    },
+    "name": "5ad59051-8736-46f4-ac46-a532e79adc71"
+  }, {
+    "intent": "context.unknown",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "$request.generative.response" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "$request.generative.response" ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "generators": [ {
+        "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/3cfc9038-4593-4f67-a3c5-53748446d017",
+        "outputParameter": "$request.generative.response"
+      } ]
+    },
+    "name": "71ddcc62-fa20-4571-bab9-4bd0d32b4764"
+  }, {
+    "intent": "context.repeat",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "$request.generative.repeat_response" ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "identification_repeat",
+        "value": 1
+      } ],
+      "conditionalCases": [ {
+        "cases": [ {
+          "condition": "$session.params.PHN_Invalid_Counter = 0 AND $session.params.Loud_Counter \u003c 5 AND $session.params.CPM_Invalid_Counter = 0 AND $session.params.PHN_Incorrect_Counter = 0 AND $session.params.CIRN != null",
+          "caseContent": [ {
+            "message": {
+              "text": {
+                "text": [ "\u003cspeak\u003eThat was \u003cprosody rate=\"slow\"\u003e\u003csay-as interpret-as='telephone'\u003e$session.params.CIRN\u003c/say-as\u003e\u003c/prosody\u003e, right?\u003c/speak\u003e" ]
+              },
+              "languageCode": "en"
+            }
+          } ]
+        }, {
+          "condition": "$session.params.PHN_Invalid_Counter = 0 AND $session.params.Loud_Counter \u003c 5 AND $session.params.CPM_Invalid_Counter = 0 AND $session.params.PHN_Incorrect_Counter = 0 AND $session.params.BAN != null",
+          "caseContent": [ {
+            "message": {
+              "text": {
+                "text": [ "\u003cspeak\u003eThat was \u003cprosody rate=\"slow\"\u003e\u003csay-as interpret-as='telephone'\u003e$session.params.BAN\u003c/say-as\u003e\u003c/prosody\u003e, right?\u003c/speak\u003e" ]
+              },
+              "languageCode": "en"
+            }
+          } ]
+        }, {
+          "condition": "$session.params.PHN_Invalid_Counter = 0 AND $session.params.Loud_Counter \u003c 5 AND $session.params.CPM_Invalid_Counter \u003e= 1 AND $session.params.PHN_Incorrect_Counter = 0 AND $session.params.CIRN != null AND $session.params.clid != $session.params.CIRN",
+          "caseContent": [ {
+            "message": {
+              "text": {
+                "text": [ "\u003cspeak\u003eThat was \u003cprosody rate=\"slow\"\u003e\u003csay-as interpret-as='telephone'\u003e$session.params.CIRN\u003c/say-as\u003e\u003c/prosody\u003e, right?\u003c/speak\u003e" ]
+              },
+              "languageCode": "en"
+            }
+          } ]
+        }, {
+          "condition": "$session.params.Loud_Counter \u003c 5 AND $session.params.PHN_Incorrect_Counter = 0 AND $session.params.PHN_Invalid_Counter = 0 AND $session.params.CPM_Invalid_Counter = 1 AND $session.params.clid != $session.params.CIRN",
+          "caseContent": [ {
+            "message": {
+              "text": {
+                "text": [ "\u003cspeak\u003eThat was \u003cprosody rate=\"slow\"\u003e\u003csay-as interpretas='telephone'\u003e$session.params.BAN\u003c/say-as\u003e\u003c/prosody\u003e, right?\u003c/speak\u003e" ]
+              },
+              "languageCode": "en"
+            }
+          } ]
+        }, {
+          "caseContent": [ {
+            "message": {
+              "text": {
+                "text": [ "$request.generative.repeat_response" ]
+              },
+              "languageCode": "en"
+            }
+          } ]
+        } ]
+      } ],
+      "generators": [ {
+        "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/d2573b7b-849d-43d3-8c64-867837bd84d2",
+        "inputParameters": [ {
+          "key": "request-last-agent-utterance",
+          "value": "$request.last-agent-utterance"
+        } ],
+        "outputParameter": "$request.generative.repeat_response"
+      } ],
+      "nextActionOverride": {
+      
+      }
+    },
+    "name": "f208864e-e240-4acf-ad27-25964750126e"
+  }, {
+    "intent": "context.business_account",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "route",
+        "value": "business_account"
+      } ]
+    },
+    "targetFlow": "va_to_ivr_business_id_sales",
+    "name": "07398239-4518-484e-af43-a542550dead1"
+  }, {
+    "condition": "$session.params.NGA = true OR $session.params.NGA = \"true\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "NGA Handling",
+    "name": "5b182675-1959-49d7-a951-ccbee33ee6e9"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "local_noinput_counter",
+        "value": 0
+      }, {
+        "parameter": "local_nomatch_counter",
+        "value": 0
+      }, {
+        "parameter": "aqd_counter",
+        "value": 0
+      }, {
+        "parameter": "Agent_Counter",
+        "value": 0
+      } ]
+    },
+    "name": "4df9ea69-168f-4b08-bd33-c04d794fe84c"
+  }, {
+    "condition": "$session.params.va_ivr_cirn_check = true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "CIRN Collection Check",
+    "name": "53d0b3ee-3fd5-4270-9bc4-cca34b5688c5"
+  }, {
+    "condition": "$session.params.va_ivr_cpm_route = true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "CPM_DB_Check",
+    "name": "8ea73850-47ae-4780-aab3-163626e8e6fe"
+  }, {
+    "condition": "$session.params.BBM = false",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "crn_check",
+        "value": ""
+      } ]
+    },
+    "targetPage": "CIRN Collection Check",
+    "name": "f1341229-9088-40d3-b5ec-372425e1a1ba"
+  }, {
+    "condition": "$session.params.Error_Count \u003e 5",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Seems like you're having some difficulty today. Let's connect you with someone who can help" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "On dirait que vous rencontrez des difficultés aujourd'hui. Mettons-vous en contact avec quelqu'un qui peut vous aider" ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "nextActionOverride": {
+      
+      }
+    },
+    "targetFlow": "bell_aqd",
+    "name": "c490304d-bc45-4bd5-af30-c4a36647161c"
+  }, {
+    "condition": "$session.params.ivr_handoff_identification = true",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I'm having a little trouble locating your account.  Would you please provide your 10-digit phone number again? You can also use your phone's keypad if that's easier. " ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "J'ai de la difficulté à trouver votre compte. Pourriez-vous me redonner le numéro de téléphone de 10 chiffres? Vous pouvez vous servir du clavier de votre téléphone, si vous préférez." ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "CIRN",
+        "value": null
+      }, {
+        "parameter": "bbm_smb_flag",
+        "value": null
+      }, {
+        "parameter": "clid_pass",
+        "value": true
+      } ]
+    },
+    "targetPage": "CIRN Collection Check",
+    "name": "634aa936-4f34-4b1b-b90e-36e44d66d7aa"
+  }, {
+    "condition": "$session.params.event_other_number = \"cirn_identification\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Phone Validation 1",
+    "name": "cb190003-951e-4c79-a2a4-185b1e90219b"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "PHN_Invalid_Counter",
+        "value": 0
+      }, {
+        "parameter": "CPM_Invalid_Counter",
+        "value": 0
+      }, {
+        "parameter": "Loud_Counter",
+        "value": 0
+      }, {
+        "parameter": "More_Time_Counter",
+        "value": 0
+      }, {
+        "parameter": "Mistake_Counter",
+        "value": 0
+      }, {
+        "parameter": "PHN_Incorrect_Counter",
+        "value": 0
+      }, {
+        "parameter": "No_Input_Counter",
+        "value": 0
+      }, {
+        "parameter": "No_Match_Counter",
+        "value": 0
+      }, {
+        "parameter": "semantic_void",
+        "value": 0
+      }, {
+        "parameter": "dwt_counter",
+        "value": 0
+      } ],
+      "nextActionOverride": {
+      
+      }
+    },
+    "targetPage": "Route_By_Identification_Status",
+    "name": "cc7ff01c-a962-4718-a984-b9cfe5bcac8e"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Global Error Handling",
+    "event": "sys.no-match-default",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "global_error_counter ",
+        "value": "$sys.func.ADD($session.params.global_error_counter,1)"
+      }, {
+        "parameter": "local_trigger",
+        "value": "no_match"
+      }, {
+        "parameter": "local_nomatch_counter",
+        "value": "$sys.func.ADD($session.params.local_nomatch_counter,1)"
+      } ],
+      "nextActionOverride": {
+      
+      }
+    },
+    "name": "05969491-126f-4fce-8588-477d17e8436c"
+  }, {
+    "targetPage": "Global Error Handling",
+    "event": "sys.no-input-default",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "global_error_counter",
+        "value": "$sys.func.ADD($session.params.global_error_counter,1)"
+      }, {
+        "parameter": "local_trigger",
+        "value": "no_input"
+      }, {
+        "parameter": "local_noinput_counter",
+        "value": "$sys.func.ADD($session.params.local_noinput_counter,1)"
+      } ],
+      "nextActionOverride": {
+      
+      }
+    },
+    "name": "719b9aca-920f-4b29-bc25-7fe617ff575d"
+  }, {
+    "targetPage": "End Session",
+    "event": "wrapup",
+    "triggerFulfillment": {
+    
+    },
+    "name": "fe3b491d-71d8-45f4-a556-ac8e7a014cd2"
+  } ],
+  "nluSettings": {
+    "modelType": "MODEL_TYPE_CUSTOM",
+    "classificationThreshold": 0.30000001,
+    "modelTrainingMode": "MODEL_TRAINING_MODE_MANUAL",
+    "multiIntentSettings": {
+    
+    }
+  },
+  "advancedSettings": {
+    "enabled": true,
+    "speechAdaptationSettings": {
+      "enableManualSpeechAdaptation": true,
+      "biasingPhraseSets": [ {
+        "biasingPhrases": [ {
+          "value": "Wi-Fi pods",
+          "boost": 20
+        }, {
+          "value": "Wi-Fi pod",
+          "boost": 20
+        }, {
+          "value": "new Wi-Fi pods",
+          "boost": 20
+        }, {
+          "value": "I want to get new Wi-Fi pods",
+          "boost": 15
+        }, {
+          "value": "I want to order Wi-Fi pods",
+          "boost": 15
+        }, {
+          "value": "order Wi-Fi pods",
+          "boost": 15
+        }, {
+          "value": "buy Wi-Fi pods",
+          "boost": 15
+        }, {
+          "value": "purchase Wi-Fi-pods",
+          "boost": 15
+        }, {
+          "value": "get new Wi-Fi pods",
+          "boost": 15
+        }, {
+          "value": "order new Wi-Fi pods",
+          "boost": 15
+        }, {
+          "value": "buy new Wi-Fi pods",
+          "boost": 15
+        }, {
+          "value": "purchase new Wi-Fi pods",
+          "boost": 15
+        } ],
+        "displayName": "Wi-Fi_pods"
+      }, {
+        "biasingPhrases": [ {
+          "value": "do not",
+          "boost": 20
+        }, {
+          "value": "DO NOT",
+          "boost": 20
+        }, {
+          "value": "I do not want to tell you",
+          "boost": 20
+        }, {
+          "value": "I do not want to tell",
+          "boost": 20
+        } ],
+        "displayName": "do-not"
+      }, {
+        "biasingPhrases": [ {
+          "value": "Bell Aliant account",
+          "boost": 15
+        }, {
+          "value": "bell aliant ",
+          "boost": 10
+        }, {
+          "value": "my Bell Aliant account",
+          "boost": 5
+        } ],
+        "displayName": "Bell-Aliant"
+      }, {
+        "biasingPhrases": [ {
+          "value": "new plan",
+          "boost": 5
+        }, {
+          "value": "want new plan",
+          "boost": 5
+        }, {
+          "value": "your plan",
+          "boost": 2
+        } ],
+        "displayName": "plan"
+      } ]
+    }
+  },
+  "transitionRouteGroups": [ "HI_account (Before Deleting/Editing/Removing Ask Vamshi)", "HI_billing (Before Deleting/Editing/Removing Ask Vamshi)", "HI_disconnect (Before Deleting/Editing/Removing Ask Vamshi)", "HI_equipment (Before Deleting/Editing/Removing Ask Vamshi)", "HI_faq (Before Deleting/Editing/Removing Ask Vamshi)", "HI_other (Before Deleting/Editing/Removing Ask Vamshi)", "HI_payment (Before Deleting/Editing/Removing Ask Vamshi)", "HI_service (Before Deleting/Editing/Removing Ask Vamshi)", "HI_techsupport (Before Deleting/Editing/Removing Ask Vamshi)" ],
+  "nluSettingsList": [ {
+    "modelType": "MODEL_TYPE_CUSTOM",
+    "classificationThreshold": 0.40000001,
+    "modelTrainingMode": "MODEL_TRAINING_MODE_MANUAL",
+    "multiIntentSettings": {
+    
+    },
+    "languageCode": "en"
+  }, {
+    "modelType": "MODEL_TYPE_CUSTOM",
+    "classificationThreshold": 0.30000001,
+    "modelTrainingMode": "MODEL_TRAINING_MODE_MANUAL",
+    "multiIntentSettings": {
+    
+    },
+    "languageCode": "fr-ca"
+  } ],
+  "agentTransitionRouteGroups": [ "HI_sales" ],
+  "inputParameterDefinitions": [ {
+    "name": "caller_channel",
+    "description": "caller channel",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "NUMBER"
+      }
+    },
+    "parameterType": {
+      "name": "caller_channel",
+      "openapiJsonSchema": {
+        "type": "number"
+      }
+    }
+  }, {
+    "name": "CLID",
+    "description": "CLID",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "STRING"
+      }
+    },
+    "parameterType": {
+      "name": "CLID",
+      "openapiJsonSchema": {
+        "type": "string"
+      }
+    }
+  }, {
+    "name": "identification_status",
+    "description": "identification_status",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "STRING"
+      }
+    },
+    "parameterType": {
+      "name": "identification_status",
+      "openapiJsonSchema": {
+        "type": "string"
+      }
+    }
+  }, {
+    "name": "language",
+    "description": "Language",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "STRING"
+      }
+    },
+    "parameterType": {
+      "name": "language",
+      "openapiJsonSchema": {
+        "type": "string"
+      }
+    }
+  }, {
+    "name": "province",
+    "description": "province",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "STRING"
+      }
+    },
+    "parameterType": {
+      "name": "province",
+      "openapiJsonSchema": {
+        "type": "string"
+      }
+    }
+  }, {
+    "name": "lob",
+    "description": "lob",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "STRING"
+      }
+    },
+    "parameterType": {
+      "name": "lob",
+      "openapiJsonSchema": {
+        "type": "string"
+      }
+    }
+  }, {
+    "name": "route",
+    "description": "route",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "STRING"
+      }
+    },
+    "parameterType": {
+      "name": "route",
+      "openapiJsonSchema": {
+        "type": "string"
+      }
+    }
+  }, {
+    "name": "global_error_counter",
+    "description": "Counts the total number of no matches and no inputs given by the customer throughout the conversation",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "NUMBER"
+      }
+    },
+    "parameterType": {
+      "name": "global_error_counter",
+      "openapiJsonSchema": {
+        "type": "number"
+      }
+    }
+  }, {
+    "name": "id_global_error",
+    "description": "id_global_error",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "NUMBER"
+      }
+    },
+    "parameterType": {
+      "name": "id_global_error",
+      "openapiJsonSchema": {
+        "type": "number"
+      }
+    }
+  } ],
+  "outputParameterDefinitions": [ {
+    "name": "CIRN",
+    "description": "Call In Regards Number (CIRN)",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "NUMBER"
+      }
+    },
+    "parameterType": {
+      "name": "CIRN",
+      "openapiJsonSchema": {
+        "type": "number"
+      }
+    }
+  }, {
+    "name": "identification_status",
+    "description": "identification_status",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "STRING"
+      }
+    },
+    "parameterType": {
+      "name": "identification_status",
+      "openapiJsonSchema": {
+        "type": "string"
+      }
+    }
+  }, {
+    "name": "caller_channel",
+    "description": "caller_channel",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "STRING"
+      }
+    },
+    "parameterType": {
+      "name": "caller_channel",
+      "openapiJsonSchema": {
+        "type": "string"
+      }
+    }
+  }, {
+    "name": "line_type",
+    "description": "Line Type",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "STRING"
+      }
+    },
+    "parameterType": {
+      "name": "line_type",
+      "openapiJsonSchema": {
+        "type": "string"
+      }
+    }
+  }, {
+    "name": "language",
+    "description": "Language",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "STRING"
+      }
+    },
+    "parameterType": {
+      "name": "language",
+      "openapiJsonSchema": {
+        "type": "string"
+      }
+    }
+  }, {
+    "name": "province",
+    "description": "province",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "STRING"
+      }
+    },
+    "parameterType": {
+      "name": "province",
+      "openapiJsonSchema": {
+        "type": "string"
+      }
+    }
+  }, {
+    "name": "lob",
+    "description": "lob",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "STRING"
+      }
+    },
+    "parameterType": {
+      "name": "lob",
+      "openapiJsonSchema": {
+        "type": "string"
+      }
+    }
+  }, {
+    "name": "route",
+    "description": "route",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "STRING"
+      }
+    },
+    "parameterType": {
+      "name": "route",
+      "openapiJsonSchema": {
+        "type": "string"
+      }
+    }
+  }, {
+    "name": "global_error_counter",
+    "description": "Counts the total number of no matches and no inputs given by the customer throughout the conversation",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "NUMBER"
+      }
+    },
+    "parameterType": {
+      "name": "global_error_counter",
+      "openapiJsonSchema": {
+        "type": "number"
+      }
+    }
+  } ],
+  "multiLanguageSettings": {
+  
+  }
+}

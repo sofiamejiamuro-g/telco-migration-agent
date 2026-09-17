@@ -1,0 +1,83 @@
+{
+  "name": "6b339b50-c650-4a9d-aa9a-f5e32b044975",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "language": "en"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Sure, let me help you with that.\n\nWhich service are you inquiring about?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "I don't know"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "In order to assist you better"
+    }
+  }, {
+    "playbookInvocation": {
+      "playbook": "bell_uc_ask_LOB",
+      "playbookInput": {
+        "precedingConversationSummary": "User lob is to be captured",
+        "actionParameters": {
+          "language": "en",
+          "route": "sales_plan_inquiry"
+        }
+      },
+      "playbookOutput": {
+        "executionSummary": "User's lob is captured and stored in parameter {lob}",
+        "actionParameters": {
+          "langauge": "en",
+          "lob": "tv",
+          "route": "sales_plans_inquiry"
+        }
+      },
+      "playbookState": "OUTPUT_STATE_OK"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_aqd",
+      "inputActionParameters": {
+        "language": "en",
+        "lob": "tv"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customers want to know about different plans or compare different plans that Bell has and lob identified as \" Internet\" OR \"TV\" OR \"Homephone\"",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "New",
+      "language": "en",
+      "province": "ROC",
+      "route": "sales_plans_inquiry",
+      "utterance": "I need a plan"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "If lob is not mentioned, ask for it and route to bell_uc_ask_LOB if user does not mention it, \nWhen province is anything other than ON and QC or is null or empty, ask user for province, extract in {province} parameter and further route based on province",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "lob": "tv",
+      "province": "ROC"
+    }
+  },
+  "displayName": "sales plans inquiry- ID Fail, customer_type-new- no province is identified-ROC(tv) LOb (Not identified)",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 543,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

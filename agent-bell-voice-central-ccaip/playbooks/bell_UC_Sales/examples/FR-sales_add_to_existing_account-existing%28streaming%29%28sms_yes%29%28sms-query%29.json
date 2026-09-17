@@ -1,0 +1,77 @@
+{
+  "name": "424b5737-5701-4501-814b-17604fb67e4e",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+        "language": "fr-ca"
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Bien sûr, laissez-moi vous aider.\nÀ propos de quel service communiquez-vous avec nous?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "crave"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Je vais envoyer un texto à l’appareil au moyen duquel vous appelez, afin que vous puissiez consulter toutes les options de lecture en continu. Est-ce que ça vous convient?\n\n"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Le lien expirera-t-il ?"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Non, le lien n'expirera pas. Cela vous convient-il de recevoir ce SMS ?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "oui"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "fr-ca",
+        "line_type": "New",
+        "sms_content": "Bell: Vous pouvez visiter subscription.bell.ca/client pour vous abonner à un service de diffusion en continu dans l'appli MonBell. ( bell.ca/apropos )",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+        "language": "fr-ca"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "customer wants to add streaming services like crave,Netflix,Disney,basic, premium and also more information about SMS",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "fr-ca",
+      "line_type": "New",
+      "route": "sales_add_to_existing_account",
+      "utterance": "Ajouter une nouvelle ligne pour les enfants"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "customer is asked about sms and is agreed to receive the sms",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca",
+      "line_type": "New",
+      "streaming_services": "crave"
+    }
+  },
+  "displayName": "FR-sales_add_to_existing_account-existing(streaming)(sms_yes)(sms-query)",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 529,
+  "languageCode": "en"
+}

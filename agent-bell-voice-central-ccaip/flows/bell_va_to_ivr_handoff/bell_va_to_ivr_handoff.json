@@ -1,0 +1,375 @@
+{
+  "name": "7236071c-1553-4217-a18d-0a64a4737a9a",
+  "displayName": "bell_va_to_ivr_handoff",
+  "transitionRoutes": [ {
+    "intent": "global_events_full_startover",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "event_type",
+        "value": "full start over"
+      } ]
+    },
+    "targetFlow": "Default Start Flow",
+    "name": "c10b66f0-907d-4cad-a80a-66cc24c5c8bb"
+  }, {
+    "intent": "global_events_partial_start_over",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "event_type",
+        "value": "partial start over"
+      } ]
+    },
+    "targetFlow": "Default Start Flow",
+    "name": "424edfda-7965-4019-8cc8-ba883e348747"
+  }, {
+    "intent": "context.repeat",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "$request.generative.response" ]
+        },
+        "languageCode": "en"
+      } ],
+      "generators": [ {
+        "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/d2573b7b-849d-43d3-8c64-867837bd84d2",
+        "inputParameters": [ {
+          "key": "request-last-agent-utterance",
+          "value": "$request.last-agent-utterance"
+        } ],
+        "outputParameter": "$request.generative.response"
+      } ]
+    },
+    "name": "12bd35fc-7cce-48cf-b1ce-c3c807ffb957"
+  }, {
+    "intent": "other_speak_to_agent",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_aqd",
+    "name": "0a3776c1-4525-4d6c-b5de-0f59ac0ab4ea"
+  }, {
+    "condition": "$session.params.route = null",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "route",
+        "value": "other_speak_to_agent"
+      }, {
+        "parameter": "intent",
+        "value": "other_speak_to_agent"
+      } ]
+    },
+    "name": "9f548153-24cd-4529-b8e8-f56ce5c9aea2"
+  }, {
+    "condition": "$session.params.intent = \"\\\\$session\\.params\\.route\" OR $session.params.intent = \"$session\\.params\\.route\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "route",
+        "value": "other_speak_to_agent"
+      }, {
+        "parameter": "intent",
+        "value": "other_speak_to_agent"
+      } ]
+    },
+    "name": "0432e4d0-7e5b-4e16-b04c-f5b913cbd6e2"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "ivr_handoff",
+        "value": true
+      }, {
+        "parameter": "local_noinput_counter",
+        "value": 0
+      }, {
+        "parameter": "local_nomatch_counter",
+        "value": 0
+      } ]
+    },
+    "name": "817c90d4-3f72-49a5-811a-cfd0a6402973"
+  }, {
+    "condition": "$session.params.business_type = \"CCC\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "CX Check for Business Account",
+    "name": "f57c933e-38e2-45c1-af65-d1b8f95ad2c7"
+  }, {
+    "condition": "$session.params.onebillindicator = \"M\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Check Intent type ATL/MTS",
+    "name": "fd4fbd89-a093-4ccb-a489-c70587ebf83f"
+  }, {
+    "condition": "$session.params.onebillindicator = \"Y\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Check Intent type ATL/MTS",
+    "name": "929b03f2-8502-4552-8980-98b44b7ffc61"
+  }, {
+    "condition": "$session.params.region = \"MTS\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Check LOB",
+    "name": "efdfd9ca-6db8-4e68-85a8-6a7b6ece0002"
+  }, {
+    "condition": "$session.params.region = \"ATL\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Check LOB",
+    "name": "d3503fe3-5ef6-49a8-8028-ddfc1616fa34"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Global Error handling",
+    "event": "sys.no-match-default",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "J'ai du mal à comprendre cette question.", "J'ai mal compris votre demande.", "Je n'ai pas saisi ce que vous avez dit.", "Je crois que je ne vous suis pas.", "Je ne comprends pas de quoi vous me parlez." ]
+        },
+        "languageCode": "fr"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "global_error_counter",
+        "value": "$sys.func.ADD($session.params.global_error_counter,1)"
+      }, {
+        "parameter": "local_trigger",
+        "value": "no_match"
+      }, {
+        "parameter": "local_nomatch_counter",
+        "value": "$sys.func.ADD($session.params.local_nomatch_counter,1)"
+      } ]
+    },
+    "name": "5512a8a1-ce6a-4655-b89e-7766a961445b"
+  }, {
+    "targetPage": "Global Error handling",
+    "event": "sys.no-input-default",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "J'ai du mal à comprendre cette question.", "J'ai mal compris votre demande.", "Je n'ai pas saisi ce que vous avez dit.", "Je crois que je ne vous suis pas.", "Je ne comprends pas de quoi vous me parlez." ]
+        },
+        "languageCode": "fr"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "global_error_counter",
+        "value": "$sys.func.ADD($session.params.global_error_counter,1)"
+      }, {
+        "parameter": "local_trigger",
+        "value": "no_input"
+      }, {
+        "parameter": "local_noinput_counter",
+        "value": "$sys.func.ADD($session.params.local_noinput_counter,1)"
+      } ]
+    },
+    "name": "614673ca-584e-4a8f-913b-44d99ee1bce9"
+  }, {
+    "targetPage": "End Session",
+    "event": "wrapup",
+    "triggerFulfillment": {
+    
+    },
+    "name": "ec86ab70-ddce-4dd6-905d-edabc4d3eb66"
+  } ],
+  "nluSettings": {
+    "modelType": "MODEL_TYPE_CUSTOM",
+    "classificationThreshold": 0.30000001,
+    "modelTrainingMode": "MODEL_TRAINING_MODE_MANUAL"
+  },
+  "advancedSettings": {
+    "enabled": true,
+    "playbackInterruptionSettings": {
+    
+    },
+    "speechAdaptationSettings": {
+      "enableManualSpeechAdaptation": true,
+      "biasingPhraseSets": [ {
+        "biasingPhrases": [ {
+          "value": "Bell Aliant account",
+          "boost": 20
+        }, {
+          "value": "my Bell Aliant account",
+          "boost": 20
+        }, {
+          "value": "the Bell Aliant account",
+          "boost": 20
+        }, {
+          "value": "bell aliant account",
+          "boost": 20
+        }, {
+          "value": "bell aliant ",
+          "boost": 20
+        } ],
+        "displayName": "Bell-Aliant"
+      }, {
+        "biasingPhrases": [ {
+          "value": "Fibe TV",
+          "boost": 20
+        }, {
+          "value": "Fibe television",
+          "boost": 10
+        } ],
+        "displayName": "fibe_tv"
+      } ]
+    }
+  },
+  "nluSettingsList": [ {
+    "modelType": "MODEL_TYPE_CUSTOM",
+    "classificationThreshold": 0.30000001,
+    "modelTrainingMode": "MODEL_TRAINING_MODE_MANUAL",
+    "languageCode": "fr-ca"
+  }, {
+    "modelType": "MODEL_TYPE_CUSTOM",
+    "classificationThreshold": 0.30000001,
+    "modelTrainingMode": "MODEL_TRAINING_MODE_MANUAL",
+    "languageCode": "en"
+  } ],
+  "inputParameterDefinitions": [ {
+    "name": "language",
+    "description": "language",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "STRING"
+      }
+    },
+    "parameterType": {
+      "name": "language",
+      "openapiJsonSchema": {
+        "type": "string"
+      }
+    }
+  }, {
+    "name": "lob",
+    "description": "lob",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "STRING"
+      }
+    },
+    "parameterType": {
+      "name": "lob",
+      "openapiJsonSchema": {
+        "type": "string"
+      }
+    }
+  }, {
+    "name": "tv_check",
+    "description": "tv_check",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "BOOLEAN"
+      }
+    },
+    "parameterType": {
+      "name": "tv_check",
+      "openapiJsonSchema": {
+        "type": "boolean"
+      }
+    }
+  }, {
+    "name": "tv_sub_type",
+    "description": "tv_sub_type",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "STRING"
+      }
+    },
+    "parameterType": {
+      "name": "tv_sub_type",
+      "openapiJsonSchema": {
+        "type": "string"
+      }
+    }
+  }, {
+    "name": "global_error_counter",
+    "description": "Counts the total number of no matches and no inputs given by the customer throughout the conversation",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "NUMBER"
+      }
+    },
+    "parameterType": {
+      "name": "global_error_counter",
+      "openapiJsonSchema": {
+        "type": "number"
+      }
+    }
+  } ],
+  "outputParameterDefinitions": [ {
+    "name": "language",
+    "description": "language",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "STRING"
+      }
+    },
+    "parameterType": {
+      "name": "language",
+      "openapiJsonSchema": {
+        "type": "string"
+      }
+    }
+  }, {
+    "name": "lob",
+    "description": "lob",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "STRING"
+      }
+    },
+    "parameterType": {
+      "name": "lob",
+      "openapiJsonSchema": {
+        "type": "string"
+      }
+    }
+  }, {
+    "name": "tv_check",
+    "description": "tv_check",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "STRING"
+      }
+    },
+    "parameterType": {
+      "name": "tv_check",
+      "openapiJsonSchema": {
+        "type": "string"
+      }
+    }
+  }, {
+    "name": "tv_sub_type",
+    "description": "tv_sub_type",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "STRING"
+      }
+    },
+    "parameterType": {
+      "name": "tv_sub_type",
+      "openapiJsonSchema": {
+        "type": "string"
+      }
+    }
+  }, {
+    "name": "global_error_counter",
+    "description": "Counts the total number of no matches and no inputs given by the customer throughout the conversation",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "NUMBER"
+      }
+    },
+    "parameterType": {
+      "name": "global_error_counter",
+      "openapiJsonSchema": {
+        "type": "number"
+      }
+    }
+  } ],
+  "multiLanguageSettings": {
+  
+  }
+}

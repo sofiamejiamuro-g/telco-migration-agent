@@ -1,0 +1,51 @@
+{
+  "name": "9f2b332d-e120-4269-975e-f34695e39fed",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "brand": "bell",
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_aqd",
+      "inputActionParameters": {
+        "device_type": "Smart Watch",
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+        "language": "fr-ca"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "New customer wants to order a device at bell AND {device_type} is \"Smart Watch\"",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "New",
+      "device_type": "Smart Watch",
+      "identification_status": "Fail",
+      "language": "fr-ca",
+      "route": "sales_order_device",
+      "utterance": "I want to get a smart watch please"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "We need to check the result from identification flow from the webhook NPANXX, if it is \"ON\" then call bell_aqd flow",
+    "actionParameters": {
+      "language": "fr-ca",
+      "lob": "Smart Watch"
+    }
+  },
+  "displayName": "FR- sales order device- ID fail, smart watch-(captured-nlu)",
+  "retrievalStrategy": "NEVER",
+  "tokenCount": 320,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

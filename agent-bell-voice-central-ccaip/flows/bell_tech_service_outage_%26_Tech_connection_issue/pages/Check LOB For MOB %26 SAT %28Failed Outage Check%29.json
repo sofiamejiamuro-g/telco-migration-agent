@@ -1,0 +1,41 @@
+{
+  "name": "13d22048-054f-4e85-814d-59c8d5f9d399",
+  "displayName": "Check LOB For MOB \u0026 SAT (Failed Outage Check)",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.route = tech_connection_issue AND ($session.params.lob = Internet OR $session.params.lob = internet OR $session.params.lob = INTERNET OR $session.params.lob = Homephone OR $session.params.tv_sub_type = fibe OR $session.params.tv_sub_type = \"fibe tv app\") AND ($session.params.province_list = \"ON\" OR $session.params.province_list = \"QC\")",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_VR",
+    "name": "92bb9620-e84b-492c-b423-ccaf49968e75"
+  }, {
+    "condition": "$session.params.route = tech_connection_issue AND ($session.params.lob = Mobility OR $session.params.lob = mobility OR $session.params.lob = MOBILITY OR $session.params.tv_sub_type = sat) AND ($session.params.province != \"ON\" AND $session.params.province != \"QC\")",
+    "triggerFulfillment": {
+    
+    },
+    "name": "3d3a3adf-a6f6-4acb-9f05-77ad0ddb58be",
+    "targetPlaybook": "Bell_UC_Technical_Support_Infobot"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "13d22048-054f-4e85-814d-59c8d5f9d399"
+      }, {
+        "parameter": "flow_id",
+        "value": "94d32e37-496f-4fa3-81e8-18fd95281a52"
+      }, {
+        "parameter": "page_name",
+        "value": "Check LOB For MOB \u0026 SAT (Failed Outage Check)"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

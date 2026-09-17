@@ -1,0 +1,80 @@
+{
+  "name": "d68a5aea-69f2-4a04-ac06-de348d16542d",
+  "displayName": "Consolidated Customers",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "returnPartialResponses": true
+  },
+  "transitionRoutes": [ {
+    "condition": "($session.params.accountType = \"I\" AND ($session.params.accountSubType = \"R\" OR $session.params.accountSubType = \"P\" OR $session.params.accountSubType = \"N\" OR $session.params.accountSubType = \"B\" OR $session.params.accountSubType = \"5\" OR $session.params.accountSubType = \"E\")) OR ($session.params.accountType = \"C\" AND ($session.params.accountSubType = \"P\" OR $session.params.accountSubType = \"V\" OR $session.params.accountSubType = \"T\")) OR ($session.params.oneBillIndicator = \"M\" OR $session.params.oneBillIndicator = \"Y\")",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Province Lookup",
+    "name": "3af1e252-024c-42dd-b0ef-d18748787b43"
+  }, {
+    "condition": "$session.params.accountType != 'I' AND $session.params.accountType != 'C'",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Unfortunately, this self serve option is not available for your account" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "targetFlow": "bell_Feedback",
+    "name": "a27e9bf9-085a-4f40-bdb0-444495cec283"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_aqd",
+    "name": "29795ea5-9840-4195-9df7-29c56a2985f2"
+  } ],
+  "eventHandlers": [ {
+    "targetFlow": "bell_aqd",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+    
+    },
+    "name": "7f78eb2e-c0e9-49bd-82a1-854bb406f2c1"
+  }, {
+    "targetFlow": "bell_aqd",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+    
+    },
+    "name": "baa45137-fc99-47c2-8efe-590d4a9c5c60"
+  }, {
+    "targetFlow": "bell_aqd",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+    
+    },
+    "name": "df325142-ddf6-48c6-81d4-09e533380996"
+  }, {
+    "targetFlow": "bell_aqd",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+    
+    },
+    "name": "f4894456-6da4-46b8-819f-8490350fdb7c"
+  }, {
+    "targetFlow": "bell_aqd",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+    
+    },
+    "name": "91428b04-7516-4f4f-bf3e-c3e23f723ba2"
+  }, {
+    "targetFlow": "bell_aqd",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+    
+    },
+    "name": "055fa156-a31c-498e-a9a1-22b81788a5b4"
+  } ]
+}

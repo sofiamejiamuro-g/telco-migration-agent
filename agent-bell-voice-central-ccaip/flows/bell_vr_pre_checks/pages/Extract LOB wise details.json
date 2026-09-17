@@ -1,0 +1,69 @@
+{
+  "name": "f4367515-aa5c-494d-b383-fe3ad6f259d2",
+  "displayName": "Extract LOB wise details",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "setParameterActions": [ {
+      "parameter": "account_details_payload",
+      "value": "$session.params.billing_account_info_list[0]"
+    }, {
+      "parameter": "multiple_services",
+      "value": false
+    }, {
+      "parameter": "FTTH_home",
+      "value": false
+    }, {
+      "parameter": "calling_from_landline",
+      "value": "false"
+    }, {
+      "parameter": "account_details_payload",
+      "value": "$sys.func.TO_OBJECT($session.params.account_details_payload)"
+    }, {
+      "parameter": "p_clean_length",
+      "value": "$sys.func.MINUS($sys.func.LEN($sys.func.TO_TEXT($session.params.clid)), 2)"
+    }, {
+      "parameter": "search_clid",
+      "value": "$sys.func.MID($sys.func.TO_TEXT($session.params.clid), 3, $session.params.p_clean_length)"
+    }, {
+      "parameter": "callback_number",
+      "value": "$session.params.calling_number"
+    }, {
+      "parameter": "caller_id",
+      "value": "$session.params.clid"
+    }, {
+      "parameter": "preferred_contact_method",
+      "value": "$sys.func.LOWER($session.params.type)"
+    }, {
+      "parameter": "search_clid",
+      "value": "$session.params.clid"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "service_homephone",
+        "value": "$sys.func.UNIQUE($sys.func.FILTER(\"$session.params.account_details_payload\", \"$..services[?(@.service_type in ['HOMEPHONE', 'WIRELINE'])].service_id\"))"
+      }, {
+        "parameter": "service_tv",
+        "value": "$sys.func.UNIQUE($sys.func.FILTER(\"$session.params.account_details_payload\", \"$..services[?(@.service_type == 'TV')].service_id\"))"
+      }, {
+        "parameter": "service_internet",
+        "value": "$sys.func.UNIQUE($sys.func.FILTER(\"$session.params.account_details_payload\", \"$..services[?(@.service_type == 'INTERNET')].service_id\"))"
+      }, {
+        "parameter": "n_service_homephone",
+        "value": "$sys.func.COUNT($session.params.service_homephone)"
+      }, {
+        "parameter": "n_service_tv",
+        "value": "$sys.func.COUNT($session.params.service_tv)"
+      }, {
+        "parameter": "n_service_internet",
+        "value": "$sys.func.COUNT($session.params.service_internet)"
+      } ]
+    },
+    "targetPage": "Multiple service id",
+    "name": "fc207d22-522f-46aa-914d-963c58df9303"
+  } ]
+}

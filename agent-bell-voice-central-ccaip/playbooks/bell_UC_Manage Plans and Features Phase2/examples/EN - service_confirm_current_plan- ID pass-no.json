@@ -1,0 +1,73 @@
+{
+  "name": "332be485-c271-482a-9150-9d3793a53b8e",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "brand": "bell",
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "I'll send a text to the device you're calling from, so that you can easily view and manage your plans in MyBell, Is that alright?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "no"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_get_sdl_mapping_url",
+      "inputActionParameters": {
+        "language": "en"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "No problem at all. For any other questions you can always visit our website at {faq_link}"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_Feedback",
+      "inputActionParameters": {
+      
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "customer wants to know about the details of their current subscription",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "Existing",
+      "faq_link": "bell.ca/support",
+      "identification_status": "Pass",
+      "language": "en",
+      "route": "service_confirm_current_plan",
+      "utterance": "I want to know what i'm subscribed for"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Ask if user wants to receives the sms, if customer disagreed then call the sdl_mapping flow and call feedback",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "en"
+    }
+  },
+  "displayName": "EN - service_confirm_current_plan- ID pass-no",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 443,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

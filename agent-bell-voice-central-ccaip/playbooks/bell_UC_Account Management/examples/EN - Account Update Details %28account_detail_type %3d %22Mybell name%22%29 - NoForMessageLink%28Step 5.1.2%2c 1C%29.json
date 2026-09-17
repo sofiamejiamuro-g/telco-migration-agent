@@ -1,0 +1,69 @@
+{
+  "name": "f1a0a15e-9e3c-473f-816c-e26599bee100",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Just a reminder: changing your name in MyBell does not affect your billing information. If you need to change the name on your bill due to a legal name change, or if you would like to transfer account ownership, you will need to talk with an agent. Are you looking to change your MyBell display name or the name on your bill?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Mybell name"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "I'll send a text to the device you're calling from, so that you can change the display name for MyBell. Is that alright?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "No"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_get_sdl_mapping_url",
+      "inputActionParameters": {
+        "brand": "bell",
+        "language": "en",
+        "route": "account_update_details"
+      },
+      "outputActionParameters": {
+        "brand": "bell",
+        "language": "en"
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "No problem at all. For any other questions you can always visit our website at {faq_link}."
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_Feedback",
+      "inputActionParameters": {
+        "brand": "bell",
+        "language": "en"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "The customer wants to make update to their account information - including updating name, emails, address, billing address.",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "route": "account_update_details",
+      "utterance": "I want a name change"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "The {update_detail_type} parameter is empty so we prompt the user with appropriate response then the customer says they want to update their Mybell name so we prompt the user with the message the user declines to receive a message on their device so we route them to bell_get_sdl_mapping_url flow prompt the user with appropriate {faq_link} prompt and then route then user to bell_Feedback flow.",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en"
+    }
+  },
+  "displayName": "EN - Account Update Details (account_detail_type = \"Mybell name\") - NoForMessageLink(Step 5.1.2, 1C)",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 519,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

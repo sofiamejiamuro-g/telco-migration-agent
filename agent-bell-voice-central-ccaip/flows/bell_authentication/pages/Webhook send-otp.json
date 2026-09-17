@@ -1,0 +1,102 @@
+{
+  "name": "b6c040e4-5914-4ea2-bf24-0a3e3ae239b6",
+  "displayName": "Webhook send-otp",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "v1/customer-authentication#send-otp",
+    "tag": "send-otp",
+    "setParameterActions": [ {
+      "parameter": "brand",
+      "value": "$session.params.brand"
+    }, {
+      "parameter": "callKey",
+      "value": "$session.params.auth_options_response.callKey"
+    }, {
+      "parameter": "otp_tns",
+      "value": [ "$session.params.auth_options_response.otp_tns" ]
+    }, {
+      "parameter": "skip_validation",
+      "value": "True"
+    } ],
+    "nextActionOverride": {
+    
+    }
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.webhook_success = \"True\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Once you receive the verification code by text, please say it back to me or enter it on your phone keypad." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Quand vous aurez reçu le code par message texte, vous pourrez me le répéter ou l’entrer sur votre téléphone." ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "webhook_success",
+        "value": null
+      }, {
+        "parameter": "local_noinput_counter",
+        "value": 0
+      } ]
+    },
+    "targetPage": "Trigger_OTP",
+    "name": "a65ca1b3-049b-4a5c-bbc7-96177858c963"
+  }, {
+    "condition": "True",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook send-otp Error",
+    "name": "0dc4f190-5562-4ece-b856-378f07656cff"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Webhook send-otp Error",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+    
+    },
+    "name": "c3a043d1-abd7-40c3-b839-451fa92b5ddd"
+  }, {
+    "targetPage": "Webhook send-otp Error",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+    
+    },
+    "name": "ee43eae4-ecbe-4222-8f3f-259be70b95db"
+  }, {
+    "targetPage": "Webhook send-otp Error",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+    
+    },
+    "name": "eb19b2cf-2152-4bd4-be83-f4dba1f2e869"
+  }, {
+    "targetPage": "Webhook send-otp Error",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+    
+    },
+    "name": "b6a76d37-60ae-4150-9dab-e5771e61f972"
+  }, {
+    "targetPage": "Webhook send-otp Error",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+    
+    },
+    "name": "d880d3a7-fd73-4939-a989-ed4fd5bf38ea"
+  }, {
+    "targetPage": "Webhook send-otp Error",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+    
+    },
+    "name": "11c8c199-7ecf-4fd7-b902-d39c34c273f2"
+  } ]
+}

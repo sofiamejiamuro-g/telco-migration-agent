@@ -1,0 +1,113 @@
+{
+  "name": "5512e5f7-86a4-4926-9c85-ca370bd7a702",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "language": "en"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Sure, let me help you with that.\nWhich service are you inquiring about?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "the sky is blue"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_global_error_count_check",
+      "inputActionParameters": {
+        "global_error_counter": "1"
+      },
+      "outputActionParameters": {
+        "global_error_counter": "2"
+      }
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_global_error_count_check",
+      "inputActionParameters": {
+        "global_error_counter": "1"
+      },
+      "outputActionParameters": {
+        "global_error_counter": "2"
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "I'm unable to provide information on that subject. However, I'd be glad to assist with any inquiries you may have regarding Bell's products and services."
+    }
+  }, {
+    "userUtterance": {
+      "text": "canada is great"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_global_error_count_check",
+      "inputActionParameters": {
+        "global_error_counter": "2"
+      },
+      "outputActionParameters": {
+        "global_error_counter": "3"
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "I apologize, I'm still having difficulty understanding your request. To best assist you, could you please rephrase your question or provide more detail about what you're looking for regarding Bell's products and services?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "canada is the second largest country in the world"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_global_error_count_check",
+      "inputActionParameters": {
+        "global_error_counter": "3"
+      },
+      "outputActionParameters": {
+        "global_error_counter": "4"
+      }
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_No_Match_3",
+      "inputActionParameters": {
+      
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customers want to know about different plans or compare different plans that Bell has and Previous conversation not relevant",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "New",
+      "global_error_counter": "1",
+      "language": "en",
+      "route": "sales_new_account",
+      "utterance": "I want to join bell services"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "As Customer says irrelevant information to bell  products and services, so flow bell_global_error_count_check is called each time and VA respond as per instructions and when 3rd time they say irrelevant things, we send them to bell_no_match_3 flow",
+    "actionParameters": {
+      "brand": "bell",
+      "global_error_counter": "4",
+      "language": "en"
+    }
+  },
+  "displayName": "EN sales_new_account- ID Fail, customer_type-new-No match(IRRELAVANT)",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 805,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "fr"
+}

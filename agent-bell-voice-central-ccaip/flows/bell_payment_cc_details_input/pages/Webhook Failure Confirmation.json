@@ -1,0 +1,166 @@
+{
+  "name": "19d12c42-1a94-4aca-9a92-75c0bcd8dc27",
+  "displayName": "Webhook Failure Confirmation",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "conditionalCases": [ {
+      "cases": [ {
+        "condition": "$session.params.route = \"payment_make_payment\"",
+        "caseContent": [ {
+          "message": {
+            "text": {
+              "text": [ "It looks like I'm having trouble saving your card information. I'll send a text to the device you're calling from so that you can proceed with your payment on MyBell app. Is that alright?" ]
+            },
+            "languageCode": "en"
+          }
+        }, {
+          "message": {
+            "text": {
+              "text": [ "On dirait que j’ai de la difficulté à enregistrer les renseignements de votre carte. Je vais envoyer un texto à l’appareil à partir duquel vous appelez afin que vous puissiez effectuer votre paiement dans l’appli MonBell. Cela vous convient-il?" ]
+            },
+            "languageCode": "fr-ca"
+          }
+        } ]
+      }, {
+        "condition": "$session.params.route = \"payment_setup_autopay\" OR \"payment_update_autopay\"",
+        "caseContent": [ {
+          "message": {
+            "text": {
+              "text": [ "It looks like I'm having trouble saving your card information. I'll send a text to the device you're calling from so that you can set up pre-authorized payment on MyBell. Is that alright?" ]
+            },
+            "languageCode": "en"
+          }
+        }, {
+          "message": {
+            "text": {
+              "text": [ "Il semble que j’ai des difficultés à enregistrer les renseignements de votre carte. Je vais envoyer un message texte à l’appareil au moyen duquel vous appelez, afin que vous puissiez configurer le paiement pré-autorisé dans l’appli MonBell. Est-ce que ça vous convient?" ]
+            },
+            "languageCode": "fr-ca"
+          }
+        } ]
+      }, {
+        "caseContent": [ {
+          "message": {
+            "text": {
+              "text": [ "It looks like I'm having trouble saving your card information. I'll send a text to the device you're calling from so that you can proceed with your payment on MyBell. Is that alright?" ]
+            },
+            "languageCode": "en"
+          }
+        }, {
+          "message": {
+            "text": {
+              "text": [ "On dirait que j’ai de la difficulté à enregistrer les renseignements de votre carte. Je vais envoyer un texto à l’appareil à partir duquel vous appelez afin que vous puissiez effectuer votre paiement dans l’appli MonBell. Cela vous convient-il?" ]
+            },
+            "languageCode": "fr-ca"
+          }
+        } ]
+      } ]
+    } ]
+  },
+  "transitionRoutes": [ {
+    "intent": "context.confirm_yes",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Language Based SMS",
+    "name": "7e481dc0-749d-487a-aa24-d0672a759805"
+  }, {
+    "intent": "context.sms_no",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Ok. You can always check try again later using the MyBell app." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "D'accord. Vous pouvez toujours vérifier et réessayer plus tard en utilisant l'application MonBell." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetFlow": "bell_Feedback",
+    "name": "90c5c4d2-bcbd-412e-9c66-afced01cd6e4"
+  } ],
+  "eventHandlers": [ {
+    "event": "sys.no-input-1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I didn't quite get that. Can you try again?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je n’ai pas tout à fait compris. Pouvez-vous réessayer?" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "c629e284-9813-4c7b-9583-69408fbc35df"
+  }, {
+    "event": "sys.no-match-1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I didn't quite get that. Can you try again?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je n’ai pas tout à fait compris. Pouvez-vous réessayer?" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "2d51a062-e2b8-4d69-9c91-15d8c277e6c8"
+  }, {
+    "event": "sys.no-input-2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I still didnt get that" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je n’ai toujours pas compris" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "af522ad3-773d-48ca-955f-6b84da59d3e3"
+  }, {
+    "event": "sys.no-match-2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I still didnt get that" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je n’ai toujours pas compris" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "82dce17c-e14e-453e-9347-64579706b84a"
+  }, {
+    "targetFlow": "bell_determine_handover",
+    "event": "sys.no-match-3",
+    "triggerFulfillment": {
+    
+    },
+    "name": "94b50bbd-7c45-4c28-a648-0e5035aaebea"
+  }, {
+    "targetFlow": "bell_determine_handover",
+    "event": "sys.no-input-3",
+    "triggerFulfillment": {
+    
+    },
+    "name": "2df2b652-ba6d-467f-9f44-0cb96ca69a99"
+  } ]
+}

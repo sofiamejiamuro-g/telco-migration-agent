@@ -1,0 +1,60 @@
+{
+  "name": "63686e7f-56c0-4207-ba7c-154a5a273736",
+  "displayName": "Regional LOB Check",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.n_billing_accounts_lob = 1",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "billing_account_number",
+        "value": "$sys.func.GET($session.params.billing_accounts_lob, 0)"
+      }, {
+        "parameter": "route",
+        "value": "regional_ban"
+      } ]
+    },
+    "targetPage": "Identify Single Ban",
+    "name": "4aef4e72-f257-4974-adc5-0269b804785b"
+  }, {
+    "condition": "$session.params.n_billing_accounts_lob != 1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Could you also tell me your account number, please?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Pourriez-vous également fournir votre numéro de compte?" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetPage": "Account Number",
+    "name": "2d00600f-c346-4840-90a8-461ae460a75e"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "63686e7f-56c0-4207-ba7c-154a5a273736"
+      }, {
+        "parameter": "flow_id",
+        "value": "1ecd0a71-8b39-47fa-8bfa-16c0e2425d74"
+      }, {
+        "parameter": "page_name",
+        "value": "Regional LOB Check"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

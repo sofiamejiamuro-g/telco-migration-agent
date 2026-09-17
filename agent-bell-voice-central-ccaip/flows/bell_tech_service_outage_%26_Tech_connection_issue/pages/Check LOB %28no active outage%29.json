@@ -1,0 +1,58 @@
+{
+  "name": "b1577b17-1dc6-4720-b684-ca0df0746f4a",
+  "displayName": "Check LOB (no active outage)",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "($session.params.lob = \"Internet\" OR $session.params.lob = \"Homephone\" OR $session.params.tv_sub_type = \"fibe tv app\" OR $session.params.lob = \"internet\") AND ($session.params.province = ON OR $session.params.province = QC)",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_VR",
+    "name": "2873f93c-eb95-4b9e-b9a3-ee3b51e8a605"
+  }, {
+    "condition": "$session.params.lob = \"Internet\" OR $session.params.lob = \"Homephone\" OR $session.params.tv_sub_type = \"fibe tv app\" OR $session.params.lob = \"internet\"",
+    "triggerFulfillment": {
+    
+    },
+    "name": "2d212af7-a7fc-40b4-bc90-7c188071bdde",
+    "targetPlaybook": "Bell_UC_Technical_Support_Infobot"
+  }, {
+    "condition": "$sys.func.UPPER($session.params.lob) = \"MOBILITY\"",
+    "triggerFulfillment": {
+    
+    },
+    "name": "7454c5b5-6dfe-4435-98f6-8ec6a337ba8f",
+    "targetPlaybook": "Bell_UC_Technical_Support_Infobot"
+  }, {
+    "condition": "$session.params.tv_sub_type = \"sat\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Check CX input sat",
+    "name": "61e0230e-ad4f-41ad-a64c-2d2fd30be0dd"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "b1577b17-1dc6-4720-b684-ca0df0746f4a"
+      }, {
+        "parameter": "flow_id",
+        "value": "94d32e37-496f-4fa3-81e8-18fd95281a52"
+      }, {
+        "parameter": "page_name",
+        "value": "Check LOB (no active outage)"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

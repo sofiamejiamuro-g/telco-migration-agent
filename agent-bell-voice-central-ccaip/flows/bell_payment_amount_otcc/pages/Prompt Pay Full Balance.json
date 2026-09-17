@@ -1,0 +1,224 @@
+{
+  "name": "9ac2afd7-2c1d-43c0-b10a-19a9ad6dfe5f",
+  "displayName": "Prompt Pay Full Balance",
+  "form": {
+    "parameters": [ {
+      "displayName": "customer_mentioned_amount",
+      "entityType": "@sys.number-sequence",
+      "fillBehavior": {
+        "initialPromptFulfillment": {
+        
+        }
+      }
+    } ]
+  },
+  "entryFulfillment": {
+    "messages": [ {
+      "text": {
+        "text": [ "Souhaitez-vous régler le solde total actuel de $session.params.current_account_balance $?" ]
+      },
+      "languageCode": "fr-ca"
+    }, {
+      "text": {
+        "text": [ "Would you like to pay your total current balance of $ $session.params.current_account_balance ?" ]
+      },
+      "languageCode": "en"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "intent": "context.confirm_yes",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Excellent." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "Great." ]
+        },
+        "languageCode": "en"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "amount_paid",
+        "value": "$session.params.current_account_balance"
+      } ]
+    },
+    "targetFlow": "bell_payment_cc_details_input",
+    "name": "4d21fe2c-a5cb-488e-8515-182dff825528"
+  }, {
+    "intent": "context.confirm_no(Deny SMS + Deny Top up + Deny Auto top up + Deny Auto top up update)",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Check Collection Status",
+    "name": "2319f946-fb78-4e2a-8259-04aeb6bea4a8"
+  }, {
+    "intent": "context.pa_amount",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "other_amount_mentioned",
+        "value": true
+      }, {
+        "parameter": "other_amount_value",
+        "value": "$session.params.customer_mentioned_amount"
+      }, {
+        "parameter": "customer_mentioned_amount",
+        "value": null
+      } ]
+    },
+    "targetPage": "Check Collection Status",
+    "name": "c5cf0f92-6a6d-4fb1-9e28-5337b315f78a"
+  }, {
+    "intent": "context.pa_amount_and_no",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "other_amount_mentioned",
+        "value": true
+      }, {
+        "parameter": "other_amount_value",
+        "value": "$session.params.customer_mentioned_amount"
+      }, {
+        "parameter": "customer_mentioned_amount",
+        "value": null
+      } ]
+    },
+    "targetPage": "Check Collection Status",
+    "name": "39713e9b-3641-430b-bb71-36f94bab9b2f"
+  }, {
+    "intent": "context.request_partial_payment",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Prompt Other Amount",
+    "name": "70590fee-d899-441c-9df2-d0fe59912261"
+  }, {
+    "intent": "context.repeat",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "$request.generative.repeat_response" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "$request.generative.repeat_response" ]
+        },
+        "languageCode": "en"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "repeat_flag",
+        "value": 1
+      } ],
+      "generators": [ {
+        "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/d2573b7b-849d-43d3-8c64-867837bd84d2",
+        "inputParameters": [ {
+          "key": "request-last-agent-utterance",
+          "value": "$request.last-agent-utterance"
+        } ],
+        "outputParameter": "$request.generative.repeat_response"
+      } ]
+    },
+    "name": "b68a519b-b26a-46ab-bbcc-f0744fcf55f9"
+  }, {
+    "intent": "context.confirm_pay_full_balance",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Excellent." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "Great." ]
+        },
+        "languageCode": "en"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "amount_paid",
+        "value": "$session.params.current_account_balance"
+      } ]
+    },
+    "targetFlow": "bell_payment_cc_details_input",
+    "name": "c277f2f4-242e-4e98-be4b-82efac13c99e"
+  } ],
+  "eventHandlers": [ {
+    "event": "sys.no-input-1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Je n’ai pas tout à fait compris. Pouvez-vous réessayer?" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "I didn't quite get that. Can you try again?" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "f8961361-067b-4621-9683-5120ab41bbb8"
+  }, {
+    "event": "sys.no-match-1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Je n’ai pas tout à fait compris. Pouvez-vous réessayer?" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "I didn't quite get that. Can you try again?" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "a66758e8-2b5a-4ce8-bde6-f5f5104a12d5"
+  }, {
+    "event": "sys.no-input-2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Je n’ai toujours pas compris" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "I still didnt get that" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "c62ffe99-afdf-4007-95e3-c6c03188c7aa"
+  }, {
+    "event": "sys.no-match-2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Je n’ai toujours pas compris" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "I still didn't get that" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "2f6939ca-321e-4a0a-8f76-03f2bc224241"
+  }, {
+    "targetFlow": "bell_determine_handover",
+    "event": "sys.no-input-3",
+    "triggerFulfillment": {
+    
+    },
+    "name": "067c5e92-4157-40a0-a9a2-06e2b30aee29"
+  }, {
+    "targetFlow": "bell_determine_handover",
+    "event": "sys.no-match-3",
+    "triggerFulfillment": {
+    
+    },
+    "name": "909b2ec8-5dc0-44ca-b051-e6f862ce348d"
+  } ]
+}

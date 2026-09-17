@@ -1,0 +1,108 @@
+{
+  "name": "4dbf74a0-bfb7-4e77-9d07-3a7261468195",
+  "displayName": "Webhook Get Customer Profile",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "/v1/ibm_mw/nm1_get#customer-profile",
+    "tag": "customer-profile"
+  },
+  "transitionRoutes": [ {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "oneBillIndicator",
+        "value": "$session.params.nm1_get_cust_profile_response.oneBill"
+      }, {
+        "parameter": "accountType",
+        "value": "$session.params.nm1_get_cust_profile_response.banType"
+      }, {
+        "parameter": "accountSubType",
+        "value": "$session.params.nm1_get_cust_profile_response.banSubType"
+      }, {
+        "parameter": "pastDueAmount",
+        "value": "$session.params.nm1_get_cust_profile_response.pastDueAmount"
+      }, {
+        "parameter": "accountBalance",
+        "value": "$session.params.nm1_get_cust_profile_response.arBalance"
+      } ]
+    },
+    "name": "c2962a1a-079d-4d7e-b498-0a0aab020829"
+  }, {
+    "condition": "$session.params.webhook_success = false OR $session.params.nm1_get_cust_profile_response.returnCode = 0",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "NM1 Outage",
+    "name": "38471761-4d36-4553-90ad-3a92adce2804"
+  }, {
+    "condition": "$session.params.webhook_success = true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Eligibility Check",
+    "name": "62f8aebb-012c-4309-a35d-2cc73dcc7ceb"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "End Flow",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "consolidated_status",
+        "value": "Fail"
+      } ]
+    },
+    "name": "6f60d05e-c2ac-495d-ae14-948f3efd0304"
+  }, {
+    "targetPage": "End Flow",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "consolidated_status",
+        "value": "Fail"
+      } ]
+    },
+    "name": "ceda6778-10d5-44c5-9b64-318905a5168a"
+  }, {
+    "targetPage": "End Flow",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "consolidated_status",
+        "value": "Fail"
+      } ]
+    },
+    "name": "c3fac99d-3770-43dc-bd8d-620b9d8668c0"
+  }, {
+    "targetPage": "End Flow",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "consolidated_status",
+        "value": "Fail"
+      } ]
+    },
+    "name": "0f62b040-1579-4ae2-8c87-c00cd3105160"
+  }, {
+    "targetPage": "End Flow",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "consolidated_status",
+        "value": "Fail"
+      } ]
+    },
+    "name": "6ed529d7-13f7-4b0d-98d2-e8c8a9a11d79"
+  }, {
+    "targetPage": "End Flow",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "consolidated_status",
+        "value": "Fail"
+      } ]
+    },
+    "name": "ff03e8da-d079-4723-90b0-0b92f21a7743"
+  } ]
+}

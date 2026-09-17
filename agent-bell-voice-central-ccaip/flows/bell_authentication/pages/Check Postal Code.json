@@ -1,0 +1,89 @@
+{
+  "name": "57cf8763-815a-4350-be68-5c0f035b78eb",
+  "displayName": "Check Postal Code",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "postal_code_three",
+        "value": "$sys.func.LOWER($sys.func.SUBSTITUTE($session.params.postal_code_three, \" \",\"\"))"
+      }, {
+        "parameter": "postal_code_three_backend",
+        "value": "$sys.func.LOWER($sys.func.SUBSTITUTE($session.params.billing_account_info_list.billing_address.postcode, \" \",\"\"))"
+      }, {
+        "parameter": "postal_code_three_backend",
+        "value": "$sys.func.MID($session.params.postal_code_three_backend, $sys.func.MINUS( $sys.func.LEN($session.params.postal_code_three_backend),2), 3)"
+      } ]
+    },
+    "name": "2eea8b59-0625-44ba-87d8-9b156bef79c0"
+  }, {
+    "condition": "$session.params.postal_code_three_backend = $session.params.postal_code_three OR $session.params.postal_code_three = $session.params.sp0 OR $session.params.postal_code_three = $session.params.sp1 OR $session.params.postal_code_three = $session.params.sp2 OR $session.params.postal_code_three = $session.params.sp3 OR $session.params.postal_code_three = $session.params.sp4 OR $session.params.postal_code_three = $session.params.sp5 OR $session.params.postal_code_three = $session.params.sp6 OR $session.params.postal_code_three = $session.params.sp7 OR $session.params.postal_code_three = $session.params.sp8 OR $session.params.postal_code_three = $session.params.sp9",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Great, that's the correct postal code." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Parfait, c'est le bon code postal." ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "auth_status",
+        "value": "Pass"
+      } ]
+    },
+    "targetPage": "End Flow Check",
+    "name": "752e45e0-292a-40c0-be77-8878a5168b90"
+  }, {
+    "condition": "$session.params.wrong_postal = null",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "That doesn't seem to match what we have in our files. Can you give that another try?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Cela ne semble pas correspondre à ce que nous avons dans nos dossiers. Pouvez-vous réessayer?" ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "wrong_postal",
+        "value": 1
+      }, {
+        "parameter": "postal_code_three",
+        "value": null
+      } ]
+    },
+    "targetPage": "Get Postal Code",
+    "name": "9327f480-1c31-4f7d-a34a-b83ed8fd324a"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Sorry, that's not the correct Postal Code." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Malheureusement, ce n'est pas le bon code postal." ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "auth_status",
+        "value": "Fail"
+      } ]
+    },
+    "targetPage": "End Flow Check",
+    "name": "904cb303-7dd4-4205-b777-d2bf31da2899"
+  } ]
+}

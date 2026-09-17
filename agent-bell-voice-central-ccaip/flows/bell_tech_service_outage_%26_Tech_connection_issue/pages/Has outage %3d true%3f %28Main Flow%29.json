@@ -1,0 +1,47 @@
+{
+  "name": "7f1900a0-0a6c-437b-a15f-a5fa4221fb48",
+  "displayName": "Has outage = true? (Main Flow)",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "setParameterActions": [ {
+      "parameter": "has_outage",
+      "value": "$session.params.oc_status_response.has_outage"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.has_outage = true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook get timezone (Main Flow)",
+    "name": "9ce4dc11-7d59-43ca-a191-033da6320e58"
+  }, {
+    "condition": "$session.params.has_outage != true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "No Active Outage",
+    "name": "eb82bd6f-a871-4c96-a06e-64239c7d522c"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "7f1900a0-0a6c-437b-a15f-a5fa4221fb48"
+      }, {
+        "parameter": "flow_id",
+        "value": "94d32e37-496f-4fa3-81e8-18fd95281a52"
+      }, {
+        "parameter": "page_name",
+        "value": "Has outage = true? (Main Flow)"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

@@ -1,0 +1,34 @@
+{
+  "name": "790cb7f7-d935-4cc3-82bb-f63c7313f275",
+  "displayName": "CX confirmation on ACUT ticket 2",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "intent": "context.confirm_yes",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "ticket_number",
+        "value": "$session.params.ticket_number2"
+      }, {
+        "parameter": "ticket_state",
+        "value": "$session.params.ticket_state2"
+      }, {
+        "parameter": "ticket_number_ref",
+        "value": "$sys.func.CONCATENATE(\"REF\", $sys.func.TO_TEXT($session.params.ticket_number))"
+      } ]
+    },
+    "targetFlow": "Bell_appt_mgmt_acut_ticket_chk",
+    "name": "6c1f2288-4d0b-43f0-8fac-f988ff7d13e7"
+  }, {
+    "intent": "context.confirm_no",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_aqd",
+    "name": "e7a53381-4523-48dc-9bec-a3172161a24c"
+  } ]
+}

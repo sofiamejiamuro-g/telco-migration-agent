@@ -1,0 +1,124 @@
+{
+  "name": "c896f3b4-9888-44ca-934c-ea89b6b32863",
+  "displayName": "EEPA-2094 | Wrong Clid into Right Clid",
+  "testCaseConversationTurns": [ {
+    "userInput": {
+      "injectedParameters": {
+        "caller_channel": "TFN"
+      },
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "Hi"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "sessionParameters": {
+        "caller_channel": "TFN"
+      },
+      "triggeredIntent": {
+        "name": "Default Welcome Intent"
+      },
+      "currentPage": {
+        "name": "CIRN Collection Check",
+        "flow": "bell_Identification"
+      },
+      "textResponses": [ {
+        "text": [ "If you're looking to order a new service, please say 'new service.'  Otherwise, what’s the 10-digit phone number associated with your service?" ],
+        "allowPlaybackInterruption": true
+      } ],
+      "currentFlow": {
+        "name": "bell_Identification"
+      }
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "4165718783"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "currentPage": {
+        "name": "Check CX Input",
+        "flow": "bell_Identification"
+      },
+      "textResponses": [ {
+        "text": [ "\u003cspeak\u003eThat was \u003cprosody rate=\"slow\"\u003e\u003csay-as interpret-as='telephone'\u003e4165718783\u003c/say-as\u003e\u003c/prosody\u003e, right?\u003c/speak\u003e" ],
+        "allowPlaybackInterruption": true
+      } ],
+      "currentFlow": {
+        "name": "bell_Identification"
+      }
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "yes"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "triggeredIntent": {
+        "name": "context.confirm_yes"
+      },
+      "currentPage": {
+        "name": "CIRN Collection Check",
+        "flow": "bell_Identification"
+      },
+      "textResponses": [ {
+        "text": [ "\u003cspeak\u003eThanks! \u003cbreak time=\"1s\"/\u003e\u003c/speak\u003e" ],
+        "allowPlaybackInterruption": true
+      }, {
+        "text": [ "I'm not finding an account associated with that number. Could you please re-enter the 10-digit phone number for me? You can also key it in on your phone." ],
+        "allowPlaybackInterruption": true,
+        "containAiGeneratedContent": true,
+        "containGenerativeFallback": true,
+        "containGeneratorsContent": true
+      } ],
+      "currentFlow": {
+        "name": "bell_Identification"
+      }
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "4165718784"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "currentPage": {
+        "name": "End Session",
+        "flow": "bell_Identification"
+      },
+      "textResponses": [ {
+        "text": [ "\u003cspeak\u003eThanks! \u003cbreak time=\"1s\"/\u003e\u003c/speak\u003e" ],
+        "allowPlaybackInterruption": true
+      } ],
+      "currentFlow": {
+        "name": "bell_Identification"
+      }
+    }
+  } ],
+  "creationTime": {
+    "seconds": 1752624005,
+    "nanos": 866580000
+  },
+  "testConfig": {
+    "flow": "bell_Identification",
+    "page": "Start Page"
+  },
+  "languageCode": "en"
+}

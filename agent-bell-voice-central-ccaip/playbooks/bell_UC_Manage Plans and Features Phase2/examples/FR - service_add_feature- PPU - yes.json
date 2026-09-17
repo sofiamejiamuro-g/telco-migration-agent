@@ -1,0 +1,83 @@
+{
+  "name": "0686af68-87e8-4eed-b2b9-055cc93fe132",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70011",
+        "brand": "bell",
+        "language": "en",
+        "route": "service_add_feature"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Les données en itinérance payables à l'utilisation ne seront plus offertes à compter du 1er mai 2026.\nSi vous cherchez des options de voyage, nous avons des options d'itinérance et des Passeports Voyage disponibles, souhaitez- vous en savoir plus?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "oui"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Vous pouvez consulter les options de voyage offertes dans MonBell. Je vais envoyer un texto avec un lien à l'appareil au moyen duquel vous appelez. Est-ce que ça vous convient?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "oui"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "add_ons": "roaming",
+        "language": "fr-ca",
+        "route": "service_add_feature",
+        "sms_content": "Bell: Vous pouvez visiter https://m.bell.ca/voyage pour voir vos options de voyage dans l'appli MonBell. ( bell.ca/apropos )",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+        "language": "fr-ca"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "The {identification_status} is \"Pass\", {customer_type} is \"Existing\"",
+    "actionParameters": {
+      "add_ons": "",
+      "apb_location_id": "70011",
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "is_prepaid": "false",
+      "language": "fr-ca",
+      "route": "service_add_feature",
+      "sms_content": "",
+      "sms_type": "Public",
+      "utterance": "Pouvez-vous ajouter un forfait de données à la carte ?"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "As the {lob} is null and {streaming_services}, {ppv} is null and {add_ons} = \"roaming\" then we will prompt user to send SMS and if user say \"yes\" or anything affirmative then send the user to \"bell_SMS Trigger\" flow",
+    "actionParameters": {
+      "apb_location_id": "70011",
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "is_prepaid": "false",
+      "language": "fr-ca",
+      "mobility_sub_type": "postpaid",
+      "route": "service_add_feature",
+      "sms_type": "Public",
+      "utterance": "Pouvez-vous ajouter un forfait de données à la carte ?"
+    }
+  },
+  "displayName": "FR - service_add_feature- PPU - yes",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 688,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

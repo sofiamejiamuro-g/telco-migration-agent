@@ -1,0 +1,63 @@
+{
+  "name": "77258bf9-9bc4-4dec-9b12-2f19665ece53",
+  "displayName": "AuthFailCase",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "messages": [ {
+      "text": {
+        "text": [ "I'm unable to verify your account at this time, however you can still make a payment and I can send you a text afterwards with a link to the MyAccount App so that you may view your updated account and balance details yourself. Would you like to proceed with a payment?" ]
+      },
+      "languageCode": "en"
+    }, {
+      "text": {
+        "text": [ "Je ne suis pas en mesure de vérifier votre compte pour le moment, mais vous pouvez tout de même effectuer un paiement et je vous enverral ensulte un message texte contenant un lien vers l'appii Mon Compte afin que vous puissiez consulter vous-même les détails de votre compte et de votre solde mis à jour. Souhaitez-vous procéder au paiement?" ]
+      },
+      "languageCode": "fr-ca"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "intent": "context.confirm_yes",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "proceed_with_ot_payment",
+        "value": true
+      } ]
+    },
+    "targetFlow": "bell_payment_one_time_CC_payment",
+    "name": "4b48be97-7f10-4529-aebc-d2156978b1f6"
+  }, {
+    "intent": "context.confirm_no",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "How can I help you? For example, you can say \"I want to restore my services\"." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Comment puis-je vous aider ? Par exemple, vous pouvez dire : « Je souhaite rétablir mes services »." ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "speciality",
+        "value": "true"
+      } ]
+    },
+    "targetFlow": "Default Start Flow",
+    "name": "043c5f2f-f299-4c57-8baa-ceb0992a7620"
+  }, {
+    "condition": "$session.params.route != null",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "speciality",
+        "value": "true"
+      } ]
+    },
+    "targetFlow": "Default Start Flow",
+    "name": "89cdef8e-4316-4ca1-9a07-2bde7cc25758"
+  } ],
+  "transitionRouteGroups": [ "HI_account (copy)", "HI_disconnect (copy)", "HI_equipment (copy)", "HI_faq (copy) (copy)", "HI_other (copy)", "HI_sales (copy) (copy)", "HI_smalltalk (copy) (copy)", "HI_techsupport (copy)" ]
+}

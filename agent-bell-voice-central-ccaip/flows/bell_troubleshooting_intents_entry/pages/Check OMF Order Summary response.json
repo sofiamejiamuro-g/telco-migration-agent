@@ -1,0 +1,72 @@
+{
+  "name": "05364004-3bdd-4e3c-9758-76506d00e6ea",
+  "displayName": "Check OMF Order Summary response",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$sys.func.COUNT($session.params.order_summary_response.order_summaries) = 1",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "order_summaries",
+        "value": "$sys.func.GET_FIELD($session.params.order_summary_response, \"order_summaries\")"
+      }, {
+        "parameter": "recent_order1",
+        "value": "$sys.func.GET($session.params.order_summaries,0)"
+      }, {
+        "parameter": "order_identifier",
+        "value": "$session.params.recent_order1.orderIdentifier"
+      }, {
+        "parameter": "internet_order_reference",
+        "value": "$session.params.recent_order1.serviceAttributes[0].legacyOrderIdentifier.internetOrderReference"
+      } ]
+    },
+    "targetFlow": "bell_ticket_mgmt_omf_ticket_check_technical_intents",
+    "name": "601d697d-886e-4a76-a5e8-c3325f650708",
+    "description": "Provisioning ticket found\n\n[ToDo] Might need to set params before routing to another flow"
+  }, {
+    "condition": "$sys.func.COUNT($session.params.order_summary_response.order_summaries) \u003e 1",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Find recent order",
+    "name": "596e0536-71fc-467a-b616-bb074f24144d",
+    "description": "Multiple tickets"
+  }, {
+    "condition": "($sys.func.COUNT($session.params.order_summary_response.order_summaries) = 0 OR $session.params.order_summary_response.order_summaries = \"\" OR $session.params.order_summary_response.order_summaries = null) AND $session.params.from_flow = \"bell_vr_kickout\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_aqd",
+    "name": "b558d745-db90-4a95-bdb1-d7b467a36edb"
+  }, {
+    "condition": "$sys.func.COUNT($session.params.order_summary_response.order_summaries) = 0 OR $session.params.order_summary_response.order_summaries = \"\" OR $session.params.order_summary_response.order_summaries = null",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_tech_service_outage_\u0026_Tech_connection_issue",
+    "name": "1debb1c5-69fe-4653-9657-c755ef8bb53b"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "05364004-3bdd-4e3c-9758-76506d00e6ea"
+      }, {
+        "parameter": "flow_id",
+        "value": "5ea404f8-de10-4476-880f-d17773565fad"
+      }, {
+        "parameter": "page_name",
+        "value": "Check OMF Order Summary response"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

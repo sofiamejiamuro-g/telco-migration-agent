@@ -1,0 +1,58 @@
+{
+  "name": "13862aa4-fcdd-4f1c-8d53-f3b5dd687c67",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "brand": "bell",
+        "language": "en"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "À propos de quel service communiquez-vous avec nous?\n"
+    }
+  }, {
+    "userUtterance": {
+      "text": "maison intelligente"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_va_to_ivr_smarthome",
+      "inputActionParameters": {
+        "language": "fr-ca",
+        "lob": "Smarthome"
+      },
+      "outputActionParameters": {
+        "language": "fr-ca"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer has questions about device availability, device features, cost, related to devices that Bell sells",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "New",
+      "identification_status": "Fail",
+      "language": "fr-ca",
+      "route": "sales_device_inquiry",
+      "utterance": "J'ai des questions sur la disponibilité des appareils"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "from the identification flow, know the customer_type as \"New\", and if we don't know the lob we need to ask them regarding that too, if it is smart home then reroute to bell_ivr_handoff",
+    "actionParameters": {
+      "language": "fr-ca",
+      "lob": "Smarthome"
+    }
+  },
+  "displayName": "FR sales device inquiry- ID fail, new-smarthome",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 363,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

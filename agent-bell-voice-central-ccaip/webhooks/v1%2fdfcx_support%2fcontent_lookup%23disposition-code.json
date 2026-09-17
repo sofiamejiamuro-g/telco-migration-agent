@@ -1,0 +1,27 @@
+{
+  "name": "d29b7a41-2092-45b7-99ea-1660b3992605",
+  "displayName": "v1/dfcx_support/content_lookup#disposition-code",
+  "timeout": {
+    "seconds": 5
+  },
+  "serviceDirectory": {
+    "service": "projects/gcp-it-npe-pltfm-apigee/locations/us-central1/namespaces/apigee-nb-usc1-service-dir-namespace/services/apigee-nb-usc1-service",
+    "genericWebService": {
+      "uri": "https://apigee-nane1-uat.int.bell.ca/v1/dfcx_support/content_lookup",
+      "requestHeaders": [ {
+        "key": "x-apikey",
+        "value": "npZmDivP6Hxes3wtQ0tC9RqItjJTY8TgZHbOPNeFwvSYSKPI"
+      } ],
+      "webhookType": "FLEXIBLE",
+      "httpMethod": "POST",
+      "requestBody": "{\n  \"sessionInfo\": {\n    \"dfcx_session_id\": \"$session.params.dfcx_session_id\",\n    \"agent_id\": \"$session.params.agent_id\",\n    \"parameters\": {\n      \"worked_on_code\": \"$session.params.worked_on_code\",\n      \"worked_on_sub_code\": \"$session.params.worked_on_sub_code\",\n      \"language\": \"$session.params.language\"\n    }\n  },\n  \"fulfillmentInfo\": {\n    \"tag\": \"disposition-code\"\n  },\n  \"languageCode\": \"$request.language\"\n}",
+      "parameterMapping": [ {
+        "key": "acut_disposition_code_response",
+        "value": "sessionInfo.parameters.acut_disposition_code_response"
+      }, {
+        "key": "webhook_success",
+        "value": "sessionInfo.parameters.webhook_success"
+      } ]
+    }
+  }
+}

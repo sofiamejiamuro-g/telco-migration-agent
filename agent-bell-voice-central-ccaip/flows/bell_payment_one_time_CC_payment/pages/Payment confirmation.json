@@ -1,0 +1,151 @@
+{
+  "name": "c37a7028-22f0-4dc7-a48f-36b10341e9bc",
+  "displayName": "Payment confirmation",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "messages": [ {
+      "text": {
+        "text": [ "Bien sûr, je peux vous aider à effectuer un paiement par carte de crédit ou par carte de débit Visa. Êtes-vous prêt à continuer ?" ]
+      },
+      "languageCode": "fr-ca"
+    }, {
+      "text": {
+        "text": [ "Sure, I can help you with making a credit card or visa debit payment. Are you ready to proceed?" ]
+      },
+      "languageCode": "en"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "intent": "context.confirm_yes",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "payment_confirmation",
+        "value": true
+      } ]
+    },
+    "targetPage": "Identification Check",
+    "name": "a1868c8e-2e71-4eb7-a981-f22e5ad2d362"
+  }, {
+    "intent": "context.confirm_no",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "otccp_exit_1",
+        "value": "true"
+      } ]
+    },
+    "targetFlow": "bell_Feedback",
+    "name": "6cd92273-500e-415f-8974-c55fe7a85914"
+  }, {
+    "intent": "other_speak_to_agent",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_determine_handover",
+    "name": "9b9c41e1-48fe-46eb-b4ab-d00024c7fd32"
+  }, {
+    "intent": "context.user_asks_more_time",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "\u003cspeak\u003eAbsolument. Veuillez prendre un moment pour trouver votre numéro de carte. \u003cbreak time=\"5s\"/\u003e \u003c/speak\u003e" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "\u003cspeak\u003eAbsolutely. Please take a moment to find your card number.\u003cbreak time=\"5s\"/\u003e\u003c/speak\u003e" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "81840589-acb7-4e98-9167-770126036a6b"
+  } ],
+  "eventHandlers": [ {
+    "event": "sys.no-input-1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Je n’ai pas tout à fait compris. Pouvez-vous réessayer?" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "I didn't quite get that. Can you try again?" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "97aa8002-66c5-4b01-9433-eb3156d94122"
+  }, {
+    "event": "sys.no-input-2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Je n’ai toujours pas compris" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "I still didnt get that" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "59f65346-8576-4a38-9670-2c8433fac628"
+  }, {
+    "targetFlow": "bell_determine_handover",
+    "event": "sys.no-input-3",
+    "triggerFulfillment": {
+    
+    },
+    "name": "a4678039-780a-4ef4-a1ae-24ef03ddd0a6"
+  }, {
+    "event": "sys.no-match-1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Je n’ai pas tout à fait compris. Pouvez-vous réessayer?" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "I didn't quite get that. Can you try again?" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "79ce7866-4034-4c69-a2cf-1c5c45ee6e13"
+  }, {
+    "event": "sys.no-match-2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Je n’ai toujours pas compris" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "I still didnt get that" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "636df44a-fe53-4502-a606-7110bd752fcc"
+  }, {
+    "targetFlow": "bell_determine_handover",
+    "event": "sys.no-match-3",
+    "triggerFulfillment": {
+    
+    },
+    "name": "8772cb68-4040-4cbe-924a-046427851e4d"
+  } ],
+  "advancedSettings": {
+    "speechAdaptationSettings": {
+      "enableManualSpeechAdaptation": true
+    }
+  },
+  "speakerIdSettings": {
+  
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "name": "fbb62d4d-bc5c-482f-b519-301ddca4bad6",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "brand": "bell",
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Désirez-vous ajouter un nouveau service ou modifier votre service actuel?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Je veux en savoir plus sur le service actuel"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Je vais envoyer un texto à l'appareil au moyen duquel vous appelez, afin que vous puissiez découvrir les appareils Internet de Bell. Est-ce que ça vous convient?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "oui"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "fr-ca",
+        "sms_content": "Bell : Vous pouvez visiter bell.ca/technowifi pour plus d'information sur les capsules Wi-Fi. ( bell.ca/apropos )",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+        "language": "fr-ca"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer is looking to for an their internet device",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "fr-ca",
+      "lob": "Internet",
+      "route": "sales_order_device",
+      "utterance": "Je veux mettre à niveau mon internet"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "from the identification flow, it was determined that the customer_type as \"Existing\", disambiguated if it is related to existing or new service and  user responded with \"Existing\". Waiting for a response from user if  he agrees to receiving an SMS",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca",
+      "lob": "Internet"
+    }
+  },
+  "displayName": "FR sales order device - ID Pass, line type-not mentioned- existing- Internet - oui",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 468,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

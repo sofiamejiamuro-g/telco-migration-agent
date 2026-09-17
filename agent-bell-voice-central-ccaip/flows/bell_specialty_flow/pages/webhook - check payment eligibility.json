@@ -1,0 +1,121 @@
+{
+  "name": "b0fdbc91-6014-4dab-92da-d5f385476f7e",
+  "displayName": "webhook - check payment eligibility",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "v1/payment-arrangement#get-eligibility-criteria",
+    "tag": "get-eligibility-criteria"
+  },
+  "transitionRoutes": [ {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "showPaymentArrangementLink",
+        "value": "$sys.func.FILTER(\"$session.params.pmt_arrangement_eligibility_response\", \"$.showPaymentArrangementLink\")"
+      } ]
+    },
+    "name": "a4cb0720-d765-468c-893a-bf16f3d1c02f"
+  }, {
+    "condition": "$session.params.showPaymentArrangementLink = false",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_aqd",
+    "name": "7d3df2d8-9e29-4921-8b22-811dd36fafce"
+  }, {
+    "condition": "$session.params.showPaymentArrangementLink = true",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Okay, instead of a one-time payment, do you want to set up a payment arrangement?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "D'accord, au lieu d'un paiement unique, souhaitez-vous mettre en place un accord de paiement ?" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetPage": "confirm_payment",
+    "name": "86eb26d9-e0ec-4156-8038-4fcc9d8b707d"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "b0fdbc91-6014-4dab-92da-d5f385476f7e"
+      }, {
+        "parameter": "flow_id",
+        "value": "d35b61b6-c884-44f8-b5c7-aed63cc356ab"
+      }, {
+        "parameter": "page_name",
+        "value": "webhook - check payment eligibility"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ],
+  "eventHandlers": [ {
+    "targetFlow": "bell_aqd",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+    
+    },
+    "name": "51af7f33-637c-43a2-a398-a38b9970db64"
+  }, {
+    "targetFlow": "bell_aqd",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+    
+    },
+    "name": "6533755f-15be-47ed-a1d6-9b452af3dbb2"
+  }, {
+    "targetFlow": "bell_aqd",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+    
+    },
+    "name": "578cb227-b6d8-4bd1-b5f3-a867e21ebbf8"
+  }, {
+    "targetFlow": "bell_aqd",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+    
+    },
+    "name": "8f2d046b-5172-467f-a0ba-ff4607d05fef"
+  }, {
+    "targetFlow": "bell_aqd",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+    
+    },
+    "name": "33607d02-7ec8-4770-9909-b4850010f47d"
+  }, {
+    "targetFlow": "bell_aqd",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+    
+    },
+    "name": "64487c8c-d5ee-408e-ab49-49acefd53b93"
+  }, {
+    "targetFlow": "bell_aqd",
+    "event": "sys.no-input-1",
+    "triggerFulfillment": {
+    
+    },
+    "name": "636d3527-d3d4-4f82-a60b-7ab0cdbd8162"
+  }, {
+    "targetFlow": "bell_aqd",
+    "event": "sys.no-match-1",
+    "triggerFulfillment": {
+    
+    },
+    "name": "45e830d5-386b-4de8-8a60-ed261426dded"
+  } ]
+}

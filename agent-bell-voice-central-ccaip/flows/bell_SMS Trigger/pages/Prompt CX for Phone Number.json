@@ -1,0 +1,137 @@
+{
+  "name": "5ab86d17-dcf7-4b0c-8990-5fddc0723d3d",
+  "displayName": "Prompt CX for Phone Number",
+  "form": {
+    "parameters": [ {
+      "displayName": "phone_number",
+      "required": true,
+      "entityType": "@sys.phone-number",
+      "fillBehavior": {
+        "initialPromptFulfillment": {
+        
+        },
+        "repromptEventHandlers": [ {
+          "targetPage": "CX didn't receive SMS Fallback",
+          "event": "sys.no-match-1",
+          "triggerFulfillment": {
+            "setParameterActions": [ {
+              "parameter": "fallback_counter",
+              "value": "$sys.func.ADD($session.params.fallback_counter, 1)"
+            }, {
+              "parameter": "global_error_counter",
+              "value": "$sys.func.ADD($session.params.global_error_counter,1)"
+            } ]
+          },
+          "name": "1e9c69f8-5320-4f08-8dea-ef4ebd7a6080"
+        }, {
+          "event": "sys.no-input-1",
+          "triggerFulfillment": {
+            "messages": [ {
+              "text": {
+                "text": [ "To which number do you want me to try sending the text to instead?" ]
+              },
+              "languageCode": "en"
+            }, {
+              "text": {
+                "text": [ "À quel numéro souhaitez-vous que j'essaie d'envoyer le message à la place ?" ]
+              },
+              "languageCode": "fr-ca"
+            } ],
+            "setParameterActions": [ {
+              "parameter": "global_error_counter",
+              "value": "$sys.func.ADD($session.params.global_error_counter,1)"
+            }, {
+              "parameter": "noinput",
+              "value": true
+            } ]
+          },
+          "name": "3678431e-1c75-41bb-b74f-95c7c3f784ec"
+        }, {
+          "targetPage": "CX didn't receive SMS Fallback",
+          "event": "sys.no-input-2",
+          "triggerFulfillment": {
+            "setParameterActions": [ {
+              "parameter": "global_error_counter",
+              "value": "$sys.func.ADD($session.params.global_error_counter,1)"
+            }, {
+              "parameter": "fallback_counter",
+              "value": "$sys.func.ADD($session.params.fallback_counter, 1)"
+            } ]
+          },
+          "name": "3d523b5f-9646-44ca-9758-a96e8380680e"
+        } ]
+      },
+      "advancedSettings": {
+        "dtmfSettings": {
+          "enabled": true,
+          "maxDigits": 10,
+          "useSystemEntityRule": false,
+          "interdigitTimeoutDuration": {
+            "seconds": 5
+          },
+          "endpointingTimeoutDuration": {
+            "seconds": 5
+          }
+        }
+      }
+    } ]
+  },
+  "entryFulfillment": {
+    "setParameterActions": [ {
+      "parameter": "phone_number",
+      "value": null
+    } ]
+  },
+  "transitionRoutes": [ {
+    "intent": "context.same_number",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "phone_number",
+        "value": "\"$sys.func.IF(\"$session.params.phone_number = null\",$session.params.clid, $session.params.phone_number)\""
+      } ]
+    },
+    "targetPage": "Trigger SMS to Provided Number",
+    "name": "7dd63316-4140-499d-8156-cf8a6d11dc97"
+  }, {
+    "intent": "context.sms_received",
+    "triggerFulfillment": {
+    
+    },
+    "name": "dad7640f-182f-46d0-9a1c-a387ed372416",
+    "targetPlaybook": "bell_Steering_Feedback"
+  }, {
+    "condition": "$page.params.status = \"FINAL\" AND $sys.func.IS_PHONE_NUMBER($session.params.phone_number, \"CA\") = true",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Thanks!" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Merci!" ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "CLID",
+        "value": "$session.params.phone_number"
+      } ]
+    },
+    "targetPage": "Check Number in Account",
+    "name": "a5eba622-908e-4646-b64a-573cecefe73e"
+  }, {
+    "condition": "$session.params.phone_number != null",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "phone_number",
+        "value": null
+      }, {
+        "parameter": "fallback_counter",
+        "value": "$sys.func.ADD($session.params.fallback_counter, 1)"
+      } ]
+    },
+    "targetPage": "CX didn't receive SMS Fallback",
+    "name": "54393a0a-cb6e-48c8-aa11-76f11046de6c"
+  } ]
+}

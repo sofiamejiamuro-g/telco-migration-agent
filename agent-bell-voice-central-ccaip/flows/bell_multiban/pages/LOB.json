@@ -1,0 +1,74 @@
+{
+  "name": "1d7e346e-57c1-4e0f-b891-2ec483f1b7a9",
+  "displayName": "LOB",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.lob = null",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "coming_from",
+        "value": "multiban"
+      } ]
+    },
+    "name": "f8d2766c-3150-4f1f-a485-f1af679c2227",
+    "targetPlaybook": "bell_UC_Get_LOB"
+  }, {
+    "condition": "$session.params.lob_agent = true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "S2A LOB",
+    "name": "0e9fdc48-1fc5-4268-9004-fe768b47a61a"
+  }, {
+    "condition": "$session.params.lob != null",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "billing_accounts_lob",
+        "value": "$sys.func.FILTER(\"$session.params.customer_id_search_response\",$sys.func.CONCATENATE(\"$..billing_accounts[?(@.services[*].service_type =~ /(?i)^\",$sys.func.TO_TEXT($session.params.lob),\"$/)].billing_account_number\"))"
+      }, {
+        "parameter": "n_billing_accounts_lob",
+        "value": "$sys.func.COUNT($session.params.billing_accounts_lob)"
+      } ]
+    },
+    "targetPage": "Lob Present?",
+    "name": "d346bf4c-c74b-40b7-b23b-97562d9bf3dd"
+  }, {
+    "condition": "$session.params.lob = null AND $session.params.n_postcode \u003e 1",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "lob_postcode_list_all",
+        "value": "$sys.func.FILTER(\"$session.params.customer_id_search_response\", \"$..billing_accounts[*].billing_address.postcode\")"
+      }, {
+        "parameter": "n_lob_postcode_list_all",
+        "value": "$sys.func.COUNT($session.params.lob_postcode_list_all)"
+      }, {
+        "parameter": "lob_i",
+        "value": 0
+      } ]
+    },
+    "targetPage": "Check - Unique Postcode",
+    "name": "6ad27ae7-31bc-4f23-bd05-50bde58f030c"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Could you also tell me your account number, please?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "J'aurais aussi besoin du numéro de compte en question." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetPage": "Account Number",
+    "name": "4355fdf8-ba32-444d-a183-614f10011e76"
+  } ]
+}

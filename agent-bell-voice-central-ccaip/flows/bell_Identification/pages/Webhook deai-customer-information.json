@@ -1,0 +1,102 @@
+{
+  "name": "e867a22d-4c3c-42ad-8f5e-8005c3675c1d",
+  "displayName": "Webhook deai-customer-information",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "v1/deai-customer-information",
+    "tag": "N/A",
+    "setParameterActions": [ {
+      "parameter": "telephone_number",
+      "value": "$session.params.clid"
+    }, {
+      "parameter": "dfcx_session_id",
+      "value": "$request.session-id"
+    } ],
+    "returnPartialResponses": true
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.webhook_success = \"True\" OR $session.params.webhook_success = \"true\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "webhook_success",
+        "value": null
+      } ]
+    },
+    "targetPage": "Route_By_Identification_Status",
+    "name": "da9053b8-552b-46a4-b9fe-154b7898b464"
+  }, {
+    "condition": "$session.params.webhook_success = \"False\" OR $session.params.webhook_success = \"false\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "webhook_success",
+        "value": null
+      } ]
+    },
+    "targetPage": "Route_By_Identification_Status",
+    "name": "8f55e262-ab7c-4e5d-8d9d-eea54cd4162c"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "e867a22d-4c3c-42ad-8f5e-8005c3675c1d"
+      }, {
+        "parameter": "flow_id",
+        "value": "8df7f836-8c64-4019-9506-2cedc52519c8"
+      }, {
+        "parameter": "page_name",
+        "value": "Webhook deai-customer-information"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Route_By_Identification_Status",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+    
+    },
+    "name": "c4e99f25-546d-4ef5-941a-d6310b52b16b"
+  }, {
+    "targetPage": "Route_By_Identification_Status",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+    
+    },
+    "name": "61fce2e4-9c1a-4f7b-bb39-c71c69ebddae"
+  }, {
+    "targetPage": "Route_By_Identification_Status",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+    
+    },
+    "name": "7f0cd763-7513-4858-a3ce-a70e72360744"
+  }, {
+    "targetPage": "Route_By_Identification_Status",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+    
+    },
+    "name": "582d603a-04ae-4f04-9e16-d5f5bfe838f2"
+  }, {
+    "targetPage": "Route_By_Identification_Status",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+    
+    },
+    "name": "49de1e88-db7f-45b6-9907-cd1cec4bb3ef"
+  }, {
+    "targetPage": "Route_By_Identification_Status",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+    
+    },
+    "name": "83790bd7-cab6-48d4-aa5c-007cd942c1d4"
+  } ]
+}

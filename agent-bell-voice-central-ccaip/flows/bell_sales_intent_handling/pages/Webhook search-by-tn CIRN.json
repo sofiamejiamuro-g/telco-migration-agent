@@ -1,0 +1,174 @@
+{
+  "name": "7c671165-60d7-4e09-a496-71294ea23aea",
+  "displayName": "Webhook search-by-tn CIRN",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "v1/customer-identification#search-by-tn",
+    "tag": "search-by-tn",
+    "setParameterActions": [ {
+      "parameter": "telephone_number",
+      "value": "$session.params.CIRN"
+    }, {
+      "parameter": "tag",
+      "value": "search-by-tn"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.webhook_success = \"False\" OR $session.params.webhook_success = \"false\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "webhook_success",
+        "value": null
+      }, {
+        "parameter": "identification_status",
+        "value": "Fail"
+      }, {
+        "parameter": "line_type",
+        "value": "Existing"
+      }, {
+        "parameter": "customer_type",
+        "value": "Existing"
+      } ]
+    },
+    "targetPage": "Webhook npa-nxx-lookup",
+    "name": "8234a8ad-0f43-4dff-ae3b-ecb501c5d694"
+  }, {
+    "condition": "$session.params.webhook_success = \"True\" OR $session.params.webhook_success = \"true\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "webhook_success",
+        "value": null
+      }, {
+        "parameter": "customer_id_search_response",
+        "value": "$sys.func.TO_OBJECT($session.params.customer_id_search_response)"
+      }, {
+        "parameter": "first_user_account",
+        "value": "$sys.func.GET($sys.func.GET_FIELD($session.params.customer_id_search_response,\"users\"),0)"
+      }, {
+        "parameter": "service_type_list",
+        "value": "$sys.func.UNIQUE($sys.func.FILTER(\"$session.params.first_user_account\", \"$.billing_accounts[*].services[*].service_type\"))"
+      }, {
+        "parameter": "n_service_type",
+        "value": "$sys.func.COUNT($session.params.service_type_list)"
+      }, {
+        "parameter": "billing_account_number_list",
+        "value": "$sys.func.FILTER(\"$session.params.customer_id_search_response\", \"$..billing_account_number\")"
+      }, {
+        "parameter": "n_billing_account",
+        "value": "$sys.func.COUNT($session.params.billing_account_number_list)"
+      }, {
+        "parameter": "is_prepaid_list",
+        "value": "$sys.func.FILTER(\"$session.params.customer_id_search_response\", \"$[*].users[?(@.contact_number == $session.params.CIRN)].billing_accounts[*].services[*].is_prepaid\")"
+      }, {
+        "parameter": "is_prepaid",
+        "value": "$session.params.customer_id_search_response.users[0].billing_accounts[0].services[0].is_prepaid"
+      } ]
+    },
+    "name": "652a0664-c7d9-4448-bec5-d67045283c14"
+  }, {
+    "condition": "$session.params.n_billing_account = 1 AND $session.params.is_prepaid = false",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "identification_status",
+        "value": "Pass"
+      }, {
+        "parameter": "line_type",
+        "value": "Existing"
+      }, {
+        "parameter": "customer_type",
+        "value": "Existing"
+      }, {
+        "parameter": "billing_account_number",
+        "value": "$session.params.customer_id_search_response.users[0].billing_accounts[0].billing_account_number"
+      }, {
+        "parameter": "billing_account",
+        "value": "$session.params.billing_account_number"
+      }, {
+        "parameter": "billing_account_info_list",
+        "value": "$sys.func.GET_FIELD($sys.func.GET($sys.func.GET_FIELD($session.params.customer_id_search_response, \"users\"), 0), \"billing_accounts\")"
+      } ]
+    },
+    "targetPage": "Webhook npa-nxx-lookup",
+    "name": "3c8a07e0-9e5c-4557-b57a-3c1cf7d12dc9"
+  }, {
+    "condition": "$session.params.n_billing_account \u003e 1",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "identification_status",
+        "value": "Pass"
+      }, {
+        "parameter": "line_type",
+        "value": "Existing"
+      }, {
+        "parameter": "customer_type",
+        "value": "Existing"
+      }, {
+        "parameter": "multiban_sales_lob",
+        "value": "$session.params.service_type_list"
+      } ]
+    },
+    "targetPage": "Webhook npa-nxx-lookup",
+    "name": "38d9ef68-089a-4db2-9d46-2c3eecfd1ac8"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "identification_status",
+        "value": "Fail"
+      }, {
+        "parameter": "line_type",
+        "value": "Existing"
+      }, {
+        "parameter": "customer_type",
+        "value": "Existing"
+      } ]
+    },
+    "targetPage": "Webhook npa-nxx-lookup",
+    "name": "06d96b9c-d563-49cf-bab9-8eaffab2575f"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Webhook search-by-tn CIRN Error",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+    
+    },
+    "name": "4740681c-7b36-492e-979e-f259cf5e6237"
+  }, {
+    "targetPage": "Webhook search-by-tn CIRN Error",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+    
+    },
+    "name": "85ffd86d-acdb-43b9-8454-71b88544f8d4"
+  }, {
+    "targetPage": "Webhook search-by-tn CIRN Error",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+    
+    },
+    "name": "679610df-39ab-4e08-9ea4-834683399f76"
+  }, {
+    "targetPage": "Webhook search-by-tn CIRN Error",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+    
+    },
+    "name": "be2296d4-645e-45ed-997b-035389f47259"
+  }, {
+    "targetPage": "Webhook search-by-tn CIRN Error",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+    
+    },
+    "name": "fb9c9252-dd0c-4c12-b55f-bd4f8e1ab148"
+  }, {
+    "targetPage": "Webhook search-by-tn CIRN Error",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+    
+    },
+    "name": "ff2bd5fd-647b-430c-8ce2-854241e73b81"
+  } ]
+}

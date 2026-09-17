@@ -1,0 +1,89 @@
+{
+  "name": "7531e2d6-c5b2-49ab-918b-8f107344e574",
+  "displayName": "BBM MkSeg Webhook",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "/v1/ibm_mw/db_get#bbm-bbm-mkseg-dip",
+    "tag": "bbm-bbm-mkseg-dip",
+    "setParameterActions": [ {
+      "parameter": "phone",
+      "value": "$session.params.CIRN"
+    }, {
+      "parameter": "webhook_success",
+      "value": null
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "($session.params.webhook_success = true OR $session.params.webhook_success = True) AND $session.params.db_get_bbm_mkseg_dip_response.found = true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "business_type",
+        "value": "BBM"
+      }, {
+        "parameter": "BBM_flag",
+        "value": true
+      } ]
+    },
+    "targetPage": "Regional Webhook",
+    "name": "fb25fa26-4ab8-49c1-9f85-6e4bcc5d1e12"
+  }, {
+    "condition": "$session.params.webhook_success = \"False\" OR $session.params.webhook_success = \"false\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Regional Webhook",
+    "name": "dd1d6e88-2900-4bf6-8dd7-57a128bacc91"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Regional Webhook",
+    "name": "640ccbf0-404c-40c3-a4b8-559764189305"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Regional Webhook",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+    
+    },
+    "name": "34aed1c8-8317-458c-b9e2-bfa4d54589a6"
+  }, {
+    "targetPage": "Regional Webhook",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+    
+    },
+    "name": "34cc2f8c-c0aa-4fd7-94c5-7a0d69c69dd2"
+  }, {
+    "targetPage": "Regional Webhook",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+    
+    },
+    "name": "035b5bed-307e-49f1-81a8-348d2127060e"
+  }, {
+    "targetPage": "Regional Webhook",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+    
+    },
+    "name": "8c9c91e0-1241-458b-a4d7-596e7ab6d808"
+  }, {
+    "targetPage": "Regional Webhook",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+    
+    },
+    "name": "c1d7aa8d-6eb1-4d53-b37a-653513695915"
+  }, {
+    "targetPage": "Regional Webhook",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+    
+    },
+    "name": "f83d6d42-79d6-4dc5-ae4b-f7e21ecc9c6a"
+  } ]
+}

@@ -1,0 +1,61 @@
+{
+  "name": "57746016-2a87-47eb-a59d-f0361e5c6ca5",
+  "displayName": "RDAM2",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.va_entry_flow = \"IBM_transfer\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "For help with prepaid services, I need to transfer you to our prepaid support agents. Are you ready to be transferred, or do you have a question about another service?\n" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Pour de l’aide au sujet des services prépayés, je dois vous transférer à nos agents de soutien des services prépayés. Êtes-vous prêt à être transféré, ou avez-vous une question sur un autre service?\n" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetPage": "Get CX Input2",
+    "name": "45ea72d7-bf68-4548-bbe3-47d93a3ee2b7"
+  }, {
+    "condition": "$session.params.va_entry_flow != \"IBM_transfer\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "For help with prepaid services, I need to transfer you to our prepaid support system. Are you ready to be transferred, or do you have a question about another service?\n" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Pour de l’aide au sujet des services prépayés, je dois vous transférer à notre système de soutien des services prépayés. Êtes-vous prêt à être transféré, ou avez-vous une question sur un autre service?" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetPage": "Get CX Input2",
+    "name": "90b13298-7ed5-4f1a-8e2d-1eeb0e2e8ec0"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "57746016-2a87-47eb-a59d-f0361e5c6ca5"
+      }, {
+        "parameter": "flow_id",
+        "value": "fe6d8a4b-9e84-44d3-9af5-4a5a77d347ab"
+      }, {
+        "parameter": "page_name",
+        "value": "RDAM2"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

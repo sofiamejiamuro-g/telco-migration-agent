@@ -1,0 +1,60 @@
+{
+  "name": "3d545530-6782-4ae3-a45d-ac3d6e0c7868",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_tech_intent_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70012",
+        "language": "en",
+        "lob": "mobility",
+        "utterance": "I'm having trouble making phone calls."
+      },
+      "outputActionParameters": {
+        "lob": "mobility"
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "You can easily check for service outages on our website. I'll send a text to the device you're calling from so you can access it quickly. Is that alright?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Can i check about my account details first?"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "Routing only",
+      "inputActionParameters": {
+        "language": "en",
+        "utterance": "Can i check about my account details first?"
+      },
+      "outputActionParameters": {
+        "language": "en",
+        "utterance": "Can i check about my account details first?"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "customer is having no phone signals",
+    "actionParameters": {
+      "apb_location_id": "70012",
+      "language": "en",
+      "lob": "mobility",
+      "route": "tech_service_outage",
+      "utterance": "I'm having trouble making phone calls."
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "customer wants to first know about account details, hence transfer them to Routing only flow",
+    "actionParameters": {
+      "apb_location_id": "70012",
+      "language": "en",
+      "lob": "mobility"
+    }
+  },
+  "displayName": "EN tech_service_outage - {lob-mobility} | topic switching",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 389,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

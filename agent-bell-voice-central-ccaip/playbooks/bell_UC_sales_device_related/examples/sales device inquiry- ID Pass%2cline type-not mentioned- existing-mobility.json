@@ -1,0 +1,76 @@
+{
+  "name": "cc88d555-4ff3-43f8-83a7-31b24e4ecd27",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "brand": "bell",
+        "language": "en"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Are you inquiring about a new service or do you want to make changes to your current service?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "it's for my current service"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Which service are you inquiring about?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "it's for my mobile phone I want to replace it by another one"
+    }
+  }, {
+    "playbookInvocation": {
+      "playbook": "bell_UC_Equipment",
+      "playbookInput": {
+        "precedingConversationSummary": "follow instructions under \"equipment_upgrade_device\"",
+        "actionParameters": {
+          "language": "en",
+          "lob": "Mobility",
+          "route": "equipment_upgrade_device"
+        }
+      },
+      "playbookOutput": {
+        "actionParameters": {
+          "language": "en"
+        }
+      },
+      "playbookState": "OUTPUT_STATE_OK"
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer says he was looking for new devices",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "en",
+      "route": "sales_device_inquiry",
+      "utterance": "I want to see if you guys have a new devices"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "customer was asked lob and as device_type is mobile phone is transferred to equipment playbook ",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "line_type": "Existing",
+      "lob": "Mobility",
+      "route": "equipment_upgrade_device"
+    }
+  },
+  "displayName": "sales device inquiry- ID Pass,line type-not mentioned- existing-mobility",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 439,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

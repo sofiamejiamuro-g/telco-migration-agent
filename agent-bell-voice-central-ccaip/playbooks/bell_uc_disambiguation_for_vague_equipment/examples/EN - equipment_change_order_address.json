@@ -1,0 +1,48 @@
+{
+  "name": "35944e8a-c41f-4bc1-b737-1a1c674a69a6",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "What kind of help do you need with your order? Are you looking for a status update, do you need to make a change to the address, or something else?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "The shipping address for my order is wrong. Can you change it?"
+    }
+  }, {
+    "playbookInvocation": {
+      "playbook": "bell_UC_Equipment",
+      "playbookInput": {
+        "precedingConversationSummary": "Customer is looking to change the order address",
+        "actionParameters": {
+          "language": "en",
+          "route": "equipment_change_order_address",
+          "utterance": "The shipping address for my order is wrong. Can you change it?"
+        }
+      },
+      "playbookOutput": {
+        "executionSummary": "Customer query is addressed and then transferred to \"bell_UC_Equipment\" playbook for further conversation",
+        "actionParameters": {
+          "language": "en",
+          "route": "equipment_request_sim"
+        }
+      },
+      "playbookState": "OUTPUT_STATE_OK"
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer query about \"Help me with my order\" is addressed",
+    "actionParameters": {
+      "language": "en",
+      "route": "equipment_vague",
+      "utterance": "Help me with my order"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Customer query is addressed and then transferred to \"bell_UC_Equipment\" playbook for further conversation"
+  },
+  "displayName": "EN - equipment_change_order_address",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 320,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

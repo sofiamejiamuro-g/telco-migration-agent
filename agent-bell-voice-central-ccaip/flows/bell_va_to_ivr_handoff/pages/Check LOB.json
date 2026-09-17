@@ -1,0 +1,89 @@
+{
+  "name": "2f96cdc4-71b8-41f8-a59a-e9d28f651bd1",
+  "displayName": "Check LOB",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.tv_sub_type = null AND $session.params.lob = null",
+    "triggerFulfillment": {
+    
+    },
+    "name": "307b59d3-78bf-45d1-8398-c0b50f814cf2",
+    "targetPlaybook": "Bell_UC_Tech_intents_lob"
+  }, {
+    "condition": "$session.params.lob = \"Mobility\" OR $session.params.lob = \"mobility\" OR $session.params.lob = \"MOBILITY\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "id_again",
+        "value": true
+      }, {
+        "parameter": "va_ivr_cpm_route",
+        "value": true
+      }, {
+        "parameter": "ivr_handoff",
+        "value": true
+      }, {
+        "parameter": "fallback_flag",
+        "value": true
+      } ]
+    },
+    "targetPage": "End Flow",
+    "name": "739f7758-260f-4a04-afe9-f5a57310ac68"
+  }, {
+    "condition": "$session.params.lob = \"Internet\" OR $session.params.lob = \"internet\" OR $session.params.lob = \"homephone\" OR $session.params.lob = \"Homephone\" OR $session.params.lob = \"HOMEPHONE\" OR $session.params.lob = \"INTERNET\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Check Account type",
+    "name": "f756f1f1-9ec3-4e63-9caf-7386c685277b"
+  }, {
+    "condition": "$session.params.lob = \"TV\" OR $session.params.lob = \"tv\"",
+    "triggerFulfillment": {
+    
+    },
+    "name": "8dd47fb3-7034-4305-8e98-d74b1b2cc465"
+  }, {
+    "condition": "$session.params.tv_sub_type = \"sat\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "va_ivr_cpm_route",
+        "value": true
+      }, {
+        "parameter": "lob",
+        "value": "TV"
+      } ]
+    },
+    "targetPage": "End Flow",
+    "name": "19857332-399b-466d-bc65-7b4b0c0d04b3"
+  }, {
+    "condition": "$session.params.tv_sub_type = \"fibe\" OR $session.params.tv_sub_type = \"alt\" OR $session.params.tv_sub_type = null",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Check Account type",
+    "name": "b5d1e204-570a-41df-9fc9-a1a791b891a1"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "2f96cdc4-71b8-41f8-a59a-e9d28f651bd1"
+      }, {
+        "parameter": "flow_id",
+        "value": "7236071c-1553-4217-a18d-0a64a4737a9a"
+      }, {
+        "parameter": "page_name",
+        "value": "Check LOB"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

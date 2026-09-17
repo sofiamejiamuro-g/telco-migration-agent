@@ -1,0 +1,22 @@
+{
+  "name": "bb4e334a-6381-4f68-97aa-64ab9c592d36",
+  "displayName": "sales",
+  "transitionRoutes": [ {
+    "condition": "$session.params.route = \"sales_add_to_existing_account\"",
+    "triggerFulfillment": {
+    
+    },
+    "name": "efbf690f-2d58-4e6d-a34d-fe757eee2311",
+    "targetPlaybook": "bell_UC_Sales"
+  }, {
+    "condition": "$session.params.route = \"sales_plans_inquiry\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "route",
+        "value": "sales_plan_inquiry"
+      } ]
+    },
+    "name": "ab0f17f5-56f1-45f8-96c1-0467e2260d5e",
+    "targetPlaybook": "bell_UC_Sales"
+  } ]
+}

@@ -1,0 +1,71 @@
+{
+  "name": "02054e3b-a269-4072-bd53-8d511ed1e8f4",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "brand": "bell",
+        "language": "en"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "I'll send a text to the device you're calling from, so that you can learn more about all sorts of accessories that Bell has to offer. Is that alright?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "What does SMS contains?"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "The SMS will provide you with a link to our website where you can browse and purchase accessories. Is that alright?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "ok"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "brand": "bell",
+        "language": "en",
+        "sms_content": "Bell: You can visit bell.ca/phoneaccessories to view our phone accessories. ( bell.ca/about-us )",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "customer want to order a remote and also asked for more information about SMS",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "Existing",
+      "device_type": "Accessories",
+      "identification_status": "Pass",
+      "language": "en",
+      "line_type": "existing",
+      "route": "sales_order_device",
+      "utterance": "I want to order a remote"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "we got to know from the utterance that the device type Customer asked a question regarding SMS so VA answered them and prompted again for SMS. User then said yes so we route to bell_SMS Trigger",
+    "actionParameters": {
+      "device_type": "Accessories",
+      "language": "en",
+      "line_type": "Existing"
+    }
+  },
+  "displayName": "\"sales_order_device\"- ID Pass,line type-not mentioned- existing-device_type=accessories-remote contextual",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 470,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

@@ -1,0 +1,151 @@
+{
+  "name": "79e2fac6-c22e-4d07-bfef-968ed816c906",
+  "displayName": "check special status",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "active_services",
+        "value": "$sys.func.FILTER(\"$session.params.billing_account_info_list[0]\", \"$.services[*].service_type\")"
+      }, {
+        "parameter": "contains_mobility",
+        "value": "$sys.func.CONTAIN($session.params.active_service, \"MOBILITY\")"
+      } ]
+    },
+    "name": "f6330400-e6c1-4f23-9631-b23580d5b322"
+  }, {
+    "condition": "$session.params.special_status = \"bell_col_aul\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Parfait, je vais maintenant traiter les détails de votre entente de paiement. Veuillez patienter un instant.\n Votre transaction a été traitée avec succès. Veuillez vérifier votre courrier électronique pour obtenir votre numéro de confirmation. Votre service sera rétabli d’ici 30 minutes. Pour éviter toute suspension de vos services, vos paiements doivent être reçus à la date à laquelle vous vous êtes engagé à payer." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "Perfect, I will now process your payment arrangement details. Just a moment.\nYour transaction has successfully been processed. Please check your email for your confirmation number. Your service will be restored within 30 minutes. To avoid suspension, your payments must be received by the date you committed to." ]
+        },
+        "languageCode": "en"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "special_queue",
+        "value": null
+      }, {
+        "parameter": "special_status",
+        "value": "bell_col_delinquent"
+      } ]
+    },
+    "targetFlow": "bell_Feedback",
+    "name": "e19f7893-04b7-4a29-835a-68b78adfb8fe"
+  }, {
+    "condition": "$session.params.special_status = \"bell_col_sus\" AND $session.params.payment_type = \"Credit\" AND $session.params.contains_mobility = \"Mobility\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ " Parfait, je vais maintenant traiter les détails de votre entente de paiement. Veuillez patienter un instant.\nVotre transaction a été traitée avec succès. Veuillez vérifier votre courrier électronique pour obtenir votre numéro de confirmation. Dès réception de votre paiement, votre service sera automatiquement rétabli. Veuillez noter que des frais de reconnexion de 50 $ s’appliqueront par service." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "Perfect, I will now process your payment arrangement details. Just a moment.\nYour transaction has successfully been processed. Please check your email for your confirmation number. As soon as we receive your payment, your service will be restored automatically. Please note a $50 reconnection fee will apply per service." ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "targetFlow": "bell_Feedback",
+    "name": "1ebd4426-5188-47dd-9b11-c025b80a66ae"
+  }, {
+    "condition": "$session.params.special_status = \"bell_col_delinquent\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Votre transaction a été effectuée avec succès. Veuillez vérifier votre courrier électronique pour obtenir votre numéro de confirmation. Pour ne pas perdre vos services, votre paiement doit être effectué à la date convenue." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "Perfect, I will now process your payment arrangement details. Just a moment.\nYour transaction has successfully been processed. Please check your email for your confirmation number. To avoid losing your services; your payment must be made by the date you agreed to." ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "targetFlow": "bell_Feedback",
+    "name": "eb6b58d7-0ecf-4de0-b950-604997ddbb59"
+  }, {
+    "condition": "$session.params.special_status = \"bell_col_sus\" AND $session.params.payment_type != \"Credit\" AND $session.params.contains_mobility = \"Mobility\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Parfait, je vais maintenant traiter les détails de votre entente de paiement. Veuillez patienter un instant.\nVotre transaction a été traitée avec succès. Veuillez vérifier votre courrier électronique pour obtenir votre numéro de confirmation. Dès réception de votre paiement, votre service sera automatiquement rétabli. Veuillez noter que des frais de reconnexion de 50 $ s’appliqueront par service et que le traitement des paiements peut prendre quelques jours." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "Perfect, I will now process your payment arrangement details. Just a moment.\nYour transaction has successfully been processed. Please check your email for your confirmation number. As soon as we receive your payment, your service will be restored automatically. Please note a $50 reconnection fee will apply per service and payments may take a few days to process.\n" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "targetFlow": "bell_Feedback",
+    "name": "d4bd4c4c-fc9e-4cc9-895e-424ed4c303b9"
+  }, {
+    "condition": "$session.params.special_status = \"bell_col_sus\" AND $session.params.payment_type = \"Credit\" AND $session.params.contains_mobility != \"Mobility\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ " Parfait, je vais maintenant traiter les détails de votre entente de paiement. Veuillez patienter un instant.\nVotre transaction a été traitée avec succès. Veuillez vérifier votre courrier électronique pour obtenir votre numéro de confirmation. Dès réception de votre paiement, votre service sera automatiquement rétabli. Veuillez noter que des frais de reconnexion de 49.95 $ s’appliqueront par service." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "Perfect, I will now process your payment arrangement details. Just a moment.\nYour transaction has successfully been processed. Please check your email for your confirmation number. As soon as we receive your payment, your service will be restored automatically. Please note a $49.95 reconnection fee will apply per service." ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "targetFlow": "bell_Feedback",
+    "name": "d372f40c-ab9d-4815-b28a-eb76efacf6fc"
+  }, {
+    "condition": "$session.params.special_status = \"bell_col_sus\" AND $session.params.payment_type != \"Credit\" AND $session.params.contains_mobility != \"Mobility\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Parfait, je vais maintenant traiter les détails de votre entente de paiement. Veuillez patienter un instant.\nVotre transaction a été traitée avec succès. Veuillez vérifier votre courrier électronique pour obtenir votre numéro de confirmation. Dès réception de votre paiement, votre service sera automatiquement rétabli. Veuillez noter que des frais de reconnexion de 49.95 $ s’appliqueront par service et que le traitement des paiements peut prendre quelques jours." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "Perfect, I will now process your payment arrangement details. Just a moment.\nYour transaction has successfully been processed. Please check your email for your confirmation number. As soon as we receive your payment, your service will be restored automatically. Please note a $49.95 reconnection fee will apply per service and payments may take a few days to process.\n" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "targetFlow": "bell_Feedback",
+    "name": "26080674-3b70-4797-85a2-58f9417c1e1b"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "79e2fac6-c22e-4d07-bfef-968ed816c906"
+      }, {
+        "parameter": "flow_id",
+        "value": "f769e9bc-195d-4bb3-a5d0-6244de842e69"
+      }, {
+        "parameter": "page_name",
+        "value": "check special status"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

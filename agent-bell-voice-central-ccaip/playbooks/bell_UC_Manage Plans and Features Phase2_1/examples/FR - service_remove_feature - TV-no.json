@@ -1,0 +1,58 @@
+{
+  "name": "f6706762-e6f7-4449-b0c2-09b955565c90",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70011",
+        "brand": "bell",
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "You can modify your Bell TV programming package at any time using MyBell. I'll send a text to the device you're calling from, so that you can easily make changes to your programming. Is that alright?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Vous pouvez modifier votre forfait de programmation Bell Télé en tout temps à l’aide de MonBell. Je vais envoyer un texto à l’appareil au moyen duquel vous appelez, afin que vous puissiez facilement apporter des changements à votre programmation. Est-ce que ça vous convient?"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "en",
+        "sms_send_status": "Declined"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "The {identification_status} is \"Pass\", {customer_type} is \"Existing\", {streaming_services} is null and {lob} is \"TV\" so, we will prompt user for send SMS confirmation and if user say \"yes\" or anything affirmative then route to \"bell_SMS Trgigger\" flow.",
+    "actionParameters": {
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "fr-ca",
+      "lob": "TV",
+      "route": "service_remove_feature",
+      "utterance": "I'd like to cancel the sports package in my TV plan"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "As the {lob} is \"Internet\" and {streaming_services} is null then we will prompt user to send SMS and if user say \"no\"  then send the user to \"bell_SMS Trigger\" flow",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca"
+    }
+  },
+  "displayName": "FR - service_remove_feature - TV-no",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 494,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

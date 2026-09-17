@@ -1,0 +1,81 @@
+{
+  "name": "d06576ce-4797-4d8b-a417-ffdc4e78e583",
+  "displayName": "webhook check account balance",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "setParameterActions": [ {
+      "parameter": "brand",
+      "value": "$session.params.brand"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "account_balance",
+        "value": "$sys.func.FILTER(   \"$session.params.balance_payment_details_response\",   \"$.brs_postpaid_details.account_balance\" )"
+      } ]
+    },
+    "name": "5cb422e2-f803-421c-8eba-77e11e32257b"
+  }, {
+    "condition": "$session.params.arBalance \u003e= 1",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "special_status",
+        "value": "bell_finals"
+      } ]
+    },
+    "targetFlow": "bell_authentication",
+    "name": "e4b48501-2bf6-42e3-b9de-e4db758f0e98"
+  }, {
+    "condition": "$session.params.arBalance = 0 OR $session.params.arBalance = \"0\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "special_status",
+        "value": "cancelled_no_balance"
+      } ]
+    },
+    "targetPage": "Privilege",
+    "name": "e3385ae1-3a22-4a54-a08b-a2b380b39763"
+  }, {
+    "condition": "$session.params.arBalance \u003c 0",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Privilege",
+    "name": "59a2c255-1761-4d78-82d1-ecd475d26dfc"
+  }, {
+    "condition": "$session.params.auth_status = \"Pass\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I see your account is currently closed." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je vois que votre compte est actuellement fermé." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetFlow": "bell_payment_account_balance_and_last_payment_details",
+    "name": "c64a9ff3-db51-4ec6-91ec-f25fd22f309f"
+  }, {
+    "condition": "$session.params.auth_status = \"Fail\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "If Not Authenticated",
+    "name": "c14c6f49-01f7-438d-8810-f2172acc8acc"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Head intent Trigger",
+    "name": "e633d398-8e17-443b-9d04-10ccd75a7e8f"
+  } ]
+}

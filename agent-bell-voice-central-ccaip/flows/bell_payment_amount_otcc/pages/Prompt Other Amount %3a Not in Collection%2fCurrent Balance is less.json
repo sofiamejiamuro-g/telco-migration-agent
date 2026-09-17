@@ -1,0 +1,171 @@
+{
+  "name": "71c4b611-9ce5-4e9f-85b3-aff713a20ffe",
+  "displayName": "Prompt Other Amount : Not in Collection/Current Balance is less",
+  "form": {
+    "parameters": [ {
+      "displayName": "other_payment_amount",
+      "required": true,
+      "entityType": "@sys.number-sequence",
+      "fillBehavior": {
+        "initialPromptFulfillment": {
+        
+        },
+        "repromptEventHandlers": [ {
+          "event": "sys.no-input-1",
+          "triggerFulfillment": {
+            "messages": [ {
+              "text": {
+                "text": [ "Je n’ai pas tout à fait compris. Pouvez-vous réessayer?" ]
+              },
+              "languageCode": "fr-ca"
+            }, {
+              "text": {
+                "text": [ "I didn't quite get that. Can you try again?" ]
+              },
+              "languageCode": "en"
+            } ]
+          },
+          "name": "78e450a2-174f-4dbf-bb8e-391265d45799"
+        }, {
+          "event": "sys.no-match-1",
+          "triggerFulfillment": {
+            "messages": [ {
+              "text": {
+                "text": [ "Je n’ai pas tout à fait compris. Pouvez-vous réessayer?" ]
+              },
+              "languageCode": "fr-ca"
+            }, {
+              "text": {
+                "text": [ "I didn't quite get that. Can you try again?" ]
+              },
+              "languageCode": "en"
+            } ]
+          },
+          "name": "576e8b06-2651-4ac4-b801-18030cf014f4"
+        }, {
+          "event": "sys.no-input-2",
+          "triggerFulfillment": {
+            "messages": [ {
+              "text": {
+                "text": [ "Je n’ai toujours pas compris" ]
+              },
+              "languageCode": "fr-ca"
+            }, {
+              "text": {
+                "text": [ "I still didn't get that" ]
+              },
+              "languageCode": "en"
+            } ]
+          },
+          "name": "313223ab-eff8-4dc6-a9d0-d4dbf001fcde"
+        }, {
+          "event": "sys.no-match-2",
+          "triggerFulfillment": {
+            "messages": [ {
+              "text": {
+                "text": [ "Je n’ai toujours pas compris" ]
+              },
+              "languageCode": "fr-ca"
+            }, {
+              "text": {
+                "text": [ "I still didn't get that" ]
+              },
+              "languageCode": "en"
+            } ]
+          },
+          "name": "f43822c0-91d4-41ed-9758-2df81f23a3a7"
+        }, {
+          "targetFlow": "bell_determine_handover",
+          "event": "sys.no-input-3",
+          "triggerFulfillment": {
+          
+          },
+          "name": "07d8fdc6-0edd-4444-83f4-f88465ca3b16"
+        }, {
+          "targetFlow": "bell_determine_handover",
+          "event": "sys.no-match-3",
+          "triggerFulfillment": {
+          
+          },
+          "name": "3d9329da-5634-431e-b0f1-f84b38823ee9"
+        } ]
+      }
+    } ]
+  },
+  "entryFulfillment": {
+    "messages": [ {
+      "text": {
+        "text": [ "D'accord, quel montant souhaitez-vous payer?" ]
+      },
+      "languageCode": "fr-ca"
+    }, {
+      "text": {
+        "text": [ "OK, please tell me how much you want to pay?" ]
+      },
+      "languageCode": "en"
+    } ],
+    "setParameterActions": [ {
+      "parameter": "other_payment_amount",
+      "value": null
+    } ]
+  },
+  "transitionRoutes": [ {
+    "intent": "context.confirm_pay_full_balance",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Great." ]
+        },
+        "languageCode": "en"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "amount_paid",
+        "value": "$session.params.current_account_balance"
+      } ]
+    },
+    "targetFlow": "bell_payment_cc_details_input",
+    "name": "3233e242-bf50-417c-99da-79affe9d2973"
+  }, {
+    "condition": "$session.params.other_payment_amount != null",
+    "triggerFulfillment": {
+      "generators": [ {
+        "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/c04b950b-c924-4a38-84d8-06e8da7030ef",
+        "inputParameters": [ {
+          "key": "ip_amount",
+          "value": "$session.params.other_payment_amount"
+        } ],
+        "outputParameter": "$request.generative.other_payment_amount"
+      } ]
+    },
+    "name": "3e21b175-5cc5-48d5-9a88-c35bd91b839d"
+  }, {
+    "condition": "$session.params.other_payment_amount != null",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "other_payment_amount",
+        "value": "$request.generative.other_payment_amount"
+      }, {
+        "parameter": "other_payment_amount",
+        "value": "$sys.func.TO_NUMBER($session.params.other_payment_amount)"
+      } ]
+    },
+    "name": "5c78aaac-cec4-409e-9827-4ccf45936073"
+  }, {
+    "condition": "$session.params.other_payment_amount = -100",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "No Match Counter",
+    "name": "e1225ef3-20ca-4212-9858-da407b855992"
+  }, {
+    "condition": "$session.params.other_payment_amount != null",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "amount_paid",
+        "value": "$session.params.other_payment_amount"
+      } ]
+    },
+    "targetPage": "Amount Validation",
+    "name": "9673ea91-3846-48b6-a65d-b4905e679802"
+  } ]
+}

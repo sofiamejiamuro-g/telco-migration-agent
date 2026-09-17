@@ -1,0 +1,57 @@
+{
+  "name": "667d6a22-0ffb-404f-9eea-9e9cd3ffeea5",
+  "displayName": "Check number of ACUT tickets",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "setParameterActions": [ {
+      "parameter": "ticket_summaries",
+      "value": "$session.params.acut_find_response.ticket_summaries"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$sys.func.COUNT($session.params.acut_find_response.ticket_summaries) = 1",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Found an ACUT ticket",
+    "name": "97a4367e-22f3-4a9d-a3a0-6264d48ac115",
+    "description": "Single ACUT ticket"
+  }, {
+    "condition": "$sys.func.COUNT($session.params.acut_find_response.ticket_summaries) \u003e 1",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Multiple ACUT tickets",
+    "name": "2a5076b3-0979-4ce2-b761-b96552bcb3dc",
+    "description": "Multiple ACUT tickets"
+  }, {
+    "condition": "$sys.func.COUNT($session.params.acut_find_response.ticket_summaries) = 0 OR $session.params.acut_find_response.ticket_summaries = \"\" OR $session.params.acut_find_response.ticket_summaries = null",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Check LOB - OMF summary",
+    "name": "7cffebd2-096f-421d-980c-9dbc142a6be1",
+    "description": "No ACUT tickets"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "667d6a22-0ffb-404f-9eea-9e9cd3ffeea5"
+      }, {
+        "parameter": "flow_id",
+        "value": "5ea404f8-de10-4476-880f-d17773565fad"
+      }, {
+        "parameter": "page_name",
+        "value": "Check number of ACUT tickets"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

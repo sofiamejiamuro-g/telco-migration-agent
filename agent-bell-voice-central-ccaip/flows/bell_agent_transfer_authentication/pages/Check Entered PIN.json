@@ -1,0 +1,85 @@
+{
+  "name": "328eeb96-026a-4ef0-a748-373a7f09882d",
+  "displayName": "Check Entered PIN",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$sys.func.LEN($session.params.pin) = 4",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Validate Pin",
+    "name": "b65007fa-01f4-41c0-8f04-53baee09f61e"
+  }, {
+    "condition": "$sys.func.LEN($session.params.pin) != 4 AND $session.params.pin_validation_counter = 1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Sorry, that’s not the correct PIN." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Désolé, ce n'est toujours pas le bon NIP." ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "pin_validation_counter",
+        "value": 2
+      }, {
+        "parameter": "auth_status",
+        "value": "Fail"
+      } ]
+    },
+    "targetPage": "Webhook set-auth-status",
+    "name": "3224cea5-6175-4d2e-887d-798dcc2378e1"
+  }, {
+    "condition": "$sys.func.LEN($session.params.pin) != 4 AND $session.params.pin_validation_counter = 0",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "That doesn't seem to match what we have in our files. Can you give that another try? " ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Cela ne semble pas correspondre à ce que nous avons dans nos dossiers. Pouvez-vous réessayer?" ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "pin_validation_counter",
+        "value": 1
+      }, {
+        "parameter": "pin",
+        "value": null
+      } ]
+    },
+    "targetPage": "PIN Auth - Start",
+    "name": "29c1b978-00cc-4fde-bdb0-87ca93346c56"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "328eeb96-026a-4ef0-a748-373a7f09882d"
+      }, {
+        "parameter": "flow_id",
+        "value": "87797521-bad6-4ad0-8ba5-2ff3b1d9bab2"
+      }, {
+        "parameter": "page_name",
+        "value": "Check Entered PIN"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

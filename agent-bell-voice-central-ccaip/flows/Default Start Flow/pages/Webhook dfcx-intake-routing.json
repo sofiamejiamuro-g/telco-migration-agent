@@ -1,0 +1,135 @@
+{
+  "name": "9a2b5c01-370d-4c0a-a63c-beb065299ce9",
+  "displayName": "Webhook dfcx-intake-routing",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "v1/dfcx/intake-routing",
+    "tag": "N/A",
+    "setParameterActions": [ {
+      "parameter": "intake_tfn",
+      "value": "$session.params.tfn"
+    }, {
+      "parameter": "clid",
+      "value": "$session.params.clid"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.intake_routing_lookup_response.flagged_for_testing = true AND $session.params.webhook_success = true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "intake_tfn",
+        "value": null
+      } ]
+    },
+    "targetFlow": "bell_test_wrapper",
+    "name": "2dd2866c-9b03-4120-bbc1-11e883aea6fa"
+  }, {
+    "condition": "$session.params.webhook_success = true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "webhook_success",
+        "value": null
+      }, {
+        "parameter": "ibm_application_id",
+        "value": "$session.params.intake_routing_lookup_response.va_ibm_id"
+      }, {
+        "parameter": "va_entry_flow",
+        "value": "$session.params.intake_routing_lookup_response.va_entry_flow"
+      }, {
+        "parameter": "va_caller_channel",
+        "value": "$session.params.intake_routing_lookup_response.va_caller_channel"
+      }, {
+        "parameter": "va_ibm_id",
+        "value": "$session.params.intake_routing_lookup_response.va_ibm_id"
+      } ]
+    },
+    "targetPage": "check va_entry",
+    "name": "73c9a362-b75d-4cb2-bda5-f563faa7661b"
+  }, {
+    "condition": "$session.params.webhook_success = false",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "webhook_success",
+        "value": null
+      }, {
+        "parameter": "va_ibm_id",
+        "value": "BCE_Entry"
+      }, {
+        "parameter": "va_entry_flow",
+        "value": "BCE_Entry"
+      }, {
+        "parameter": "va_caller_channel",
+        "value": "TFN"
+      }, {
+        "parameter": "ibm_application_id",
+        "value": "$session.params.va_ibm_id"
+      } ]
+    },
+    "targetPage": "check va_entry",
+    "name": "1b1d7f72-b50d-4463-b4e2-ec50ab9f93b2"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "9a2b5c01-370d-4c0a-a63c-beb065299ce9"
+      }, {
+        "parameter": "flow_id",
+        "value": "00000000-0000-0000-0000-000000000000"
+      }, {
+        "parameter": "page_name",
+        "value": "Webhook dfcx-intake-routing"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Webhook dfcx-intake-routing Error",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+    
+    },
+    "name": "f822543b-06d0-4a80-8944-d537f21f5836"
+  }, {
+    "targetPage": "Webhook dfcx-intake-routing Error",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+    
+    },
+    "name": "1be81773-d2f9-404d-b807-253d661e5966"
+  }, {
+    "targetPage": "Webhook dfcx-intake-routing Error",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+    
+    },
+    "name": "ce69ea68-8653-459e-bf0f-99c73b1d309a"
+  }, {
+    "targetPage": "Webhook dfcx-intake-routing Error",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+    
+    },
+    "name": "ae834f02-b1d4-4d01-a3b4-ff0b1e596372"
+  }, {
+    "targetPage": "Webhook dfcx-intake-routing Error",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+    
+    },
+    "name": "d6b42d60-cfa9-4c25-a26e-6801f9cfa735"
+  }, {
+    "targetPage": "Webhook dfcx-intake-routing Error",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+    
+    },
+    "name": "814f425c-8ad2-4222-b259-f5e73032146a"
+  } ]
+}

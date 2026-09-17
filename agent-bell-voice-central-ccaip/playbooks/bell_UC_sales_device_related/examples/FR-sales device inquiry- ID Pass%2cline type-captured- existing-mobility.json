@@ -1,0 +1,60 @@
+{
+  "name": "bfd60c9f-e340-47d4-863c-7ad1cddc328b",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "brand": "bell",
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "playbookInvocation": {
+      "playbook": "bell_UC_Equipment",
+      "playbookInput": {
+        "precedingConversationSummary": "follow the instructions under the route \"equipment_upgrade_device\"",
+        "actionParameters": {
+          "language": "fr-ca",
+          "lob": "Mobility",
+          "route": "equipment_upgrade_device"
+        }
+      },
+      "playbookOutput": {
+        "actionParameters": {
+          "language": "fr-ca"
+        }
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer has questions about device availability, device features, cost, related to devices that Bell sells",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "fr-ca",
+      "line_type": "Existing",
+      "lob": "Mobility",
+      "route": "sales_device_inquiry",
+      "utterance": "C'est pour l'achat du téléphone cellulaire"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "from the identification flow, know the customer_type as \"Existing\", we already know from query that we have {lob} as mobility and {device_type} as phone , if it is mobility then reroute to  \"equipment_upgrade_device\"",
+    "actionParameters": {
+      "language": "fr-ca",
+      "line_type": "Existing",
+      "lob": "Mobility",
+      "route": "equipment_upgrade_device"
+    }
+  },
+  "displayName": "FR-sales device inquiry- ID Pass,line type-captured- existing-mobility",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 399,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

@@ -1,0 +1,81 @@
+{
+  "name": "c15f00e8-7ce1-47e2-9b6b-d3f2ea0a2326",
+  "displayName": "[whk] OMF Order Summary - Internet",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "/v1/ticket_management/omf/order#summary-Internet",
+    "tag": "summary",
+    "setParameterActions": [ {
+      "parameter": "webhook_success",
+      "value": null
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.webhook_success = true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Check OMF Order Summary response",
+    "name": "9499f70c-7582-4d66-8c46-158589e80b13"
+  }, {
+    "condition": "$session.params.webhook_success = false",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Failure - Troubleshooting Intents",
+    "name": "1840e4ed-4211-4511-b5f1-7244b2406385"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Failure - Troubleshooting Intents",
+    "name": "cleanup-hardstop-route"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Webhook Failure - Troubleshooting Intents",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+    
+    },
+    "name": "78d6158e-9292-4895-8c1f-8b7f35527a83"
+  }, {
+    "targetPage": "Webhook Failure - Troubleshooting Intents",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+    
+    },
+    "name": "cd7d32a1-3a42-4c12-b9e5-6038241fb280"
+  }, {
+    "targetPage": "Webhook Failure - Troubleshooting Intents",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+    
+    },
+    "name": "75943e65-51cd-4e41-9c3d-1a0703d3ae18"
+  }, {
+    "targetPage": "Webhook Failure - Troubleshooting Intents",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+    
+    },
+    "name": "9dd37ac3-f5d0-46a0-874e-050ba092a7d5"
+  }, {
+    "targetPage": "Webhook Failure - Troubleshooting Intents",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+    
+    },
+    "name": "5124e6a7-164f-4cc7-89fc-fce6826cdb0c"
+  }, {
+    "targetPage": "Webhook Failure - Troubleshooting Intents",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+    
+    },
+    "name": "ddae1d10-aa9c-4e6c-a96a-fe5adcb732f5"
+  } ],
+  "description": "Note: must have brand and internet_account_number"
+}

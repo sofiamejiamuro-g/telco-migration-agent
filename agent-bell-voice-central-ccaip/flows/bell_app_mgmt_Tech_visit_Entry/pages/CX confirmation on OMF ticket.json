@@ -1,0 +1,48 @@
+{
+  "name": "c8399def-2d0c-49c2-b6a1-bcdfd50a070e",
+  "displayName": "CX confirmation on OMF ticket",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "intent": "context.confirm_yes",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "order_identifier",
+        "value": "$session.params.order_identifier1"
+      }, {
+        "parameter": "internet_order_reference",
+        "value": "$session.params.internet_order_reference1"
+      } ]
+    },
+    "targetFlow": "bell_ticket_mgmt_omf_ticket_check_appointment_mgmt",
+    "name": "5d3de5a4-9d64-408b-85a7-07866493c72d"
+  }, {
+    "intent": "context.confirm_no",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I see you have another order related to your $session.params.recent_service_type2. Is this the ticket you are calling about?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je vois que vous avez une autre commande liée à votre $session.params.recent_service_type2. S’agit-il du billet pour lequel vous appelez?" ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "order_identifier",
+        "value": null
+      }, {
+        "parameter": "internet_order_reference",
+        "value": null
+      } ]
+    },
+    "targetPage": "CX confirmation on OMF ticket 2",
+    "name": "3a487084-5ce2-418f-8471-c0547121a8b1"
+  } ]
+}

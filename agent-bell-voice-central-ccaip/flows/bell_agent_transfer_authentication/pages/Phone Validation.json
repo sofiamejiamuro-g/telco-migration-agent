@@ -1,0 +1,104 @@
+{
+  "name": "1b6c9c64-ae1b-4f07-b2b6-5c75114b43d5",
+  "displayName": "Phone Validation",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "setParameterActions": [ {
+      "parameter": "number_is_wsc_on_ban",
+      "value": "$sys.func.CONTAIN($session.params._wsc_on_ban, $session.params.telephone_otp)"
+    }, {
+      "parameter": "number_is_contact_on_ban",
+      "value": "$sys.func.CONTAIN($session.params.contact_number_on_ban, $session.params.telephone_otp)"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.CIRN_flag = true AND ($session.params.number_is_wsc_on_ban = true OR $session.params.number_is_contact_on_ban = true)",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Thanks." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Merci." ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "telephone_number",
+        "value": "$session.params.telephone_otp"
+      } ]
+    },
+    "targetPage": "Webhook send-otp",
+    "name": "83c661a5-9855-43a8-b0a2-5003b0543327"
+  }, {
+    "condition": "$session.params.telephone_otp_counter = 1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "There seems to be a problem." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Il semble y avoir un problème." ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "auth_status",
+        "value": "Fail"
+      }, {
+        "parameter": "status",
+        "value": "SMSTimeout"
+      } ]
+    },
+    "targetPage": "Webhook set-auth-status",
+    "name": "bc6af201-aa28-4710-a550-2d967661cbfb"
+  }, {
+    "condition": "True",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Sorry, that number isn’t associated with your account. Can you give me another number?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Le numéro de téléphone que vous m’avez donné n’est malheureusement pas associé à votre compte. Pouvez-vous me donner un autre numéro?" ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "telephone_otp_counter",
+        "value": 1
+      }, {
+        "parameter": "telephone_otp",
+        "value": null
+      } ]
+    },
+    "targetPage": "Prompt Phone Number",
+    "name": "65240cda-2d4f-4b25-af1f-bc653dda686b"
+  } ],
+  "advancedSettings": {
+    "speechSettings": {
+      "endpointerSensitivity": 90,
+      "noSpeechTimeout": {
+        "seconds": 10
+      },
+      "models": [ {
+        "key": "en",
+        "value": "telephony_short"
+      }, {
+        "key": "fr-ca",
+        "value": "telephony_short"
+      } ]
+    }
+  },
+  "speakerIdSettings": {
+  
+  }
+}

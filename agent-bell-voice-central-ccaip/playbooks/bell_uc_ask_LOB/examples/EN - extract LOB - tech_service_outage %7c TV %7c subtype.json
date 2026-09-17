@@ -1,0 +1,41 @@
+{
+  "name": "da685aa2-57db-41f4-b1c6-3866d3faaecf",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Could you tell me which service you're having issues with? Mobility, Internet, TV, or Homephone?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "TV"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Which type of TV service are you inquiring about? Fibe TV, Fibe TV app, or Satellite TV?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Fibe TV"
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "User wants to schedule the appointment, but does not mention LOB",
+    "actionParameters": {
+      "language": "en",
+      "route": "tech_service_outage",
+      "utterance": "I want to see if there is some kind of outage in my area."
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "User wants to schedule, which can be any of these routes or intent (tech_field_tech_visits | tech_change_appointment | tech_field_tech_visit_cancel), but does not mention LOB , so route ask them about lob and extract the lob if mentioned and of lob is TV then ask about TV subtype and capture the same, , and return back to PARENT playbook ",
+    "actionParameters": {
+      "apb_location_id": "70015",
+      "language": "en",
+      "lob": "TV",
+      "route": "tech_service_outage"
+    }
+  },
+  "displayName": "EN - extract LOB - tech_service_outage | TV | subtype",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 293,
+  "languageCode": "en"
+}

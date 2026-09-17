@@ -1,0 +1,60 @@
+{
+  "name": "73fa218f-68e9-4f7b-b115-2b8c58fac19b",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Bien sûr, laissez-moi vous aider.\n\nÀ propos de quel service communiquez-vous avec nous?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "internet"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_aqd",
+      "inputActionParameters": {
+        "language": "fr-ca",
+        "lob": "internet",
+        "special_queue": "bell_sales_to_mts"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customers want to know about different plans or compare different plans that Bell has and lob identified as \" Internet\" OR \"TV\" OR \"Homephone\"",
+    "actionParameters": {
+      "customer_type": "New",
+      "identification_status": "Fail",
+      "language": "fr-ca",
+      "province": "MTS",
+      "route": "sales_plans_inquiry",
+      "utterance": "j'ai besoin d'un nouveau plan"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "We need to check the result from identification flow from the webhook NPANXX, if it is \"MTS\" then call bell_aqd flow and set special_queue =\nbell_sales_to_mts",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca",
+      "lob": "internet",
+      "province": "MTS"
+    }
+  },
+  "displayName": "FR - sales plans inquiry- ID Fail, customer_type-new- MTS",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 400,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "fr"
+}

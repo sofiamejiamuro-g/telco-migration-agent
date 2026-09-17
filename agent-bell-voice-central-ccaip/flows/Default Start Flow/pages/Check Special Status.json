@@ -1,0 +1,63 @@
+{
+  "name": "27619021-c48e-46e0-ab04-759acdafbd9d",
+  "displayName": "Check Special Status",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.speak_to_agent_counter \u003c= 1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "$request.generative.speaktoagent" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "$request.generative.speaktoagent" ]
+        },
+        "languageCode": "en"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "speak_to_agent_counter",
+        "value": "$sys.func.ADD($session.params.speak_to_agent_counter, 1)"
+      }, {
+        "parameter": "route",
+        "value": "other_speak_to_agent"
+      } ],
+      "generators": [ {
+        "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/d107fc93-46ff-43b0-8283-7066e3f62a37",
+        "outputParameter": "$request.generative.speaktoagent"
+      } ]
+    },
+    "targetPage": "Previous Page",
+    "name": "7f1fbacb-ff47-4ccf-a2d1-fb1d1d49d0db"
+  }, {
+    "condition": "$session.params.special_status = \"bell_finals\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Check Intent",
+    "name": "1733d649-d02b-4c43-89cd-9bf865cf50b0"
+  }, {
+    "condition": "$session.params.special_status = \"bell_col_sus\" OR $session.params.special_status = \"bell_col_aul\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "special_queue",
+        "value": "bell_collections"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "f535187d-5588-4277-8999-f5d5e55dd2d3"
+  }, {
+    "condition": "$session.params.special_status = \"bell_privilege\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_aqd",
+    "name": "01904fef-2280-4a72-a747-f0bbd79a7d85"
+  } ]
+}

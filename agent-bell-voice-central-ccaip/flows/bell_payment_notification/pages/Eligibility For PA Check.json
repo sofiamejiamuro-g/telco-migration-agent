@@ -1,0 +1,54 @@
+{
+  "name": "ee05c717-3136-4f9e-b11b-f8634462aa58",
+  "displayName": "Eligibility For PA Check",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "($session.params.showPaymentArrangementLink = \"false\" OR $session.params.showPaymentArrangementLink = false) AND $session.params.amountPaid \u003c $session.params.past_due_amount",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "It seems your balance owing is less than the past due amount. Please hold while we transfer you to an agent." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Il semble que votre solde dû est inférieur au montant en souffrance." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "a68302d2-6f67-4309-a893-74b0046b159f"
+  }, {
+    "condition": "($session.params.showPaymentArrangementLink = \"true\" OR $session.params.showPaymentArrangementLink = true) AND $session.params.amountPaid \u003c $session.params.past_due_amount",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Payment Arrangement Prompt",
+    "name": "cc2ad08c-8039-417e-b17d-d2711ddebcd6"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "ee05c717-3136-4f9e-b11b-f8634462aa58"
+      }, {
+        "parameter": "flow_id",
+        "value": "ced63037-f058-4dd0-9269-97742185ea0f"
+      }, {
+        "parameter": "page_name",
+        "value": "Eligibility For PA Check"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

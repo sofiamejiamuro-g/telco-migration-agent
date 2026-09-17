@@ -1,0 +1,67 @@
+{
+  "name": "1e8f4f29-8f79-42af-96f7-11973670ad3e",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "language": "en"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Sure, let me help you with that.\n\nWhich service are you inquiring about?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "internet"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Let’s check if we offer Internet and Home phone service in your area. In which province are you looking to get service?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "ON"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_aqd",
+      "inputActionParameters": {
+        "language": "en",
+        "lob": "internet"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customers want to know about different plans or compare different plans that Bell has and lob identified as \" Internet\" OR \"TV\" OR \"Homephone\"",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "New",
+      "language": "en",
+      "province": "ROC",
+      "route": "sales_plans_inquiry",
+      "utterance": "I need a plan"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "If lob is not mentioned, ask for it and route to bell_uc_ask_LOB if user does not mention it, \nWhen province is anything other than ON and QC or is null or empty, ask user for province, extract in {province} parameter and further route based on province",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "lob": "internet",
+      "province": "ROC"
+    }
+  },
+  "displayName": "sales plans inquiry- ID Fail, customer_type-new- province not identified- ON",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 432,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

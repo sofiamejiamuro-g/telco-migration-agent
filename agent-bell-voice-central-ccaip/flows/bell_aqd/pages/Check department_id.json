@@ -1,0 +1,85 @@
+{
+  "name": "62b55d42-37b9-41ed-b3d8-cd2a6f700da2",
+  "displayName": "Check department_id",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.additional_info = null",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "additional_info",
+        "value": ""
+      } ]
+    },
+    "name": "c8ce40d8-af7a-4ed1-9dd1-6d93abebb482"
+  }, {
+    "condition": "$session.params.callKey = null",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "callKey",
+        "value": ""
+      }, {
+        "parameter": "customer_authentication",
+        "value": false
+      } ]
+    },
+    "name": "37b3cc94-e95e-4a05-9e13-bb66ae7692ef"
+  }, {
+    "condition": "$session.params.customer_authentication != true OR $session.params.auth_status != Pass",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "callKey",
+        "value": ""
+      }, {
+        "parameter": "customer_authentication",
+        "value": false
+      } ]
+    },
+    "name": "878214fe-42fd-449a-94e7-0fccda43fa6c"
+  }, {
+    "condition": "$session.params.department_id != 2005 OR $session.params.department_id != \"2005\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Get Authentication Status",
+    "name": "77c699f5-a61a-4ee8-92ac-63d963a839f4"
+  }, {
+    "condition": "$session.params.customer_authentication = null",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "customer_authentication",
+        "value": false
+      } ]
+    },
+    "name": "9be081a4-5f31-44ee-b23b-56cc275fc2a8"
+  }, {
+    "condition": "$session.params.department_id = 2005",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "dam_id",
+        "value": "XFER"
+      }, {
+        "parameter": "cti_at",
+        "value": "VAAT"
+      }, {
+        "parameter": "account_type",
+        "value": "Consumer"
+      }, {
+        "parameter": "brand",
+        "value": "$session.params.l2_brand"
+      }, {
+        "parameter": "customer_authentication",
+        "value": "$sys.func.IF(\"$session.params.auth_status = 'Pass'\", true, false)"
+      }, {
+        "parameter": "apb_transfer_location",
+        "value": "$sys.func.IF(\"$session.params.apb_skip = true\", null, \"70032\")"
+      } ]
+    },
+    "targetPage": "Send Transfer Data 2005",
+    "name": "6cff1d73-0f57-4fae-99e7-db65b0c5f499"
+  } ]
+}

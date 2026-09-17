@@ -1,0 +1,64 @@
+{
+  "name": "af191aac-b3f5-4108-8dbf-26c705766e2e",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+        "language": "fr-ca"
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Bien sûr, laissez-moi vous aider.\nVérifions si nous offrons des services Internet ou de téléphonie résidentielle dans votre secteur. Dans quelle province avez-vous besoin de services?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Grande Cache"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_aqd",
+      "inputActionParameters": {
+        "language": "fr-ca",
+        "line_type": "New",
+        "lob": "Internet",
+        "special_queue": "cable_internet"
+      },
+      "outputActionParameters": {
+        "language": "fr-ca"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "customer wants to add a new internet line and {province} is \"ROC\" or \"BC\" OR \"AB\"",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "fr-ca",
+      "line_type": "New",
+      "lob": "Internet",
+      "province": "BC",
+      "route": "sales_add_to_existing_account",
+      "utterance": "Comment puis-je ajouter un service internet à mon compte ?"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "customer is asked {province} and is asked about sms and as user denies to sms we are transferring user to sms flow",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca",
+      "line_type": "New",
+      "lob": "Internet",
+      "province": "AB"
+    }
+  },
+  "displayName": "FR-sales_add_to_existing-account-Existing-ROC(internet)(province-AB)",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 432,
+  "languageCode": "en"
+}

@@ -1,0 +1,52 @@
+{
+  "name": "cf11e542-4f10-45fa-b995-496faff5e7bf",
+  "displayName": "No Match Counter",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.other_amount_counter = 1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Je n'ai pas compris. Vous pouvez le répéter ?" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "I did not get that. Can you say that amount again?" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "targetPage": "Previous Page",
+    "name": "8269993a-56e3-4554-9f70-9297ebdaf85a"
+  }, {
+    "condition": "$session.params.other_amount_counter = 2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Je n'ai toujours pas compris." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "I still didn't get that." ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "targetPage": "Previous Page",
+    "name": "422f5778-a21a-421f-9f87-a252fbd01190"
+  }, {
+    "condition": "$session.params.other_amount_counter = 3",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "other_amount_counter",
+        "value": null
+      } ]
+    },
+    "targetFlow": "bell_determine_handover",
+    "name": "23640b13-9cc4-49ce-b686-6f36bb7c9809"
+  } ]
+}

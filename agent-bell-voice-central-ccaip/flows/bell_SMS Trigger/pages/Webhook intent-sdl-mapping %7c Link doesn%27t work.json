@@ -1,0 +1,70 @@
+{
+  "name": "582edd7b-9f67-4afa-9174-918dcde742ff",
+  "displayName": "Webhook intent-sdl-mapping | Link doesn't work",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "v1/intent-sdl-mapping",
+    "tag": "default",
+    "setParameterActions": [ {
+      "parameter": "intent",
+      "value": "$session.params.route"
+    }, {
+      "parameter": "brand",
+      "value": "bell"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.webhook_success = True AND $session.params.intent_sdl_map_response.url != null",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I apologize for not being able to answer your question.   You can check out our frequently asked questions at $session.params.intent_sdl_map_response.url if you are looking for something else. " ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je suis désolé de ne pas pouvoir répondre à ta question.\n\nTu peux consulter notre foire aux questions à $session.params.intent_sdl_map_response.url si tu cherches autre chose." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "de48923b-002d-4bba-9e1e-bee2dff29f0c"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I apologize for not being able to answer your question.   \u003cspeak\u003eYou can check out our frequently asked questions at\n\u003csay-as interpret-as=\"url\"\u003ebell.ca/support\u003c/say-as\u003e\u003c/speak\u003e if you are looking for something else. " ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je suis désolé de ne pas pouvoir répondre à ta question.\n\nTu peux consulter notre foire aux questions à vpc.ca/soutien si tu cherches autre chose." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "12caf65a-155f-41be-8da7-f20e76bfbaf0"
+  } ],
+  "eventHandlers": [ {
+    "event": "webhook.error",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I apologize for not being able to answer your question. \u003cspeak\u003eYou can check out our frequently asked questions at\n\u003csay-as interpret-as=\"url\"\u003ebell.ca/support\u003c/say-as\u003e\u003c/speak\u003e if you are looking for something else. " ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je suis désolé de ne pas pouvoir répondre à ta question.\n\nTu peux consulter notre foire aux questions à vpc.ca/soutien si tu cherches autre chose." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "9ec63b46-2e81-416b-885d-ebdcb7cbc981"
+  } ]
+}

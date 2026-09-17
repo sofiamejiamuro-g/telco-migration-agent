@@ -1,0 +1,83 @@
+{
+  "name": "870075ef-f20a-4dc6-8443-645e315881e7",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70024",
+        "language": "en"
+      },
+      "outputActionParameters": {
+        "language": "en"
+      }
+    }
+  }, {
+    "playbookInvocation": {
+      "playbook": "bell_uc_ask_LOB",
+      "playbookInput": {
+        "actionParameters": {
+          "language": "en",
+          "utterance": "How to call to Korea?"
+        }
+      },
+      "playbookOutput": {
+        "actionParameters": {
+          "language": "en",
+          "lob": "mobility"
+        }
+      },
+      "playbookState": "OUTPUT_STATE_OK"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Is this related to a technical problem, or would you like to learn more about the add-on or features we provide?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "techincal"
+    }
+  }, {
+    "playbookInvocation": {
+      "playbook": "Bell_UC_Technical_Support_Infobot",
+      "playbookInput": {
+        "actionParameters": {
+          "language": "en",
+          "lob": "mobility",
+          "route": "tech_configure_settings_request",
+          "utterance": "How to call to Korea?"
+        }
+      },
+      "playbookOutput": {
+        "actionParameters": {
+          "language": "en"
+        }
+      },
+      "playbookState": "OUTPUT_STATE_OK"
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer asking about how to call Korea or abroad",
+    "actionParameters": {
+      "brand": "bell",
+      "identification_status": "Pass",
+      "language": "en",
+      "route": "service_feature_inquiry",
+      "utterance": "How to call to Korea?"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "First, flow \"bell_apb\" is called followed by playbook \"bell_uc_ask_LOB\" and since here customer is facing Technical issue, so playbook \"Bell_UC_Technical_Support_Infobot\"  is triggered with route as \"tech_configure_settings_request\"",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "lob": "Mobility",
+      "route": "tech_configure_settings_request",
+      "utterance": "How to call to Korea?"
+    }
+  },
+  "displayName": "EN_service_feature_inquiry_how_to_call_to_Korea_Technical Issue",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 523,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

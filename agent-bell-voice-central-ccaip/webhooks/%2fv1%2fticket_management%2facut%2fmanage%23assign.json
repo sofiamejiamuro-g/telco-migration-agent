@@ -1,0 +1,27 @@
+{
+  "name": "675d93d6-98d4-42b7-b19b-0bb4c5699358",
+  "displayName": "/v1/ticket_management/acut/manage#assign",
+  "timeout": {
+    "seconds": 30
+  },
+  "serviceDirectory": {
+    "service": "projects/gcp-it-npe-pltfm-apigee/locations/us-central1/namespaces/apigee-nb-usc1-service-dir-namespace/services/apigee-nb-usc1-service",
+    "genericWebService": {
+      "uri": "https://apigee-nane1-uat.int.bell.ca/v1/ticket_management/acut/manage",
+      "requestHeaders": [ {
+        "key": "x-apikey",
+        "value": "npZmDivP6Hxes3wtQ0tC9RqItjJTY8TgZHbOPNeFwvSYSKPI"
+      } ],
+      "webhookType": "FLEXIBLE",
+      "httpMethod": "POST",
+      "requestBody": "{\n  \"sessionInfo\": {\n    \"dfcx_session_id\": \"$session.params.dfcx_session_id\",\n    \"agent_id\": \"$session.params.agent_id\",\n    \"parameters\": {\n      \"dispatch_type\": \"FIELD\",\n      \"menu_type\": \"$session.params.menu_type\",\n      \"ticket_number\": \"$session.params.ticket_number\"\n    }\n  },\n  \"fulfillmentInfo\": {\n    \"tag\": \"assign\"\n  },\n  \"languageCode\": \"$request.language\"\n}",
+      "parameterMapping": [ {
+        "key": "acut_assign_response",
+        "value": "sessionInfo.parameters.acut_assign_response"
+      }, {
+        "key": "webhook_success",
+        "value": "sessionInfo.parameters.webhook_success"
+      } ]
+    }
+  }
+}

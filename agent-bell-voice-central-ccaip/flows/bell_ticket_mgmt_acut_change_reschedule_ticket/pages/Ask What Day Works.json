@@ -1,0 +1,88 @@
+{
+  "name": "7b0cfad0-87c6-4ac9-a878-9b49013a4d0c",
+  "displayName": "Ask What Day Works",
+  "form": {
+    "parameters": [ {
+      "displayName": "day",
+      "required": true,
+      "entityType": "@sys.date",
+      "fillBehavior": {
+        "initialPromptFulfillment": {
+          "messages": [ {
+            "text": {
+              "text": [ "\u003cspeak\u003eOkay, I have availability between\u003csay-as interpret-as=\"date\" format=\"md\"\u003e$session.params.first_available_md\u003c/say-as\u003e\u003cbreak time=\"100ms\"/\u003e and \u003csay-as interpret-as=\"date\" format=\"md\"\u003e$session.params.last_available_md\u003c/say-as\u003e. What day works for you?\u003c/speak\u003e" ]
+            },
+            "languageCode": "en"
+          }, {
+            "text": {
+              "text": [ "\u003cspeak\u003eD’accord, j’ai des disponibilités entre\u003csay-as interpret-as=\"date\" format=\"md\"\u003e$session.params.first_available_md\u003c/say-as\u003e\u003cbreak time=\"100ms\"/\u003e et \u003csay-as interpret-as=\"date\" format=\"md\"\u003e$session.params.last_available_md\u003c/say-as\u003e. Quel jour vous convient?\u003c/speak\u003e" ]
+            },
+            "languageCode": "fr-ca"
+          } ]
+        },
+        "repromptEventHandlers": [ {
+          "targetPage": "Local Error handling + Ask What Day Works",
+          "event": "sys.no-input-1",
+          "triggerFulfillment": {
+            "setParameterActions": [ {
+              "parameter": "global_error_counter",
+              "value": "$sys.func.ADD($session.params.global_error_counter,1)"
+            }, {
+              "parameter": "local_trigger",
+              "value": "no_input"
+            }, {
+              "parameter": "local_noinput_counter",
+              "value": "$sys.func.ADD($session.params.local_noinput_counter,1)"
+            } ]
+          },
+          "name": "dfa436a2-e58b-4a0e-9649-12cf68c5ab5b"
+        }, {
+          "targetPage": "Local Error handling + Ask What Day Works",
+          "event": "sys.no-match-1",
+          "triggerFulfillment": {
+            "setParameterActions": [ {
+              "parameter": "global_error_counter",
+              "value": "$sys.func.ADD($session.params.global_error_counter,1)"
+            }, {
+              "parameter": "local_trigger",
+              "value": "no_match"
+            }, {
+              "parameter": "local_nomatch_counter",
+              "value": "$sys.func.ADD($session.params.local_nomatch_counter,1)"
+            } ]
+          },
+          "name": "75d5df88-f2de-4734-adac-f8d1e42c47a3"
+        } ]
+      }
+    } ]
+  },
+  "entryFulfillment": {
+    "setParameterActions": [ {
+      "parameter": "appointment_date_range",
+      "value": "$sys.func.TO_OBJECT($request.generative.appointment_date_range)"
+    }, {
+      "parameter": "first_available",
+      "value": "$session.params.appointment_date_range.first_available.date"
+    }, {
+      "parameter": "last_available",
+      "value": "$session.params.appointment_date_range.last_available.date"
+    }, {
+      "parameter": "day",
+      "value": null
+    }, {
+      "parameter": "first_available_md",
+      "value": "$session.params.appointment_date_range.first_available_md"
+    }, {
+      "parameter": "last_available_md",
+      "value": "$session.params.appointment_date_range.last_available_md"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$page.params.status = \"FINAL\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Date Formatter",
+    "name": "6ab19c49-71dc-4cb6-b446-7ba1c95b2fc7"
+  } ]
+}

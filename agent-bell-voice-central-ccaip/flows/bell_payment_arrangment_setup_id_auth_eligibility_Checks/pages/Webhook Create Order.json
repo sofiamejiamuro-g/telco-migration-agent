@@ -1,0 +1,112 @@
+{
+  "name": "2ab5b583-71bd-4e32-b15d-aa111f50933d",
+  "displayName": "Webhook Create Order",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "v1/payment-arrangement#create-order",
+    "tag": "create-order",
+    "setParameterActions": [ {
+      "parameter": "brand",
+      "value": "$session.params.brand"
+    }, {
+      "parameter": "billing_account",
+      "value": "$session.params.billing_account_number"
+    }, {
+      "parameter": "menu_type",
+      "value": "$session.params.menu_type"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "currentBalance",
+        "value": "$session.params.start_pmt_arrangement_response.paymentinfo.currentBalance"
+      }, {
+        "parameter": "webhook_success",
+        "value": "$session.params.webhook_success"
+      }, {
+        "parameter": "paDays",
+        "value": "$session.params.start_pmt_arrangement_response.paDays"
+      }, {
+        "parameter": "installments",
+        "value": "$sys.func.GET_FIELD($session.params.start_pmt_arrangement_response, \"installments\")"
+      }, {
+        "parameter": "date_today",
+        "value": "$sys.func.NOW()"
+      }, {
+        "parameter": "pa_days_num",
+        "value": "$sys.func.TO_NUMBER($session.params.paDays)"
+      }, {
+        "parameter": "pa_date",
+        "value": "$sys.func.ADD_DATE($session.params.date_today, $session.params.pa_days_num, \"DAYS\")"
+      }, {
+        "parameter": "actual_date",
+        "value": "$sys.func.FORMAT_DATE($session.params.pa_date, \"MMMM dd\", $session.params.language)"
+      }, {
+        "parameter": "calculated_date",
+        "value": "$session.params.start_pmt_arrangement_response.calculated_payment_date"
+      }, {
+        "parameter": "calculated_date1",
+        "value": "$sys.func.MID($session.params.calculated_date, 1, 10)"
+      }, {
+        "parameter": "calculated_payment_date",
+        "value": "$sys.func.MID($session.params.calculated_date1, 6, 5)"
+      } ]
+    },
+    "name": "09a8d82c-22ee-4fcf-bcc9-86550d41b556"
+  }, {
+    "condition": "$session.params.webhook_success = true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "transaction_id",
+        "value": "$session.params.start_pmt_arrangement_response.orderFormId"
+      } ]
+    },
+    "targetPage": "Check Special Status",
+    "name": "391e27e2-4dff-4f20-9814-1d1c0c392a75"
+  }, {
+    "condition": "$session.params.webhook_success = false",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Failure Confirmation",
+    "name": "f10d72be-d495-4aac-b14e-850a166450e3"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "2ab5b583-71bd-4e32-b15d-aa111f50933d"
+      }, {
+        "parameter": "flow_id",
+        "value": "57228ada-e06b-4b6d-b615-3f9af36911b6"
+      }, {
+        "parameter": "page_name",
+        "value": "Webhook Create Order"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Webhook Failure Confirmation",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+    
+    },
+    "name": "4d422220-65ab-4dea-9dfb-bf2fc1349664"
+  }, {
+    "targetPage": "Webhook Failure Confirmation",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+    
+    },
+    "name": "c8d8f018-bea0-40f0-a286-ff9661ae2ef6"
+  } ]
+}

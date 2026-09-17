@@ -1,0 +1,44 @@
+{
+  "name": "f72868f1-b9cf-447f-9a4c-4147ef2dcb4d",
+  "displayName": "Webhook get-apbs-for-location",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.test_multiban = \"true\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "banType",
+        "value": "$session.params.nm1_get_cust_profile_response.banType"
+      }, {
+        "parameter": "banSubType",
+        "value": "$session.params.nm1_get_cust_profile_response.banSubType"
+      }, {
+        "parameter": "marketSegment",
+        "value": "$session.params.nm1_get_cust_profile_response.marketSegment"
+      } ]
+    },
+    "targetFlow": "bell_multiban",
+    "name": "01b726f4-e202-40ee-a7de-8c0042741e4c"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "apb_location_id",
+        "value": 70008
+      } ]
+    },
+    "targetFlow": "bell_apb",
+    "name": "73c175fa-00ef-4677-a70f-4f2eddb59d38"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "greeting",
+    "name": "0d38299f-6bea-4145-aa06-25f96c8a37d1"
+  } ]
+}

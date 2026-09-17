@@ -1,0 +1,49 @@
+{
+  "name": "eb1fb64f-e58d-4c8a-a3e7-459a3895cad9",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "I'm sorry to hear that. That can definitely be frustrating, especially if it's used to receive one-time verification codes. The next time you login to MyBell, you'll have the option to receive your verification code by email instead of your phone. That way, you can still securely log in. To learn more about MFA, you can visit bell.ca/mybellmfa. Have you tried using a tracking feature like \"Find my iPhone\" or \"Find my Device\"?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Yes I have already done that"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Understood. I would suggest temporarily suspending your service to prevent unauthorized use. I will send a text to the device you're calling from, with a link to do it yourself. Is that alright?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Okay Sure"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "en",
+        "sms_content": "Bell: To temporarily suspend your service, you can visit bell.ca/suspendline and follow the steps. ( bell.ca/about-us )",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "User has lost their mfa device",
+    "actionParameters": {
+      "language": "en",
+      "mfa": "mfa",
+      "route": "equipment_report_lost_device",
+      "utterance": " I lost my multi factor device"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "We sympathise and inform them more about MFA, VA asks user if they have tracked their phone. User says yes so we suggest them to suspend their service and prompt them for SMS with link. User agrees on SMS so we send them SMS with link to suspend their service"
+  },
+  "displayName": "EN Equipment report lost device - MFA - tracked - yes",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 430,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

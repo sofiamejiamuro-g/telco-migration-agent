@@ -1,0 +1,53 @@
+{
+  "name": "40bffde0-cf1f-44af-b69f-fe71c4a95cf9",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Please note it can take 7-10 days from the time you sent your package for items to arrive at our warehouse and to be processed. If you were billed equipment non-return fees, it can take 1-2 bill cycles for the return to be credited and to appear on your bill.\n\nDo you have your tracking number?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "yes"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Equipment returns can be tracked on either the Canada Post or Purolator website. I'll send a text to the device you're calling from, so that you can track your returns. Is that alright?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "yes"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "en",
+        "sms_content": "EN: Bell: To track your return shipment with Purolator, you can visit purolator.com/en. To track for Canada Post, you can visit canadapost-postescanada.ca/cpc/en.  ( bell.ca/about-us )",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "customer wants return status update",
+    "actionParameters": {
+      "language": "en",
+      "lob": "Mobility",
+      "route": "equipment_return_device",
+      "utterance": "I want to know the status of the device I returned last week it is a mobile device"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "customer asked for tracking number then asked if they want to receive sms",
+    "actionParameters": {
+      "language": "en",
+      "lob": "Mobility"
+    }
+  },
+  "displayName": "equipment_return_device 1A",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 403,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

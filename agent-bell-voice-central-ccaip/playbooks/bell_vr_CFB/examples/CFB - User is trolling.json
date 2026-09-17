@@ -1,0 +1,60 @@
+{
+  "name": "354412e7-3a9f-4292-ab9b-d46413ad8eb0",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "To fix this issue, you need to perform this step now. Please check if the power light on the front of the modem is solid white. Please perform that step and let me know when you are done"
+    }
+  }, {
+    "userUtterance": {
+      "text": "The moon is made of green cheese"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Hmm, that's definitely an interesting thought! I want to get your internet working so you can get back to browsing, so let's focus on this step for a second. Are you able to check that white light for me?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Banana soup for the soul"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "I see we are having trouble communicating. I will transfer you to an agent who can better assist you."
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_aqd",
+      "inputActionParameters": {
+      
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "User's internet is not working and they have initiated virtual repair process wherein it will ask the user some questions so they can help them.",
+    "actionParameters": {
+      "acceptable_answers": [ {
+        "choice": "Yes",
+        "id": 0,
+        "sub-choices": [ ],
+        "title": ""
+      }, {
+        "choice": "No",
+        "id": 1,
+        "sub-choices": [ ],
+        "title": ""
+      } ],
+      "dcx_action_code": "6505",
+      "title": "Modem Power Light Check",
+      "vr_type": "CFB"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "The bot correctly classified the first off-topic input (\"Green cheese\") as an invalid query and executed the mandatory Answer Not Found Fallback to re-orient the user. Upon receiving a second consecutive nonsensical response (\"Turtles\"), the system identified the user as non-compliant rather than technically \"stuck.\" Adhering to the updated logic, the bot bypassed the standard help flow and triggered the Agent Handoff (bell_aqd) to terminate the automated loop."
+  },
+  "displayName": "CFB - User is trolling",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 479,
+  "languageCode": "en"
+}

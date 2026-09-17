@@ -1,0 +1,89 @@
+{
+  "name": "f44c0a12-f5d5-4810-946f-0b59f561b7a0",
+  "displayName": "test input",
+  "form": {
+    "parameters": [ {
+      "displayName": "cx_input_wait",
+      "required": true,
+      "entityType": "@sys.any",
+      "fillBehavior": {
+        "initialPromptFulfillment": {
+        
+        },
+        "repromptEventHandlers": [ {
+          "targetPage": "Previous Page",
+          "event": "sys.no-input-default",
+          "triggerFulfillment": {
+          
+          },
+          "name": "b0b9e535-c2b5-4499-8f02-a2813e6452d1"
+        }, {
+          "targetPage": "Previous Page",
+          "event": "sys.no-match-default",
+          "triggerFulfillment": {
+          
+          },
+          "name": "0354eda1-019a-48f5-aa67-01b604859ea4"
+        } ]
+      }
+    } ]
+  },
+  "entryFulfillment": {
+    "messages": [ {
+      "text": {
+        "text": [ "Un instant, s'il vous plaît !" ]
+      },
+      "languageCode": "fr-ca"
+    }, {
+      "text": {
+        "text": [ "one moment please!" ]
+      },
+      "languageCode": "en"
+    } ],
+    "setParameterActions": [ {
+      "parameter": "looping",
+      "value": "true"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$page.params.status = FINAL",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Previous Page",
+    "name": "3f197873-06f0-4447-ae15-9495d7fc1e4c"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Previous Page",
+    "event": "sys.no-input-default",
+    "triggerFulfillment": {
+    
+    },
+    "name": "e27ecfd5-95e2-4c2d-96da-60715ab33093"
+  }, {
+    "targetPage": "Previous Page",
+    "event": "sys.no-match-default",
+    "triggerFulfillment": {
+    
+    },
+    "name": "ef1d8ed9-79a6-4816-93b7-19ea047b3083"
+  } ],
+  "advancedSettings": {
+    "speechSettings": {
+      "endpointerSensitivity": 90,
+      "noSpeechTimeout": {
+        "seconds": 2
+      },
+      "models": [ {
+        "key": "en",
+        "value": "telephony_short"
+      }, {
+        "key": "fr-ca",
+        "value": "telephony_short"
+      } ]
+    }
+  },
+  "speakerIdSettings": {
+  
+  }
+}

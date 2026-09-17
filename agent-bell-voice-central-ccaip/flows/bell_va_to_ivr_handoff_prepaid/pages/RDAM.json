@@ -1,0 +1,36 @@
+{
+  "name": "cc658af2-4c28-4a8b-94b4-f26598ebc365",
+  "displayName": "RDAM",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.va_entry_flow = \"IBM_transfer\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "  \u003cspeak\u003eFor help with prepaid services, I need to connect you to our prepaid support line. Note that this system is touch tone only, so you’ll need to use your phone keypad. Please hold while I connect you. In the future, please call \u003cprosody rate=\"slow\"\u003e\u003csay-as interpret-as=\"telephone\"\u003e1-888-537-9999\u003c/say-as\u003e \u003c/prosody\u003efor Bell Prepaid support.\u003c/speak\u003e" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "\u003cspeak\u003ePour de l’aide au sujet des services prépayés, je dois vous transférer à notre ligne de soutien des services prépayés. Comme ce système ne fonctionne qu’avec les touches, vous devrez utiliser le clavier de votre téléphone. Veuillez patienter pendant que je vous mets en contact. À l’avenir, veuillez composer le \u003cprosody rate=\"slow\"\u003e\u003csay-as interpret-as=\"telephone\"\u003e1-888-537-9999\u003c/say-as\u003e\u003c/prosody\u003epour obtenir de l’aide au sujet du service prépayé de Bell.\u003c/speak\u003e\n" ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "special_queue",
+        "value": "bell_prepaid"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "b58ae8b0-e81a-49c4-aec5-6a283c6c1a9d"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook get-configs",
+    "name": "bf7e1c6c-3c3e-4e79-a349-e0fb88889177"
+  } ]
+}

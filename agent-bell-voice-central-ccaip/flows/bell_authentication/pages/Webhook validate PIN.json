@@ -1,0 +1,170 @@
+{
+  "name": "702b78c4-9f47-4fd9-8485-f994ac93e1b2",
+  "displayName": "Webhook validate PIN",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "v1/customer-authentication#validate-pin",
+    "tag": "validate-pin"
+  },
+  "transitionRoutes": [ {
+    "condition": "True",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "is_authenticated",
+        "value": "$session.params.pin_validation_response.is_authenticated"
+      }, {
+        "parameter": "is_locked",
+        "value": "$session.params.pin_validation_response.is_locked"
+      } ]
+    },
+    "name": "1936a804-d730-45c1-b65f-aa96977fa4ca"
+  }, {
+    "condition": "$session.params.is_locked = \"true\" OR $session.params.is_locked = True",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "It looks like your PIN is locked, so I'll need to verify your identity another way." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "We now use a 6-digit code to verify you.  Do you have access to a mobile phone that’s listed on your account?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Comme votre NIP semble verrouillé, je dois vérifier votre identité d'une autre façon." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "Nous utilisons maintenant un code de six chiffres pour vérifier votre compte.  Avez-vous accès à un téléphone mobile dont le numéro figure à ce compte?" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetPage": "Confirm Customer has OTP device",
+    "name": "5fc5560f-1b93-4bb8-b82f-33d8d9151db9"
+  }, {
+    "condition": "$session.params.is_authenticated = True OR $session.params.is_authenticated = \"true\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Thanks, that's the correct PIN." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Parfait, c'est le bon code." ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "auth_status",
+        "value": "Pass"
+      }, {
+        "parameter": "auth_method",
+        "value": "PIN"
+      } ]
+    },
+    "targetPage": "End Flow Check",
+    "name": "a00c2bee-d8f8-4c53-a2ad-502d1bd31f31"
+  }, {
+    "condition": "$session.params.is_authenticated = \"false\" AND $session.params.Wrong_PIN_Counter = 0",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "That doesn't seem to match your 4-digit PIN. Can you please try again?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Cela ne semble pas correspondre à ce que nous avons dans nos dossiers. Pouvez-vous réessayer?" ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "pin",
+        "value": null
+      }, {
+        "parameter": "Wrong_PIN_Counter",
+        "value": "$sys.func.ADD($session.params.Wrong_PIN_Counter,1)"
+      } ]
+    },
+    "targetPage": "PIN Auth - Start",
+    "name": "d4fa5538-5123-42b4-a5ef-1f1e9b6ab9fd"
+  }, {
+    "condition": "$session.params.is_authenticated = \"false\" AND $session.params.Wrong_PIN_Counter = 1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Unfortunately, that's not the correct PIN." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Malheureusement, ce n'est pas le bon NIP." ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "auth_status",
+        "value": "Fail"
+      } ]
+    },
+    "targetPage": "Postal Code Auth - Start",
+    "name": "8a884ad6-2a67-48a3-ba99-485369c3451d"
+  }, {
+    "condition": "True",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook validate PIN Failure",
+    "name": "26789535-c0a8-4938-be76-64d520716080"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Webhook validate PIN Failure",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+    
+    },
+    "name": "641e8e5e-870a-4cd5-ac84-3d134576e2bc"
+  }, {
+    "targetPage": "Webhook validate PIN Failure",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+    
+    },
+    "name": "8cd012d8-cc10-4f68-8afb-b77c7827540c"
+  }, {
+    "targetPage": "Webhook validate PIN Failure",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+    
+    },
+    "name": "170b80be-4168-4bee-97fc-eb7acc2f3f46"
+  }, {
+    "targetPage": "Webhook validate PIN Failure",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+    
+    },
+    "name": "a847ee85-a171-4116-bc0f-2ca8909922e6"
+  }, {
+    "targetPage": "Webhook validate PIN Failure",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+    
+    },
+    "name": "d989ec71-cf2d-447a-9c6d-35cbd58f10c1"
+  }, {
+    "targetPage": "Webhook validate PIN Failure",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+    
+    },
+    "name": "2e238ee8-abb3-4794-a695-a0ab2bcc1549"
+  } ]
+}

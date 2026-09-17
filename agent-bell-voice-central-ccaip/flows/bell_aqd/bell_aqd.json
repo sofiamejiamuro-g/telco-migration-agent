@@ -1,0 +1,518 @@
+{
+  "name": "a38e03e7-424b-4112-a50c-2776a2676d60",
+  "displayName": "bell_aqd",
+  "transitionRoutes": [ {
+    "intent": "global_events_full_startover",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "event_type",
+        "value": "full start over"
+      } ]
+    },
+    "targetFlow": "Default Start Flow",
+    "name": "effe51d2-07aa-4cb2-a6bc-be55ae5434d4"
+  }, {
+    "intent": "global_events_partial_start_over",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "event_type",
+        "value": "partial start over"
+      } ]
+    },
+    "targetFlow": "Default Start Flow",
+    "name": "3652ac4e-74a8-4f21-af22-36e524766ca7"
+  }, {
+    "condition": "$session.params.intent = \"\\\\$session\\.params\\.route\" OR $session.params.intent = \"$session\\.params\\.route\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "route",
+        "value": "other_speak_to_agent"
+      } ]
+    },
+    "name": "48f179a1-62c3-4b61-8870-3fb639586d26"
+  }, {
+    "condition": "$session.params.route = \"small_talk\\.appraisal\\.thank_you\" OR $session.params.route = \"small_talk\\.agent\\.bad\" OR $session.params.route = \"small_talk\\.dialog\\.wrong\" OR $session.params.route = \"small_talk\\.agent\\.AI\" OR $session.params.route = \"small_talk\\.greetings\\.nice_to_meet_you\" OR $session.params.route = \"small_talk\\.greetings\\.hello\" OR $session.params.route = \"small_talk\\.hangup_apology\" OR $session.params.route = \"small_talk\\.agent\\.good\" OR $session.params.route = \"small_talk\\.outbound_call\" OR $session.params.route = \"small_talk\\.user\\.angry\" OR $session.params.route = \"small_talk\\.agent\\.annoying\" OR $session.params.route = \"small_talk\\.greetings\\.bye\" OR $session.params.route = \"small_talk\\.agent\\.acquaintance\" OR $session.params.route = \"small_talk\\.appraisal\\.well_done\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "route",
+        "value": "other_speak_to_agent"
+      }, {
+        "parameter": "intent",
+        "value": "other_speak_to_agent"
+      } ]
+    },
+    "name": "b3b79d64-172a-4896-9d48-0f6490f06f40"
+  }, {
+    "condition": "$session.params.route = \"infobot\" OR $session.params.intent = \"infobot\" OR $session.params.intent = \"Agent\" OR $session.params.route = \"Agent\" OR $session.params.intent = \"agent\" OR $session.params.intent = \"Infobot\" OR $session.params.intent = \"default\" OR $session.params.route = \"default\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "intent",
+        "value": "other_speak_to_agent"
+      }, {
+        "parameter": "route",
+        "value": "other_speak_to_agent"
+      } ]
+    },
+    "name": "1b67dae7-12ec-4120-b80c-e47b246b5209",
+    "description": "This route is to tackle if LLM doing intent hallucinations or for \"infobot\" use-case. So, needed to default it to \"other_speak_to_agent\". Also, the route \"infobot\" is set by NLU team in playbook as per demand. Hence, here we need to default it to \"other_speak_to_agent\" "
+  }, {
+    "condition": "$session.params.route != null",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "intent",
+        "value": "$session.params.route"
+      } ]
+    },
+    "name": "75fafb41-ef69-4a8f-bd73-854c86892321"
+  }, {
+    "condition": "$session.params.route = null OR $session.params.route = \"\" OR $session.params.route = None",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "intent",
+        "value": "other_speak_to_agent"
+      }, {
+        "parameter": "route",
+        "value": "other_speak_to_agent"
+      } ]
+    },
+    "name": "dfb5cf7a-55c2-4e04-bedd-5ee97deabdac"
+  }, {
+    "condition": "$session.params.intent = null OR $session.params.intent = \"\" OR $session.params.intent = None",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "intent",
+        "value": "other_speak_to_agent"
+      } ]
+    },
+    "name": "3116e171-6e97-411e-83f2-4fc07074bff2"
+  }, {
+    "condition": "$session.params.clid != null AND $sys.func.LEN($sys.func.TO_TEXT($session.params.clid)) = 11",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "clid",
+        "value": "$sys.func.MID($session.params.clid,2,10)"
+      } ]
+    },
+    "name": "5b57ccee-a9cc-4be0-9ef6-8b9f3c51cc9c"
+  }, {
+    "condition": "$session.params.clid != null AND $sys.func.LEN($sys.func.TO_TEXT($session.params.clid)) = 12",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "clid",
+        "value": "$sys.func.MID($session.params.clid,3,10)"
+      } ]
+    },
+    "name": "0a4e5a8c-c470-4f35-9110-46d61485d272"
+  }, {
+    "condition": "$session.params.tfn != null AND $sys.func.LEN($sys.func.TO_TEXT($session.params.tfn)) = 11",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "tfn",
+        "value": "$sys.func.MID($session.params.tfn,2,10)"
+      } ]
+    },
+    "name": "e2e6078c-3972-4ee1-8e1d-7acedeed4162"
+  }, {
+    "condition": "$session.params.tfn != null AND $sys.func.LEN($sys.func.TO_TEXT($session.params.tfn)) = 12",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "tfn",
+        "value": "$sys.func.MID($session.params.tfn,3,10)"
+      } ]
+    },
+    "name": "88648181-e6b5-4951-a18a-af9af75a208e"
+  }, {
+    "condition": "$session.params.cirn = null OR $session.params.cirn = \"0\" OR $session.params.cirn = \"0000000000\" OR $session.params.cirn = \"\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "cirn",
+        "value": "$session.params.clid"
+      } ]
+    },
+    "name": "d1299b7c-3e97-4afc-b6d8-1fdfe912138d",
+    "description": "This route is to make sure that if parameter \"cirn\" is null or \"0\" or \"0000000000\" then we set CIRN=CLID as per business rule."
+  }, {
+    "condition": "$session.params.apb_skip = true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "customer_type",
+        "value": ""
+      } ]
+    },
+    "targetPage": "Check department_id",
+    "name": "267f0ac3-713e-46a6-8e1a-4f878cfe3349"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "customer_type",
+        "value": ""
+      } ]
+    },
+    "targetPage": "Get default queue (﻿menu_id)",
+    "name": "9577a587-c506-4a7d-9b1f-a31b0fb0f8df"
+  } ],
+  "eventHandlers": [ {
+    "event": "sys.no-match-default",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I didn't get that. Can you say it again?", "I missed what you said. What was that?", "Sorry, could you say that again?", "Sorry, can you say that again?", "Can you say that again?", "Sorry, I didn't get that. Can you rephrase?", "Sorry, what was that?", "One more time?", "What was that?", "Say that one more time?", "I didn't get that. Can you repeat?", "I missed that, say that again?" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "320afa76-7e46-4527-b22b-8ad95af012d0"
+  }, {
+    "event": "sys.no-input-default",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I didn't get that. Can you say it again?", "I missed what you said. What was that?", "Sorry, could you say that again?", "Sorry, can you say that again?", "Can you say that again?", "Sorry, I didn't get that. Can you rephrase?", "Sorry, what was that?", "One more time?", "What was that?", "Say that one more time?", "I didn't get that. Can you repeat?", "I missed that, say that again?" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "ef897a5e-b46e-4a4e-860d-c3a51b9ba9e9"
+  }, {
+    "event": "sys.no-input-1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "$request.generative.response" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "$request.generative.response" ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "advancedSettings": {
+        "playbackInterruptionSettings": {
+        
+        },
+        "dtmfSettings": {
+          "useSystemEntityRule": false
+        }
+      },
+      "generators": [ {
+        "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/1b8d360c-c2a0-49b0-9a32-d5542ff42d87",
+        "outputParameter": "$request.generative.response"
+      } ],
+      "nextActionOverride": {
+      
+      }
+    },
+    "name": "252acf49-a079-4856-926c-6daaeb3e87b7"
+  }, {
+    "event": "sys.no-input-2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "$request.generative.response" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "$request.generative.response" ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "advancedSettings": {
+        "playbackInterruptionSettings": {
+        
+        },
+        "dtmfSettings": {
+          "useSystemEntityRule": false
+        }
+      },
+      "generators": [ {
+        "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/1bcff408-4981-474e-986a-309d3622718f",
+        "outputParameter": "$request.generative.response"
+      } ],
+      "nextActionOverride": {
+      
+      }
+    },
+    "name": "4f8fcf01-486e-4b99-a29d-25f324784a27"
+  }, {
+    "event": "sys.no-match-1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "$request.generative.response" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "$request.generative.response" ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "advancedSettings": {
+        "playbackInterruptionSettings": {
+        
+        },
+        "dtmfSettings": {
+          "useSystemEntityRule": false
+        }
+      },
+      "generators": [ {
+        "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/f7ef68c2-5424-41ab-94dc-f8c07e3164de",
+        "outputParameter": "$request.generative.response"
+      } ],
+      "nextActionOverride": {
+      
+      }
+    },
+    "name": "80c7a606-896a-4ebf-b058-f252490e4a92"
+  }, {
+    "event": "sys.no-match-2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "$request.generative.response" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "$request.generative.response" ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "advancedSettings": {
+        "playbackInterruptionSettings": {
+        
+        },
+        "dtmfSettings": {
+          "useSystemEntityRule": false
+        }
+      },
+      "generators": [ {
+        "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/ab9980b0-e324-4bef-8fd6-5e1c1c8d59e1",
+        "outputParameter": "$request.generative.response"
+      } ],
+      "nextActionOverride": {
+      
+      }
+    },
+    "name": "a551bb6b-796e-4b11-baa0-857a95b8b637"
+  }, {
+    "targetPage": "End Session",
+    "event": "wrapup",
+    "triggerFulfillment": {
+    
+    },
+    "name": "f06292f8-56e4-41a0-9260-533758f5bcf2"
+  }, {
+    "targetFlow": "bell_No_Input_3",
+    "event": "sys.no-input-3",
+    "triggerFulfillment": {
+    
+    },
+    "name": "66a06b10-ed58-4c80-9b88-99b0b817efe9"
+  }, {
+    "targetFlow": "bell_No_Match_3",
+    "event": "sys.no-match-3",
+    "triggerFulfillment": {
+    
+    },
+    "name": "4214708a-2614-4e0b-b256-abb74bbd247b"
+  } ],
+  "nluSettings": {
+    "modelType": "MODEL_TYPE_CUSTOM",
+    "classificationThreshold": 0.30000001,
+    "modelTrainingMode": "MODEL_TRAINING_MODE_MANUAL"
+  },
+  "advancedSettings": {
+    "enabled": true,
+    "playbackInterruptionSettings": {
+    
+    }
+  },
+  "nluSettingsList": [ {
+    "modelType": "MODEL_TYPE_CUSTOM",
+    "classificationThreshold": 0.30000001,
+    "modelTrainingMode": "MODEL_TRAINING_MODE_MANUAL",
+    "languageCode": "en"
+  }, {
+    "modelType": "MODEL_TYPE_CUSTOM",
+    "classificationThreshold": 0.30000001,
+    "modelTrainingMode": "MODEL_TRAINING_MODE_MANUAL",
+    "languageCode": "fr-ca"
+  } ],
+  "inputParameterDefinitions": [ {
+    "name": "special_queue",
+    "description": "special_queue",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "STRING"
+      }
+    },
+    "parameterType": {
+      "name": "special_queue",
+      "openapiJsonSchema": {
+        "type": "string"
+      }
+    }
+  }, {
+    "name": "lob",
+    "description": "lob",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "STRING"
+      }
+    },
+    "parameterType": {
+      "name": "lob",
+      "openapiJsonSchema": {
+        "type": "string"
+      }
+    }
+  }, {
+    "name": "identification_status",
+    "description": "ID status",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "STRING"
+      }
+    },
+    "parameterType": {
+      "name": "identification_status",
+      "openapiJsonSchema": {
+        "type": "string"
+      }
+    }
+  }, {
+    "name": "route",
+    "description": "route",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "STRING"
+      }
+    },
+    "parameterType": {
+      "name": "route",
+      "openapiJsonSchema": {
+        "type": "string"
+      }
+    }
+  }, {
+    "name": "device_type",
+    "description": "device_type",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "STRING"
+      }
+    },
+    "parameterType": {
+      "name": "device_type",
+      "openapiJsonSchema": {
+        "type": "string"
+      }
+    }
+  }, {
+    "name": "language",
+    "description": "language",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "STRING"
+      }
+    },
+    "parameterType": {
+      "name": "language",
+      "openapiJsonSchema": {
+        "type": "string"
+      }
+    }
+  }, {
+    "name": "utterance",
+    "description": "utterance",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "STRING"
+      }
+    },
+    "parameterType": {
+      "name": "utterance",
+      "openapiJsonSchema": {
+        "type": "string"
+      }
+    }
+  }, {
+    "name": "global_error_counter",
+    "description": "Counts the total number of no matches and no inputs given by the customer throughout the conversation",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "NUMBER"
+      }
+    },
+    "parameterType": {
+      "name": "global_error_counter",
+      "openapiJsonSchema": {
+        "type": "number"
+      }
+    }
+  } ],
+  "outputParameterDefinitions": [ {
+    "name": "identification_status",
+    "description": "ID status",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "STRING"
+      }
+    },
+    "parameterType": {
+      "name": "identification_status",
+      "openapiJsonSchema": {
+        "type": "string"
+      }
+    }
+  }, {
+    "name": "language",
+    "description": "language",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "STRING"
+      }
+    },
+    "parameterType": {
+      "name": "language",
+      "openapiJsonSchema": {
+        "type": "string"
+      }
+    }
+  }, {
+    "name": "lob",
+    "description": "lob",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "STRING"
+      }
+    },
+    "parameterType": {
+      "name": "lob",
+      "openapiJsonSchema": {
+        "type": "string"
+      }
+    }
+  }, {
+    "name": "global_error_counter",
+    "description": "Counts the total number of no matches and no inputs given by the customer throughout the conversation",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "NUMBER"
+      }
+    },
+    "parameterType": {
+      "name": "global_error_counter",
+      "openapiJsonSchema": {
+        "type": "number"
+      }
+    }
+  } ],
+  "multiLanguageSettings": {
+  
+  }
+}

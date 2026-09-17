@@ -1,0 +1,300 @@
+{
+  "name": "7b79b75c-6cee-409d-b609-9b5561813ec0",
+  "displayName": "bell_expired_credit_card",
+  "transitionRoutes": [ {
+    "intent": "Default Welcome Intent",
+    "triggerFulfillment": {
+    
+    },
+    "name": "c7449f64-74c8-4159-a5bd-9c7b2c2f2465"
+  }, {
+    "intent": "global_events_full_startover",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "event_type",
+        "value": "full start over"
+      } ]
+    },
+    "targetFlow": "Default Start Flow",
+    "name": "e1b01847-b6c5-4211-9191-fb156013d2cf"
+  }, {
+    "intent": "global_events_partial_start_over",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "event_type",
+        "value": "partial start over"
+      } ]
+    },
+    "targetFlow": "Default Start Flow",
+    "name": "e4cdb448-0dde-41b7-98bc-a6f30a90910c"
+  }, {
+    "condition": "$session.params.bee_testing = true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "current_year",
+        "value": "$sys.func.FORMAT_DATE($sys.func.NOW(),\"yy\") "
+      }, {
+        "parameter": "current_month",
+        "value": "$sys.func.FORMAT_DATE($sys.func.NOW(),\"MM\")"
+      }, {
+        "parameter": "serve_to_check",
+        "value": "$sys.func.IF($session.params.serve_to_check=null, \"Fail\", $session.params.serve_to_check)"
+      } ]
+    },
+    "targetPage": "Expiry Date Processing",
+    "name": "4df5fc51-9d1d-4a1e-8fd6-47b14c9329e4"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "webhook": "/v1/ibm_mw/nm1_get#customer-profile",
+      "tag": "customer-profile",
+      "setParameterActions": [ {
+        "parameter": "phone",
+        "value": "$session.params.CIRN"
+      }, {
+        "parameter": "ibm_application_id",
+        "value": "$sys.func.IF(\"$session.params.intake_routing_lookup_response.va_ibm_id = null\", LUC_Entry, $session.params.intake_routing_lookup_response.va_ibm_id)"
+      }, {
+        "parameter": "current_year",
+        "value": "$sys.func.FORMAT_DATE($sys.func.NOW(),\"yy\") "
+      }, {
+        "parameter": "current_month",
+        "value": "$sys.func.FORMAT_DATE($sys.func.NOW(),\"MM\")"
+      }, {
+        "parameter": "serve_to_check",
+        "value": "$sys.func.IF($session.params.serve_to_check=null, \"Pass\", $session.params.serve_to_check)"
+      }, {
+        "parameter": "Expired_credit_card_check",
+        "value": "True"
+      }, {
+        "parameter": "local_nomatch_counter",
+        "value": 0
+      }, {
+        "parameter": "local_noinput_counter",
+        "value": 0
+      } ]
+    },
+    "targetPage": "Webhook State",
+    "name": "2d92a553-3dc7-4570-9171-9cb3e1176079"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Global Error handling",
+    "event": "sys.no-match-default",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "J'ai du mal à comprendre cette question.", "J'ai mal compris votre demande.", "Je n'ai pas saisi ce que vous avez dit.", "Je crois que je ne vous suis pas.", "Je ne comprends pas de quoi vous me parlez." ]
+        },
+        "languageCode": "fr"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "global_error_counter",
+        "value": "$sys.func.ADD($session.params.global_error_counter,1)"
+      }, {
+        "parameter": "local_trigger",
+        "value": "no_match"
+      }, {
+        "parameter": "local_nomatch_counter",
+        "value": "$sys.func.ADD($session.params.local_nomatch_counter,1)"
+      } ]
+    },
+    "name": "f33aebed-df2f-4d23-9267-b87496a741fe"
+  }, {
+    "targetPage": "Global Error handling",
+    "event": "sys.no-input-default",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "J'ai du mal à comprendre cette question.", "J'ai mal compris votre demande.", "Je n'ai pas saisi ce que vous avez dit.", "Je crois que je ne vous suis pas.", "Je ne comprends pas de quoi vous me parlez." ]
+        },
+        "languageCode": "fr"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "global_error_counter",
+        "value": "$sys.func.ADD($session.params.global_error_counter,1)"
+      }, {
+        "parameter": "local_trigger",
+        "value": "no_input"
+      }, {
+        "parameter": "local_noinput_counter",
+        "value": "$sys.func.ADD($session.params.local_noinput_counter,1)"
+      } ]
+    },
+    "name": "c1e8057b-0ffb-4207-aa0f-f47c1dd9c1bd"
+  }, {
+    "targetPage": "Get Propensity To Sell Then End Flow",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+    
+    },
+    "name": "58f43982-20c3-4022-83c4-5694fbe07fc3"
+  }, {
+    "targetPage": "Get Propensity To Sell Then End Flow",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+    
+    },
+    "name": "daa58ebd-eba5-4a66-90fe-3a14b2758f52"
+  }, {
+    "targetPage": "Get Propensity To Sell Then End Flow",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+    
+    },
+    "name": "f43315d9-8a3a-454b-aa16-33f4ed2fde79"
+  }, {
+    "targetPage": "Get Propensity To Sell Then End Flow",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+    
+    },
+    "name": "3c67f50c-865e-415d-9c41-2d66c4eb6745"
+  }, {
+    "targetPage": "Get Propensity To Sell Then End Flow",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+    
+    },
+    "name": "65d009c4-06ab-43df-969a-f814e3a6fa35"
+  }, {
+    "targetPage": "Get Propensity To Sell Then End Flow",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+    
+    },
+    "name": "1290203b-64b2-453b-9d60-cec8652a2838"
+  }, {
+    "targetPage": "End Session",
+    "event": "wrapup",
+    "triggerFulfillment": {
+    
+    },
+    "name": "597fa265-4e09-4974-baa4-af72af1dd9b3"
+  } ],
+  "nluSettings": {
+    "modelType": "MODEL_TYPE_CUSTOM",
+    "classificationThreshold": 0.30000001,
+    "modelTrainingMode": "MODEL_TRAINING_MODE_MANUAL"
+  },
+  "advancedSettings": {
+    "enabled": true,
+    "playbackInterruptionSettings": {
+    
+    }
+  },
+  "nluSettingsList": [ {
+    "modelType": "MODEL_TYPE_CUSTOM",
+    "classificationThreshold": 0.30000001,
+    "modelTrainingMode": "MODEL_TRAINING_MODE_MANUAL",
+    "languageCode": "fr-ca"
+  }, {
+    "modelType": "MODEL_TYPE_CUSTOM",
+    "classificationThreshold": 0.30000001,
+    "modelTrainingMode": "MODEL_TRAINING_MODE_MANUAL",
+    "languageCode": "en"
+  } ],
+  "agentTransitionRouteGroups": [ "HI_account", "HI_billing", "HI_disconnect", "HI_equipment", "HI_faq", "HI_other", "HI_payment", "HI_sales", "HI_service", "HI_techsupport" ],
+  "inputParameterDefinitions": [ {
+    "name": "CIRN",
+    "description": "CIRN",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "NUMBER"
+      }
+    },
+    "parameterType": {
+      "name": "CIRN",
+      "openapiJsonSchema": {
+        "type": "number"
+      }
+    }
+  }, {
+    "name": "language",
+    "description": "language",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "STRING"
+      }
+    },
+    "parameterType": {
+      "name": "language",
+      "openapiJsonSchema": {
+        "type": "string"
+      }
+    }
+  }, {
+    "name": "ibm_application_id",
+    "description": "ibm_application_id",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "STRING"
+      }
+    },
+    "parameterType": {
+      "name": "ibm_application_id",
+      "openapiJsonSchema": {
+        "type": "string"
+      }
+    }
+  }, {
+    "name": "global_error_counter",
+    "description": "Counts the total number of no matches and no inputs given by the customer throughout the conversation",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "NUMBER"
+      }
+    },
+    "parameterType": {
+      "name": "global_error_counter",
+      "openapiJsonSchema": {
+        "type": "number"
+      }
+    }
+  } ],
+  "outputParameterDefinitions": [ {
+    "name": "serve_to_check",
+    "description": "serve_to_check",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "STRING"
+      }
+    },
+    "parameterType": {
+      "name": "serve_to_check",
+      "openapiJsonSchema": {
+        "type": "string"
+      }
+    }
+  }, {
+    "name": "Expired_credit_card_check",
+    "description": "Checks for expired credit card",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "STRING"
+      }
+    },
+    "parameterType": {
+      "name": "Expired_credit_card_check",
+      "openapiJsonSchema": {
+        "type": "string"
+      }
+    }
+  }, {
+    "name": "global_error_counter",
+    "description": "Counts the total number of no matches and no inputs given by the customer throughout the conversation",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "NUMBER"
+      }
+    },
+    "parameterType": {
+      "name": "global_error_counter",
+      "openapiJsonSchema": {
+        "type": "number"
+      }
+    }
+  } ],
+  "multiLanguageSettings": {
+  
+  }
+}

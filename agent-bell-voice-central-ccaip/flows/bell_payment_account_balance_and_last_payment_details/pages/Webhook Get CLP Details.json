@@ -1,0 +1,78 @@
+{
+  "name": "3061d247-5423-4065-ac5c-c0f3d2da31b6",
+  "displayName": "Webhook Get CLP Details",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "v1/account-information/get-clp-details",
+    "tag": "N/A"
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.webhook_success = true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "clp_spending_limit",
+        "value": "$session.params.get_clp_info_response.spendingLimit"
+      } ]
+    },
+    "name": "b5a14016-ede7-4212-9e41-92881a75a533"
+  }, {
+    "condition": "$session.params.clp_spending_limit \u003e 0",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_payment_CLP_details",
+    "name": "45907389-00d1-48f2-8524-e6d78b439f53"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Get Last Payment Info",
+    "name": "be188469-89d8-40a5-90d2-17acf1076df2"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Webhook Get Last Payment Info",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+    
+    },
+    "name": "aa385053-fb32-47be-9611-be8c813744d3"
+  }, {
+    "targetPage": "Webhook Get Last Payment Info",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+    
+    },
+    "name": "e85e142f-6ea3-49f6-aa1c-e74e3e0860ba"
+  }, {
+    "targetPage": "Webhook Get Last Payment Info",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+    
+    },
+    "name": "a6204182-99e8-4ec1-a325-2924bce683ad"
+  }, {
+    "targetPage": "Webhook Get Last Payment Info",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+    
+    },
+    "name": "dc27cfc8-7617-4201-bdbb-26b1595a519f"
+  }, {
+    "targetPage": "Webhook Get Last Payment Info",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+    
+    },
+    "name": "a380b285-e1f3-4c79-9926-bf4ffe52e87d"
+  }, {
+    "targetPage": "Webhook Get Last Payment Info",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+    
+    },
+    "name": "105aa480-b85a-4f67-a1d1-35a375de46dc"
+  } ]
+}

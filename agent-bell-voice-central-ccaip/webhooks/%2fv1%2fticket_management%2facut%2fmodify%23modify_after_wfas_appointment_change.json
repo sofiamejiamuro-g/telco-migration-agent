@@ -1,0 +1,27 @@
+{
+  "name": "1d1bd9c0-6b65-4795-b25a-44c5bb5b0103",
+  "displayName": "/v1/ticket_management/acut/modify#modify_after_wfas_appointment_change",
+  "timeout": {
+    "seconds": 30
+  },
+  "serviceDirectory": {
+    "service": "projects/gcp-it-npe-pltfm-apigee/locations/us-central1/namespaces/apigee-nb-usc1-service-dir-namespace/services/apigee-nb-usc1-service",
+    "genericWebService": {
+      "uri": "https://apigee-nane1-uat.int.bell.ca/v1/ticket_management/acut/modify",
+      "requestHeaders": [ {
+        "key": "x-apikey",
+        "value": "npZmDivP6Hxes3wtQ0tC9RqItjJTY8TgZHbOPNeFwvSYSKPI"
+      } ],
+      "webhookType": "FLEXIBLE",
+      "httpMethod": "POST",
+      "requestBody": "{\n  \"sessionInfo\": {\n    \"dfcx_session_id\": \"$session.params.dfcx_session_id\",\n    \"agent_id\": \"$session.params.agent_id\",\n    \"parameters\": {\n      \"operation_context\": \"$session.params.operation_context\",\n      \"menu_type\": \"$session.params.menu_type\",\n      \"ticket_number\": \"$session.params.ticket_number\",\n      \"wfas_context\": \"$session.params.wfas_context\"\n    }\n  },\n  \"fulfillmentInfo\": {\n    \"tag\": \"modify\"\n  },\n  \"languageCode\": \"$request.language\"\n}",
+      "parameterMapping": [ {
+        "key": "modify_trouble_ticket_response",
+        "value": "sessionInfo.parameters.modify_trouble_ticket_response"
+      }, {
+        "key": "webhook_success",
+        "value": "sessionInfo.parameters.webhook_success"
+      } ]
+    }
+  }
+}

@@ -1,0 +1,158 @@
+{
+  "name": "5733d219-cbdc-46e5-a573-87ea8305cd3c",
+  "displayName": "Get Tester Id",
+  "form": {
+    "parameters": [ {
+      "displayName": "tester_id",
+      "required": true,
+      "entityType": "@sys.number-integer",
+      "fillBehavior": {
+        "initialPromptFulfillment": {
+          "messages": [ {
+            "text": {
+              "text": [ "Veuillez saisir votre identifiant de testeur" ]
+            },
+            "languageCode": "fr-ca"
+          }, {
+            "text": {
+              "text": [ "Please enter your Tester ID using the phone's keypad now." ]
+            },
+            "languageCode": "en"
+          } ]
+        },
+        "repromptEventHandlers": [ {
+          "event": "sys.no-input-1",
+          "triggerFulfillment": {
+            "messages": [ {
+              "text": {
+                "text": [ "Veuillez saisir votre identifiant de testeur" ]
+              },
+              "languageCode": "fr-ca"
+            }, {
+              "text": {
+                "text": [ "Please enter your Tester ID using the phone's keypad now." ]
+              },
+              "languageCode": "en"
+            } ]
+          },
+          "name": "959a137c-2942-47b0-820e-e529122969f9"
+        }, {
+          "event": "sys.no-input-2",
+          "triggerFulfillment": {
+            "messages": [ {
+              "text": {
+                "text": [ "Veuillez saisir votre identifiant de testeur" ]
+              },
+              "languageCode": "fr-ca"
+            }, {
+              "text": {
+                "text": [ "Please enter your Tester ID using the phone's keypad now." ]
+              },
+              "languageCode": "en"
+            } ]
+          },
+          "name": "7a9b9388-08e4-4f75-9a38-b8f54b2fc4e6"
+        }, {
+          "targetPage": "End Flow",
+          "event": "sys.no-input-3",
+          "triggerFulfillment": {
+            "messages": [ {
+              "text": {
+                "text": [ "Vous n'avez pas saisi d'identifiant de testeur. Nous quittons maintenant test wrapper." ]
+              },
+              "languageCode": "fr-ca"
+            }, {
+              "text": {
+                "text": [ "You have not entered a tester ID. Exiting test wrapper." ]
+              },
+              "languageCode": "en"
+            } ]
+          },
+          "name": "39b35243-8e9f-48ed-b37f-38fef3fc9f59"
+        }, {
+          "event": "sys.no-match-1",
+          "triggerFulfillment": {
+            "messages": [ {
+              "text": {
+                "text": [ "Veuillez saisir un identifiant de testeur valide" ]
+              },
+              "languageCode": "fr-ca"
+            }, {
+              "text": {
+                "text": [ "Please enter valid Tester ID" ]
+              },
+              "languageCode": "en"
+            } ]
+          },
+          "name": "a4cbab5a-c75e-4a6a-985b-df3ea09fd8f1"
+        }, {
+          "targetPage": "End Flow",
+          "event": "sys.no-match-2",
+          "triggerFulfillment": {
+            "messages": [ {
+              "text": {
+                "text": [ "Vous n'avez pas saisi d'identifiant de testeur. Nous quittons maintenant test wrapper." ]
+              },
+              "languageCode": "fr-ca"
+            }, {
+              "text": {
+                "text": [ "You have not entered a tester ID. Exiting test wrapper." ]
+              },
+              "languageCode": "en"
+            } ]
+          },
+          "name": "09203878-57e1-4f49-b901-dedaee608048"
+        } ]
+      },
+      "defaultValue": 123
+    } ]
+  },
+  "entryFulfillment": {
+    "setParameterActions": [ {
+      "parameter": "tester_id",
+      "value": null
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.tester_id != null",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook get-tester-details",
+    "name": "5c20bfa9-a1a4-496c-9c80-1d5b727f7a1e"
+  } ],
+  "advancedSettings": {
+    "speechSettings": {
+      "endpointerSensitivity": 70,
+      "noSpeechTimeout": {
+        "seconds": 5
+      },
+      "models": [ {
+        "key": "en",
+        "value": "telephony_short"
+      }, {
+        "key": "fr",
+        "value": ""
+      }, {
+        "key": "fr-ca",
+        "value": "telephony_short"
+      } ]
+    },
+    "dtmfSettings": {
+      "enabled": true,
+      "useSystemEntityRule": false,
+      "interdigitTimeoutDuration": {
+        "seconds": 5
+      },
+      "endpointingTimeoutDuration": {
+        "seconds": 5
+      }
+    },
+    "speechAdaptationSettings": {
+    
+    }
+  },
+  "speakerIdSettings": {
+  
+  }
+}

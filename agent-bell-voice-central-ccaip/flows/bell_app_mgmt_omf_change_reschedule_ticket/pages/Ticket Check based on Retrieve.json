@@ -1,0 +1,51 @@
+{
+  "name": "d5d6e595-1c00-47df-bebc-dc9c3ec8baa5",
+  "displayName": "Ticket Check based on Retrieve",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "setParameterActions": [ {
+      "parameter": "contains_not_modifiable",
+      "value": "$session.params.order_detail_response.contains_not_modifiable"
+    }, {
+      "parameter": "input_start_date_string",
+      "value": "$sys.func.NOW()"
+    }, {
+      "parameter": "input_end_date_string",
+      "value": "$sys.func.ADD_DATE($sys.func.NOW(), 14, \"DAYS\")"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.contains_not_modfiable = true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "special_queue",
+        "value": "tech_to_care"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "fc4757f2-ee2d-474b-9a73-8792ea18c8ab"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "generators": [ {
+        "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/7af3e5f9-5a07-49ff-902f-8869de454075",
+        "inputParameters": [ {
+          "key": "input_start_date_string",
+          "value": "$session.params.input_start_date_string"
+        } ],
+        "outputParameter": "$request.generative.start_date_utc"
+      }, {
+        "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/70420655-dc88-4eee-8750-b15a87927a6c",
+        "inputParameters": [ {
+          "key": "input_end_date_string",
+          "value": "$session.params.input_end_date_string"
+        } ],
+        "outputParameter": "$request.generative.end_date_utc"
+      } ]
+    },
+    "targetPage": "Webhook Calendar Availability",
+    "name": "541a2410-3cab-48ed-8fc5-850a99bf7fb9"
+  } ]
+}

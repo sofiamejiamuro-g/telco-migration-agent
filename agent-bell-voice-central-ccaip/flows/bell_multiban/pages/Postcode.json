@@ -1,0 +1,140 @@
+{
+  "name": "086155d5-7eed-4e35-982b-9022cbb9f3f2",
+  "displayName": "Postcode",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.postcode = null",
+    "triggerFulfillment": {
+    
+    },
+    "name": "b8d59223-b79f-41ae-a75b-132934df9a7a",
+    "targetPlaybook": "bell_UC_Postal_Code"
+  }, {
+    "condition": "$session.params.postal_agent = true",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "$request.generative.postal_1" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "$request.generative.postal_1" ]
+        },
+        "languageCode": "en"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "entry_route_postal",
+        "value": "s2a"
+      } ],
+      "generators": [ {
+        "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/b565ff4d-2895-4ba0-9020-594fda7affa9",
+        "outputParameter": "$request.generative.postal_1"
+      } ]
+    },
+    "name": "61f7de9a-dec7-4b55-818b-cfe90dea6cc0",
+    "targetPlaybook": "bell_UC_Postal_Code"
+  }, {
+    "condition": "$session.params.postal_agent_2 = true",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "$request.generative.postal_2" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "$request.generative.postal_2" ]
+        },
+        "languageCode": "en"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "entry_route_postal",
+        "value": "s2a_2"
+      } ],
+      "generators": [ {
+        "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/ba8a8023-fd52-466a-a3c2-7ae7496284f8",
+        "outputParameter": "$request.generative.postal_2"
+      } ]
+    },
+    "name": "82f8fd47-b57d-4a88-95cd-47e00058bce9",
+    "targetPlaybook": "bell_UC_Postal_Code"
+  }, {
+    "condition": "$session.params.postcode != null",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "billing_address_postcode",
+        "value": "$sys.func.FILTER(\"$session.params.customer_id_search_response\", $sys.func.CONCATENATE(\"$..billing_accounts[?(@.billing_address.postcode =='\", $sys.func.TO_TEXT($session.params.postcode), \"')].billing_account_number\"))"
+      }, {
+        "parameter": "n_billing_accounts_postcoode",
+        "value": "$sys.func.COUNT($session.params.billing_address_postcode)"
+      }, {
+        "parameter": "service_address_postcode",
+        "value": "$sys.func.FILTER(\"$session.params.customer_id_search_response\", $sys.func.CONCATENATE(\"$..billing_accounts[?('\", $session.params.postcode, \"' in @.services[*].service_address.postcode)].billing_account_number\"))"
+      }, {
+        "parameter": "n_service_address_postcode",
+        "value": "$sys.func.COUNT($session.params.service_address_postcode)"
+      } ]
+    },
+    "name": "8f0414f5-edf7-49fb-85cd-0cd552aa3e1f"
+  }, {
+    "condition": "$session.params.postcode = null",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ " Si vous ne pouvez pas trouver votre code postal, vous pouvez plutôt me donner votre numéro de compte." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "If you're having trouble finding your postal code, you can tell me your account number instead." ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "targetPage": "Account Number",
+    "name": "0c24c375-b833-4480-892d-9ce140465b97"
+  }, {
+    "condition": "$session.params.n_billing_accounts_postcoode = 1",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "billing_account_number",
+        "value": "$sys.func.TO_NUMBER($sys.func.GET($session.params.billing_address_postcode,0))"
+      } ]
+    },
+    "targetPage": "Account Found",
+    "name": "79a34d69-3977-46f8-a719-d3ff35315281"
+  }, {
+    "condition": "$session.params.n_service_address_postcode = 1",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "billing_account_number",
+        "value": "$session.params.n_service_address_postcode"
+      } ]
+    },
+    "targetPage": "Account Found",
+    "name": "2d85ee82-7d32-49c1-85e7-fef8af1e09c1"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "J'ai besoin d'en savoir un peu plus. Pourriez-vous aussi me donner votre numéro de compte?" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ " I still need a bit more information. Could you also tell me your account number, please?" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "targetPage": "Account Number",
+    "name": "70ea19a1-c4e4-42ff-9bcb-bc1e439bcb7f"
+  } ]
+}

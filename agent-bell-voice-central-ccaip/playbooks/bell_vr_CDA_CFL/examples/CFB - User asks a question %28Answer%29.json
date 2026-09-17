@@ -1,0 +1,103 @@
+{
+  "name": "54aa7b2c-d066-4907-b1f9-f4448ad31bb2",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Can you take a look at your modem and let me know what the lights look like?\n"
+    }
+  }, {
+    "userUtterance": {
+      "text": "What is a modem?"
+    }
+  }, {
+    "toolUse": {
+      "tool": "EN_Bell_vr_cfl_faq",
+      "action": "EN_Bell_vr_cfl_faq",
+      "inputActionParameters": {
+        "requestBody": {
+          "query": "6502"
+        }
+      },
+      "outputActionParameters": {
+        "200": {
+          "answer": "Q: What's a modem? A: A modem is a rectangular device that allows you to connect to the internet. It should be standing up right, and have at least 2 cables plugged into the ports on the back of it. Q: What does my modem look like? A: A modem is a rectangular device that allows you to connect to the internet. It should be standing up right, and have at least 2 cables plugged into the ports on the back of it.",
+          "snippets": [ {
+            "text": "",
+            "title": "6502",
+            "uri": ""
+          } ]
+        }
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "A modem is a rectangular device that allows you to connect to the internet. It should be standing up right, and have at least 2 cables plugged into the ports on the back of it. If you don't have any other information, can you please look at your modem and let me know what the lights look like?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "They're all white."
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Thank you for letting me know. I'm checking now what will be the next step."
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_vr_post_answer",
+      "inputActionParameters": {
+        "customer_answer1_id": "0"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer having an issue with the service, starts the Virtual repair process.",
+    "actionParameters": {
+      "acceptable_answers": [ {
+        "choice": "They’re all white.",
+        "id": 0,
+        "sub-choices": [ ],
+        "title": ""
+      }, {
+        "choice": "Some are red.",
+        "id": 1,
+        "sub-choices": [ ],
+        "title": ""
+      }, {
+        "choice": "Some are orange.",
+        "id": 2,
+        "sub-choices": [ ],
+        "title": ""
+      }, {
+        "choice": "A combination of red and orange.",
+        "id": 3,
+        "sub-choices": [ ],
+        "title": ""
+      }, {
+        "choice": "No lights are on.",
+        "id": 4,
+        "sub-choices": [ ],
+        "title": ""
+      }, {
+        "choice": "None of the above.",
+        "id": 5,
+        "sub-choices": [ ],
+        "title": ""
+      } ],
+      "dcx_action_code": "6502",
+      "title": "What colour are the lights on your modem?",
+      "vr_type": "CFB"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "This Dialogflow CX execution outlines a modem troubleshooting flow. The agent initiates by asking the user to describe their modem's lights.\n\nHowever, the user responds by asking, \"What is a modem?\" This immediately triggers a call to the vr_cfl_faq_en tool. Crucially, the vr_cfl_faq_en tool successfully provides the necessary definition for \"modem,\" addressing the user's fundamental knowledge gap. This successful intervention by the tool sets the stage for the conversation to potentially proceed with the original troubleshooting query.",
+    "actionParameters": {
+    
+    }
+  },
+  "displayName": "CFB - User asks a question (Answer)",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 842,
+  "languageCode": "en"
+}

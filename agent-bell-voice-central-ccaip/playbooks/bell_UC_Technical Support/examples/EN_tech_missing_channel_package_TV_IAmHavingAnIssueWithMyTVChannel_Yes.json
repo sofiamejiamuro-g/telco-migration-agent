@@ -1,0 +1,63 @@
+{
+  "name": "f11bac39-66b5-4d7e-90b4-d70e4c637fa9",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_tech_intent_apb",
+      "inputActionParameters": {
+        "language": "en",
+        "lob": "TV",
+        "utterance": "I do not see the promised channels in my plan now"
+      },
+      "outputActionParameters": {
+        "language": "en",
+        "lob": "TV"
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "I'll send a text to the device you're calling from, so you can easily synchronize your TV programming through MyBell. Is that alright?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Yes"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "sms_content": "Bell msg: Visit https://m.bell.ca/supportsynchproge and follow the onscreen instructions to synchronize your programming. (bell.ca/about-us)",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer asking about TV service related issue",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "lob": "TV",
+      "route": "tech_missing_channel_package",
+      "utterance": "I do not see the promised channels in my plan now"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Customer is given the resolution for TV or TV channel packge issue",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "lob": "TV",
+      "route": "tech_missing_channel_package",
+      "sms_content": "Bell msg: Visit https://m.bell.ca/supportsynchproge and follow the onscreen instructions to synchronize your programming. (bell.ca/about-us)",
+      "sms_type": "Public",
+      "utterance": "I do not see the promised channels in my plan now"
+    }
+  },
+  "displayName": "EN_tech_missing_channel_package_TV_IAmHavingAnIssueWithMyTVChannel_Yes",
+  "retrievalStrategy": "NEVER",
+  "tokenCount": 437,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

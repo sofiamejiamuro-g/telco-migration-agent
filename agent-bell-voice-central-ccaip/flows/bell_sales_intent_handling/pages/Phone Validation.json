@@ -1,0 +1,53 @@
+{
+  "name": "8936f555-5d41-43d6-9dd0-1940b207ff3d",
+  "displayName": "Phone Validation",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "($session.params.CIRN_flag = true AND $sys.func.LEN($session.params.CIRN) = 10) OR ($session.params.CIRN_999 = \"999\" AND $sys.func.LEN($session.params.CIRN) = 10)",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook search-by-tn CIRN",
+    "name": "bd56cae8-314d-484a-aa5b-d402683850c4"
+  }, {
+    "condition": "$session.params.CIRN_flag = false OR $sys.func.LEN($session.params.CIRN) != 10",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "identification_status",
+        "value": "Fail"
+      }, {
+        "parameter": "line_type",
+        "value": "Existing"
+      }, {
+        "parameter": "customer_type",
+        "value": "Existing"
+      } ]
+    },
+    "targetPage": "Webhook npa-nxx-lookup",
+    "name": "65275689-cdc0-44a8-a7ce-ae74d39b3ba2"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "8936f555-5d41-43d6-9dd0-1940b207ff3d"
+      }, {
+        "parameter": "flow_id",
+        "value": "77cfa112-7fcc-4226-9d68-33bdee616f44"
+      }, {
+        "parameter": "page_name",
+        "value": "Phone Validation"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

@@ -1,0 +1,27 @@
+{
+  "name": "c219a170-3575-4929-8cf5-d6d75e4e9a93",
+  "displayName": "v1/dfcx_support/cpm_profile_info",
+  "timeout": {
+    "seconds": 5
+  },
+  "serviceDirectory": {
+    "service": "projects/gcp-it-npe-pltfm-apigee/locations/us-central1/namespaces/apigee-nb-usc1-service-dir-namespace/services/apigee-nb-usc1-service",
+    "genericWebService": {
+      "uri": "https://apigee-nane1-uat.int.bell.ca/v1/dfcx-support/cpm-profile-info",
+      "requestHeaders": [ {
+        "key": "x-apikey",
+        "value": "npZmDivP6Hxes3wtQ0tC9RqItjJTY8TgZHbOPNeFwvSYSKPI"
+      } ],
+      "webhookType": "FLEXIBLE",
+      "httpMethod": "POST",
+      "requestBody": "{\n  \"sessionInfo\": {\n    \"dfcx_session_id\": \"$session.params.dfcx_session_id\",\n    \"agent_id\": \"$session.params.agent_id\",\n    \"parameters\": {\n      \"clid\": \"$session.params.clid\",\n      \"billing_account_number\": \"$session.params.billing_account_number\",\n      \"customer_profile\": \"$session.params.customer_profile\"\n    }\n  },\n  \"fulfillmentInfo\": {\n    \"tag\": \"hp-in-ban\"\n  },\n  \"languageCode\": \"$request.language\"\n}",
+      "parameterMapping": [ {
+        "key": "hp_in_ban_response",
+        "value": "sessionInfo.parameters.hp_in_ban_response"
+      }, {
+        "key": "webhook_success",
+        "value": "sessionInfo.parameters.webhook_success"
+      } ]
+    }
+  }
+}

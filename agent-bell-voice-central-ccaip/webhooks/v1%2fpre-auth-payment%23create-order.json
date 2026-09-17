@@ -1,0 +1,27 @@
+{
+  "name": "c7a15d47-d263-4a5c-9f09-e14ba89effc2",
+  "displayName": "v1/pre-auth-payment#create-order",
+  "timeout": {
+    "seconds": 30
+  },
+  "serviceDirectory": {
+    "service": "projects/gcp-it-npe-pltfm-apigee/locations/us-central1/namespaces/apigee-nb-usc1-service-dir-namespace/services/apigee-nb-usc1-service",
+    "genericWebService": {
+      "uri": "https://apigee-nane1-uat.int.bell.ca/v1/pre-auth-payment",
+      "requestHeaders": [ {
+        "key": "x-apikey",
+        "value": "npZmDivP6Hxes3wtQ0tC9RqItjJTY8TgZHbOPNeFwvSYSKPI"
+      } ],
+      "webhookType": "FLEXIBLE",
+      "httpMethod": "POST",
+      "requestBody": "{\n  \"sessionInfo\": {\n    \"dfcx_session_id\": \"$session.params.dfcx_session_id\",\n    \"agent_id\": \"$session.params.agent_id\",\n    \"parameters\": {\n      \"brand\": \"$session.params.brand\",\n      \"billing_account\": \"$session.params.billing_account\",\n      \"menu_type\": \"$session.params.menu_type\",\n      \"subscriber_number\": \"$session.params.subscriber_number\",\n      \"callKey\": \"$session.params.callKey\"\n    }\n  },\n  \"fulfillmentInfo\": {\n    \"tag\": \"create-order\"\n  },\n  \"languageCode\": \"$request.language\"\n}",
+      "parameterMapping": [ {
+        "key": "start_pre_auth_pmt_response",
+        "value": "sessionInfo.parameters.start_pre_auth_pmt_response"
+      }, {
+        "key": "webhook_success",
+        "value": "sessionInfo.parameters.webhook_success"
+      } ]
+    }
+  }
+}

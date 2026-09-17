@@ -1,0 +1,58 @@
+{
+  "name": "43126866-5983-486c-96e6-fc1c1d78b040",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "language": "fr-ca",
+        "province": "ON"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Bien sûr, laissez-moi vous aider.\nVérifions si nous offrons des services Internet ou de téléphonie résidentielle dans votre secteur. Dans quelle province avez-vous besoin de services?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "ON"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_aqd",
+      "inputActionParameters": {
+        "language": "fr-ca",
+        "province": "ON"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "The customer is asking whether the provider's service is offered at an address or location.",
+    "actionParameters": {
+      "language": "fr-ca",
+      "lob": "Internet",
+      "province": "NB",
+      "route": "sales_confirm_service_coverage",
+      "utterance": "Avez-vous un service Internet à mon emplacement?"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "If province is anything other than \"ON\" or \"QC\", ask the user to provide the province, If the user mentions \"ON\", set the parameter {province} as \"ON\", and route to bell_aqd flow",
+    "actionParameters": {
+      "language": "fr-ca",
+      "lob": "Internet",
+      "province": "ON",
+      "utterance": "Avez-vous un service Internet à mon emplacement?"
+    }
+  },
+  "displayName": "FR-sales_service_coverage-streaming | Internet | not ON/QC",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 403,
+  "languageCode": "fr"
+}

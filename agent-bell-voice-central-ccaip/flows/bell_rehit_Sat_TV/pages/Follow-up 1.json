@@ -1,0 +1,56 @@
+{
+  "name": "1d0e329a-30ef-4bf9-9b86-47b413f3f287",
+  "displayName": "Follow-up 1",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "messages": [ {
+      "text": {
+        "text": [ "Have you used your TV in the last 2 weeks?" ]
+      },
+      "languageCode": "en"
+    }, {
+      "text": {
+        "text": [ "Avez-vous utilisé votre télé au cours des deux dernières semaines ?" ]
+      },
+      "languageCode": "fr-ca"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "intent": "context.confirm_yes",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Follow-up 2",
+    "name": "a91abf6c-0cbe-4471-bfb2-b014b8c8cb6a"
+  }, {
+    "intent": "context.confirm_no",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Follow-up 3",
+    "name": "f3ab0522-c43f-4b2c-b6cc-2f3ef9bb4f9e"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Local Error handling",
+    "event": "sys.no-input-default",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "bell_rehit_Sat_TV",
+        "value": "Follow-up 1"
+      } ]
+    },
+    "name": "3a2ada28-bc6f-4b4d-9632-8d4e59814076"
+  }, {
+    "targetPage": "Local Error handling",
+    "event": "sys.no-match-default",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "bell_rehit_Sat_TV",
+        "value": "Follow-up 1"
+      } ]
+    },
+    "name": "73b559c6-37d8-4b44-adae-ea0505a6a822"
+  } ]
+}

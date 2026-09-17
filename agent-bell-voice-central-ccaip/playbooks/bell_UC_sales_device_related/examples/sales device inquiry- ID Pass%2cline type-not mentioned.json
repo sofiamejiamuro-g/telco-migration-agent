@@ -1,0 +1,62 @@
+{
+  "name": "f4680787-3680-42b8-bdaa-07cd3f692f99",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "brand": "bell",
+        "language": "en"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Are you inquiring about a new service or do you want to make\nchanges to your current service?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "new service"
+    }
+  }, {
+    "playbookInvocation": {
+      "playbook": "bell_UC_Sales",
+      "playbookInput": {
+        "precedingConversationSummary": "follow the instructions under the route \"sales_add_to_existing_account\"",
+        "actionParameters": {
+          "customer_type": "Existing",
+          "line_type": "New",
+          "route": "sales_add_to_existing_account",
+          "utterance": "new service"
+        }
+      },
+      "playbookOutput": {
+        "executionSummary": "customer query is resolved",
+        "actionParameters": {
+        
+        }
+      },
+      "playbookState": "OUTPUT_STATE_OK"
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer has questions about device availability, device features, cost, related to devices that Bell sells",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "Existing",
+      "language": "en",
+      "route": "sales_device_inquiry",
+      "utterance": "I have questions about device availability"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "from the identification flow, know the customer_type as \"Existing\", as we don't know the line type, we need to ask the customer, if customer says that they are looking for new service we need to set \"line_type\" as \"New\" and reroute to \"sales_add_to_existing_account\" in this playbook"
+  },
+  "displayName": "sales device inquiry- ID Pass,line type-not mentioned",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 438,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

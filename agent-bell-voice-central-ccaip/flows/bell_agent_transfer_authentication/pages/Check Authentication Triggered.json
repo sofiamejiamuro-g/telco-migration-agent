@@ -1,0 +1,64 @@
+{
+  "name": "07a118b8-61d2-43a9-87d4-5cb3592ba2a6",
+  "displayName": "Check Authentication Triggered",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.auth_status = \"Fail\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "auth_status",
+        "value": "Fail"
+      } ]
+    },
+    "targetPage": "End Flow",
+    "name": "12a39bd3-8be6-4fdb-8760-e1fed125f39f"
+  }, {
+    "condition": "$session.params.auth_status = null",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "PIN Check",
+    "name": "4fc49cb7-0d04-41c6-933b-b412985647ed"
+  }, {
+    "condition": "$session.params.auth_status = \"Pass\" AND ($session.params.auth_method = \"PIN\" OR ($session.params.auth_method = \"OTP\" AND $session.params.is_old = true))",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "auth_status",
+        "value": "Pass"
+      } ]
+    },
+    "targetPage": "End Flow",
+    "name": "2ef41352-bb39-43d6-8668-474fb9363a58"
+  }, {
+    "condition": "$session.params.auth_status = \"Pass\" AND ($session.params.caller_channel = \"WSC\" OR $session.params.is_old != true)",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "PIN Check",
+    "name": "755beac7-cd40-4933-b445-4012ed45a6cc"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "07a118b8-61d2-43a9-87d4-5cb3592ba2a6"
+      }, {
+        "parameter": "flow_id",
+        "value": "87797521-bad6-4ad0-8ba5-2ff3b1d9bab2"
+      }, {
+        "parameter": "page_name",
+        "value": "Check Authentication Triggered"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

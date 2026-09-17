@@ -1,0 +1,44 @@
+{
+  "name": "45d2715a-dbc1-421e-ab3a-43d93abb2a03",
+  "displayName": "EEPA-2798 - 2",
+  "notes": "Tested starting directly on the Global Error Handling page in the bell_Identification flow in the simulator. Giving a no-match starts the conversation without leaving the page, which then goes through the conditional routes and matches non since there are no parameters set, and then activates the true route added.",
+  "testCaseConversationTurns": [ {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "hhh"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "currentPage": {
+        "name": "End Session",
+        "flow": "bell_aqd"
+      },
+      "textResponses": [ {
+        "text": [ "Sorry, I'm unable to transfer you to an agent due to an unexpected system issue. Please try calling us back later." ]
+      } ],
+      "currentFlow": {
+        "name": "bell_aqd"
+      }
+    },
+    "expectations": {
+      "expectedSessionParameters": [ {
+        "key": "hardstop",
+        "value": true
+      } ]
+    }
+  } ],
+  "creationTime": {
+    "seconds": 1764176934,
+    "nanos": 293346000
+  },
+  "testConfig": {
+    "trackingParameters": [ "hardstop" ],
+    "flow": "bell_Identification",
+    "page": "Global Error Handling"
+  },
+  "languageCode": "en"
+}

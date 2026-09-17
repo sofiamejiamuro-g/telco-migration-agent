@@ -1,0 +1,47 @@
+{
+  "name": "2e7f6c77-c54e-4b94-8427-7362350b21b3",
+  "displayName": "No Active Outage",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "setParameterActions": [ {
+      "parameter": "outage_status",
+      "value": "not active"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.tv_sub_type = \"fibe\" OR $session.params.tv_sub_type = \"fibe tv app\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Check CX input ",
+    "name": "eec77035-0c65-4c14-bcbc-d21f37c41ee3"
+  }, {
+    "condition": "$sys.func.UPPER($session.params.lob) = \"MOBILITY\" OR $session.params.lob = \"Internet\" OR $session.params.lob = \"Homephone\" OR $session.params.tv_sub_type = \"sat\" OR $session.params.tv_sub_type = \"fibe tv app\" OR $session.params.lob = \"internet\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "User Input Confirmation",
+    "name": "7e65cf4c-a818-48bb-bd82-77e567369210"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "2e7f6c77-c54e-4b94-8427-7362350b21b3"
+      }, {
+        "parameter": "flow_id",
+        "value": "94d32e37-496f-4fa3-81e8-18fd95281a52"
+      }, {
+        "parameter": "page_name",
+        "value": "No Active Outage"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

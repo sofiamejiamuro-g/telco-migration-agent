@@ -1,0 +1,54 @@
+{
+  "name": "628d01b6-1fb9-4f45-84ba-ffc162fc078c",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "brand": "bell",
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "brand": "bell",
+        "language": "fr-ca",
+        "sms_content": "Vous pouvez visiter m.bell.ca/gererloptioninternet pour plus d'information sur les appareils Internet. ( bell.ca/apropos )",
+        "sms_type": "public"
+      },
+      "outputActionParameters": {
+        "language": "fr-ca"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer wants to order modem for Internet, so {lob} is mentioned as \"Internet\" and {device_type} is mentioned as \"modem\" in utterance then route to transferred to the bell_SMS Trigger flow. ",
+    "actionParameters": {
+      "brand": "bell",
+      "device_type": "modem",
+      "identification_status": "Fail",
+      "language": "fr-ca",
+      "lob": "Internet",
+      "route": "sales_order_device",
+      "utterance": "Je veux obtenir un modem pour Internet s’il vous plaît"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "We need to check the result from identification flow from the webhook NPANXX, here it is \"NB\" (which is ATL) so {special_queue} is set to 'bell_sales_to_atl' and it will go to bell_aqd",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca",
+      "lob": "Internet"
+    }
+  },
+  "displayName": "FR \"sales_order_device\"- ID fail, province NB, Device_type Modem, LOB Internet",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 414,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

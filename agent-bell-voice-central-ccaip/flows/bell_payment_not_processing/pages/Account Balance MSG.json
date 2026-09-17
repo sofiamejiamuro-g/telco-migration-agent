@@ -1,0 +1,45 @@
+{
+  "name": "9bf8f931-8611-4c41-9cd6-5afabf224ea0",
+  "displayName": "Account Balance MSG",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "messages": [ {
+      "text": {
+        "text": [ "I can see your last payment of $ $session.params.last_payment_amount was received on $session.params.last_payment_date. Is that the payment you're referring to?" ]
+      },
+      "languageCode": "en"
+    }, {
+      "text": {
+        "text": [ "Je vois que votre dernier paiement de $ $session.params.last_payment_amount a été reçu le $session.params.last_payment_date. Est-ce le paiement auquel vous faites référence ?" ]
+      },
+      "languageCode": "fr-ca"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "intent": "context.confirm_yes",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Great! Looks like we've received your payment. " ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Génial ! Il semble que nous ayons bien reçu votre paiement." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetFlow": "bell_Feedback",
+    "name": "c31db637-1d19-47d4-9f1b-c559226c9d0b"
+  }, {
+    "intent": "context.confirm_no",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_aqd",
+    "name": "09bf233e-0fd3-4ace-b595-42ca5a9d33e9"
+  } ]
+}

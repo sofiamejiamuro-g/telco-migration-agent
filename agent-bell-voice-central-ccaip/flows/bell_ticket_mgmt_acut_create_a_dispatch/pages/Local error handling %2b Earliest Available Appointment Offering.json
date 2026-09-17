@@ -1,0 +1,180 @@
+{
+  "name": "b04d4a8d-db38-45a2-a6b5-2d167cd8d982",
+  "displayName": "Local error handling + Earliest Available Appointment Offering",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.global_error_counter \u003e= 3",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_aqd",
+    "name": "ee889f07-9f0f-464a-a8d7-ab06ffa8fcfe"
+  }, {
+    "condition": "$session.params.local_trigger = \"no_input\" AND $session.params.local_noinput_counter = 1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I didn't quite get that." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "\u003cspeak\u003eThe next available time slot is $session.params.day_of_week, $session.params.month \u003csay-as interpret-as=\"ordinal\"\u003e$session.params.date_of_month\u003c/say-as\u003e between $session.params.start_time_2 and $session.params.end_time_2. Does that work for you?\u003c/speak\u003e" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je n'ai pas bien compris." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "\u003cspeak\u003eLa prochaine plage horaire disponible est le $session.params.day_of_week_fr, le \u003csay-as interpret-as=\"cardinal\"\u003e$session.params.date_of_month\u003c/say-as\u003e $session.params.month_fr entre $session.params.start_time_fr_2 et $session.params.end_time_fr_2. Est-ce que cela vous convient?\u003c/speak\u003e" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "86448811-0398-4b51-af9f-886bd3d71aa7"
+  }, {
+    "condition": "$session.params.local_trigger = \"no_input\" AND $session.params.local_noinput_counter = 2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I still didn't get that." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "\u003cspeak\u003eThe next available time slot is $session.params.day_of_week, $session.params.month \u003csay-as interpret-as=\"ordinal\"\u003e$session.params.date_of_month\u003c/say-as\u003e between $session.params.start_time_2 and $session.params.end_time_2. Does that work for you?\u003c/speak\u003e" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je n'ai toujours pas compris." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "\u003cspeak\u003eLa prochaine plage horaire disponible est le $session.params.day_of_week_fr, le \u003csay-as interpret-as=\"cardinal\"\u003e$session.params.date_of_month\u003c/say-as\u003e $session.params.month_fr entre $session.params.start_time_fr_2 et $session.params.end_time_fr_2. Est-ce que cela vous convient?\u003c/speak\u003e" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "47aed860-e3fd-495d-af30-dd7a1fa52354"
+  }, {
+    "condition": "$session.params.local_trigger = \"no_input\" AND $session.params.local_noinput_counter \u003e= 3",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "rejected_date",
+        "value": "$session.params.date"
+      } ],
+      "generators": [ {
+        "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/b0cb025a-aac0-472d-96d2-ca481f609082",
+        "inputParameters": [ {
+          "key": "availability",
+          "value": "$session.params.availability"
+        }, {
+          "key": "original_end_date",
+          "value": "$session.params.original_end_date"
+        }, {
+          "key": "original_start_date",
+          "value": "$session.params.original_start_date"
+        }, {
+          "key": "rejected_date",
+          "value": "$session.params.rejected_date"
+        } ],
+        "outputParameter": "$request.generative.appointment_date_range"
+      } ]
+    },
+    "targetPage": "Ask What Day Works",
+    "name": "c64102f6-1225-4188-859d-cb38e00d0fff"
+  }, {
+    "condition": "$session.params.local_trigger = \"no_match\" AND $session.params.local_nomatch_counter = 1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I didn't quite get that." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "\u003cspeak\u003eThe next available time slot is $session.params.day_of_week, $session.params.month \u003csay-as interpret-as=\"ordinal\"\u003e$session.params.date_of_month\u003c/say-as\u003e between $session.params.start_time_2 and $session.params.end_time_2. Does that work for you?\u003c/speak\u003e" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je n'ai pas bien compris." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "\u003cspeak\u003eLa prochaine plage horaire disponible est le $session.params.day_of_week_fr, le \u003csay-as interpret-as=\"cardinal\"\u003e$session.params.date_of_month\u003c/say-as\u003e $session.params.month_fr entre $session.params.start_time_fr_2 et $session.params.end_time_fr_2. Est-ce que cela vous convient?\u003c/speak\u003e" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "c146987b-0d81-45e3-ad0d-c14e52003f29"
+  }, {
+    "condition": "$session.params.local_trigger = \"no_match\" AND $session.params.local_nomatch_counter = 2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I still didn't get that." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "\u003cspeak\u003eThe next available time slot is $session.params.day_of_week, $session.params.month \u003csay-as interpret-as=\"ordinal\"\u003e$session.params.date_of_month\u003c/say-as\u003e between $session.params.start_time_2 and $session.params.end_time_2. Does that work for you?\u003c/speak\u003e" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je n'ai toujours pas compris." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "\u003cspeak\u003eLa prochaine plage horaire disponible est le $session.params.day_of_week_fr, le \u003csay-as interpret-as=\"cardinal\"\u003e$session.params.date_of_month\u003c/say-as\u003e $session.params.month_fr entre $session.params.start_time_fr_2 et $session.params.end_time_fr_2. Est-ce que cela vous convient?\u003c/speak\u003e" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "3ed710dc-bee2-4d59-88e7-1a6549814293"
+  }, {
+    "condition": "$session.params.local_trigger = \"no_match\" AND $session.params.local_nomatch_counter \u003e= 3",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "rejected_date",
+        "value": "$session.params.date"
+      } ],
+      "generators": [ {
+        "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/b0cb025a-aac0-472d-96d2-ca481f609082",
+        "inputParameters": [ {
+          "key": "availability",
+          "value": "$session.params.availability"
+        }, {
+          "key": "original_end_date",
+          "value": "$session.params.original_end_date"
+        }, {
+          "key": "original_start_date",
+          "value": "$session.params.original_start_date"
+        }, {
+          "key": "rejected_date",
+          "value": "$session.params.rejected_date"
+        } ],
+        "outputParameter": "$request.generative.appointment_date_range"
+      } ]
+    },
+    "targetPage": "Ask What Day Works",
+    "name": "04da8b33-dc56-4c73-b08c-f28d7730cfb7"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Previous Page",
+    "name": "55f49af7-8140-4bb1-8154-29c213b924f5"
+  } ]
+}

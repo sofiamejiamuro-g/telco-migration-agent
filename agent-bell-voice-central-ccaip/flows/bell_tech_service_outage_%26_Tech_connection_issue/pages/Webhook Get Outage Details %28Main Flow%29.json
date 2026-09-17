@@ -1,0 +1,73 @@
+{
+  "name": "c0f9bd63-e4e2-4c37-b6bb-18831f6390f0",
+  "displayName": "Webhook Get Outage Details (Main Flow)",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "v1/digital-tools/outage-check#failed-details",
+    "tag": "failed-details",
+    "setParameterActions": [ {
+      "parameter": "tz_offset",
+      "value": "$session.params.npa_nxx_lookup_response.tz_offset"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.webhook_success = true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Active Outage",
+    "name": "7809c6a2-bdb8-4e1c-9890-3609da59391a"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Failed Outage Check",
+    "name": "cleanup-hardstop-route"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Failed Outage Check",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+    
+    },
+    "name": "88db4fe9-ddd6-4ad1-81c3-fb442311395e"
+  }, {
+    "targetPage": "Failed Outage Check",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+    
+    },
+    "name": "a53f08d7-5e9d-45d1-8376-d6b360f71831"
+  }, {
+    "targetPage": "Failed Outage Check",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+    
+    },
+    "name": "daaa3fca-08bf-4555-9daf-e50ed16d66eb"
+  }, {
+    "targetPage": "Failed Outage Check",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+    
+    },
+    "name": "dc7eced7-9f03-428a-ad6e-3fa23d206b77"
+  }, {
+    "targetPage": "Failed Outage Check",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+    
+    },
+    "name": "9110cf64-506c-4f68-9fef-9b9b9d9318ca"
+  }, {
+    "targetPage": "Failed Outage Check",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+    
+    },
+    "name": "12efa63e-a107-4e10-ac74-7aba34e5d4ca"
+  } ]
+}

@@ -1,0 +1,53 @@
+{
+  "name": "940b6c15-1628-42dd-89c2-b086b8696613",
+  "displayName": "SMS content MOB and SAT TV (Failed Auth)",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.language = \"en\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "sms_type",
+        "value": "Public"
+      }, {
+        "parameter": "sms_content",
+        "value": "Bell: You can visit https://support.bell.ca/outage-check to track the status of the service outage. ( bell.ca/about-us )"
+      } ]
+    },
+    "targetFlow": "bell_SMS Trigger",
+    "name": "45255b23-09dd-4a69-9d5b-1bc9e53d8fb6"
+  }, {
+    "condition": "$session.params.language = \"fr-ca\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "sms_type",
+        "value": "Public"
+      }, {
+        "parameter": "sms_content",
+        "value": "Bell : Vous pouvez visiter https://soutien.bell.ca/Verification-des-pannes pour suivre le statut de la panne de service. ( bell.ca/apropos )"
+      } ]
+    },
+    "targetFlow": "bell_SMS Trigger",
+    "name": "4601b0f5-90d6-4032-af57-f33c72f81294"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "940b6c15-1628-42dd-89c2-b086b8696613"
+      }, {
+        "parameter": "flow_id",
+        "value": "94d32e37-496f-4fa3-81e8-18fd95281a52"
+      }, {
+        "parameter": "page_name",
+        "value": "SMS content MOB and SAT TV (Failed Auth)"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

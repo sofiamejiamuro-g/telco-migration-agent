@@ -1,0 +1,110 @@
+{
+  "name": "e7867373-064c-446c-919b-2b564c4d7ca1",
+  "displayName": "Webhook - Selected Interval",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "v1/dfcx_support/omf_calendar#selected-interval",
+    "tag": "selected-interval",
+    "setParameterActions": [ {
+      "parameter": "day",
+      "value": "$session.params.day"
+    }, {
+      "parameter": "calendarIdentifier",
+      "value": "$session.params.calendarIdentifier"
+    }, {
+      "parameter": "interval",
+      "value": "$session.params.interval"
+    }, {
+      "parameter": "estimatedStartTime",
+      "value": "$session.params.estimatedStartTime"
+    }, {
+      "parameter": "omf_selections",
+      "value": null
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "omf_selected_interval_response_raw",
+        "value": "$session.params.omf_selected_interval_response"
+      }, {
+        "parameter": "omf_selected_interval_response",
+        "value": "$sys.func.TO_OBJECT($session.params.omf_selected_interval_response_raw)"
+      }, {
+        "parameter": "omf_selections_obj",
+        "value": "$session.params.omf_selected_interval_response.omf_selections"
+      }, {
+        "parameter": "omf_selections",
+        "value": "[$session.params.omf_selections_obj]"
+      } ]
+    },
+    "name": "d64a2cde-1bf0-445b-8ecc-a969ddf09fba"
+  }, {
+    "condition": "$session.params.webhook_success = true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Calendar Reserve",
+    "name": "0c88adbc-42a6-4da4-b083-35d477ca1811"
+  }, {
+    "condition": "$session.params.webhook_success = false",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Failure - OMF",
+    "name": "98f82f82-5823-4ebb-9b5f-83a9254532b0"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Failure - OMF",
+    "name": "a96f79c3-5a1e-4f71-9cda-4e8bcf32ba80"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Webhook Failure - OMF",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+    
+    },
+    "name": "b901ceeb-bf65-4a40-85b8-512ae42e401a"
+  }, {
+    "targetPage": "Webhook Failure - OMF",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+    
+    },
+    "name": "3ca5a604-e7ee-44b9-a2f5-a5fcbb69e726"
+  }, {
+    "targetPage": "Webhook Failure - OMF",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+    
+    },
+    "name": "5b174d93-d330-4a23-8996-d1343afe1e2d"
+  }, {
+    "targetPage": "Webhook Failure - OMF",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+    
+    },
+    "name": "87a45061-8165-4b8b-9e74-9d71448bf87a"
+  }, {
+    "targetPage": "Webhook Failure - OMF",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+    
+    },
+    "name": "8601e100-030b-4deb-ba6c-3adea00ba0fd"
+  }, {
+    "targetPage": "Webhook Failure - OMF",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+    
+    },
+    "name": "e2c8a346-b3a8-491a-88dd-21c3c8078bff"
+  } ]
+}

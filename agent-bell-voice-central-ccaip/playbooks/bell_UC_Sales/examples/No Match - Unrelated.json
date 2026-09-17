@@ -1,0 +1,82 @@
+{
+  "name": "e1277dd6-edb6-4eac-914c-4be0433c90bb",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_global_error_count_check",
+      "inputActionParameters": {
+        "global_error_counter": "1"
+      },
+      "outputActionParameters": {
+        "global_error_counter": "2"
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "I'm unable to provide information on that subject. However, I'd be glad to assist with any inquiries you may have regarding Bell's products and services."
+    }
+  }, {
+    "userUtterance": {
+      "text": "But I need to make a bolognese"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_global_error_count_check",
+      "inputActionParameters": {
+        "global_error_counter": "2"
+      },
+      "outputActionParameters": {
+        "global_error_counter": "3"
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "I’m having trouble understanding. Can you repeat please?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Can you tell the weather?"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_global_error_count_check",
+      "inputActionParameters": {
+        "global_error_counter": "3"
+      },
+      "outputActionParameters": {
+        "global_error_counter": "4"
+      }
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_No_Match_3",
+      "inputActionParameters": {
+      
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "The user's input is linguistically correct but completely unrelated to the current conversation or outside the scope of Bell customer support",
+    "actionParameters": {
+      "brand": "bell",
+      "global_error_counter": "1",
+      "language": "en",
+      "utterance": "The sky is blue"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "As Customer says irrelevant information to bell  products and services, so flow bell_global_error_count_check is called each time and VA respond as per instructions and when 3rd time they say irrelevant things, we send them to bell_no_match_3 flow",
+    "actionParameters": {
+      "brand": "bell",
+      "global_error_counter": "4",
+      "language": "en"
+    }
+  },
+  "displayName": "No Match - Unrelated",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 558,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "fr"
+}

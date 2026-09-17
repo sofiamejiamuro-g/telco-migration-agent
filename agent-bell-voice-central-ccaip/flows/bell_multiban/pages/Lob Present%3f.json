@@ -1,0 +1,61 @@
+{
+  "name": "3848e7f5-920c-45fd-9264-b05b06f7b0fe",
+  "displayName": "Lob Present?",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.atlantic = true OR $session.params.BNQ = true OR $session.params.MTS = true",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_IVR_Options",
+    "name": "9bff5f04-055c-4b70-8a68-aade563b9025"
+  }, {
+    "condition": "$session.params.n_billing_accounts_lob = 1",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "billing_account_number",
+        "value": "$sys.func.GET($session.params.billing_accounts_lob, 0)"
+      } ]
+    },
+    "targetPage": "Account Found",
+    "name": "b4ea92fd-392f-43f2-98a0-59ea3426d144"
+  }, {
+    "condition": "$session.params.n_billing_accounts_lob != 1 AND $session.params.n_postcode \u003e 1",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "lob_postcode_list_all",
+        "value": "$sys.func.FILTER(\"$session.params.customer_id_search_response\", \"$..billing_accounts[*].billing_address.postcode\")"
+      }, {
+        "parameter": "n_lob_postcode_list_all",
+        "value": "$sys.func.COUNT($session.params.lob_postcode_list_all)"
+      }, {
+        "parameter": "lob_i",
+        "value": 0
+      } ]
+    },
+    "targetPage": "Check - Unique Postcode",
+    "name": "615b3ee8-2578-4579-b3fa-8f4a9626835e"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Could you also tell me your account number, please?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "J'aurais aussi besoin du numéro de compte en question." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetPage": "Account Number",
+    "name": "629d67d8-85de-412d-9f65-d98946871448"
+  } ]
+}

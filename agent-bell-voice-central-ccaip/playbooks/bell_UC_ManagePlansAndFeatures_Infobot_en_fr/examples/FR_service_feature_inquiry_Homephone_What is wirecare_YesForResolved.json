@@ -1,0 +1,93 @@
+{
+  "name": "91f69a81-fcb0-45f5-a6af-456f433ef93a",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70024",
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+        "language": "fr-ca"
+      }
+    }
+  }, {
+    "playbookInvocation": {
+      "playbook": "bell_uc_ask_LOB",
+      "playbookInput": {
+        "actionParameters": {
+          "language": "fr-ca"
+        }
+      },
+      "playbookOutput": {
+        "actionParameters": {
+          "language": "fr-ca",
+          "lob": "home phone"
+        }
+      },
+      "playbookState": "OUTPUT_STATE_OK"
+    }
+  }, {
+    "toolUse": {
+      "tool": "FR_Bell_Manage_plans_and_features",
+      "action": "FR_Bell_Manage_plans_and_features",
+      "inputActionParameters": {
+        "requestBody": {
+          "query": "Qu’est-ce que le plan Entretien de câblage intérieur?"
+        }
+      },
+      "outputActionParameters": {
+        "200": {
+          "answer": "Le plan Entretien du câblage intérieur couvre les dommages accidentels ou liés à l'usage normal du câblage intérieur et des prises. Tous les frais de Bell reliés à la réparation sont couverts par le plan, au coût de 6,95 $ par mois.",
+          "snippets": [ {
+            "text": "* Couvre les dommages au câblage intérieur et aux prises, accidentels ou liés à l'usage normal. * Tous les frais de Bell reliés à la réparation sont couverts par le plan. 6 ,95 $ /mois par mois .",
+            "title": "Forfait Entretien du câblage intérieur | Téléphonie | Bell Canada",
+            "uri": "https://www.bell.ca/Telephonie/Plans-entretien#:~:text=*%20Couvre%20les,par%20mois%20."
+          } ]
+        }
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Le plan Entretien du câblage intérieur couvre les dommages accidentels ou liés à l'usage normal du câblage intérieur et des prises. Tous les frais de Bell reliés à la réparation sont couverts par le plan, au coût de 6,95 $ par mois. Est-ce que cela vous aide ?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Oui"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_Feedback",
+      "inputActionParameters": {
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer inquired about What is WireCare?",
+    "actionParameters": {
+      "brand": "bell",
+      "identification_status": "pass",
+      "language": "fr-ca",
+      "route": "service_feature_inquiry",
+      "utterance": "Qu’est-ce que le plan Entretien de câblage intérieur?"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Information about wirecare was provided from data store in French language",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca",
+      "lob": "homephone",
+      "route": "service_feature_inquiry"
+    }
+  },
+  "displayName": "FR_service_feature_inquiry_Homephone_What is wirecare_YesForResolved",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 739,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

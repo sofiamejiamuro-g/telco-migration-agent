@@ -1,0 +1,59 @@
+{
+  "name": "7dbec2c0-cdef-4296-88d6-65833f44084d",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Veuillez noter que le retour des articles à notre entrepôt et leur traitement peut prendre de 7 à 10 jours à compter du moment où vous avez envoyé le colis. Si des frais de non-retour de l'équipement vous ont été facturés, il peut s'écouler 1 à 2 cycles de facturation pour que le retour apparaisse à votre facture.\n\nAvez-vous votre numéro de suivi?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "oui"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Le suivi des retours d'équipement peut être effectué sur le site Web de Postes Canada ou de Purolator. Une fois l'appareil reçu, le traitement prend normalement de 7 à 10 jours. Je peux également vous envoyer un texto contenant un lien pour faire le suivi de votre envoi. Cela vous convient-il?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Quel type de lien contient le SMS ?"
+    }
+  }, {
+    "agentUtterance": {
+      "text": " Le SMS contient un lien vers le site Web de Postes Canada ou de Purolator, où vous pouvez entrer votre numéro de suivi pour suivre votre envoi de retour. Cela vous convient-il de recevoir ce SMS ? "
+    }
+  }, {
+    "userUtterance": {
+      "text": "oui"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "fr-ca",
+        "sms_content": "Bell : Pour suivre votre envoi de retour avec Purolator, rendez-vous au purolator.com/fr. Pour suivre votre envoi avec Postes Canada, rendez-vous au canadapost-postescanada.ca/cpc/fr ( bell.ca/apropos )",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "le client souhaite une mise à jour du statut de retour et aussi plus d'informations sur les SMS",
+    "actionParameters": {
+      "language": "fr-ca",
+      "route": "equipment_return_device",
+      "utterance": "avez-vous déjà reçu mon retour"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "le client a demandé un numéro de suivi puis a demandé s'il voulait recevoir des SMS et il a dit oui (ou équivalent) Un client a posé une question concernant les SMS. VA a répondu et a de nouveau proposé d'utiliser les SMS. L'utilisateur a alors accepté, et nous avons donc acheminé le message en conséquence.",
+    "actionParameters": {
+      "language": "fr-ca"
+    }
+  },
+  "displayName": "equipment_return_device 1A FR(sms-query)",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 584,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

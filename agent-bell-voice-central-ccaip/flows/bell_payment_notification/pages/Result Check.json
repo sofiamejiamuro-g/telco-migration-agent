@@ -1,0 +1,35 @@
+{
+  "name": "7f2e959c-19d1-4586-8a37-4adc1449292a",
+  "displayName": "Result Check",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "($session.params.accountType = \"I\" AND ($session.params.accountSubType = \"R\" OR $session.params.accountSubType = \"P\" OR $session.params.accountSubType = \"N\" OR $session.params.accountSubType = \"B\" OR $session.params.accountSubType = \"5\" OR $session.params.accountSubType = \"E\")) OR ($session.params.accountType = \"C\" AND ($session.params.accountSubType = \"P\" OR $session.params.accountSubType = \"V\" OR $session.params.accountSubType = \"T\")) OR ($session.params.oneBillIndicator = \"M\" OR $session.params.oneBillIndicator = \"Y\")",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook NPA XX Lookup",
+    "name": "e955a359-346a-4d30-880b-7e2179863efb"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Unfortunately, this self serve option is not available for your account." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Malheureusement, cette option libre-service n'est pas disponible pour votre compte." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetFlow": "bell_Feedback",
+    "name": "57ab4c9e-ca20-4ea3-b2e8-fb706e7aaaff"
+  } ]
+}

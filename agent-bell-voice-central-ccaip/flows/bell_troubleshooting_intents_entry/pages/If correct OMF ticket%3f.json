@@ -1,0 +1,47 @@
+{
+  "name": "a6ccb0d7-25fb-4d2a-90ef-da02d244936f",
+  "displayName": "If correct OMF ticket?",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "messages": [ {
+      "text": {
+        "text": [ "I found an order related to your $session.params.lineOfBusiness_1. Is this the ticket you're calling about?" ]
+      },
+      "languageCode": "en"
+    }, {
+      "text": {
+        "text": [ "J’ai trouvé une commande liée à votre $session.params.lineOfBusiness_1. S’agit-il du billet pour lequel vous appelez?\n" ]
+      },
+      "languageCode": "fr-ca"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "intent": "context.confirm_yes",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "order_identifier",
+        "value": "$session.params.recent_order_summary_1.orderIdentifier"
+      } ]
+    },
+    "targetFlow": "bell_ticket_mgmt_omf_ticket_check_technical_intents",
+    "name": "26a93776-59a6-48e7-8ae8-87ba7f2c5b7d"
+  }, {
+    "intent": "context.confirm_no",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "recent_order_summary_raw_2",
+        "value": "$session.params.order_summary_response.order_summaries[1]"
+      }, {
+        "parameter": "recent_order_summary_2",
+        "value": "$sys.func.TO_OBJECT($session.params.recent_order_summary_raw_2)"
+      }, {
+        "parameter": "lineOfBusiness_2",
+        "value": "$session.params.recent_order_summary_2.serviceAttributes[0].lineOfBusiness"
+      } ]
+    },
+    "targetPage": "If another OMF ticket correct?",
+    "name": "1d5a035a-8a1b-402f-92db-bce065b1f2bc"
+  } ]
+}

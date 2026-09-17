@@ -1,0 +1,124 @@
+{
+  "name": "0e225203-1cb0-4f81-b051-2c9de9905d1f",
+  "tags": [ "#bell" ],
+  "displayName": "EEPA-1564-TFN-Identification",
+  "testCaseConversationTurns": [ {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "languageCode": "en",
+        "event": {
+          "event": "greet"
+        }
+      }
+    },
+    "virtualAgentOutput": {
+      "sessionParameters": {
+        "Agent_Counter": 0,
+        "CLID": 4155547622,
+        "brand": "bell",
+        "caller_channel": "TFN",
+        "language": "en"
+      },
+      "currentPage": {
+        "name": "Routing Page",
+        "flow": "Default Start Flow"
+      },
+      "textResponses": [ {
+        "text": [ "Welcome. I’m Bell’s virtual assistant. it’s nice to e-meet you. I use AI to offer you help quickly when you need it. How Can I help you?" ]
+      } ],
+      "currentFlow": {
+        "name": "Default Start Flow"
+      },
+      "actions": [ {
+        "event": {
+          "event": "greet"
+        }
+      }, {
+        "agentUtterance": {
+          "text": "Welcome. I’m Bell’s virtual assistant. it’s nice to e-meet you. I use AI to offer you help quickly when you need it. How Can I help you?"
+        }
+      } ]
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "setup autopay"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "triggeredIntent": {
+        "name": "payment_setup_autopay"
+      },
+      "currentPage": {
+        "name": "Get CX Input",
+        "flow": "bell_Identification"
+      },
+      "textResponses": [ {
+        "text": [ "Is this concerning the number you are calling from?" ],
+        "allowPlaybackInterruption": true
+      } ],
+      "currentFlow": {
+        "name": "bell_Identification"
+      }
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "no that's not the number"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "triggeredIntent": {
+        "name": "context.confirm_no"
+      },
+      "currentPage": {
+        "name": "CX Input Custom Fallback 1",
+        "flow": "bell_Identification"
+      },
+      "textResponses": [ {
+        "text": [ "Okay, so what’s the 10-digit number you’re calling about?" ],
+        "allowPlaybackInterruption": true
+      } ],
+      "currentFlow": {
+        "name": "bell_Identification"
+      }
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "4155547622"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "textResponses": [ {
+        "text": [ "You have been Identified" ],
+        "allowPlaybackInterruption": true
+      }, {
+        "text": [ "Is there anything else I can help you with?" ],
+        "allowPlaybackInterruption": true
+      } ]
+    }
+  } ],
+  "creationTime": {
+    "seconds": 1732717584,
+    "nanos": 414155000
+  },
+  "testConfig": {
+    "flow": "Default Start Flow",
+    "page": "Start Page"
+  },
+  "languageCode": "en"
+}

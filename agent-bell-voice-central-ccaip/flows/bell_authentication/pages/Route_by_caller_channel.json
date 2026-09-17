@@ -1,0 +1,52 @@
+{
+  "name": "6a6770a2-8d22-4702-be0a-b4a99c711fbe",
+  "displayName": "Route_by_caller_channel",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.caller_channel != \"WSC\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "PIN Check",
+    "name": "5aef7a94-3ec3-4442-88ed-6c2ad50ac2b5"
+  }, {
+    "condition": "$session.params.caller_channel = \"WSC\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "auth_status",
+        "value": "Pass"
+      } ],
+      "advancedSettings": {
+        "dtmfSettings": {
+          "useSystemEntityRule": false
+        }
+      }
+    },
+    "targetPage": "WSC_CLID_CIRN_Check",
+    "name": "a724e47c-c9e6-4293-a5b7-756ccfdc6f6b"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "6a6770a2-8d22-4702-be0a-b4a99c711fbe"
+      }, {
+        "parameter": "flow_id",
+        "value": "5f8f4b4a-558a-4e66-9d28-a31389981b36"
+      }, {
+        "parameter": "page_name",
+        "value": "Route_by_caller_channel"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

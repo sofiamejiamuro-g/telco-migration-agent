@@ -1,0 +1,121 @@
+{
+  "name": "b0d4ba12-7cc2-4849-bebb-5ca533b2c3f2",
+  "displayName": "Webhook get-tester-details",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "v1/testing/get-tester-details",
+    "tag": "N/A",
+    "setParameterActions": [ {
+      "parameter": "webhook_success",
+      "value": null
+    } ],
+    "returnPartialResponses": true
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.webhook_success = \"true\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Tester ID lookup webhook succeeded." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Le webhook d'identification du testeur a réussi." ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "tester_firstname",
+        "value": "$session.params.get_tester_details_response.firstName"
+      } ]
+    },
+    "targetPage": "Get Spoof TFN",
+    "name": "c09945f0-0ef2-42ae-b4d2-a386895389ee"
+  }, {
+    "condition": "$session.params.webhook_success != \"true\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Tester ID lookup webhook failed." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Le webhook d'identification du testeur a échoué." ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "tester_id",
+        "value": null
+      } ]
+    },
+    "targetPage": "Webhook get-tester-details fail",
+    "name": "e5eb4f01-44ef-498a-ad6f-801f699d0995"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "b0d4ba12-7cc2-4849-bebb-5ca533b2c3f2"
+      }, {
+        "parameter": "flow_id",
+        "value": "1819189a-3e6b-4603-aeaf-3ecc162de16e"
+      }, {
+        "parameter": "page_name",
+        "value": "Webhook get-tester-details"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Webhook get-tester-details fail",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+    
+    },
+    "name": "5c4434f9-8494-4157-b7f4-d44e7104334d"
+  }, {
+    "targetPage": "Webhook get-tester-details fail",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+    
+    },
+    "name": "e215542b-3773-4ec1-bec9-a836d2ca1b71"
+  }, {
+    "targetPage": "Webhook get-tester-details fail",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+    
+    },
+    "name": "701e5c2d-1a8c-449b-bac0-a66ffb4f009c"
+  }, {
+    "targetPage": "Webhook get-tester-details fail",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+    
+    },
+    "name": "9905b8cb-0c9c-4846-a762-e24736018f47"
+  }, {
+    "targetPage": "Webhook get-tester-details fail",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+    
+    },
+    "name": "e3781aa6-151e-4fc1-990a-0ee7ba7517ae"
+  }, {
+    "targetPage": "Webhook get-tester-details fail",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+    
+    },
+    "name": "8759892a-7149-4771-8141-025f9d0d5ccd"
+  } ]
+}

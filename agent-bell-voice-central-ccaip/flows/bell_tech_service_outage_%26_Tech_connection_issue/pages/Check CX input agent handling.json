@@ -1,0 +1,56 @@
+{
+  "name": "df9d7367-2dd2-496e-8064-122163eaf39c",
+  "displayName": "Check CX input agent handling",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "messages": [ {
+      "text": {
+        "text": [ "Could you tell me why you'd like to speak to an agent?" ]
+      },
+      "languageCode": "en"
+    }, {
+      "text": {
+        "text": [ "Pourriez-vous me dire pourquoi vous aimeriez parler à un agent?" ]
+      },
+      "languageCode": "fr-ca"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "intent": "compenation_request",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Check_Outage_Status_Agent_Handling",
+    "name": "9bfaac72-9b6c-41fc-800a-34b0ebc12c62"
+  }, {
+    "intent": "payment_request_refund",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Check_Outage_Status_Agent_Handling",
+    "name": "9748d9e5-64a7-47e5-8141-fa537c20f6fd"
+  }, {
+    "intent": "other_speak_to_agent",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "force_ss_exception",
+        "value": "yes"
+      } ]
+    },
+    "targetFlow": "bell_determine_handover",
+    "name": "41251f22-67e0-47da-9d4b-601914db6b1a"
+  } ],
+  "eventHandlers": [ {
+    "targetFlow": "bell_determine_handover",
+    "event": "sys.no-match-1",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "force_ss_exception",
+        "value": "yes"
+      } ]
+    },
+    "name": "bbf6db33-b0a8-4d0f-ae6a-1f43b35d87b4"
+  } ]
+}

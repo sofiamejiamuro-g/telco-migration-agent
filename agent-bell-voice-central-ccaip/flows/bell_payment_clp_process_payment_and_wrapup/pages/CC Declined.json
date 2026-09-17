@@ -1,0 +1,173 @@
+{
+  "name": "79f40eb6-04bd-4c69-b3c1-21e21a3a9807",
+  "displayName": "CC Declined",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "conditionalCases": [ {
+      "cases": [ {
+        "condition": "$session.params.cc_failed_attempt \u003c 2",
+        "caseContent": [ {
+          "message": {
+            "text": {
+              "text": [ "Unfortunately, I wasn't able to process your payment. This can happen for a few different reasons. Would you like to enter your card details again or try using a different card? Please say yes or no." ]
+            },
+            "languageCode": "en"
+          }
+        }, {
+          "message": {
+            "text": {
+              "text": [ "Malheureusement, je n'ai pas pu traiter votre paiement. Cela peut arriver pour plusieurs raisons. Souhaitez-vous saisir à nouveau vos informations de carte ou essayer avec une autre carte? Veuillez répondre oui ou non." ]
+            },
+            "languageCode": "fr-ca"
+          }
+        } ]
+      } ]
+    } ]
+  },
+  "transitionRoutes": [ {
+    "intent": "context.confirm_no",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "OK, you can always try again later using the MyBell app." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "D'accord, vous pouvez toujours réessayer plus tard avec l'appli MonBell." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetFlow": "bell_Feedback",
+    "name": "1f635607-f0e8-43ec-b190-0546e690f030"
+  }, {
+    "intent": "context.confirm_yes",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "cc_failed_attempt",
+        "value": "$sys.func.ADD(1, $session.params.cc_failed_attempt)"
+      } ]
+    },
+    "targetFlow": "bell_payment_cc_details_input",
+    "name": "c6a3d2a9-3a91-49a9-b7fa-233a044dc29f"
+  }, {
+    "condition": "$session.params.cc_failed_attempt = 2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Unfortunately I'm unable to proceed with your request right now. For more information regarding your\npayment and account status please visit the MyBell app." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Malheureusement, je ne peux pas donner suite à votre demande pour le moment. Pour plus d'informations\nconcernant votre paiement et l'état de votre compte, veuillez consulter l'appli MonBell." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetFlow": "bell_Feedback",
+    "name": "26f4c194-33ae-42e3-9459-81b9d45c5f27"
+  } ],
+  "eventHandlers": [ {
+    "event": "sys.no-input-1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I didn't quite get that. Can you try again?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je n’ai pas tout à fait compris. Pouvez-vous réessayer?" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "847921d8-d4fc-4b3a-acf8-514c5ad0f25b"
+  }, {
+    "event": "sys.no-input-2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I still didn't get that" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je n’ai toujours pas compris" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "dd14bf0c-9cf2-43b7-82da-62b485293033"
+  }, {
+    "targetFlow": "bell_Feedback",
+    "event": "sys.no-input-3",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Unfortunately, your credit card payment didn't go through.  Please contact your credit card provider for more information" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Malheureusement, votre paiement par carte de crédit n'a pas abouti. Veuillez contacter l'émetteur de votre carte de crédit pour en savoir plus." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "d0433771-0167-4c44-9bb5-99a1159e9542"
+  }, {
+    "event": "sys.no-match-1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I didn't quite get that. Can you try again?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je n’ai pas tout à fait compris. Pouvez-vous réessayer?" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "cccf1571-0576-4daf-b02e-9e72c9361579"
+  }, {
+    "event": "sys.no-match-2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I still didn't get that" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je n’ai toujours pas compris" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "8bd8ff37-e728-4e4d-b893-994da36751f2"
+  }, {
+    "targetFlow": "bell_Feedback",
+    "event": "sys.no-match-3",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Unfortunately, your credit card payment didn't go through.  Please contact your credit card provider for more information" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Malheureusement, votre paiement par carte de crédit n'a pas abouti. Veuillez contacter l'émetteur de votre carte de crédit pour en savoir plus." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "bf9814d5-f514-46dd-9b53-cdbbdaeea239"
+  } ]
+}

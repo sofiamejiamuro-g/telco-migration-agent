@@ -1,0 +1,605 @@
+{
+  "name": "b62fb0a9-1ede-4398-a85b-596afaba2e4c",
+  "displayName": "Webhook search-by-tn CIRN",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "v1/customer-identification#search-by-tn",
+    "tag": "search-by-tn",
+    "setParameterActions": [ {
+      "parameter": "telephone_number",
+      "value": "$session.params.CIRN"
+    }, {
+      "parameter": "webhook_success",
+      "value": null
+    }, {
+      "parameter": "n_billing_account",
+      "value": null
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "search_by_tn_ws",
+        "value": "$session.params.webhook_success"
+      } ]
+    },
+    "name": "d798aa3c-dede-4588-8437-d857f1019857"
+  }, {
+    "condition": "$session.params.webhook_success = \"True\" OR $session.params.webhook_success = \"true\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "CIRN",
+        "value": "$session.params.CIRN"
+      }, {
+        "parameter": "customer_id_search_response",
+        "value": "$sys.func.TO_OBJECT($session.params.customer_id_search_response)"
+      }, {
+        "parameter": "subscriber_number",
+        "value": "$session.params.customer_id_search_response.users[0].billing_accounts[0].services[0].service_account_number"
+      }, {
+        "parameter": "first_user_account",
+        "value": "$sys.func.GET($sys.func.GET_FIELD($session.params.customer_id_search_response,\"users\"),0)"
+      }, {
+        "parameter": "billing_account_number_list",
+        "value": "$sys.func.FILTER(\"$session.params.customer_id_search_response\", \"$..billing_account_number\")"
+      }, {
+        "parameter": "n_billing_account",
+        "value": "$sys.func.COUNT($session.params.billing_account_number_list)"
+      }, {
+        "parameter": "billing_account_info_list",
+        "value": "$sys.func.GET_FIELD($sys.func.GET($sys.func.GET_FIELD($session.params.customer_id_search_response, \"users\"), 0), \"billing_accounts\")"
+      }, {
+        "parameter": "print_test",
+        "value": "$sys.func.FILTER(\"$session.params.customer_id_search_response\", \"$[*].users[?(@.contact_number == $session.params.CIRN)].billing_accounts[*].billing_account_number\")"
+      }, {
+        "parameter": "is_prepaid_list",
+        "value": "$sys.func.FILTER(\"$session.params.customer_id_search_response\", \"$[*].users[?(@.contact_number == '$session.params.CIRN')].billing_accounts[*].billing_account_number\")"
+      }, {
+        "parameter": "is_prepaid",
+        "value": "$session.params.customer_id_search_response.users[0].billing_accounts[0].services[0].is_prepaid"
+      }, {
+        "parameter": "active_services",
+        "value": "$sys.func.FILTER(\"$session.params.billing_account_info_list\", \"$[*].services[*].service_type\")"
+      }, {
+        "parameter": "unique_services",
+        "value": "$sys.func.UNIQUE($session.params.active_services)"
+      }, {
+        "parameter": "contain_mobility",
+        "value": "$sys.func.CONTAIN($session.params.unique_services, \"MOBILITY\")"
+      }, {
+        "parameter": "province",
+        "value": "$session.params.customer_id_search_response.users[0].billing_accounts[0].billing_address.stateOrProvince"
+      }, {
+        "parameter": "BBM_flag",
+        "value": true
+      }, {
+        "parameter": "is_preapid_value_list",
+        "value": "$sys.func.FILTER(\"$session.params.customer_id_search_response\", \"$..[?(@.contact_number == '$session.params.CIRN')].billing_accounts[*].services[*].is_prepaid\")"
+      }, {
+        "parameter": "webhook_success",
+        "value": null
+      }, {
+        "parameter": "cpm_ban",
+        "value": "$session.params.customer_id_search_response.users[0].billing_accounts[0].billing_account_number"
+      }, {
+        "parameter": "nm1_multiban",
+        "value": true
+      }, {
+        "parameter": "service_id",
+        "value": "$session.params.billing_account_info_list[0].services[0].service_id"
+      } ]
+    },
+    "name": "83ca8a75-32bd-42c7-ba8a-8e2088a0ef87"
+  }, {
+    "condition": "$session.params.va_entry_flow = BUS AND $session.params.db_get_bbm_mkseg_dip_response.found = true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "billing_account_number",
+        "value": "$session.params.db_get_bbm_mkseg_dip_response.def5"
+      }, {
+        "parameter": "customer_data",
+        "value": "$sys.func.FILTER(\"$session.params.customer_id_search_response\",$sys.func.CONCATENATE(\"$..billing_accounts[?(@.billing_account_number == '\",$sys.func.TO_TEXT($session.params.billing_account_number),\"')]\"))"
+      }, {
+        "parameter": "billing_account_info_list",
+        "value": "$sys.func.TO_OBJECT(   $sys.func.TO_TEXT($session.params.customer_data[0]) )"
+      }, {
+        "parameter": "identification_status",
+        "value": "Pass"
+      }, {
+        "parameter": "customer_type",
+        "value": "existing"
+      }, {
+        "parameter": "is_preapid",
+        "value": "$session.params.billing_account_info_list.services[0].is_prepaid"
+      }, {
+        "parameter": "billing_account_number_ref",
+        "value": "$sys.func.CONCATENATE(\"REF\", $sys.func.TO_TEXT($session.params.billing_account_number))"
+      }, {
+        "parameter": "is_business",
+        "value": true
+      } ]
+    },
+    "targetFlow": "bell_va_to_ivr_handoff_BBM_BNM_SMB",
+    "name": "2eb24956-0a1c-4e8f-bbef-f1eb4c5ed214"
+  }, {
+    "condition": "$session.params.va_entry_flow = CCC AND ($session.params.banType = C AND $session.params.ivr_handoff != true) AND ($session.params.banSubType = 5 OR $session.params.banSubType = R OR $session.params.banSubType = Z OR $session.params.banSubType = U OR $session.params.banSubType = G OR $session.params.banSubType = F) AND ($session.params.marketSegment = ENT OR $session.params.marketSegment = MED)",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "billing_account_number",
+        "value": "$session.params.nm1_get_cust_profile_response.banNumber"
+      }, {
+        "parameter": "customer_data",
+        "value": "$sys.func.FILTER(\"$session.params.customer_id_search_response\",$sys.func.CONCATENATE(\"$..billing_accounts[?(@.billing_account_number == '\",$sys.func.TO_TEXT($session.params.billing_account_number),\"')]\"))"
+      }, {
+        "parameter": "billing_account_info_list",
+        "value": "$sys.func.TO_OBJECT(   $sys.func.TO_TEXT($session.params.customer_data[0]) )"
+      }, {
+        "parameter": "is_prepaid",
+        "value": "$session.params.billing_account_info_list.services[0].is_prepaid"
+      }, {
+        "parameter": "identification_status",
+        "value": "Pass"
+      }, {
+        "parameter": "customer_type",
+        "value": "Existing"
+      }, {
+        "parameter": "business_type",
+        "value": "CCC"
+      }, {
+        "parameter": "billing_account_number_ref",
+        "value": "$sys.func.CONCATENATE(\"REF\", $sys.func.TO_TEXT($session.params.billing_account_number))"
+      }, {
+        "parameter": "is_business",
+        "value": true
+      } ]
+    },
+    "targetFlow": "bell_va_to_ivr_handoff",
+    "name": "cda8d321-9b97-4143-a986-f14f6bd5e5d2"
+  }, {
+    "condition": "$session.params.cpm_ban != $session.params.nm1_ban AND $session.params.nm1_flag = true AND ($session.params.search_by_tn_ws = \"True\" OR $session.params.search_by_tn_ws = \"true\")",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_multiban",
+    "name": "8d301e35-8ce7-4ffe-a3aa-3ad78a987577"
+  }, {
+    "condition": "$session.params.cpm_ban != $session.params.nm1_ban AND $session.params.nm1_flag = true AND ($session.params.search_by_tn_ws = \"True\" OR $session.params.search_by_tn_ws = \"true\")",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "End Flow Check",
+    "name": "75025a40-d846-430e-a0a5-44e860c0d612"
+  }, {
+    "condition": "$session.params.n_billing_account \u003e 1",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_multiban",
+    "name": "4573f8f6-c57b-4dc7-9c5c-6e83ea2716d9"
+  }, {
+    "condition": "$session.params.n_billing_account \u003e 1",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "End Flow Check",
+    "name": "643ed491-c61f-4cec-a64f-43ce730d5bb3"
+  }, {
+    "condition": "(($session.params.banType = C AND $session.params.banSubType = V) OR ($session.params.banType = C AND $session.params.banSubType = T) OR ($session.params.banType = C AND $session.params.banSubType = P) OR ($session.params.banType = C AND $session.params.banSubType = 7)) OR (($session.params.banType = I AND $session.params.banSubType = B) OR ($session.params.banType = I AND $session.params.banSubType = N) OR ($session.params.banType = I AND $session.params.banSubType = 5))",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "NM1 Webhook Info",
+    "name": "a74c48b2-0015-4b20-b966-9daa03f0c7f1"
+  }, {
+    "condition": "($session.params.banType = C AND $session.params.ivr_handoff != true) AND ($session.params.banSubType = 5 OR $session.params.banSubType = R OR $session.params.banSubType = Z OR $session.params.banSubType = U OR $session.params.banSubType = G OR $session.params.banSubType = F) AND ($session.params.marketSegment = ENT OR $session.params.marketSegment = MED)",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "business_type",
+        "value": "CCC"
+      }, {
+        "parameter": "is_business",
+        "value": false
+      } ]
+    },
+    "targetFlow": "bell_va_to_ivr_handoff",
+    "name": "8b2b75f2-1cb3-4928-b51e-522ed4ee5ffa"
+  }, {
+    "condition": "($session.params.search_by_tn_ws = \"False\" OR $session.params.search_by_tn_ws = \"false\") AND $session.params.business_type != \"BBM\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "webhook_success",
+        "value": null
+      }, {
+        "parameter": "regional_flag",
+        "value": null
+      }, {
+        "parameter": "nm1_flag",
+        "value": null
+      }, {
+        "parameter": "semantic_void",
+        "value": "$sys.func.ADD(1, $session.params.semantic_void)"
+      }, {
+        "parameter": "aqd_counter",
+        "value": "$sys.func.ADD($session.params.aqd_counter, 1)"
+      } ]
+    },
+    "targetPage": "Custom Fallback for CPM check",
+    "name": "9519b81e-ba6e-4c05-a72d-ea4125b6b8b6"
+  }, {
+    "condition": "$session.params.contain_mobility != true",
+    "triggerFulfillment": {
+      "webhook": "v1/npa-nxx-lookup",
+      "tag": "NA",
+      "setParameterActions": [ {
+        "parameter": "_temp_number",
+        "value": "$sys.func.IF(\"$session.params.CIRN = null\", $session.params.clid, $session.params.CIRN)"
+      }, {
+        "parameter": "temp_number",
+        "value": "$sys.func.TO_TEXT($session.params._temp_number)"
+      }, {
+        "parameter": "npa",
+        "value": "$sys.func.MID($session.params.temp_number, 1, 3)"
+      }, {
+        "parameter": "nxx",
+        "value": "$sys.func.MID($session.params.temp_number, 4, 3)"
+      } ]
+    },
+    "name": "69041a67-4cbe-406b-bb97-f436eddda829"
+  }, {
+    "condition": "$session.params.contain_mobility != true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "province",
+        "value": "$session.params.npa_nxx_lookup_response.province"
+      }, {
+        "parameter": "ROC",
+        "value": [ "AB", "BC", "YT", "NU", "NT", "SK" ]
+      }, {
+        "parameter": "ATL",
+        "value": [ "NB", "NL", "NS", "PE" ]
+      }, {
+        "parameter": "Central",
+        "value": [ "ON", "QC" ]
+      }, {
+        "parameter": "MTS",
+        "value": [ "MB" ]
+      } ]
+    },
+    "name": "3b25a07f-39e1-435b-8fa1-4618b020e478"
+  }, {
+    "condition": "$session.params.npa_nxx_lookup_response.is_canadian = false",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "province",
+        "value": null
+      } ]
+    },
+    "name": "22a8fcd6-34cd-420c-8b0d-e1e5d6e00410"
+  }, {
+    "condition": "$session.params.ATL : $session.params.province",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "region",
+        "value": "ATL"
+      } ]
+    },
+    "name": "f79f6a08-f5aa-4948-af5d-481ea39a2d69"
+  }, {
+    "condition": "$session.params.Central : $session.params.province",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "region",
+        "value": "Central"
+      } ]
+    },
+    "name": "68105783-5e87-4510-a016-7e8d3b37185d"
+  }, {
+    "condition": "$session.params.MTS : $session.params.province",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "region",
+        "value": "MTS"
+      } ]
+    },
+    "name": "870a9a4a-013e-4065-be4a-51097a8a19f1"
+  }, {
+    "condition": "$session.params.ROC : $session.params.province",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "region",
+        "value": "ROC"
+      } ]
+    },
+    "name": "68968789-ca46-4609-a0a5-d7e4fda0dcf0"
+  }, {
+    "condition": "$session.params.contain_mobility != true AND $session.params.ivr_handoff != true AND $session.params.region = \"MTS\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_va_to_ivr_handoff",
+    "name": "3657964c-1116-45c9-a872-89d6663c9d55"
+  }, {
+    "condition": "$session.params.contain_mobility != true AND $session.params.ivr_handoff != true AND $session.params.region = \"ATL\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_va_to_ivr_handoff",
+    "name": "fb284f41-a5e4-4724-86e7-7c7d4a22039a"
+  }, {
+    "condition": "$session.params.n_billing_account = 1 AND $session.params.business_type = \"BBM\" AND $session.params.va_entry_flow = \"CCC\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "identification_status",
+        "value": "Pass"
+      }, {
+        "parameter": "customer_type",
+        "value": "Existing"
+      }, {
+        "parameter": "billing_account_number",
+        "value": "$session.params.customer_id_search_response.users[0].billing_accounts[0].billing_account_number"
+      }, {
+        "parameter": "billing_account",
+        "value": "$session.params.billing_account_number"
+      }, {
+        "parameter": "billing_account_info_list",
+        "value": "$sys.func.GET_FIELD($sys.func.GET($sys.func.GET_FIELD($session.params.customer_id_search_response, \"users\"), 0), \"billing_accounts\")"
+      }, {
+        "parameter": "active_services",
+        "value": "$sys.func.FILTER(\"$session.params.billing_account_info_list\", \"$[*].services[*].service_type\")"
+      }, {
+        "parameter": "unique_services",
+        "value": "$sys.func.UNIQUE($session.params.active_services)"
+      }, {
+        "parameter": "number_of_services",
+        "value": "$sys.func.COUNT($session.params.unique_services)"
+      }, {
+        "parameter": "billing_account_number_ref",
+        "value": "$sys.func.CONCATENATE(\"REF\", $sys.func.TO_TEXT($session.params.billing_account_number))"
+      } ]
+    },
+    "targetPage": "End Flow Check",
+    "name": "8beccc2b-2c8a-429d-b4fd-b1eff00bf12a"
+  }, {
+    "condition": "$session.params.business_type = \"BBM\" AND $session.params.va_entry_flow = \"CCC\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Custom Fallback for CPM check",
+    "name": "41e05bf0-86ab-4eba-99a0-3d603e4411b7"
+  }, {
+    "condition": "$session.params.region = BBM OR $session.params.business_type = BBM",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_va_to_ivr_handoff_BBM_BNM_SMB",
+    "name": "1923612f-b643-499f-8a8a-7c52f29180fc"
+  }, {
+    "condition": "$session.params.n_billing_account = 1 AND $session.params.ivr_handoff = true AND $session.params.region = \"ATL\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Thanks." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Merci." ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "identification_status",
+        "value": "Pass"
+      }, {
+        "parameter": "customer_type",
+        "value": "Existing"
+      } ]
+    },
+    "targetPage": "End Flow Check",
+    "name": "bb40fabb-e738-4d31-a134-c30676a0349a"
+  }, {
+    "condition": "$session.params.n_billing_account = 1 AND $session.params.is_prepaid != true AND $session.params.db_get_bbm_mkseg_dip_response.found != true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "identification_status",
+        "value": "Pass"
+      }, {
+        "parameter": "customer_type",
+        "value": "Existing"
+      }, {
+        "parameter": "billing_account_number",
+        "value": "$session.params.customer_id_search_response.users[0].billing_accounts[0].billing_account_number"
+      }, {
+        "parameter": "billing_account",
+        "value": "$session.params.billing_account_number"
+      }, {
+        "parameter": "billing_account_info_list",
+        "value": "$sys.func.GET_FIELD($sys.func.GET($sys.func.GET_FIELD($session.params.customer_id_search_response, \"users\"), 0), \"billing_accounts\")"
+      }, {
+        "parameter": "active_services",
+        "value": "$sys.func.FILTER(\"$session.params.billing_account_info_list\", \"$[*].services[*].service_type\")"
+      }, {
+        "parameter": "unique_services",
+        "value": "$sys.func.UNIQUE($session.params.active_services)"
+      }, {
+        "parameter": "number_of_services",
+        "value": "$sys.func.COUNT($session.params.unique_services)"
+      }, {
+        "parameter": "billing_account_number_ref",
+        "value": "$sys.func.CONCATENATE(\"REF\", $sys.func.TO_TEXT($session.params.billing_account_number))"
+      } ]
+    },
+    "targetPage": "End Flow Check",
+    "name": "a99e8e51-607c-4620-97f2-8414ecc93d2e"
+  }, {
+    "condition": "$session.params.ivr_handoff = true OR $session.params.ivr_handoff_identification = true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "aqd_counter",
+        "value": "$sys.func.ADD($session.params.local_nomatch_counter,1)"
+      } ]
+    },
+    "targetPage": "Custom Fallback for CPM check",
+    "name": "736bf334-cf49-4d81-af7c-ad28185af300"
+  }, {
+    "condition": "$session.params.region = BBM OR $session.params.business_type = BBM",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "business_type",
+        "value": ""
+      } ]
+    },
+    "targetPage": "End Flow Check",
+    "name": "2de43826-0e09-432c-9ab9-9a4e6012406e"
+  }, {
+    "condition": "$session.params.n_billing_account = 1 AND $session.params.is_prepaid = true AND $session.params.ivr_handoff_identification != true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "identification_status",
+        "value": "Pass"
+      }, {
+        "parameter": "customer_type",
+        "value": "Existing"
+      } ]
+    },
+    "targetFlow": "bell_va_to_ivr_handoff_prepaid",
+    "name": "29bdd9a4-5ca2-4386-bb5d-91ac500ff570"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "End Flow Check",
+    "name": "c625d7ac-84cb-4f55-a0fe-cb918db0a69d"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "End Flow Check",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Sorry, there was a problem on our side and I can't find your profile.  But don’t worry, I'll still help you however I can." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Malheureusement, un problème est survenu et je ne suis pas en mesure de trouver votre profil.Mais rassurez-vous, je ferai de mon mieux pour vous aider." ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "identification_status",
+        "value": "Fail"
+      } ]
+    },
+    "name": "bec1162f-aa57-47be-ae98-bba74d25305b"
+  }, {
+    "targetPage": "End Flow Check",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Sorry, there was a problem on our side and I can't find your profile.  But don’t worry, I'll still help you however I can." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Malheureusement, un problème est survenu et je ne suis pas en mesure de trouver votre profil.Mais rassurez-vous, je ferai de mon mieux pour vous aider." ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "identification_status",
+        "value": "Fail"
+      } ]
+    },
+    "name": "01b5201a-0cd4-46b2-a38c-44ef31d06cea"
+  }, {
+    "targetPage": "End Flow Check",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Sorry, there was a problem on our side and I can't find your profile.  But don’t worry, I'll still help you however I can." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Malheureusement, un problème est survenu et je ne suis pas en mesure de trouver votre profil.Mais rassurez-vous, je ferai de mon mieux pour vous aider." ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "identification_status",
+        "value": "Fail"
+      } ]
+    },
+    "name": "e5172beb-70da-4b04-b58c-2a3269d456c4"
+  }, {
+    "targetPage": "End Flow Check",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Sorry, there was a problem on our side and I can't find your profile.  But don’t worry, I'll still help you however I can." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Malheureusement, un problème est survenu et je ne suis pas en mesure de trouver votre profil.Mais rassurez-vous, je ferai de mon mieux pour vous aider." ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "identification_status",
+        "value": "Fail"
+      } ]
+    },
+    "name": "0b5d4001-a6fc-4f1a-ae93-1f34fedf7a85"
+  }, {
+    "targetPage": "End Flow Check",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Sorry, there was a problem on our side and I can't find your profile.  But don’t worry, I'll still help you however I can." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Malheureusement, un problème est survenu et je ne suis pas en mesure de trouver votre profil.Mais rassurez-vous, je ferai de mon mieux pour vous aider." ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "identification_status",
+        "value": "Fail"
+      } ]
+    },
+    "name": "cdc01308-68f0-4ddb-a139-71d57f99d746"
+  }, {
+    "targetPage": "End Flow Check",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Sorry, there was a problem on our side and I can't find your profile.  But don’t worry, I'll still help you however I can." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Malheureusement, un problème est survenu et je ne suis pas en mesure de trouver votre profil.Mais rassurez-vous, je ferai de mon mieux pour vous aider." ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "identification_status",
+        "value": "Fail"
+      } ]
+    },
+    "name": "3802180a-491b-4fe3-9c0b-b391e26f338d"
+  } ]
+}

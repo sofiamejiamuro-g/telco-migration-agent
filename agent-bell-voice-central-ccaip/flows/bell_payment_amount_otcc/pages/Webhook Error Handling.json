@@ -1,0 +1,55 @@
+{
+  "name": "40d1be74-fb13-466f-ab01-3ae2930f85ca",
+  "displayName": "Webhook Error Handling",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "messages": [ {
+      "text": {
+        "text": [ "Sorry. I'm unable to process your payment at this time. I'll send a text to the device you're calling from so that you can make a payment in the MyBell app. Is that alright?" ]
+      },
+      "languageCode": "en"
+    }, {
+      "text": {
+        "text": [ "Je suis désolé, mais je ne peux pas traiter votre paiement pour le moment. Je vais vous envoyer un message texte sur l'appareil que vous utilisez en ce moment vous pouvez effectuer un paiement dans l'appli MonBell. Est ce que cela vous va?" ]
+      },
+      "languageCode": "fr-ca"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "intent": "context.confirm_yes",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Language Based SMS",
+    "name": "c7531899-3378-4060-ba2b-e552eab12ef1"
+  }, {
+    "intent": "context.confirm_no",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "You can review your account details yourself in the MyBell app.\nYou can also learn more about how to make a payment at https://m.bell.ca/ecmanagepayment" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Vous pouvez consulter vous-même les détails de votre compte dans l'application MonBell.\nVous pouvez également en savoir plus sur la façon d'effectuer un paiement sur https://m.bell.ca/ecgererpaiement" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetFlow": "bell_Feedback",
+    "name": "23704180-667e-40fd-838c-2fcb2a171988"
+  }, {
+    "intent": "context.different_number",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "different_number",
+        "value": true
+      } ]
+    },
+    "targetPage": "Language Based SMS",
+    "name": "702a7245-cd32-42c6-925e-2bf1b1fead09"
+  } ]
+}

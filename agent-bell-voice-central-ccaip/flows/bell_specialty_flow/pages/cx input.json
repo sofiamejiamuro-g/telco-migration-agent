@@ -1,0 +1,69 @@
+{
+  "name": "733007ab-a1d2-40d8-9532-3e4230acc527",
+  "displayName": "cx input",
+  "form": {
+    "parameters": [ {
+      "displayName": "cx_input_wait",
+      "entityType": "@sys.any",
+      "fillBehavior": {
+        "initialPromptFulfillment": {
+        
+        }
+      },
+      "defaultValue": 1
+    } ]
+  },
+  "entryFulfillment": {
+    "messages": [ {
+      "text": {
+        "text": [ "For example, you can say \"I have a question about my bill\"" ]
+      },
+      "languageCode": "en"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$page.params.cx_input_wait = 1",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_aqd",
+    "name": "4143c6d7-2d51-405e-b321-96b702543c53"
+  } ],
+  "eventHandlers": [ {
+    "targetFlow": "bell_aqd",
+    "event": "sys.no-input-1",
+    "triggerFulfillment": {
+    
+    },
+    "name": "5b603483-5839-458f-807f-c0f8d13ab570"
+  }, {
+    "targetPage": "Routing Page",
+    "event": "sys.no-match-1",
+    "triggerFulfillment": {
+    
+    },
+    "name": "cb48e75f-3b7d-4e4d-80cf-32f2d9ef4e22"
+  } ],
+  "transitionRouteGroups": [ "HI_techsupport", "HI_account", "HI_disconnect", "HI_equipment", "HI_faq", "HI_other", "HI_billing", "HI_smalltalk" ],
+  "advancedSettings": {
+    "speechSettings": {
+      "endpointerSensitivity": 90,
+      "noSpeechTimeout": {
+        "seconds": 3
+      },
+      "models": [ {
+        "key": "en",
+        "value": "telephony_short"
+      }, {
+        "key": "fr-ca",
+        "value": "telephony_short"
+      } ]
+    },
+    "speechAdaptationSettings": {
+    
+    }
+  },
+  "speakerIdSettings": {
+  
+  }
+}

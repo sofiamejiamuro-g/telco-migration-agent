@@ -1,0 +1,103 @@
+{
+  "name": "f985f015-5554-4c77-9de9-0fe0281749bf",
+  "displayName": "0 Second No Input",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "messages": [ {
+      "text": {
+        "text": [ "One moment please" ]
+      },
+      "languageCode": "en"
+    }, {
+      "text": {
+        "text": [ "Un instant s'il vous plaît" ]
+      },
+      "languageCode": "fr-ca"
+    } ],
+    "setParameterActions": [ {
+      "parameter": "local_nomatch_counter",
+      "value": 0
+    }, {
+      "parameter": "local_noinput_counter",
+      "value": 0
+    }, {
+      "parameter": "local_trigger",
+      "value": null
+    } ]
+  },
+  "transitionRoutes": [ {
+    "intent": "context.confirm_yes",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "End Flow Check",
+    "name": "e626c2a0-303a-4965-a6c6-b73401dcb16b"
+  }, {
+    "intent": "context.confirm_no",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "End Flow Check",
+    "name": "dea1b509-933d-46c7-be07-19555ce551d0"
+  }, {
+    "intent": "context.repeat",
+    "triggerFulfillment": {
+      "generators": [ {
+        "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/d2573b7b-849d-43d3-8c64-867837bd84d2",
+        "inputParameters": [ {
+          "key": "request-last-agent-utterance",
+          "value": "$request.last-agent-utterance"
+        } ],
+        "outputParameter": "$request.generative.repeat_response"
+      } ]
+    },
+    "targetPage": "Start Page",
+    "name": "dbf7baf2-9837-4da2-a692-0b4efd3b4ec2"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Local Error handling - 0 Second No Input",
+    "event": "sys.no-input-1",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "global_error_counter",
+        "value": "$sys.func.ADD($session.params.global_error_counter,1)"
+      }, {
+        "parameter": "local_noinput_counter",
+        "value": "$sys.func.ADD($session.params.local_noinput_counter,1)"
+      }, {
+        "parameter": "local_trigger",
+        "value": "no_input"
+      } ]
+    },
+    "name": "42e9a691-9638-420f-b478-cabd9785bb68"
+  }, {
+    "targetPage": "Local Error handling - 0 Second No Input",
+    "event": "sys.no-match-1",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "local_trigger",
+        "value": "no_match"
+      }, {
+        "parameter": "local_nomatch_counter",
+        "value": "$sys.func.ADD($session.params.local_nomatch_counter,1)"
+      }, {
+        "parameter": "global_error_counter",
+        "value": "$sys.func.ADD($session.params.global_error_counter,1)"
+      } ]
+    },
+    "name": "1d06cab4-dd0f-4bd5-8090-e35d2a3ca02a"
+  } ],
+  "advancedSettings": {
+    "speechSettings": {
+      "endpointerSensitivity": 90,
+      "noSpeechTimeout": {
+        "nanos": 200000000
+      }
+    }
+  },
+  "speakerIdSettings": {
+  
+  }
+}

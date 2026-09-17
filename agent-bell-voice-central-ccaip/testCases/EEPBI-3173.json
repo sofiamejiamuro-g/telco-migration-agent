@@ -1,0 +1,261 @@
+{
+  "name": "256e6968-36b8-4e04-a3e6-ef98f1f7e8a7",
+  "displayName": "EEPBI-3173",
+  "testCaseConversationTurns": [ {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "hi"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "triggeredIntent": {
+        "name": "Default Welcome Intent"
+      },
+      "currentPage": {
+        "name": "Get Tester Id",
+        "flow": "bell_test_wrapper"
+      },
+      "textResponses": [ {
+        "text": [ "Please enter your Tester ID using the phone's keypad now." ],
+        "allowPlaybackInterruption": true
+      } ],
+      "currentFlow": {
+        "name": "bell_test_wrapper"
+      }
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "120"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "currentPage": {
+        "name": "Get Spoof CLID",
+        "flow": "bell_test_wrapper"
+      },
+      "textResponses": [ {
+        "text": [ "Tester ID lookup webhook succeeded." ],
+        "allowPlaybackInterruption": true
+      }, {
+        "text": [ "Welcome Vaibhav!" ],
+        "allowPlaybackInterruption": true
+      }, {
+        "text": [ "TFN lookup Webhook succeeded." ],
+        "allowPlaybackInterruption": true
+      }, {
+        "text": [ "Please enter the spoof CLID for your test." ],
+        "allowPlaybackInterruption": true
+      } ],
+      "currentFlow": {
+        "name": "bell_test_wrapper"
+      }
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "4169588117"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "currentPage": {
+        "name": "CIRN Collection Check",
+        "flow": "bell_Identification"
+      },
+      "textResponses": [ {
+        "text": [ "\u003cspeak\u003eI'm Bell's virtual assistant, I use artificial intelligence to learn. \u003cbreak time=\"1s\"/\u003e\u003c/speak\u003e" ]
+      }, {
+        "text": [ "Are you calling about the account associated with number you’re calling from? " ],
+        "allowPlaybackInterruption": true
+      } ],
+      "currentFlow": {
+        "name": "bell_Identification"
+      }
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "yes"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "triggeredIntent": {
+        "name": "context.confirm_yes"
+      },
+      "currentPage": {
+        "name": "Routing Page",
+        "flow": "Default Start Flow"
+      },
+      "textResponses": [ {
+        "text": [ "\u003cspeak\u003eThanks! \u003cbreak time=\"1s\"/\u003e\u003c/speak\u003e" ],
+        "allowPlaybackInterruption": true
+      }, {
+        "text": [ "How can I help you?" ],
+        "allowPlaybackInterruption": true
+      } ],
+      "currentFlow": {
+        "name": "Default Start Flow"
+      }
+    }
+  }, {
+    "userInput": {
+      "injectedParameters": {
+        "test_auth": true
+      },
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "i want to authenticate"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "sessionParameters": {
+        "test_auth": true
+      },
+      "triggeredIntent": {
+        "name": "context.user.authentication"
+      },
+      "currentPage": {
+        "name": "Confirm Customer has OTP device",
+        "flow": "bell_authentication"
+      },
+      "textResponses": [ {
+        "text": [ "To assist you, I first need to confirm your identity. We’ll do this with a 6-digit code—can you access the mobile phone linked to your account?" ],
+        "allowPlaybackInterruption": true
+      } ],
+      "currentFlow": {
+        "name": "bell_authentication"
+      }
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "yes"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "triggeredIntent": {
+        "name": "custom.yes"
+      },
+      "currentPage": {
+        "name": "Trigger_OTP",
+        "flow": "bell_authentication"
+      },
+      "textResponses": [ {
+        "text": [ "I’ll text a 6-digit code to the mobile phone on your account." ],
+        "allowPlaybackInterruption": true
+      }, {
+        "text": [ "Once you receive the verification code by text, please say it back to me or enter it on your phone keypad." ],
+        "allowPlaybackInterruption": true
+      } ],
+      "currentFlow": {
+        "name": "bell_authentication"
+      }
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "I haven't received any code yet"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "triggeredIntent": {
+        "name": "context.pin_not_received"
+      },
+      "currentPage": {
+        "name": "Trigger_OTP",
+        "flow": "bell_authentication"
+      },
+      "textResponses": [ {
+        "text": [ "Sometimes the message takes a moment to arrive. Can you please check again?" ],
+        "allowPlaybackInterruption": true
+      } ],
+      "currentFlow": {
+        "name": "bell_authentication"
+      }
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "I haven't received any code yet"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "triggeredIntent": {
+        "name": "context.pin_not_received"
+      },
+      "currentPage": {
+        "name": "Trigger_OTP",
+        "flow": "bell_authentication"
+      },
+      "textResponses": [ {
+        "text": [ "Please check again. Sometimes the message takes some time to arrive." ],
+        "allowPlaybackInterruption": true
+      } ],
+      "currentFlow": {
+        "name": "bell_authentication"
+      }
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "I haven't received any code yet"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "triggeredIntent": {
+        "name": "context.pin_not_received"
+      },
+      "currentPage": {
+        "name": "Routing Page",
+        "flow": "Default Start Flow"
+      },
+      "currentFlow": {
+        "name": "Default Start Flow"
+      }
+    }
+  } ],
+  "creationTime": {
+    "seconds": 1758227233,
+    "nanos": 77315000
+  },
+  "testConfig": {
+    "flow": "Default Start Flow",
+    "page": "Start Page"
+  },
+  "languageCode": "en"
+}

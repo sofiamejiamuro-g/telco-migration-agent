@@ -1,0 +1,76 @@
+{
+  "name": "040738e0-82f0-4533-890b-fe107916e9d6",
+  "displayName": "Ask Time Slot",
+  "form": {
+    "parameters": [ {
+      "displayName": "time_slot",
+      "required": true,
+      "entityType": "@time_slot",
+      "fillBehavior": {
+        "initialPromptFulfillment": {
+          "conditionalCases": [ {
+            "cases": [ {
+              "condition": "$session.params.local_noinput_counter = 0 AND $session.params.local_nomatch_counter = 0",
+              "caseContent": [ {
+                "message": {
+                  "text": {
+                    "text": [ "$session.params.dynamic_intervals" ]
+                  },
+                  "languageCode": "fr-ca"
+                }
+              }, {
+                "message": {
+                  "text": {
+                    "text": [ "$session.params.dynamic_intervals" ]
+                  },
+                  "languageCode": "en"
+                }
+              } ]
+            } ]
+          } ]
+        },
+        "repromptEventHandlers": [ {
+          "targetPage": "Local Error handling + Ask Time Slot",
+          "event": "sys.no-input-1",
+          "triggerFulfillment": {
+            "setParameterActions": [ {
+              "parameter": "global_error_counter",
+              "value": "$sys.func.ADD($session.params.global_error_counter,1)"
+            }, {
+              "parameter": "local_noinput_counter",
+              "value": "$sys.func.ADD($session.params.local_noinput_counter,1)"
+            }, {
+              "parameter": "local_trigger",
+              "value": "no_input"
+            } ]
+          },
+          "name": "60d018ff-7ea4-458d-8464-534283f37a87"
+        }, {
+          "targetPage": "Local Error handling + Time Slot Confirmation",
+          "event": "sys.no-match-1",
+          "triggerFulfillment": {
+            "setParameterActions": [ {
+              "parameter": "global_error_counter",
+              "value": "$sys.func.ADD($session.params.global_error_counter,1)"
+            }, {
+              "parameter": "local_nomatch_counter",
+              "value": "$sys.func.ADD($session.params.local_nomatch_counter,1)"
+            }, {
+              "parameter": "local_trigger",
+              "value": "no_match"
+            } ]
+          },
+          "name": "b8c6485a-776f-477b-bf44-db848a859c4e"
+        } ]
+      }
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.time_slot = \"morning\" OR $session.params.time_slot = \"evening\" OR $session.params.time_slot = \"afternoon\" OR $session.params.time_slot = \"allday\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Interval Check",
+    "name": "7416964d-2055-42ab-b224-59675d956204"
+  } ]
+}

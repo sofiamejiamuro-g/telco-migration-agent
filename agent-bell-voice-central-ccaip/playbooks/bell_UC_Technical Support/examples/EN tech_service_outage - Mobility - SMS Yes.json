@@ -1,0 +1,73 @@
+{
+  "name": "50f00bba-d7e0-4a30-8db0-55a028aa60fb",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Could you tell me which service you're having trouble with?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Mobility"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70016",
+        "language": "en"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "You can easily check for service outages on our website. I'll send a text to the device you're calling from so you can access it quickly. Is that alright?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "yes"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "en",
+        "route": "tech_service_outage",
+        "sms_content": "Bell msg: You can visit https://support.bell.ca/outage-check to check for service outages in your area. ( bell.ca/about-us )",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+        "language": "en",
+        "sms_content": "Bell msg: You can visit https://support.bell.ca/outage-check to check for service outages in your area. ( bell.ca/about-us )",
+        "sms_type": "Public"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customers are facing outage in their area, they reported this issue for {lob} = Mobility when asked used said yes to the sms flow",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "lob": "Mobility",
+      "route": "tech_service_outage",
+      "utterance": "Is there outage in my area?"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "User is redirected sms_trigger flow",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "lob": "Mobility",
+      "route": "tech_service_outage",
+      "sms_content": "Bell msg: You can visit https://support.bell.ca/outage-check to check for service outages in your area. ( bell.ca/about-us )",
+      "sms_type": "Public",
+      "utterance": "Is there outage in my area?"
+    }
+  },
+  "displayName": "EN tech_service_outage - Mobility - SMS Yes",
+  "retrievalStrategy": "NEVER",
+  "tokenCount": 548,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

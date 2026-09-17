@@ -1,0 +1,185 @@
+{
+  "name": "6440beee-d2f1-4edf-8114-6b5d266769bf",
+  "displayName": "Webhook Intent SDL Mapping",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "v1/intent-sdl-mapping",
+    "tag": "\"default\"",
+    "setParameterActions": [ {
+      "parameter": "brand",
+      "value": "bell"
+    }, {
+      "parameter": "language",
+      "value": "$request.language"
+    }, {
+      "parameter": "intent",
+      "value": "$session.params.route"
+    }, {
+      "parameter": "webhook_success",
+      "value": null
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.webhook_success = true",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "If you'd still like to check your Pre-Authorized payments status, you can do so in MyBell. Please visit $session.params.vanity_url for more information" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Si vous souhaitez toujours vérifier l'état de vos paiements préautorisés, vous pouvez le faire dans MonBell. Veuillez consulter $session.params.vanity_url pour plus d'informations." ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "vanity_url",
+        "value": "$session.params.intent_sdl_map_response.url"
+      } ]
+    },
+    "targetFlow": "bell_Feedback",
+    "name": "c758cdd0-0342-4d82-8215-682542a72e43"
+  }, {
+    "condition": "$session.params.webhook_success = false",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "If you'd still like to check your Pre-Authorized payments status, you can do so in MyBell. Please visit bell.ca/support for more information" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Si vous souhaitez toujours vérifier l'état de vos paiements préautorisés, vous pouvez le faire dans MonBell. Veuillez consulter bell.ca/soutien pour plus d'informations." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetFlow": "bell_Feedback",
+    "name": "5f3a24cc-8ee0-4427-82b6-2bd1f2c48812"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "6440beee-d2f1-4edf-8114-6b5d266769bf"
+      }, {
+        "parameter": "flow_id",
+        "value": "2270f500-41b4-45fb-89ed-e16938ec3cea"
+      }, {
+        "parameter": "page_name",
+        "value": "Webhook Intent SDL Mapping"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ],
+  "eventHandlers": [ {
+    "targetFlow": "bell_Feedback",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "If you'd still like to check your Pre-Authorized payments status, you can do so in MyBell. Please visit bell.ca/support for more information" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Si vous souhaitez toujours vérifier l'état de vos paiements préautorisés, vous pouvez le faire dans MonBell. Veuillez consulter bell.ca/soutien pour plus d'informations." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "b956ca0b-eae1-46aa-bb24-909a73dcf1e8"
+  }, {
+    "targetFlow": "bell_Feedback",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "If you'd still like to check your Pre-Authorized payments status, you can do so in MyBell. Please visit bell.ca/support for more information" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Si vous souhaitez toujours vérifier l'état de vos paiements préautorisés, vous pouvez le faire dans MonBell. Veuillez consulter bell.ca/soutien pour plus d'informations." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "be06d28d-399a-4698-97da-99f5b9eceb4b"
+  }, {
+    "targetFlow": "bell_Feedback",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "If you'd still like to check your Pre-Authorized payments status, you can do so in MyBell. Please visit bell.ca/support for more information" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Si vous souhaitez toujours vérifier l'état de vos paiements préautorisés, vous pouvez le faire dans MonBell. Veuillez consulter bell.ca/soutien pour plus d'informations." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "06ba322c-81f9-4cbf-aece-0899cad6f806"
+  }, {
+    "targetFlow": "bell_Feedback",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "If you'd still like to check your Pre-Authorized payments status, you can do so in MyBell. Please visit bell.ca/support for more information" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Si vous souhaitez toujours vérifier l'état de vos paiements préautorisés, vous pouvez le faire dans MonBell. Veuillez consulter bell.ca/soutien pour plus d'informations." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "f431a6ac-52a8-4632-9c95-7494fa80d16e"
+  }, {
+    "targetFlow": "bell_Feedback",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "If you'd still like to check your Pre-Authorized payments status, you can do so in MyBell. Please visit bell.ca/support for more information" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Si vous souhaitez toujours vérifier l'état de vos paiements préautorisés, vous pouvez le faire dans MonBell. Veuillez consulter bell.ca/soutien pour plus d'informations." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "252eb075-6540-42bc-af9d-b43d7d42bc1e"
+  }, {
+    "targetFlow": "bell_Feedback",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "If you'd still like to check your Pre-Authorized payments status, you can do so in MyBell. Please visit bell.ca/support for more information" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Si vous souhaitez toujours vérifier l'état de vos paiements préautorisés, vous pouvez le faire dans MonBell. Veuillez consulter bell.ca/soutien pour plus d'informations." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "ebfb97d5-b3aa-4343-809f-5a0e95cd0fda"
+  } ]
+}

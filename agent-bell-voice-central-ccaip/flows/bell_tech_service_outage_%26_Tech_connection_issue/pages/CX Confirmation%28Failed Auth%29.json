@@ -1,0 +1,64 @@
+{
+  "name": "5943691f-f7c6-46b4-b529-bec8b9448887",
+  "displayName": "CX Confirmation(Failed Auth)",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "intent": "context.confirm_yes",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "SMS content (Failed Auth)",
+    "name": "ca76938a-135c-4bc2-8eb8-a967c8f56dd9"
+  }, {
+    "intent": "context.confirm_no",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "sms_send_status",
+        "value": "Declined"
+      } ]
+    },
+    "targetFlow": "bell_SMS Trigger",
+    "name": "255ba113-f0a7-485c-b93b-57d04d24c598"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Local Error handling (Failed Auth)",
+    "event": "sys.no-input-1",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "sms_send_status",
+        "value": "Declined"
+      }, {
+        "parameter": "global_error_counter",
+        "value": "$sys.func.ADD($session.params.global_error_counter,1)"
+      }, {
+        "parameter": "local_noinput_counter",
+        "value": "$sys.func.ADD($session.params.local_noinput_counter,1)"
+      }, {
+        "parameter": "local_trigger",
+        "value": "no_input"
+      } ]
+    },
+    "name": "7e3c305a-fc1f-4327-820b-a927fc8fae11"
+  }, {
+    "targetPage": "Local Error handling (Failed Auth)",
+    "event": "sys.no-match-1",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "global_error_counter",
+        "value": "$sys.func.ADD($session.params.global_error_counter,1)"
+      }, {
+        "parameter": "local_nomatch_counter",
+        "value": "$sys.func.ADD($session.params.local_nomatch_counter,1)"
+      }, {
+        "parameter": "local_trigger",
+        "value": "no_match"
+      }, {
+        "parameter": "sms_send_status",
+        "value": "Declined"
+      } ]
+    },
+    "name": "ee49f87d-91f6-45aa-87f2-1aa312d726c4"
+  } ]
+}

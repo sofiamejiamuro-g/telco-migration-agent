@@ -1,0 +1,46 @@
+{
+  "name": "e8b71dda-0f16-478a-aada-44b39d33c2c9",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Bonne nouvelle! Vous pouvez facilement mettre à jour votre profil MonBell en ligne, y compris votre adresse postale et de facturation, et préférences linguistiques. Je vais envoyer un texto à l’appareil au moyen duquel vous appelez, afin que vous puissiez facilement apporter les changements. Est-ce que ça vous convient?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Oui"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "brand": "bell",
+        "language": "fr-ca",
+        "sms_content": "Vous pouvez visiter https://m.bell.ca/gererprofil pour mettre à jour vos informations de profil dans l'appli MonBell. (bell.ca/apropos)",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "The customer wants to make update to their account information - including updating name, emails, address, billing address, PIN.",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca",
+      "route": "account_update_details",
+      "utterance": "Je veux changer mon code PIN"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "The {update_detail_type} parameter is empty so we prompt the user with appropriate response then the customer says they want to update their PIN so we prompt the user with the message the user declines to receive a message on their device so we route them to bell_get_sdl_mapping_url flow prompt the user with appropriate {faq_link} prompt and then route then user to bell_Feedback flow.",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca"
+    }
+  },
+  "displayName": "FR - Account Update Details (account_detail_type = \"PIN\") - YesForMessageLink(Step 5.3)",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 392,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

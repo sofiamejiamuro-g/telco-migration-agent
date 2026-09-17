@@ -1,0 +1,84 @@
+{
+  "name": "517ddfc4-4680-477b-908a-17e092f2bb23",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70024",
+        "lob": "tv"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "playbookInvocation": {
+      "playbook": "bell_uc_ask_LOB",
+      "playbookInput": {
+        "actionParameters": {
+          "language": "en",
+          "utterance": "Where can I access Crave?"
+        }
+      },
+      "playbookOutput": {
+        "actionParameters": {
+          "lob": "TV"
+        }
+      },
+      "playbookState": "OUTPUT_STATE_OK"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Is this related to a technical problem, or would you like to learn more about the add-on or features we provide?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Technical problem"
+    }
+  }, {
+    "playbookInvocation": {
+      "playbook": "Bell_UC_Technical_Support_Infobot",
+      "playbookInput": {
+        "actionParameters": {
+          "language": "en",
+          "lob": {
+            "lob": "TV"
+          },
+          "route": "tech_configure_settings_request",
+          "utterance": "Crave"
+        }
+      },
+      "playbookOutput": {
+        "actionParameters": {
+        
+        }
+      },
+      "playbookState": "OUTPUT_STATE_OK"
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer is asking about where to access Crave",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "lob": "TV",
+      "route": "service_feature_inquiry",
+      "utterance": "Where can I access Crave?"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "First, flow \"bell_apb\" is called and then playbook \"bell_uc_ask_LOB\" followed by triggering data store for searching answer for user {utterance}",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "lob": "TV",
+      "route": "service_feature_inquiry",
+      "utterance": "Where can I access Crave?"
+    }
+  },
+  "displayName": "EN_service_feature_inquiry_TV_Where can I access Crave?",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 490,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

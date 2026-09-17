@@ -1,0 +1,89 @@
+{
+  "name": "009c8d5e-ff78-4a36-87df-6f599dc76850",
+  "displayName": "Update Contact Method Confirmation",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "messages": [ {
+      "text": {
+        "text": [ "I see the contact number you provided earlier is different from the number we have on file for you. Would you like me to update your contact method?" ]
+      },
+      "languageCode": "en"
+    }, {
+      "text": {
+        "text": [ "Je constate que le numéro de téléphone de la personne-ressource que vous avez fourni précédemment diffère de celui que nous avons dans nos dossiers. Souhaitez-vous que je mette à jour votre méthode de contact?" ]
+      },
+      "languageCode": "fr-ca"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "intent": "context.confirm_yes",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "ticket_number",
+        "value": "$session.params.ticket_number"
+      }, {
+        "parameter": "menu_type",
+        "value": "$session.params.menu_type"
+      }, {
+        "parameter": "operation_context",
+        "value": "modify_contact_preferences"
+      }, {
+        "parameter": "contact_phone",
+        "value": "$session.params.stored_contact_number"
+      }, {
+        "parameter": "contact_name",
+        "value": "$session.params.contact_name"
+      }, {
+        "parameter": "reported_by",
+        "value": "$session.params.reported_by"
+      }, {
+        "parameter": "ticket_number_ref",
+        "value": "$sys.func.CONCATENATE(\"REF\", $sys.func.TO_TEXT($session.params.ticket_number))"
+      } ]
+    },
+    "targetPage": "Contact_Preference_Update",
+    "name": "165779b4-3832-47f3-9efc-3b5edb63cae3"
+  }, {
+    "intent": "context.confirm_no",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook - WFAS Check Availability",
+    "name": "da2c0dff-cac3-4be1-b86e-e0aaedc352e0"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Local Error handling + Update Contact Method Confirmation",
+    "event": "sys.no-input-1",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "global_error_counter",
+        "value": "$sys.func.ADD($session.params.global_error_counter,1)"
+      }, {
+        "parameter": "local_noinput_counter",
+        "value": "$sys.func.ADD($session.params.local_noinput_counter,1)"
+      }, {
+        "parameter": "local_trigger",
+        "value": "no_input"
+      } ]
+    },
+    "name": "6c850e64-497d-4cd7-9cb8-bf43ed010dcf"
+  }, {
+    "targetPage": "Local Error handling + Update Contact Method Confirmation",
+    "event": "sys.no-match-1",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "global_error_counter",
+        "value": "$sys.func.ADD($session.params.global_error_counter,1)"
+      }, {
+        "parameter": "local_nomatch_counter",
+        "value": "$sys.func.ADD($session.params.local_nomatch_counter,1)"
+      }, {
+        "parameter": "local_trigger",
+        "value": "no_match"
+      } ]
+    },
+    "name": "9f906d03-489f-40ba-ab46-0725adad44ae"
+  } ]
+}

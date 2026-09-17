@@ -1,0 +1,58 @@
+{
+  "name": "ac741f54-7a23-4687-85c7-962dbd87a9b5",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Sure, I can help with that. You can temporarily suspend your residential services in MyBell. I will send a text to the device you're calling from, with a link to do it yourself. Is that alright?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "no"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "sms_send_status": "Declined"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "No problem at all. For any other questions you can always visit our website at {faq_link}"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_Feedback",
+      "inputActionParameters": {
+      
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer wants to suspend his services",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "route": "account_suspend_service",
+      "unique_services": "WIRELINE",
+      "utterance": "I want to suspend my service"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "VA understood the {utterance}, checked the {unique_services} parameter, found only one value equal to WIRELINE,  VA asks if it can send a text to the device he's calling from, user says no, it routed the user to bell_SMS Trigger flow then to bell_Feedback flow",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en"
+    }
+  },
+  "displayName": "Happy path - Account suspend service - unique services(WIRELINE) - homephone - no - en - 16",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 382,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

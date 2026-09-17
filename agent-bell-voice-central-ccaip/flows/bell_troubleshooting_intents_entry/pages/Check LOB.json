@@ -1,0 +1,31 @@
+{
+  "name": "6fb2e2c6-c3a2-4002-9327-a463b9eb5a9c",
+  "displayName": "Check LOB",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.lob = \"Homephone\" OR $session.params.lob = \"HOMEPHONE\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "lob_list",
+        "value": "['WIRELINE','Wireline','Homephone','HOMEPHONE']"
+      } ]
+    },
+    "targetPage": "Categorize LOB - ACUT",
+    "name": "b2d393a5-aecf-463c-aa3f-b1a15b2626e8"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "lob_list",
+        "value": "['$session.params.lob', '$sys.func.LOWER($session.params.lob)', '$sys.func.UPPER($session.params.lob)']"
+      } ]
+    },
+    "targetPage": "Categorize LOB - ACUT",
+    "name": "342d5216-3b2f-46b2-a094-7ca07aa6fe89"
+  } ]
+}

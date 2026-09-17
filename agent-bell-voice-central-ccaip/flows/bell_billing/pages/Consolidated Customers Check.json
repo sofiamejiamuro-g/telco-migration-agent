@@ -1,0 +1,43 @@
+{
+  "name": "bb2c7cda-5dfc-47a7-9a7d-f17473ae77e6",
+  "displayName": "Consolidated Customers Check",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.consolidated_status = null",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_payment_billing_consolidated_flow_identification",
+    "name": "ac91e81d-f862-4904-b84a-47d9567af554"
+  }, {
+    "condition": "$session.params.consolidated_status = \"Pass\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Intent Check",
+    "name": "0611412e-0be5-4af6-aa8e-f5e48133c76f"
+  }, {
+    "condition": "$session.params.consolidated_status = \"Fail\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Intent Check",
+    "name": "f0297777-32ad-49bd-bfff-08ac98ae4492"
+  }, {
+    "condition": "$session.params.consolidated_status = \"Outage\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "NM1 Outage",
+    "name": "bad207a1-35a2-43c9-9020-7bd20c089505"
+  }, {
+    "condition": "$session.params.consolidated_status = \"Uneligible\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_aqd",
+    "name": "52b61dd3-7bd2-47ee-8f8a-96a4fc9bc8a0"
+  } ]
+}

@@ -1,0 +1,75 @@
+{
+  "name": "b0bf47f8-351a-4049-83ad-a81932f8be9b",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70024",
+        "language": "en"
+      },
+      "outputActionParameters": {
+        "language": "en"
+      }
+    }
+  }, {
+    "toolUse": {
+      "tool": "EN_Bell_AccountManagement",
+      "action": "EN_Bell_AccountManagement",
+      "inputActionParameters": {
+        "requestBody": {
+          "query": "What to do if you suspect a fraud attempt"
+        }
+      },
+      "outputActionParameters": {
+        "200": {
+          "answer": "If you suspect a fraud attempt, you should forward any suspicious emails appearing to be from Bell to phish@bell.ca, then delete the email. For suspicious text messages, forward them to 7726 (SPAM) and then delete the message.",
+          "snippets": [ {
+            "text": "* If you receive a suspicious email that appears to be from Bell, forward it to [phish@bell.ca](mailto:phish@bell.ca)then delete the email. * If you receive a suspicious text or multimedia message, forward it to 7726 (SPAM) then delete the message.",
+            "title": "How to protect yourself from fraud",
+            "uri": "https://support.bell.ca/billing-and-accounts/security_and_privacy/how_to_protect_yourself_from_fraud?step=6#:~:text=*%20If%20you,delete%20the%20message."
+          } ]
+        }
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "If you suspect a fraudulent email from Bell, forward it to phish@bell.ca, then delete it. If you suspect a fraudulent text, forward it to 7726 (SPAM), then delete it. You can also contact Bell directly to confirm. Could you please let me know if your query is answered?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "yes"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_Feedback",
+      "inputActionParameters": {
+        "language": "en"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer is asking about fraud email",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "route": "account_fraud",
+      "utterance": "I received an email from Bell but I think it is a fraud"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Customer is given a crisp answer from datastore",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "route": "account_fraud"
+    }
+  },
+  "displayName": "EN_account_fraud_IReceivedAnEmailFromBellButIThinkItIsAFraud_YesForAnswered",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 629,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

@@ -1,0 +1,58 @@
+{
+  "name": "babb26ba-1b03-4eec-8a01-5524e2df5529",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Sure, I can help with that. Could you please confirm which service you are looking to restore?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Internet"
+    }
+  }, {
+    "agentUtterance": {
+      "text": " Sure, I can help with that. You can easily restore your residential services in MyBell. I will send a text to the device you're calling from, with a link to do it yourself. Is that alright? "
+    }
+  }, {
+    "userUtterance": {
+      "text": "no"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "brand": "bell",
+        "language": "en",
+        "route": "account_restore_service",
+        "sms_send_status": "Declined",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "User wants to restore their service",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "route": "account_restore_service",
+      "unique_services": "MOBILITY, INTERNET, TV",
+      "utterance": "I want to restore my service"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "User declines sms and routed to sms flow",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "route": "account_restore_service",
+      "sms_send_status": "Declined"
+    }
+  },
+  "displayName": "Restore Service : Ask service - Internet - No SMS",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 326,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

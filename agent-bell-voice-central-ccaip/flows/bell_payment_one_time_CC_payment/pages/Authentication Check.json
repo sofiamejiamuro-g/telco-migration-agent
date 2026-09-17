@@ -1,0 +1,48 @@
+{
+  "name": "93b7c15e-f98b-4578-b993-21001b685a82",
+  "displayName": "Authentication Check",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.auth_status = null",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_authentication",
+    "name": "6dda4d8c-264d-4bac-9000-50fb272914d1"
+  }, {
+    "condition": "$session.params.auth_status = \"Pass\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "APB Check",
+    "name": "2e511386-4b3f-4861-ac45-a1456d8a7e1d"
+  }, {
+    "condition": "$session.params.auth_status = \"Fail\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Auth Failure",
+    "name": "3a42e765-f9a1-46ee-ad47-f34772c5293d"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "93b7c15e-f98b-4578-b993-21001b685a82"
+      }, {
+        "parameter": "flow_id",
+        "value": "79610380-24f4-4284-b946-244d0aa037d8"
+      }, {
+        "parameter": "page_name",
+        "value": "Authentication Check"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "00a52c5b-7467-4083-aed7-bb991f2b568a"
+  } ]
+}

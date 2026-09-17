@@ -1,0 +1,71 @@
+{
+  "name": "dc639234-bef8-496e-8754-10c288d67d76",
+  "displayName": "Webhook intent-sdl-mapping | Link Rejected",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "v1/intent-sdl-mapping",
+    "tag": "default",
+    "setParameterActions": [ {
+      "parameter": "intent",
+      "value": "$session.params.route"
+    }, {
+      "parameter": "brand",
+      "value": "bell"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.webhook_success = True",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ " No worries, you can always learn more about our services on our frequently asked questions at $session.params.intent_sdl_map_response.url" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Pas de soucis, tu peux toujours en apprendre davantage sur nos services dans notre foire aux questions à $session.params.intent_sdl_map_response.url" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetFlow": "bell_wrapup",
+    "name": "27129bd5-2e04-4b64-a47e-fe23f5abb66f"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "No worries, you can always learn more about our services on our frequently asked questions at bell.ca/support" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Pas de soucis, tu peux toujours en apprendre davantage sur nos services dans notre foire aux questions à vpc.ca/soutien" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetFlow": "bell_wrapup",
+    "name": "fde1c8cc-c615-4d9b-a8b8-398802c1ee6c"
+  } ],
+  "eventHandlers": [ {
+    "targetFlow": "bell_wrapup",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "No worries, you can always learn more about our services on our frequently asked questions at bell.ca/support" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Pas de soucis, tu peux toujours en apprendre davantage sur nos services dans notre foire aux questions à vpc.ca/soutien" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "a963ecf1-fda7-4446-bd48-c13f2e044629"
+  } ]
+}

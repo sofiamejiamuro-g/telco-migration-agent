@@ -1,0 +1,180 @@
+{
+  "name": "837b64b9-cfa5-4828-a168-351db3acb970",
+  "displayName": "Local Error handling + Ask Time Slot Again",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.global_error_counter \u003e= 3",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_aqd",
+    "name": "374bdcf6-a3bc-422d-88a8-2ac3cc7556a0"
+  }, {
+    "condition": "$session.params.local_trigger = \"no_input\" AND $session.params.local_noinput_counter = 1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I didn't quite get that." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "$session.params.unav_response" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "$session.params.dynamic_intervals_trimmed" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je n'ai pas bien compris." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "$session.params.unav_response" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "$session.params.dynamic_intervals_trimmed" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "d78e7f30-7353-4b81-83fe-c182b5995cc0"
+  }, {
+    "condition": "$session.params.local_trigger = \"no_input\" AND $session.params.local_noinput_counter = 2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I still didn't get that." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "$session.params.unav_response" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "$session.params.dynamic_intervals_trimmed" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je n'ai toujours pas compris." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "$session.params.unav_response" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "$session.params.dynamic_intervals_trimmed" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "67e5d2ca-ef1a-4cdd-95c5-64952e134afb"
+  }, {
+    "condition": "$session.params.local_trigger = \"no_input\" AND $session.params.local_noinput_counter = 3",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook - WFAS Cancel",
+    "name": "1fba0460-c932-44ca-9e7d-9766c36f2e45"
+  }, {
+    "condition": "$session.params.local_trigger = \"no_match\" AND $session.params.local_nomatch_counter = 1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I didn't quite get that." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "$session.params.unav_response" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "$session.params.dynamic_intervals_trimmed" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je n'ai pas bien compris." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "$session.params.unav_response" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "$session.params.dynamic_intervals_trimmed" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "bdda559a-452e-4d4b-a776-68d311eaf9d3"
+  }, {
+    "condition": "$session.params.local_trigger = \"no_match\" AND $session.params.local_nomatch_counter = 2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I still didn't get that." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "$session.params.unav_response" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "$session.params.dynamic_intervals_trimmed" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je n'ai toujours pas compris." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "$session.params.unav_response" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "$session.params.dynamic_intervals_trimmed" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "c4720f66-0a2f-4a2b-9874-f256174b47f4"
+  }, {
+    "condition": "$session.params.local_trigger = \"no_match\" AND $session.params.local_nomatch_counter = 3",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook - WFAS Cancel",
+    "name": "b522ec88-020c-4eb6-979e-ee8fa822feb1"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Previous Page",
+    "name": "e033b431-c84a-4d56-8524-8e78deaf34c0"
+  } ]
+}

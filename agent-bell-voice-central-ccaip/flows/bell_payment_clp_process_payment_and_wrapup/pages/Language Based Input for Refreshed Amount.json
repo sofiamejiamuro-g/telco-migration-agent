@@ -1,0 +1,53 @@
+{
+  "name": "f55dbb6e-96ac-4b75-8926-b7f4bac5ba0f",
+  "displayName": "Language Based Input for Refreshed Amount",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.language = \"en\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "sms_type",
+        "value": "Public"
+      }, {
+        "parameter": "sms_content",
+        "value": "Bell msg: You can visit https://m.bell.ca/ecmyprofile to view your account status in the MyBell app. ( bell.ca/about-us )"
+      } ]
+    },
+    "targetFlow": "bell_SMS Trigger",
+    "name": "3c2e2a82-1491-43b4-8164-867856b8ff60"
+  }, {
+    "condition": "$session.params.language = \"fr-ca\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "sms_type",
+        "value": "Public"
+      }, {
+        "parameter": "sms_content",
+        "value": "Mess. de Bell: Vous pouvez visiter https://m.bell.ca/ecmonprofil pour afficher l'etat de votre compte dans l'application MonBell. ( bell.ca/apropos )"
+      } ]
+    },
+    "targetFlow": "bell_SMS Trigger",
+    "name": "1c6a161d-85eb-4c1a-adaf-7f8e3b6b285b"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "f55dbb6e-96ac-4b75-8926-b7f4bac5ba0f"
+      }, {
+        "parameter": "flow_id",
+        "value": "d810bc76-3e37-4bbb-a2ef-ad430f390435"
+      }, {
+        "parameter": "page_name",
+        "value": "Language Based Input for Refreshed Amount"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

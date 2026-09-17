@@ -1,0 +1,118 @@
+{
+  "name": "acd68390-42a9-4245-8c3e-574b56cef24f",
+  "displayName": "Final confirmation from user",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "intent": "context.confirm_yes",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "\u003cspeak\u003eLa dernière date pour laquelle vous pouvez vous engager à effectuer un versement pour votre entente de paiement est le \u003csay-as interpret-as=\"date\" format=\"md\" detail=\"2\"\u003e$session.params.calculated_payment_date \u003c/say-as\u003e. Pouvez-vous effectuer un paiement d’ici là?\u003c/speak\u003e" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "\u003cspeak\u003eThe latest date you can commit to making a payment arrangement is on  \u003csay-as interpret-as=\"date\" format=\"md\" detail=\"2\"\u003e$session.params.calculated_payment_date \u003c/say-as\u003e. Can you make a payment by then? \u003c/speak\u003e" ]
+        },
+        "languageCode": "en"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "amount",
+        "value": "$session.params.payment_amount"
+      } ]
+    },
+    "targetPage": "Payment Date Confirmation",
+    "name": "d0c01c9f-cbb1-4474-9cd6-9e3d51ec1d9a"
+  }, {
+    "intent": "context.confirm_no",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_aqd",
+    "name": "5a74b421-b46c-44c1-8e17-5e501c0a2d34"
+  } ],
+  "eventHandlers": [ {
+    "event": "sys.no-input-1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ " Je n’ai pas tout à fait compris. Pouvez-vous effectuer un paiement d’ici le $$session.params.payment_amount??" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "I didn't quite get that. Can you confirm the payment arrangement amount you're committing to is $session.params.payment_amount?" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "9a0e10c3-3b45-4785-8dc1-08c790281681"
+  }, {
+    "event": "sys.no-input-2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Je n’ai toujours pas compris" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "I still didn't get that" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "f4f73c8e-2d1f-42f4-9c0c-c5b238e266c3"
+  }, {
+    "targetFlow": "bell_aqd",
+    "event": "sys.no-input-3",
+    "triggerFulfillment": {
+    
+    },
+    "name": "0dbe308b-4856-4dee-9f46-29071764666e"
+  }, {
+    "event": "sys.no-match-1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ " Je n’ai pas tout à fait compris. Pouvez-vous effectuer un paiement d’ici le $$session.params.payment_amount??" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "I didn't quite get that. Can you confirm the payment arrangement amount you're committing to is $session.params.payment_amount?" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "dddc7a52-fa9a-42b3-95d5-9b8b000bf18b"
+  }, {
+    "event": "sys.no-match-2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Je n’ai toujours pas compris" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "I still didn't get that" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "adc62644-2e07-43a1-be98-e58ea401cc0c"
+  }, {
+    "targetFlow": "bell_aqd",
+    "event": "sys.no-match-3",
+    "triggerFulfillment": {
+    
+    },
+    "name": "1dd73fdd-9069-40cf-a042-3b724d24a2b4"
+  } ]
+}

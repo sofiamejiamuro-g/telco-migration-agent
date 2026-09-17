@@ -1,0 +1,40 @@
+{
+  "name": "af4060d7-0d89-4282-9463-b2dcd38f74f1",
+  "displayName": "Webhook validate-otp",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "v1/customer-authentication#validate-otp",
+    "tag": "validate-otp",
+    "setParameterActions": [ {
+      "parameter": "brand",
+      "value": "$session.params.brand"
+    }, {
+      "parameter": "callKey",
+      "value": "$session.params.auth_options_response.callKey"
+    }, {
+      "parameter": "otp",
+      "value": "$session.params.pin"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "is_authenticated",
+        "value": "$session.params.otp_validation_response.is_authenticated"
+      } ]
+    },
+    "targetPage": "Validate OTP",
+    "name": "47bc28af-ea70-427f-ac92-4baba0ac1e66"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Webhook validate-otp Error",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+    
+    },
+    "name": "cb3aa8a3-cc01-490d-8f3b-8411aff93e73"
+  } ]
+}

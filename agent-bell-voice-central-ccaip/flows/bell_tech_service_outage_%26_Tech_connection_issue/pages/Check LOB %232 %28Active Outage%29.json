@@ -1,0 +1,114 @@
+{
+  "name": "04ae04b3-7154-4799-83a8-90fb3e8b725e",
+  "displayName": "Check LOB #2 (Active Outage)",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.lob = \"mobility\" OR $session.params.lob = \"Mobility\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Malheureusement, il y a actuellement une panne mobilité dans votre région. Mais ne vous inquiétez pas, nos équipes s’efforcent de rétablir votre service dans les plus brefs délais." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetPage": "Check LOB #3 (Active Outage)",
+    "name": "98999be2-d487-4cd1-8dc1-88fc8e14ea93"
+  }, {
+    "condition": "$session.params.lob = \"Homephone\" OR $session.params.lob = \"homephone\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Malheureusement, il y a actuellement une panne téléphone résidentiel dans votre région. Mais ne vous inquiétez pas, nos équipes s’efforcent de rétablir votre service dans les plus brefs délais." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetPage": "Check LOB #3 (Active Outage)",
+    "name": "35fdc501-ff60-44d8-a010-95f4a356580b"
+  }, {
+    "condition": "$session.params.lob = \"Internet\" OR $session.params.lob = \"internet\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Malheureusement, il y a actuellement une panne d'internet dans votre région. Mais ne vous inquiétez pas, nos équipes s’efforcent de rétablir votre service dans les plus brefs délais." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "Unfortunately, there is currently an $session.params.lob outage in your area. But don't worry, our teams are working to restore your service as soon as possible." ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "targetPage": "Check LOB #3 (Active Outage)",
+    "name": "261572d7-4b3a-49e0-88e2-dc6edd4cefc6"
+  }, {
+    "condition": "$session.params.tv_sub_type = \"fibe\" OR $session.params.tv_sub_type = \"fibe tv app\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Malheureusement, il y a actuellement une panne dans votre région. Mais ne vous inquiétez pas, nos équipes s’efforcent de rétablir votre service dans les plus brefs délais." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "Unfortunately, there is currently an outage in your area. But don't worry, our teams are working to restore your service as soon as possible." ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "targetPage": "Check LOB #3 (Active Outage)",
+    "name": "bb789f42-97ec-4fbd-aabd-edcf1855ec14"
+  }, {
+    "condition": "$session.params.tv_sub_type = \"sat\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Malheureusement, il y a actuellement une panne télé satellite dans votre région. Mais ne vous inquiétez pas, nos équipes s’efforcent de rétablir votre service dans les plus brefs délais." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetPage": "Check LOB #3 (Active Outage)",
+    "name": "8b45a672-949b-47b6-bdec-4c2da7d54ab2"
+  }, {
+    "condition": "$session.params.lob = \"TV\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Malheureusement, il y a actuellement une panne Télévision dans votre région. Mais ne vous inquiétez pas, nos équipes s’efforcent de rétablir votre service dans les plus brefs délais." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "Unfortunately, there is currently an $session.params.lob outage in your area. But don't worry, our teams are working to restore your service as soon as possible." ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "targetPage": "Check LOB #3 (Active Outage)",
+    "name": "ff90dee2-1acc-4cf6-a170-1bf4577df972"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "04ae04b3-7154-4799-83a8-90fb3e8b725e"
+      }, {
+        "parameter": "flow_id",
+        "value": "94d32e37-496f-4fa3-81e8-18fd95281a52"
+      }, {
+        "parameter": "page_name",
+        "value": "Check LOB #2 (Active Outage)"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

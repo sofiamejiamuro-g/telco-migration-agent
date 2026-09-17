@@ -1,0 +1,263 @@
+{
+  "name": "c2767444-21e5-44f4-b719-df512107687e",
+  "displayName": "Get Phone Number",
+  "form": {
+    "parameters": [ {
+      "displayName": "CLID",
+      "required": true,
+      "entityType": "@sys.phone-number",
+      "fillBehavior": {
+        "initialPromptFulfillment": {
+          "conditionalCases": [ {
+            "cases": [ {
+              "condition": "$session.params.invalid_clid_counter = 0",
+              "caseContent": [ {
+                "message": {
+                  "text": {
+                    "text": [ "Sure, what is the other number?" ]
+                  },
+                  "languageCode": "en"
+                }
+              } ]
+            }, {
+            
+            } ]
+          } ]
+        },
+        "repromptEventHandlers": [ {
+          "targetPage": "Local Error Handling- Get Phone number",
+          "event": "sys.no-input-1",
+          "triggerFulfillment": {
+            "setParameterActions": [ {
+              "parameter": "global_error_counter",
+              "value": "$sys.func.ADD($session.params.global_error_counter,1)"
+            }, {
+              "parameter": "local_noinput_counter",
+              "value": "$sys.func.ADD($session.params.local_noinput_counter,1)"
+            }, {
+              "parameter": "local_trigger",
+              "value": "no_input"
+            } ],
+            "generators": [ {
+              "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/7be942f9-6872-4334-8700-688c4635b495",
+              "outputParameter": "$request.generative.response"
+            } ]
+          },
+          "name": "97085fc8-50a8-4be4-8db5-ef63600f42bc"
+        }, {
+          "targetPage": "Local Error Handling- Get Phone number",
+          "event": "sys.no-match-1",
+          "triggerFulfillment": {
+            "setParameterActions": [ {
+              "parameter": "invalid_clid_counter",
+              "value": "$sys.func.ADD($session.params.invalid_clid_counter, 1)"
+            }, {
+              "parameter": "global_error_counter",
+              "value": "$sys.func.ADD($session.params.global_error_counter,1)"
+            }, {
+              "parameter": "local_nomatch_counter",
+              "value": "$sys.func.ADD($session.params.local_nomatch_counter,1)"
+            }, {
+              "parameter": "local_trigger",
+              "value": "no_match"
+            }, {
+              "parameter": "Error_Count",
+              "value": "true"
+            } ]
+          },
+          "name": "e9340cb3-a634-4cd3-baf2-e26838bdfd53"
+        } ]
+      }
+    } ]
+  },
+  "entryFulfillment": {
+    "setParameterActions": [ {
+      "parameter": "_temp_clid",
+      "value": "$session.params.clid"
+    }, {
+      "parameter": "CLID",
+      "value": null
+    }, {
+      "parameter": "id_again",
+      "value": "yes"
+    }, {
+      "parameter": "local_trigger",
+      "value": null
+    }, {
+      "parameter": "local_nomatch_counter",
+      "value": 0
+    }, {
+      "parameter": "local_noinput_counter",
+      "value": 0
+    } ]
+  },
+  "transitionRoutes": [ {
+    "intent": "other_speak_to_agent",
+    "condition": "$session.params.speak_to_agent_counter \u003e= 2",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "identification_status",
+        "value": "Fail"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "87bfad34-3fcd-417b-8cf8-b8466e344b13"
+  }, {
+    "intent": "other_speak_to_agent",
+    "condition": "$session.params.speak_to_agent_counter = 1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "$request.generative.response" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "$request.generative.response" ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "speak_to_agent_counter",
+        "value": "$sys.func.ADD(1, $session.params.speak_to_agent_counter)"
+      } ],
+      "generators": [ {
+        "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/e936c564-4908-4c78-89e8-2b170a2b9374",
+        "outputParameter": "$request.generative.response"
+      } ]
+    },
+    "name": "67fcd541-9eea-448d-b744-4334ae580b46"
+  }, {
+    "intent": "other_speak_to_agent",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "$request.generative.response" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "$request.generative.response" ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "speak_to_agent_counter",
+        "value": "$sys.func.ADD(1, $session.params.speak_to_agent_counter)"
+      } ],
+      "generators": [ {
+        "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/c3aeeb56-ae5b-4a83-9a12-b878ebeef038",
+        "outputParameter": "$request.generative.response"
+      } ]
+    },
+    "name": "0d8322e0-00c8-4faf-9f88-4ad6fce0f6c9"
+  }, {
+    "intent": "context.user_asks_more_time",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Absolutely. Please take a moment to find your number." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Absolument. Veuillez prendre un moment pour trouver votre numéro." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "dac8e8d4-1ab3-4888-87f3-242f1d661186"
+  }, {
+    "intent": "context.cant_say_out_loud",
+    "condition": "$session.params.Loud_Counter \u003e= 5",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "\u003cspeak\u003eI didn't receive your response. You can check out our frequently asked questions at \u003csay-as interpret-as=\"url\"\u003ehttps://www.virginplus.ca/en/support/index.html\u003c/say-as\u003e\u003c/speak\u003e" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "994d927c-835f-4128-9b51-23bb1fe25a7d"
+  }, {
+    "intent": "context.same_number",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "D’accord, de quoi souhaitez-vous parler maintenant?" ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "CIRN",
+        "value": "$session.params._temp_clid"
+      }, {
+        "parameter": "CLID",
+        "value": "$session.params._temp_clid"
+      } ]
+    },
+    "name": "41b30fb1-ac30-4c23-ad11-432761e84b01"
+  }, {
+    "intent": "context.cant_say_out_loud",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "No worries, if you can't read your number out loud, you can enter it using your key pad." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Ne t'inquiète pas, si tu ne peux pas lire ton numéro à voix haute, tu peux le saisir à l'aide de ton clavier." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "5420a193-1548-40f9-b61d-52a6ff654d77"
+  }, {
+    "intent": "context.user_makes_mistake",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "No worries, please say or re-enter your number when ready." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Ne t'inquiète pas, tu peux le dire à voix haute ou re-saisir à nouveau ton numéro." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "65285722-34f4-4383-b494-7c182cb7c3ac"
+  }, {
+    "condition": "$page.params.status = \"FINAL\" AND $sys.func.IS_PHONE_NUMBER($session.params.CLID, \"CA\") = true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "event_other_number",
+        "value": "cirn_identification"
+      }, {
+        "parameter": "CIRN",
+        "value": "$session.params.clid"
+      } ]
+    },
+    "targetFlow": "bell_Identification",
+    "name": "ade236bf-df73-4c1c-a6e6-df1a56ea1dbd"
+  }, {
+    "condition": "$page.params.status = \"FINAL\" AND $sys.func.IS_PHONE_NUMBER($session.params.CLID, \"CA\") != true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "invalid_clid_counter",
+        "value": "$sys.func.ADD($session.params.invalid_clid_counter, 1)"
+      } ]
+    },
+    "targetPage": "Get Phone Number Invalid Number fallback",
+    "name": "78df9f1a-e265-499e-84c3-150cfea49f64"
+  }, {
+    "condition": "$session.params.CLID != null OR $session.params.identification_status != null",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Routing Page",
+    "name": "d899991a-694f-4052-89ae-21b60ffe5ad7"
+  } ]
+}

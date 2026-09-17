@@ -1,0 +1,60 @@
+{
+  "name": "ea041060-9ac0-48ed-b3c8-30e53a5343d8",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "language": "fr-ca",
+        "lob": "internet",
+        "province": "ROC"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Je suis désolé d'apprendre pour les inondations. J'espère que vous et vos proches êtes sains et saufs.\nBien sûr, laissez-moi vous aider.\nVérifions si nous offrons des services Internet ou de téléphonie résidentielle dans votre secteur. Dans quelle province avez-vous besoin de services?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Lloydminster"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_aqd",
+      "inputActionParameters": {
+        "language": "fr-ca",
+        "lob": "Internet",
+        "special_queue": "cable_internet"
+      },
+      "outputActionParameters": {
+        "language": "fr-ca"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "The customer is asking whether the provider's service is offered at an address or location.",
+    "actionParameters": {
+      "language": "fr-ca",
+      "lob": "Internet",
+      "province": "BC",
+      "route": "sales_confirm_service_coverage",
+      "utterance": "Avez-vous une couverture internet dans ma région? Nous avons subi de graves inondations et j'ai besoin de savoir si le réseau est toujours opérationnel."
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "When province is anything other than ON and QC or is null or empty, ask user for province, extract in {province} parameter and further route based on province",
+    "actionParameters": {
+      "language": "fr-ca",
+      "lob": "Internet",
+      "province": "AB",
+      "utterance": "Avez-vous une couverture internet dans ma région? Nous avons subi de graves inondations et j'ai besoin de savoir si le réseau est toujours opérationnel."
+    }
+  },
+  "displayName": "Empathetic FR-sales_service_coverage- internet",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 479,
+  "languageCode": "en"
+}

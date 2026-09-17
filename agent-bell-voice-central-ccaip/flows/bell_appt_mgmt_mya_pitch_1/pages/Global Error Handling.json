@@ -1,0 +1,104 @@
+{
+  "name": "a8946c0b-9981-41e8-8d79-2ec56d59b107",
+  "displayName": "Global Error Handling",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.global_error_counter \u003e= 3",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_aqd",
+    "name": "fd147f14-94ff-4547-8b39-35e1fac69108"
+  }, {
+    "condition": "$session.params.local_trigger = \"no_input\" AND $session.params.local_noinput_counter = 1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Connaissez-vous notre appli Gérez votre rendez-vous? Il s'agit d'un moyen pratique de consulter, de replanifier ou d'annuler votre rendez-vous directement à partir de votre téléphone. Je vais envoyer un texto sur l'appareil au moyen duquel vous appelez, afin de vous permettre de commencer. Est-ce que cela vous convient?" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "Are you aware of our Manage Your Appointment App? It is a convenient way to view, reschedule, or cancel your appointment directly from your phone. I'll send you a text to the device you're calling from, so that you can get started. Is that alright? You can say \"Yes\" or \"No\". " ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "a8c2ed1c-4170-4670-b0a5-03e19e3fff09"
+  }, {
+    "condition": "$session.params.local_trigger = \"no_input\" AND $session.params.local_noinput_counter = 2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Connaissez-vous notre appli Gérez votre rendez-vous? Il s'agit d'un moyen pratique de consulter, de replanifier ou d'annuler votre rendez-vous directement à partir de votre téléphone. Je vais envoyer un texto sur l'appareil au moyen duquel vous appelez, afin de vous permettre de commencer. Est-ce que cela vous convient?" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "Are you aware of our Manage Your Appointment App? It is a convenient way to view, reschedule, or cancel your appointment directly from your phone. I'll send you a text to the device you're calling from, so that you can get started. Is that alright? You can say \"Yes\" or \"No\". " ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "6ce2180c-2d18-4c64-a57f-8eed004ec64c"
+  }, {
+    "condition": "$session.params.local_trigger = \"no_input\" AND $session.params.local_noinput_counter \u003e= 3",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_No_Input_3",
+    "name": "2fce449f-86d6-41da-a49c-d86ce0bcbc94"
+  }, {
+    "condition": "$session.params.local_trigger = \"no_match\" AND $session.params.local_nomatch_counter = 1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Connaissez-vous notre appli Gérez votre rendez-vous? Il s'agit d'un moyen pratique de consulter, de replanifier ou d'annuler votre rendez-vous directement à partir de votre téléphone. Je vais envoyer un texto sur l'appareil au moyen duquel vous appelez, afin de vous permettre de commencer. Est-ce que cela vous convient?" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "Are you aware of our Manage Your Appointment App? It is a convenient way to view, reschedule, or cancel your appointment directly from your phone. I'll send you a text to the device you're calling from, so that you can get started. Is that alright? You can say \"Yes\" or \"No\". " ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "71c2942d-ae05-4de1-af0d-25e692d97794"
+  }, {
+    "condition": "$session.params.local_trigger = \"no_match\" AND $session.params.local_nomatch_counter = 2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Connaissez-vous notre appli Gérez votre rendez-vous? Il s'agit d'un moyen pratique de consulter, de replanifier ou d'annuler votre rendez-vous directement à partir de votre téléphone. Je vais envoyer un texto sur l'appareil au moyen duquel vous appelez, afin de vous permettre de commencer. Est-ce que cela vous convient?" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "Are you aware of our Manage Your Appointment App? It is a convenient way to view, reschedule, or cancel your appointment directly from your phone. I'll send you a text to the device you're calling from, so that you can get started. Is that alright? You can say \"Yes\" or \"No\". " ]
+        },
+        "languageCode": "en"
+      } ],
+      "generators": [ {
+        "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/ab9980b0-e324-4bef-8fd6-5e1c1c8d59e1",
+        "outputParameter": "$request.generative.response"
+      } ]
+    },
+    "name": "59518df1-f790-4772-bc6f-aa5f79a287c4"
+  }, {
+    "condition": "$session.params.local_trigger = \"no_match\" AND $session.params.local_nomatch_counter \u003e= 3",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_No_Match_3",
+    "name": "a47d1f04-7cc3-4fcc-8d80-c86f8d818ec5"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Previous Page",
+    "name": "e0b6e549-6e2f-4750-b6d5-333f05845d5c"
+  } ]
+}

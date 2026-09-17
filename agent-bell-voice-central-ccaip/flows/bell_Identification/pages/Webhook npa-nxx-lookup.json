@@ -1,0 +1,149 @@
+{
+  "name": "b1c4f682-126f-4dfc-9fdc-f2716f52d908",
+  "displayName": "Webhook npa-nxx-lookup",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "v1/npa-nxx-lookup",
+    "tag": "NA",
+    "setParameterActions": [ {
+      "parameter": "_temp_number",
+      "value": "$sys.func.IF(\"$session.params.CIRN = null\", $session.params.clid, $session.params.CIRN)"
+    }, {
+      "parameter": "temp_number",
+      "value": "$sys.func.TO_TEXT($session.params._temp_number)"
+    }, {
+      "parameter": "npa",
+      "value": "$sys.func.MID($session.params.temp_number, 1, 3)"
+    }, {
+      "parameter": "nxx",
+      "value": "$sys.func.MID($session.params.temp_number, 4, 3)"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "province",
+        "value": "$session.params.npa_nxx_lookup_response.province"
+      }, {
+        "parameter": "is_canadian",
+        "value": "$session.params.npa_nxx_lookup_response.is_canadian"
+      } ]
+    },
+    "name": "b60b1806-0efc-4c59-a45b-47c087ab7dc1"
+  }, {
+    "condition": "$session.params.province = AB OR $session.params.province = BC OR $session.params.province = YT OR $session.params.province = NU OR $session.params.province = NT OR $session.params.province = SK",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "region",
+        "value": "ROC"
+      } ]
+    },
+    "targetPage": "Previous Page",
+    "name": "cf20ace8-a440-4020-83af-61c63b5351d6"
+  }, {
+    "condition": "$session.params.province = MB",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "region",
+        "value": "MTS"
+      } ]
+    },
+    "targetPage": "Previous Page",
+    "name": "58413eba-26e1-4631-8153-bf803930d48d"
+  }, {
+    "condition": "$session.params.province = NB OR $session.params.province = NL OR $session.params.province = NS OR $session.params.province = PE",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "region",
+        "value": "ATL"
+      } ]
+    },
+    "targetPage": "Previous Page",
+    "name": "e6653797-68a9-4d93-af95-eb2ede3beb6f"
+  }, {
+    "condition": "$session.params.province = ON OR $session.params.province = QC",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "region",
+        "value": "Central"
+      } ]
+    },
+    "targetPage": "Previous Page",
+    "name": "47fd851c-696f-4791-8b24-5b03bde58627"
+  }, {
+    "condition": "$session.params.is_canadian = false",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "province",
+        "value": null
+      } ]
+    },
+    "targetPage": "Previous Page",
+    "name": "0870d370-c680-40a7-989c-ad67a9519ad3"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "b1c4f682-126f-4dfc-9fdc-f2716f52d908"
+      }, {
+        "parameter": "flow_id",
+        "value": "8df7f836-8c64-4019-9506-2cedc52519c8"
+      }, {
+        "parameter": "page_name",
+        "value": "Webhook npa-nxx-lookup"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Previous Page",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+    
+    },
+    "name": "a2d74f6b-25d2-41c6-b40f-3fa8ef0a9a6a"
+  }, {
+    "targetPage": "Previous Page",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+    
+    },
+    "name": "c9c11c67-b454-4f49-bfef-21b90c149916"
+  }, {
+    "targetPage": "Previous Page",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+    
+    },
+    "name": "b1cee4be-f6cc-4faa-9075-b84e9040c70c"
+  }, {
+    "targetPage": "Previous Page",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+    
+    },
+    "name": "7cdf587d-ba35-4f14-9a62-5a2a6ab62d63"
+  }, {
+    "targetPage": "Previous Page",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+    
+    },
+    "name": "a5426edf-75ed-411b-9e3e-44db9ef890dd"
+  }, {
+    "targetPage": "Previous Page",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+    
+    },
+    "name": "0f0ef550-e7e1-4627-955d-a9038960f9bb"
+  } ]
+}

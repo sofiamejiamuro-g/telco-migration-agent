@@ -1,0 +1,54 @@
+{
+  "name": "545e790a-8ab8-4055-a018-cde6b75af4a4",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Bien sûr, je peux vous aider. Pourriez-vous confirmer le service que vous souhaitez suspendre?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Internet"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Merci. Vous pouvez suspendre temporairement vos services résidentiels dans MonBell. Je vais envoyer un texto à l’appareil à partir duquel vous appelez qui contient un lien pour le faire vous-même. Est-ce que cela vous convient?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Parler des frais sur la facture"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "Routing only",
+      "inputActionParameters": {
+        "brand": "bell",
+        "language": "fr-ca",
+        "utterance": "Parler des frais sur la facture"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer trying to suspend their service as there device is lost",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca",
+      "route": "account_suspend_service",
+      "unique_services": "Internet, Tv, Homephone",
+      "utterance": "Je veux suspendre mon ou mes service"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "The customer wants to switch topics and talk about their bill, so they are transitioned to the \"Routing only\" flow",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca"
+    }
+  },
+  "displayName": "FR Account suspend service - Internet - Topic Switching",
+  "retrievalStrategy": "NEVER",
+  "tokenCount": 331,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

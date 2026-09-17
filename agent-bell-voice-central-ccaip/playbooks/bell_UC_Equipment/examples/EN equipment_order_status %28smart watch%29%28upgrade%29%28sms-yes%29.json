@@ -1,0 +1,55 @@
+{
+  "name": "86d43357-9b1b-49f0-8b77-fff039c118db",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Are you inquiring about device upgrade, new device, or a repair order?\n"
+    }
+  }, {
+    "userUtterance": {
+      "text": "device upgrade"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Got it, you can view and check the status of your device order on the MyBell. I'll send a text to the device you are calling from, so that you can track your shipment. Is that alright?\n"
+    }
+  }, {
+    "userUtterance": {
+      "text": "yes"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "en",
+        "sms_content": "You can visit https://m.bell.ca/chatorderhug to track your order in the My Bell app( bell.ca/about-us )",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "customer is inquiring about their smart watch order and {device_type} is smart watch",
+    "actionParameters": {
+      "brand": "bell",
+      "device_type": "Smart watch",
+      "language": "en",
+      "route": "equipment_order_status",
+      "utterance": "I was just wondering about the smartwatch order that I placed. I still haven't received a tracking number for it."
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "customer is asked device_type and then proceeds as per instructions",
+    "actionParameters": {
+      "brand": "bell",
+      "device_type": "Smart watch",
+      "language": "en"
+    }
+  },
+  "displayName": "EN equipment_order_status (smart watch)(upgrade)(sms-yes)",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 358,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

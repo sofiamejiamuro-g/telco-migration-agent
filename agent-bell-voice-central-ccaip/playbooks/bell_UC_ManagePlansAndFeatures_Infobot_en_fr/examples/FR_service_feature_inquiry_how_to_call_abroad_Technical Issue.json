@@ -1,0 +1,83 @@
+{
+  "name": "716f6d6e-2f62-4735-8dfc-a9ea990898b4",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70024",
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+        "language": "fr-ca"
+      }
+    }
+  }, {
+    "playbookInvocation": {
+      "playbook": "bell_uc_ask_LOB",
+      "playbookInput": {
+        "actionParameters": {
+          "language": "fr-ca",
+          "utterance": "Comment faire un appel à l’étranger?"
+        }
+      },
+      "playbookOutput": {
+        "actionParameters": {
+          "language": "fr-ca",
+          "lob": "mobility"
+        }
+      },
+      "playbookState": "OUTPUT_STATE_OK"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Est-ce lié à un problème technique ou aimeriez-vous en savoir plus sur le module complémentaire ou les fonctionnalités que nous offrons?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "problème technique"
+    }
+  }, {
+    "playbookInvocation": {
+      "playbook": "Bell_UC_Technical_Support_Infobot_Fr",
+      "playbookInput": {
+        "actionParameters": {
+          "language": "fr-ca",
+          "lob": "mobility",
+          "route": "tech_configure_settings_request",
+          "utterance": "Comment faire un appel à l’étranger?"
+        }
+      },
+      "playbookOutput": {
+        "actionParameters": {
+          "language": "fr-ca"
+        }
+      },
+      "playbookState": "OUTPUT_STATE_OK"
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer asking about how to call Korea or abroad",
+    "actionParameters": {
+      "brand": "bell",
+      "identification_status": "Pass",
+      "language": "fr-ca",
+      "route": "service_feature_inquiry",
+      "utterance": "Comment faire un appel à l’étranger?"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "First, flow \"bell_apb\" is called followed by playbook \"bell_UC_Get_LOB\" and since here customer is facing Technical issue, so playbook \"Bell_UC_Technical_Support_Infobot_Fr\"  is triggered with route as \"tech_configure_settings_request\"",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca",
+      "lob": "Mobility",
+      "route": "tech_configure_settings_request",
+      "utterance": "Comment faire un appel à l’étranger?"
+    }
+  },
+  "displayName": "FR_service_feature_inquiry_how_to_call_abroad_Technical Issue",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 554,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

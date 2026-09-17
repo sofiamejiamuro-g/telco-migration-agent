@@ -1,0 +1,58 @@
+{
+  "name": "5b97603e-31b5-4497-9999-d7ce13249bb1",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Bien sûr, je peux vous aider. Vous pouvez suspendre temporairement vos services résidentiels via MonBell. Je vais envoyer un SMS sur l'appareil depuis lequel vous appelez, contenant un lien pour le faire vous-même. Cela vous convient-il ?"
+    }
+  }, {
+    "userUtterance": {
+    
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "sms_send_status": "Declined"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Pas de problème. Pour toute autre question, vous pouvez toujours consulter notre site Web à l'adresse suivante : {faq_link}"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_Feedback",
+      "inputActionParameters": {
+      
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer wants to suspend his mobile service",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca",
+      "route": "account_suspend_service",
+      "unique_services": "WIRELINE, Mobility, Internet",
+      "utterance": "Je veux suspendre mon service TV"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "VA understood the {utterance}, checked the {unique_services} parameter, found multiple values, rechecked the {utterance} and found it mentions TV related term, VA asks if it can send a text to the device he's calling from, user gives no input, it routed the user to bell_SMS Trigger flow then to bell_Feedback flow",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca"
+    }
+  },
+  "displayName": "Happy path - Account suspend service - unique services(Multiple) - TV utterance - no input - fr - 24",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 416,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "fr"
+}

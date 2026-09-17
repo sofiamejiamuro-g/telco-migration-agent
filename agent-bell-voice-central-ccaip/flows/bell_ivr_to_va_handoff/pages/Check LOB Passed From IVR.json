@@ -1,0 +1,36 @@
+{
+  "name": "ead00435-a199-4f6c-9a86-8ad739c87c58",
+  "displayName": "Check LOB Passed From IVR",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.lob_from_ivr = null OR $session.params.lob_from_ivr = \"\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Je suis l'assistant virtuel de Bell, j'utilise l'intelligence artificielle pour apprendre." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "I'm Bell's virtual assistant, I use artificial intelligence to learn." ]
+        },
+        "languageCode": "en"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "lob",
+        "value": null
+      } ]
+    },
+    "targetPage": "Webhook Search-by-tn-cirn",
+    "name": "734def53-21e2-425b-9290-19ee89140e02"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "LOB Translation IVR To VA",
+    "name": "c7da5757-5bb6-4bb9-a0fe-cc5c3886b044"
+  } ]
+}

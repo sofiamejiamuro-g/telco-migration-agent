@@ -1,0 +1,101 @@
+{
+  "name": "ba290b1b-efb9-4ff5-bd41-4cab1f67735d",
+  "displayName": "CLP SUS Check",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.banStatus = \"S\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "CLP_statActvRsnCode_Check",
+    "name": "9c414711-57c2-4b96-add4-efa7306585fb"
+  }, {
+    "condition": "($session.params.mobility = true OR $session.params.tv = true OR $session.params.internet = true OR $session.params.smarthome = true OR $session.params.homephone = true) AND $session.params.banStatus != \"S\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "CLP_AUL_Check",
+    "name": "269d53ba-d35c-4e50-831b-a87c8ed577b5"
+  }, {
+    "condition": "$session.params.mobility = true AND $session.params.banStatus != \"S\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "CLP_AUL_Check",
+    "name": "4f09ced7-5e55-41c8-b366-e4b45fac8710"
+  }, {
+    "condition": "$session.params.banStatus != \"S\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "CLP_AUL_Check",
+    "name": "a8252553-bff5-4182-943d-487d9559f277"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "ba290b1b-efb9-4ff5-bd41-4cab1f67735d"
+      }, {
+        "parameter": "flow_id",
+        "value": "d35b61b6-c884-44f8-b5c7-aed63cc356ab"
+      }, {
+        "parameter": "page_name",
+        "value": "CLP SUS Check"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "CLP_AUL_Check",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+    
+    },
+    "name": "0c8c2a1c-a3c8-49b2-b536-0c137a4df43b"
+  }, {
+    "targetPage": "CLP_AUL_Check",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+    
+    },
+    "name": "d3b8c938-4e77-4148-b6e5-3f03552e1104"
+  }, {
+    "targetPage": "CLP_AUL_Check",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+    
+    },
+    "name": "741af711-0ab7-4da0-97d1-d2abec232b58"
+  }, {
+    "targetPage": "CLP_AUL_Check",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+    
+    },
+    "name": "e4a7e5a9-905c-4d01-9503-52c4dad34c07"
+  }, {
+    "targetPage": "CLP_AUL_Check",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+    
+    },
+    "name": "627d31ed-37e2-472b-a722-4997eacfc35f"
+  }, {
+    "targetPage": "CLP_AUL_Check",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+    
+    },
+    "name": "9ab3fe67-b6c4-4cd9-bd5e-183bbabcba58"
+  } ]
+}

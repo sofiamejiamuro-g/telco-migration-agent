@@ -1,0 +1,75 @@
+{
+  "name": "739c4b6b-0437-40e4-827a-f96de96e45cf",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Sure, I can help with that. What is the reason for suspending your service?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "my device was stolen"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Understood. Have you tried using a tracking feature like \"Find my iPhone\" or \"Find my Device\"?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "no"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Understood, I would suggest temporarily suspending your service to prevent unauthorized use. I will send a text to the device you are calling from, with a link to do it yourelf, it that alright?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "no"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "sms_send_status": "Declined"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Inform the user \"No problem at all. For any other questions you can always visit our website at {faq_link}"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_Feedback",
+      "inputActionParameters": {
+      
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer wants to suspend his services",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "route": "account_suspend_service",
+      "unique_services": "Mobility",
+      "utterance": "I want to suspend my service"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "\t\tVA understood the {utterance}, checked the {unique_services} parameter, found only one value equal to Mobility, and since the {suspension_type} is null, VA asks for the reason behind the suspension, user says his device was stolen, VA asks the user if he tried using the features track my phone, user says no, VA asks if it can send a text to the device he's calling from, user says no, VA routes the user to bell_SMS Trigger flow then to bell_Feedback flow",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "suspension_type": "stolen"
+    }
+  },
+  "displayName": "Happy path - Account suspend service - unique services(Mobility) - Mobility - stolen(no) - en - 8",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 525,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

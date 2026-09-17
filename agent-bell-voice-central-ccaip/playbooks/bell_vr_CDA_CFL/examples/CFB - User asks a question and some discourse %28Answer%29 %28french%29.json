@@ -1,0 +1,81 @@
+{
+  "name": "d295275c-5aa7-4a60-ae8e-6642bc2aedae",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Y a-t-il une lumière bleue sur votre récepteur ?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Qu'est-ce qu'un modem ?"
+    }
+  }, {
+    "toolUse": {
+      "tool": "FR_Bell_vr_cfl_faq",
+      "action": "FR_Bell_vr_cfl_faq",
+      "inputActionParameters": {
+        "requestBody": {
+          "query": "6505"
+        }
+      },
+      "outputActionParameters": {
+        "200": {
+          "answer": "",
+          "snippets": [ {
+            "text": "",
+            "title": "6505",
+            "uri": ""
+          } ]
+        }
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Je comprends que vous avez une question, et même si je n'ai pas cette information spécifique, vérifier les lumières du récepteur est la prochaine étape nécessaire pour nous permettre de résoudre le problème. Pourriez-vous me dire s'il y a une lumière bleue sur votre récepteur ?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Oui"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Merci de me l'avoir fait savoir."
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_vr_post_answer",
+      "inputActionParameters": {
+        "customer_answer1_id": "0"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer having an issue with the service, starts the Virtual repair process.",
+    "actionParameters": {
+      "acceptable_answers": [ {
+        "choice": "Yes",
+        "id": 0,
+        "sub-choices": [ ],
+        "title": ""
+      }, {
+        "choice": "No",
+        "id": 1,
+        "sub-choices": [ ],
+        "title": ""
+      } ],
+      "dcx_action_code": "6505",
+      "more_info": [ ],
+      "title": "Is there a blue light on your receiver?",
+      "vr_type": "CFB"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "outlines a troubleshooting flow where the agent attempts to confirm the presence of a blue light on a receiver. The interaction begins with the agent's question: \"Can you please tell if there is a blue light on your receiver?\"\n\nThe user's immediate counter-question, \"What is a modem?\", indicates a misunderstanding or confusion regarding the device being discussed. This triggers a vr_cfl_faq_en tool call. However, the agent's subsequent response, \"I understand you have a question, and while I don't have that specific information, checking the receiver lights is the necessary next step for us to solve the issue. Could you please let me know if there's a blue light on your receiver?\", clearly shows that the vr_cfl_faq_en tool failed to provide the definition for \"modem\". This forces the agent to bypass the user's explicit question and reiterate the original request for receiver light information. The user then simply responds with \"Yes,\" indicating the blue light is present. The conversation concludes with a VR_post_answer tool call, likely logging this confirmation."
+  },
+  "displayName": "CFB - User asks a question and some discourse (Answer) (french)",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 712,
+  "languageCode": "en"
+}

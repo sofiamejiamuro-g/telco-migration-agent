@@ -1,0 +1,131 @@
+{
+  "name": "11b7309c-bb86-4e20-bbb4-67acd71c2661",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Souhaitez-vous apporter des changements à votre service prépayé ou à votre service mensuel?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "oui"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_global_error_count_check",
+      "inputActionParameters": {
+        "global_error_counter": "0"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_global_error_count_check",
+      "inputActionParameters": {
+        "global_error_counter": "0"
+      },
+      "outputActionParameters": {
+        "global_error_counter": "1"
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Pourriez-vous préciser s'il s'agit d'un service prépayé ou d'un abonnement mensuel ?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "oui"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_global_error_count_check",
+      "inputActionParameters": {
+        "global_error_counter": "1"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_global_error_count_check",
+      "inputActionParameters": {
+        "global_error_counter": "1"
+      },
+      "outputActionParameters": {
+        "global_error_counter": "2"
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "S'agit-il de votre service prépayé ou de votre service mensuel ?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "oui"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_global_error_count_check",
+      "inputActionParameters": {
+        "global_error_counter": "2"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_global_error_count_check",
+      "inputActionParameters": {
+        "global_error_counter": "2"
+      },
+      "outputActionParameters": {
+        "global_error_counter": "3"
+      }
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_No_Match_3",
+      "inputActionParameters": {
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "The {identification_status} is \"Pass\", {customer_type} is \"Existing\", {streaming_services} is null or {lob} is null so, we will prompt user to ask \"Which service are you calling about?\" and once user reply then please analyze the user response and based on that please set {lob} or {streaming_services} based on instruction provided in playbook on how to set {lob} and {streaming_services} within {route} = \"service_change_plan\"",
+    "actionParameters": {
+      "apb_location_id": "70011",
+      "brand": "bell",
+      "customer_type": "Existing",
+      "global_error_counter": "0",
+      "identification_status": "Pass",
+      "language": "fr-ca",
+      "lob": "mobility",
+      "route": "service_change_plan",
+      "utterance": "change plan"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "As, the {streaming_services} is null or {lob} is null so, we will prompt user to ask \"Which service are you calling about?\" and if user reply then please analyze the user {utterance} and if the response is lob related then SET parameter {lob} and if it is related to streaming service then SET parameter {streaming_services} with correct value provided in playbook instruction within {route} = \"service_change_plan\", if not reprompt 3 times",
+    "actionParameters": {
+      "apb_location_id": "70011",
+      "brand": "bell",
+      "customer_type": "Existing",
+      "global_error_counter": "3",
+      "identification_status": "Pass",
+      "language": "fr-ca",
+      "lob": "mobility",
+      "route": "service_change_plan",
+      "utterance": "change plan"
+    }
+  },
+  "displayName": "FR -  service_change_plan-mobility_sub_type-null-nomatch(yes)",
+  "retrievalStrategy": "NEVER",
+  "tokenCount": 1018,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

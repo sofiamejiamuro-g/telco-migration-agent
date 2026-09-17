@@ -1,0 +1,39 @@
+{
+  "name": "1a0026f6-4b7d-40ec-a59c-71848a9cfd09",
+  "displayName": "Webhook Get Config Consolidated Billing",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "v2/get-configs-for-dialogflow",
+    "tag": "default",
+    "setParameterActions": [ {
+      "parameter": "domain",
+      "value": "consumer"
+    }, {
+      "parameter": "webhook_success",
+      "value": "null"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.webhook_success = true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "menu_id",
+        "value": "$session.params.config.DEFAULT_MENU_ID"
+      }, {
+        "parameter": "menu_id_ref",
+        "value": "$sys.func.CONCATENATE(\"REF\", $sys.func.TO_TEXT($session.params.menu_id))"
+      } ]
+    },
+    "targetPage": "Webhook: get-dept id: Consolidated Billing",
+    "name": "f33ad56c-2116-4a4d-82b9-6724a5334006"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_Live Agent Handoff",
+    "name": "848cde6c-dc83-4941-833e-62ef5f0e3e60"
+  } ]
+}

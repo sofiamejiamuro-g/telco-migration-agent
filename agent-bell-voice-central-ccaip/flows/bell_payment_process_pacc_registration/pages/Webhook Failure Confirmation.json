@@ -1,0 +1,179 @@
+{
+  "name": "379b2e31-5127-4f0b-a241-79bc63e474a8",
+  "displayName": "Webhook Failure Confirmation",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "messages": [ {
+      "text": {
+        "text": [ "I'm unable to set up your pre-authorized payment at this time. I'll send a text to the device you're calling from so that you can set up pre-authorized payment in MyBell. Is that alright?" ]
+      },
+      "languageCode": "en"
+    }, {
+      "text": {
+        "text": [ "Je ne suis pas en mesure de configurer votre paiement pré-autorisé pour le moment. Je vais envoyer un texto à l’appareil au moyen duquel vous appelez afin que vous puissiez configurer le paiement pré-autorisé dans MonBell. Est-ce que ça vous convient?" ]
+      },
+      "languageCode": "fr-ca"
+    } ],
+    "setParameterActions": [ {
+      "parameter": "card_number",
+      "value": null
+    }, {
+      "parameter": "cc_token",
+      "value": null
+    }, {
+      "parameter": "expiry_date",
+      "value": null
+    }, {
+      "parameter": "expiry_month",
+      "value": null
+    }, {
+      "parameter": "expiry_year",
+      "value": null
+    }, {
+      "parameter": "security_code",
+      "value": null
+    }, {
+      "parameter": "cvv_number",
+      "value": null
+    }, {
+      "parameter": "cc_from_utterance",
+      "value": null
+    } ]
+  },
+  "transitionRoutes": [ {
+    "intent": "context.confirm_yes",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Language Based SMS",
+    "name": "939a8f38-1324-4574-886b-340de85afa10"
+  }, {
+    "intent": "context.sms_no",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Ok. You can always check try again later in MyBell. Please visit bell.ca/support for more information." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "D’accord. Vous pouvez toujours réessayer plus tard dans MonBell. Veuillez visiter le site Web bell.ca/soutien pour en savoir plus." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetFlow": "bell_Feedback",
+    "name": "1e62c989-6e70-4d40-bd2f-cb1cfcdf4c6b"
+  }, {
+    "intent": "context.different_number",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "different_number",
+        "value": true
+      } ]
+    },
+    "targetPage": "Language Based SMS",
+    "name": "21329549-c4f0-4926-8f59-57c281fbd943"
+  } ],
+  "eventHandlers": [ {
+    "event": "sys.no-input-1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I didn't quite get that. Can you try again?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je n’ai pas tout à fait compris. Pouvez-vous réessayer?" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "647dbec2-73f4-42aa-baff-2a4ae16c24d5"
+  }, {
+    "event": "sys.no-match-1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I didn't quite get that. Can you try again?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je n’ai pas tout à fait compris. Pouvez-vous réessayer?" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "e0dea450-7468-44de-814a-29c7e7c9bcae"
+  }, {
+    "event": "sys.no-input-2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I still didn't get that" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je n’ai toujours pas compris." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "8a4de02a-9c08-46dd-aaa7-8532ff449add"
+  }, {
+    "event": "sys.no-match-2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I still didn't get that" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je n’ai toujours pas compris." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "81f8132a-fe12-4b63-aef6-c0c90fa57d53"
+  }, {
+    "targetFlow": "bell_Feedback",
+    "event": "sys.no-input-3",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "If you'd still like to complete your Pre-Authorized payment request, you can do so in MyBell. Please visit  bell.ca/support for more information." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Si vous souhaitez toujours effectuer une demande de paiements pré-autorisés, vous pouvez le faire dans MonBell. Veuillez visiter le site Web bell.ca/soutien pour en savoir plus." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "59ab4d9c-8e69-4a98-9f51-4d792eac84fd"
+  }, {
+    "targetFlow": "bell_Feedback",
+    "event": "sys.no-match-3",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "If you'd still like to complete your Pre-Authorized payment request, you can do so in MyBell. Please visit  bell.ca/support for more information." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Si vous souhaitez toujours effectuer une demande de paiements pré-autorisés, vous pouvez le faire dans MonBell. Veuillez visiter le site Web bell.ca/soutien pour en savoir plus." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "ff731f41-7a4f-42cd-98bc-37c2274c6608"
+  } ]
+}

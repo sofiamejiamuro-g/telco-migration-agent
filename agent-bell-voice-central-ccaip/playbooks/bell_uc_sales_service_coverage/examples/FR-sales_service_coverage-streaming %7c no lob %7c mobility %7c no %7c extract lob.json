@@ -1,0 +1,77 @@
+{
+  "name": "40ac5918-8b96-4f7f-9eb7-5379105ddcb4",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "playbookInvocation": {
+      "playbook": "bell_uc_ask_LOB",
+      "playbookInput": {
+        "precedingConversationSummary": "The customer is asking whether the provider's service is offered at an address or location.",
+        "actionParameters": {
+          "language": "fr-ca",
+          "route": "sales_confirm_service_coverage"
+        }
+      },
+      "playbookOutput": {
+        "executionSummary": "When user does not provide lob, prompt them to understand what kind of service they are looking for, if the user mentions lob then return lob to the originating Playbook, if not set the default lob and return back",
+        "actionParameters": {
+          "language": "fr-ca",
+          "lob": "Mobility",
+          "route": "sales_confirm_service_coverage"
+        }
+      },
+      "playbookState": "OUTPUT_STATE_OK"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Grâce aux réseaux 4G, LTE et Wi-Fi les plus vastes au Canada, Bell dessert 99 % de la population canadienne. Nous offrons également la 5G dans certaines régions du Canada. Est-ce que je vous mets en contact avec un de nos agents, qui pourra vous en dire davantage sur Bell Mobilité?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "non"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "D'accord. Vous pouvez toujours en apprendre davantage sur nos services de téléphonie mobile à l'adresse bell.ca/Mobilite."
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_Feedback",
+      "inputActionParameters": {
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "The customer is asking whether the provider's service is offered at an address or location.",
+    "actionParameters": {
+      "language": "fr-ca",
+      "route": "sales_confirm_service_coverage",
+      "utterance": "Quelle est la couverture de Bell?"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "If any of the streaming services is NOT captured like Disney, Netflix or crave and service type {lob} is mobility then ask the user to be connected to agent, if the user replies no or disagrees then call bell_Feedback flow.",
+    "actionParameters": {
+      "language": "fr-ca",
+      "lob": "Mobility",
+      "utterance": "Quelle est la couverture de Bell?"
+    }
+  },
+  "displayName": "FR-sales_service_coverage-streaming | no lob | mobility | no | extract lob",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 623,
+  "languageCode": "en"
+}

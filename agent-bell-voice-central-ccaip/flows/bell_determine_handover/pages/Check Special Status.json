@@ -1,0 +1,75 @@
+{
+  "name": "8b0c8a85-cb8d-485a-a229-4774703792f8",
+  "displayName": "Check Special Status",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.special_status = \"bell_col_sus\" OR $session.params.special_status = \"bell_col_aul\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "special_queue",
+        "value": "bell_collections"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "4971b441-bcf7-4ced-b24c-e35d957e7b1f"
+  }, {
+    "condition": "$session.params.special_status = \"bell_finals\"",
+    "triggerFulfillment": {
+      "advancedSettings": {
+        "dtmfSettings": {
+          "useSystemEntityRule": false
+        }
+      }
+    },
+    "targetPage": "Special Status Check Intent",
+    "name": "a0a603e7-e14d-472b-be91-19355c1cbfc5"
+  }, {
+    "condition": "$session.params.special_status = \"bell_privilege\" OR $session.params.special_status = \"bell_preferred\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "special_queue",
+        "value": "bell_collections"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "ed1a98dc-d165-4784-8619-eda790399b6f"
+  }, {
+    "condition": "$session.params.special_status != \"bell_col_sus\" OR \"bell_col_aul\" OR \"bell_finals\" OR \"bell_privilege\" OR \"bell_preferred\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Check SSR",
+    "name": "ea831755-df48-45d1-a3f2-6a0a4a0cfd28"
+  }, {
+    "condition": "$session.params.special_status = null",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Check SSR",
+    "name": "6d4fd2bf-aa3d-404b-afc6-181c007ba8f1"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "8b0c8a85-cb8d-485a-a229-4774703792f8"
+      }, {
+        "parameter": "flow_id",
+        "value": "27ff83f5-292f-476a-9ca1-4890b1d5c02e"
+      }, {
+        "parameter": "page_name",
+        "value": "Check Special Status"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

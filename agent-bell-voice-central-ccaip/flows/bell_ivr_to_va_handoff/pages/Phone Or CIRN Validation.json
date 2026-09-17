@@ -1,0 +1,61 @@
+{
+  "name": "2d7f5b2b-508b-425d-bdcb-b03a16c3a8b9",
+  "displayName": "Phone Or CIRN Validation",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "($session.params.CIRN_flag = true AND $sys.func.LEN($session.params.CIRN) = 10) OR ($session.params.CIRN_999 = \"999\" AND $sys.func.LEN($session.params.CIRN) = 10)",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "cirn",
+        "value": "$session.params.CIRN"
+      }, {
+        "parameter": "ivr_va_no_ban_counter",
+        "value": "$sys.func.ADD(1, $session.params.ivr_va_no_ban_counter)"
+      } ]
+    },
+    "targetPage": "Webhook Search-by-tn-cirn",
+    "name": "80a93f3f-cdf0-4036-95d8-a26b37d98a81"
+  }, {
+    "condition": "$session.params.CIRN_flag = true AND $sys.func.LEN($session.params.CIRN) = 10",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "cirn",
+        "value": "$session.params.CIRN"
+      }, {
+        "parameter": "ivr_va_no_ban_counter",
+        "value": "$sys.func.ADD(1, $session.params.ivr_va_no_ban_counter)"
+      } ]
+    },
+    "targetPage": "Webhook Search-by-tn-cirn",
+    "name": "e9e990f7-07dd-495c-9de0-af3f6c7e4f91"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Désolé, je ne parviens pas à trouver ce numéro dans nos dossiers. Soyez sans crainte, je ferai quand même de mon mieux pour vous servir." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "Sorry, I can't seem to find that number in our records. However, I'll still do my best to help you. " ]
+        },
+        "languageCode": "en"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "identification_status",
+        "value": "Fail"
+      }, {
+        "parameter": "ivr_va_cpm_check_fail",
+        "value": true
+      }, {
+        "parameter": "CIRN",
+        "value": null
+      } ]
+    },
+    "targetFlow": "Default Start Flow",
+    "name": "afa71637-7477-4a29-a3e6-c94e59893c64"
+  } ]
+}

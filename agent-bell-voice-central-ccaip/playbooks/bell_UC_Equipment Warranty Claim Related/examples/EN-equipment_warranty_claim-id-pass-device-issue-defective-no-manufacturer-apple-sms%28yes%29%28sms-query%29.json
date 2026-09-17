@@ -1,0 +1,77 @@
+{
+  "name": "3c629163-95b4-4fb7-a88a-b974428b671d",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Who is the manufacturer?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "apple"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Most devices purchased through Bell come within the limited manufacturer's warranty. Did you purchase your device within the last 12 months?\n"
+    }
+  }, {
+    "userUtterance": {
+      "text": "350 days"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "For questions about your iPhone's warranty, please visit an Apple Store or their website for details. I can send you a link to help with your Apple warranty questions. Is that alright?\n"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Is sending SMS necessary?"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "I understand your concern. Yes, sending a link is perfectly fine. Is it alright to send the SMS?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "yes"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "en",
+        "sms_content": "Bell: You can visit checkcoverage.apple.com/?locale=en_CA for information on your iPhone Warranty. ( bell.ca/about-us )",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "customer is inquiring about device_issue=\"defective\" and also more information about SMS",
+    "actionParameters": {
+      "brand": "bell",
+      "device_issue": "Defective",
+      "language": "en",
+      "noinput_flag": "True",
+      "route": "equipment_warranty_claim",
+      "utterance": "I am facing issues with the backlight I want to climb it under warranty"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "customer is asked manufacturer and proceed further manufacturer warranty logic Customer asked a question regarding SMS so VA answered them and prompted again for SMS. User then said yes so we route accordingly",
+    "actionParameters": {
+      "brand": "bell",
+      "device_issue": "Defective",
+      "language": "en",
+      "manufacturer": "Apple",
+      "noinput_flag": "True",
+      "route": "equipment_warranty_claim",
+      "sms_content": "Bell msg: You can visit https:/checkcoverage.apple.com/? locale=en CA to validate your iPhone Warranty. (bell.ca/about-us)",
+      "sms_type": "Public"
+    }
+  },
+  "displayName": "EN-equipment_warranty_claim-id-pass-device-issue-defective-no-manufacturer-apple-sms(yes)(sms-query)",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 538,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

@@ -1,0 +1,123 @@
+{
+  "name": "f36a0aec-1fb5-4978-90b7-62e5a028e4bb",
+  "displayName": "Webhook ACUT find - finalized",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "setParameterActions": [ {
+      "parameter": "ticket_state",
+      "value": "finalized"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$sys.func.UPPER($session.params.lob) = \"INTERNET\"",
+    "triggerFulfillment": {
+      "webhook": "/v1/ticket_management/acut/search#find-internet_account_number",
+      "tag": "find"
+    },
+    "name": "8a8cde09-3677-41df-a460-7f22d0afc51b"
+  }, {
+    "condition": "$sys.func.UPPER($session.params.lob) = \"TV\"",
+    "triggerFulfillment": {
+      "webhook": "/v1/ticket_management/acut/search#find-tv_account_number",
+      "tag": "find"
+    },
+    "name": "882ae56c-8483-40a1-88d3-155b4eb70be7"
+  }, {
+    "condition": "$sys.func.UPPER($session.params.lob) = \"HOMEPHONE\" OR $sys.func.UPPER($session.params.lob) = \"WIRELINE\"",
+    "triggerFulfillment": {
+      "webhook": "/v1/ticket_management/acut/search#find-wireline_telephone_number",
+      "tag": "find"
+    },
+    "name": "f3415593-1f90-4307-82d4-38fc95025e31"
+  }, {
+    "condition": "$session.params.webhook_success = True",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "ticket_summaries",
+        "value": "$sys.func.GET_FIELD($session.params.acut_find_response, \"ticket_summaries\")"
+      }, {
+        "parameter": "n_acut_tickets",
+        "value": "$sys.func.COUNT($session.params.ticket_summaries)"
+      }, {
+        "parameter": "ticket_summary1",
+        "value": "$sys.func.GET($session.params.ticket_summaries,0)"
+      }, {
+        "parameter": "ticket_number",
+        "value": "$session.params.ticket_summary1.acut_trouble_ticket_number"
+      }, {
+        "parameter": "ticket_number_ref",
+        "value": "$sys.func.CONCATENATE(\"REF\", $sys.func.TO_TEXT($session.params.ticket_number))"
+      } ]
+    },
+    "name": "7b53d117-fc4c-47b3-8f18-5355ccfa28a8"
+  }, {
+    "condition": "$session.params.n_acut_tickets \u003e 0",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "Bell_appt_mgmt_acut_ticket_chk",
+    "name": "e1ca648f-cc1b-4df1-983d-730edf3345ff"
+  }, {
+    "condition": "True",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I can't seem to find any scheduled appointments on your account. Are you looking for a new product installation or for a repair of an existing product?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je ne trouve aucun rendez-vous prévu sur votre compte.  Désirez-vous l’installation d’un nouveau produit ou la réparation d’un produit existant?" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetPage": "CX confirmation for historical ticket",
+    "name": "c069c7dd-dc5e-42e7-be82-95ba7b57b534"
+  } ],
+  "eventHandlers": [ {
+    "targetFlow": "bell_ticket_mgmt_webhook_failure",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+    
+    },
+    "name": "bb56c284-daaf-491a-b082-70a875812f64"
+  }, {
+    "targetFlow": "bell_ticket_mgmt_webhook_failure",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+    
+    },
+    "name": "eba8bc19-39b1-45e4-8297-a1c285c52fb3"
+  }, {
+    "targetFlow": "bell_ticket_mgmt_webhook_failure",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+    
+    },
+    "name": "d83ca4b2-06f2-4c49-832f-2e3cd006d234"
+  }, {
+    "targetFlow": "bell_ticket_mgmt_webhook_failure",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+    
+    },
+    "name": "bde84155-790e-4b91-80d6-3fd062eb7aaf"
+  }, {
+    "targetFlow": "bell_ticket_mgmt_webhook_failure",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+    
+    },
+    "name": "8f6cf616-9049-454b-8144-3c09d8ecb6c1"
+  }, {
+    "targetFlow": "bell_ticket_mgmt_webhook_failure",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+    
+    },
+    "name": "d9558823-1312-413f-8b12-4885b51dddcb"
+  } ]
+}

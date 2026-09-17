@@ -1,0 +1,98 @@
+{
+  "name": "438905c2-5a46-45aa-b2a9-72054e0609cf",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_tech_intent_apb",
+      "inputActionParameters": {
+        "lob": "homephone",
+        "route": "tech_configure_settings_request",
+        "unique_services": "call forwarding"
+      },
+      "outputActionParameters": {
+        "lob": "homephone"
+      }
+    }
+  }, {
+    "toolUse": {
+      "tool": "Fr_Bell Tech Support Wireless",
+      "action": "Fr_Bell Tech Support Wireless",
+      "inputActionParameters": {
+        "requestBody": {
+          "query": "homephone renvoi d'appels"
+        }
+      },
+      "outputActionParameters": {
+        "200": {
+          "answer": "",
+          "snippets": [ ]
+        }
+      }
+    }
+  }, {
+    "toolUse": {
+      "tool": "FR_Generic_Datastore",
+      "action": "FR_Generic_Datastore",
+      "inputActionParameters": {
+        "requestBody": {
+          "query": "homephone renvoi d'appels"
+        }
+      },
+      "outputActionParameters": {
+        "200": {
+          "answer": "Pour réactiver la TéléRéponse afin qu'elle enregistre vos messages quand vous ne répondez pas aux appels, composez le *92 (ou 1192 sur un appareil à cadran). Pour réactiver la TéléRéponse afin qu'elle enregistre les messages quand votre ligne est occupée, composez le *90 (ou 1190 sur un appareil à cadran).",
+          "snippets": [ {
+            "text": "Pour réactiver la TéléRéponse afin qu'elle enregistre vos messages quand vous ne répondez pas aux appels, composez le *92 (ou 1192 sur un appareil à cadran). Pour réactiver la TéléRéponse afin qu'elle enregistre les messages quand votre ligne est occupée, composez le *90 (ou 1190 sur un appareil à cadran).",
+            "title": "Comment utiliser la TéléRéponse (messagerie vocale) avec mon service de téléphonie résidentielle de Bell",
+            "uri": "https://soutien.bell.ca/Telephonie/Options/Comment_utiliser_la_TeleReponse_avec_mon_telephone_residentiel_Bell#:~:text=Pour%20r%C3%A9activer%20la,appareil%20%C3%A0%20cadran)."
+          } ]
+        }
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Pour réactiver la TéléRéponse afin qu'elle enregistre vos messages quand vous ne répondez pas aux appels, composez le *92 (ou 1192 sur un appareil à cadran). Pour réactiver la TéléRéponse afin qu'elle enregistre les messages quand votre ligne est occupée, composez le *90 (ou 1190 sur un appareil à cadran).\n\nCela vous a-t-il aidé?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Laissez-moi vérifier."
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Prenez votre temps. Je suis là pour vous aider si vous avez d'autres questions."
+    }
+  }, {
+    "userUtterance": {
+      "text": "Non, ça ne marche pas."
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_aqd",
+      "inputActionParameters": {
+        "language": "fr-ca",
+        "lob": "homephone",
+        "utterance": "Le renvoi d'appels ne fonctionne pas après avoir essayé la TéléRéponse pour le renvoi d'appels."
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "customer query Je souhaite utiliser le renvoi d'appels.",
+    "actionParameters": {
+      "brand": "bell",
+      "identification_status": "pass",
+      "language": "fr-ca",
+      "lob": "homephone",
+      "utterance": "Je souhaite utiliser le renvoi d'appels."
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "routed to AQD"
+  },
+  "displayName": "Example_tech_configure_setting_request_lob_homephone_i_want_to_use_call_forwarding",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 916,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "fr"
+}

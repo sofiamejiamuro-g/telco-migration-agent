@@ -1,0 +1,135 @@
+{
+  "name": "b311ff2a-14a0-440a-a6a5-92415d565fd7",
+  "displayName": "Global Error Handling",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.global_error_counter \u003e= 3",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_aqd",
+    "name": "6cb7a89b-d8e6-4345-9099-b7758681f15e"
+  }, {
+    "condition": "$session.params.local_trigger = \"no_match\" AND $session.params.local_nomatch_counter = 1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Je suis désolé, je n'ai pas bien saisie. Qu'est-ce que vous avez dit?" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "Sorry, I didn't understand. What was that?" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "9f846f49-8dea-4a3b-a0c9-2e03cbc91431"
+  }, {
+    "condition": "$session.params.local_trigger = \"no_match\" AND $session.params.local_nomatch_counter = 2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "J'ai du mal à comprendre. Pouvez-vous répéter s'il vous plaît?" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "I’m having trouble understanding. Can you repeat please?" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "d133a500-f09f-4ef1-97a1-234ec0675994"
+  }, {
+    "condition": "$session.params.local_trigger = \"no_match\" AND $session.params.local_nomatch_counter = 3",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "\u003cspeak\u003eExcusez-moi, je n'ai toujours pas compris. Vous pouvez consulter notre foire aux questions sur \u003csay-as interpret-as=\"url\"\u003ebell.ca/soutien-prepaye\u003c/say-as\u003e\u003c/speak\u003e" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "\u003cspeak\u003eI still didn’t get that. You can check out our frequently asked questions at \u003csay-as interpret-as=\"url\"\u003ebell.ca/prepaid-support\u003c/say-as\u003e\u003c/speak\u003e" ]
+        },
+        "languageCode": "en"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "CIRN",
+        "value": null
+      }, {
+        "parameter": "identificaton_status",
+        "value": "Fail"
+      } ]
+    },
+    "targetFlow": "bell_No_Match_3",
+    "name": "616abae0-fb42-477c-a233-72ef995dbbbd"
+  }, {
+    "condition": "$session.params.local_trigger = \"no_input\" AND $session.params.local_noinput_counter = 1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Désolé, je n'ai pas bien compris. Pourriez-vous réessayer?" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "Sorry, I didn’t quite get that. Can you try again?" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "ad49e67a-2b74-4e67-b817-3f8ff3020d58"
+  }, {
+    "condition": "$session.params.local_trigger = \"no_input\" AND $session.params.local_noinput_counter = 2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Êtes-vous toujours là? Pouvez-vous répèter?" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "Are you still there? Can you repeat please?" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "246d8cc6-4150-49de-acd9-179a38e23ad6"
+  }, {
+    "condition": "$session.params.local_trigger = \"no_input\" AND $session.params.local_noinput_counter = 3",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "CIRN",
+        "value": null
+      }, {
+        "parameter": "identification_status",
+        "value": "Fail"
+      } ]
+    },
+    "targetFlow": "bell_No_Input_3",
+    "name": "6fe6fd79-1ed1-4082-b569-c2864cfb2038"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "b311ff2a-14a0-440a-a6a5-92415d565fd7"
+      }, {
+        "parameter": "flow_id",
+        "value": "8df7f836-8c64-4019-9506-2cedc52519c8"
+      }, {
+        "parameter": "page_name",
+        "value": "Global Error Handling"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

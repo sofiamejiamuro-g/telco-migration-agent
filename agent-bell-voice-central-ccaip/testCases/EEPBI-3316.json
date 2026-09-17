@@ -1,0 +1,178 @@
+{
+  "name": "7b026854-58c8-4b53-a20c-099e30941b00",
+  "displayName": "EEPBI-3316",
+  "testCaseConversationTurns": [ {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "Hi"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "triggeredIntent": {
+        "name": "Default Welcome Intent"
+      },
+      "currentPage": {
+        "name": "Get Tester Id",
+        "flow": "bell_test_wrapper"
+      },
+      "textResponses": [ {
+        "text": [ "Please enter your Tester ID using the phone's keypad now." ],
+        "allowPlaybackInterruption": true
+      } ],
+      "currentFlow": {
+        "name": "bell_test_wrapper"
+      }
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "110"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "currentPage": {
+        "name": "Get Spoof CLID",
+        "flow": "bell_test_wrapper"
+      },
+      "textResponses": [ {
+        "text": [ "Tester ID lookup webhook succeeded." ],
+        "allowPlaybackInterruption": true
+      }, {
+        "text": [ "Welcome Jenifer!" ],
+        "allowPlaybackInterruption": true
+      }, {
+        "text": [ "TFN lookup Webhook succeeded." ],
+        "allowPlaybackInterruption": true
+      }, {
+        "text": [ "Please enter the spoof CLID for your test." ],
+        "allowPlaybackInterruption": true
+      } ],
+      "currentFlow": {
+        "name": "bell_test_wrapper"
+      }
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "5199817318"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "currentPage": {
+        "name": "CIRN Collection Check",
+        "flow": "bell_Identification"
+      },
+      "textResponses": [ {
+        "text": [ "\u003cspeak\u003eI'm Bell's virtual assistant, I use artificial intelligence to learn. \u003cbreak time=\"1s\"/\u003e\u003c/speak\u003e" ]
+      }, {
+        "text": [ "Are you calling about the account associated with number you’re calling from? " ]
+      } ],
+      "currentFlow": {
+        "name": "bell_Identification"
+      }
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "yes"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "triggeredIntent": {
+        "name": "context.confirm_yes"
+      },
+      "currentPage": {
+        "name": "Routing Page",
+        "flow": "Default Start Flow"
+      },
+      "textResponses": [ {
+        "text": [ "\u003cspeak\u003eThanks! \u003cbreak time=\"1s\"/\u003e\u003c/speak\u003e" ],
+        "allowPlaybackInterruption": true
+      }, {
+        "text": [ "How can I help you?" ],
+        "allowPlaybackInterruption": true
+      } ],
+      "currentFlow": {
+        "name": "Default Start Flow"
+      }
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "I'd like to have customer service"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "triggeredIntent": {
+        "name": "other_speak_to_agent"
+      },
+      "currentPage": {
+        "name": "Routing Page",
+        "flow": "Default Start Flow"
+      },
+      "textResponses": [ {
+        "text": [ "I'd like to know what you're calling about, so I can find the right agent to help you. For example, you can say \"I want to get a new service\" or \"What is the balance of my account\"." ],
+        "allowPlaybackInterruption": true,
+        "containAiGeneratedContent": true,
+        "containGeneratorsContent": true
+      } ],
+      "currentFlow": {
+        "name": "Default Start Flow"
+      }
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "speak to an agent"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "triggeredIntent": {
+        "name": "other_speak_to_agent"
+      },
+      "currentPage": {
+        "name": "End Session",
+        "flow": "bell_aqd"
+      },
+      "textResponses": [ {
+        "text": [ "Sorry, I'm unable to transfer you to an agent due to an unexpected system issue. Please try calling us back later." ]
+      } ],
+      "currentFlow": {
+        "name": "bell_aqd"
+      }
+    }
+  } ],
+  "creationTime": {
+    "seconds": 1758627678,
+    "nanos": 531066000
+  },
+  "testConfig": {
+    "flow": "Default Start Flow",
+    "page": "Start Page"
+  },
+  "languageCode": "en"
+}

@@ -1,0 +1,154 @@
+{
+  "name": "5a9ba62b-d888-4f22-8aa3-74df2533df08",
+  "displayName": "switch_format Offer SMS ",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "messages": [ {
+      "text": {
+        "text": [ "You can easily update your billing preferences yourself in the MyBell App. I'll send a text to the device you're calling from with a link to view this yourself. Is that alright?" ]
+      },
+      "languageCode": "en"
+    }, {
+      "text": {
+        "text": [ "Vous pouvez facilement mettre à jour vos préférences de facturation vous-même dans l'application MonBell. Je vais vous envoyer un message texte sur l'appareil que vous utilisez en ce moment afin que vous puissiez voir cela vous-même. Est-ce que cela vous va?" ]
+      },
+      "languageCode": "fr-ca"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "intent": "context.sms_yes",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "SMS Content",
+    "name": "f474f1a3-14e3-45d0-9847-56426c5aa648"
+  }, {
+    "intent": "context.sms_no",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "You can review your billing preferences yourself in the MyBell app." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Vous pouvez passer en revue vos préférences de facturation vous-même dans l'application MonBell." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetPage": "Vanity Check",
+    "name": "c2a0b8e6-0e0d-48cc-8fb8-56fa96faed0e"
+  }, {
+    "intent": "context.different_number",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "different_number",
+        "value": "true"
+      } ]
+    },
+    "targetPage": "SMS Content",
+    "name": "2a210a12-b4f5-4907-a920-1c14d0c63478"
+  } ],
+  "eventHandlers": [ {
+    "event": "sys.no-input-1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I didn't quite get that. Can you try again?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je n'ai pas tout à fait compris. Pouvez-vous réessayer?" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "f4dbb7fa-3eec-48d2-baa6-2b79ace1cbee"
+  }, {
+    "event": "sys.no-input-2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I still didn't get that" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je n'ai toujours pas compris." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "d24722da-2794-4c8e-8440-545fe5d14a4b"
+  }, {
+    "targetPage": "Vanity Check",
+    "event": "sys.no-input-3",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "You can review your billing preferences yourself in the MyBell app." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Vous pouvez passer en revue vos préférences de facturation vous-même dans l'application MonBell." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "c40279c6-cd66-4d0b-a53c-442871dc1c46"
+  }, {
+    "event": "sys.no-match-1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I didn't quite get that. Can you try again?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je n'ai pas tout à fait compris. Pouvez-vous réessayer?" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "003b1993-4010-4fdf-b667-4c727b38f060"
+  }, {
+    "event": "sys.no-match-2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I still didn't get that" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je n'ai toujours pas compris." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "8dc82009-2334-4f2b-b96d-5dd225079a5d"
+  }, {
+    "targetPage": "Vanity Check",
+    "event": "sys.no-match-3",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "You can review your billing preferences yourself in the MyBell app." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Vous pouvez passer en revue vos préférences de facturation vous-même dans l'application MonBell." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "1dff2490-ad4a-4052-ae2a-9cf176c96eac"
+  } ]
+}

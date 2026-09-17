@@ -1,0 +1,104 @@
+{
+  "name": "0e07409a-5271-46ea-bbf0-50630adf5855",
+  "displayName": "Webhook Failure Confirmation",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "messages": [ {
+      "text": {
+        "text": [ "Since I was unable to verify your account, I'll send a text to the device you're calling from so that you can set up your payment arrangement in MyBell. Is that alright?" ]
+      },
+      "languageCode": "en"
+    }, {
+      "text": {
+        "text": [ "Puisque je n'ai pas pu vérifier votre compte, je vais envoyer un texto à l'appareil avec lequel vous appelez afin que vous puissiez établir votre entente de paiement dans MonBell. Cela vous va-t-il?" ]
+      },
+      "languageCode": "fr-ca"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "intent": "context.confirm_no",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_aqd",
+    "name": "003cad68-cb1b-400e-82e7-031072706d36"
+  }, {
+    "intent": "context.confirm_yes",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Language Based SMS",
+    "name": "cfb55338-6057-4fd9-8139-a35fae309d83"
+  } ],
+  "eventHandlers": [ {
+    "event": "sys.no-input-1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I didn't quite get that. Can you try again?" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "5913601b-cedf-4353-ab07-9e2592083564"
+  }, {
+    "event": "sys.no-match-1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I didn't quite get that. Can you try again?" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "a156d22d-e9ba-4655-8126-4b00e9dae10a"
+  }, {
+    "event": "sys.no-input-2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I still didn't get that." ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "78f61891-da80-425b-b07f-c296f4e7cc55"
+  }, {
+    "event": "sys.no-match-2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I still didn't get that." ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "cac276c1-8730-40cf-8069-3a1c27bfe081"
+  }, {
+    "targetFlow": "bell_Feedback",
+    "event": "sys.no-match-3",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Since I was unable to verify your account, I'll send a text to the device you're calling from so that you can set up your payment arrangement in MyBell. Is that alright?" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "24b470c9-528a-4ce7-8d88-8fed56daba26"
+  }, {
+    "targetFlow": "bell_Feedback",
+    "event": "sys.no-input-3",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Since I was unable to verify your account, I'll send a text to the device you're calling from so that you can set up your payment arrangement in MyBell. Is that alright?" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "43a28257-e4b7-402d-94ce-3be4cbc07c59"
+  } ]
+}

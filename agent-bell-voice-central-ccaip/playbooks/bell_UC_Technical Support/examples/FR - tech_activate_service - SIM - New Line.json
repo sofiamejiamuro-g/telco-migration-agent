@@ -1,0 +1,56 @@
+{
+  "name": "7f4151e1-12c7-45e9-ab92-52167b8f00ea",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Je peux certainement vous aider à activer votre service.\n\nActivez-vous une carte SIM pour une ligne existante ou une nouvelle ligne?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "une nouvelle ligne"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Vous pouvez facilement transférer une ligne existante vers une nouvelle carte SIM ou SIM électronique dans l'application MonBell. Je vais vous envoyer un message texte à l'instant avec des instructions supplémentaires."
+    }
+  }, {
+    "userUtterance": {
+      "text": "oui"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "BAN": "4162675927163",
+        "CLID": "4169705061",
+        "brand": "bell",
+        "language": "fr-ca",
+        "route": "tech_activate_service",
+        "sms_content": "Mess. Bell: Voici un lien pour activer un nouveau service en ligne maintenant: https://monbell.bell.ca/PrepaidActivationLogin (bell.ca/apropos)",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+        "brand": "bell",
+        "language": "fr-ca"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer wants to activate a new SIM Card",
+    "actionParameters": {
+      "BAN": "4162675927163",
+      "CLID": "4155547622",
+      "brand": "bell",
+      "language": "fr-ca",
+      "route": "tech_activate_service",
+      "sim_type": "Physical SIM"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Customer has been redirected to \"Steering_SMS Trigger\" playbook and then has been directed to \"Steering_Wrap-up\" playbook"
+  },
+  "displayName": "FR - tech_activate_service - SIM - New Line",
+  "retrievalStrategy": "NEVER",
+  "tokenCount": 422,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

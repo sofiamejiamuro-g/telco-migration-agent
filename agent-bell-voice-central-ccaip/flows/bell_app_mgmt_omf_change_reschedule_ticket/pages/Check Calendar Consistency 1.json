@@ -1,0 +1,41 @@
+{
+  "name": "46c3379b-2839-40c1-a5ed-9708a0c357b7",
+  "displayName": "Check Calendar Consistency 1",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.consistent_calendars = true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Check Appointment Number",
+    "name": "7c01fdc6-a877-481b-b92e-ef35c2b767b4"
+  }, {
+    "condition": "$session.params.consistent_calendars = false",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_aqd",
+    "name": "709a6d5b-f552-49b3-8cb1-c2c2376903d5"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "46c3379b-2839-40c1-a5ed-9708a0c357b7"
+      }, {
+        "parameter": "flow_id",
+        "value": "3cb06ee0-48c8-49e1-8be4-96461dd61130"
+      }, {
+        "parameter": "page_name",
+        "value": "Check Calendar Consistency 1"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

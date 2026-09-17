@@ -1,0 +1,70 @@
+{
+  "name": "dcb564a1-1d26-4464-90c8-c1c0ef24690d",
+  "displayName": "Amount Validation",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.clp_amount_paid \u003e= 1 AND $session.params.clp_amount_paid \u003c= 10000",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "C'était $$session.params.clp_amount_paid. n'est-ce pas ?" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "That was $$session.params.clp_amount_paid, correct?" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "targetPage": "Proceed With Payment?",
+    "name": "34a0d70a-ed2c-40a9-a3ed-52cc93170fd8"
+  }, {
+    "condition": "$session.params.bad_amount \u003c= 2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Désolé, nous pouvons seulement accepter des paiements jusqu'à 10,000 $" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "We can only take payments between $1 and $10,000" ]
+        },
+        "languageCode": "en"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "clp_bad_amount",
+        "value": "$sys.func.ADD($session.params.clp_bad_amount, 1)"
+      } ]
+    },
+    "targetPage": "Check CLP Balance",
+    "name": "ec620bf7-e49f-41be-8f39-6ba778f3e638"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Désolé, nous pouvons seulement accepter des paiements jusqu'à 10,000 $" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "We can only take payments between $1 and $10,000" ]
+        },
+        "languageCode": "en"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "clp_bad_amount",
+        "value": 0
+      } ]
+    },
+    "targetFlow": "bell_Feedback",
+    "name": "9eb8d4ab-fcd9-44b6-b080-ce1bb95fbf69"
+  } ]
+}

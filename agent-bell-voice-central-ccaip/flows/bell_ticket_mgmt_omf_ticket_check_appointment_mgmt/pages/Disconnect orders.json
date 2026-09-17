@@ -1,0 +1,29 @@
+{
+  "name": "7a38e839-a867-4098-bcd6-c5c8e9216c76",
+  "displayName": "Disconnect orders",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "true",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "\u003cspeak\u003eI found an order to disconnect your $session.params.line_of_business service. Your appointment is on $session.params.day_of_week, $session.params.month_name \u003csay-as interpret-as=\"ordinal\"\u003e$session.params.date_of_month\u003c/say-as\u003e. The Technician can arrive any time between $session.params.startTime and $session.params.endTime, and remember, an appointment scheduled from $session.params.startTime to $session.params.endTime can start at $session.params.endTimeUpdated and finish later.\u003c/speak\u003e" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "\u003cspeak\u003eJ’ai trouvé une commande de débranchement por votre service $session.params.line_of_business. Votre rendez-vous est prévu le $session.params.day_of_week, le \u003csay-as interpret-as=\"cardinal\"\u003e$session.params.date_of_month\u003c/say-as\u003e $session.params.month_name. Le ou la technicien(ne) peut arriver à tout moment entre $session.params.startTime et $session.params.endTime. Et n’oubliez pas qu’un rendez-vous prévu entre $session.params.startTime et $session.params.endTime peut commencer à $session.params.endTimeUpdated et se terminer plus tard.\u003c/speak\u003e" ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "special_queue",
+        "value": "tech_to_loyalty"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "e6d746e9-243d-4c30-84a7-1e0f99bbdd68"
+  } ]
+}

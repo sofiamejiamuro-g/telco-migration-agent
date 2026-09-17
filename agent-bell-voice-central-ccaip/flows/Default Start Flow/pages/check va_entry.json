@@ -1,0 +1,43 @@
+{
+  "name": "5e5ae4e2-c78f-4cb8-bd51-92cf27d9528a",
+  "displayName": "check va_entry",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.va_entry_flow = \"IBM_transfer\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_ivr_to_va_handoff",
+    "name": "0384cd79-1456-4e50-8834-ef56c594595e"
+  }, {
+    "condition": "$session.params.ivr_to_va_entry = true",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "En une phrase ou deux, comment puis-je vous aider aujourd’hui?" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "In a sentence or two, how can we help you today?" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "targetPage": "Routing Page",
+    "name": "9df4c248-fd97-45c9-90d5-f66eab39d412",
+    "description": "Do not remove this route as it is for IVR to VA. When from \"bell_ivr_to_va_handoff flow\", Page - \"Check BAN Count\" the end flow will happen then it will come here and will go to routing page."
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook get-apbs-for-location",
+    "name": "251867b7-b82c-4a70-bd23-ec3c672550a5"
+  } ]
+}

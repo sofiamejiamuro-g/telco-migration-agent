@@ -1,0 +1,65 @@
+{
+  "name": "919a73f6-1c47-4430-983b-09ca3a58d82a",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70012",
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+        "language": "fr-ca"
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Est-ce pour un nouveau service ou avez-vous besoin d’aide pour votre service actuel?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Je veux installer un nouveau service"
+    }
+  }, {
+    "playbookInvocation": {
+      "playbook": "bell_UC_Sales",
+      "playbookInput": {
+        "precedingConversationSummary": "\"sales_plan_inquiry\"",
+        "actionParameters": {
+          "customer_type": "Existing",
+          "language": "fr-ca",
+          "line_type": "New",
+          "route": "sales_plan_inquiry"
+        }
+      },
+      "playbookOutput": {
+        "executionSummary": "\"sales_plan_inquiry\"",
+        "actionParameters": {
+          "language": "fr-ca",
+          "route": "sales_plan_inquiry"
+        }
+      },
+      "playbookState": "OUTPUT_STATE_OK"
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer wants a technician for new service",
+    "actionParameters": {
+      "language": "fr-ca",
+      "route": "tech_field_tech_visits",
+      "utterance": "J’ai besoin d’un technicien"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Reroute to sales_plan_inquiry",
+    "actionParameters": {
+      "language": "fr-ca",
+      "route": "tech_field_tech_visits",
+      "utterance": "J’ai besoin d’un technicien"
+    }
+  },
+  "displayName": "FR_tech_field_tech_visits_new_service",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 396,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

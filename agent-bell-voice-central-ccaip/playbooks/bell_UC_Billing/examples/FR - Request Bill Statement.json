@@ -1,0 +1,50 @@
+{
+  "name": "7aa92235-b6a5-4c30-892b-8d6b23120896",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Vous pouvez facilement consulter votre solde prépayé et votre historique de paiement en ligne ou avec l'application Mon Bell. Je vais vous envoyer un SMS maintenant avec plus de détails."
+    }
+  }, {
+    "userUtterance": {
+      "text": "oui"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "BAN": "4162675927163",
+        "CLID": "4169705061",
+        "brand": "bell",
+        "language": "fr-ca",
+        "route": "bill_view_bill",
+        "sms_content": "Cliquez ici \u003cURL\u003e pour consulter votre solde prépayé et recharger votre historique en ligne ou dans l'application Mon compte Bell. \u003cURL\u003e",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+        "brand": "bell",
+        "language": "fr-ca"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "User has request a copy of their bill statement",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca",
+      "route": "bill_view_bill",
+      "utterance": "Je veux une copie de mon relevé de facture"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Agent has responded and redirected customer to playbook \"bell_Steering_SMS Trigger\"",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca"
+    }
+  },
+  "displayName": "FR - Request Bill Statement",
+  "retrievalStrategy": "NEVER",
+  "tokenCount": 333,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

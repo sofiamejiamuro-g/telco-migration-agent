@@ -1,0 +1,54 @@
+{
+  "name": "d8bf8278-f056-4c75-a5ac-d58e01f39ff5",
+  "displayName": "Head intent Trigger",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.route != null",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "firstRoutingPage",
+    "name": "febad8ad-c0e1-4b48-9f6a-c3585200e05c"
+  }, {
+    "condition": "$session.params.route = null",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ " How can I help you? For example, you can say \"I have a question about my bill\"" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Comment puis-je vous aider ? Par exemple, vous pouvez dire « Je veux rétablir mes services »" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetPage": "firstRoutingPage",
+    "name": "5114552d-36db-4378-90c1-08ad02ae725c"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "d8bf8278-f056-4c75-a5ac-d58e01f39ff5"
+      }, {
+        "parameter": "flow_id",
+        "value": "d35b61b6-c884-44f8-b5c7-aed63cc356ab"
+      }, {
+        "parameter": "page_name",
+        "value": "Head intent Trigger"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

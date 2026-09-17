@@ -1,0 +1,51 @@
+{
+  "name": "48cc3229-722a-43a9-8eb1-32c99c6048ba",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Pourriez-vous me dire avec quel service vous rencontrez des problèmes? Mobilité, Internet, Télé ou Téléphonie résidentielle?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Tele"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Sur quel type de service de télévision vous renseignez-vous? Télé Fibe, appli Télé Fibe ou Télé Satellite?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Fibe tele"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_aqd",
+      "inputActionParameters": {
+      
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "User wants to schedule the appointment, but does not mention LOB",
+    "actionParameters": {
+      "language": "fr-ca",
+      "route": "tech_service_outage",
+      "utterance": "Je veux voir s'il y a une panne de courant dans ma région."
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "User wants to schedule, which can be any of these routes or intent (tech_field_tech_visits | tech_change_appointment | tech_field_tech_visit_cancel), but does not mention LOB , so route ask them about lob and extract the lob if mentioned and of lob is TV then ask about TV subtype and capture the same, and return back to PARENT playbook ",
+    "actionParameters": {
+      "apb_location_id": "70015",
+      "language": "fr-ca",
+      "lob": "TV",
+      "route": "tech_service_outage"
+    }
+  },
+  "displayName": "FR - extract LOB - tech_service_outage | TV | subtype",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 369,
+  "languageCode": "en"
+}

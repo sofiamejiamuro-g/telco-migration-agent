@@ -1,0 +1,57 @@
+{
+  "name": "6f183856-1944-474f-a590-0d1e39790e21",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Bien sûr, je peux vous aider. Vous pouvez suspendre temporairement vos services résidentiels via MonBell. Je vais envoyer un SMS sur l'appareil depuis lequel vous appelez, contenant un lien pour le faire vous-même. Cela vous convient-il ?"
+    }
+  }, {
+    "userUtterance": {
+    
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "sms_send_status": "Declined"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Pas de problème. Pour toute autre question, vous pouvez toujours consulter notre site Web à l'adresse suivante : {faq_link}"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_Feedback",
+      "inputActionParameters": {
+      
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer wants to suspend his services",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca",
+      "unique_services": "Tv",
+      "utterance": "Je veux suspendre mon service"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "VA understood the {utterance}, checked the {unique_services} parameter, found only one value equal to TV,  VA asks if it can send a text to the device he's calling from, user gives no input, it routed the user to bell_SMS Trigger flow then to bell_Feedback flow",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca"
+    }
+  },
+  "displayName": "Happy path - Account suspend service - unique services(TV) - TV - no input - fr - 18",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 390,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "fr"
+}

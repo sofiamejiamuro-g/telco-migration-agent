@@ -1,0 +1,105 @@
+{
+  "name": "a9a7cb52-6d3f-4f32-8cf8-822188df9d02",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "brand": "bell",
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "À propos de quel service communiquez- vous avec nous?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "le ciel est bleu"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_global_error_count_check",
+      "inputActionParameters": {
+        "global_error_counter": "1"
+      },
+      "outputActionParameters": {
+        "global_error_counter": "2"
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Je ne suis pas en mesure de fournir des renseignements à ce sujet. Cependant, je serais ravie de vous aider avec toute question que vous pourriez avoir concernant les produits et services de Bell."
+    }
+  }, {
+    "userUtterance": {
+      "text": "le Canada est grand"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_global_error_count_check",
+      "inputActionParameters": {
+        "global_error_counter": "2"
+      },
+      "outputActionParameters": {
+        "global_error_counter": "3"
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Je m’excuse, j’ai toujours de la difficulté à comprendre votre demande. Pour vous aider au mieux, pourriez-vous, s’il vous plaît, reformuler votre question ou fournir plus de détails sur ce que vous recherchez concernant les produits et services de Bell?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "l'Inde est géniale"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_global_error_count_check",
+      "inputActionParameters": {
+        "global_error_counter": "3"
+      },
+      "outputActionParameters": {
+        "global_error_counter": "4"
+      }
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_No_Match_3",
+      "inputActionParameters": {
+        "lob": "multiple"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer has questions about device availability, device features, cost, related to devices that Bell sells and there's no input from the customer and user gives a gibberish response",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "New",
+      "global_error_counter": "1",
+      "language": "fr-ca",
+      "lob": "multiple",
+      "route": "sales_device_inquiry",
+      "utterance": "Montrez-moi les derniers accessoires pour téléphone."
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "As Customer says irrelevant information to bell  products and services, so flow bell_global_error_count_check is called each time and VA respond as per instructions and when 3rd time they say irrelevant things, we send them to bell_no_match_3 flow",
+    "actionParameters": {
+      "brand": "bell",
+      "global_error_counter": "4",
+      "language": "fr-ca"
+    }
+  },
+  "displayName": "FR-sales device inquiry- ID Fail- no match(IRRELEVANT)",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 769,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

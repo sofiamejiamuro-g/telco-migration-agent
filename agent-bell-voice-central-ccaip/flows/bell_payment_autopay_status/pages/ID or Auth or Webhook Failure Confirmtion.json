@@ -1,0 +1,163 @@
+{
+  "name": "981d6900-bfce-4c03-a306-e5ebb552c963",
+  "displayName": "ID or Auth or Webhook Failure Confirmtion",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "conditionalCases": [ {
+      "cases": [ {
+        "condition": "$session.params.identification_status = \"Fail\" OR $session.params.auth_status = \"Fail\"",
+        "caseContent": [ {
+          "message": {
+            "text": {
+              "text": [ "Since I was unable to verify your account, I'll send a text to the device you're calling from so that you can check your pre-authorized payment status in MyBell. Is that alright?" ]
+            },
+            "languageCode": "en"
+          }
+        } ]
+      }, {
+        "condition": "$session.params.webhook_success = \"false\"",
+        "caseContent": [ {
+          "message": {
+            "text": {
+              "text": [ "I'm unable to retrieve your account information at this time.  I'll send a text to the device you're calling from so that you can check your pre-authorized payment status in MyBell. Is that alright?" ]
+            },
+            "languageCode": "en"
+          }
+        }, {
+          "message": {
+            "text": {
+              "text": [ "Je ne suis pas en mesure de récupérer les informations relatives à votre compte pour le moment. Je vais envoyer un texto à l'appareil au moyen duquel vous appelez afin que vous puissiez vérifier l'état de vos paiements pré-autorisés dans MonBell. Est-ce que ça vous convient?" ]
+            },
+            "languageCode": "fr-ca"
+          }
+        } ]
+      } ]
+    } ]
+  },
+  "transitionRoutes": [ {
+    "intent": "context.sms_yes",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Language Based Message",
+    "name": "adc6b431-a04e-4141-b98c-eada0b1e8fcd"
+  }, {
+    "intent": "context.sms_no",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Intent SDL Mapping",
+    "name": "23fa17b5-ff99-4101-aa4c-bcd5ccd9ce37"
+  }, {
+    "intent": "context.different_number",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "different_number",
+        "value": "true"
+      } ]
+    },
+    "targetPage": "Language Based Message",
+    "name": "46ae632c-ddb5-41db-a120-b8c150c90ec3"
+  } ],
+  "eventHandlers": [ {
+    "event": "sys.no-input-1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I didn't quite get that. Can you try again?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je n'ai pas tout à fait compris. Pouvez-vous réessayer?" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "29639576-81cb-49dd-8612-51e752387892"
+  }, {
+    "event": "sys.no-match-1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I didn't quite get that. Can you try again?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je n'ai pas tout à fait compris. Pouvez-vous réessayer?" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "bf284625-0d69-4a6a-b8b9-57d0d2eb1a27"
+  }, {
+    "event": "sys.no-input-2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I still didn't get that" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je n'ai toujours pas compris." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "d06eed43-fc09-41d2-9d5f-944df5bfa080"
+  }, {
+    "event": "sys.no-match-2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I still didn't get that" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je n'ai toujours pas compris." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "7032c36d-b891-4ef8-a97a-7447df4026e1"
+  }, {
+    "targetFlow": "bell_Feedback",
+    "event": "sys.no-input-3",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "If you'd still like to check your Pre-Authorized payments status, you can do so in MyBell. Please visit bell.ca/support for more information" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Si vous souhaitez toujours vérifier l'état de vos paiements préautorisés, vous pouvez le faire dans MonBell. Veuillez consulter bell.ca/soutien pour plus d'informations." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "994268d6-3ac0-4092-994d-e5f3fc2011b0"
+  }, {
+    "targetFlow": "bell_Feedback",
+    "event": "sys.no-match-3",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "If you'd still like to check your Pre-Authorized payments status, you can do so in MyBell. Please visit bell.ca/support for more information" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Si vous souhaitez toujours vérifier l'état de vos paiements préautorisés, vous pouvez le faire dans MonBell. Veuillez consulter bell.ca/soutien pour plus d'informations." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "c46c8796-932b-466e-bbac-db4c99cd66bc"
+  } ]
+}

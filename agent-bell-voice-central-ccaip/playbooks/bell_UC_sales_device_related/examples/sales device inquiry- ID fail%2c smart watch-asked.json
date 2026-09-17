@@ -1,0 +1,59 @@
+{
+  "name": "93f8391e-1138-4675-9ad7-b5e51e256c06",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "brand": "bell",
+        "language": "en"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Which service are you Inquiring about?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "its my smart watch"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_aqd",
+      "inputActionParameters": {
+        "device_type": "Smart Watch",
+        "language": "en"
+      },
+      "outputActionParameters": {
+        "language": "en"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer has questions about device availability, device features, cost, related to devices that Bell sells",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "New",
+      "identification_status": "Fail",
+      "language": "en",
+      "province": "ON",
+      "route": "sales_device_inquiry",
+      "utterance": "I have questions about device availability"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "We need to check the result from identification flow from the webhook NPANXX, if it is \"ON\" then call bell_aqd flow",
+    "actionParameters": {
+      "language": "en",
+      "lob": "Smart Watch"
+    }
+  },
+  "displayName": "sales device inquiry- ID fail, smart watch-asked",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 338,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

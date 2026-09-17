@@ -1,0 +1,185 @@
+{
+  "name": "c6ac21f8-cc70-4ad2-924b-7cb9edc6495d",
+  "displayName": "Prompt CVV Number",
+  "form": {
+    "parameters": [ {
+      "displayName": "cvv_number",
+      "required": true,
+      "entityType": "@sys.number-sequence",
+      "fillBehavior": {
+        "initialPromptFulfillment": {
+        
+        },
+        "repromptEventHandlers": [ {
+          "event": "sys.no-input-1",
+          "triggerFulfillment": {
+            "messages": [ {
+              "text": {
+                "text": [ "Could you please provide the security code on your card?" ]
+              },
+              "languageCode": "en"
+            }, {
+              "text": {
+                "text": [ "Pourriez-vous me fournir le code de sécurité de votre carte? " ]
+              },
+              "languageCode": "fr-ca"
+            } ]
+          },
+          "name": "9d035790-ef4d-409a-a421-28bc9951428b"
+        }, {
+          "event": "sys.no-input-2",
+          "triggerFulfillment": {
+            "messages": [ {
+              "text": {
+                "text": [ "I didn't get a number from you. Could you provide the security code on your card when you're ready?" ]
+              },
+              "languageCode": "en"
+            }, {
+              "text": {
+                "text": [ " Je n’ai pas obtenu de numéro de votre part. Pourriez-vous fournir le code de sécurité sur votre carte lorsque vous serez prêt?" ]
+              },
+              "languageCode": "fr-ca"
+            } ]
+          },
+          "name": "c394424a-57bb-43b7-af9f-414c8f73a0e5"
+        }, {
+          "event": "sys.no-match-1",
+          "triggerFulfillment": {
+            "messages": [ {
+              "text": {
+                "text": [ "Could you please provide the security code on your card?" ]
+              },
+              "languageCode": "en"
+            }, {
+              "text": {
+                "text": [ "Pourriez-vous me fournir le code de sécurité de votre carte? " ]
+              },
+              "languageCode": "fr-ca"
+            } ]
+          },
+          "name": "8e775b2b-b20f-4cf4-91e1-f8d7c5438af2"
+        }, {
+          "event": "sys.no-match-2",
+          "triggerFulfillment": {
+            "messages": [ {
+              "text": {
+                "text": [ "I didn't get a number from you. Could you provide the security code on your card when you're ready?" ]
+              },
+              "languageCode": "en"
+            }, {
+              "text": {
+                "text": [ " Je n’ai pas obtenu de numéro de votre part. Pourriez-vous fournir le code de sécurité sur votre carte lorsque vous serez prêt?" ]
+              },
+              "languageCode": "fr-ca"
+            } ]
+          },
+          "name": "78148c2a-ce82-4382-ac25-2afcbfd79928"
+        }, {
+          "targetPage": "Prompt CX SMS",
+          "event": "sys.no-input-3",
+          "triggerFulfillment": {
+            "messages": [ {
+              "text": {
+                "text": [ "Since I didn't get the security code from you, I won't be able to proceed with this step. You can call back later or you can easily complete this step on the MyBell app." ]
+              },
+              "languageCode": "en"
+            }, {
+              "text": {
+                "text": [ "Comme je n’ai pas obtenu le code de sécurité de votre part, je ne pourrai pas effectuer cette étape. Vous pouvez rappeler plus tard ou vous pouvez facilement effectuer cette étape à l’aide de l’appli MonBell." ]
+              },
+              "languageCode": "fr-ca"
+            } ]
+          },
+          "name": "219c7a1a-6985-4a2b-941b-c12e0d411d4c"
+        }, {
+          "targetPage": "Prompt CX SMS",
+          "event": "sys.no-match-3",
+          "triggerFulfillment": {
+            "messages": [ {
+              "text": {
+                "text": [ "Since I didn't get the security code from you, I won't be able to proceed with this step. You can call back later or you can easily complete this step on the MyBell app." ]
+              },
+              "languageCode": "en"
+            }, {
+              "text": {
+                "text": [ "Comme je n’ai pas obtenu le code de sécurité de votre part, je ne pourrai pas effectuer cette étape. Vous pouvez rappeler plus tard ou vous pouvez facilement effectuer cette étape à l’aide de l’appli MonBell." ]
+              },
+              "languageCode": "fr-ca"
+            } ]
+          },
+          "name": "2e88afc1-eb11-49f7-a28f-25de29533c62"
+        } ]
+      },
+      "redact": true,
+      "description": "CC CVV number"
+    } ]
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "intent": "context.user_makes_mistake",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "No worries, please say or re-enter your number when ready." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Ne t'inquiète pas, tu peux le dire à voix haute ou re-saisir à nouveau le numéro." ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "global_error_counter",
+        "value": "$sys.func.ADD(1, $session.params.global_error_counter)"
+      }, {
+        "parameter": "Mistake_Counter",
+        "value": "$sys.func.ADD(1, $session.params.Mistake_Counter)"
+      } ]
+    },
+    "name": "999c2e8b-0565-459c-8a13-3f5530fccc49"
+  }, {
+    "intent": "context.user_asks_more_time",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Absolutely. Please take a moment to find your number." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Absolument. Veuillez prendre un moment pour trouver votre numéro." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "c13d8ce8-73fa-4200-972d-262fc1b392c2"
+  }, {
+    "intent": "context.cant_say_out_loud",
+    "condition": "$session.params.Loud_Counter \u003e= 5",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Since I didn't get a number from you, I won't be able to proceed with your payment. You can call back later or you can easily complete this step using the MyBell app.\n" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Comme je n'ai pas reçu votre numéro de téléphone, je ne pourrai pas procéder à votre paiement. Vous pouvez me rappeler ultérieurement ou effectuer cette étape facilement via l'application MonBell." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetFlow": "bell_Feedback",
+    "name": "814d1e86-51a5-4018-9db7-dd8fd5fb5f5c"
+  }, {
+    "condition": "$session.params.cvv_number != null",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "CVV Validation",
+    "name": "a26393fb-97d4-413f-8bd4-fe05de48dbab"
+  } ]
+}

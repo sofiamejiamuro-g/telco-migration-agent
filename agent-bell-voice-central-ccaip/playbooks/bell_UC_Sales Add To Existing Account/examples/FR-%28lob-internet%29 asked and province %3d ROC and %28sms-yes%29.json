@@ -1,0 +1,76 @@
+{
+  "name": "edead54a-56b1-4bb8-86d8-ae59bcfee690",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "À propos de quel service communiquez-vous avec nous?\n"
+    }
+  }, {
+    "userUtterance": {
+      "text": "internet résidentiel"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Vérifions si nous offrons des services Internet ou de téléphonie résidentielle dans votre secteur. Dans quelle province avez-vous besoin de services?\n"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Reste du Canada"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Obtenez des vitesses ultrarapides sur le réseau de Bell grâce au service Internet mobile de Bell. Vous pouvez bénéficier d’une connectivité Internet allant jusqu’à 5G avec un point d’accès sans fil mobile afin de rester connecté à la maison ou lors de vos déplacements.\nJe vais envoyer un texto à l’appareil au moyen duquel vous appelez, afin que vous puissiez en savoir plus sur le service Internet mobile sur notre site Web. Est-ce que ça vous convient?\n\n"
+    }
+  }, {
+    "userUtterance": {
+      "text": "oui"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "fr-ca",
+        "sms_content": "Mess. de Bell: Vous pouvez consulter https://www.bell.ca/Mobilite/Internet-Mobile-listing pour en savoir plus sur Bell Internet mobile.( bell.ca/apropos )",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "customer wants to add a new  line and {lob} is null",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "fr-ca",
+      "province": "ROC",
+      "utterance": "j'appelle pour ajouter une nouvelle ligne à mon compte"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "customer is asked about service type and if lob is \"Internet\" province is \"BC\" and {shr_int_partner_nw_elig_flg} is not equal to \"1\"",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca",
+      "lob": "internet",
+      "province": "ROC"
+    }
+  },
+  "displayName": "FR-(lob-internet) asked and province = ROC and (sms-yes)",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 587,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

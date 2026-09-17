@@ -1,0 +1,92 @@
+{
+  "name": "5c6f09d0-27e1-4982-9a79-c6626ab7665a",
+  "displayName": "Get Postal Code",
+  "form": {
+    "parameters": [ {
+      "displayName": "postal_code_three",
+      "required": true,
+      "entityType": "@postal_code_last_three",
+      "fillBehavior": {
+        "initialPromptFulfillment": {
+        
+        },
+        "repromptEventHandlers": [ {
+          "targetPage": "Local Error handling - Get Postal Code",
+          "event": "sys.no-input-1",
+          "triggerFulfillment": {
+            "setParameterActions": [ {
+              "parameter": "global_error_counter",
+              "value": "$sys.func.ADD($session.params.global_error_counter,1)"
+            }, {
+              "parameter": "local_noinput_counter",
+              "value": "$sys.func.ADD($session.params.local_noinput_counter,1)"
+            }, {
+              "parameter": "local_trigger",
+              "value": "no_input"
+            } ]
+          },
+          "name": "329ce8d4-ace8-41db-bbb5-9446f9438d7f"
+        }, {
+          "targetPage": "Local Error handling - Get Postal Code",
+          "event": "sys.no-match-1",
+          "triggerFulfillment": {
+            "setParameterActions": [ {
+              "parameter": "global_error_counter",
+              "value": "$sys.func.ADD($session.params.global_error_counter,1)"
+            }, {
+              "parameter": "local_noinput_counter",
+              "value": "$sys.func.ADD($session.params.local_noinput_counter,1)"
+            }, {
+              "parameter": "local_trigger",
+              "value": "no_input"
+            } ]
+          },
+          "name": "5cfd6155-45df-461a-8da6-4877d1e8a1c2"
+        } ]
+      }
+    } ]
+  },
+  "entryFulfillment": {
+    "setParameterActions": [ {
+      "parameter": "local_nomatch_counter",
+      "value": 0
+    }, {
+      "parameter": "local_noinput_counter",
+      "value": 0
+    }, {
+      "parameter": "local_trigger",
+      "value": null
+    } ],
+    "conditionalCases": [ {
+      "cases": [ {
+        "condition": "$session.params.init_getpos = true",
+        "caseContent": [ {
+          "message": {
+            "text": {
+              "text": [ "Let's try something else. Can you tell me the last three characters of the postal code for your service address?" ]
+            },
+            "languageCode": "en"
+          }
+        }, {
+          "message": {
+            "text": {
+              "text": [ "Essayons autre chose. Pouvez-vous me donner les trois derniers caractères du code postal de votre adresse de service ?" ]
+            },
+            "languageCode": "fr-ca"
+          }
+        } ]
+      } ]
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.postal_code_three != null",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "init_getpos",
+        "value": false
+      } ]
+    },
+    "targetPage": "Check Postal Code",
+    "name": "e75de947-bc46-4fe4-af1e-5dd74641a228"
+  } ]
+}

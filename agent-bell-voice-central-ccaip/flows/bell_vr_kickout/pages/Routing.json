@@ -1,0 +1,105 @@
+{
+  "name": "0c22e956-3a89-41eb-a48f-a23412ec5748",
+  "displayName": "Routing",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "messages": [ {
+      "text": {
+        "text": [ "$request.generative.kickout_response" ]
+      },
+      "languageCode": "en"
+    }, {
+      "text": {
+        "text": [ "$request.generative.kickout_response" ]
+      },
+      "languageCode": "fr-ca"
+    } ],
+    "generators": [ {
+      "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/b942b895-b3b1-4841-bf85-03749932370d",
+      "inputParameters": [ {
+        "key": "kickout_description",
+        "value": "$session.params.description"
+      }, {
+        "key": "kickout_title",
+        "value": "$session.params.title"
+      } ],
+      "outputParameter": "$request.generative.kickout_response"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.dcx_action_code = \"7011\" OR $session.params.dcx_action_code = \"7012\" OR $session.params.dcx_action_code = \"7013\" OR $session.params.dcx_action_code = \"7100\" OR $session.params.dcx_action_code = \"7101\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_aqd",
+    "name": "a791ecf6-c546-4be1-a94d-2a34aedc9ad6"
+  }, {
+    "condition": "$session.params.dcx_action_code = \"7004\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "vr_outcome",
+        "value": "dispatch"
+      }, {
+        "parameter": "from_flow",
+        "value": "bell_vr_kickout"
+      } ]
+    },
+    "targetFlow": "bell_tech_service_outage_connection_issue_main",
+    "name": "f866c1e8-dc4f-4f71-99a2-975d6992a828"
+  }, {
+    "condition": "$session.params.dcx_action_code = \"7000\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Thanks for using the virtual repair tool. The same steps can be performed using the MyBell app as well." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Merci d'avoir utilisé l'outil de réparation virtuelle. Vous pouvez aussi faire les mêmes étapes avec l'application MonBell." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetFlow": "bell_Feedback",
+    "name": "ce19f36e-81d9-4ef2-9beb-cb4887206a7d"
+  }, {
+    "condition": "$session.params.dcx_action_code = \"7016\" OR $session.params.dcx_action_code = \"7029\" OR $session.params.dcx_action_code = \"7030\" OR $session.params.dcx_action_code = \"7028\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "generative_utterance",
+        "value": "$request.generative.kickout_response"
+      } ]
+    },
+    "name": "81b2dd35-8ee3-4f46-8ba3-33ea98df3d27",
+    "targetPlaybook": "bell_vr_kickout_sms"
+  }, {
+    "condition": "$session.params.dcx_action_code = \"7015\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_Feedback",
+    "name": "78ad3ff5-71a7-4829-b421-b78f7337ebf4"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "0c22e956-3a89-41eb-a48f-a23412ec5748"
+      }, {
+        "parameter": "flow_id",
+        "value": "e75403f7-98e1-4a47-9d85-4cc4dd354540"
+      }, {
+        "parameter": "page_name",
+        "value": "Routing"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

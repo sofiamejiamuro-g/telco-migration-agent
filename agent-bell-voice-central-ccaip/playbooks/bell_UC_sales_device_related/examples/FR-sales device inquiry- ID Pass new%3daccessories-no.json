@@ -1,0 +1,68 @@
+{
+  "name": "10bec580-87c5-46d0-88f8-e701dcdbcd39",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "brand": "bell",
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "À propos de quel service communiquez-vous avec nous?\n"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Adaptateur"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Je vais envoyer un texto à l'appareil au moyen\nduquel vous appelez, afin que vous puissiez en\nsavoir plus sur toutes les sortes d'accessoires que\nBell a à offrir. Est-ce que ça vous convient?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Non"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "fr-ca",
+        "route": "sales_device_inquiry",
+        "sms_send_status": "Declined"
+      },
+      "outputActionParameters": {
+        "language": "fr-ca"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer has questions about device availability, device features, cost, related to devices that Bell sells",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "fr-ca",
+      "line_type": "Existing",
+      "route": "sales_device_inquiry"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "we got to know from the utterance that the device type",
+    "actionParameters": {
+      "device_type": "Accessories",
+      "language": "fr-ca",
+      "line_type": "Existing"
+    }
+  },
+  "displayName": "FR-sales device inquiry- ID Pass new=accessories-no",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 416,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

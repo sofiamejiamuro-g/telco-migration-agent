@@ -1,0 +1,27 @@
+{
+  "name": "2c87c840-099c-4f96-9ed0-2e605d427219",
+  "displayName": "v1/dfcx_support/omf_calendar#selected-interval",
+  "timeout": {
+    "seconds": 5
+  },
+  "serviceDirectory": {
+    "service": "projects/gcp-it-npe-pltfm-apigee/locations/us-central1/namespaces/apigee-nb-usc1-service-dir-namespace/services/apigee-nb-usc1-service",
+    "genericWebService": {
+      "uri": "https://apigee-nane1-uat.int.bell.ca/v1/dfcx_support/omf_calendar",
+      "requestHeaders": [ {
+        "key": "x-apikey",
+        "value": "npZmDivP6Hxes3wtQ0tC9RqItjJTY8TgZHbOPNeFwvSYSKPI"
+      } ],
+      "webhookType": "FLEXIBLE",
+      "httpMethod": "POST",
+      "requestBody": "{\n  \"sessionInfo\": {\n    \"dfcx_session_id\": \"$session.params.dfcx_session_id\",\n    \"agent_id\": \"$session.params.agent_id\",\n    \"parameters\": {\n      \"calendarIdentifier\": \"$session.params.calendarIdentifier\",\n      \"day\": \"$session.params.day\",\n      \"estimatedStartTime\": \"$session.params.estimatedStartTime\",\n      \"interval\": \"$session.params.interval\",\n      \"language\": \"$session.params.language\",\n      \"omf_selections\": \"$session.params.omf_selections\"\n    }\n  },\n  \"fulfillmentInfo\": {\n    \"tag\": \"selected-interval\"\n  },\n  \"languageCode\": \"$request.language\"\n}",
+      "parameterMapping": [ {
+        "key": "omf_selected_interval_response",
+        "value": "sessionInfo.parameters.omf_selected_interval_response"
+      }, {
+        "key": "webhook_success",
+        "value": "sessionInfo.parameters.webhook_success"
+      } ]
+    }
+  }
+}

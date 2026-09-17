@@ -1,0 +1,69 @@
+{
+  "name": "092f6a0e-2e29-460b-b4e8-f2153e4b34f4",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Quel est le fabricant?\n"
+    }
+  }, {
+    "userUtterance": {
+      "text": "iphone"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "La plupart des appareils achetés par l’intermédiaire de Bell sont couverts par une garantie limitée du fabricant. Avez-vous acheté votre appareil au cours des 12 derniers mois?\n"
+    }
+  }, {
+    "userUtterance": {
+      "text": "11 mois"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Pour toute question sur la garantie de votre iPhone, veuillez visiter un magasin Apple ou leur site Web pour en savoir plus.\nJe peux vous envoyer un lien pour vous aider avec vos questions concernant la garantie d’Apple. Est-ce que ça vous convient?\n"
+    }
+  }, {
+    "userUtterance": {
+      "text": "oui"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "fr-ca",
+        "sms_content": "Bell : Vous pouvez visiter checkcoverage.apple.com/?locale=fr_CA  pour des informations détaillées au sujet de la garantie de votre iPhone. ( bell.ca/apropos )",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "customer is inquiring about defective device",
+    "actionParameters": {
+      "brand": "bell",
+      "device_issue": "Defective",
+      "language": "fr-ca",
+      "noinput_flag": "True",
+      "route": "equipment_warranty_claim",
+      "utterance": "Je ne vois pas les pixels à l'écran, ce sont des pixels morts."
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "customer is asked manufacturer and proceed further manufacturer warranty logic",
+    "actionParameters": {
+      "brand": "bell",
+      "device_issue": "Defective",
+      "language": "fr-ca",
+      "manufacturer": "Apple",
+      "noinput_flag": "True",
+      "route": "equipment_warranty_claim",
+      "sms_content": "de Bell: Vous pouvez consulter le site https://checkcoverage.apple.com/?locale=fr CA garantie de votre iPhone. (bell.ca/apropos) pour valider la",
+      "sms_type": "Public"
+    }
+  },
+  "displayName": "FR-equipment_warranty_claim-id-pass-device-issue-defective-no-manufacturer-apple-sms(yes)",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 503,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "fr"
+}

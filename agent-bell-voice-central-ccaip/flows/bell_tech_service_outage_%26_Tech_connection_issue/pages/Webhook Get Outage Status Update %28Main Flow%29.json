@@ -1,0 +1,76 @@
+{
+  "name": "d5a07824-4b7b-4892-95dd-6433ae85a230",
+  "displayName": "Webhook Get Outage Status Update (Main Flow)",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "v1/digital-tools/outage-check#status-update",
+    "tag": "status-update",
+    "setParameterActions": [ {
+      "parameter": "pf_id",
+      "value": "$session.params.oc_start_response.pf_id"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.webhook_success = true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "outage_counter",
+        "value": "$sys.func.ADD($session.params.outage_counter,1)"
+      } ]
+    },
+    "targetPage": "is_finished = true? (Main Flow)",
+    "name": "3af4e0d9-5f1b-4681-8387-b8e8da9ba5b7"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Failed Outage Check",
+    "name": "cleanup-hardstop-route"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Failed Outage Check",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+    
+    },
+    "name": "a0ce0195-4df2-4004-87f3-9af06c96b367"
+  }, {
+    "targetPage": "Failed Outage Check",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+    
+    },
+    "name": "4213d0fb-a1fa-4485-9cb9-9055686eaa95"
+  }, {
+    "targetPage": "Failed Outage Check",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+    
+    },
+    "name": "71967d11-a36f-4a77-a719-2ed41aa67d80"
+  }, {
+    "targetPage": "Failed Outage Check",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+    
+    },
+    "name": "f0222d20-9a3b-47d1-a240-9f16daade006"
+  }, {
+    "targetPage": "Failed Outage Check",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+    
+    },
+    "name": "b0eda4fa-7c8e-4fc9-92c8-d33ca7867a78"
+  }, {
+    "targetPage": "Failed Outage Check",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+    
+    },
+    "name": "45c55d25-b302-4085-9073-a28089f13ab2"
+  } ]
+}

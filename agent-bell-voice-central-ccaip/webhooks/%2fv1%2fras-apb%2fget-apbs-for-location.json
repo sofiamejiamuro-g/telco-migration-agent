@@ -1,0 +1,27 @@
+{
+  "name": "3599c67e-be22-4352-a3dc-eddba2f81440",
+  "displayName": "/v1/ras-apb/get-apbs-for-location",
+  "timeout": {
+    "seconds": 10
+  },
+  "serviceDirectory": {
+    "service": "projects/gcp-it-npe-pltfm-apigee/locations/us-central1/namespaces/apigee-nb-usc1-service-dir-namespace/services/apigee-nb-usc1-service",
+    "genericWebService": {
+      "uri": "https://apigee-nane1-uat.int.bell.ca/v1/ras-apb/get-apbs-for-location",
+      "requestHeaders": [ {
+        "key": "x-apikey",
+        "value": "npZmDivP6Hxes3wtQ0tC9RqItjJTY8TgZHbOPNeFwvSYSKPI"
+      } ],
+      "webhookType": "FLEXIBLE",
+      "httpMethod": "POST",
+      "requestBody": "{\n  \"sessionInfo\": {\n    \"dfcx_session_id\": \"$request.session-id\",\n    \"agent_id\": \"$session.params.agent_id\",\n    \"parameters\": {\n      \"apb_location_id\": \"$session.params.apb_location_id\",\n      \"clid\": \"$session.params.clid\",\n      \"call_id\": \"$session.params.call_id\",\n      \"cirn\": \"$session.params.cirn\"\n    }\n  },\n  \"languageCode\": \"$request.language\"\n}",
+      "parameterMapping": [ {
+        "key": "get_ras_apb_response",
+        "value": "sessionInfo.parameters.get_ras_apb_response"
+      }, {
+        "key": "webhook_success",
+        "value": "sessionInfo.parameters.webhook_success"
+      } ]
+    }
+  }
+}

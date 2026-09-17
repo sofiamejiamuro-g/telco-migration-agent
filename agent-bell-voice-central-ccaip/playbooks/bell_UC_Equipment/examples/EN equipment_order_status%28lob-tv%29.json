@@ -1,0 +1,55 @@
+{
+  "name": "a2cd6172-1530-48d1-8ccd-c20d36c29398",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Are you looking to track your TV remote order or other TV equipment?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "tv remote"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Got it, you can view and check the status of your device order on the MyBell. I'll send a text to the device you are calling from, so that you can track your shipment. Is that alright?\n"
+    }
+  }, {
+    "userUtterance": {
+      "text": "yes"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "en",
+        "sms_content": "You can visit https://www.bell.ca/shipping-tracker to track your order in the My Bell app ( bell.ca/about-us )",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "customer is inquiring about their tv order and {lob} is tv",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "lob": "tv",
+      "route": "equipment_order_status",
+      "utterance": "can you plz help me tracking my TV order"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "VA follows as per given instructions",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "lob": "tv"
+    }
+  },
+  "displayName": "EN equipment_order_status(lob-tv)",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 323,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

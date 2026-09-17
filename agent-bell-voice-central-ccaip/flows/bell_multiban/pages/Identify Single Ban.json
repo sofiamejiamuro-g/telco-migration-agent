@@ -1,0 +1,129 @@
+{
+  "name": "dae1eda2-5053-4e13-9a40-b6bf7d2a3baf",
+  "displayName": "Identify Single Ban",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.account_number = $session.params.smb_ban",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "billing_account_number",
+        "value": "$session.params.smb_ban"
+      }, {
+        "parameter": "billing_account_number_ref",
+        "value": "$sys.func.CONCATENATE(\"REF\", $sys.func.TO_TEXT($session.params.billing_account_number))"
+      } ]
+    },
+    "targetFlow": "bell_va_to_ivr_handoff_BBM_BNM_SMB",
+    "name": "fc49f450-f2fd-453a-82da-fe1c5410ae77"
+  }, {
+    "condition": "$session.params.account_number = $session.params.ccc_ban",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "billing_account_number",
+        "value": "$session.params.ccc_ban"
+      }, {
+        "parameter": "customer_data",
+        "value": "$sys.func.FILTER(\"$session.params.customer_id_search_response\",$sys.func.CONCATENATE(\"$..billing_accounts[?(@.billing_account_number == '\",$sys.func.TO_TEXT($session.params.billing_account_number),\"')]\"))"
+      }, {
+        "parameter": "billing_account_info_list",
+        "value": "$sys.func.TO_OBJECT(   $sys.func.TO_TEXT($session.params.customer_data[0]) )"
+      }, {
+        "parameter": "is_prepaid",
+        "value": "$session.params.billing_account_info_list.services[0].is_prepaid"
+      }, {
+        "parameter": "identification_status",
+        "value": "Pass"
+      }, {
+        "parameter": "customer_type",
+        "value": "Existing"
+      }, {
+        "parameter": "business_type",
+        "value": "CCC"
+      }, {
+        "parameter": "billing_account_number_ref",
+        "value": "$sys.func.CONCATENATE(\"REF\", $sys.func.TO_TEXT($session.params.billing_account_number))"
+      } ]
+    },
+    "targetFlow": "bell_va_to_ivr_handoff",
+    "name": "878ea06d-8a2d-4ea6-bb30-cf18fe2e7c4e"
+  }, {
+    "condition": "$session.params.region = ATL OR $session.params.region = MTS",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_va_to_ivr_handoff",
+    "name": "4af4517f-d405-4cd0-a4cb-b147aef8c26f"
+  }, {
+    "condition": "$session.params.BBM = true",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_va_to_ivr_handoff_BBM_BNM_SMB",
+    "name": "824908fb-ced2-4fbb-afcd-4d36df7c7d93"
+  }, {
+    "condition": "$session.params.account_number_present? = True OR $session.params.route = regional_ban OR $session.params.account_number_present? = true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "billing_account_number",
+        "value": "$sys.func.TO_NUMBER($session.params.account_number)"
+      }, {
+        "parameter": "billing_account_number_ref",
+        "value": "$sys.func.CONCATENATE(\"REF\", $sys.func.TO_TEXT($session.params.billing_account_number))"
+      } ]
+    },
+    "targetPage": "Account Found",
+    "name": "743e84fe-6d34-4d7d-a5cc-48b8f4e9d667"
+  }, {
+    "condition": "$session.params.CCC = true",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_va_to_ivr_handoff",
+    "name": "dae5c9d5-6f77-4e74-acd1-0bf9c1381baa"
+  }, {
+    "condition": "$session.params.account_number_present? = False",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Sorry, I can’t find your account. But don't worry, let's continue." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je ne trouve malheureusement pas votre compte. Rassurez-vous, on peut continuer." ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "identification_status",
+        "value": "Fail"
+      } ]
+    },
+    "targetPage": "End Flow",
+    "name": "b8a49176-7d82-4dc8-a5f6-6f96e0286e9b"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "dae1eda2-5053-4e13-9a40-b6bf7d2a3baf"
+      }, {
+        "parameter": "flow_id",
+        "value": "1ecd0a71-8b39-47fa-8bfa-16c0e2425d74"
+      }, {
+        "parameter": "page_name",
+        "value": "Identify Single Ban"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

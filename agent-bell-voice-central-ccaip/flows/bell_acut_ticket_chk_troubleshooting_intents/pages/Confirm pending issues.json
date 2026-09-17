@@ -1,0 +1,53 @@
+{
+  "name": "5c48f128-34b2-4791-8a1e-ee684b8b550e",
+  "displayName": "Confirm pending issues",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "messages": [ {
+      "text": {
+        "text": [ "Are you still experiencing issues with your service?" ]
+      },
+      "languageCode": "en"
+    }, {
+      "text": {
+        "text": [ " Rencontrez-vous toujours des problèmes avec votre service?" ]
+      },
+      "languageCode": "fr-ca"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "intent": "context.confirm_yes",
+    "condition": "$session.params.from_flow = \"bell_vr_kickout\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_aqd",
+    "name": "05a4ad94-3ac9-4dee-bc54-177999b9f2b4"
+  }, {
+    "intent": "context.confirm_yes",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Let's continue to help you troubleshooting your issues." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "D’accord, commençons le dépannage ." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetFlow": "bell_tech_service_outage_\u0026_Tech_connection_issue",
+    "name": "a680dc53-1923-4de3-9f25-0e444d22ff89"
+  }, {
+    "intent": "context.confirm_no",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_Feedback",
+    "name": "ab9b9e6e-a571-4cb9-8c89-288f294922fa"
+  } ]
+}

@@ -1,0 +1,56 @@
+{
+  "name": "476dba75-b9ed-45bd-b308-1883f5281727",
+  "displayName": "Language Based SMS",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.language = \"en\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "sms_type",
+        "value": "Public"
+      }, {
+        "parameter": "sms_content",
+        "value": "You can visit https://m.bell.ca/ecmanagepayment  to make a payment in the MyBell app. ( bell.ca/about-us )"
+      } ]
+    },
+    "targetFlow": "bell_SMS Trigger",
+    "name": "7ffd4720-fe5f-4e21-9044-483704d058f5"
+  }, {
+    "condition": "$session.params.language = \"fr-ca\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "sms_type",
+        "value": "Public"
+      }, {
+        "parameter": "sms_content",
+        "value": "Vous pouvez visiter https://m.bell.ca/ecgererpaiement  pour effectuer un paiement dans l'application MonBell."
+      } ]
+    },
+    "targetFlow": "bell_SMS Trigger",
+    "name": "d673100c-f1d4-4720-a3d8-c942f8a4970c"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "476dba75-b9ed-45bd-b308-1883f5281727"
+      }, {
+        "parameter": "flow_id",
+        "value": "5f9ad0a8-5f25-4bd1-96dd-a2b5b74312df"
+      }, {
+        "parameter": "page_name",
+        "value": "Language Based SMS"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

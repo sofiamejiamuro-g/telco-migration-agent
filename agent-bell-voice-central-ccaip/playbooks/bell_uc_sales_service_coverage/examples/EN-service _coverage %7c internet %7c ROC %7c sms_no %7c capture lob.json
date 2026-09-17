@@ -1,0 +1,55 @@
+{
+  "name": "a6904c17-b8f2-4af1-8747-8b009995b553",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Let's check if we offer Internet and Home phone service in your area. In which province are you looking to get service?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "ROC"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Get blazing-fast speeds on the Bell network with Bell Mobile Internet. Where you can get up to 5G internet connectivity with a mobile hotspot device so you can stay connected at home or on the go.\nI'll send a text to the device you're calling from, so that you can learn more and easily place an order on our website. Is that alright?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "No, thanks"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "en",
+        "route": "sales_confirm_service_coverage",
+        "sms_send_status": "Declined"
+      },
+      "outputActionParameters": {
+        "language": "en"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "User wants to know about service coverage in their area for internet connection",
+    "actionParameters": {
+      "language": "en",
+      "province": "ROC",
+      "route": "sales_confirm_service_coverage",
+      "utterance": "do you have internet service in SK"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "The playbook analyzed the utterance, successfully inferred the line of business as \"Internet\" directly from the request without asking the user for clarification, and extracted the {province} value. Based on this information, the playbook routed the interaction to ${FLOW:bell_get_sdl_mapping_url} followed by ${FLOW:bell_Feedback}.",
+    "actionParameters": {
+      "language": "en",
+      "lob": "Internet",
+      "province": "ROC",
+      "utterance": "do you have internet service in SK"
+    }
+  },
+  "displayName": "EN-service _coverage | internet | ROC | sms_no | capture lob",
+  "retrievalStrategy": "STATIC",
+  "tokenCount": 415,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

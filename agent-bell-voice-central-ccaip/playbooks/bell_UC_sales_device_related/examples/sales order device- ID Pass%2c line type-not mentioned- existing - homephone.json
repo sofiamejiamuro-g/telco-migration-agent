@@ -1,0 +1,75 @@
+{
+  "name": "9d7451bf-a997-4cf2-931a-1840b0fce792",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "brand": "bell",
+        "language": "en"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Are you inquiring about a new service or do you want to make changes to your current service?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "existing"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Which service are you inquiring about?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "homephone"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Sorry, we don't sell any Home phone equipment. However, we do offer Home phone service. Can I connect you with an agent to learn more about our Home phone packages?\n"
+    }
+  }, {
+    "userUtterance": {
+      "text": "no"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_Feedback",
+      "inputActionParameters": {
+        "brand": "bell",
+        "language": "en"
+      },
+      "outputActionParameters": {
+        "language": "en"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "customer wants to order a new device",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "en",
+      "route": "sales_order_device",
+      "utterance": "I want to order a new device"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "if user says no to connect with agent then reroute to feedback flow",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "lob": "Homephone"
+    }
+  },
+  "displayName": "sales order device- ID Pass, line type-not mentioned- existing - homephone",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 409,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

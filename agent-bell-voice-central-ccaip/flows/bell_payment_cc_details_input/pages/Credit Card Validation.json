@@ -1,0 +1,104 @@
+{
+  "name": "7be84bf9-5783-45ef-992d-b2cbe74427c2",
+  "displayName": "Credit Card Validation",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.check_credit_card_number = false AND $session.params.no_match_counter \u003c 2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Sorry, but the card number entered is not valid. Could you please double-check the number and try again?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Désolé, mais le numéro de carte entré n’est pas valide. Pourriez-vous vérifier le numéro et réessayer?" ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "card_number",
+        "value": null
+      }, {
+        "parameter": "no_match_counter",
+        "value": "$sys.func.ADD($session.params.no_match_counter,1)"
+      } ]
+    },
+    "targetPage": "Prompt CC Number",
+    "name": "d22a78c4-6395-4402-86ea-e3bffd5533fd"
+  }, {
+    "condition": "$session.params.no_match_counter \u003e= 2 AND $session.params.check_credit_card_number = false",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "The card number you entered still isn't valid. To keep your things secure, we ask that you please try again later. You can also easily make a one time payment at any point using the MyBell app." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Le numéro de carte que vous avez entré n’est toujours pas valide. Pour assurer la sécurité de vos renseignements, nous vous demandons de réessayer plus tard. Vous pouvez également effectuer facilement un paiement unique à tout moment à l’aide de l’appli MonBell." ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "card_number",
+        "value": null
+      }, {
+        "parameter": "no_match_counter",
+        "value": "$sys.func.ADD($session.params.no_match_counter,1)"
+      } ]
+    },
+    "targetPage": "Prompt CX SMS",
+    "name": "ce728f29-fc1e-4d4c-bcaa-1bae70448062"
+  }, {
+    "condition": "$session.params.check_credit_card_number = true",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_payment_dts_token",
+    "name": "12b4055c-9ec7-40b4-b319-80a087ce8536"
+  }, {
+    "condition": "$session.params.dts_token_details_response != null",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "card_brand",
+        "value": "$session.params.dts_token_details_response.card_brand"
+      }, {
+        "parameter": "cc_token",
+        "value": "$session.params.dts_token_details_response.token"
+      }, {
+        "parameter": "expired_count",
+        "value": 0
+      }, {
+        "parameter": "no_match_counter",
+        "value": 0
+      } ]
+    },
+    "targetPage": "Confirm CX CC Number",
+    "name": "eed27bf7-699a-4a6c-ac1f-1f46ddb2defe"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "7be84bf9-5783-45ef-992d-b2cbe74427c2"
+      }, {
+        "parameter": "flow_id",
+        "value": "a059ee3e-a2ae-4118-bc6a-65f7330baa63"
+      }, {
+        "parameter": "page_name",
+        "value": "Credit Card Validation"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

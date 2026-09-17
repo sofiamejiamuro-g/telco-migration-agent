@@ -1,0 +1,87 @@
+{
+  "name": "84c96e3b-89c5-4953-ab27-cf67dcbc9ed7",
+  "displayName": "suspendedFraud_statActvRsnCode_check",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.statActvRsnCode = \"FRD\" OR $session.params.statActvRsnCode = \"FRA\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "special_queue",
+        "value": "bell_sus_fraud"
+      } ]
+    },
+    "targetPage": "0 Second No Input to AQD",
+    "name": "017063a7-a8b9-4d4a-8c57-7d6f8c7b004c"
+  }, {
+    "condition": "$session.params.statActvRsnCode != \"FRD\" AND $session.params.statActvRsnCode != \"FRA\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook-AUL Data Check- soc-info-list",
+    "name": "d5c9615d-7cb6-41d9-8995-0b32759a6f2d"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "84c96e3b-89c5-4953-ab27-cf67dcbc9ed7"
+      }, {
+        "parameter": "flow_id",
+        "value": "d35b61b6-c884-44f8-b5c7-aed63cc356ab"
+      }, {
+        "parameter": "page_name",
+        "value": "suspendedFraud_statActvRsnCode_check"
+      } ]
+    },
+    "targetPage": "0 Second No Input to AQD",
+    "name": "cleanup-hardstop-route"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Webhook-AUL Data Check- soc-info-list",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+    
+    },
+    "name": "228c10ab-604d-4e84-a9d0-e5cbb7596b5f"
+  }, {
+    "targetPage": "Webhook-AUL Data Check- soc-info-list",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+    
+    },
+    "name": "c7d72b04-c2ff-45f1-b136-33e93d0c9b2e"
+  }, {
+    "targetPage": "Webhook-AUL Data Check- soc-info-list",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+    
+    },
+    "name": "83290412-e47d-4cea-bc3d-bf95ac100bfb"
+  }, {
+    "targetPage": "Webhook-AUL Data Check- soc-info-list",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+    
+    },
+    "name": "02f0bfbf-b159-4a06-8732-28f33b41f141"
+  }, {
+    "targetPage": "Webhook-AUL Data Check- soc-info-list",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+    
+    },
+    "name": "8ed12eb6-5475-444d-8b24-fcea379faed9"
+  }, {
+    "targetPage": "Webhook-AUL Data Check- soc-info-list",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+    
+    },
+    "name": "529b2d14-6ce1-469d-ae02-ca6a8f6dc70b"
+  } ]
+}

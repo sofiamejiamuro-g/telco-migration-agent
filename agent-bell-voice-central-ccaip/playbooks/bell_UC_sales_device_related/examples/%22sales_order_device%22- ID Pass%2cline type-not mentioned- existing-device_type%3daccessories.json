@@ -1,0 +1,63 @@
+{
+  "name": "cd365316-ffce-47cd-b308-a8de3f4af00e",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "brand": "bell",
+        "language": "en"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "I'll send a text to the device you're calling from, so that you can learn more about all sorts of accessories that Bell has to offer. Is that alright?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "ok"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "brand": "bell",
+        "language": "en",
+        "sms_content": "Bell: You can visit bell.ca/phoneaccessories to view our phone accessories. ( bell.ca/about-us )",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "The customer has questions about needing the latest phone accessories",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "Existing",
+      "device_type": "accessories",
+      "identification_status": "Pass",
+      "language": "en",
+      "line_type": "Existing",
+      "route": "sales_order_device",
+      "utterance": "Show me the latest phone accessories"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Because the utterance identified the device as a phone, the user was initially directed to the bell_apb flow. After the user agreed to receive a text message, they were then transferred to the bell_SMS Trigger flow.",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "line_type": "Existing"
+    }
+  },
+  "displayName": "\"sales_order_device\"- ID Pass,line type-not mentioned- existing-device_type=accessories",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 420,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

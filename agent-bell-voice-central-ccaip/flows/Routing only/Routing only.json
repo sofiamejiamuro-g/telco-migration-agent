@@ -1,0 +1,287 @@
+{
+  "name": "8e47d952-b705-4eab-8f8d-aeb591f62bda",
+  "displayName": "Routing only",
+  "description": "A start flow created along with the agent",
+  "transitionRoutes": [ {
+    "condition": "($session.params.NGA = \"true\" OR $session.params.NGA = true) AND $session.params.utterance != null",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "handoff_from",
+        "value": "feedback"
+      } ]
+    },
+    "targetFlow": "nga_handling",
+    "name": "3a61993a-db48-4d02-a38e-0b5f15ccdd3b"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "utterance",
+        "value": "$request.user-utterance"
+      } ],
+      "nextActionOverride": {
+      
+      }
+    },
+    "name": "c9e67769-88e5-453d-a5c0-c2eb00351960",
+    "targetPlaybook": "bell_NLU_Query_Rewriter"
+  } ],
+  "eventHandlers": [ {
+    "event": "sys.no-match-default",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I didn't get that. Can you say it again?", "I missed what you said. What was that?", "Sorry, could you say that again?", "Sorry, can you say that again?", "Can you say that again?", "Sorry, I didn't get that. Can you rephrase?", "Sorry, what was that?", "One more time?", "What was that?", "Say that one more time?", "I didn't get that. Can you repeat?", "I missed that, say that again?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "J'ai du mal à comprendre cette question.", "J'ai mal compris votre demande.", "Je n'ai pas saisi ce que vous avez dit.", "Je crois que je ne vous suis pas.", "Je ne comprends pas de quoi vous me parlez." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "J'ai du mal à comprendre cette question.", "J'ai mal compris votre demande.", "Je n'ai pas saisi ce que vous avez dit.", "Je crois que je ne vous suis pas.", "Je ne comprends pas de quoi vous me parlez." ]
+        },
+        "languageCode": "fr"
+      } ]
+    },
+    "name": "a9e492c9-a76f-49b9-a861-37cd4afe4d5e"
+  }, {
+    "event": "sys.no-input-default",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I didn't get that. Can you say it again?", "I missed what you said. What was that?", "Sorry, could you say that again?", "Sorry, can you say that again?", "Can you say that again?", "Sorry, I didn't get that. Can you rephrase?", "Sorry, what was that?", "One more time?", "What was that?", "Say that one more time?", "I didn't get that. Can you repeat?", "I missed that, say that again?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "J'ai du mal à comprendre cette question.", "J'ai mal compris votre demande.", "Je n'ai pas saisi ce que vous avez dit.", "Je crois que je ne vous suis pas.", "Je ne comprends pas de quoi vous me parlez." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "J'ai du mal à comprendre cette question.", "J'ai mal compris votre demande.", "Je n'ai pas saisi ce que vous avez dit.", "Je crois que je ne vous suis pas.", "Je ne comprends pas de quoi vous me parlez." ]
+        },
+        "languageCode": "fr"
+      } ]
+    },
+    "name": "eaef0404-a5d1-4ae1-b93d-1342b803e4d0"
+  }, {
+    "event": "sys.no-input-1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Sorry, I didn’t quite get that. Can you try again?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Désolé, je n'ai pas bien compris. Pourriez-vous réessayer?" ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "nextActionOverride": {
+      
+      }
+    },
+    "name": "53886601-dd11-42f7-95aa-543f2a6e668b"
+  }, {
+    "event": "sys.no-input-2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Are you still there? Can you repeat please?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Êtes-vous toujours là? Pouvez-vous répèter?" ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "nextActionOverride": {
+      
+      }
+    },
+    "name": "073c1e0e-51da-4a42-bcd9-9ab99f457d2b"
+  }, {
+    "targetFlow": "bell_No_Input_3",
+    "event": "sys.no-input-3",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "\u003cspeak\u003eYou can check out our frequently asked questions at \u003csay-as interpret-as=\"url\"\u003ebell.ca/prepaid-support\u003c/say-as\u003e\u003c/speak\u003e" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "\u003cspeak\u003eVous pouvez consulter notre foire aux questions sur  \u003csay-as interpret-as=\"url\"\u003ebell.ca/soutien-prepaye\u003c/say-as\u003e\u003c/speak\u003e" ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "nextActionOverride": {
+      
+      }
+    },
+    "name": "577e19e9-ecf4-438c-938b-dd52f279b01b"
+  }, {
+    "event": "sys.no-match-1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Sorry, I didn't understand. What was that?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je suis désolé, je n'ai pas bien saisie. Qu'est-ce que vous avez dit?" ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "nextActionOverride": {
+      
+      }
+    },
+    "name": "6a742fa1-1cc5-4f89-9042-f58a027b65b5"
+  }, {
+    "event": "sys.no-match-2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I’m having trouble understanding. Can you repeat please?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "J'ai du mal à comprendre. Pouvez-vous répéter s'il vous plaît?" ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "nextActionOverride": {
+      
+      }
+    },
+    "name": "dc9317ed-1c4d-4821-9e64-1506812d478a"
+  }, {
+    "targetFlow": "bell_No_Match_3",
+    "event": "sys.no-match-3",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "\u003cspeak\u003eI still didn’t get that. You can check out our frequently asked questions at \u003csay-as interpret-as=\"url\"\u003ebell.ca/prepaid-support\u003c/say-as\u003e\u003c/speak\u003e" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "\u003cspeak\u003eExcusez-moi, je n'ai toujours pas compris. Vous pouvez consulter notre foire aux questions sur \u003csay-as interpret-as=\"url\"\u003ebell.ca/soutien-prepaye\u003c/say-as\u003e\u003c/speak\u003e" ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "nextActionOverride": {
+      
+      }
+    },
+    "name": "e6b94b3d-06d3-4dce-8675-59ece012d7aa"
+  }, {
+    "targetPage": "End Session",
+    "event": "wrapup",
+    "triggerFulfillment": {
+    
+    },
+    "name": "efeca4d8-ec31-48c2-8228-7144e4509665"
+  } ],
+  "nluSettings": {
+    "modelType": "MODEL_TYPE_CUSTOM",
+    "classificationThreshold": 0.44999999,
+    "modelTrainingMode": "MODEL_TRAINING_MODE_MANUAL",
+    "multiIntentSettings": {
+    
+    }
+  },
+  "advancedSettings": {
+    "enabled": true,
+    "playbackInterruptionSettings": {
+    
+    }
+  },
+  "nluSettingsList": [ {
+    "modelType": "MODEL_TYPE_CUSTOM",
+    "classificationThreshold": 0.44999999,
+    "modelTrainingMode": "MODEL_TRAINING_MODE_MANUAL",
+    "multiIntentSettings": {
+    
+    },
+    "languageCode": "en"
+  }, {
+    "modelType": "MODEL_TYPE_CUSTOM",
+    "classificationThreshold": 0.44999999,
+    "modelTrainingMode": "MODEL_TRAINING_MODE_MANUAL",
+    "multiIntentSettings": {
+    
+    },
+    "languageCode": "fr-ca"
+  } ],
+  "inputParameterDefinitions": [ {
+    "name": "utterance",
+    "description": "utterance",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "STRING"
+      }
+    },
+    "parameterType": {
+      "name": "utterance",
+      "openapiJsonSchema": {
+        "type": "string"
+      }
+    }
+  }, {
+    "name": "language",
+    "description": "language",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "STRING"
+      }
+    },
+    "parameterType": {
+      "name": "language",
+      "openapiJsonSchema": {
+        "type": "string"
+      }
+    }
+  } ],
+  "outputParameterDefinitions": [ {
+    "name": "utterance",
+    "description": "utterance",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "STRING"
+      }
+    },
+    "parameterType": {
+      "name": "utterance",
+      "openapiJsonSchema": {
+        "type": "string"
+      }
+    }
+  }, {
+    "name": "language",
+    "description": "language",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "STRING"
+      }
+    },
+    "parameterType": {
+      "name": "language",
+      "openapiJsonSchema": {
+        "type": "string"
+      }
+    }
+  } ],
+  "multiLanguageSettings": {
+  
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "name": "69751029-5f36-4b14-a3d8-81d5e3860763",
+  "displayName": "v1/ticket_management/acut/search",
+  "timeout": {
+    "seconds": 20
+  },
+  "serviceDirectory": {
+    "service": "projects/gcp-it-npe-pltfm-apigee/locations/us-central1/namespaces/apigee-nb-usc1-service-dir-namespace/services/apigee-nb-usc1-service",
+    "genericWebService": {
+      "uri": "https://apigee-nane1-uat.int.bell.ca/v1/ticket_management/acut/search",
+      "requestHeaders": [ {
+        "key": "x-apikey",
+        "value": "npZmDivP6Hxes3wtQ0tC9RqItjJTY8TgZHbOPNeFwvSYSKPI"
+      } ],
+      "webhookType": "FLEXIBLE",
+      "httpMethod": "POST",
+      "requestBody": "{\n  \"sessionInfo\": {\n    \"dfcx_session_id\": \"$session.params.dfcx_session_id\",\n    \"agent_id\": \"$session.params.agent_id\",\n    \"parameters\": {\n      \"brand\": \"$session.params.brand\",\n      \"callKey\": \"$session.params.callKey\",\n      \"telephone_number\": \"$session.params.telephone_number\",\n      \"otp\": \"$session.params.otp\"\n    }\n  },\n  \"fulfillmentInfo\": {\n    \"tag\": \"validate-otp\"\n  },\n  \"languageCode\": \"$request.language\"\n}",
+      "parameterMapping": [ {
+        "key": "otp_validation_response",
+        "value": "sessionInfo.parameters.otp_validation_response"
+      }, {
+        "key": "webhook_success",
+        "value": "sessionInfo.parameters.webhook_success"
+      } ]
+    }
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "name": "2a1cb01a-2f39-4fbf-b09d-daf890de32ce",
+  "displayName": "Tech intent apb / Auth check",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "True",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_tech_intent_apb",
+    "name": "8b499bc7-a0eb-43bf-9349-30918e483847"
+  }, {
+    "condition": "$session.params.identification_status = null",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_Identification",
+    "name": "82b65bb8-7814-4df4-a9c3-69da0503aae9"
+  }, {
+    "condition": "$session.params.identification_status = \"Fail\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "ID / Auth Failure",
+    "name": "1ca9b441-7c49-462f-8516-7230915f388e"
+  }, {
+    "condition": "$session.params.auth_status = null",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_authentication",
+    "name": "1ddddf63-27cc-48b8-93fd-2269ae83278e"
+  }, {
+    "condition": "$session.params.auth_status = \"Pass\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Check LOB",
+    "name": "4560e5b3-a837-46d1-acfe-e384ee43b61f"
+  }, {
+    "condition": "$session.params.auth_status = \"Fail\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "ID / Auth Failure",
+    "name": "2c6dcaec-f6dc-4e0d-88c2-676bab5f2a76"
+  } ]
+}

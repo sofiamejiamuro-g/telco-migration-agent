@@ -1,0 +1,247 @@
+{
+  "name": "3dd3e595-bf2b-4de9-b983-671a2425bf47",
+  "displayName": "EPA-1250 Wrong PIN Entry",
+  "testCaseConversationTurns": [ {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "hi"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "triggeredIntent": {
+        "name": "Default Welcome Intent"
+      },
+      "currentPage": {
+        "name": "Get Tester Id",
+        "flow": "bell_test_wrapper"
+      },
+      "textResponses": [ {
+        "text": [ "Please enter your Tester ID using the phone's keypad now." ],
+        "allowPlaybackInterruption": true
+      } ],
+      "currentFlow": {
+        "name": "bell_test_wrapper"
+      }
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "122"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "currentPage": {
+        "name": "Get Spoof TFN",
+        "flow": "bell_test_wrapper"
+      },
+      "textResponses": [ {
+        "text": [ "Tester ID lookup webhook succeeded." ]
+      }, {
+        "text": [ "Welcome Sujoy!" ]
+      }, {
+        "text": [ "Please enter the spoof TFN for your test." ],
+        "allowPlaybackInterruption": true
+      } ],
+      "currentFlow": {
+        "name": "bell_test_wrapper"
+      }
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "8889992321"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "currentPage": {
+        "name": "Get Spoof CLID",
+        "flow": "bell_test_wrapper"
+      },
+      "textResponses": [ {
+        "text": [ "TFN lookup Webhook succeeded." ]
+      }, {
+        "text": [ "Please enter the spoof CLID for your test." ],
+        "allowPlaybackInterruption": true
+      } ],
+      "currentFlow": {
+        "name": "bell_test_wrapper"
+      }
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "9055163171"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "currentPage": {
+        "name": "Get CX Input",
+        "flow": "bell_Identification"
+      },
+      "textResponses": [ {
+        "text": [ "\u003cspeak\u003eI'm Bell's virtual assistant, I use artificial intelligence to learn. \u003cbreak time=\"1s\"/\u003e\u003c/speak\u003e" ]
+      }, {
+        "text": [ "Are you calling about the account associated with number you’re calling from?" ],
+        "allowPlaybackInterruption": true
+      } ],
+      "currentFlow": {
+        "name": "bell_Identification"
+      }
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "no"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "triggeredIntent": {
+        "name": "context.confirm_no"
+      },
+      "currentPage": {
+        "name": "CIRN Collection Check",
+        "flow": "bell_Identification"
+      },
+      "textResponses": [ {
+        "text": [ "If you're looking to order a new service, please say 'new service.'  Otherwise, what’s the 10-digit phone number associated with your service?" ],
+        "allowPlaybackInterruption": true
+      } ],
+      "currentFlow": {
+        "name": "bell_Identification"
+      }
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "521767842"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "currentPage": {
+        "name": "Routing Page",
+        "flow": "Default Start Flow"
+      },
+      "textResponses": [ {
+        "text": [ "\u003cspeak\u003eThanks! \u003cbreak time=\"1s\"/\u003e\u003c/speak\u003e" ],
+        "allowPlaybackInterruption": true
+      }, {
+        "text": [ "How can I help you?" ],
+        "allowPlaybackInterruption": true
+      } ],
+      "currentFlow": {
+        "name": "Default Start Flow"
+      }
+    }
+  }, {
+    "userInput": {
+      "injectedParameters": {
+        "test_auth": true
+      },
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "i want to authenticate"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "sessionParameters": {
+        "test_auth": true
+      },
+      "triggeredIntent": {
+        "name": "context.user.authentication"
+      },
+      "currentPage": {
+        "name": "PIN Auth - Start",
+        "flow": "bell_authentication"
+      },
+      "textResponses": [ {
+        "text": [ "To help with that, I need to make sure I'm talking to the right person. I see you have a PIN number on file. Please enter your 4-digit PIN." ],
+        "allowPlaybackInterruption": true
+      } ],
+      "currentFlow": {
+        "name": "bell_authentication"
+      }
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": " 1358"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "currentPage": {
+        "name": "PIN Auth - Start",
+        "flow": "bell_authentication"
+      },
+      "textResponses": [ {
+        "text": [ "That doesn't seem to match your 4-digit PIN. Can you please try again?" ],
+        "allowPlaybackInterruption": true
+      } ],
+      "currentFlow": {
+        "name": "bell_authentication"
+      }
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": " 1358"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "currentPage": {
+        "name": "Routing Page",
+        "flow": "Default Start Flow"
+      },
+      "textResponses": [ {
+        "text": [ "Unfortunately, that's not the correct PIN." ],
+        "allowPlaybackInterruption": true
+      } ],
+      "currentFlow": {
+        "name": "Default Start Flow"
+      }
+    }
+  } ],
+  "creationTime": {
+    "seconds": 1756398427,
+    "nanos": 403886000
+  },
+  "testConfig": {
+    "flow": "Default Start Flow",
+    "page": "Start Page"
+  },
+  "languageCode": "en"
+}

@@ -1,0 +1,56 @@
+{
+  "name": "36f9b913-f4eb-4225-bc5c-3040433e3fba",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "language": "en"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Sure, let me help you with that.\nLet's check if we offer Internet and Home phone service in your area. In which province are you looking to get service?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Ontario"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_aqd",
+      "inputActionParameters": {
+        "language": "en"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "The customer is asking whether the provider's service is offered at an address or location.",
+    "actionParameters": {
+      "language": "en",
+      "lob": "Internet",
+      "province": "BC",
+      "route": "sales_confirm_service_coverage",
+      "utterance": "Do I have full internet service in BC?"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "When province is anything other than ON and QC or is null or empty, ask user for province, extract in {province} parameter and further route based on province",
+    "actionParameters": {
+      "language": "en",
+      "lob": "Internet",
+      "province": "ON",
+      "utterance": "Do I have full internet service in BC?"
+    }
+  },
+  "displayName": "EN-sales_service_coverage-streaming_service_not_captured | internet | prov_on/qc",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 364,
+  "languageCode": "en"
+}

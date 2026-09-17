@@ -1,0 +1,55 @@
+{
+  "name": "c219f72c-e3bd-4069-ac3b-95ad387445fc",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_aqd",
+      "inputActionParameters": {
+        "language": "fr-ca",
+        "lob": "Internet",
+        "special_queue": "bell_sales_to_atl"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "The Customer wants to sign up or open a new account with Bell AND province is \"ATL\" or any synonym of this",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "New",
+      "identification_status": "Fail",
+      "language": "fr-ca",
+      "lob": "Internet",
+      "province": "NB",
+      "route": "sales_new_account",
+      "utterance": "j'aimerais faire affaire avec vous pour mon internet"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "We need to check the result from identification flow from the webhook NPANXX, if it is \"ATL\" then call bell_aqd flow and set special_queue =\nbell_sales_to_mts",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "New",
+      "identification_status": "Fail",
+      "language": "fr-ca",
+      "special_queue": "bell_sales_to_atl"
+    }
+  },
+  "displayName": "FR - sales_new_account- ID Fail, customer_type-new- ATL",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 374,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

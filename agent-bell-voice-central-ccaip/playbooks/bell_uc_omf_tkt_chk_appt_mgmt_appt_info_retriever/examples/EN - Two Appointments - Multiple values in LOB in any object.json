@@ -1,0 +1,78 @@
+{
+  "name": "90bb0ce0-a302-4b2c-84d2-f723ce584b7f",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "I found 2 appointments on your order. One is for your Internet and Television services on Thursday, April 30 between 12 PM and 5 PM. The next is for your Wireline service on Friday, May 29 between 8 AM and 12 PM. And remember, a technician can arrive 5 minutes before the end of the appointment and finish later."
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_ticket_mgmt_omf_ticket_check_appointment_mgmt",
+      "inputActionParameters": {
+        "appointments_count": "2",
+        "info_retrieval_done": "true",
+        "line_of_business_multiple": {
+          "Internet,Television": "Intcon,Iptvcon",
+          "Wireline": "Wlcon"
+        }
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "The user is inquiring about their scheduled service appointments. The system has already retrieved the appointment data and stored it in the {merged_calendar_context} parameter as a JSON array. The user's language preference is stored in the {language} parameter. The agent now needs to process this technical data into a human-readable summary and present it to the user.",
+    "actionParameters": {
+      "language": "en",
+      "merged_calendar_context": [ {
+        "calendarReference": "Intcon,Iptvcon",
+        "customerWork": [ {
+          "Internet": "Yes"
+        }, {
+          "Television": "Yes"
+        } ],
+        "cutoffTime": "11:30:00Z",
+        "date": "2026-04-30Z",
+        "endTime": "17:00:00Z",
+        "fieldWork": [ {
+          "Internet": "No"
+        }, {
+          "Television": "No"
+        } ],
+        "interval": "PM",
+        "lineOfBusiness": "Internet,Television",
+        "startTime": "12:00:00Z"
+      }, {
+        "calendarReference": "Wlcon",
+        "customerWork": [ {
+          "Wireline": "Yes"
+        } ],
+        "cutoffTime": "07:30:00Z",
+        "date": "2026-05-29Z",
+        "endTime": "12:00:00Z",
+        "fieldWork": [ {
+          "Wireline": "Yes"
+        } ],
+        "interval": "AM",
+        "lineOfBusiness": "Wireline",
+        "startTime": "08:00:00Z"
+      } ]
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "The agent analyzes the {merged_calendar_context} to count appointments and iterates through each object to extract and transform the line of business, date, and time into a 12-hour format without leading zeros. It aggregates all extracted services into the {line_of_business_multiple} parameter and displays the formatted appointment details and technician disclaimer to the user in their preferred language.",
+    "actionParameters": {
+      "appointments_count": "2",
+      "info_retrieval_done": "true",
+      "line_of_business_multiple": {
+        "Internet,Television": "Intcon,Iptvcon",
+        "Wireline": "Wlcon"
+      }
+    }
+  },
+  "displayName": "EN - Two Appointments - Multiple values in LOB in any object",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 680,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

@@ -1,0 +1,88 @@
+{
+  "name": "d8b3a9a8-c78a-42d1-8180-3ceb68e89b1e",
+  "displayName": "Ticket check",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.n_omf_tickets \u003e 0 AND $session.params.n_acut_tickets \u003e 0",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "CX confirmation on ACUT or OMF",
+    "name": "8199739a-60c8-432a-8c98-dab64cb89d1a"
+  }, {
+    "condition": "$session.params.n_omf_tickets \u003e 1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I found an order related to your $session.params.recent_service_type1. Is this the ticket you are calling about?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "J’ai trouvé une commande liée à votre $session.params.recent_service_type1. S’agit-il du billet pour lequel vous appelez?" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetPage": "CX confirmation on OMF ticket",
+    "name": "0387c52c-065b-4310-bf13-30cc9a37c64e"
+  }, {
+    "condition": "$session.params.n_acut_tickets \u003e 1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I see you have a ticket that was opened on $session.params.date_formatted. Is this the ticket you are calling about?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je vois que vous avez un billet qui a été ouvert le $session.params.date_formatted. S’agit-il du billet pour lequel vous appelez?" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetPage": "CX confirmation on ACUT ticket",
+    "name": "e3751d37-c233-4c17-961a-bd175a687395"
+  }, {
+    "condition": "$session.params.n_acut_tickets = 1",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "ticket_state",
+        "value": "$session.params.ticket_state1"
+      }, {
+        "parameter": "ticket_number",
+        "value": "$session.params.ticket_number1"
+      }, {
+        "parameter": "ticket_number_ref",
+        "value": "$sys.func.CONCATENATE(\"REF\", $sys.func.TO_TEXT($session.params.ticket_number))"
+      } ]
+    },
+    "targetFlow": "Bell_appt_mgmt_acut_ticket_chk",
+    "name": "12326296-f7d9-4e3a-a8d5-5258656cddcb"
+  }, {
+    "condition": "$session.params.n_omf_tickets = 1",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "order_identifier",
+        "value": "$session.params.order_identifier1"
+      }, {
+        "parameter": "internet_order_reference",
+        "value": "$session.params.internet_order_reference1"
+      } ]
+    },
+    "targetFlow": "bell_ticket_mgmt_omf_ticket_check_appointment_mgmt",
+    "name": "1fc748f0-1277-409f-b58b-0c263db21682"
+  }, {
+    "condition": "True",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook ACUT find - finalized",
+    "name": "b753fbef-c1af-4e5f-bcc3-1e9359c8f47c"
+  } ]
+}

@@ -1,0 +1,78 @@
+{
+  "name": "c291d1a0-3d5f-4160-aacb-3bf3b0ed9455",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Pour résoudre ce problème, vous devez effectuer cette étape maintenant. Veuillez vérifier si la batterie est bien insérée dans le modem et si elle charge.\n\nVeuillez effectuer cette étape et dites-moi quand vous avez terminé."
+    }
+  }, {
+    "userUtterance": {
+      "text": "Qu'est-ce qu'un modem ?"
+    }
+  }, {
+    "toolUse": {
+      "tool": "FR_Bell_vr_cda_faq",
+      "action": "FR_Bell_vr_cda_faq",
+      "inputActionParameters": {
+        "requestBody": {
+          "query": "6013"
+        }
+      },
+      "outputActionParameters": {
+        "200": {
+          "answer": "Q : Qu'est-ce qu'un modem ? R : Un appareil qui vous permet de vous connecter à Internet.Q : Qu'est-ce qu'un cordon d'alimentation ? R : Un petit cordon noir avec un embout rond qui se branche sur une prise électrique et alimente le modem.Q : Quelle incidence cela a-t-il sur mes services ? R : Vos services seront temporairement indisponibles une fois le câble d'alimentation débranché. Q : Que faisons-nous lors de ces étapes ? R : Nous redémarrons votre modem pour voir si le redémarrage du système permettra l'installation des mises à jour du modem et résoudra votre problème. Q : Comment effectuer l’étape 1 ? R : Localisez votre modem et débranchez le câble d'alimentation à l'arrière.Q : Comment effectuer l’étape 2 ? R : Attendez 30 secondes et rebranchez le câble d'alimentation. Q : Comment effectuer l’étape 3 ? R : Les voyants à l'avant clignoteront pendant que le modem effectue sa séquence de démarrage. Cela peut prendre jusqu'à cinq minutes.",
+          "snippets": [ {
+            "text": "",
+            "title": "6013",
+            "uri": ""
+          } ]
+        }
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Un modem est un appareil qui vous permet de vous connecter à Internet. Quand vous êtes prêt, pouvez-vous regarder et me dire si vous avez pu effectuer la vérification ?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "D'accord, c'est fait."
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Merci de m'en informer. Je vérifie maintenant quelle sera la prochaine étape."
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_vr_post_answer",
+      "inputActionParameters": {
+        "customer_answer1_id": "0"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "User having a problem with the service and initiating Virtual repair session.",
+    "actionParameters": {
+      "acceptable_answers": [ {
+        "choice": "CDA:endNow:success",
+        "id": 0
+      }, {
+        "choice": "CDA:gotoStep1",
+        "id": 1
+      } ],
+      "dcx_action_code": "6013",
+      "language": "fr-ca",
+      "more_info": "",
+      "title": "Checking if the battery is inserted and charging in the modem",
+      "vr_type": "CDA"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "The bot prompted a troubleshooting step. The user interrupted with an FAQ, which the bot addressed via the ${TOOL:FR_Bell_vr_cda_faq} tool. Following the response, the user acknowledged that the step was completed."
+  },
+  "displayName": "CDA - User asks a relevant question (FAQ) (french)",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 790,
+  "languageCode": "en"
+}

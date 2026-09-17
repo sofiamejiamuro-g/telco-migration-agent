@@ -1,0 +1,126 @@
+{
+  "name": "a4f42224-7ae2-463b-a975-0791f8286683",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "I see you're having some trouble with your internet. Just to understand better, is it that your internet is really slow, you’re getting frequent disconnections, or is it something else?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "I just want it fixed now"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "I definitely want to get this fixed for you. To do that, I need to know which of those issues matches best. Is it slow speeds, the connection dropping in and out,  or is it something else?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Whatever, just help me."
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Thanks for letting me know. I'm now checking what the next step is."
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_vr_post_answer",
+      "inputActionParameters": {
+        "customer_answer1_id": "1",
+        "customer_answer2_id": "5"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "User having a problem with the service and initiating Virtual repair session.",
+    "actionParameters": {
+      "acceptable_answers": [ {
+        "choice": "Home phone",
+        "id": "0",
+        "sub-choices": [ {
+          "choice": "My Home Phone has no dial tone.",
+          "id": "0"
+        }, {
+          "choice": "My Home Phone line is noisy.",
+          "id": "1"
+        }, {
+          "choice": "My Home Phone features aren’t working.",
+          "id": "2"
+        }, {
+          "choice": "I can’t receive phone calls.",
+          "id": "3"
+        }, {
+          "choice": "I'm not sure what's wrong.",
+          "id": "4"
+        }, {
+          "choice": "None of the above.",
+          "id": "5"
+        } ],
+        "title": "What type of problem are you experiencing with your Home phone service?"
+      }, {
+        "choice": "Internet",
+        "id": "1",
+        "sub-choices": [ {
+          "choice": "My modem won't turn on.",
+          "id": "0"
+        }, {
+          "choice": "I’m experiencing frequent disconnections.",
+          "id": "1"
+        }, {
+          "choice": "My Internet service is slow.",
+          "id": "2"
+        }, {
+          "choice": "My streaming services don’t work.",
+          "id": "3"
+        }, {
+          "choice": "I'm not sure what's wrong.",
+          "id": "4"
+        }, {
+          "choice": "None of the above.",
+          "id": "5"
+        } ],
+        "title": "What type of problem are you experiencing with your Internet service?"
+      }, {
+        "choice": "TV",
+        "id": "2",
+        "sub-choices": [ {
+          "choice": "Image quality issues.",
+          "id": "0"
+        }, {
+          "choice": "My Bell Fibe TV apps aren’t working.",
+          "id": "1"
+        }, {
+          "choice": "Some of my channels are missing or not working.",
+          "id": "2"
+        }, {
+          "choice": "My receiver isn’t working.",
+          "id": "3"
+        }, {
+          "choice": "My Bell Fibe TV remote isn’t working.",
+          "id": "4"
+        }, {
+          "choice": "None of the above.",
+          "id": "5"
+        } ],
+        "title": "What type of problem are you experiencing with your TV service?"
+      }, {
+        "choice": "All services",
+        "id": "3",
+        "sub-choices": [ ],
+        "title": ""
+      } ],
+      "dcx_action_code": "6590",
+      "language": "en",
+      "title": "Internet is not working",
+      "vr_type": "CFB"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "This multi-turn scenario demonstrates the logic for dcx_action_code 6590 when a user is persistently vague. It shows the first \"Nudge\" (Strike 1) followed by the mandatory \"Fallback\" (Strike 2). On the second non-match, the bot must map the user to \"None of the above,\" use the mandatory phrase, and trigger the post-answer flow."
+  },
+  "displayName": "CFB - 6590 - two strike fallback",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 910,
+  "languageCode": "en"
+}

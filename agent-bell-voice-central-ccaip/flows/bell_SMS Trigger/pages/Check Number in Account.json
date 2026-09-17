@@ -1,0 +1,34 @@
+{
+  "name": "d9770d51-d949-435f-9f03-2cfe539842cd",
+  "displayName": "Check Number in Account",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "setParameterActions": [ {
+      "parameter": "contact_numbers_list",
+      "value": "$sys.func.FILTER(\"$session.params.customer_id_search_response\", \"$.[*].users[*].contact_number\")"
+    }, {
+      "parameter": "is_in_account",
+      "value": "$sys.func.CONTAIN($session.params.contact_numbers_list, $session.params.phone_number)"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.is_in_account = true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "webhook_success",
+        "value": null
+      } ]
+    },
+    "targetPage": "Check SMS Type",
+    "name": "75ad8290-425f-42c8-b734-fa93e1cd35e9"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Confirm Number",
+    "name": "d6401dbd-5257-4444-9b11-d1827022d02b"
+  } ]
+}

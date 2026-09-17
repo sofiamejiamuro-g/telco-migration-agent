@@ -1,0 +1,29 @@
+{
+  "name": "e2dd253d-d947-4e20-8e28-71909ef10eb4",
+  "displayName": "dispute_bill SMS Declined",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_authentication",
+    "name": "9f968e10-8027-44dc-930d-356cea1490df"
+  }, {
+    "condition": "$session.params.auth_status = \"Fail\" OR $session.params.identification_status = \"Fail\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_aqd",
+    "name": "7377b6bd-59e7-4466-ade0-3413f5e4d61d"
+  }, {
+    "condition": "$session.params.auth_status = \"Pass\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "APB Check",
+    "name": "2d41f7c4-5c42-4e29-8f42-6c6c252d8bc1"
+  } ]
+}

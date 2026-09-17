@@ -1,0 +1,78 @@
+{
+  "name": "4f81fa57-e731-4579-8480-e6ec3ee7e1df",
+  "displayName": "Webhook Get balance details",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "v1/account-information/get-account-balance-details",
+    "tag": "N/A"
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.webhook_success = true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "last_payment_amount",
+        "value": "$session.params.balance_payment_details_response.brs_postpaid_details.last_payment_amount"
+      }, {
+        "parameter": "last_payment_date",
+        "value": "$session.params.balance_payment_details_response.brs_postpaid_details.last_payment_date"
+      }, {
+        "parameter": "last_payment_date",
+        "value": "$sys.func.MID($session.params.last_payment_date,1,10)"
+      } ]
+    },
+    "targetPage": "Check previous payments",
+    "name": "2af646f7-0970-464b-a4cd-99d5ed725584"
+  }, {
+    "condition": "$session.params.webhook_success = false",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_aqd",
+    "name": "8f146621-916b-4600-87f2-4bb267d55ebc"
+  } ],
+  "eventHandlers": [ {
+    "targetFlow": "bell_aqd",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+    
+    },
+    "name": "688752a7-1298-42da-8172-cdce5d760f9b"
+  }, {
+    "targetFlow": "bell_aqd",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+    
+    },
+    "name": "b97c9c94-623e-48e8-acca-6f0ca58b9e1c"
+  }, {
+    "targetFlow": "bell_aqd",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+    
+    },
+    "name": "85adfdd8-0ac4-4b0e-ad9b-eb33f7d17f5e"
+  }, {
+    "targetFlow": "bell_aqd",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+    
+    },
+    "name": "b0d2e55e-dd20-4c58-bd39-085b43b34821"
+  }, {
+    "targetFlow": "bell_aqd",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+    
+    },
+    "name": "fccd3009-2a47-4500-b9fe-8c5c9446a3a1"
+  }, {
+    "targetFlow": "bell_aqd",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+    
+    },
+    "name": "cb97f97d-5ee2-4f25-af55-816932760d58"
+  } ]
+}

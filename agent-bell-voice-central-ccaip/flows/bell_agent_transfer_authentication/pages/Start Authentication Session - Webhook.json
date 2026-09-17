@@ -1,0 +1,83 @@
+{
+  "name": "04a25904-250a-4ad7-acb3-fff925972790",
+  "displayName": "Start Authentication Session - Webhook",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "v1/customer-authentication#start-auth-session",
+    "tag": "start-auth-session",
+    "setParameterActions": [ {
+      "parameter": "brand",
+      "value": "Bell"
+    }, {
+      "parameter": "billing_account",
+      "value": "$session.params.billing_account_number"
+    }, {
+      "parameter": "calling_number",
+      "value": "$session.params.CIRN"
+    } ],
+    "returnPartialResponses": true
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.webhook_success = \"True\" OR $session.params.webhook_success = True",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "callKey",
+        "value": "$session.params.auth_options_response.callKey"
+      } ]
+    },
+    "targetPage": "Check Identification Status",
+    "name": "e94bd930-83ae-4eb3-aa50-5be28c382aec"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook start-auth-session Error",
+    "name": "a81f0780-8c69-4c74-8e7f-b348ae31db09"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Webhook start-auth-session Error",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+    
+    },
+    "name": "543eb245-b495-49c0-9aa1-18027d39e764"
+  }, {
+    "targetPage": "Webhook start-auth-session Error",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+    
+    },
+    "name": "4cc4be4a-5432-47c9-ad85-3b9bf8dba85e"
+  }, {
+    "targetPage": "Webhook start-auth-session Error",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+    
+    },
+    "name": "d1227f3a-b7e7-4748-9047-b1f4dad9b960"
+  }, {
+    "targetPage": "Webhook start-auth-session Error",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+    
+    },
+    "name": "777beed6-6890-4d8b-988b-86723f318731"
+  }, {
+    "targetPage": "Webhook start-auth-session Error",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+    
+    },
+    "name": "e8046cd7-b962-4ba2-a2ae-0ca7569bdccb"
+  }, {
+    "targetPage": "Webhook start-auth-session Error",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+    
+    },
+    "name": "57700128-1fdc-4a2d-b42e-c72d73259053"
+  } ]
+}

@@ -1,0 +1,119 @@
+{
+  "name": "0f94e188-0491-43f5-9423-9c203091a5d6",
+  "displayName": "Webhook Send Transfer Data",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "/v1/ivr-transfer/send-transfer-data#agent-transfer",
+    "tag": "agent-transfer",
+    "setParameterActions": [ {
+      "parameter": "department",
+      "value": "$session.params.department_id"
+    }, {
+      "parameter": "cti_rt",
+      "value": "$session.params.route"
+    }, {
+      "parameter": "cti_sd",
+      "value": "$session.params.tfn"
+    }, {
+      "parameter": "call_id",
+      "value": "$session.params.call_id"
+    }, {
+      "parameter": "dam_id",
+      "value": "$session.params.dam_id"
+    }, {
+      "parameter": "clid",
+      "value": "$session.params.clid"
+    }, {
+      "parameter": "account_type",
+      "value": "$session.params.account_type"
+    }, {
+      "parameter": "cti_at",
+      "value": "$session.params.cti_at"
+    }, {
+      "parameter": "apb_transfer_location",
+      "value": "$session.params.apb_location_id"
+    }, {
+      "parameter": "tag",
+      "value": "agent-transfer"
+    }, {
+      "parameter": "lob",
+      "value": null
+    }, {
+      "parameter": "_empty_string",
+      "value": ""
+    }, {
+      "parameter": "cti_rt",
+      "value": "$sys.func.IF(\"$session.params.route = $session.params._empty_string\" , other_speak_to_agent, $session.params.route)"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.webhook_success = True",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Let me check for an available agent. I'll likely be silent for some time during the transfer. You'll know it's successful when you're greeted again. Please stay on the line. Thanks!" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Laissez-moi vérifier si un agent est disponible. Il se peut que je ne réponde pas pendant un certain temps au cours du transfert.  Vous saurez que l’opération a réussi lorsque nous vous ferons de nouveau signe. Veuillez rester en ligne. Merci!" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetFlow": "bell_Live Agent Handoff",
+    "name": "00f37e3d-2e39-46ee-b190-c3c9f2ed1179"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "AQD Error",
+    "name": "0b600726-2e5d-48ea-baa0-c8cb4b6e3d6c"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "AQD Error",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+    
+    },
+    "name": "07fa4c17-bd65-46dc-9ec7-71cc3589c6fe"
+  }, {
+    "targetPage": "AQD Error",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+    
+    },
+    "name": "4042c68f-1be6-47ab-825e-838018750b71"
+  }, {
+    "targetPage": "AQD Error",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+    
+    },
+    "name": "66f9a5a0-9583-4fdb-a554-40b89c19f0c6"
+  }, {
+    "targetPage": "AQD Error",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+    
+    },
+    "name": "789b3752-b4df-4adb-98f4-d6bb0c9490ee"
+  }, {
+    "targetPage": "AQD Error",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+    
+    },
+    "name": "2eb322cd-389d-46a0-81ef-3a4af0c0422d"
+  }, {
+    "targetPage": "AQD Error",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+    
+    },
+    "name": "335d4198-c636-40e0-9072-ea59d8e0a22b"
+  } ]
+}

@@ -1,0 +1,96 @@
+{
+  "name": "795a46c5-04b4-4925-af90-e78dded8af76",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "brand": "bell",
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": " Désirez-vous ajouter un nouveau service ou modifier votre service actuel?\n"
+    }
+  }, {
+    "userUtterance": {
+      "text": " service actuel\n"
+    }
+  }, {
+    "agentUtterance": {
+      "text": " À propos de quel service communiquez-vous avec nous?\n"
+    }
+  }, {
+    "userUtterance": {
+      "text": "une nouvelle prestation"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Pour mieux vous aider."
+    }
+  }, {
+    "playbookInvocation": {
+      "playbook": "bell_uc_ask_LOB",
+      "playbookInput": {
+        "actionParameters": {
+          "language": "fr-ca",
+          "route": "sales_order_device"
+        }
+      },
+      "playbookOutput": {
+        "actionParameters": {
+          "language": "fr-ca",
+          "lob": "Mobility",
+          "route": "sales_order_device"
+        }
+      },
+      "playbookState": "OUTPUT_STATE_OK"
+    }
+  }, {
+    "playbookInvocation": {
+      "playbook": "bell_UC_Equipment",
+      "playbookInput": {
+        "precedingConversationSummary": "follow the instructions under the route \"equipment_upgrade_device\"",
+        "actionParameters": {
+          "device_type": "Mobile Phone",
+          "language": "fr-ca",
+          "route": "equipment_upgrade_device"
+        }
+      },
+      "playbookOutput": {
+        "actionParameters": {
+          "language": "fr-ca"
+        }
+      },
+      "playbookState": "OUTPUT_STATE_OK"
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer has questions about device availability, device features, cost, related to devices that Bell sells",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "Existing",
+      "language": "fr-ca",
+      "route": "sales_order_device",
+      "utterance": "à qui je dois parler pour l'achat d'un nouvel appareil"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "from the identification flow, know the customer_type as \"Existing\", we already know from query that we have {lob} as mobility and {device_type} as phone , if it is mobility then reroute to  \"equipment_upgrade_device\"",
+    "actionParameters": {
+      "language": "fr-ca",
+      "line_type": "Existing",
+      "lob": "Mobility",
+      "route": "equipment_upgrade_device"
+    }
+  },
+  "displayName": "FR-sales order_device- ID Pass,line type-not mentioned- existing-mobility or phones",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 611,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

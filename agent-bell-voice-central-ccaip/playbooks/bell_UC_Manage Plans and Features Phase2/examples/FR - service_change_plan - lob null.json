@@ -1,0 +1,55 @@
+{
+  "name": "36216adb-b34b-4d58-8895-d038f0de6072",
+  "actions": [ {
+    "playbookInvocation": {
+      "playbook": "bell_uc_ask_LOB",
+      "playbookInput": {
+        "precedingConversationSummary": "Passing the user {utterance} to extract the parameter {lob} when {identification_status} is \"Pass\" and {lob} is null",
+        "actionParameters": {
+          "brand": "bell",
+          "identification_status": "Pass",
+          "language": "fr-ca",
+          "route": "service_change_plan",
+          "utterance": "Je souhaite mettre à niveau mon forfait mobilité"
+        }
+      },
+      "playbookOutput": {
+        "executionSummary": "returns the parameter {lob} based on user input provided or {utterance}",
+        "actionParameters": {
+          "identification_status": "Pass",
+          "language": "fr-ca",
+          "lob": "Mobility",
+          "utterance": "Je souhaite mettre à niveau mon forfait mobilité"
+        }
+      },
+      "playbookState": "OUTPUT_STATE_OK"
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "The customer requesting to modify there existing service plan and if parameter {lob} is null in session then we need to call PLAYBOOK:bell_uc_ask_LOB to extract the lob value",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "fr-ca",
+      "route": "service_change_plan",
+      "utterance": "Je souhaite mettre à niveau mon forfait mobilité"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "User is rerouted to check lob playbook to extract the parameter \"lob\" and return back",
+    "actionParameters": {
+      "brand": "bell",
+      "identification_status": "Pass",
+      "language": "fr-ca",
+      "lob": "Mobility",
+      "route": "service_change_plan",
+      "utterance": "Je souhaite mettre à niveau mon forfait mobilité"
+    }
+  },
+  "displayName": "FR - service_change_plan - lob null",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 391,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "undetected"
+}

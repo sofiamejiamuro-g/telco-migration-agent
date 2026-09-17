@@ -1,0 +1,100 @@
+{
+  "name": "030e965b-e2f2-4347-a37e-31ae8bb1c5d4",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70024",
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+        "language": "fr-ca"
+      }
+    }
+  }, {
+    "playbookInvocation": {
+      "playbook": "bell_uc_ask_LOB",
+      "playbookInput": {
+        "actionParameters": {
+          "language": "fr-ca",
+          "utterance": "Je voyage et je dois utiliser mon téléphone."
+        }
+      },
+      "playbookOutput": {
+        "actionParameters": {
+          "language": "fr-ca",
+          "lob": "Mobility"
+        }
+      },
+      "playbookState": "OUTPUT_STATE_OK"
+    }
+  }, {
+    "toolUse": {
+      "tool": "FR_Bell_Manage_plans_and_features",
+      "action": "FR_Bell_Manage_plans_and_features",
+      "inputActionParameters": {
+        "requestBody": {
+          "query": "Qu'est-ce qui est inclus dans Voyagez mieux ? et Qu'est-ce qui est inclus dans un Passeport Voyage ?"
+        }
+      },
+      "outputActionParameters": {
+        "200": {
+          "answer": "L'option Voyagez mieux inclut les appels et messages texte illimités vers le Canada et à l'intérieur de votre destination, ainsi que l'accès aux données de votre forfait, pour 13 $/jour aux États-Unis et 16 $/jour dans plus de 200 destinations à l'étranger. Les Passeports Voyage comprennent des appels et messages texte illimités à l’intérieur de votre destination et vers le Canada, ainsi que l’accès aux données de votre forfait.",
+          "snippets": [ {
+            "text": "[Qu'est-ce qui est compris dans l'option Voyagez mieux?](javascript:void(0))Grâce à l'option Voyagez mieux, vous avez accès aux données de votre forfait pendant que vous voyagez, ainsi qu'à des appels et messages texte illimités vers le Canada et à l'intérieur de votre destination, pour 13 $/jour aux États-Unis et 16 $/jour dans plus de 200 destinations à l'étranger.",
+            "title": "Options voyage | Bell Mobilité | Bell Canada",
+            "uri": "https://www.bell.ca/Mobilite/Carte_de_couverture#:~:text=%5BQu'est%2Dce%20qui%20est,destinations%20%C3%A0%20l'%C3%A9tranger."
+          }, {
+            "text": "Si vous avez l'option Voyagez mieux : Voyagez mieux — avec données locales * L'option Voyagez mieux — avec données locales comprend les appels illimités ainsi que les messages texte illimités aux États-Unis (y compris à Porto Rico et dans les îles Vierges américaines) et vers plus de 200 destinations internationales, et vers le Canada.",
+            "title": "Comment utiliser mon téléphone mobile à l'extérieur du Canada et quels seront les frais? Soutien | Bell",
+            "uri": "https://soutien.bell.ca/Mobilite/Reseau_couverture/Ou_puis_je_utiliser_mon_telephone_mobile_a_lexterieur_du_Canada_et_quels_seront_les_frais#:~:text=Si%20vous%20avez,vers%20le%20Canada."
+          } ]
+        }
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "L'option Voyagez mieux inclut les appels et messages texte illimités vers le Canada et à l'intérieur de votre destination, ainsi que l'accès aux données de votre forfait, pour 13 $/jour aux États-Unis et 16 $/jour dans plus de 200 destinations à l'étranger. Les Passeports Voyage comprennent des appels et messages texte illimités à l’intérieur de votre destination et vers le Canada, ainsi que l’accès aux données de votre forfait.\n\nSouhaitez-vous en savoir plus à ce sujet?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "non"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_Feedback",
+      "inputActionParameters": {
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "The customer inquired about \"I'm traveling and need to use my phone\"",
+    "actionParameters": {
+      "brand": "bell",
+      "identification_status": "pass",
+      "language": "fr-ca",
+      "lob": "Mobility",
+      "route": "service_feature_inquiry",
+      "utterance": "Je voyage et je dois utiliser mon téléphone."
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Information about What’s included in Roam Better? and What’s included in  Travel Pass? was provided from data store",
+    "actionParameters": {
+      "add_ons": "travel pass",
+      "brand": "bell",
+      "language": "fr-ca",
+      "route": "service_feature_inquiry",
+      "utterance": "Je voyage et je dois utiliser mon téléphone."
+    }
+  },
+  "displayName": " FR_service_feature_inquiry_ I'm traveling and need to use my phone",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 1155,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

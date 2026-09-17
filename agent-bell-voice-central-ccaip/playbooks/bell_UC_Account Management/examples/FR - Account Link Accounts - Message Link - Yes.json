@@ -1,0 +1,53 @@
+{
+  "name": "4ec412f8-0a57-403e-9c4a-16dc10baebb9",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Je vais envoyer un texto à l'appareil au moyen duquel vous appelez, afin que vous puissiez facilement lier les comptes et les services à MonBell. Est-ce que ça vous convient?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Oui"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "brand": "bell",
+        "language": "fr-ca",
+        "route": "account_link_accounts",
+        "sms_content": "Bell: Vous pouvez visiter https://m.bell.ca/associerservice pour associer un compte dans l'appli MonBell. (bell.ca/apropos)",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+        "brand": "bell",
+        "language": "fr-ca",
+        "sms_content": "Bell: Vous pouvez visiter https://m.bell.ca/associerservice pour associer un compte dans l'appli MonBell. (bell.ca/apropos)",
+        "sms_type": "Public"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "The customer is looking to link their accounts into one single account respond in fr-ca only",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca",
+      "route": "account_link_accounts",
+      "utterance": "Je souhaite lier mes comptes"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "The user asks to link accounts and is prompted with an appropriate response, the user agrees to receive a message and is routed to bell_SMS trigger flow and respond in fr-ca only",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca",
+      "route": "account_link_accounts",
+      "sms_content": "Bell: Vous pouvez visiter https://m.bell.ca/associerservice pour associer un compte dans l'appli MonBell. (bell.ca/apropos)",
+      "sms_type": "Public"
+    }
+  },
+  "displayName": "FR - Account Link Accounts - Message Link - Yes",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 441,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

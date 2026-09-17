@@ -1,0 +1,47 @@
+{
+  "name": "8da55e08-a53f-434e-a478-c039ee696131",
+  "actions": [ {
+    "agentUtterance": {
+      "text": " Je peux vous aider avec plusieurs sujets de paiement. Pour vous diriger au bon endroit, veuillez me donner plus de détails sur votre demande. Par exemple, vous pourriez dire 'faire un paiement' ou 'configurer des paiements préautorisés'."
+    }
+  }, {
+    "userUtterance": {
+      "text": "J'ai effectué un paiement à Bell; puis-je obtenir un remboursement pour ce montant?"
+    }
+  }, {
+    "playbookInvocation": {
+      "playbook": "bell_UC_Payments",
+      "playbookInput": {
+        "precedingConversationSummary": "Customer looking to raise a request for a refund",
+        "actionParameters": {
+          "language": "fr-ca",
+          "route": "payment_request_refund",
+          "utterance": "J'ai effectué un paiement à Bell; puis-je obtenir un remboursement pour ce montant?"
+        }
+      },
+      "playbookOutput": {
+        "executionSummary": "Customer query is addresses and then routed to \"bell_UC_payment\" playbook for further help",
+        "actionParameters": {
+          "language": "fr-ca"
+        }
+      },
+      "playbookState": "OUTPUT_STATE_OK"
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer query about \"Payment issue\" is addressed",
+    "actionParameters": {
+      "langauge": "fr-ca",
+      "route": "payment_vague",
+      "utterance": "Problème de paiement"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Customer query is addresses and then routed to \"bell_UC_payment\" playbook for further help"
+  },
+  "displayName": "FR - payment_request_refund - Payment issue",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 341,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

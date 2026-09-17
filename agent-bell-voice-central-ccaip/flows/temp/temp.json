@@ -1,0 +1,118 @@
+{
+  "name": "80c64814-02bc-4136-aa42-50372164f6a1",
+  "displayName": "temp",
+  "transitionRoutes": [ {
+    "intent": "Default Welcome Intent",
+    "triggerFulfillment": {
+      "webhook": "/v1/ivr-transfer/send-transfer-data#dam-transfer",
+      "tag": "dam-transfer",
+      "setParameterActions": [ {
+        "parameter": "dam_id",
+        "value": "BBM"
+      }, {
+        "parameter": "call_id",
+        "value": "$session.params.call_id"
+      }, {
+        "parameter": "cirn",
+        "value": "5142580852"
+      }, {
+        "parameter": "account_type",
+        "value": "B"
+      }, {
+        "parameter": "cti_at",
+        "value": "BUSMENU"
+      }, {
+        "parameter": "cti_rt",
+        "value": "business_account"
+      }, {
+        "parameter": "cti_sd",
+        "value": "8000212355"
+      }, {
+        "parameter": "cirn",
+        "value": "$sys.func.IF(\"$session.params.cirn = null\", \"$session.params.clid\", $session.params.cirn)"
+      }, {
+        "parameter": "department",
+        "value": "955"
+      }, {
+        "parameter": "clid",
+        "value": "5142580852"
+      }, {
+        "parameter": "va_ibm_id",
+        "value": "BCE_Entry"
+      }, {
+        "parameter": "account_type",
+        "value": "B"
+      }, {
+        "parameter": "agent_id",
+        "value": "0f67e50b-0b7d-4e9c-9ebe-50557aff3f4e"
+      }, {
+        "parameter": "dfcx_session_id",
+        "value": "f12ca3-5a4-a2b-987-463832885"
+      }, {
+        "parameter": "brand",
+        "value": "Bell Residential Services"
+      } ]
+    },
+    "name": "91ed63ee-cb91-4eb9-a502-4ac6ad5f0d4c"
+  } ],
+  "eventHandlers": [ {
+    "event": "sys.no-match-default",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "J'ai du mal à comprendre cette question.", "J'ai mal compris votre demande.", "Je n'ai pas saisi ce que vous avez dit.", "Je crois que je ne vous suis pas.", "Je ne comprends pas de quoi vous me parlez." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "I didn't get that. Can you say it again?", "I missed what you said. What was that?", "Sorry, could you say that again?", "Sorry, can you say that again?", "Can you say that again?", "Sorry, I didn't get that. Can you rephrase?", "Sorry, what was that?", "One more time?", "What was that?", "Say that one more time?", "I didn't get that. Can you repeat?", "I missed that, say that again?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "J'ai du mal à comprendre cette question.", "J'ai mal compris votre demande.", "Je n'ai pas saisi ce que vous avez dit.", "Je crois que je ne vous suis pas.", "Je ne comprends pas de quoi vous me parlez." ]
+        },
+        "languageCode": "fr"
+      } ]
+    },
+    "name": "01955063-3f68-4076-b296-7b0bf85ffc6e"
+  }, {
+    "event": "sys.no-input-default",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "J'ai du mal à comprendre cette question.", "J'ai mal compris votre demande.", "Je n'ai pas saisi ce que vous avez dit.", "Je crois que je ne vous suis pas.", "Je ne comprends pas de quoi vous me parlez." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "I didn't get that. Can you say it again?", "I missed what you said. What was that?", "Sorry, could you say that again?", "Sorry, can you say that again?", "Can you say that again?", "Sorry, I didn't get that. Can you rephrase?", "Sorry, what was that?", "One more time?", "What was that?", "Say that one more time?", "I didn't get that. Can you repeat?", "I missed that, say that again?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "J'ai du mal à comprendre cette question.", "J'ai mal compris votre demande.", "Je n'ai pas saisi ce que vous avez dit.", "Je crois que je ne vous suis pas.", "Je ne comprends pas de quoi vous me parlez." ]
+        },
+        "languageCode": "fr"
+      } ]
+    },
+    "name": "9525e7cd-508f-468c-bcb9-a5e58e2e37dd"
+  } ],
+  "nluSettings": {
+    "modelType": "MODEL_TYPE_CUSTOM",
+    "classificationThreshold": 0.30000001,
+    "modelTrainingMode": "MODEL_TRAINING_MODE_MANUAL"
+  },
+  "nluSettingsList": [ {
+    "modelType": "MODEL_TYPE_CUSTOM",
+    "classificationThreshold": 0.30000001,
+    "modelTrainingMode": "MODEL_TRAINING_MODE_MANUAL",
+    "customConfigKey": "02362f0d-4337-4781-b265-81632b6ccb43",
+    "languageCode": "fr-ca"
+  }, {
+    "modelType": "MODEL_TYPE_ADVANCED",
+    "classificationThreshold": 0.30000001,
+    "customConfigKey": "02362f0d-4337-4781-b265-81632b6ccb43",
+    "languageCode": "en"
+  } ]
+}

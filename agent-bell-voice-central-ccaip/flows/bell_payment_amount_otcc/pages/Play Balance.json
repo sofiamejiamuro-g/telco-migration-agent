@@ -1,0 +1,44 @@
+{
+  "name": "057d5d90-b7fd-4501-b18b-ccfc913c0c9b",
+  "displayName": "Play Balance",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "messages": [ {
+      "text": {
+        "text": [ "Your current spending limit balance is: $session.params.curSpendingLimitBal" ]
+      },
+      "languageCode": "en"
+    }, {
+      "text": {
+        "text": [ "$session.params.curSpendingLimitBal" ]
+      },
+      "languageCode": "fr-ca"
+    } ],
+    "setParameterActions": [ {
+      "parameter": "curSpendingLimitBal",
+      "value": "$session.params.get_clp_info_response.curSpendingLimitBal"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "057d5d90-b7fd-4501-b18b-ccfc913c0c9b"
+      }, {
+        "parameter": "flow_id",
+        "value": "5f9ad0a8-5f25-4bd1-96dd-a2b5b74312df"
+      }, {
+        "parameter": "page_name",
+        "value": "Play Balance"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

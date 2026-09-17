@@ -1,0 +1,107 @@
+{
+  "name": "ed73ad79-1bbc-4d94-b40f-e26079295eeb",
+  "displayName": "User Confirmation for address",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "conditionalCases": [ {
+      "cases": [ {
+        "condition": "$session.params.sub_unit != null",
+        "caseContent": [ {
+          "message": {
+            "text": {
+              "text": [ "The address we have on file for you is $session.params.sub_unit $session.params.street_number $session.params.street_name, Is this still correct?" ]
+            },
+            "languageCode": "en"
+          }
+        }, {
+          "message": {
+            "text": {
+              "text": [ "L'adresse que nous avons dans nos dossiers pour vous est $session.params.sub_unit $session.params.street_number $session.params.street_name, est-ce toujours correct ?" ]
+            },
+            "languageCode": "fr-ca"
+          }
+        } ]
+      }, {
+        "caseContent": [ {
+          "message": {
+            "text": {
+              "text": [ "The address we have on file for you is $session.params.street_number $session.params.street_name, Is this still correct?" ]
+            },
+            "languageCode": "en"
+          }
+        }, {
+          "message": {
+            "text": {
+              "text": [ "L'adresse que nous avons dans nos dossiers pour vous est $session.params.street_number $session.params.street_name, est-ce toujours correct ?" ]
+            },
+            "languageCode": "fr-ca"
+          }
+        } ]
+      } ]
+    } ]
+  },
+  "transitionRoutes": [ {
+    "intent": "context.address_not_need_to_be_updated",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_ticket_mgmt_acut_create_a_dispatch",
+    "name": "5e982937-3e7c-41fd-b942-7a35bf3785c0"
+  }, {
+    "intent": "context.confirm_yes",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_ticket_mgmt_acut_create_a_dispatch",
+    "name": "50825edc-862d-4c46-b68e-dec752075998"
+  }, {
+    "intent": "context.address_need_to_be_updated",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_aqd",
+    "name": "2fc7d0fb-23e0-4ce6-ad80-095749ddba75"
+  }, {
+    "intent": "context.confirm_no",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_aqd",
+    "name": "510f95e6-9ada-4b13-a707-5b244ddc277a"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Local Error Handling",
+    "event": "sys.no-input-default",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "global_error_counter",
+        "value": "$sys.func.ADD($session.params.global_error_counter,1)"
+      }, {
+        "parameter": "local_trigger",
+        "value": "no_input"
+      }, {
+        "parameter": "local_noinput_counter",
+        "value": "$sys.func.ADD($session.params.local_noinput_counter,1)"
+      } ]
+    },
+    "name": "b9aa49d6-2c90-4021-ac4f-e97d2aa1908b"
+  }, {
+    "targetPage": "Local Error Handling",
+    "event": "sys.no-match-default",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "global_error_counter",
+        "value": "$sys.func.ADD($session.params.global_error_counter,1)"
+      }, {
+        "parameter": "local_nomatch_counter",
+        "value": "$sys.func.ADD($session.params.local_nomatch_counter,1)"
+      }, {
+        "parameter": "local_trigger",
+        "value": "no_match"
+      } ]
+    },
+    "name": "f0ee20c5-3535-40fe-89fe-1c7066d7c23f"
+  } ]
+}

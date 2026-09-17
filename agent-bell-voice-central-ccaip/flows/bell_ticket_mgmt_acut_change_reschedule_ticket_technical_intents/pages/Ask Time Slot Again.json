@@ -1,0 +1,96 @@
+{
+  "name": "68a5e192-afcf-46d3-b7ef-04c651fdf356",
+  "displayName": "Ask Time Slot Again",
+  "form": {
+    "parameters": [ {
+      "displayName": "time_slot",
+      "required": true,
+      "entityType": "@time_slot",
+      "fillBehavior": {
+        "initialPromptFulfillment": {
+          "conditionalCases": [ {
+            "cases": [ {
+              "condition": "$session.params.local_noinput_counter = 0 AND $session.params.local_nomatch_counter = 0",
+              "caseContent": [ {
+                "message": {
+                  "text": {
+                    "text": [ "$session.params.unav_response" ]
+                  },
+                  "languageCode": "fr-ca"
+                }
+              }, {
+                "message": {
+                  "text": {
+                    "text": [ "$session.params.dynamic_intervals_trimmed" ]
+                  },
+                  "languageCode": "fr-ca"
+                }
+              }, {
+                "message": {
+                  "text": {
+                    "text": [ "$session.params.unav_response" ]
+                  },
+                  "languageCode": "en"
+                }
+              }, {
+                "message": {
+                  "text": {
+                    "text": [ "$session.params.dynamic_intervals_trimmed" ]
+                  },
+                  "languageCode": "en"
+                }
+              } ]
+            } ]
+          } ]
+        },
+        "repromptEventHandlers": [ {
+          "targetPage": "Local Error handling + Ask Time Slot Again",
+          "event": "sys.no-match-1",
+          "triggerFulfillment": {
+            "setParameterActions": [ {
+              "parameter": "global_error_counter",
+              "value": "$sys.func.ADD($session.params.global_error_counter,1)"
+            }, {
+              "parameter": "local_nomatch_counter",
+              "value": "$sys.func.ADD($session.params.local_nomatch_counter,1)"
+            }, {
+              "parameter": "local_trigger",
+              "value": "no_match"
+            } ]
+          },
+          "name": "07196e29-c8bc-48cd-bde2-052e96352d2d"
+        }, {
+          "targetPage": "Local Error handling + Ask Time Slot Again",
+          "event": "sys.no-input-1",
+          "triggerFulfillment": {
+            "setParameterActions": [ {
+              "parameter": "global_error_counter",
+              "value": "$sys.func.ADD($session.params.global_error_counter,1)"
+            }, {
+              "parameter": "local_noinput_counter",
+              "value": "$sys.func.ADD($session.params.local_noinput_counter,1)"
+            }, {
+              "parameter": "local_trigger",
+              "value": "no_input"
+            } ]
+          },
+          "name": "bbc0893b-478c-491e-b48c-e1bb63579807"
+        } ]
+      }
+    } ]
+  },
+  "entryFulfillment": {
+    "setParameterActions": [ {
+      "parameter": "dynamic_intervals_trimmed",
+      "value": "$request.generative.dynamic_intervals_trimmed"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.time_slot = \"morning\" OR $session.params.time_slot = \"afternoon\" OR $session.params.time_slot = \"evening\" OR $session.params.time_slot = \"allday\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Interval Check",
+    "name": "16271c01-7bf1-4aa7-919e-a074cb2c6fea"
+  } ]
+}

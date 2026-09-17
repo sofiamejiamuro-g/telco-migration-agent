@@ -1,0 +1,72 @@
+{
+  "name": "be526198-8843-4959-94d2-a53097866621",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70011",
+        "brand": "bell",
+        "language": "en",
+        "route": "service_change_plan"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Are you looking to make changes to your prepaid or monthly service?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "prepaid"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_va_to_ivr_handoff_prepaid",
+      "inputActionParameters": {
+        "add_ons": "Mobility Regular Feature",
+        "identification_status": "Pass",
+        "language": "en",
+        "mobility_sub_type": "prepaid",
+        "route": "service_add_feature",
+        "utterance": "Can I get Can-Wide calls"
+      },
+      "outputActionParameters": {
+        "language": "en"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "The {identification_status} is \"Pass\", {customer_type} is \"Existing\", {streaming_services} is null and {ppv} is null and {lob} is null and {mobility_sub_type} is null and {add_ons} = \"Mobility Regular Feature\" then we will prompt user to confirm if they are talking about \"prepaid\" or \"postpaid\" service and then based on user response will set parameter {mobility_sub_type}",
+    "actionParameters": {
+      "add_ons": "Mobility Regular Feature",
+      "apb_location_id": "70011",
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "en",
+      "route": "service_add_feature",
+      "utterance": "Can I get Can-Wide calls"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "As the {lob} is null and {mobility_sub_type} is null and {add_ons} = \"Mobility Regular Feature\" then, prompt user with message \"ASK customer \"Are you looking to make changes to your prepaid or monthly service?\" and then based on user response set parameter {mobility_sub_type} based on instruction given in playbook.",
+    "actionParameters": {
+      "add_ons": "Mobility Regular Feature",
+      "apb_location_id": "70011",
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "en",
+      "mobility_sub_type": "prepaid",
+      "route": "service_add_feature",
+      "utterance": "Can I get Can-Wide calls"
+    }
+  },
+  "displayName": "EN - service_add_feature- streaming_services,ppv,lob - null-add-ons-MRF-mobility_sub_type-null-prepaid",
+  "retrievalStrategy": "NEVER",
+  "tokenCount": 598,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

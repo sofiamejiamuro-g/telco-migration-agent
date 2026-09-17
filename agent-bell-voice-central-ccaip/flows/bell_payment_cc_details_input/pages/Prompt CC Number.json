@@ -1,0 +1,184 @@
+{
+  "name": "d3438a0a-66b0-426a-9597-5e7bcb9008cf",
+  "displayName": "Prompt CC Number",
+  "form": {
+    "parameters": [ {
+      "displayName": "card_number",
+      "required": true,
+      "entityType": "@sys.number-sequence",
+      "fillBehavior": {
+        "initialPromptFulfillment": {
+          "conditionalCases": [ {
+            "cases": [ {
+              "condition": "$session.params.repeat_flag = 0 AND $session.params.card_len_check_counter = 0 AND $session.params.no_match_counter = 0 AND $session.params.mod_counter = 0 AND $session.params.faq_flag = 0 AND $session.params.wrong_cc_number_counter = 0",
+              "caseContent": [ {
+                "message": {
+                  "text": {
+                    "text": [ "Now I'm going to need your credit or Visa debit card details. I'll be reading the card details back to you so please ensure you're in a private area. When you're ready, please enter your card number using the keypad." ]
+                  },
+                  "languageCode": "en"
+                }
+              }, {
+                "message": {
+                  "text": {
+                    "text": [ "J'ai maintenant besoin de vos informations de carte de crédit ou de débit Visa. Je vous les lirai ; veuillez donc vous trouver dans un espace privé. Lorsque vous serez prêt, saisissez votre numéro de carte à l'aide du clavier." ]
+                  },
+                  "languageCode": "fr-ca"
+                }
+              } ]
+            } ]
+          } ]
+        },
+        "repromptEventHandlers": [ {
+          "event": "sys.no-match-1",
+          "triggerFulfillment": {
+            "messages": [ {
+              "text": {
+                "text": [ "I didn't get a number from you. Could you please enter your card number when you're ready?" ]
+              },
+              "languageCode": "en"
+            }, {
+              "text": {
+                "text": [ "VA: Je n’ai pas reçu de numéro de votre part. Pourriez-vous entrer votre numéro de carte lorsque vous serez prêt?" ]
+              },
+              "languageCode": "fr-ca"
+            } ]
+          },
+          "name": "c6f7a79f-156d-479c-813f-330372903ecb"
+        }, {
+          "event": "sys.no-match-2",
+          "triggerFulfillment": {
+            "messages": [ {
+              "text": {
+                "text": [ "I didn't get a number from you. Could you please enter your card number when you're ready?" ]
+              },
+              "languageCode": "en"
+            }, {
+              "text": {
+                "text": [ "Je n’ai pas obtenu de numéro de votre part. Pourriez-vous entrer votre numéro de carte lorsque vous êtes prêt?" ]
+              },
+              "languageCode": "fr-ca"
+            } ]
+          },
+          "name": "f85c541b-85dc-476d-b484-080b048e3dd7"
+        }, {
+          "event": "sys.no-input-1",
+          "triggerFulfillment": {
+            "messages": [ {
+              "text": {
+                "text": [ "I didn't get a number from you. Could you enter your\r\ncard number when you're ready?" ]
+              },
+              "languageCode": "en"
+            }, {
+              "text": {
+                "text": [ "Je n'ai pas reçu de numéro de votre part. Pourriez-vous entrer votre numéro de carte lorsque vous serez prêt?" ]
+              },
+              "languageCode": "fr-ca"
+            } ]
+          },
+          "name": "d44343a5-8409-4540-9198-d4384dc6c17e"
+        }, {
+          "event": "sys.no-input-2",
+          "triggerFulfillment": {
+            "messages": [ {
+              "text": {
+                "text": [ "I didn't get a number from you. Could you please enter your card number when you're ready?" ]
+              },
+              "languageCode": "en"
+            }, {
+              "text": {
+                "text": [ "Je n’ai pas obtenu de numéro de votre part. Pourriez-vous entrer votre numéro de carte lorsque vous êtes prêt?" ]
+              },
+              "languageCode": "fr-ca"
+            } ]
+          },
+          "name": "a6d39f87-314f-4593-a052-042ff066ab39"
+        }, {
+          "targetPage": "Prompt CX SMS",
+          "event": "sys.no-input-3",
+          "triggerFulfillment": {
+            "messages": [ {
+              "text": {
+                "text": [ "Since I didn't get a number from you, I won't be able to proceed with this step. You can call back later or you can also easily complete this step using the MyBell app." ]
+              },
+              "languageCode": "en"
+            }, {
+              "text": {
+                "text": [ "Puisque je n’ai pas reçu de numéro de votre part, je ne pourrai pas traiter votre paiement. Vous pouvez rappeler plus tard ou vous pouvez facilement effectuer un paiement à l’aide de l’appli MonBell." ]
+              },
+              "languageCode": "fr-ca"
+            } ]
+          },
+          "name": "4b973763-7d77-4469-8870-b3bf8707d066"
+        }, {
+          "targetPage": "Prompt CX SMS",
+          "event": "sys.no-match-3",
+          "triggerFulfillment": {
+            "messages": [ {
+              "text": {
+                "text": [ "Since I didn't get a number from you, I won't be able to proceed with this step. You can call back later or you can also easily complete this step using the MyBell app." ]
+              },
+              "languageCode": "en"
+            }, {
+              "text": {
+                "text": [ "Puisque je n’ai pas reçu de numéro de votre part, je ne pourrai pas traiter votre paiement. Vous pouvez rappeler plus tard ou vous pouvez facilement effectuer un paiement à l’aide de l’appli MonBell." ]
+              },
+              "languageCode": "fr-ca"
+            } ]
+          },
+          "name": "bf648819-547d-47c4-afe4-6a11b2e923d4"
+        } ]
+      },
+      "redact": true
+    } ]
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "intent": "context.user_makes_mistake",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "No worries, please say or re-enter your number when ready." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Pas de souci; veuillez dire ou saisir à nouveau votre numéro lorsque vous êtes prêt" ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "global_error_counter",
+        "value": "$sys.func.ADD(1, $session.params.global_error_counter)"
+      }, {
+        "parameter": "Mistake_Counter",
+        "value": "$sys.func.ADD(1, $session.params.Mistake_Counter)"
+      } ]
+    },
+    "name": "86384f69-b91b-41f7-9230-379889a16500"
+  }, {
+    "condition": "$page.params.status = \"FINAL\" AND $session.params.card_number != null",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "faq_flag",
+        "value": 0
+      }, {
+        "parameter": "repeat_flag",
+        "value": 0
+      }, {
+        "parameter": "check_credit_card_number",
+        "value": "$sys.func.IS_CREDIT_CARD_NUMBER($sys.func.TO_TEXT($session.params.card_number))"
+      }, {
+        "parameter": "len_credit_card_number",
+        "value": "$sys.func.LEN($sys.func.TO_TEXT($session.params.card_number))"
+      }, {
+        "parameter": "amex_check_digits",
+        "value": "$sys.func.MID($sys.func.TO_TEXT($session.params.card_number),1,2)"
+      } ]
+    },
+    "targetPage": "Credit Card Length Validation",
+    "name": "39242ee0-f296-480c-b0f8-96a961eeed6d"
+  } ]
+}

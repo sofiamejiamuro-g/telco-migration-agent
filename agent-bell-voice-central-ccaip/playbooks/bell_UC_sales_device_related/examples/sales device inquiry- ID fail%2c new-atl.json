@@ -1,0 +1,59 @@
+{
+  "name": "90a33b9d-caad-4fba-acd5-a1781656bab5",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "brand": "bell",
+        "language": "en"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Which service are you Inquiring about?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "receivers"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_aqd",
+      "inputActionParameters": {
+        "language": "Receiver",
+        "special_queue": "bell_sales_to_atl"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer has questions about device availability, device features, cost, related to devices that Bell sells",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "New",
+      "identification_status": "Fail",
+      "language": "en",
+      "province": "ATL",
+      "route": "sales_device_inquiry",
+      "utterance": "I have questions about device availability"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "We need to check the result from identification flow from the webhook NPANXX, if it is \"ATL\" then call bell_aqd flow and set special_queue =\nbell_sales_to_atl",
+    "actionParameters": {
+      "device_type": "Receiver",
+      "language": "en"
+    }
+  },
+  "displayName": "sales device inquiry- ID fail, new-atl",
+  "retrievalStrategy": "NEVER",
+  "tokenCount": 358,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

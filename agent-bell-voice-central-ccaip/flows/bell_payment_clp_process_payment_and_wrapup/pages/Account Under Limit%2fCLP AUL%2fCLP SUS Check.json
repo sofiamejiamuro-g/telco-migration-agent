@@ -1,0 +1,66 @@
+{
+  "name": "f04611ab-9928-44a6-a48b-e98f02f46c5a",
+  "displayName": "Account Under Limit/CLP AUL/CLP SUS Check",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.newSpendingLimitBal \u003c $session.params.clp_aul_limit OR $session.params.newSpendingLimitClpBal \u003c $session.params.clp_aul_limit",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "current_special_status",
+        "value": "bell_clp_under"
+      }, {
+        "parameter": "current_special_queue",
+        "value": "bell_clp"
+      } ]
+    },
+    "targetPage": "Status Change Check",
+    "name": "41e34ede-9f4f-4c9a-9f14-89831b99c8a9"
+  }, {
+    "condition": "$session.params.newSpendingLimitBal \u003e= $session.params.clp_sus_limit OR $session.params.newSpendingLimitClpBal \u003e= $session.params.clp_sus_limit",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "current_special_status",
+        "value": "bell_clp_sus"
+      }, {
+        "parameter": "current_special_queue",
+        "value": "bell_clp"
+      } ]
+    },
+    "targetPage": "Status Change Check",
+    "name": "aeb60a65-686e-4c8f-89f3-0f21f1651137"
+  }, {
+    "condition": "($session.params.newSpendingLimitBal \u003e= $session.params.clp_aul_limit AND $session.params.newSpendingLimitBal \u003c $session.params.clp_sus_limit) OR ($session.params.newSpendingLimitClpBal \u003e= $session.params.clp_aul_limit AND $session.params.newSpendingLimitClpBal \u003c $session.params.clp_sus_limit)",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "current_special_status",
+        "value": "bell_clp_aul"
+      }, {
+        "parameter": "current_special_queue",
+        "value": "bell_clp"
+      } ]
+    },
+    "targetPage": "Status Change Check",
+    "name": "94fd725f-d436-4d3c-8e4f-edc5576c3311"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "f04611ab-9928-44a6-a48b-e98f02f46c5a"
+      }, {
+        "parameter": "flow_id",
+        "value": "d810bc76-3e37-4bbb-a2ef-ad430f390435"
+      }, {
+        "parameter": "page_name",
+        "value": "Account Under Limit/CLP AUL/CLP SUS Check"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

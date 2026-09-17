@@ -1,0 +1,201 @@
+{
+  "name": "689f3614-2073-4f64-b6df-47efea1fad00",
+  "displayName": "EEPBI-3431",
+  "testCaseConversationTurns": [ {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "Hi"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "triggeredIntent": {
+        "name": "Default Welcome Intent"
+      },
+      "currentPage": {
+        "name": "Get Tester Id",
+        "flow": "bell_test_wrapper"
+      },
+      "textResponses": [ {
+        "text": [ "Please enter your Tester ID using the phone's keypad now." ],
+        "allowPlaybackInterruption": true
+      } ],
+      "currentFlow": {
+        "name": "bell_test_wrapper"
+      }
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "110"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "currentPage": {
+        "name": "Get Spoof TFN",
+        "flow": "bell_test_wrapper"
+      },
+      "textResponses": [ {
+        "text": [ "Tester ID lookup webhook succeeded." ],
+        "allowPlaybackInterruption": true
+      }, {
+        "text": [ "Welcome Jenifer!" ],
+        "allowPlaybackInterruption": true
+      }, {
+        "text": [ "Please enter the spoof TFN for your test." ],
+        "allowPlaybackInterruption": true
+      } ],
+      "currentFlow": {
+        "name": "bell_test_wrapper"
+      }
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "8000212355"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "currentPage": {
+        "name": "Get Spoof CLID",
+        "flow": "bell_test_wrapper"
+      },
+      "textResponses": [ {
+        "text": [ "TFN lookup Webhook succeeded." ]
+      }, {
+        "text": [ "Please enter the spoof CLID for your test." ],
+        "allowPlaybackInterruption": true
+      } ],
+      "currentFlow": {
+        "name": "bell_test_wrapper"
+      }
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "5199817317"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "currentPage": {
+        "name": "CIRN Collection Check",
+        "flow": "bell_Identification"
+      },
+      "textResponses": [ {
+        "text": [ "\u003cspeak\u003eI'm Bell's virtual assistant, I use artificial intelligence to learn. \u003cbreak time=\"1s\"/\u003e\u003c/speak\u003e" ]
+      }, {
+        "text": [ "If you're looking to order a new service, please say 'new service.'  Otherwise, what’s the 10-digit phone number associated with your service?" ],
+        "allowPlaybackInterruption": true
+      } ],
+      "currentFlow": {
+        "name": "bell_Identification"
+      }
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "5199817319"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "currentPage": {
+        "name": "Check CX Input",
+        "flow": "bell_Identification"
+      },
+      "textResponses": [ {
+        "text": [ "\u003cspeak\u003eI heard \u003cprosody rate=\"slow\"\u003e\u003csay-as interpret-as='telephone'\u003e5199817319\u003c/say-as\u003e\u003c/prosody\u003e, right?\u003c/speak\u003e" ]
+      } ],
+      "currentFlow": {
+        "name": "bell_Identification"
+      }
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "yes"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "triggeredIntent": {
+        "name": "context.confirm_yes"
+      },
+      "currentPage": {
+        "name": "CIRN Collection Check",
+        "flow": "bell_Identification"
+      },
+      "textResponses": [ {
+        "text": [ "\u003cspeak\u003eThanks! \u003cbreak time=\"1s\"/\u003e\u003c/speak\u003e" ],
+        "allowPlaybackInterruption": true
+      }, {
+        "text": [ "I'm not finding an account associated with that number. Could you please re-enter the 10-digit phone number for me? You can also key it in on your phone." ],
+        "allowPlaybackInterruption": true,
+        "containAiGeneratedContent": true,
+        "containGenerativeFallback": true,
+        "containGeneratorsContent": true
+      } ],
+      "currentFlow": {
+        "name": "bell_Identification"
+      }
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "I want to buy internet"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "triggeredIntent": {
+        "name": "Default Welcome Intent"
+      },
+      "currentPage": {
+        "name": "Start Page",
+        "flow": "bell_Live Agent Handoff"
+      },
+      "textResponses": [ {
+        "text": [ "One moment please" ]
+      }, {
+        "text": [ "Let me check for an available agent. I'll likely be silent for some time during the transfer. You'll know it's successful when you're greeted again. Please stay on the line. Thanks!" ],
+        "allowPlaybackInterruption": true
+      } ],
+      "currentFlow": {
+        "name": "bell_Live Agent Handoff"
+      }
+    }
+  } ],
+  "creationTime": {
+    "seconds": 1759156882,
+    "nanos": 955439000
+  },
+  "testConfig": {
+    "flow": "Default Start Flow",
+    "page": "Start Page"
+  },
+  "languageCode": "en"
+}

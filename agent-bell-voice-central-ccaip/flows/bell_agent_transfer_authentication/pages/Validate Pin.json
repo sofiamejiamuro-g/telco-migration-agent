@@ -1,0 +1,162 @@
+{
+  "name": "6811a78b-3bf6-4713-b7a6-a53ba3e42284",
+  "displayName": "Validate Pin",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "v1/customer-authentication#validate-pin",
+    "tag": "validate-pin",
+    "setParameterActions": [ {
+      "parameter": "callKey",
+      "value": "$session.params.auth_options_response.callKey"
+    }, {
+      "parameter": "brand",
+      "value": "bell"
+    }, {
+      "parameter": "pin",
+      "value": "$session.params.pin"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.pin_validation_response.is_locked = \"true\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Votre NIP semble verrouillé. Je dois donc vérifier votre identité d'une autre façon." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "Seems like your PIN is locked, so I'll need to verify your identity another way." ]
+        },
+        "languageCode": "en"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "from_pin",
+        "value": true
+      } ]
+    },
+    "targetPage": "Confirm customer has access  to OTP device",
+    "name": "5fe9643d-cbc0-40dc-ae7b-4565ee2daffc"
+  }, {
+    "condition": "$session.params.pin_validation_response.is_authenticated = \"true\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Parfait, c'est le bon NIP." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "Great, that's the correct PIN. " ]
+        },
+        "languageCode": "en"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "auth_status",
+        "value": "Pass"
+      } ]
+    },
+    "targetPage": "End Flow",
+    "name": "aec30057-1123-4da8-986a-e8167ad3ed55"
+  }, {
+    "condition": "$session.params.pin_validation_response.is_authenticated = \"false\" AND $session.params.pin_validation_counter = 1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Malheureusement, ce n'est pas le bon NIP." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "Sorry, that’s not the correct PIN. " ]
+        },
+        "languageCode": "en"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "auth_status",
+        "value": "Fail"
+      }, {
+        "parameter": "status",
+        "value": "PINTimeout"
+      } ]
+    },
+    "targetPage": "Webhook set-auth-status",
+    "name": "31f21707-19a3-4fdf-9329-b045dbb3fd19"
+  }, {
+    "condition": "$session.params.pin_validation_response.is_authenticated = \"false\" AND $session.params.pin_validation_counter = 0",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ " Cela ne semble pas correspondre à ce que nous avons dans nos dossiers. Pouvez-vous réessayer?" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "That doesn't seem to match what we have in our files. Can you give that another try? " ]
+        },
+        "languageCode": "en"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "pin_validation_counter",
+        "value": 1
+      }, {
+        "parameter": "pin",
+        "value": null
+      }, {
+        "parameter": "local_no_match",
+        "value": "$sys.func.ADD($session.params.local_no_match,1)"
+      } ]
+    },
+    "targetPage": "PIN Auth - Start",
+    "name": "3f795838-3b93-48e4-98c5-6a93bc812bbe"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "6811a78b-3bf6-4713-b7a6-a53ba3e42284"
+      }, {
+        "parameter": "flow_id",
+        "value": "87797521-bad6-4ad0-8ba5-2ff3b1d9bab2"
+      }, {
+        "parameter": "page_name",
+        "value": "Validate Pin"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Confirm customer has access  to OTP device",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Malheureusement, un problème est survenu et je dois donc vérifier votre identité d'une autre façon" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "Sorry, there was a problem on our side and I'll need to verify your identity another way." ]
+        },
+        "languageCode": "en"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "status",
+        "value": "PINUnavailable"
+      }, {
+        "parameter": "from_pin",
+        "value": true
+      } ]
+    },
+    "name": "f875b7f9-5091-4770-9bdb-634dc23c02cb"
+  } ],
+  "speakerIdSettings": {
+  
+  }
+}

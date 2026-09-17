@@ -1,0 +1,181 @@
+{
+  "name": "229ca65f-cc20-478b-8c73-916ce312cbb0",
+  "tags": [ "#bell", "#tech_activate_service" ],
+  "displayName": "EECD-2192-esim",
+  "testCaseConversationTurns": [ {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "languageCode": "en",
+        "event": {
+          "event": "greet"
+        }
+      }
+    },
+    "virtualAgentOutput": {
+      "sessionParameters": {
+        "Agent_Counter": 0,
+        "CLID": 4155547622,
+        "brand": "bell",
+        "caller_channel": "TFN",
+        "language": "en"
+      },
+      "currentPage": {
+        "name": "Routing Page",
+        "flow": "Default Start Flow"
+      },
+      "textResponses": [ {
+        "text": [ "Welcome. I’m Bell’s virtual assistant. it’s nice to e-meet you. I use AI to offer you help quickly when you need it. How Can I help you?" ]
+      } ],
+      "currentFlow": {
+        "name": "Default Start Flow"
+      },
+      "actions": [ {
+        "event": {
+          "event": "greet"
+        }
+      }, {
+        "agentUtterance": {
+          "text": "Welcome. I’m Bell’s virtual assistant. it’s nice to e-meet you. I use AI to offer you help quickly when you need it. How Can I help you?"
+        }
+      } ]
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "activate esim"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "sessionParameters": {
+        "Agent_Counter": 0,
+        "CLID": 4155547624,
+        "Error_Count": 0,
+        "Zero_Out": 0,
+        "brand": "bell",
+        "brand_num": 2,
+        "caller_channel": "TFN",
+        "language": "en",
+        "route": "tech_activate_service",
+        "sim_type": "eSIM",
+        "utterance": "activate esim"
+      },
+      "differences": [ {
+        "type": "UTTERANCE",
+        "description": "Agent response mismatch",
+        "warning": true,
+        "assertionType": "EQUAL",
+        "expectedValue": "",
+        "actualValue": "I'd be happy to help you activate your service.\nAre you activating an eSIM for an existing line or a new line?"
+      } ],
+      "textResponses": [ {
+        "text": [ "I'd be happy to help you activate your service.\nAre you activating an eSIM for an existing line or a new line?" ]
+      } ],
+      "actions": [ {
+        "userUtterance": {
+          "text": "activate esim"
+        }
+      }, {
+        "playbookInvocation": {
+          "playbook": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/playbooks/e283827c-8820-4398-91fc-dc42d0c18b87",
+          "playbookInput": {
+            "actionParameters": {
+              "CLID": 4155547624,
+              "brand": "bell",
+              "caller_channel": "TFN",
+              "language": "en",
+              "route": "tech_activate_service",
+              "sim_type": "eSIM",
+              "utterance": "activate esim"
+            }
+          },
+          "playbookState": "OUTPUT_STATE_PENDING"
+        }
+      }, {
+        "agentUtterance": {
+          "text": "I'd be happy to help you activate your service.\nAre you activating an eSIM for an existing line or a new line?"
+        }
+      } ]
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "I am a new customer"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "sessionParameters": {
+        "Agent_Counter": 0,
+        "CLID": 4155547624,
+        "Error_Count": 0,
+        "Zero_Out": 0,
+        "brand": "bell",
+        "brand_num": 2,
+        "caller_channel": "TFN",
+        "language": "en",
+        "route": "tech_activate_service",
+        "sim_type": "eSIM",
+        "utterance": "activate esim"
+      },
+      "differences": [ {
+        "type": "UTTERANCE",
+        "description": "Agent response mismatch",
+        "warning": true,
+        "assertionType": "EQUAL",
+        "expectedValue": "",
+        "actualValue": "You can easily activate your eSIM by visiting our website. I'll send you a text now with further instructions.Would you like to receive a text message with a link to activate your new service online?"
+      } ],
+      "textResponses": [ {
+        "text": [ "You can easily activate your eSIM by visiting our website. I'll send you a text now with further instructions." ]
+      }, {
+        "text": [ "Would you like to receive a text message with a link to activate your new service online?" ]
+      } ],
+      "actions": [ {
+        "userUtterance": {
+          "text": "I am a new customer"
+        }
+      }, {
+        "agentUtterance": {
+          "text": "You can easily activate your eSIM by visiting our website. I'll send you a text now with further instructions."
+        }
+      }, {
+        "playbookInvocation": {
+          "playbook": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/playbooks/bb0845d7-9539-472c-89a2-4f884ec919ef",
+          "playbookInput": {
+            "precedingConversationSummary": "Ask for the customer's confirmation wether they are ok to receive an SMS.",
+            "actionParameters": {
+              "BAN": 4162675927163,
+              "CLID": 4155547624,
+              "brand": "bell",
+              "language": "EN",
+              "sms_content": "Bell msg. Here is a link to activate a new service online now: https://monbell.bell.ca/PrepaidActivationLogin (bell.ca/about-us)",
+              "sms_type": "Public"
+            }
+          },
+          "playbookState": "OUTPUT_STATE_PENDING"
+        }
+      }, {
+        "agentUtterance": {
+          "text": "Would you like to receive a text message with a link to activate your new service online?"
+        }
+      } ]
+    }
+  } ],
+  "creationTime": {
+    "seconds": 1730280135,
+    "nanos": 433972000
+  },
+  "testConfig": {
+    "flow": "Default Start Flow",
+    "page": "Start Page"
+  },
+  "languageCode": "en"
+}

@@ -1,0 +1,65 @@
+{
+  "name": "4d3b3736-58e3-4577-aae0-b88a9ae25e6c",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "brand": "bell",
+        "language": "en"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "playbookInvocation": {
+      "playbook": "bell_UC_Sales",
+      "playbookInput": {
+        "precedingConversationSummary": "Customer wants to order a new device with service as mobility",
+        "actionParameters": {
+          "brand": "bell",
+          "customer_type": "Existing",
+          "identification_status": "Pass",
+          "language": "en",
+          "line_type": "New",
+          "lob": "Mobility",
+          "route": "sales_add_to_existing_account"
+        }
+      },
+      "playbookOutput": {
+        "executionSummary": "Customer is routed to bell_UC_Sales playbook with route as sales_add_to_existing_account as per instructions",
+        "actionParameters": {
+        
+        }
+      },
+      "playbookState": "OUTPUT_STATE_OK"
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer has questions about needing a new device,device availability, device features, cost, related to devices that Bell sells",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "en",
+      "line_type": "New",
+      "lob": "Mobility",
+      "route": "sales_order_device",
+      "utterance": "I want to order a new device"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "set {line_type} = \"New\" as the {utterance} contains the value \"new\" and transition to bell_UC_Sales playbook with {route} = \"sales_add_to_existing_account\"",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "line_type": "New"
+    }
+  },
+  "displayName": "\"sales_order_device\"- ID Pass, LOB - Mobility ",
+  "retrievalStrategy": "NEVER",
+  "tokenCount": 442,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

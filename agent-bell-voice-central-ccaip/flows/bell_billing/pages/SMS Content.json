@@ -1,0 +1,194 @@
+{
+  "name": "e0c2a396-8bb9-4e47-8a40-4f20a4cb9bf8",
+  "displayName": "SMS Content",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "setParameterActions": [ {
+      "parameter": "sms_type",
+      "value": "Public"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "($session.params.language = \"en\" OR $session.params.language = \"en-CA\") AND $session.params.route = \"bill_contract_terms\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "sms_content",
+        "value": "You can visit https://m.bell.ca/ecmyagreement to view the terms and conditions of your contract in the MyBell app. ( bell.ca/about-us )"
+      } ]
+    },
+    "targetFlow": "bell_SMS Trigger",
+    "name": "61ab7025-1666-4794-ab8d-b3178e23debd"
+  }, {
+    "condition": "$session.params.route = \"bill_contract_terms\" AND $session.params.language = \"fr-ca\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "sms_content",
+        "value": "Vous pouvez visiter https://m.bell.ca/ecmesententes pour consulter les modalités de votre contrat dans l'application MonBell. ( bell.ca/apropos )"
+      } ]
+    },
+    "targetFlow": "bell_SMS Trigger",
+    "name": "c8f03e3b-9df7-4e1b-b44a-b7c4ad728816"
+  }, {
+    "condition": "($session.params.language = \"en\" OR $session.params.language = \"en-CA\") AND $session.params.route = \"bill_view_bill\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "sms_content",
+        "value": "You can visit https://m.bell.ca/ecviewmybill to view your account details and Monthly Rate Charges in the MyBell app. ( bell.ca/about-us )"
+      } ]
+    },
+    "targetFlow": "bell_SMS Trigger",
+    "name": "6ea0c8fc-b072-4d93-be57-084c9736b97c"
+  }, {
+    "condition": "$session.params.language = \"fr-ca\" AND $session.params.route = \"bill_view_bill\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "sms_content",
+        "value": "Vous pouvez visiter https://m.bell.ca/ecvoirmafacture pour voir les détails de votre compte et les frais du tarif mensuel dans l'application MonBell. ( bell.ca/apropos )"
+      } ]
+    },
+    "targetFlow": "bell_SMS Trigger",
+    "name": "a5d387f2-f0b7-4bd5-85b4-6e4db5244776"
+  }, {
+    "condition": "($session.params.language = \"en\" OR $session.params.language = \"en-CA\") AND $session.params.route = \"bill_device_balance\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "sms_content",
+        "value": "You can visit https://m.bell.ca/ecviewmybill to check your device balance in the MyBell app. ( bell.ca/about-us )"
+      } ]
+    },
+    "targetFlow": "bell_SMS Trigger",
+    "name": "a666110a-0c37-4ddb-bca4-5ad72c3c60ed"
+  }, {
+    "condition": "$session.params.route = \"bill_device_balance\" AND $session.params.language = \"fr-ca\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "sms_content",
+        "value": "Vous pouvez visiter https://m.bell.ca/ecvoirmafacture pour vérifier le solde de votre appareil dans l'application MonBell. ( bell.ca/apropos )"
+      } ]
+    },
+    "targetFlow": "bell_SMS Trigger",
+    "name": "dee13e7a-bc0d-4bee-b52e-ff68b5876684"
+  }, {
+    "condition": "$session.params.route = \"bill_switch_format\" AND ($session.params.language = \"en\" OR $session.params.language = \"en-CA\")",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "sms_content",
+        "value": "You can visit https://m.bell.ca/ecmybillformat to update your billing preferences in the MyBell app. ( bell.ca/about-us )"
+      } ]
+    },
+    "targetFlow": "bell_SMS Trigger",
+    "name": "d2a0f377-c43a-4015-9b03-9311603aab6d"
+  }, {
+    "condition": "$session.params.route = \"bill_switch_format\" AND $session.params.language = \"fr-ca\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "sms_content",
+        "value": "Vous pouvez visiter https://m.bell.ca/ecmonmodedefacturation pour mettre à jour vos préférences de facturation dans l'application MonBelll. ( bell.ca/apropos )"
+      } ]
+    },
+    "targetFlow": "bell_SMS Trigger",
+    "name": "e236ff5a-3b0e-4108-96fa-af68a446d66c"
+  }, {
+    "condition": "$session.params.route = \"bill_reduce_plan\" AND ($session.params.language = \"en\" OR $session.params.language = \"en-CA\")",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "sms_content",
+        "value": "You can visit https://m.bell.ca/changemyplan  to change your plan in the MyBell app. ( bell.ca/about-us )"
+      } ]
+    },
+    "targetFlow": "bell_SMS Trigger",
+    "name": "6d9f8bbe-21b2-4984-b5bd-67313d134ee7"
+  }, {
+    "condition": "$session.params.route = \"bill_reduce_plan\" AND $session.params.language = \"fr-ca\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "sms_content",
+        "value": "Vous pouvez visiter m.bell.ca/changemyplan pour modifier votre forfait dans l'application MonBell. ( bell.ca/apropos )"
+      } ]
+    },
+    "targetFlow": "bell_SMS Trigger",
+    "name": "612accf8-d53b-42ce-a542-a9a0fb1e5a4e"
+  }, {
+    "condition": "$session.params.route = \"bill_dispute\" AND ($session.params.language = \"en\" OR $session.params.language = \"en-CA\")",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "sms_content",
+        "value": "You can visit https://m.bell.ca/eccheckusage to view your monthly charges and usage in the MyBell app. ( bell.ca/about-us )"
+      } ]
+    },
+    "targetFlow": "bell_SMS Trigger",
+    "name": "cec36840-ee96-447a-84fc-72b31d1243e7"
+  }, {
+    "condition": "$session.params.route = \"bill_dispute\" AND $session.params.language = \"fr-ca\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "sms_content",
+        "value": "Vous pouvez visiter https://m.bell.ca/ecutilisation pour voir vos frais mensuels et votre utilisation dans l'application MonBell. ( bell.ca/apropos )"
+      } ]
+    },
+    "targetFlow": "bell_SMS Trigger",
+    "name": "5ae12d05-2a40-4b58-b26a-54a95d7adc14"
+  }, {
+    "condition": "$session.params.route = \"bill_confirm_due_date\" AND ($session.params.language = \"en\" OR $session.params.language = \"en-CA\")",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "sms_content",
+        "value": "You can visit https://m.bell.ca/ecmylogin to view your Monthly Charge Date in the MyBell app. ( bell.ca/about-us )"
+      } ]
+    },
+    "targetFlow": "bell_SMS Trigger",
+    "name": "591b0f98-af4b-490c-9dc3-1faa662a8be1"
+  }, {
+    "condition": "$session.params.route = \"bill_confirm_due_date\" AND $session.params.language = \"fr-ca\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "sms_content",
+        "value": "Vous pouvez visiter https://m.bell.ca/ecmaconnexion pour voir votre date de facturation mensuelle dans l'application MonBell. ( bell.ca/apropos )"
+      } ]
+    },
+    "targetFlow": "bell_SMS Trigger",
+    "name": "206daadb-5656-4a6b-ae1d-2342119d72d7"
+  }, {
+    "condition": "($session.params.language = \"en\" OR $session.params.language = \"en-CA\") AND ($session.params.route = \"bill_add_promo\" OR $session.params.route = \"bill_inquire_promo\")",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "sms_content",
+        "value": "You can visit https://m.bell.ca/ecchangemyplan to learn more about our to learn more about our plans and offers in the MyBell app. ( bell.ca/about-us )"
+      } ]
+    },
+    "targetFlow": "bell_SMS Trigger",
+    "name": "68350a5e-2b69-422e-ad65-4ffacfefe6d3"
+  }, {
+    "condition": "$session.params.language = \"fr-ca\" AND ($session.params.route = \"bill_add_promo\" OR $session.params.route = \"bill_inquire_promo\")",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "sms_content",
+        "value": "Vous pouvez visiter https://m.bell.ca/ecchangermonforfait our en savoir plus sur nos forfaits et offres dans l'application MonBell. (bell.ca/apropos)"
+      } ]
+    },
+    "targetFlow": "bell_SMS Trigger",
+    "name": "30199701-3780-4203-a275-f36772c8b578"
+  }, {
+    "condition": "$session.params.route = \"bill_missing_promos\" AND ($session.params.language = \"en\" OR $session.params.language = \"en-CA\")",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "sms_content",
+        "value": "You can visit https://m.bell.ca/ecchangemyplan to review your promotions in the MyBell app. ( bell.ca/about-us )"
+      } ]
+    },
+    "targetFlow": "bell_SMS Trigger",
+    "name": "3806aece-65b3-4388-bfc2-bbfe7c6a060f"
+  }, {
+    "condition": "$session.params.route = \"bill_missing_promos\" AND $session.params.language = \"fr-ca\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "sms_content",
+        "value": "Vous pouvez visiter https://m.bell.ca/ecchangermonforfait pour passer en revue vos promotions dans l'application MonBell. ( bell.ca/apropos )"
+      } ]
+    },
+    "targetFlow": "bell_SMS Trigger",
+    "name": "52d0f08d-beda-4a62-9482-29abf154f3b0"
+  } ]
+}

@@ -1,0 +1,65 @@
+{
+  "name": "ec0a016a-ecbd-4330-a55d-6970574e3205",
+  "actions": [ {
+    "agentUtterance": {
+      "text": " L'utilisation  de MonBell est un excellent moyen de gérer vos services au moment qui vous convient. Je vais envoyer un texto à l'appareil au moyen duquel vous appelez, afin que vous puissiez créer votre compte. Est-ce que ça vous convient ?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Non"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_get_sdl_mapping_url",
+      "inputActionParameters": {
+        "brand": "bell",
+        "language": "fr-ca",
+        "route": "account_selfserve_registration"
+      },
+      "outputActionParameters": {
+        "brand": "bell",
+        "language": "fr-ca"
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Pas de problème. Pour toute autre question, vous pouvez toujours consulter notre site web à l'adresse {faq_link}."
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_Feedback",
+      "inputActionParameters": {
+        "brand": "bell",
+        "customer_type": "Existing",
+        "language": "fr-ca",
+        "sms_send_status": "Declined"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "The customer is trying to register in the MyBell Application.",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "Existing",
+      "language": "fr-ca",
+      "route": "account_selfserve_registration",
+      "utterance": "monbell s'inscrire"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "If the customer disagrees and says No then reroute the user to bell_feedback flow.",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca",
+      "route": "account_selfserve_registration"
+    }
+  },
+  "displayName": "FR_account_selfserve_registration_MybellRegister_CustomerTypeIsExisting_NoToMessageLink(Step 2.2,1B)",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 418,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

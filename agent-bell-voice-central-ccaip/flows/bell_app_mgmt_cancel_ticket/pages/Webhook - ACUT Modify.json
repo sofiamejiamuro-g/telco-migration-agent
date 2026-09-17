@@ -1,0 +1,136 @@
+{
+  "name": "e896507e-7e0e-441b-a1a9-593f2ca4944c",
+  "displayName": "Webhook - ACUT Modify",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "/v1/ticket_management/acut/modify#modify_close_ticket",
+    "tag": "modify",
+    "setParameterActions": [ {
+      "parameter": "autofill_template_name",
+      "value": "$sys.func.IF(\"$session.params.task_type = SATTV\", \"TICKET MGMT - SUB SAYS OK - NO MORE TROUBLE - A\", \"UPDATE SUB SAYS OK NOW - A\")"
+    }, {
+      "parameter": "operation_context",
+      "value": "modify_close_ticket"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.webhook_success = true",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Okay all done!" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "The next time you want to manage your appointments, remember you can use the Manage your appointment app by downloading the MyBell app. It's faster and easier to use than calling in!" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Très bien, c'est fait!" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "La prochaine fois que vous souhaitez gérer vos rendez-vous, n’oubliez pas que vous pouvez utiliser l’appli Gérez votre rendez-vous en téléchargeant l’application mobile MonBell. C’est plus rapide et plus facile à utiliser que d’appeler!" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetFlow": "bell_Feedback",
+    "name": "57c7613d-826b-46df-8e01-31732d5ddfd4"
+  }, {
+    "condition": "$session.params.webhook_success = false",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "ticket_mgmt_webhook_failure_type",
+        "value": "acut"
+      } ]
+    },
+    "targetFlow": "bell_ticket_mgmt_webhook_failure",
+    "name": "eb44e630-cebc-45c2-96fd-0bfb44838c14"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "e896507e-7e0e-441b-a1a9-593f2ca4944c"
+      }, {
+        "parameter": "flow_id",
+        "value": "0e7d1e69-bcd3-4477-a0d1-c63b375883d2"
+      }, {
+        "parameter": "page_name",
+        "value": "Webhook Call Modify"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ],
+  "eventHandlers": [ {
+    "targetFlow": "bell_ticket_mgmt_webhook_failure",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "ticket_mgmt_webhook_failure_type",
+        "value": "acut"
+      } ]
+    },
+    "name": "f0a9933c-eb74-4962-ae07-2f556c025f94"
+  }, {
+    "targetFlow": "bell_ticket_mgmt_webhook_failure",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "ticket_mgmt_webhook_failure_type",
+        "value": "acut"
+      } ]
+    },
+    "name": "6e9269b0-c828-4362-85ec-a20621707a5b"
+  }, {
+    "targetFlow": "bell_ticket_mgmt_webhook_failure",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "ticket_mgmt_webhook_failure_type",
+        "value": "acut"
+      } ]
+    },
+    "name": "0fdd9c67-a7c7-47ed-93cb-69dc0d43aa1f"
+  }, {
+    "targetFlow": "bell_ticket_mgmt_webhook_failure",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "ticket_mgmt_webhook_failure_type",
+        "value": "acut"
+      } ]
+    },
+    "name": "7d3a02e4-941c-46b3-b7e3-596050b83444"
+  }, {
+    "targetFlow": "bell_ticket_mgmt_webhook_failure",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "ticket_mgmt_webhook_failure_type",
+        "value": "acut"
+      } ]
+    },
+    "name": "69aa2afa-4f35-48e7-a8a9-00c8a9cb6c29"
+  }, {
+    "targetFlow": "bell_ticket_mgmt_webhook_failure",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "ticket_mgmt_webhook_failure_type",
+        "value": "acut"
+      } ]
+    },
+    "name": "a5b1ff1e-f37f-4a96-b3c9-3d0a0b1a0c00"
+  } ]
+}

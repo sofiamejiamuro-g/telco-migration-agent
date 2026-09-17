@@ -1,0 +1,38 @@
+{
+  "name": "6793b0b7-d5f9-4e23-82f9-be2c95bce9b5",
+  "displayName": "Preauthorized Debit SMS",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "messages": [ {
+      "text": {
+        "text": [ "I'll send a text to the device you're calling from so that you can register for preauthorized payments, is that alright?" ]
+      },
+      "languageCode": "en"
+    }, {
+      "text": {
+        "text": [ "Je vais envoyer un texto à l'appareil au moyen duquel vous appelez afin que vous puissiez vous inscrire aux paiements pré-autorisés. Est-ce que ça vous convient?" ]
+      },
+      "languageCode": "fr-ca"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "intent": "context.sms_no",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "In Collection Check",
+    "name": "64a636e1-3312-4681-8777-9f4058d5de93"
+  }, {
+    "intent": "context.sms_yes",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "offer_type",
+        "value": "preauthorized_payment"
+      } ]
+    },
+    "targetPage": "Language Based SMS",
+    "name": "1cc21a05-05e6-4d3e-8d6d-317f8dedbb4b"
+  } ]
+}

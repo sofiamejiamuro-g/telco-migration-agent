@@ -1,0 +1,99 @@
+{
+  "name": "a011776d-8a1c-486b-a6c2-61fb62aeab41",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "language": "fr-ca",
+        "lob": "internet",
+        "province": "ROC"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Bien sûr, laissez-moi vous aider.\nÀ propos de quel service communiquez-vous avec nous?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Que voulez-vous?"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Pour mieux vous aider."
+    }
+  }, {
+    "playbookInvocation": {
+      "playbook": "bell_uc_ask_LOB",
+      "playbookInput": {
+        "precedingConversationSummary": "User's lob is to be captured",
+        "actionParameters": {
+          "language": "fr-ca",
+          "route": "sales_confirm_service_coverage"
+        }
+      },
+      "playbookOutput": {
+        "executionSummary": "When user does not provide lob, prompt them to understand what kind of service they are looking for, if the user mentions lob then return lob to the originating Playbook, if not set the default lob and return back",
+        "actionParameters": {
+          "language": "fr-ca",
+          "lob": "Internet",
+          "route": "sales_confirm_service_coverage"
+        }
+      },
+      "playbookState": "OUTPUT_STATE_OK"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Vérifions si nous offrons des services Internet ou de téléphonie résidentielle dans votre secteur. Dans quelle province avez-vous besoin de services?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Lloydminster"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Obtenez des vitesses ultrarapides sur le réseau de Bell grâce au service Internet mobile de Bell. Vous pouvez bénéficier d'une connectivité Internet allant jusqu'à 5G avec un point d'accès sans fil mobile afin de rester connecté à la maison ou lors de vos déplacements.\nJe vais envoyer un texto à l'appareil au moyen duquel vous appelez, afin que vous puissiez en savoir plus sur le service Internet mobile sur notre site Web. Est-ce que ça vous convient?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "non"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "fr-ca",
+        "route": "sales_confirm_service_coverage",
+        "sms_send_status": "Declined"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "The customer is asking whether the provider's service is offered at an address or location.",
+    "actionParameters": {
+      "language": "fr-ca",
+      "province": "BC",
+      "route": "sales_confirm_service_coverage",
+      "utterance": "Avez-vous un service à mon emplacement?"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "lob is not mentioned so ask for it and if not answered, route to bell_uc_ask_LOB playbook to extract it , When province is anything other than ON and QC or is null or empty, ask user for province, extract in {province} parameter and further route based on province",
+    "actionParameters": {
+      "language": "fr-ca",
+      "lob": "Internet",
+      "province": "AB",
+      "utterance": "Avez-vous un service Internet à mon emplacement?"
+    }
+  },
+  "displayName": "FR-sales_service_coverage- no lob | BC | internet | uxno | extract lob",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 786,
+  "languageCode": "en"
+}

@@ -1,0 +1,76 @@
+{
+  "name": "663c498f-4cf9-4b40-bffd-599ffbc1c2c6",
+  "displayName": "Webhook Calendar Reserve",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "/v1/ticket_management/omf/calendar#reserve",
+    "tag": "reserve"
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.webhook_success = true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Control Submit",
+    "name": "da780858-259a-4ced-96f5-bc6103979f60"
+  }, {
+    "condition": "$session.params.webhook_success = false",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Failure - OMF",
+    "name": "48cdcde0-d7a1-46fc-b691-0ca7744a4e8d"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Failure - OMF",
+    "name": "13087ae4-51c2-4392-abd5-4fd829616022"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Webhook Failure - OMF",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+    
+    },
+    "name": "fd7ae5ac-1e0e-4991-94f4-caa8f1360b54"
+  }, {
+    "targetPage": "Webhook Failure - OMF",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+    
+    },
+    "name": "e44272ca-007d-4032-ad16-d4a26a867b4f"
+  }, {
+    "targetPage": "Webhook Failure - OMF",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+    
+    },
+    "name": "349f68f9-c4ad-4cc1-92fd-8eb51806d9de"
+  }, {
+    "targetPage": "Webhook Failure - OMF",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+    
+    },
+    "name": "843342c0-95bb-4110-9504-1e53c756a07d"
+  }, {
+    "targetPage": "Webhook Failure - OMF",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+    
+    },
+    "name": "b11f01fc-f316-4a25-9835-600233b1e9e6"
+  }, {
+    "targetPage": "Webhook Failure - OMF",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+    
+    },
+    "name": "2e3c0b0b-0724-480d-8724-115191bb0476"
+  } ]
+}

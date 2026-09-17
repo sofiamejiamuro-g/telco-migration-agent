@@ -1,0 +1,72 @@
+{
+  "name": "4aed27d7-df8f-45a6-9ccf-2d61942e7f10",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Sure, I can help with that. Could you please confirm which service you are looking to suspend?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Im looking to suspend my mobility services"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Thank you. What is the reason for suspending your service?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "My phone is lost"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Understood. Have you tried using a tracking feature like \"Find my iPhone\" or \"Find my Device\"?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "yes"
+    }
+  }, {
+    "agentUtterance": {
+      "text": " Understood, I would suggest temporarily suspending your service to prevent unauthorized use. I will send a text to the device you are calling from, with a link to do it yourelf, is that alright? "
+    }
+  }, {
+    "userUtterance": {
+      "text": "Yes"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "brand": "bell",
+        "language": "en",
+        "sms_content": "You can visit bell.ca/suspendline to temporarily suspend your mobility service in MyBell. (bell.ca/about-us)",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer trying to suspend their service",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "route": "account_suspend_service",
+      "unique_services": "Mobility",
+      "utterance": "Suspend my service"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Customer query is resolved and we update the {route} as \"equipment_report_lost_device\"",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "route": "equipment_report_lost_device"
+    }
+  },
+  "displayName": " Account suspend service - unique service - Lost - en",
+  "retrievalStrategy": "NEVER",
+  "tokenCount": 425,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

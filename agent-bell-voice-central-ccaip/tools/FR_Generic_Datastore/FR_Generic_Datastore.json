@@ -1,0 +1,65 @@
+{
+  "name": "0c3023ba-6283-4b2a-9c75-47d9294efa86",
+  "displayName": "FR_Generic_Datastore",
+  "description": "Datastore to answer general queries in French",
+  "dataStoreSpec": {
+    "dataStoreConnections": [ {
+      "dataStoreType": "PUBLIC_WEB",
+      "dataStore": "projects/698791718673/locations/us/collections/default_collection/dataStores/bell-infobot-fr-001-temp_1736541240893",
+      "documentProcessingMode": "DOCUMENTS",
+      "engineType": "CHAT_ENGINE",
+      "connectorConfig": {
+      
+      },
+      "createTime": {
+        "seconds": 1736541321,
+        "nanos": 679260000
+      },
+      "displayName": "bell_chat_central_fr_temp",
+      "dialogflowAddTime": {
+        "seconds": 1736541321,
+        "nanos": 679260000
+      }
+    }, {
+      "dataStoreType": "STRUCTURED",
+      "dataStore": "projects/698791718673/locations/us/collections/default_collection/dataStores/bell-global-fr-structured-faq_1768971721762",
+      "documentProcessingMode": "DOCUMENTS",
+      "engineType": "CHAT_ENGINE",
+      "connectorConfig": {
+      
+      },
+      "createTime": {
+        "seconds": 1768971743,
+        "nanos": 798253000
+      },
+      "displayName": "bell_global_fr_structured_faq",
+      "dialogflowAddTime": {
+        "seconds": 1768971743,
+        "nanos": 798253000
+      }
+    } ],
+    "models": {
+      "summarizationModel": {
+        "model": "gemini_25_flash",
+        "promptText": "Given the conversation between a Human and an AI assistant and a list of sources, write a final answer for the AI assistant.\nFollow these guidelines:\n  + Answer the Human's query and make sure you mention all relevant details from the sources, using exactly the same words as the sources if possible.\n  + The answer must be based only on the sources and not introduce any additional information.\n  + All numbers, like price, date, time or phone numbers must appear exactly as they are in the sources.\n  + Give a summarized and short given the sources. Include all important details, and any caveats and conditions that apply.\n  + The answer MUST be in French and the response summary should not exceed 50 words.\n  + You should not respond with customer service or support contact number.\n  + Don't try to make up an answer: If the answer cannot be found in the sources, you admit that you don't know and you answer NOT_ENOUGH_INFORMATION.\n\nYou will be given a few examples before you begin.\n\nExample 1:\nSources:\n[1] \u003cproduct or service\u003e Info Page\nYes, \u003ccompany\u003e offers \u003cproduct or service\u003e in various options or variations.\n\nHuman: Do you sell \u003cproduct or service\u003e?\nAI: Yes, \u003ccompany\u003e sells \u003cproduct or service\u003e. Is there anything else I can\nhelp you with?\n\nExample 2:\nSources:\n[1] Andrea - Wikipedia\nAndrea is a given name which is common worldwide for both males and females.\n\nHuman: How is the weather?\nAI: NOT_ENOUGH_INFORMATION\n\n\nBegin! Let's work this out step by step to be sure we have the right answer.\n\nSources:\n$sources\n\n$conversation\nHuman: $original-query\nAI:\n"
+      },
+      "rewriterModel": {
+        "model": "gemini_25_flash"
+      }
+    },
+    "fallbackPrompt": {
+    
+    },
+    "groundingSettings": {
+    
+    },
+    "payloadSettings": {
+      "enableSnippetsPayload": true,
+      "maxSnippetsCount": 1
+    },
+    "voiceModeSettings": {
+    
+    }
+  },
+  "toolType": "CUSTOMIZED_TOOL"
+}

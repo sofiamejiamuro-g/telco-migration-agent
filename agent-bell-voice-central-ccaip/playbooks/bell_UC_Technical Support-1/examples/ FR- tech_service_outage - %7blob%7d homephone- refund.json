@@ -1,0 +1,68 @@
+{
+  "name": "d4014b9e-dbe4-47e2-b8d0-545f9628e2d9",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_tech_intent_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70012",
+        "language": "fr-ca",
+        "lob": "homephone",
+        "utterance": "Panne de ligne fixe depuis ce matin"
+      },
+      "outputActionParameters": {
+        "lob": "homephone"
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Vous pouvez utiliser notre outil virtuel de réparation pour vérifier les pannes de service et dépanner votre équipement.\nJe vais envoyer un texto sur l’appareil au moyen duquel vous appelez, afin que vous puissiez y accéder rapidement. Est-ce que ça vous convient?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "agent"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Pourriez-vous me dire pourquoi vous aimeriez parler à un agent?\n"
+    }
+  }, {
+    "userUtterance": {
+      "text": "compensation"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_aqd",
+      "inputActionParameters": {
+        "language": "en",
+        "lob": "homephone",
+        "special_queue": "compensation"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customers are facing homephone outage in their area",
+    "actionParameters": {
+      "apb_location_id": "70012",
+      "language": "fr-ca",
+      "lob": "homephone",
+      "route": "tech_service_outage",
+      "utterance": "Panne de ligne fixe depuis ce matin"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "customer is transferred to tech_intent_apb for lob",
+    "actionParameters": {
+      "apb_location_id": "70012",
+      "language": "fr-ca",
+      "lob": "homephone"
+    }
+  },
+  "displayName": " FR- tech_service_outage - {lob} homephone- refund",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 439,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

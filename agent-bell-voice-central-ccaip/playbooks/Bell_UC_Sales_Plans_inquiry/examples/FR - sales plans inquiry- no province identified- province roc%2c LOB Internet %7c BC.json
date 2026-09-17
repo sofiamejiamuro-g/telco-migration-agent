@@ -1,0 +1,67 @@
+{
+  "name": "15187687-3df5-4d97-a0d7-710518a14842",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Je suis vraiment désolée d'apprendre que votre maison a été inondée.\n\nBien sûr, laissez-moi vous aider.\n\nÀ propos de quel service communiquez-vous avec nous?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Internet"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Vérifions si nous offrons des services Internet ou de téléphonie\nrésidentielle dans votre secteur. Dans quelle province avez-vous besoin de\nservices?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Victoria"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_aqd",
+      "inputActionParameters": {
+        "special_queue": "cornerstone"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customers want to know about different plans or compare different plans that Bell has and lob identified as \" Internet\" OR \"TV\" OR \"Homephone\"",
+    "actionParameters": {
+      "customer_type": "New",
+      "identification_status": "Fail",
+      "language": "fr-ca",
+      "province": "ROC",
+      "route": "sales_plans_inquiry",
+      "utterance": "J'ai besoin d'un plan car ma maison est inondée."
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "If lob is not mentioned, ask for it and route to bell_uc_ask_LOB if user does not mention it, \nWhen province is anything other than ON and QC or is null or empty, ask user for province, extract in {province} parameter and further route based on province",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca",
+      "lob": "internet",
+      "province": "BC",
+      "special_queue": "cornerstone"
+    }
+  },
+  "displayName": "FR - sales plans inquiry- no province identified- province roc, LOB Internet | BC",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 489,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "fr"
+}

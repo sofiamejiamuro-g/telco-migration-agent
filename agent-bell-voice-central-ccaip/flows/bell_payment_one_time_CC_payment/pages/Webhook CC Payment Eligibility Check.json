@@ -1,0 +1,107 @@
+{
+  "name": "20bbeb2e-c2b9-4486-9980-96372630f205",
+  "displayName": "Webhook CC Payment Eligibility Check",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "v1/ibm_mw/nm1_get#pa-eligibility",
+    "tag": "pa-eligibility",
+    "setParameterActions": [ {
+      "parameter": "billing_account",
+      "value": "$session.params.billing_account_number"
+    }, {
+      "parameter": "ibm_application_id",
+      "value": "$sys.func.IF(\"$session.params.intake_routing_lookup_response.va_ibm_id = null\", LUC_Entry, $session.params.intake_routing_lookup_response.va_ibm_id)"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.webhook_success = false",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Failure",
+    "name": "34e1ec13-4f55-4bae-ac2f-c883803e0a69"
+  }, {
+    "condition": "$session.params.webhook_success = true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "eligibilityInfo",
+        "value": "$sys.func.GET($session.params.nm1_get_pa_eligibility_response.paymentEligInfo.eligibilityCheckInfo.eligibilityInfo,2)"
+      }, {
+        "parameter": "eligInd",
+        "value": "$session.params.eligibilityInfo.eligInd"
+      }, {
+        "parameter": "eligInd",
+        "value": "$sys.func.FILTER(   \"$session.params.nm1_get_pa_eligibility_response.paymentEligInfo.eligibilityCheckInfo.eligibilityInfo\",   \"$[?(@.eligSource == 'OP')].eligInd\" )"
+      }, {
+        "parameter": "eligInd",
+        "value": "$sys.func.GET($session.params.eligInd,0)"
+      } ]
+    },
+    "targetPage": "CC Payment Eligibility Check",
+    "name": "a4be35b9-18f4-4822-8f58-70b0169c5e72"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "20bbeb2e-c2b9-4486-9980-96372630f205"
+      }, {
+        "parameter": "flow_id",
+        "value": "79610380-24f4-4284-b946-244d0aa037d8"
+      }, {
+        "parameter": "page_name",
+        "value": "Webhook CC Payment Eligibility Check"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "ID/Auth Fail",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+    
+    },
+    "name": "78bda429-310c-4532-817f-e635b8f5a1be"
+  }, {
+    "targetPage": "ID/Auth Fail",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+    
+    },
+    "name": "e40b596d-d92d-4a46-bb93-ead82725a1b9"
+  }, {
+    "targetPage": "ID/Auth Fail",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+    
+    },
+    "name": "24955a2e-a734-4ef5-97ed-6a8f72ef869a"
+  }, {
+    "targetPage": "ID/Auth Fail",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+    
+    },
+    "name": "2f134b16-76cb-40ee-b5f5-eed326e2478f"
+  }, {
+    "targetPage": "ID/Auth Fail",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+    
+    },
+    "name": "398aaf5a-2946-4f88-af2a-6ca53a3dbe29"
+  }, {
+    "targetPage": "ID/Auth Fail",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+    
+    },
+    "name": "f5f6ba20-6bc0-4637-987a-c5f9b70655d5"
+  } ]
+}

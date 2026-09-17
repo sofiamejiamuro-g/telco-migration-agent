@@ -1,0 +1,47 @@
+{
+  "name": "2e846a51-dbf4-4555-90ce-9fb2d7c19883",
+  "displayName": "Check Authentication Status",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.auth_status = \"Pass\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "webhook_success",
+        "value": null
+      } ]
+    },
+    "targetPage": "Check if asked for different number",
+    "name": "e4239ce1-61f6-4876-9fa7-fdf84c14997d"
+  }, {
+    "condition": "$session.params.auth_status = \"Fail\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Return to triggered use case",
+    "name": "5afb1029-74f1-4055-bfcb-301018d20332"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "2e846a51-dbf4-4555-90ce-9fb2d7c19883"
+      }, {
+        "parameter": "flow_id",
+        "value": "b5addc0e-1d3b-4354-9541-c698dba5f163"
+      }, {
+        "parameter": "page_name",
+        "value": "Check Authentication Status"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

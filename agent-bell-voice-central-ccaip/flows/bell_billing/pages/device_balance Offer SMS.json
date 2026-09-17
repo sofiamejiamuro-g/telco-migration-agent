@@ -1,0 +1,144 @@
+{
+  "name": "3f97bd70-446a-46b9-8574-c24411a73a6d",
+  "displayName": "device_balance Offer SMS",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "messages": [ {
+      "text": {
+        "text": [ "Pour vous aider, l'application MonBell offre une vue détaillée de votre facture, y compris des informations sur le solde de votre appareil. Je vais envoyer un texto à l'appareil depuis lequel vous appelez avec un lien vers l'application MonBell. Est-ce que ça vous convient?" ]
+      },
+      "languageCode": "fr-ca"
+    }, {
+      "text": {
+        "text": [ "To help with that, the MyBell app provides a detailed view of your bill, including information about your device balance. I'll send a text to the device you're calling from with a link to the MyBell app. Is that alright?" ]
+      },
+      "languageCode": "en"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "intent": "context.sms_yes",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "SMS Content",
+    "name": "1c7fdd15-82e3-444a-b815-461ace9a70bf"
+  }, {
+    "intent": "context.sms_no",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Vanity Check",
+    "name": "66e40ae1-e2d3-4fa4-a4ed-85666ae8ecf1"
+  }, {
+    "intent": "context.different_number",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "different_number",
+        "value": "true"
+      } ]
+    },
+    "targetPage": "SMS Content",
+    "name": "818e8a9f-4f44-4417-8a17-ad472b256259"
+  } ],
+  "eventHandlers": [ {
+    "event": "sys.no-input-1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Je n’ai pas tout à fait compris. Pouvez-vous réessayer?" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "I didn't quite get that. Can you try again?" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "92cf01d6-c792-4a16-843e-77aff5d0f4ed"
+  }, {
+    "event": "sys.no-input-2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Je n’ai toujours pas compris" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "I still didnt get that" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "9c6a1b04-6f6d-4c8b-9c28-f6e925a3692c"
+  }, {
+    "targetPage": "Vanity Check",
+    "event": "sys.no-input-3",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Vous pouvez consulter le solde de votre appareil dans l'application MonBell." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "You can review your device balance in the MyBell app." ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "d1787fd7-5a4d-4b14-bbd1-d9ad30c6fc65"
+  }, {
+    "event": "sys.no-match-1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Je n’ai pas tout à fait compris. Pouvez-vous réessayer?" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "I didn't quite get that. Can you try again?" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "b0dacaee-c9bf-4ca9-bf3e-7ccaf2ad68d5"
+  }, {
+    "event": "sys.no-match-2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Je n’ai toujours pas compris" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "I still didnt get that" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "514e228b-105d-4a08-a7ae-05ff11893f7b"
+  }, {
+    "targetPage": "Vanity Check",
+    "event": "sys.no-match-3",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Vous pouvez consulter le solde de votre appareil dans l'application MonBell." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "You can review your device balance in the MyBell app." ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "1569bf48-888b-46b0-ba3d-8a301d24269a"
+  } ]
+}

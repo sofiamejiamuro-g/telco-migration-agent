@@ -1,0 +1,61 @@
+{
+  "name": "243d1866-01ca-4ba6-81d7-00ea98209c03",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Sure, I can help with that. You can easily restore your residential services in MyBell. I will send a text to the device you're calling from, with a link to do it yourself. Is that alright?"
+    }
+  }, {
+    "userUtterance": {
+    
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_global_error_count_check",
+      "inputActionParameters": {
+        "global_error_counter": "2",
+        "language": "en"
+      },
+      "outputActionParameters": {
+        "global_error_counter": "3",
+        "language": "en"
+      }
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "brand": "bell",
+        "language": "en",
+        "sms_send_status": "Declined"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "User wants to restore their service",
+    "actionParameters": {
+      "brand": "bell",
+      "global_error_counter": "2",
+      "language": "en",
+      "route": "account_restore_service",
+      "unique_services": "INTERNET, TV",
+      "utterance": "I want to restore my internet service"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "User is offered for sms and routed to sms flow",
+    "actionParameters": {
+      "brand": "bell",
+      "global_error_counter": "3",
+      "language": "en",
+      "sms_send_status": "Declined"
+    }
+  },
+  "displayName": "Restore Service : Internet, TV - No input",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 363,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

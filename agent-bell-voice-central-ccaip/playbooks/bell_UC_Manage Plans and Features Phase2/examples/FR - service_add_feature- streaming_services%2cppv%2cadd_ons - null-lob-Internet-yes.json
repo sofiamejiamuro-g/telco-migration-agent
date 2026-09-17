@@ -1,0 +1,74 @@
+{
+  "name": "bdf106a9-bb52-4d66-8da3-0e2143328b4f",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70011",
+        "brand": "bell",
+        "language": "fr-ca",
+        "route": "service_add_feature"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Vous pouvez facilement gérer votre forfait Internet ou vos options à tout moment en utilisant MonBell. Je vais envoyer un texto à l’appareil au moyen duquel vous appelez, afin que vous puissiez facilement modifier votre forfait Internet. Est-ce que ça vous convient?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "oui"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "fr-ca",
+        "lob": "Internet",
+        "route": "service_add_feature",
+        "sms_content": "Bell: Vous pouvez visiter https://m.bell.ca/gererloptioninternet pour apporter des changements à vos options Internet dans l'appli MonBell. ( bell.ca/apropos )",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+        "language": "fr-ca"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "The {identification_status} is \"Pass\", {customer_type} is \"Existing\", {streaming_services} is null and {ppv} is null and {add_ons} is null and {lob} is \"Internet\" so, we will prompt user for send SMS confirmation and if user say \"yes\" or anything affirmative then route to \"bell_SMS Trgigger\" flow.",
+    "actionParameters": {
+      "apb_location_id": "70011",
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "fr-ca",
+      "lob": "Internet",
+      "route": "service_add_feature",
+      "sms_content": "Bell: Vous pouvez visiter https://m.bell.ca/gererloptioninternet pour apporter des changements à vos options Internet dans l'appli MonBell. ( bell.ca/apropos )",
+      "sms_type": "Public",
+      "utterance": "je veux ajouter l'option internet"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "As the {lob} is \"Internet\" and {streaming_services}, {add_ons}, {ppv} is null then we will prompt user to send SMS and if user say \"yes\" or anything affirmative then send the user to \"bell_SMS Trigger\" flow",
+    "actionParameters": {
+      "apb_location_id": "70011",
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "fr-ca",
+      "lob": "Internet",
+      "route": "service_add_feature",
+      "sms_content": "Bell: Vous pouvez visiter https://m.bell.ca/gererloptioninternet pour apporter des changements à vos options Internet dans l'appli MonBell. ( bell.ca/apropos )",
+      "sms_type": "Public",
+      "utterance": "je veux ajouter l'option internet"
+    }
+  },
+  "displayName": "FR - service_add_feature- streaming_services,ppv,add_ons - null-lob-Internet-yes",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 729,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

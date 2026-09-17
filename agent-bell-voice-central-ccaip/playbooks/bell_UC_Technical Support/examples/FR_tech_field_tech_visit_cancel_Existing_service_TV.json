@@ -1,0 +1,94 @@
+{
+  "name": "36dfe9d0-6db3-4a9b-bbd1-324046960f98",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70012"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "playbookInvocation": {
+      "playbook": "bell_uc_ask_LOB",
+      "playbookInput": {
+        "precedingConversationSummary": "Customer wants to cancel the appointment",
+        "actionParameters": {
+          "language": "fr-ca",
+          "route": "tech_field_tech_visit_cancel"
+        }
+      },
+      "playbookOutput": {
+        "executionSummary": "When user does not provide lob, prompt them to understand what kind of service they are looking for, if the user mentions lob then return lob to the originating Playbook, if not set the default lob and return back",
+        "actionParameters": {
+          "language": "fr-ca",
+          "lob": "TV",
+          "route": "tech_field_tech_visit_cancel"
+        }
+      },
+      "playbookState": "OUTPUT_STATE_OK"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Est-ce pour réparer un service existant? "
+    }
+  }, {
+    "userUtterance": {
+      "text": "Oui"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_authentication",
+      "inputActionParameters": {
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70015"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_tech_field_tech_visit_cancel_flow",
+      "inputActionParameters": {
+        "ticket_lob": "TV"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer wants to cancel the appointment",
+    "actionParameters": {
+      "language": "fr-ca",
+      "route": "tech_field_tech_visit_cancel",
+      "utterance": "je veux annuler Mon rendez-vous"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "When user does not provide lob, prompt them to understand what kind of service they are looking for, if the user mentions lob then return lob to the originating Playbook, if not set the default lob and return back, then Trigger bell_aqd flow",
+    "actionParameters": {
+      "auth_status": "Pass",
+      "language": "fr-ca",
+      "route": "tech_field_tech_visit_cancel",
+      "utterance": "je veux annuler Mon rendez-vous"
+    }
+  },
+  "displayName": "FR_tech_field_tech_visit_cancel_Existing_service_TV",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 666,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "fr"
+}

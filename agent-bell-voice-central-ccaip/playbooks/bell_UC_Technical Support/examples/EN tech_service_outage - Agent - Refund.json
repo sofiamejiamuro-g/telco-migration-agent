@@ -1,0 +1,74 @@
+{
+  "name": "02d6285e-ac0e-43c8-809f-2cb96fb46db4",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Could you tell me which service you're having trouble with?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Internet"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70014",
+        "language": "en"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "You can use our Virtual Repair tool to check for service outages and troubleshoot your equipment. I'll send a text to the device you're calling from so you can access it quickly. Is that alright?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "No, get me to an agent."
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Could you tell me why you'd like to speak to an agent?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "I need refund for my service"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_aqd",
+      "inputActionParameters": {
+        "special_queue": "compensation"
+      },
+      "outputActionParameters": {
+        "special_queue": "compensation"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customers are facing outage in their area, they reported this issue for {lob} = Internet when asked used said they need an agent",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "lob": "Internet",
+      "route": "tech_service_outage",
+      "utterance": "Is there outage in my area?"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "User said they need an agent so checked why they need an agent, as user mentions they need a refund or compensation, so directed to the AQD flow with special_queue = \"compensation\"",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "lob": "Internet",
+      "route": "tech_service_outage",
+      "utterance": "Is there outage in my area?"
+    }
+  },
+  "displayName": "EN tech_service_outage - Agent - Refund",
+  "retrievalStrategy": "NEVER",
+  "tokenCount": 477,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

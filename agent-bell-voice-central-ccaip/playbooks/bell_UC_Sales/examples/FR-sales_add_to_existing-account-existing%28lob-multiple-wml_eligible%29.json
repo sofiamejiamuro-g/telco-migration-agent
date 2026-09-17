@@ -1,0 +1,61 @@
+{
+  "name": "7c914c53-2813-4374-b81d-efd688ee4760",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "language": "fr-ca",
+        "wml_eligible": "1"
+      },
+      "outputActionParameters": {
+        "language": "fr-ca"
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Bien sûr, laissez-moi vous aider.\nÀ propos de quel service communiquez-vous avec nous?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Internet et mobilité"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_aqd",
+      "inputActionParameters": {
+        "language": "fr-ca",
+        "line_type": "New",
+        "lob": "Multiple",
+        "special_queue": "cable_internet"
+      },
+      "outputActionParameters": {
+        "language": "fr-ca"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "customer is inquiring about adding a new line",
+    "actionParameters": {
+      "brand": "bell",
+      "identification_status": "Pass",
+      "language": "fr-ca",
+      "line_type": "New",
+      "route": "sales_add_to_existing-account",
+      "utterance": "Ajouter une nouvelle ligne pour les enfants"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Customer query resolved per playbook; {special_queue}=\"cable_internet\" assigned as {wml_eligible}=1",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca",
+      "line_type": "New",
+      "lob": "Multiple"
+    }
+  },
+  "displayName": "FR-sales_add_to_existing-account-existing(lob-multiple-wml_eligible)",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 381,
+  "languageCode": "en"
+}

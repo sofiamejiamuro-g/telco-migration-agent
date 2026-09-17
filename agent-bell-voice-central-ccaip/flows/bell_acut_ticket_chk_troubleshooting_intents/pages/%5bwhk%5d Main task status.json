@@ -1,0 +1,83 @@
+{
+  "name": "9580a7b6-3c42-4823-8938-4865bdf45a25",
+  "displayName": "[whk] Main task status",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "v1/dfcx_support/acut_content_lookup#main-task",
+    "tag": "\"main-task\""
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.webhook_success = true AND $session.params.trouble_ticket_state = \"606\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "If new appointment?",
+    "name": "548d2b0c-adfb-40af-9252-492900de8b81"
+  }, {
+    "condition": "$session.params.webhook_success = true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Multiple dispatches message",
+    "name": "0a16958c-e0a6-4983-a9cf-27e81a467ee2"
+  }, {
+    "condition": "$session.params.webhook_success = false",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Failure - ACUT",
+    "name": "fe6f1487-c004-4150-9cdf-5035ac40a2e3"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Failure - ACUT",
+    "name": "3f3ab146-c26e-4a02-aa2c-1d52360e5077"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Webhook Failure - ACUT",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+    
+    },
+    "name": "57a9af1c-b186-4388-92b8-6fa0a408ccb8"
+  }, {
+    "targetPage": "Webhook Failure - ACUT",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+    
+    },
+    "name": "220587a6-a42b-4a85-944f-6008dcb1c696"
+  }, {
+    "targetPage": "Webhook Failure - ACUT",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+    
+    },
+    "name": "343d7166-4dcc-4b9f-b46d-388d8cef1535"
+  }, {
+    "targetPage": "Webhook Failure - ACUT",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+    
+    },
+    "name": "ae1b416d-f7f0-4bc4-99cf-aee671038312"
+  }, {
+    "targetPage": "Webhook Failure - ACUT",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+    
+    },
+    "name": "bcd927d8-74f3-458c-aaa1-b374b420bf5d"
+  }, {
+    "targetPage": "Webhook Failure - ACUT",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+    
+    },
+    "name": "1f143c9d-6c30-4116-8131-c9e1558af566"
+  } ]
+}

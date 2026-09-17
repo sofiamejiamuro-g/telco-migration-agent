@@ -1,0 +1,71 @@
+{
+  "name": "39e018f7-117c-47d4-a73e-8aa49d767d84",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70011",
+        "brand": "bell",
+        "language": "en",
+        "route": "service_change_plan"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "You can easily manage your Internet package and features at anytime using MyBell. I'll send a text to the device you're calling from, so that you can easily make changes to your Internet package. Is that alright?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "yes"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "en",
+        "route": "service_change_plan",
+        "sms_content": "Bell: You can visit https://m.bell.ca/chatchangepackagee to view or make changes to your Internet plan in the MyBell app. ( bell.ca/about-us )",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+        "language": "en"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "The {identification_status} is \"Pass\", {customer_type} is \"Existing\", {streaming_services} is null or {lob} is not null so, check for {streaming_services} based on instruction provided in playbook on how to set {streaming_services} within {route} = \"service_change_plan\"",
+    "actionParameters": {
+      "apb_location_id": "70011",
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "en",
+      "lob": "Internet",
+      "route": "service_change_plan",
+      "utterance": "I am calling to change the plan that I have"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "As, the {streaming_services} is null or {lob} is mobility so,{lob} and if it is related to streaming service then SET parameter {streaming_services} with correct value provided in playbook instruction within {route} = \"service_change_plan\"",
+    "actionParameters": {
+      "apb_location_id": "70011",
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "en",
+      "lob": "Internet",
+      "route": "service_change_plan",
+      "sms_content": "Bell: You can visit https://m.bell.ca/changeinternetpackage to view or make changes to your Internet plan in the MyBlell app. (bell.ca/about-us)",
+      "sms_type": "Public",
+      "utterance": "I want to upgrade my internet please"
+    }
+  },
+  "displayName": "EN - service_change_plan- streaming_services-null-lob-Internet",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 642,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

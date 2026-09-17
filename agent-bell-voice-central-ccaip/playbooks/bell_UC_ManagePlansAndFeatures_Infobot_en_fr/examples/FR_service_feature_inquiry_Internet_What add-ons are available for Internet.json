@@ -1,0 +1,68 @@
+{
+  "name": "a5a3b4c2-d30b-4c48-bef8-9c9c0f005846",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70024",
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+        "language": "fr-ca"
+      }
+    }
+  }, {
+    "playbookInvocation": {
+      "playbook": "bell_uc_ask_LOB",
+      "playbookInput": {
+        "actionParameters": {
+          "language": "fr-ca",
+          "utterance": "Quels sont les compléments offerts pour le service Internet?"
+        }
+      },
+      "playbookOutput": {
+        "actionParameters": {
+          "language": "fr-ca",
+          "lob": "Internet"
+        }
+      },
+      "playbookState": "OUTPUT_STATE_OK"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "service_add_feature_flow",
+      "inputActionParameters": {
+        "language": "fr-ca",
+        "route": "service_add_feature",
+        "utterance": "Quels sont les compléments offerts pour le service Internet?"
+      },
+      "outputActionParameters": {
+        "language": "fr-ca"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": ".Customer asking about add-ons available for Internet",
+    "actionParameters": {
+      "brand": "Bell",
+      "language": "fr-ca",
+      "lob": "Internet",
+      "route": "service_feature_inquiry",
+      "utterance": "Quels sont les compléments offerts pour le service Internet?"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Customer is routed to flow \"service_add_feature_flow\"",
+    "actionParameters": {
+      "brand": "Bell",
+      "language": "fr-ca",
+      "lob": "Internet",
+      "route": "service_feature_inquiry"
+    }
+  },
+  "displayName": "FR_service_feature_inquiry_Internet_What add-ons are available for Internet",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 415,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

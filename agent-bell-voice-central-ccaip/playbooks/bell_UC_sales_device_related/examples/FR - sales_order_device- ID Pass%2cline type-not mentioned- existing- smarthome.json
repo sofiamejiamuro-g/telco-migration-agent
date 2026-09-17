@@ -1,0 +1,78 @@
+{
+  "name": "10321712-64ef-42a7-a8c8-936a0b1b6921",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "brand": "bell",
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Désirez-vous ajouter un nouveau service ou modifier votre service\nactuel?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Je veux en savoir plus sur le service actuel"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "À propos de quel service communiquez- vous avec nous?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "maison intelligente"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Je vais envoyer un texto à l'appareil au moyen\nduquel vous appelez, afin que vous puissiez\ndécouvrir les appareils mobiles de Bell, comme\nles téléphones, les tablettes et les montres\nintelligentes, ainsi que le service Internet mobile.\nEst-ce que ça vous convient?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Oui"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "fr-ca",
+        "sms_content": "Bell: Vous pouvez visiter bell.ca/appareilsmobilite pour en savoir plus sur nos appareils. ( bell.ca/apropos )",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+        "language": "fr-ca"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer has questions about device availability, device features, cost, related to devices that Bell sells",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "Existing",
+      "device_type": "Smart Watch",
+      "identification_status": "Pass",
+      "language": "fr-ca",
+      "route": "sales_order_device",
+      "utterance": "Je souhaite commander un nouvel appareil"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "if lob is Homephone then give corresponding response",
+    "actionParameters": {
+      "brand": "bell",
+      "device_type": "Smart Watch",
+      "language": "fr-ca",
+      "line_type": "Existing"
+    }
+  },
+  "displayName": "FR - sales_order_device- ID Pass,line type-not mentioned- existing- smarthome",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 524,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

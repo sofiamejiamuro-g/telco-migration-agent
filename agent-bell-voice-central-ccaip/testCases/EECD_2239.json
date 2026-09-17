@@ -1,0 +1,249 @@
+{
+  "name": "34d4cc4c-27a5-4316-91c9-3e21825fec2a",
+  "tags": [ "#bell", "#Tech_SIM_Card_Locked" ],
+  "displayName": "EECD_2239",
+  "testCaseConversationTurns": [ {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "languageCode": "en",
+        "event": {
+          "event": "greet"
+        }
+      }
+    },
+    "virtualAgentOutput": {
+      "sessionParameters": {
+        "Agent_Counter": 0,
+        "CLID": 4155547622,
+        "brand": "bell",
+        "caller_channel": "TFN",
+        "language": "en"
+      },
+      "differences": [ {
+        "type": "PAGE",
+        "description": "Page mismatch:\nExpected: \nActual:   Routing Page",
+        "assertionType": "EQUAL",
+        "expectedValue": "",
+        "actualValue": "Routing Page"
+      }, {
+        "type": "UTTERANCE",
+        "description": "Agent response mismatch",
+        "warning": true,
+        "assertionType": "EQUAL",
+        "expectedValue": "",
+        "actualValue": "Welcome. I’m Bell’s virtual assistant. it’s nice to e-meet you. I use AI to offer you help quickly when you need it. How Can I help you?"
+      } ],
+      "currentPage": {
+        "name": "Routing Page",
+        "flow": "Default Start Flow"
+      },
+      "textResponses": [ {
+        "text": [ "Welcome. I’m Bell’s virtual assistant. it’s nice to e-meet you. I use AI to offer you help quickly when you need it. How Can I help you?" ]
+      } ],
+      "currentFlow": {
+        "name": "Default Start Flow"
+      },
+      "actions": [ {
+        "event": {
+          "event": "greet"
+        }
+      }, {
+        "agentUtterance": {
+          "text": "Welcome. I’m Bell’s virtual assistant. it’s nice to e-meet you. I use AI to offer you help quickly when you need it. How Can I help you?"
+        }
+      } ]
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "my sim card is locked"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "sessionParameters": {
+        "Agent_Counter": 0,
+        "CLID": 4155547622,
+        "brand": "bell",
+        "caller_channel": "TFN",
+        "language": "en",
+        "route": "tech_sim_card_locked",
+        "utterance": "my sim card is locked"
+      },
+      "differences": [ {
+        "type": "UTTERANCE",
+        "description": "Agent response mismatch",
+        "warning": true,
+        "assertionType": "EQUAL",
+        "expectedValue": "",
+        "actualValue": "You can find your SIM unlock code on the MyBell app or by visiting the Bell website. I’ll send you a text now with further instructions.Would you like to receive an SMS with instructions on how to unlock your SIM card?"
+      } ],
+      "textResponses": [ {
+        "text": [ "You can find your SIM unlock code on the MyBell app or by visiting the Bell website. I’ll send you a text now with further instructions." ],
+        "allowPlaybackInterruption": true
+      }, {
+        "text": [ "Would you like to receive an SMS with instructions on how to unlock your SIM card?" ],
+        "allowPlaybackInterruption": true
+      } ],
+      "actions": [ {
+        "userUtterance": {
+          "text": "my sim card is locked"
+        }
+      }, {
+        "playbookInvocation": {
+          "playbook": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/playbooks/e283827c-8820-4398-91fc-dc42d0c18b87",
+          "playbookInput": {
+            "actionParameters": {
+              "CLID": 4155547622,
+              "brand": "bell",
+              "caller_channel": "TFN",
+              "language": "en",
+              "route": "tech_sim_card_locked",
+              "utterance": "my sim card is locked"
+            }
+          },
+          "playbookState": "OUTPUT_STATE_PENDING"
+        }
+      }, {
+        "agentUtterance": {
+          "text": "You can find your SIM unlock code on the MyBell app or by visiting the Bell website. I’ll send you a text now with further instructions."
+        }
+      }, {
+        "playbookInvocation": {
+          "playbook": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/playbooks/bb0845d7-9539-472c-89a2-4f884ec919ef",
+          "playbookInput": {
+            "precedingConversationSummary": "Ask for the customer's confirmation whether they are ok to receive an SMS.",
+            "actionParameters": {
+              "CLID": 4155547622,
+              "brand": "bell",
+              "caller_channel": "TFN",
+              "language": "en",
+              "route": "tech_sim_card_locked",
+              "sms_content": "Bell msg: Here is a link to unlock your SIM Card. See https://support.bell.ca/mobility/smartphones_and_mobile_internet/i_get_an_error_message_on_my_phone_that_says_sim_card_locked and follow the steps. ( bell.ca/about-us )",
+              "sms_type": "Public",
+              "utterance": "my sim card is locked"
+            }
+          },
+          "playbookState": "OUTPUT_STATE_PENDING"
+        }
+      }, {
+        "agentUtterance": {
+          "text": "Would you like to receive an SMS with instructions on how to unlock your SIM card?"
+        }
+      } ]
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "yes"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "sessionParameters": {
+        "Agent_Counter": 0,
+        "CLID": 4155547622,
+        "Loud_Counter": 0,
+        "Mistake_Counter": 0,
+        "More_Time_Counter": 0,
+        "SMS_Counter": 0,
+        "brand": "bell",
+        "caller_channel": "TFN",
+        "language": "en",
+        "message_text": "Bell msg: Here is a link to unlock your SIM Card. See https://support.bell.ca/mobility/smartphones_and_mobile_internet/i_get_an_error_message_on_my_phone_that_says_sim_card_locked and follow the steps. ( bell.ca/about-us )",
+        "route": "tech_sim_card_locked",
+        "sms_content": "Bell msg: Here is a link to unlock your SIM Card. See https://support.bell.ca/mobility/smartphones_and_mobile_internet/i_get_an_error_message_on_my_phone_that_says_sim_card_locked and follow the steps. ( bell.ca/about-us )",
+        "sms_send_status": "Fail",
+        "sms_type": "Public",
+        "telephone_number": 4155547622,
+        "utterance": "my sim card is locked"
+      },
+      "differences": [ {
+        "type": "UTTERANCE",
+        "description": "Agent response mismatch",
+        "warning": true,
+        "assertionType": "EQUAL",
+        "expectedValue": "",
+        "actualValue": "Sorry, I can't send you a text at the moment, due to an unexpected system issue.\u003cspeak\u003eYou can check out our frequently asked questions at \u003csay-as interpret-as=\"url\"\u003eluckymobile.ca/support\u003c/say-as\u003e\u003c/speak\u003eIs there anything else I can help you with?"
+      } ],
+      "textResponses": [ {
+        "text": [ "Sorry, I can't send you a text at the moment, due to an unexpected system issue." ],
+        "allowPlaybackInterruption": true
+      }, {
+        "text": [ "\u003cspeak\u003eYou can check out our frequently asked questions at \u003csay-as interpret-as=\"url\"\u003eluckymobile.ca/support\u003c/say-as\u003e\u003c/speak\u003e" ],
+        "allowPlaybackInterruption": true
+      }, {
+        "text": [ "Is there anything else I can help you with?" ],
+        "allowPlaybackInterruption": true
+      } ],
+      "actions": [ {
+        "userUtterance": {
+          "text": "yes"
+        }
+      }, {
+        "flowInvocation": {
+          "flow": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/flows/0a1510a2-b7b1-4626-b66b-8387cabd9a94",
+          "flowState": "OUTPUT_STATE_PENDING",
+          "inputActionParameters": {
+            "CLID": 4155547622,
+            "brand": "bell",
+            "caller_channel": "TFN",
+            "sms_content": "Bell msg: Here is a link to unlock your SIM Card. See https://support.bell.ca/mobility/smartphones_and_mobile_internet/i_get_an_error_message_on_my_phone_that_says_sim_card_locked and follow the steps. ( bell.ca/about-us )",
+            "sms_type": "Public"
+          }
+        }
+      }, {
+        "agentUtterance": {
+          "text": "Sorry, I can't send you a text at the moment, due to an unexpected system issue.\n\u003cspeak\u003eYou can check out our frequently asked questions at \u003csay-as interpret-as=\"url\"\u003eluckymobile.ca/support\u003c/say-as\u003e\u003c/speak\u003e"
+        }
+      }, {
+        "playbookInvocation": {
+          "playbook": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/playbooks/5de122dc-8c9a-4a4a-8332-c5df65125a22",
+          "playbookInput": {
+            "actionParameters": {
+              "CLID": 4155547622,
+              "brand": "bell",
+              "caller_channel": "TFN",
+              "language": "en"
+            }
+          },
+          "playbookState": "OUTPUT_STATE_PENDING"
+        }
+      }, {
+        "playbookInvocation": {
+          "playbook": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/playbooks/f0990574-1922-4ced-9892-cf29d8060947",
+          "playbookInput": {
+            "precedingConversationSummary": "User is asking for help",
+            "actionParameters": {
+              "CLID": 4155547622,
+              "brand": "bell",
+              "caller_channel": "TFN",
+              "language": "en"
+            }
+          },
+          "playbookState": "OUTPUT_STATE_PENDING"
+        }
+      }, {
+        "agentUtterance": {
+          "text": "Is there anything else I can help you with?"
+        }
+      } ]
+    }
+  } ],
+  "creationTime": {
+    "seconds": 1731319954,
+    "nanos": 667383000
+  },
+  "testConfig": {
+    "flow": "Default Start Flow",
+    "page": "Start Page"
+  },
+  "languageCode": "en"
+}

@@ -1,0 +1,39 @@
+{
+  "name": "8264cc24-a4a3-4af3-970d-6fde34bd3544",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "L’authentification multifactorielle, ou l’AMF, est une protection essentielle qui aide à protéger votre compte et vos renseignements personnels. Une fois que vous êtes inscrit à l’AMF, vous ne pouvez pas la désactiver puisqu’il s’agit d’une couche de sécurité obligatoire. Elle garantit que vous seul pouvez accéder à votre compte. Vous pouvez en savoir plus sur l’AMF sur notre site Web, y compris sur la façon de mettre à jour votre adresse courriel et votre numéro de téléphone pour l’AMF. Je vais envoyer un texto à l’appareil à partir duquel vous appelez, avec un lien vers notre page de soutien. Est-ce que cela vous convient? "
+    }
+  }, {
+    "userUtterance": {
+      "text": "Oui"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "fr-ca",
+        "sms_content": "Bell: Vous pouvez visiter bell.ca/monbellmfa pour obtenir plus d'information sur l'authentification multifacteur.",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer has inquired about disable multi factor authentication",
+    "actionParameters": {
+      "language": "fr-ca",
+      "route": "account_disable_mfa"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "VA responded to user and asked if they would like to receive the SMS. User agreed so we call bell_SMS_Trigger flow"
+  },
+  "displayName": "FR  Account Disable MFA  - Yes",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 355,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

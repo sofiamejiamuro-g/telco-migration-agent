@@ -1,0 +1,118 @@
+{
+  "name": "984eecc8-b782-4dfe-a8d2-370cdb6525c6",
+  "displayName": "Appointment time details",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "setParameterActions": [ {
+      "parameter": "apptStartTime",
+      "value": "$session.params.acut_retrieve_response.acutContext.appointments.appointment.appointmentStartDate"
+    }, {
+      "parameter": "apptEndTime",
+      "value": "$session.params.acut_retrieve_response.acutContext.appointments.appointment.appointmentEndDate"
+    } ],
+    "generators": [ {
+      "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/c8d9aa7a-0227-4da7-8256-fd4d68a2aa75",
+      "inputParameters": [ {
+        "key": "date-time",
+        "value": "$session.params.apptStartTime"
+      } ],
+      "outputParameter": "$request.generative.apptStartTime"
+    }, {
+      "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/c8d9aa7a-0227-4da7-8256-fd4d68a2aa75",
+      "inputParameters": [ {
+        "key": "date-time",
+        "value": "$session.params.apptEndTime"
+      } ],
+      "outputParameter": "$request.generative.apptEndTime"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "true",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "$session.params.trouble_type_message. $session.params.dispatch_task_status_message Votre rendez-vous est prévu $session.params.ticket_day_fr, $session.params.ticket_month_fr $session.params.ticket_date_fr, $session.params.ticket_year_fr." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "\u003cspeak\u003e\u003cprosody rate=\"93%\"\u003eLe technicien peut arriver entre \u003csay-as interpret-as=\"unit\"\u003e$session.params.start_time_hours_fr et $session.params.end_time_hours_fr\u003c/say-as\u003e.\u003cbreak time=\"400ms\"/\u003e\u003cprosody pitch=\"-5%\"\u003eEt rappelez-vous :\u003c/prosody\u003e un rendez-vous prévu de \u003csay-as interpret-as=\"unit\"\u003e$session.params.start_time_hours_fr à $session.params.end_time_hours_fr\u003c/say-as\u003e peut commencer \u003cemphasis level=\"moderate\"\u003emême 5 minutes avant\u003c/emphasis\u003e \u003csay-as interpret-as=\"unit\"\u003e$session.params.end_time_hours_fr\u003c/say-as\u003e, et se terminer plus tard.\u003c/prosody\u003e\u003c/speak\u003e" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "Souhaitiez-vous modifier votre rendez-vous?" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "$session.params.trouble_type_message. $session.params.dispatch_task_status_message Your appointment is on $session.params.ticket_day, $session.params.ticket_month $session.params.ticket_date, $session.params.ticket_year." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "\u003cspeak\u003eThe technician can arrive anytime between \u003csay-as interpret-as=\"time\"\u003e$session.params.start_time_hours\u003c/say-as\u003e and \u003csay-as interpret-as=\"time\"\u003e$session.params.end_time_hours\u003c/say-as\u003e. And remember, an appointment scheduled from \u003csay-as interpret-as=\"time\"\u003e$session.params.start_time_hours\u003c/say-as\u003e to \u003csay-as interpret-as=\"time\"\u003e$session.params.end_time_hours\u003c/say-as\u003e can start even 5 minutes before \u003csay-as interpret-as=\"time\"\u003e$session.params.end_time_hours\u003c/say-as\u003e and finish later.\u003c/speak\u003e" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Were you looking to modify your appointment?" ]
+        },
+        "languageCode": "en"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "apptStartTimeObj",
+        "value": "$sys.func.TO_OBJECT($request.generative.apptStartTime)"
+      }, {
+        "parameter": "apptEndTimeObj",
+        "value": "$sys.func.TO_OBJECT($request.generative.apptEndTime)"
+      }, {
+        "parameter": "trouble_type_message",
+        "value": "$session.params.acut_trouble_type_response.trouble_type_message"
+      }, {
+        "parameter": "dispatch_task_status_message",
+        "value": "$session.params.acut_task_status_response.dispatch_task_status_message"
+      }, {
+        "parameter": "ticket_day",
+        "value": "$session.params.apptStartTimeObj.day"
+      }, {
+        "parameter": "ticket_month",
+        "value": "$session.params.apptStartTimeObj.month"
+      }, {
+        "parameter": "ticket_date",
+        "value": "$session.params.apptStartTimeObj.date"
+      }, {
+        "parameter": "ticket_year",
+        "value": "$session.params.apptStartTimeObj.year"
+      }, {
+        "parameter": "start_time_hours",
+        "value": "$session.params.apptStartTimeObj.appt_time"
+      }, {
+        "parameter": "end_time_hours",
+        "value": "$session.params.apptEndTimeObj.appt_time"
+      }, {
+        "parameter": "ticket_day_fr",
+        "value": "$session.params.apptStartTimeObj.day_fr"
+      }, {
+        "parameter": "ticket_month_fr",
+        "value": "$session.params.apptStartTimeObj.month_fr"
+      }, {
+        "parameter": "ticket_date_fr",
+        "value": "$session.params.apptStartTimeObj.date"
+      }, {
+        "parameter": "ticket_year_fr",
+        "value": "$session.params.apptStartTimeObj.year"
+      }, {
+        "parameter": "start_time_hours_fr",
+        "value": "$session.params.apptStartTimeObj.appt_time_fr"
+      }, {
+        "parameter": "end_time_hours_fr",
+        "value": "$session.params.apptEndTimeObj.appt_time_fr"
+      } ]
+    },
+    "targetPage": "CX Input",
+    "name": "a372c040-aaaf-42a7-9e35-164f8aa16c42"
+  } ]
+}

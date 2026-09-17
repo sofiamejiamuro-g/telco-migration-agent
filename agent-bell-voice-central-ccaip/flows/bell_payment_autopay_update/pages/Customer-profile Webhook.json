@@ -1,0 +1,137 @@
+{
+  "name": "9878b556-4b65-457c-b2e6-85befe27b2f7",
+  "displayName": "Customer-profile Webhook",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "/v1/ibm_mw/nm1_get#customer-profile",
+    "tag": "customer-profile"
+  },
+  "transitionRoutes": [ {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "Bantype",
+        "value": "$session.params.nm1_get_cust_profile_response.banType"
+      }, {
+        "parameter": "Bansubtype",
+        "value": "$session.params.nm1_get_cust_profile_response.banSubType"
+      }, {
+        "parameter": "errorCode",
+        "value": "$session.params.nm1_get_cust_profile_response.returnCode"
+      }, {
+        "parameter": "onebillindicator",
+        "value": "$session.params.nm1_get_cust_profile_response.oneBill"
+      } ]
+    },
+    "name": "e72f78e3-f228-4dc8-8b77-6234cf589c0f"
+  }, {
+    "condition": "$session.params.webhook_success = \"false\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "ID or Auth or NM1 or PACC or Webhook Failure Confirmation",
+    "name": "dc515124-14ce-4db0-baf5-66ec57462f6a"
+  }, {
+    "condition": "$session.params.errorCode = \"0\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "webhook_success",
+        "value": "false"
+      } ]
+    },
+    "targetPage": "ID or Auth or NM1 or PACC or Webhook Failure Confirmation",
+    "name": "3a0c2d42-dd38-469c-9034-54c720a819c5"
+  }, {
+    "condition": "$session.params.onebillindicator = \"Y\" OR $session.params.onebillindicator = \"M\" OR $session.params.onebillindicator = \"N\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "webhook_success",
+        "value": null
+      } ]
+    },
+    "targetPage": "Consolidated Customers",
+    "name": "74d77434-91d9-4eda-ad81-53e995abd792"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "9878b556-4b65-457c-b2e6-85befe27b2f7"
+      }, {
+        "parameter": "flow_id",
+        "value": "00208917-47d8-4e61-a709-01d206b91ce4"
+      }, {
+        "parameter": "page_name",
+        "value": "Customer-profile Webhook"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "ID or Auth or NM1 or PACC or Webhook Failure Confirmation",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "webhook_success",
+        "value": "nm1"
+      } ]
+    },
+    "name": "1d7cf2e4-9b0a-49d7-99c4-0dcc86f196cc"
+  }, {
+    "targetPage": "ID or Auth or NM1 or PACC or Webhook Failure Confirmation",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "webhook_success",
+        "value": "nm1"
+      } ]
+    },
+    "name": "306ad245-884a-4567-a4c2-562b873ee51f"
+  }, {
+    "targetPage": "ID or Auth or NM1 or PACC or Webhook Failure Confirmation",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "webhook_success",
+        "value": "nm1"
+      } ]
+    },
+    "name": "d301fa66-a639-43e6-8e7a-e826bd8d8e1e"
+  }, {
+    "targetPage": "ID or Auth or NM1 or PACC or Webhook Failure Confirmation",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "webhook_success",
+        "value": "nm1"
+      } ]
+    },
+    "name": "1e903dbf-d8aa-46b2-b5b6-f63fa30b1765"
+  }, {
+    "targetPage": "ID or Auth or NM1 or PACC or Webhook Failure Confirmation",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "webhook_success",
+        "value": "nm1"
+      } ]
+    },
+    "name": "caf847f8-7200-4195-893e-347facb67603"
+  }, {
+    "targetPage": "ID or Auth or NM1 or PACC or Webhook Failure Confirmation",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "webhook_success",
+        "value": "nm1"
+      } ]
+    },
+    "name": "27fbcff3-d57c-440b-a025-4b9b00491968"
+  } ]
+}

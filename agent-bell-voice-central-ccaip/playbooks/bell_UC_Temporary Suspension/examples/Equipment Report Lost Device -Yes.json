@@ -1,0 +1,56 @@
+{
+  "name": "c86af902-da39-488e-baa8-3c1daa618de5",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "I'm sorry to hear that. Have you tried using a tracking feature like \"Find my iPhone\" or \"Find my Device\"?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Yes"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Understood, I would suggest temporarily suspending your service to prevent unauthorized use. I will send a text to the device you are calling from, with a link to do it yourelf, it that alright?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "yes"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "brand": "bell",
+        "language": "en",
+        "route": "equipment_report_lost_device",
+        "sms_content": "You can visit bell.ca/suspendline to temporarily suspend your mobility service in MyBell. (bell.ca/about-us)",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+        "brand": "bell",
+        "language": "en"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer to report about a device lost or stolen",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "route": "equipment_report_lost_device",
+      "utterance": "report my phone as stolen"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Customer has been redirected to \"Steering_SMS Trigger\" playbook",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en"
+    }
+  },
+  "displayName": "Equipment Report Lost Device -Yes",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 337,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

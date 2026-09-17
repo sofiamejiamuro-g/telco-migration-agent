@@ -1,0 +1,58 @@
+{
+  "name": "6ceabf59-57da-4209-bf14-efac40410e92",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Bien sûr, laissez-moi vous aider.\n\nÀ propos de quel service communiquez-vous avec nous?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "cela est lié à la fois à la mobilité et à Internet"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_aqd",
+      "inputActionParameters": {
+        "language": "fr-ca",
+        "special_queue": "cornerstone"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customers want to know about different plans or compare different plans that Bell has and lob identified as \" Internet\" OR \"TV\" OR \"Homephone\"",
+    "actionParameters": {
+      "customer_type": "New",
+      "identification_status": "Fail",
+      "language": "fr-ca",
+      "province": "MTS",
+      "route": "sales_plans_inquiry",
+      "utterance": "j'ai besoin d'un nouveau plan",
+      "wml_eligible": "1"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "user mentioned multiple services, and wml_eligible is \"1\", hence route to bell_aqd along with special_queue parameter set to \"cornerstone\"",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca"
+    }
+  },
+  "displayName": "FR - sales plans inquiry- ID Fail, customer_type-new- multiple - wml_eligible",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 386,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "fr"
+}

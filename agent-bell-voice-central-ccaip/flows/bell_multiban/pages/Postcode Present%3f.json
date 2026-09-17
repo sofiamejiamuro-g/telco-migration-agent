@@ -1,0 +1,99 @@
+{
+  "name": "60c04f6e-1b68-4fb1-8cf3-bf1e43e675a6",
+  "displayName": "Postcode Present?",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.postcode = null",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "entry_route_again",
+        "value": "postal_agent_again"
+      }, {
+        "parameter": "entry_route_postal",
+        "value": null
+      } ]
+    },
+    "name": "3101f47e-8905-4223-af28-fe41d0d98dc2"
+  }, {
+    "condition": "$session.params.postal_agent = true",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "$request.generative.postal_1" ]
+        },
+        "languageCode": "en"
+      } ],
+      "generators": [ {
+        "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/b565ff4d-2895-4ba0-9020-594fda7affa9",
+        "outputParameter": "$request.generative.postal_1"
+      } ]
+    },
+    "name": "61318a32-201c-48a4-8f9b-98fdda5ca8da",
+    "targetPlaybook": "bell_UC_Postal_Code"
+  }, {
+    "condition": "$session.params.postcode != null",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Postcode",
+    "name": "3e1af0be-1029-4e15-8aa6-38605df52f3f"
+  }, {
+    "condition": "$session.params.postcode = null",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "If you're having trouble finding your postal code, you can tell me your account number instead." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "J'ai besoin d'en savoir un peu plus. Pourriez-vous aussi me donner votre numéro de compte?" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetPage": "Account Number",
+    "name": "6f7f8602-bcac-42fe-85a0-ce5ad0a690c2"
+  }, {
+    "condition": "$session.params.n_postcode \u003e 1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ " I still need a bit more information. Could you also tell me your account number, please?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "J'ai besoin d'en savoir un peu plus. Pourriez-vous aussi me donner votre numéro de compte?" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetPage": "Account Number",
+    "name": "c69328c4-d785-404c-9c16-8c837750da29"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "60c04f6e-1b68-4fb1-8cf3-bf1e43e675a6"
+      }, {
+        "parameter": "flow_id",
+        "value": "1ecd0a71-8b39-47fa-8bfa-16c0e2425d74"
+      }, {
+        "parameter": "page_name",
+        "value": "Postcode Present?"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

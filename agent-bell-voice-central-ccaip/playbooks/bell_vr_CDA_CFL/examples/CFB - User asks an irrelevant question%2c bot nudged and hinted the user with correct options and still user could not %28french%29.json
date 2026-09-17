@@ -1,0 +1,120 @@
+{
+  "name": "e34f05a1-5862-459f-8563-329eb580caea",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Puis-tu regarder ton modem et me dire à quoi ressemblent les lumières ?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Qu'est-ce qu'internet ?"
+    }
+  }, {
+    "toolUse": {
+      "tool": "FR_Bell_vr_cfl_faq",
+      "action": "FR_Bell_vr_cfl_faq",
+      "inputActionParameters": {
+        "requestBody": {
+          "query": "6502"
+        }
+      },
+      "outputActionParameters": {
+        "200": {
+          "answer": "Q : Qu’est-ce qu’un modem ? R : Un modem est un appareil rectangulaire qui vous permet de vous connecter à Internet. Il doit être debout et avoir au moins 2 câbles branchés sur les ports à l’arrière de celui-ci. Q : À quoi ressemble mon modem ? R : Un modem est un appareil rectangulaire qui vous permet de vous connecter à Internet. Il doit être debout et avoir au moins 2 câbles branchés sur les ports à l’arrière de celui-ci.",
+          "snippets": [ {
+            "text": "",
+            "title": "6502",
+            "uri": ""
+          } ]
+        }
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Je comprends que vous avez une question, et bien que je n'aie pas cette information spécifique, connaître la couleur du voyant de votre modem est la prochaine étape pour nous permettre de résoudre le problème. Pourriez-vous me faire savoir la couleur des voyants de votre modem ?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Non, ce n'est pas le cas."
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Alors, s'il vous plaît, pourriez-vous répondre à ma question : quelles lumières voyez-vous sur votre modem ?Alors, s'il vous plaît, pourriez-vous répondre à ma question : quelles lumières voyez-vous sur votre modem ?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Je vois des lumières violettes, frérot."
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Je comprends que vous voyez une lumière violette. Pour m'aider à comprendre ce qui se passe, pourriez-vous me dire si ce que vous voyez, c'est que toutes les lumières sont blanches, certaines sont rouges, certaines sont oranges, ou si c'est une combinaison de rouge et d'orange ? Peut-être qu'aucune lumière n'est allumée du tout, ou est-ce aucune de ces options ? S'il vous plaît, faites-moi savoir laquelle de ces options décrit le mieux ce que vous voyez."
+    }
+  }, {
+    "userUtterance": {
+      "text": "Oh, je vois seulement du violet."
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Merci de m'en informer. Je vérifie maintenant quelle sera la prochaine étape."
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_vr_post_answer",
+      "inputActionParameters": {
+        "customer_answer1_id": "5"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer having an issue with the service, starts the Virtual repair process.",
+    "actionParameters": {
+      "acceptable_answers": [ {
+        "choice": "They’re all white.",
+        "id": 0,
+        "sub-choices": [ ],
+        "title": ""
+      }, {
+        "choice": "Some are red.",
+        "id": 1,
+        "sub-choices": [ ],
+        "title": ""
+      }, {
+        "choice": "Some are orange.",
+        "id": 2,
+        "sub-choices": [ ],
+        "title": ""
+      }, {
+        "choice": "A combination of red and orange.",
+        "id": 3,
+        "sub-choices": [ ],
+        "title": ""
+      }, {
+        "choice": "No lights are on.",
+        "id": 4,
+        "sub-choices": [ ],
+        "title": ""
+      }, {
+        "choice": "None of the above.",
+        "id": 5,
+        "sub-choices": [ ],
+        "title": ""
+      } ],
+      "dcx_action_code": "6502",
+      "more_info": [ ],
+      "title": "What colour are the lights on your modem?",
+      "vr_type": "CFB"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Modem troubleshooting flow where the agent seeks modem light status. After the agent asks about lights, the user's initial \"What is internet?\" triggers a vr_cfl_faq_en tool call, which fails to provide the definition, forcing the agent to re-prompt the original question. When the user vaguely replies \"No its not\" and then offers \"I see purple lights bro,\" the agent, recognizing \"purple\" is not an acceptable_answer (implied by the subsequent detailed list), guides the user by explicitly presenting a multiple-choice list of valid light states. However, the user then still responds with \"Oh, i see purple only,\" indicating they were unable to select from the acceptable options. This highlights a persistent input mismatch despite the agent's explicit guidance.",
+    "actionParameters": {
+    
+    }
+  },
+  "displayName": "CFB - User asks an irrelevant question, bot nudged and hinted the user with correct options and still user could not (french)",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 1115,
+  "languageCode": "en"
+}

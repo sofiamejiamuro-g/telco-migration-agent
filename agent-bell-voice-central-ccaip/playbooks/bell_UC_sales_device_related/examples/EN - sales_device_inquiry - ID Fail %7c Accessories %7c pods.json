@@ -1,0 +1,70 @@
+{
+  "name": "3cebf943-d8f9-4449-89a2-f4c8122d12d4",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "brand": "bell",
+        "language": "en"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Which service are you inquiring about? "
+    }
+  }, {
+    "userUtterance": {
+      "text": " I want AirPads Pro"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "I'll send a text to the device you're calling from, so that you can learn more about all sorts of accessories that Bell has to offer. Is that alright?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "ok"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "en",
+        "sms_content": "Bell: You can visit bell.ca/accessories to view our phone accessories. ( bell.ca/about-us )",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+        "language": "en"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer wants to order Accessories like pods, adaptor or something similar to accessories",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "New",
+      "identification_status": "Fail",
+      "language": "en",
+      "line_type": "New",
+      "province": "NB",
+      "route": "sales_order_device",
+      "utterance": "I need a new device"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "we got to know from the utterance that the device type or lob is \"Accessories\" so we offer SMS to customer",
+    "actionParameters": {
+      "device_type": "Accessories",
+      "language": "en",
+      "lob": "Accessories"
+    }
+  },
+  "displayName": "EN - sales_device_inquiry - ID Fail | Accessories | pods",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 430,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

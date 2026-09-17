@@ -1,0 +1,150 @@
+{
+  "name": "e64c5de1-74e7-4353-b8e3-becb1a99c95c",
+  "displayName": "Webhook-ATL Privilege-deai-customer",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.ban_provided_instead_cirn = true",
+    "triggerFulfillment": {
+      "webhook": "v1/deai-customer-information",
+      "tag": "NA",
+      "setParameterActions": [ {
+        "parameter": "telephone_number",
+        "value": "$session.params.phone"
+      } ]
+    },
+    "name": "0d3834f7-62ec-4250-a151-f788e5e6878f"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "webhook": "v1/deai-customer-information",
+      "tag": "NA"
+    },
+    "name": "e8fa2d34-3d8c-43d9-a5ac-4987af09941a"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "atl_prvlg",
+        "value": "$session.params.deai_search_by_tn_response.bell_alnt_prvlg_flg"
+      }, {
+        "parameter": "shr_int_partner_nw_elig_flg",
+        "value": "$session.params.deai_search_by_tn_response.shr_int_partner_nw_elig_flg"
+      } ]
+    },
+    "name": "bae5eadb-dd40-4ae1-804c-b400fe1de5e5"
+  }, {
+    "condition": "$session.params.atl_prvlg = 1",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "region",
+        "value": "ATL"
+      } ]
+    },
+    "targetFlow": "bell_va_to_ivr_handoff",
+    "name": "90a523d7-51ac-4466-9044-1d544db7ceea"
+  }, {
+    "condition": "$session.params.mobility = true OR $session.params.tv = true OR $session.params.internet = true OR $session.params.smarthome = true OR $session.params.homephone = true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "route",
+        "value": null
+      } ]
+    },
+    "targetPage": "Distributel_collection\u0026others",
+    "name": "429731cc-b1a3-4c78-aa47-80fb7896389a"
+  }, {
+    "condition": "$session.params.tv = true OR $session.params.internet = true OR $session.params.smarthome = true OR $session.params.homephone = true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "route",
+        "value": null
+      } ]
+    },
+    "targetPage": "Distributel_collection\u0026others",
+    "name": "0336122f-4e89-4087-9114-24d3bdd2a1ec"
+  }, {
+    "condition": "$session.params.mobility = true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "route",
+        "value": null
+      } ]
+    },
+    "targetPage": "Webhook-AUL Data Check- soc-info-list",
+    "name": "f96a033f-2c23-4aa2-9a7a-103c3436923f"
+  }, {
+    "condition": "$session.params.atl_prvlg != 1 OR $session.params.webhook_success = false",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Distributel_collection\u0026others",
+    "name": "47991f85-fb1f-432d-afb7-93d9395e6af1"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "e64c5de1-74e7-4353-b8e3-becb1a99c95c"
+      }, {
+        "parameter": "flow_id",
+        "value": "d35b61b6-c884-44f8-b5c7-aed63cc356ab"
+      }, {
+        "parameter": "page_name",
+        "value": "Webhook-ATL Privilege-deai-customer"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Distributel_collection\u0026others",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+    
+    },
+    "name": "e3083642-e8f1-498d-8f74-646ca382fdad"
+  }, {
+    "targetPage": "Distributel_collection\u0026others",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+    
+    },
+    "name": "94898c74-68e0-459e-8342-515b278f8102"
+  }, {
+    "targetPage": "Distributel_collection\u0026others",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+    
+    },
+    "name": "907c68f7-63d5-4679-84c4-1f1f045a5601"
+  }, {
+    "targetPage": "Distributel_collection\u0026others",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+    
+    },
+    "name": "13e05486-ef80-433f-b6da-890ab6a53d18"
+  }, {
+    "targetPage": "Distributel_collection\u0026others",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+    
+    },
+    "name": "2f4442db-b63e-4dbf-9f38-9bb4d59c17c1"
+  }, {
+    "targetPage": "Distributel_collection\u0026others",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+    
+    },
+    "name": "010e0a62-4054-4c99-9a02-6275b1030eb9"
+  } ]
+}

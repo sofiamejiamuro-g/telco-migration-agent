@@ -1,0 +1,94 @@
+{
+  "name": "6ecba4d1-4ae2-40c8-9306-3c5750cb0be0",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Just to understand better, is it that you’re having image quality issues, or your Virgin Plus TV app isn’t working? or it’s something else?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "I guess the option isn't here.."
+    }
+  }, {
+    "agentUtterance": {
+      "text": "No worries, let's see how we can help with that."
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_vr_post_answer",
+      "inputActionParameters": {
+        "customer_answer1_id": "1",
+        "customer_answer2_id": "5"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "User having a problem with the service and initiating Virtual repair session.",
+    "actionParameters": {
+      "acceptable_answers": [ {
+        "choice": "Internet",
+        "id": 0,
+        "sub-choices": [ {
+          "choice": "My modem won't turn on.",
+          "id": 0
+        }, {
+          "choice": "I’m experiencing frequent disconnections.",
+          "id": 1
+        }, {
+          "choice": "My Internet service is slow.",
+          "id": 2
+        }, {
+          "choice": "My streaming services don’t work.",
+          "id": 3
+        }, {
+          "choice": "I'm not sure what's wrong.",
+          "id": 4
+        }, {
+          "choice": "None of the above.",
+          "id": 5
+        } ],
+        "title": "What type of problem are you experiencing with your Internet service?"
+      }, {
+        "choice": "TV",
+        "id": 1,
+        "sub-choices": [ {
+          "choice": "I’m experiencing image quality issues.",
+          "id": 0
+        }, {
+          "choice": "My Virgin Plus TV app isn’t working.",
+          "id": 1
+        }, {
+          "choice": "Some of my Virgin Plus TV channels are missing.",
+          "id": 2
+        }, {
+          "choice": "My Virgin Plus TV service is freezing.",
+          "id": 3
+        }, {
+          "choice": "I can’t cast my Virgin Plus TV service.",
+          "id": 4
+        }, {
+          "choice": "None of the above.",
+          "id": 5
+        } ],
+        "title": "What type of problem are you experiencing with your TV service?"
+      }, {
+        "choice": "All services",
+        "id": 2,
+        "sub-choices": [ ],
+        "title": ""
+      } ],
+      "dcx_action_code": "6590",
+      "lob": "TV",
+      "vr_type": "CFB"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "The bot correctly identified the user's input (\"option isn't here\") as a \"None of the above\" or \"Stuck\" state, which triggered the Priority 2 logic path. Instead of forcing a selection, it acknowledged the limitation with the standard fallback phrase (\"No worries...\") and transitioned to ${FLOW:bell_vr_post_answer} to handle the specific, unlisted issue in the next step."
+  },
+  "displayName": "CFB - 6590 (None of the options)",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 657,
+  "languageCode": "en"
+}

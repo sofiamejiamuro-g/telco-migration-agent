@@ -1,0 +1,53 @@
+{
+  "name": "b560f00c-5d0b-470d-b36a-4558ab2789e2",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Votre compte Bell est-il compromis ou avez-vous reçu un appel ou un courriel suspect?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Non, mais j'ai reçu un SMS étrange de Bell"
+    }
+  }, {
+    "playbookInvocation": {
+      "playbook": "bell_UC_AccountManagement_Infobot_en_fr",
+      "playbookInput": {
+        "precedingConversationSummary": "The customer is inquiring about Suspicious account activity, suspicious call, email or SMS, general questions or others",
+        "actionParameters": {
+          "language": "fr-ca",
+          "utterance": "Je pense qu'il pourrait y avoir une arnaque."
+        }
+      },
+      "playbookOutput": {
+        "executionSummary": "Customer has question (in utterance) which will be addressed by this playbook",
+        "actionParameters": {
+        
+        }
+      },
+      "playbookState": "OUTPUT_STATE_OK"
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "The customer is inquiring about Suspicious account activity, suspicious call, email or SMS or general questions.",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca",
+      "route": "account_fraud",
+      "utterance": "Je pense qu'il pourrait y avoir une arnaque."
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "The customer has responded with an utterance saying \"suspicious call, email or message\" or any other reason then route them to bell_UC_AccountManagement_Infobot_en_fr playbook.",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca",
+      "route": "account_fraud",
+      "utterance": "Je pense qu'il pourrait y avoir une arnaque."
+    }
+  },
+  "displayName": "FR_account_fraud_IThinkThereMightBeAScamHappened_SuspiciousCallOrEmail",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 370,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

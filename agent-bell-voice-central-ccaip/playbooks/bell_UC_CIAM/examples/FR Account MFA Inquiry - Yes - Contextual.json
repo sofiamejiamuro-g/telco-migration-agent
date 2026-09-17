@@ -1,0 +1,47 @@
+{
+  "name": "45a830f4-0095-4b4b-a5d5-ecbecbfad6eb",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "L’authentification multifactorielle, ou l’AMF, est une protection essentielle qui aide à protéger votre compte et vos renseignements personnels. Vous pouvez en savoir plus sur l’AMF sur notre site Web. Je vais envoyer un message texte à l’appareil au moyen duquel vous appelez, avec un lien pour en savoir plus. Est-ce que cela vous convient?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Combien cela coûtera-t-il ?"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Le SMS est gratuit. Souhaitez-vous le recevoir maintenant ?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Oui"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "fr-ca",
+        "sms_content": "Bell: Vous pouvez visiter bell.ca/monbellmfa pour obtenir plus d'information sur l'authentification multifacteur.",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer has inquired about multi factor authetication",
+    "actionParameters": {
+      "language": "fr-ca",
+      "route": "account_mfa_inquiry"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "VA responded to user and asked if they would like to receive the SMS. User agreed so we call bell_SMS_Trigger flow"
+  },
+  "displayName": "FR Account MFA Inquiry - Yes - Contextual",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 331,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

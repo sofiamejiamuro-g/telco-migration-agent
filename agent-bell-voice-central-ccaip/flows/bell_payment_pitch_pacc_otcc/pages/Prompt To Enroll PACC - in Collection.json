@@ -1,0 +1,149 @@
+{
+  "name": "99d8ff3d-0212-4412-8874-14b8534305f2",
+  "displayName": "Prompt To Enroll PACC - in Collection",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "messages": [ {
+      "text": {
+        "text": [ "To help with keeping your payments up to date I recommend registering for pre-authorized payments. Would you like all future invoices to be automatically paid with the credit card you just used?" ]
+      },
+      "languageCode": "en"
+    }, {
+      "text": {
+        "text": [ "Pour vous aider à maintenir vos paiements à jour, je vous recommande de vous inscrire aux paiements préautorisés. Souhaitez-vous que toutes vos factures futures soient automatiquement payées avec la carte de crédit que vous venez d’utiliser?" ]
+      },
+      "languageCode": "fr-ca"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "intent": "context.confirm_yes",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Create Order",
+    "name": "01f95564-b257-4e09-8f1e-3e3edbe5f1b0"
+  }, {
+    "intent": "context.confirm_no",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "OK. You can always use the MyBell app to enroll for automatic bank or credit card payments at any time." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "D’accord. Vous pouvez toujours utiliser l’appli MonBell pour vous inscrire aux paiements bancaires ou par carte de crédit automatiques à tout moment." ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "card_number",
+        "value": null
+      }, {
+        "parameter": "cc_token",
+        "value": null
+      }, {
+        "parameter": "expiry_date",
+        "value": null
+      }, {
+        "parameter": "expiry_month",
+        "value": null
+      }, {
+        "parameter": "expiry_year",
+        "value": null
+      }, {
+        "parameter": "security_code",
+        "value": null
+      }, {
+        "parameter": "cvv_number",
+        "value": null
+      }, {
+        "parameter": "cc_from_utterance",
+        "value": null
+      } ]
+    },
+    "targetFlow": "bell_Feedback",
+    "name": "ff4caa5d-4913-4b9f-acc5-c4a94818944d"
+  } ],
+  "eventHandlers": [ {
+    "event": "sys.no-input-1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I didn't quite get that. Can you try again?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je n’ai pas tout à fait compris. Pouvez-vous réessayer?" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "033d3829-7c1f-4842-9c66-1d474af76626"
+  }, {
+    "event": "sys.no-input-2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I still didn't get that" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je n’ai toujours pas compris" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "1f4e5a22-db9c-4ee2-abf8-69eaad573695"
+  }, {
+    "targetFlow": "bell_determine_handover",
+    "event": "sys.no-input-3",
+    "triggerFulfillment": {
+    
+    },
+    "name": "738b9a8b-9902-4b59-9cbb-4a32fc60d4a2"
+  }, {
+    "event": "sys.no-match-1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I didn't quite get that. Can you try again?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je n’ai pas tout à fait compris. Pouvez-vous réessayer?" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "401b0122-e77c-42ad-87bd-769a096d03e4"
+  }, {
+    "event": "sys.no-match-2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I still didn't get that" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je n’ai toujours pas compris" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "e4670f41-e35e-49cd-9511-ede26f359095"
+  }, {
+    "targetFlow": "bell_determine_handover",
+    "event": "sys.no-match-3",
+    "triggerFulfillment": {
+    
+    },
+    "name": "9bd94aeb-c334-427a-8cc4-c4443b4a28fe"
+  } ]
+}

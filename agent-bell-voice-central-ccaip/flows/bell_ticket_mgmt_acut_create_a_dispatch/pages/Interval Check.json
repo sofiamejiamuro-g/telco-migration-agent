@@ -1,0 +1,142 @@
+{
+  "name": "9d0cd5bf-d741-4c07-b09c-ecaa4dc08528",
+  "displayName": "Interval Check",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "generators": [ {
+      "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/9cd06cde-9479-4dbf-a174-31edef85182b",
+      "inputParameters": [ {
+        "key": "availability",
+        "value": "$session.params.availability"
+      }, {
+        "key": "full_date",
+        "value": "$session.params.full_date"
+      }, {
+        "key": "time_slot",
+        "value": "$session.params.time_slot"
+      } ],
+      "outputParameter": "$request.generative.interval_availability"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "interval_availability_raw",
+        "value": "$request.generative.interval_availability"
+      }, {
+        "parameter": "interval_availability",
+        "value": "$sys.func.TO_OBJECT($session.params.interval_availability_raw)"
+      }, {
+        "parameter": "interval_available",
+        "value": "$session.params.interval_availability.interval_available"
+      }, {
+        "parameter": "unav_response",
+        "value": "$session.params.interval_availability.unav_response"
+      } ]
+    },
+    "name": "bb96ffeb-9bb8-4da0-9ab2-b6dfb3b2cde7"
+  }, {
+    "condition": "$session.params.interval_available_second_time = \"true\" AND $session.params.interval_available = \"true\"",
+    "triggerFulfillment": {
+      "generators": [ {
+        "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/40935f87-fbd5-4c6d-b12d-6b2d62267305",
+        "inputParameters": [ {
+          "key": "availability",
+          "value": "$session.params.availability"
+        }, {
+          "key": "full_date",
+          "value": "$session.params.full_date"
+        }, {
+          "key": "time_slot",
+          "value": "$session.params.time_slot"
+        } ],
+        "outputParameter": "$request.generative.slot_details"
+      } ]
+    },
+    "targetPage": "Time Slot Confirmation",
+    "name": "e5659c07-4f63-43b6-a6af-994e1f8e3304"
+  }, {
+    "condition": "$session.params.interval_available = \"true\"",
+    "triggerFulfillment": {
+      "generators": [ {
+        "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/40935f87-fbd5-4c6d-b12d-6b2d62267305",
+        "inputParameters": [ {
+          "key": "availability",
+          "value": "$session.params.availability"
+        }, {
+          "key": "full_date",
+          "value": "$session.params.full_date"
+        }, {
+          "key": "time_slot",
+          "value": "$session.params.time_slot"
+        } ],
+        "outputParameter": "$request.generative.slot_details"
+      } ]
+    },
+    "targetPage": "Time Slot Confirmation",
+    "name": "dc0972d4-812f-43ee-b593-91a3504a66b9"
+  }, {
+    "condition": "$session.params.interval_available_second_time = \"true\" AND $session.params.interval_available = \"false\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "$session.params.unav_response" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "$session.params.unav_response" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetPage": "Webhook - WFAS Cancel",
+    "name": "d2362661-3d5e-4e0a-9793-0b3d35474097"
+  }, {
+    "condition": "$session.params.interval_available = \"false\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "interval_available",
+        "value": null
+      }, {
+        "parameter": "interval_available_second_time",
+        "value": "true"
+      }, {
+        "parameter": "time_slot",
+        "value": null
+      } ],
+      "generators": [ {
+        "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/8b7eddf4-5a16-4a35-b392-88c9f4233b69",
+        "inputParameters": [ {
+          "key": "dynamic_intervals",
+          "value": "$session.params.dynamic_intervals"
+        } ],
+        "outputParameter": "$request.generative.dynamic_intervals_trimmed"
+      } ]
+    },
+    "targetPage": "Ask Time Slot Again",
+    "name": "e912001e-8f3b-400e-98d1-2d68cd5c2fa3"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "flow_id",
+        "value": "daa61f2b-2d60-44bf-9fc3-b0d8955f384d"
+      }, {
+        "parameter": "page_id",
+        "value": "9d0cd5bf-d741-4c07-b09c-ecaa4dc08528"
+      }, {
+        "parameter": "page_name",
+        "value": "Interval Check"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "61da7f5f-0d73-4fef-86c4-d9511dd7a165"
+  } ]
+}

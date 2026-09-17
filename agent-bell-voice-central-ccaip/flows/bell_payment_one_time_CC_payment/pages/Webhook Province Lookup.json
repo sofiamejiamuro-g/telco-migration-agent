@@ -1,0 +1,98 @@
+{
+  "name": "d270059d-a69d-49e4-8ce5-ff615db437aa",
+  "displayName": "Webhook Province Lookup",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "v1/npa-nxx-lookup",
+    "tag": "NA",
+    "setParameterActions": [ {
+      "parameter": "temp_number",
+      "value": "$sys.func.IF(\"$session.params.CIRN = null\" , $sys.func.TO_TEXT($session.params.clid), $sys.func.TO_TEXT($session.params.CIRN))"
+    }, {
+      "parameter": "npa",
+      "value": "$sys.func.MID($sys.func.TO_TEXT($session.params.temp_number), 1, 3)"
+    }, {
+      "parameter": "nxx",
+      "value": "$sys.func.MID($sys.func.TO_TEXT($session.params.temp_number), 4, 3)"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.webhook_success = true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Province Lookup",
+    "name": "702f3e2d-1c45-4c67-818a-ac94ed41624c"
+  }, {
+    "condition": "$session.params.webhook_success = false",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Failure",
+    "name": "66ea9c6e-ad56-441a-a23b-b89fb2acb8ac"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "d270059d-a69d-49e4-8ce5-ff615db437aa"
+      }, {
+        "parameter": "flow_id",
+        "value": "79610380-24f4-4284-b946-244d0aa037d8"
+      }, {
+        "parameter": "page_name",
+        "value": "Webhook Province Lookup"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Webhook Failure",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+    
+    },
+    "name": "924cd2bb-b789-4723-a4e8-efc373cc8b37"
+  }, {
+    "targetPage": "Webhook Failure",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+    
+    },
+    "name": "6f42bdad-cbf8-4f25-b826-63cf6b3e7704"
+  }, {
+    "targetPage": "Webhook Failure",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+    
+    },
+    "name": "89cb2664-aa87-48e5-81b2-7f1ae881448d"
+  }, {
+    "targetPage": "Webhook Failure",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+    
+    },
+    "name": "8ea37d4a-7f58-4425-a222-393d540655ef"
+  }, {
+    "targetPage": "Webhook Failure",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+    
+    },
+    "name": "7c85dbb5-4ddf-4c9b-b264-4107cad67554"
+  }, {
+    "targetPage": "Webhook Failure",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+    
+    },
+    "name": "220065d4-884a-44ca-9307-6cad7f11eddb"
+  } ]
+}

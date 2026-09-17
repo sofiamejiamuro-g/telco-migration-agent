@@ -1,0 +1,190 @@
+{
+  "name": "3e45f734-2879-4437-a3dd-545235a786b9",
+  "displayName": "IVR Handover",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "messages": [ {
+      "text": {
+        "text": [ "\u003cspeak\u003eOkay, I’ll transfer you now. There may be a moment of silence while I do so. In the future, please call \u003cprosody rate=\"slow\"\u003e\u003csay-as interpret-as='telephone'\u003e1-888-537-9999\u003c/say-as\u003e\u003c/prosody\u003e for Bell Prepaid support.\u003c/speak\u003e" ]
+      },
+      "languageCode": "en"
+    }, {
+      "text": {
+        "text": [ "\u003cspeak\u003eD’accord, je vous transfère maintenant. Ce sera peut-être silencieux pendant un moment lors du transfert. À l’avenir, veuillez composer le \u003cprosody rate=\"slow\"\u003e\u003csay-as interpret-as='telephone'\u003e1-888-537-9999\u003c/say-as\u003e\u003c/prosody\u003e pour obtenir de l’aide au sujet du service prépayé de Bell.\u003c/speak\u003e" ]
+      },
+      "languageCode": "fr-ca"
+    } ],
+    "webhook": "/v1/ivr-transfer/send-transfer-data#dam-transfer",
+    "tag": "dam-transfer",
+    "setParameterActions": [ {
+      "parameter": "dam_id",
+      "value": "BMCPPD"
+    }, {
+      "parameter": "tag",
+      "value": "dam-transfer"
+    }, {
+      "parameter": "cti_sd",
+      "value": "$session.params.tfn"
+    }, {
+      "parameter": "department",
+      "value": "2005"
+    }, {
+      "parameter": "account_type",
+      "value": "R"
+    }, {
+      "parameter": "cti_at",
+      "value": "VPRMMO"
+    }, {
+      "parameter": "webhook_success",
+      "value": null
+    }, {
+      "parameter": "brand",
+      "value": "MOB"
+    }, {
+      "parameter": "cirn",
+      "value": "$sys.func.IF(\"$session.params.cirn = null\", \"$session.params.clid\", $session.params.cirn)"
+    }, {
+      "parameter": "cti_rt",
+      "value": "$sys.func.IF(\"$session.params.route = null\", other_speak_to_agent, $session.params.route)"
+    }, {
+      "parameter": "ibm_entry_point",
+      "value": "$session.params.va_entry_flow"
+    }, {
+      "parameter": "_empty_string",
+      "value": ""
+    }, {
+      "parameter": "cti_rt",
+      "value": "$sys.func.IF(\"$session.params.route = $session.params._empty_string\" , other_speak_to_agent, $session.params.route)"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.webhook_success = true",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_Live Agent Handoff",
+    "name": "fdca6dcc-60c3-494e-9f0a-9ced772c7dee"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "\u003cspeak\u003eSorry, I couldn’t transfer you just now. Please call  \u003cprosody rate=\"slow\"\u003e\u003csay-as interpret-as='telephone'\u003e1-888-537-9999\u003c/say-as\u003e\u003c/prosody\u003e for support.\u003c/speak\u003e" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "\u003cspeak\u003eJe ne peux malheureusement pas effectuer votre transfert pour le moment. Veuillez composer le \u003cprosody rate=\"slow\"\u003e\u003csay-as interpret-as='telephone'\u003e1-888-537-9999\u003c/say-as\u003e\u003c/prosody\u003e pour obtenir de l’aide.\u003c/speak\u003e" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetFlow": "bell_wrapup",
+    "name": "6dab564e-4881-4652-ac55-9129c30977b8"
+  } ],
+  "eventHandlers": [ {
+    "targetFlow": "bell_wrapup",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ " \u003cspeak\u003eSorry, I couldn’t transfer you just now. Please call  \u003cprosody rate=\"slow\"\u003e\u003csay-as interpret-as='telephone'\u003e1-888-537-9999\u003c/say-as\u003e\u003c/prosody\u003e for support.\u003c/speak\u003e" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "\u003cspeak\u003eJe ne peux malheureusement pas effectuer votre transfert pour le moment. Veuillez composer le \u003cprosody rate=\"x-slow\"\u003e\u003csay-as interpretas='telephone'\u003e1-888-537-9999\u003c/say-as\u003e\u003c/prosody\u003e pour obtenir de l’aide.\u003c/speak\u003e" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "ba7c188d-2d07-450c-86d3-03c490aff414"
+  }, {
+    "targetFlow": "bell_wrapup",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ " \u003cspeak\u003eSorry, I couldn’t transfer you just now. Please call  \u003cprosody rate=\"slow\"\u003e\u003csay-as interpret-as='telephone'\u003e1-888-537-9999\u003c/say-as\u003e\u003c/prosody\u003e for support.\u003c/speak\u003e" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "\u003cspeak\u003eJe ne peux malheureusement pas effectuer votre transfert pour le moment. Veuillez composer le \u003cprosody rate=\"x-slow\"\u003e\u003csay-as interpretas='telephone'\u003e1-888-537-9999\u003c/say-as\u003e\u003c/prosody\u003e pour obtenir de l’aide.\u003c/speak\u003e" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "71732321-0402-4ad5-9bb1-08e8318e53e5"
+  }, {
+    "targetFlow": "bell_wrapup",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ " \u003cspeak\u003eSorry, I couldn’t transfer you just now. Please call  \u003cprosody rate=\"slow\"\u003e\u003csay-as interpret-as='telephone'\u003e1-888-537-9999\u003c/say-as\u003e\u003c/prosody\u003e for support.\u003c/speak\u003e" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "\u003cspeak\u003eJe ne peux malheureusement pas effectuer votre transfert pour le moment. Veuillez composer le \u003cprosody rate=\"x-slow\"\u003e\u003csay-as interpretas='telephone'\u003e1-888-537-9999\u003c/say-as\u003e\u003c/prosody\u003e pour obtenir de l’aide.\u003c/speak\u003e" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "fd4f38fa-52e9-4730-a8a6-8b41711bb081"
+  }, {
+    "targetFlow": "bell_wrapup",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ " \u003cspeak\u003eSorry, I couldn’t transfer you just now. Please call  \u003cprosody rate=\"slow\"\u003e\u003csay-as interpret-as='telephone'\u003e1-888-537-9999\u003c/say-as\u003e\u003c/prosody\u003e for support.\u003c/speak\u003e" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "\u003cspeak\u003eJe ne peux malheureusement pas effectuer votre transfert pour le moment. Veuillez composer le \u003cprosody rate=\"x-slow\"\u003e\u003csay-as interpretas='telephone'\u003e1-888-537-9999\u003c/say-as\u003e\u003c/prosody\u003e pour obtenir de l’aide.\u003c/speak\u003e" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "e827034a-d3b5-4278-8a4a-2a92246c9a65"
+  }, {
+    "targetFlow": "bell_wrapup",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ " \u003cspeak\u003eSorry, I couldn’t transfer you just now. Please call  \u003cprosody rate=\"slow\"\u003e\u003csay-as interpret-as='telephone'\u003e1-888-537-9999\u003c/say-as\u003e\u003c/prosody\u003e for support.\u003c/speak\u003e" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "\u003cspeak\u003eJe ne peux malheureusement pas effectuer votre transfert pour le moment. Veuillez composer le \u003cprosody rate=\"x-slow\"\u003e\u003csay-as interpretas='telephone'\u003e1-888-537-9999\u003c/say-as\u003e\u003c/prosody\u003e pour obtenir de l’aide.\u003c/speak\u003e" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "c4565522-196d-452b-a18c-1459117b6693"
+  }, {
+    "targetFlow": "bell_wrapup",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ " \u003cspeak\u003eSorry, I couldn’t transfer you just now. Please call  \u003cprosody rate=\"slow\"\u003e\u003csay-as interpret-as='telephone'\u003e1-888-537-9999\u003c/say-as\u003e\u003c/prosody\u003e for support.\u003c/speak\u003e" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "\u003cspeak\u003eJe ne peux malheureusement pas effectuer votre transfert pour le moment. Veuillez composer le \u003cprosody rate=\"x-slow\"\u003e\u003csay-as interpretas='telephone'\u003e1-888-537-9999\u003c/say-as\u003e\u003c/prosody\u003e pour obtenir de l’aide.\u003c/speak\u003e" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "59eb8243-3c1c-4139-a2b1-535020d610d8"
+  } ]
+}

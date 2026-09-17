@@ -1,0 +1,157 @@
+{
+  "name": "1ced2d16-76fc-4ae5-ba6b-1d5ef511f5c7",
+  "displayName": "Check LOB  and Profile Fetch (search_by_tn)",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "v1/customer-identification#search-by-tn",
+    "tag": "search-by-tn"
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.webhook_success = true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "customer_id_search_response_raw",
+        "value": "$session.params.customer_id_search_response"
+      }, {
+        "parameter": "customer_id_search_response",
+        "value": "$sys.func.TO_OBJECT($session.params.customer_id_search_response_raw)"
+      } ]
+    },
+    "name": "8cce5a4a-222f-4869-899a-4292a747a1fd"
+  }, {
+    "condition": "$session.params.tv_sub_type = \"sat\" OR $session.params.tv_sub_type = \"satellite\" OR $session.params.tv_sub_type = \"satellite TV\" OR $session.params.tv_sub_type = \"Satellite TV\" OR $session.params.tv_sub_type = \"sat tv\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "BAN",
+        "value": "$sys.func.GET_FIELD($sys.func.GET($sys.func.GET_FIELD($session.params.customer_id_search_response, \"users\"), 0), \"billing_accounts\")"
+      }, {
+        "parameter": "tech_type",
+        "value": "$sys.func.FILTER(\"$session.params.BAN\", \"$[*].services[*].technology_type\")"
+      }, {
+        "parameter": "SAT_COUNT",
+        "value": "$sys.func.COUNT($sys.func.FILTER(\"$session.params.tech_type\", \"$[?(@ == 'DTH')]\"))"
+      }, {
+        "parameter": "service_id_temp",
+        "value": "$sys.func.FILTER(\"$session.params.BAN\", \"$[*].services[?(@.technology_type == 'DTH')]\")"
+      }, {
+        "parameter": "dth_acc_no",
+        "value": "$session.params.service_id_temp[0].service_id"
+      }, {
+        "parameter": "province",
+        "value": "$session.params.customer_id_search_response.users[0].billing_accounts[0].services[0].service_address.stateOrProvince"
+      }, {
+        "parameter": "tv_account_number",
+        "value": "$session.params.dth_acc_no"
+      } ],
+      "generators": [ {
+        "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/e99f426c-ee7b-4ec2-baa8-5bb8834af4d2",
+        "inputParameters": [ {
+          "key": "BAN",
+          "value": "$session.params.BAN"
+        } ],
+        "outputParameter": "$request.generative.sat_tv_id_count"
+      } ]
+    },
+    "targetPage": "Sat TV",
+    "name": "f36e21b4-7a5d-4916-beda-008923b39677"
+  }, {
+    "condition": "$session.params.tv_sub_type = \"fibe\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "BAN",
+        "value": "$sys.func.GET_FIELD($sys.func.GET($sys.func.GET_FIELD($session.params.customer_id_search_response, \"users\"), 0), \"billing_accounts\")"
+      }, {
+        "parameter": "tech_type",
+        "value": "$sys.func.FILTER(\"$session.params.BAN\", \"$[*].services[*].technology_type\")"
+      }, {
+        "parameter": "FIBE_COUNT",
+        "value": "$sys.func.COUNT($sys.func.FILTER(\"$session.params.tech_type\", \"$[?(@ == 'IPTV')]\"))"
+      }, {
+        "parameter": "service_id_temp",
+        "value": "$sys.func.FILTER(\"$session.params.BAN\", \"$[*].services[?(@.technology_type == 'IPTV')]\")"
+      }, {
+        "parameter": "iptv_acc_no",
+        "value": "$session.params.service_id_temp[0].service_id"
+      }, {
+        "parameter": "tv_account_number",
+        "value": "$session.params.service_id_temp[0].service_id"
+      }, {
+        "parameter": "province",
+        "value": "$session.params.customer_id_search_response.users[0].billing_accounts[0].services[0].service_address.stateOrProvince"
+      } ]
+    },
+    "targetPage": "Fibe TV",
+    "name": "6da9a7fb-e3ed-4aa7-ba7c-b66a47579b70"
+  }, {
+    "condition": "$session.params.tv_sub_type != \"fibe\" AND $session.params.tv_sub_type != \"sat\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Other LOBs",
+    "name": "397d51b9-e40e-4cca-89cb-03ce1f7f70ae"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "1ced2d16-76fc-4ae5-ba6b-1d5ef511f5c7"
+      }, {
+        "parameter": "flow_id",
+        "value": "29168022-af9d-47b0-8051-575528402df8"
+      }, {
+        "parameter": "page_name",
+        "value": "Check LOB  and Profile Fetch (search_by_tn)"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ],
+  "eventHandlers": [ {
+    "targetFlow": "bell_rehit_SMS",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+    
+    },
+    "name": "4d3a2cdf-ea30-4140-a603-e7b6caa15263"
+  }, {
+    "targetFlow": "bell_rehit_SMS",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+    
+    },
+    "name": "3489f097-b39d-4b1f-8e63-12d44f3f7098"
+  }, {
+    "targetFlow": "bell_rehit_SMS",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+    
+    },
+    "name": "56414923-0a03-4618-afa0-cb60fd7eccd1"
+  }, {
+    "targetFlow": "bell_rehit_SMS",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+    
+    },
+    "name": "ba102e40-2391-4b62-aaec-8f3ecfc0d8cf"
+  }, {
+    "targetFlow": "bell_rehit_SMS",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+    
+    },
+    "name": "e5df9788-3427-4395-b0c3-35ea63493bdc"
+  }, {
+    "targetFlow": "bell_rehit_SMS",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+    
+    },
+    "name": "f5d54474-e2bf-48a5-89ab-d2c33dad993d"
+  } ]
+}

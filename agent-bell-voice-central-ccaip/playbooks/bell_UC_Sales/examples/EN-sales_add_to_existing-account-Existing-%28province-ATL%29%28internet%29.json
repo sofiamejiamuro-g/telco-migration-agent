@@ -1,0 +1,66 @@
+{
+  "name": "6978782d-1fd0-44c2-b7cb-4c2a9e160050",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "language": "en"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Sure, Let me help you with that.\nAre you inquiring about new service or do you want to make changes to your current service?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "both services"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Let’s help with your new service request first."
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_aqd",
+      "inputActionParameters": {
+        "language": "en",
+        "line_type": "New",
+        "lob": "Internet",
+        "special_queue": "bell_sales_to_mts"
+      },
+      "outputActionParameters": {
+        "language": "en"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "customer is inquiring about adding a new internet line and {province} is \"ATL\" or any synonyms of this value from id flow",
+    "actionParameters": {
+      "brand": "bell",
+      "identification_status": "Pass",
+      "language": "en",
+      "lob": "Internet",
+      "province": "NB",
+      "route": "sales_add_to_existing_account",
+      "utterance": "Looking to add home internet on my existing line."
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "as {lob} is Internet and {province} is ATL we are transferring to aqd",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "line_type": "New",
+      "lob": "Internet",
+      "province": "ON"
+    }
+  },
+  "displayName": "EN-sales_add_to_existing-account-Existing-(province-ATL)(internet)",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 412,
+  "languageCode": "en"
+}

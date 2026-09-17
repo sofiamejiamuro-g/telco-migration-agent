@@ -1,0 +1,74 @@
+{
+  "name": "a71b0f07-87a4-4961-bcb1-14c16e3ba2e7",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Pouvez-vous décrire brièvement le problème de votre appareil?\n\n"
+    }
+  }, {
+    "userUtterance": {
+      "text": "batterie se décharge"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Quel est le fabricant?\n"
+    }
+  }, {
+    "userUtterance": {
+      "text": "samsung"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "La plupart des appareils achetés par l’intermédiaire de Bell sont couverts par une garantie limitée du fabricant. Avez-vous acheté votre appareil au cours des 12 derniers mois?\n"
+    }
+  }, {
+    "userUtterance": {
+      "text": "oui"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Les spécialistes de notre Centre de réparation pourront vous aider.\n Permettez-moi de vous envoyer un lien pour rechercher un centre de réparation Bell Mobile près de chez vous. Est-ce que ça vous convient?\n\n"
+    }
+  }, {
+    "userUtterance": {
+      "text": "non"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "fr-ca",
+        "route": "equipment_warranty_claim",
+        "sms_send_status": "Declined"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "customer is asking that his device is having an issue and want to claim warranty",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca",
+      "noinput_flag": "True",
+      "route": "equipment_warranty_claim"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "customer is asked device_issue and proceed further manufacturer logic",
+    "actionParameters": {
+      "brand": "bell",
+      "device_issue": "Defective",
+      "language": "fr-ca",
+      "manufacturer": "samsung",
+      "noinput_flag": "True",
+      "route": "equipment_warranty_claim",
+      "sms_send_status": "Declined"
+    }
+  },
+  "displayName": "FR-equipment_warranty_claim-id-pass-no-device_issue-defective-no-manufacturer-samsung--sms(no)",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 436,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "fr"
+}

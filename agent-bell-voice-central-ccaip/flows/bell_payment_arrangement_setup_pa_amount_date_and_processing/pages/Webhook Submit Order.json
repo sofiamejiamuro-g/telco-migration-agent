@@ -1,0 +1,133 @@
+{
+  "name": "c5df098f-ccc1-48b3-9226-c7ea6ee7bf8b",
+  "displayName": "Webhook Submit Order",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "v1/payment-arrangement#submit-order",
+    "tag": "submit-order",
+    "setParameterActions": [ {
+      "parameter": "billing_account",
+      "value": "$session.params.billing_account_number"
+    }, {
+      "parameter": "transaction_id",
+      "value": "$session.params.start_pmt_arrangement_response.orderFormId"
+    }, {
+      "parameter": "brand",
+      "value": "$session.params.brand"
+    }, {
+      "parameter": "menu_type",
+      "value": "$session.params.menu_type"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "confirmationNumber",
+        "value": "$session.params.submit_pmt_arrangement_response.confirmationNumber"
+      }, {
+        "parameter": "webhook_success",
+        "value": "$session.params.webhook_success"
+      }, {
+        "parameter": "errorCodeID",
+        "value": "$session.params.submit_pmt_arrangement_response.errorCodeID"
+      } ]
+    },
+    "name": "74e151aa-e9fd-4d8d-a37a-35dcd667b976"
+  }, {
+    "condition": "$session.params.webhook_success = true",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ " Votre transaction a été traitée avec succès. Votre numéro de confirmation est $session.params.confirmationNumber. . Pour éviter de perdre vos services, votre paiement doit être effectué au plus tard à la date convenue.\r\n" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetPage": "check special status",
+    "name": "40bce9b0-641c-48c5-b90d-bdccca154e00"
+  }, {
+    "condition": "$session.params.webhook_success = false",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "We are currently performing maintenance on our systems so unfortunately I am unable to proceed with setting up your payment arrangement. I'll send a text to the device you're calling from, so that you can proceed with this step. Is that alright?" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "targetPage": "Webhook Failure Confirmation",
+    "name": "3721711c-9f39-4629-bcd7-a68508afb3c3"
+  }, {
+    "condition": "$session.params.confirmationNumber = null",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Failure Confirmation",
+    "name": "05ec4272-50c7-461a-97c0-e9924a4450e7"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "c5df098f-ccc1-48b3-9226-c7ea6ee7bf8b"
+      }, {
+        "parameter": "flow_id",
+        "value": "f769e9bc-195d-4bb3-a5d0-6244de842e69"
+      }, {
+        "parameter": "page_name",
+        "value": "Webhook Submit Order"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Webhook Failure Confirmation",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+    
+    },
+    "name": "f8595876-f326-43f6-9a0c-3f8aa1af17c5"
+  }, {
+    "targetPage": "Webhook Failure Confirmation",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+    
+    },
+    "name": "485c5f94-a8a5-453d-accb-312f694f37a8"
+  }, {
+    "targetPage": "Webhook Failure Confirmation",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+    
+    },
+    "name": "b6cf94ae-a5dc-4a70-8869-920638f1e083"
+  }, {
+    "targetPage": "Webhook Failure Confirmation",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+    
+    },
+    "name": "d48a46ae-bbe8-4e54-9545-73905596023e"
+  }, {
+    "targetPage": "Webhook Failure Confirmation",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+    
+    },
+    "name": "221ee82b-b506-4308-9952-e2409c22e56c"
+  }, {
+    "targetPage": "Webhook Failure Confirmation",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+    
+    },
+    "name": "d9b06b42-ccb4-4afa-a516-6f202084b747"
+  } ]
+}

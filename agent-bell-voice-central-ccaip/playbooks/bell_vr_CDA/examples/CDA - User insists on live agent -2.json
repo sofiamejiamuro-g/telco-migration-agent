@@ -1,0 +1,55 @@
+{
+  "name": "91096edd-bfeb-47a2-99b1-70b037fc9348",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "To fix this issue, you need to perform this step now. Please check if the battery is inserted and charging in the modem. Please perform that step and let me know when you are done."
+    }
+  }, {
+    "userUtterance": {
+      "text": "I want to talk to a live agent."
+    }
+  }, {
+    "agentUtterance": {
+      "text": "I understand you'd prefer to speak with someone, but I can likely help you resolve this faster right here. Completing this step helps us identify exactly what is wrong with the connection. Can you check if the battery is inserted and charging in your modem?  Once you’ve done that, let me know and we’ll go from there."
+    }
+  }, {
+    "userUtterance": {
+      "text": "No, live agent as soon as possible"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "I hear you. Since you wish to proceed with an agent, I will connect you now to someone who can help. Please hold a moment."
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_aqd",
+      "inputActionParameters": {
+      
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "User uses VR",
+    "actionParameters": {
+      "acceptable_answers": [ {
+        "choice": "CDA:endNow:success",
+        "id": 0
+      }, {
+        "choice": "CDA:gotoStep1",
+        "id": 1
+      } ],
+      "title": "Checking if the battery is inserted and charging in the modem",
+      "vr_type": "CDA"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Turn 1: The Instruction\nBot Action: Generate Instruction\n\nLogic: The bot initialized the Handle_CDA_Type subtask. It used the standard directive format defined in the prompt: \"To fix this issue... Please check if the battery is inserted...\" and ended with the mandatory closing instruction.\n\nTurn 2: First Escalation Attempt (Deflection)\nUser Input: \"I want to talk to a live agent.\"\n\nIntent Detected: Agent Request (Global Handler).\n\nLogic Execution:\n\nRule Check: The bot checked the \u003chandler name=\"Agent Request\"\u003e in the Global_Handlers section.\n\nConstraint Application: It applied Constraint #9 (ESCALATION RULE): \"On the first request for an agent, DO NOT escalate.\"\n\nAction: It executed the \"Gently guide back\" rule.\n\nResponse: The bot empathized (\"I understand you'd prefer...\") but immediately pivoted back to the specific modem battery instruction to try and contain the interaction.\n\nTurn 3: Second Escalation Attempt (Handoff)\nUser Input: \"No, live agent as soon as possible\"\n\nIntent Detected: Agent Request (Persistence).\n\nLogic Execution:\n\nCount Check: The bot recognized this as the 2nd consecutive request for a live person.\n\nRule Application: It triggered the second rule in the Global_Handlers: \"2nd time: Trigger ${FLOW:bell_aqd}.\"\n\nAction: The bot ceased troubleshooting, accepted the user's request (\"I will connect you now...\"), and triggered the handoff flow.\n\nSystem Outcome\nFlow Triggered: bell_aqd\n\nResult: The user was successfully routed to the queue for a human agent, preventing a \"loop of frustration\" while still attempting to solve the issue via automation first."
+  },
+  "displayName": "CDA - User insists on live agent -2",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 755,
+  "languageCode": "en"
+}

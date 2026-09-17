@@ -1,0 +1,47 @@
+{
+  "name": "df15f5ba-b21f-42c2-8d0a-5f6a3d562481",
+  "displayName": "LOB Translation IVR To VA",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "true",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I'm Bell's virtual assistant, I use artificial intelligence to learn." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je suis l'assistant virtuel de Bell, j'utilise l'intelligence artificielle pour apprendre." ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "ivr_va_lob_translation",
+        "value": {
+          "BRS": null,
+          "BusFibeTV": "tv",
+          "BusSBM": null,
+          "BusSec": "smarthome",
+          "Home Phone": "homephone",
+          "Internet": "internet",
+          "NA": null,
+          "SmartHome": "smarthome",
+          "TV": "tv",
+          "Virgin": null,
+          "Wireless": "mobility",
+          "internet": "internet",
+          "mobility": "mobility",
+          "tv": "tv"
+        }
+      }, {
+        "parameter": "lob",
+        "value": "$sys.func.GET_FIELD($session.params.ivr_va_lob_translation, $session.params.lob_from_ivr)"
+      } ]
+    },
+    "targetPage": "Webhook Search-by-tn-cirn",
+    "name": "6699b9c7-ceae-488c-9487-8905e12baf3d"
+  } ]
+}

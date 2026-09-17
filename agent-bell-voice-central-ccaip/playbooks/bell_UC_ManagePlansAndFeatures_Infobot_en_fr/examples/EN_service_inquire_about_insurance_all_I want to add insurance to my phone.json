@@ -1,0 +1,71 @@
+{
+  "name": "a74d365b-a8e4-4f9c-becf-35cd7b76713e",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70024",
+        "language": "en"
+      },
+      "outputActionParameters": {
+        "language": "en"
+      }
+    }
+  }, {
+    "playbookInvocation": {
+      "playbook": "bell_uc_ask_LOB",
+      "playbookInput": {
+        "actionParameters": {
+          "language": "en",
+          "utterance": "I want to add insurance to my phone"
+        }
+      },
+      "playbookOutput": {
+        "actionParameters": {
+          "language": "en"
+        }
+      },
+      "playbookState": "OUTPUT_STATE_OK"
+    }
+  }, {
+    "playbookInvocation": {
+      "playbook": "Bell_UC_Equipment_Inquires_Infobot",
+      "playbookInput": {
+        "actionParameters": {
+          "language": "en",
+          "route": "equipment_warranty_claim",
+          "utterance": "I want to add insurance to my phone"
+        }
+      },
+      "playbookOutput": {
+        "actionParameters": {
+          "language": "en"
+        }
+      },
+      "playbookState": "OUTPUT_STATE_OK"
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer is asking whether he can change his plan's effective date",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "lob": "mobility",
+      "route": "service_inquire_about_insurance",
+      "utterance": "I want to add insurance to my phone"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "First,  flow \"bell_apb\" is called and then playbook \"bell_uc_ask_LOB\". Then routed to playbook \"Bell_UC_Equipment_Inquires_Infobot\" with route as \"equipment_warranty_claim\"",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "route": "equipment_warranty_claim"
+    }
+  },
+  "displayName": "EN_service_inquire_about_insurance_all_I want to add insurance to my phone",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 447,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

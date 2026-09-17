@@ -1,0 +1,434 @@
+{
+  "name": "2954351c-4a45-4d73-a1ce-a851601752aa",
+  "displayName": "EEPA-2798 - 1",
+  "notes": "I simulated the kind of hardstop we are fixing: entering a page where we do not meet the conditional route exit conditions. In order to do this, I injected the parameter language = \"fr-va\" before the final \"yes\" response to the SMS prompt.",
+  "testCaseConversationTurns": [ {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "hi"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "triggeredIntent": {
+        "name": "Default Welcome Intent"
+      },
+      "currentPage": {
+        "name": "Get Tester Id",
+        "flow": "bell_test_wrapper"
+      },
+      "textResponses": [ {
+        "text": [ "Please enter your Tester ID using the phone's keypad now." ]
+      } ],
+      "currentFlow": {
+        "name": "bell_test_wrapper"
+      }
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "129"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "currentPage": {
+        "name": "Get Spoof TFN",
+        "flow": "bell_test_wrapper"
+      },
+      "textResponses": [ {
+        "text": [ "Tester ID lookup webhook succeeded." ],
+        "allowPlaybackInterruption": true
+      }, {
+        "text": [ "Welcome Francesco!" ],
+        "allowPlaybackInterruption": true
+      }, {
+        "text": [ "Please enter the spoof TFN for your test." ],
+        "allowPlaybackInterruption": true
+      } ],
+      "currentFlow": {
+        "name": "bell_test_wrapper"
+      }
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "8889992321"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "currentPage": {
+        "name": "Get Spoof CLID",
+        "flow": "bell_test_wrapper"
+      },
+      "textResponses": [ {
+        "text": [ "TFN lookup Webhook succeeded." ],
+        "allowPlaybackInterruption": true
+      }, {
+        "text": [ "Please enter the spoof CLID for your test." ],
+        "allowPlaybackInterruption": true
+      } ],
+      "currentFlow": {
+        "name": "bell_test_wrapper"
+      }
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "4164278815"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "currentPage": {
+        "name": "f2fe1d1d-609f-4d10-a731-1e88de0393e3",
+        "flow": "bell_test_wrapper"
+      },
+      "textResponses": [ {
+        "text": [ "Do you want to test the Phase 2 Digital Tool stories or the Post-MVP stories? Please respond 'Yes' or 'No'." ],
+        "allowPlaybackInterruption": true
+      } ],
+      "currentFlow": {
+        "name": "bell_test_wrapper"
+      }
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "no"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "triggeredIntent": {
+        "name": "context.confirm_no"
+      },
+      "currentPage": {
+        "name": "Get CX Input",
+        "flow": "bell_Identification"
+      },
+      "textResponses": [ {
+        "text": [ "\u003cspeak\u003eI'm Bell's virtual assistant, I use artificial intelligence to learn. \u003cbreak time=\"1s\"/\u003e\u003c/speak\u003e" ]
+      }, {
+        "text": [ "Are you calling about the account associated with the number you’re calling from?" ]
+      } ],
+      "currentFlow": {
+        "name": "bell_Identification"
+      }
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "yes"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "triggeredIntent": {
+        "name": "context.confirm_yes"
+      },
+      "currentPage": {
+        "name": "Routing Page",
+        "flow": "Default Start Flow"
+      },
+      "textResponses": [ {
+        "text": [ "\u003cspeak\u003eThanks! \u003cbreak time=\"1s\"/\u003e\u003c/speak\u003e" ],
+        "allowPlaybackInterruption": true
+      }, {
+        "text": [ "How can I help you?" ],
+        "allowPlaybackInterruption": true
+      } ],
+      "currentFlow": {
+        "name": "Default Start Flow"
+      }
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "make a payment"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "triggeredIntent": {
+        "name": "Default Welcome Intent"
+      },
+      "currentPage": {
+        "name": "Payment confirmation",
+        "flow": "bell_payment_one_time_CC_payment"
+      },
+      "textResponses": [ {
+        "text": [ "One moment please" ]
+      }, {
+        "text": [ "Sure, I can help you with making a credit card or visa debit payment. Are you ready to proceed with your payment?" ]
+      } ],
+      "currentFlow": {
+        "name": "bell_payment_one_time_CC_payment"
+      }
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "yes"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "triggeredIntent": {
+        "name": "context.confirm_yes"
+      },
+      "currentPage": {
+        "name": "Confirm Customer has OTP device",
+        "flow": "bell_authentication"
+      },
+      "textResponses": [ {
+        "text": [ "To help with that, I need to make sure I'm talking to the right person. We now use a 6-digit code to verify you. Do you have access to a mobile phone that's listed on your account?" ]
+      } ],
+      "currentFlow": {
+        "name": "bell_authentication"
+      }
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "yes"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "triggeredIntent": {
+        "name": "custom.yes"
+      },
+      "currentPage": {
+        "name": "Trigger_OTP",
+        "flow": "bell_authentication"
+      },
+      "textResponses": [ {
+        "text": [ "I'll text a 6-digit code to the mobile phone number we have on file for you." ]
+      }, {
+        "text": [ "Once you receive the verification code by text, please say it back to me or enter it on your phone keypad." ]
+      } ],
+      "currentFlow": {
+        "name": "bell_authentication"
+      }
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "581781"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "currentPage": {
+        "name": "Prompt Other Amount",
+        "flow": "bell_payment_amount_otcc"
+      },
+      "textResponses": [ {
+        "text": [ "Thanks, that's the correct code." ]
+      }, {
+        "text": [ "Ok, lets get started with your payment. Please have your credit card or Visa debit card handy as I will need the card number, expiry date and security code in order to process your payment." ]
+      }, {
+        "text": [ "How much would you like to pay?" ]
+      } ],
+      "currentFlow": {
+        "name": "bell_payment_amount_otcc"
+      }
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "1"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "currentPage": {
+        "name": "Proceed With Payment?",
+        "flow": "bell_payment_amount_otcc"
+      },
+      "textResponses": [ {
+        "text": [ "OK, are you ready to proceed with a payment of $ 1 ?" ]
+      } ],
+      "currentFlow": {
+        "name": "bell_payment_amount_otcc"
+      }
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "yes"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "triggeredIntent": {
+        "name": "context.confirm_yes"
+      },
+      "currentPage": {
+        "name": "Prompt CC Number",
+        "flow": "bell_payment_cc_details_input"
+      },
+      "textResponses": [ {
+        "text": [ "Sure, $ 1" ]
+      }, {
+        "text": [ "Now I'm going to need your credit or Visa debit card details. I'll be reading the card details back to you so please ensure you're in a private area. When you're ready, please enter your card number using the keypad." ]
+      } ],
+      "currentFlow": {
+        "name": "bell_payment_cc_details_input"
+      }
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "54325"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "currentPage": {
+        "name": "Prompt CC Number",
+        "flow": "bell_payment_cc_details_input"
+      },
+      "textResponses": [ {
+        "text": [ "The card number isn't complete. You can try using your phone's keypad to enter it. Can you give it another try?" ]
+      } ],
+      "currentFlow": {
+        "name": "bell_payment_cc_details_input"
+      }
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "5325"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "currentPage": {
+        "name": "Prompt CC Number",
+        "flow": "bell_payment_cc_details_input"
+      },
+      "textResponses": [ {
+        "text": [ "Sorry, but the card number entered is not valid. Could you please double-check the number and try again?" ]
+      } ],
+      "currentFlow": {
+        "name": "bell_payment_cc_details_input"
+      }
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "5235"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "currentPage": {
+        "name": "Prompt CX SMS",
+        "flow": "bell_payment_cc_details_input"
+      },
+      "textResponses": [ {
+        "text": [ "To keep things secure, we ask that you call back later or you can also easily complete this step using the MyBell app." ]
+      }, {
+        "text": [ "Unfortunately I'm unable to proceed with your request right now. You can visit the MyBell app to proceed with your payment. I'll send a text to the device you're calling from, so that you can complete this yourself. Is that alright?" ]
+      } ],
+      "currentFlow": {
+        "name": "bell_payment_cc_details_input"
+      }
+    }
+  }, {
+    "userInput": {
+      "injectedParameters": {
+        "language": "invalid_param_value"
+      },
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "yes"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "sessionParameters": {
+        "language": "invalid_param_value"
+      },
+      "triggeredIntent": {
+        "name": "context.sms_yes + topup_yes + autopay_yes + auto_pay_update_yes "
+      },
+      "currentPage": {
+        "name": "Start Page",
+        "flow": "bell_Live Agent Handoff"
+      },
+      "textResponses": [ {
+        "text": [ "Let me check for an available agent. I'll likely be silent for some time during the transfer. You'll know it's successful when you're greeted again. Please stay on the line. Thanks!" ]
+      } ],
+      "currentFlow": {
+        "name": "bell_Live Agent Handoff"
+      }
+    },
+    "expectations": {
+      "expectedSessionParameters": [ {
+        "key": "hardstop",
+        "value": true
+      } ]
+    }
+  } ],
+  "creationTime": {
+    "seconds": 1764174095,
+    "nanos": 458330000
+  },
+  "testConfig": {
+    "trackingParameters": [ "hardstop" ],
+    "flow": "Default Start Flow",
+    "page": "Start Page"
+  },
+  "languageCode": "en"
+}

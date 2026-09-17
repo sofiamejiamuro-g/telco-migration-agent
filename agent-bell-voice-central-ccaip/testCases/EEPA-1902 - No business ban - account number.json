@@ -1,0 +1,101 @@
+{
+  "name": "0964589e-ce1b-4649-8d6c-15f53e18f241",
+  "displayName": "EEPA-1902 - No business ban - account number",
+  "testCaseConversationTurns": [ {
+    "userInput": {
+      "injectedParameters": {
+        "non_consumer": true,
+        "test_multiban": "true"
+      },
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "hi"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "sessionParameters": {
+        "non_consumer": true,
+        "test_multiban": "true"
+      },
+      "triggeredIntent": {
+        "name": "Default Welcome Intent"
+      },
+      "currentPage": {
+        "name": "Business BAN Check",
+        "flow": "bell_multiban"
+      },
+      "textResponses": [ {
+        "text": [ "\u003cspeak\u003eI'm Bell's virtual assistant, I use artificial intelligence to learn. \u003cbreak time=\"1s\"/\u003e\u003c/speak\u003e" ]
+      }, {
+        "text": [ "How can I help you?" ]
+      }, {
+        "text": [ "I found several accounts related to your number. So I know we’re talking about the right one, could you tell me whether you're calling about a business account?" ],
+        "allowPlaybackInterruption": true
+      } ],
+      "currentFlow": {
+        "name": "bell_multiban"
+      }
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "No, I don't think so"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "triggeredIntent": {
+        "name": "custom.no"
+      },
+      "currentPage": {
+        "name": "Account Number",
+        "flow": "bell_multiban"
+      },
+      "textResponses": [ {
+        "text": [ "Could you also tell me your account number, please?" ],
+        "allowPlaybackInterruption": true
+      } ],
+      "currentFlow": {
+        "name": "bell_multiban"
+      }
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "558190452"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "currentPage": {
+        "name": "Routing Page",
+        "flow": "Default Start Flow"
+      },
+      "textResponses": [ {
+        "text": [ "Thank you. I found the account." ],
+        "allowPlaybackInterruption": true
+      } ],
+      "currentFlow": {
+        "name": "Default Start Flow"
+      }
+    }
+  } ],
+  "creationTime": {
+    "seconds": 1753614632,
+    "nanos": 758068000
+  },
+  "testConfig": {
+    "flow": "Default Start Flow",
+    "page": "Start Page"
+  },
+  "languageCode": "en"
+}

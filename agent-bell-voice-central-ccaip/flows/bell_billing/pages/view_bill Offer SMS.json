@@ -1,0 +1,58 @@
+{
+  "name": "02c961f0-fc8f-4b7c-832f-10e3e48dbf96",
+  "displayName": "view_bill Offer SMS",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "messages": [ {
+      "text": {
+        "text": [ "Pour vous aider, l'application MonBell offre une vue détaillée de votre facture, ce qui permet souvent de clarifier les questions de facturation et de mieux comprendre les changements apportés à votre facture. Je vais envoyer un message texte à l'appareil à partir duquel vous appelez avec un lien vers l'application MonBell. Est-ce que cela vous convient ?" ]
+      },
+      "languageCode": "fr-ca"
+    }, {
+      "text": {
+        "text": [ "To help with that, the MyBell app provides a detailed view of your bill, often clarifying billing questions and helping you understand changes in your bill. I'll send a text to the device you're calling from with a link to the MyBell app. Is that alright?" ]
+      },
+      "languageCode": "en"
+    } ],
+    "setParameterActions": [ {
+      "parameter": "use_case_en",
+      "value": "balance"
+    }, {
+      "parameter": "use_case_fr",
+      "value": "votre solde"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "intent": "context.confirm_yes",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "SMS Content",
+    "name": "499cca87-5ce5-4b81-ac9f-d9d37b0a2503"
+  }, {
+    "intent": "context.confirm_no",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "use_case_en",
+        "value": "balance"
+      }, {
+        "parameter": "use_case_fr",
+        "value": "votre solde"
+      } ]
+    },
+    "targetPage": "Vanity Check",
+    "name": "e14d7ece-b5f4-4be7-80d8-b8d2527d3472"
+  }, {
+    "intent": "context.different_number",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "different_number",
+        "value": "true"
+      } ]
+    },
+    "targetPage": "SMS Content",
+    "name": "f24bd44a-ea7e-458c-a1d5-da10243f3e5d"
+  } ]
+}

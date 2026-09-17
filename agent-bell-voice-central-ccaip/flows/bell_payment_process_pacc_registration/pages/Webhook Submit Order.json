@@ -1,0 +1,207 @@
+{
+  "name": "ed60c602-a3f3-4ce1-9132-72255e701ec0",
+  "displayName": "Webhook Submit Order",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "messages": [ {
+      "text": {
+        "text": [ "one moment please" ]
+      },
+      "languageCode": "en"
+    }, {
+      "text": {
+        "text": [ "Un instant s'il vous plaît" ]
+      },
+      "languageCode": "fr-ca"
+    } ],
+    "webhook": "v1/pre-auth-payment#submit-order",
+    "tag": "submit-order",
+    "setParameterActions": [ {
+      "parameter": "webhook_success",
+      "value": null
+    } ],
+    "returnPartialResponses": true
+  },
+  "transitionRoutes": [ {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "ErrorCodeID",
+        "value": "$session.params.submit_pre_auth_pmt_response.ErrorCodeID"
+      }, {
+        "parameter": "expiry_date",
+        "value": null
+      }, {
+        "parameter": "cvv_number",
+        "value": null
+      }, {
+        "parameter": "card_number",
+        "value": null
+      }, {
+        "parameter": "cc_token",
+        "value": null
+      }, {
+        "parameter": "security_code",
+        "value": null
+      }, {
+        "parameter": "expiry_month",
+        "value": null
+      }, {
+        "parameter": "expiry_year",
+        "value": null
+      }, {
+        "parameter": "cc_from_utterance",
+        "value": null
+      } ]
+    },
+    "name": "c9fd1a4e-cd0d-4048-90cc-262677cbb414"
+  }, {
+    "condition": "$session.params.ErrorCodeID != null AND $session.params.webhook_success = \"true\" AND $session.params.from_pacc_otcc = \"true\" AND $session.params.ErrorCodeID != \"\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "From OTCC Payment Declined",
+    "name": "58906b1c-c53b-4451-9da9-8c875ee694b2"
+  }, {
+    "condition": "$session.params.ErrorCodeID != null AND $session.params.webhook_success = \"true\" AND $session.params.ErrorCodeID != \"\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Payment Declined + Different Card?",
+    "name": "554b2e70-aa43-4fdd-9f67-6be6bae0fc7d"
+  }, {
+    "condition": "($session.params.ErrorCodeID = null OR $session.params.ErrorCodeID = \"\") AND $session.params.webhook_success = \"true\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "completed_topup_flag",
+        "value": 1
+      } ],
+      "conditionalCases": [ {
+        "cases": [ {
+          "condition": "$session.params.route = \"payment_update_autopay\"",
+          "caseContent": [ {
+            "message": {
+              "text": {
+                "text": [ "Okay, We've successfully updated your automatic credit card payments details. Your bill will be charged right to your credit card on your next bill date. You may also need to make a one time payment if you have an outstanding balance on your current balance." ]
+              },
+              "languageCode": "en"
+            }
+          }, {
+            "message": {
+              "text": {
+                "text": [ "D’accord. Nous avons mis à jour avec succès les détails de votre paiement automatique par carte de crédit. Le montant de votre facture sera débité directement de votre carte de crédit lors de votre prochain cycle de facturation." ]
+              },
+              "languageCode": "fr-ca"
+            }
+          } ]
+        }, {
+          "caseContent": [ {
+            "message": {
+              "text": {
+                "text": [ "Okay, We've got you all set up for pre-authorized credit card payments. Starting with your next billing cycle, your credit card will be automatically charged. You may also need to make a one time payment if you have an outstanding balance on your current bill." ]
+              },
+              "languageCode": "en"
+            }
+          }, {
+            "message": {
+              "text": {
+                "text": [ "D’accord, nous avons configuré les paiements pré-autorisés par carte de crédit avec succès. À compter de votre prochain cycle de facturation, le montant de votre facture sera débité directement de votre carte de crédit." ]
+              },
+              "languageCode": "fr-ca"
+            }
+          } ]
+        } ]
+      } ]
+    },
+    "targetPage": "Customer On CLP?",
+    "name": "c6403f2c-3d38-4973-a795-cb690e4dc32a"
+  }, {
+    "condition": "$session.params.ErrorCodeID != null AND $session.params.cc_failed_attempt \u003e= 2 AND $session.params.ErrorCodeID != \"\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Unfortunately I'm unable to proceed with your request right now . If you'd still like to complete this step, you can do so in MyBell. Please visit  bell.ca/support for more information." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Malheureusement, je ne suis pas en mesure de traiter votre demande pour le moment. Si vous souhaitez toujours effectuer cette étape, vous pouvez le faire dans MonBell. Veuillez visiter bell.ca/soutien pour en savoir plus." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetFlow": "bell_Feedback",
+    "name": "91f80abe-950d-46c6-8329-a07b9db3c0ea"
+  }, {
+    "condition": "$session.params.webhook_success = false",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Failure Confirmation",
+    "name": "9d6e708d-4a95-4485-93e1-495dd989a1d9"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "ed60c602-a3f3-4ce1-9132-72255e701ec0"
+      }, {
+        "parameter": "flow_id",
+        "value": "8dee6c62-dd5f-4e9e-b5a9-935b6719cf4e"
+      }, {
+        "parameter": "page_name",
+        "value": "Webhook Submit Order"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Webhook Failure Confirmation",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+    
+    },
+    "name": "8a02cb90-7e15-4389-90ef-10fa56989ae7"
+  }, {
+    "targetPage": "Webhook Failure Confirmation",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+    
+    },
+    "name": "be7e533d-a5fc-44dc-bea3-2afa69eab621"
+  }, {
+    "targetPage": "Webhook Failure Confirmation",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+    
+    },
+    "name": "e60da4b4-19ee-43bb-acc6-6fd81471c990"
+  }, {
+    "targetPage": "Webhook Failure Confirmation",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+    
+    },
+    "name": "7d0e8c71-7cce-4d1f-91e1-cb47822b4e91"
+  }, {
+    "targetPage": "Webhook Failure Confirmation",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+    
+    },
+    "name": "4fdbdfb1-930c-4e96-b090-907a1ed4e591"
+  }, {
+    "targetPage": "Webhook Failure Confirmation",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+    
+    },
+    "name": "2d78d265-7567-49df-9a87-6ccb19cf8ccf"
+  } ]
+}

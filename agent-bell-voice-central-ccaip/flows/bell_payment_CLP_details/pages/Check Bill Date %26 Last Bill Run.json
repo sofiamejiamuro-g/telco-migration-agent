@@ -1,0 +1,174 @@
+{
+  "name": "eaab469d-7cbe-4052-ad08-c33aef4c14d6",
+  "displayName": "Check Bill Date \u0026 Last Bill Run",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "today_date",
+        "value": "$sys.func.NOW()"
+      }, {
+        "parameter": "10_days",
+        "value": "$sys.func.ADD_DATE($session.params.today_date, 10, \"DAYS\")"
+      }, {
+        "parameter": "bill_date_month",
+        "value": "$sys.func.TO_NUMBER($session.params.today_date.month)"
+      }, {
+        "parameter": "bill_date_year",
+        "value": "$sys.func.TO_NUMBER($sys.func.MID( $sys.func.TO_TEXT($session.params.today_date.year),3,2))"
+      }, {
+        "parameter": "bill_date",
+        "value": "$session.params.nm1_get_bill_details_response.billDate"
+      }, {
+        "parameter": "10_days",
+        "value": "$sys.func.FORMAT_DATE(10_days, \"yyyy-MM-dd\")"
+      } ]
+    },
+    "name": "409dbc1a-3695-49df-801a-8d19e72d40d2"
+  }, {
+    "condition": "$session.params.language = en",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "formatted_date",
+        "value": "$sys.func.FORMAT_DATE(bill_date, \"MMMM dd\", \"en\")"
+      } ]
+    },
+    "name": "d4f31fdd-85cf-40cc-a5a6-90a2870531ba"
+  }, {
+    "condition": "$session.params.language = fr-ca OR $session.params.language = fr-CA",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "formatted_date",
+        "value": "$sys.func.FORMAT_DATE(bill_date, \"MMMM dd\", \"fr\")"
+      } ]
+    },
+    "name": "91f9f41e-20f5-4563-93f4-cafcffd5a46c"
+  }, {
+    "condition": "$session.params.special_status = \"bell_clp_aul\" AND $session.params.bill_date \u003c $session.params.10_days",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "\u003cspeak\u003e  You're on our Credit Limit Program; with a limit of $ $session.params.clp_program and you're now above $ $session.params.clp_aul_limit . You won't be able to make any outbound calls until you get below $ $session.params.clp_aul_limit , so please make a payment so we can get you back to full service. I can help you make a payment with a credit card, it come through right away. If you pay another way, it might take up to 5 business days to come through.  At this moment your current credit limit balance is $ $session.params.clp_balance .\n  Your next bill date is coming up on \u003csay-as interpret-as=\"date\" format=\"mmdd\" \u003e $session.params.bill_date \u003c/say-as\u003e  so your Credit Limit balance will increase soon, as you will be billed your next month's rate plan and charges. \u003c/speak\u003e" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "\u003cspeak\u003e Vous bénéficiez de notre programme de limite de crédit, avec une limite de $session.params.clp_program $, et vous avez\nactuellement dépassé $session.params.clp_aul_limit $. Vous ne pourrez plus passer d'appels sortants tant que vous n'aurez pas repassé sous la limite de $session.params.clp_aul_limit $ Veuillez effectuer un paiement afin que nous puissions rétablir l'intégralité de vos services. Je\npeux vous aider à effectuer un paiement par carte de crédit, qui sera traité immédiatement. Si vous payez par un autre\nmoyen, le traitement peut prendre jusqu'à cinq jours ouvrables. Le solde actuel de votre limite de crédit est de \n$session.params.clp_balance $ . Votre prochaine date de facturation est le \u003csay-as interpret-as=\"date\" format=\"mmdd\" \u003e $session.params.bill_date \u003c/say-as\u003e donc le solde de votre limite de crédit augmentera bientôt,\ncar votre forfait et vos frais du mois prochain vous seront\nfacturés. \u003c/speak\u003e" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetFlow": "bell_payment_pitch_one_time_CC_payment",
+    "name": "84ac2795-2adb-4445-ada2-08f727d05fe5"
+  }, {
+    "condition": "$session.params.special_status = \"bell_clp_aul\" AND $session.params.bill_date \u003e= $session.params.10_days",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "\u003cspeak\u003e   You're on our Credit Limit Program; with a limit of $ $session.params.clp_program and you're now above $ $session.params.clp_aul_limit .   You won't be able to make any outbound calls until you get below $ $session.params.clp_aul_limit ,  so please make a payment so\n  we can get you back to full service. I can help you make a payment with\n  a credit card, it'll come through right away. If you pay another way; it\n  might take up to 5 business days to come through. At this moment your current credit limit balance is $ $session.params.clp_balance \u003c/speak\u003e" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "\u003cspeak\u003e Vous bénéficiez de notre programme de limite de crédit, avec une limite de $session.params.clp_program $, et vous avez actuellement dépassé $session.params.clp_aul_limit $. Vous ne pourrez plus passer d'appels sortants tant que vous n'aurez pas repassé sous la limite de $session.params.clp_aul_limit $. Veuillez effectuer un paiement afin que nous puissions rétablir l'intégralité de vos services. Je peux vous aider à effectuer un paiement par carte de crédit, qui sera traité immédiatement. Si vous payez par un autre moyen, le traitement\npeut prendre jusqu'à cinq jours ouvrables.\n\nLe solde actuel de votre limite de crédit est de  $session.params.clp_balance $ \u003c/speak\u003e" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetFlow": "bell_payment_pitch_one_time_CC_payment",
+    "name": "fe0bab68-5d5b-4152-b919-4af305f340f5"
+  }, {
+    "condition": "$session.params.special_status = \"bell_clp_sus\" AND $session.params.bill_date \u003c $session.params.10_days",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "\u003cspeak\u003e  You're on our Credit Limit Program; with a limit of $ $session.params.clp_program and you're above that now. Once you get below $ $session.params.clp_aul_limit your services will be restored,  so please make a payment so we can get you back up and running. I can help you make a payment with a credit card, it'll come through right away. If you pay another way; it might take up to 5 business days to come through. At this moment your current credit limit balance is $ $session.params.clp_balance . Your next bill date is coming up on  \u003csay-as interpret-as=\"date\" format=\"mmdd\" \u003e $session.params.bill_date \u003c/say-as\u003e so your Credit Limit balance will increase soon, as you will be billed your next month's rate plan and charges.  \u003c/speak\u003e" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "\u003cspeak\u003e Vous bénéficiez de notre programme de limite de crédit, avec une limite de $session.params.clp_program $, et vous avez dépassé cette\nlimite. Une fois que vous serez repassé en dessous de $session.params.clp_aul_limit $, vos services seront rétablis. Veuillez effectuer un\npaiement afin que nous puissions rétablir vos services. Je peux vous aider à effectuer un paiement par carte de crédit, qui sera traité immédiatement. Si vous payez par un autre moyen, le traitement peut prendre jusqu'à cinq jours ouvrables.\nLe solde actuel de votre limite de crédit est de $session.params.clp_balance $\nVotre prochaine date de facturation est le \u003csay-as interpret-as=\"date\" format=\"mmdd\" \u003e $session.params.bill_date \u003c/say-as\u003e\ndonc le solde de votre limite de crédit augmentera bientôt, car\nvotre forfait et vos frais du mois prochain vous seront facturés. \u003c/speak\u003e" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetFlow": "bell_payment_pitch_one_time_CC_payment",
+    "name": "42775c12-6a49-479d-9e01-008bc7dcdb54"
+  }, {
+    "condition": "$session.params.special_status = \"bell_clp_sus\" AND $session.params.bill_date \u003e= $session.params.10_days",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "\u003cspeak\u003e  You're on our Credit Limit Program; with a limit of $ $session.params.clp_program and you're above that now. Once you get below $$session.params.clp_aul_limit your services will be restored, so please make a payment so we can get you back up and running. I can help you make a payment with a credit card, it'll come through right away. If you pay another way; it might take up to 5 business days to come through.\n  At this moment your current credit limit balance is $ $session.params.clp_balance  \u003c/speak\u003e" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "\u003cspeak\u003e Vous bénéficiez de notre programme de limite de crédit, avec une limite de $session.params.clp_program $, et vous avez dépassé cette limite. Une fois que vous serez repassé en dessous de $session.params.clp_aul_limit $, vos services\nseront rétablis. Veuillez effectuer un paiement afin que nous puissions rétablir vos services. Je peux vous aider à effectuer un paiement par carte de crédit, qui sera traité immédiatement. Si vous\npayez par un autre moyen, le traitement peut prendre jusqu'à cinq jours ouvrables.\n\nLe solde actuel de votre limite de crédit est de $session.params.clp_balance $ \u003c/speak\u003e" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetFlow": "bell_payment_pitch_one_time_CC_payment",
+    "name": "c6c941c3-ec8c-4307-a18f-720a55825c40"
+  }, {
+    "condition": "$session.params.bill_date \u003e= $session.params.10_days",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Good news. You are under your credit limit. At this moment your current credit limit balance is $$session.params.clp_balance " ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Bonne nouvelle! Vous n’avez pas atteint votre limite de crédit.\nLe solde actuel de votre limite de crédit est de $ $session.params.clp_balance" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetFlow": "bell_payment_pitch_one_time_CC_payment",
+    "name": "6e967840-ba7f-4e93-a7ee-91ef8be36580"
+  }, {
+    "condition": "$session.params.bill_date \u003c $session.params.10_days",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "\u003cspeak\u003e Good news. You are under your credit limit. At this moment your current credit limit balance is $$session.params.clp_balance. Your next bill date is coming up on  \u003csay-as interpret-as=\"date\" format=\"mmdd\" \u003e $session.params.bill_date \u003c/say-as\u003e so\nyour Credit Limit balance  will increase soon, as you will be\nbilled your next month's rate plan and charges.   \u003c/speak\u003e" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Bonne nouvelle! Vous n'avez pas atteint votre limite\nde crédit.\nLe solde actuel de votre limite de crédit est de $ $session.params.clp_balance\nVotre prochaine date de facturation est le $session.params.formatted_date donc le solde de votre limite de crédit augmentera\nbientot, car votre forfait et vos frais du mois prochain vous\nseront facturés." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetFlow": "bell_payment_pitch_one_time_CC_payment",
+    "name": "efbe8403-0a5e-4282-b457-f30ea525d063"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "eaab469d-7cbe-4052-ad08-c33aef4c14d6"
+      }, {
+        "parameter": "flow_id",
+        "value": "475ba791-1044-4806-ba00-57e97f0a5e24"
+      }, {
+        "parameter": "page_name",
+        "value": "Check Bill Date \u0026 Last Bill Run"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

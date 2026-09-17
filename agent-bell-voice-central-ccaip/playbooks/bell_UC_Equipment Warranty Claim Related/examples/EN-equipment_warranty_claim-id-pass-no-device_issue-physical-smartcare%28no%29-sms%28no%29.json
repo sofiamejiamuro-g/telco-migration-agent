@@ -1,0 +1,64 @@
+{
+  "name": "854727e0-b6ac-468d-9f89-6a31c0b0142a",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Can you briefly describe your problem?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "My screen is cracked, i need warranty."
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Have you enrolled in our SmartCare Program?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "no"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "I can send you a link to learn more about our in-store device repair process or additional options. Is that alright?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "no"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "en",
+        "route": "equipment_warranty_claim",
+        "sms_send_status": "Declined"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "customer is asking \" hi my phone is not working I need a warranty\"",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "route": "equipment_warranty_claim",
+      "utterance": "Hi I need warranty for my phone, it is not working."
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "customer is asked device_issue and proceed further the smart care logic",
+    "actionParameters": {
+      "brand": "bell",
+      "device_issue": "Physical Damage",
+      "language": "en",
+      "route": "equipment_warranty_claim",
+      "sms_send_status": "Declined"
+    }
+  },
+  "displayName": "EN-equipment_warranty_claim-id-pass-no-device_issue-physical-smartcare(no)-sms(no)",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 336,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

@@ -1,0 +1,49 @@
+{
+  "name": "f32f360a-8f0b-438a-a18c-c3f8cfac41f5",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "You can easily view your account details such as account and contact number in your MyBell. I'll send a text to the device you're calling from, so you can easily view your account information. Is that alright?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Yes"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "brand": "bell",
+        "language": "en",
+        "sms_content": "You can visit https://m.bell.ca/mybill to view your account information in the MyBell app. (bell.ca/about-us)",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+        "brand": "bell",
+        "language": "en"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "The customer is looking for information on their account like account number.",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "route": "account_access_information",
+      "utterance": "what is my account number"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "The customer wants to find their account information if the customer agrees and says YES route them to then bell_SMS Trigger flow.",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "route": "account_access_information",
+      "utterance": "what is my account number"
+    }
+  },
+  "displayName": "EN_account_access_information_CustomerTypeIsNull_YesToMessageLink",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 319,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

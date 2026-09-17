@@ -1,0 +1,103 @@
+{
+  "name": "32088660-a10d-4f00-810e-fb263ea954e9",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "language": "en"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Sure, let me help you with that.\n\nWhich service are you inquiring about?"
+    }
+  }, {
+    "userUtterance": {
+    
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_global_error_count_check",
+      "inputActionParameters": {
+        "global_error_counter": "0"
+      },
+      "outputActionParameters": {
+        "global_error_counter": "1"
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Hmmm, I didn’t quite get that. Can you try again?"
+    }
+  }, {
+    "userUtterance": {
+    
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_global_error_count_check",
+      "inputActionParameters": {
+        "global_error_counter": "1"
+      },
+      "outputActionParameters": {
+        "global_error_counter": "2"
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Are you still there? Can you repeat please?"
+    }
+  }, {
+    "userUtterance": {
+    
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_global_error_count_check",
+      "inputActionParameters": {
+        "global_error_counter": "2"
+      },
+      "outputActionParameters": {
+        "global_error_counter": "3"
+      }
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_No_Input_3",
+      "inputActionParameters": {
+        "language": "en"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "whenever customer does not give any response or input",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "New",
+      "global_error_counter": "0",
+      "language": "en",
+      "route": "sales_plans_inquiry",
+      "utterance": "I need a plan"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Customer provides no input , so flow bell_global_error_count_check is called each time and VA respond as per instructions and when 3nd time they don't provide input, we send them to bell_No_Input_3 flow ",
+    "actionParameters": {
+      "brand": "bell",
+      "global_error_counter": "3",
+      "language": "en"
+    }
+  },
+  "displayName": "sales plans inquiry- ID Fail, customer_type-new-No Input",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 646,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

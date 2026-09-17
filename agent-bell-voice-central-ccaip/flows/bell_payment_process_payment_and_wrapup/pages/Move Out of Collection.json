@@ -1,0 +1,50 @@
+{
+  "name": "d2123f7e-47f7-416e-9dd4-7a0ccd29ded9",
+  "displayName": "Move Out of Collection",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.accountBalance \u003c= 0",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "special_queue",
+        "value": null
+      } ]
+    },
+    "targetPage": "Previous Status Check",
+    "name": "e104e993-4a1b-4448-864e-81acabbecbff"
+  }, {
+    "condition": "$session.params.accountBalance \u003e 0",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "special_queue",
+        "value": null
+      } ]
+    },
+    "targetPage": "Previous Status Check",
+    "name": "ba9cd605-8aa9-4584-9d28-f58c04a2e4b7"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "d2123f7e-47f7-416e-9dd4-7a0ccd29ded9"
+      }, {
+        "parameter": "flow_id",
+        "value": "15649ac7-20d9-448b-a12c-b86f9480280b"
+      }, {
+        "parameter": "page_name",
+        "value": "Move Out of Collection"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

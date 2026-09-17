@@ -1,0 +1,128 @@
+{
+  "name": "0f6c4d81-4430-4e6b-a132-55d05aecde0c",
+  "displayName": "Phone Validation",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.CIRN_flag = true AND ($session.params.is_telephone_otp_wsn = true OR $session.params.telephone_otp = $session.params.billing_contact_number)",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Thanks!" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Merci!" ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "telephone_number",
+        "value": "$session.params.telephone_otp"
+      } ]
+    },
+    "targetPage": "Webhook send-otp",
+    "name": "37505c03-ff32-487f-ad74-f8838d059093"
+  }, {
+    "condition": "$session.params.telephone_otp_counter = 1",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "auth_status",
+        "value": "Fail"
+      } ],
+      "conditionalCases": [ {
+        "cases": [ {
+          "condition": "$session.params.CIRN_flag = false",
+          "caseContent": [ {
+            "message": {
+              "text": {
+                "text": [ "Sorry that still does not seem right." ]
+              },
+              "languageCode": "en"
+            }
+          }, {
+            "message": {
+              "text": {
+                "text": [ "Désolé, cela ne semble toujours pas exact." ]
+              },
+              "languageCode": "fr-ca"
+            }
+          } ]
+        }, {
+          "caseContent": [ {
+            "message": {
+              "text": {
+                "text": [ "There seems to be a problem." ]
+              },
+              "languageCode": "en"
+            }
+          }, {
+            "message": {
+              "text": {
+                "text": [ "Il semble y avoir un problème." ]
+              },
+              "languageCode": "fr-ca"
+            }
+          } ]
+        } ]
+      } ]
+    },
+    "targetPage": "End Flow Check",
+    "name": "45ab929b-1ee6-4f01-89d9-236b73e1105b"
+  }, {
+    "condition": "True",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "telephone_otp_counter",
+        "value": "$sys.func.ADD($session.params.telephone_otp_counter,1)"
+      }, {
+        "parameter": "telephone_otp",
+        "value": null
+      } ],
+      "conditionalCases": [ {
+        "cases": [ {
+          "condition": "$session.params.CIRN_flag = false",
+          "caseContent": [ {
+            "message": {
+              "text": {
+                "text": [ "Sorry, that doesn’t seem right. Please say or key in the 10-digit number you’d like us to send the code to. It needs to be a number listed on your account." ]
+              },
+              "languageCode": "en"
+            }
+          }, {
+            "message": {
+              "text": {
+                "text": [ "Désolé, cela ne semble pas exact. Veuillez dire ou entrer le numéro de dix chiffres auquel vous souhaitez que le code soit envoyé. Il doit s'agir d'un numéro inscrit à votre compte." ]
+              },
+              "languageCode": "fr-ca"
+            }
+          } ]
+        }, {
+          "caseContent": [ {
+            "message": {
+              "text": {
+                "text": [ "Sorry, that number isn't associated with your account. Can you give me another number?" ]
+              },
+              "languageCode": "en"
+            }
+          }, {
+            "message": {
+              "text": {
+                "text": [ "Le numéro de téléphone que vous m'avez donné n'est malheureusement pas associé à votre compte. Pouvez-vous me donner un autre numéro?" ]
+              },
+              "languageCode": "fr-ca"
+            }
+          } ]
+        } ]
+      } ]
+    },
+    "targetPage": "Prompt Phone Number",
+    "name": "0608b304-c7b5-4a60-96e5-795c4d01ef3c"
+  } ],
+  "description": "Check Entered Number"
+}

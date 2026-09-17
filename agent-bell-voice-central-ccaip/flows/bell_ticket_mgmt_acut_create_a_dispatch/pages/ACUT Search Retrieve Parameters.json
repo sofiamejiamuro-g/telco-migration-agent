@@ -1,0 +1,74 @@
+{
+  "name": "2b144676-f367-4434-9368-1f3ab696f14d",
+  "displayName": "ACUT Search Retrieve Parameters",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "setParameterActions": [ {
+      "parameter": "acut_retrieve_response_raw",
+      "value": "$session.params.acut_retrieve_response"
+    }, {
+      "parameter": "acut_retrieve_response",
+      "value": "$sys.func.TO_OBJECT($session.params.acut_retrieve_response_raw)"
+    }, {
+      "parameter": "acut_context_raw",
+      "value": "$session.params.acut_retrieve_response.acutContext"
+    }, {
+      "parameter": "acut_context",
+      "value": "$sys.func.TO_OBJECT($session.params.acut_context_raw)"
+    }, {
+      "parameter": "appointment_start_date",
+      "value": "$session.params.acut_context.appointments.latestAppointment.appointmentStartDate"
+    }, {
+      "parameter": "appointment_end_date",
+      "value": "$session.params.acut_context.appointments.latestAppointment.appointmentEndDate"
+    }, {
+      "parameter": "contact_number_on_file",
+      "value": "$session.params.acut_retrieve_response.primaryContact.number"
+    }, {
+      "parameter": "contact_type_on_file",
+      "value": "$session.params.acut_retrieve_response.primaryContact.type"
+    }, {
+      "parameter": "contact_preference_on_file",
+      "value": "$session.params.acut_retrieve_response.primaryContact.contactPref"
+    }, {
+      "parameter": "contact_name",
+      "value": "$session.params.acut_retrieve_response.customerAccountInteractionRole.name"
+    }, {
+      "parameter": "acut_retrieve_response_raw",
+      "value": null
+    } ],
+    "generators": [ {
+      "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/4b8f9eba-cbac-4792-882f-10f72e3c27f4",
+      "inputParameters": [ {
+        "key": "appointment_end_date",
+        "value": "$session.params.appointment_end_date"
+      }, {
+        "key": "appointment_start_date",
+        "value": "$session.params.appointment_start_date"
+      } ],
+      "outputParameter": "$request.generative.original_appointment_dates"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "original_appointment_object",
+        "value": "$sys.func.TO_OBJECT($request.generative.original_appointment_dates)"
+      }, {
+        "parameter": "appointmentStartDate",
+        "value": "$session.params.original_appointment_object.start_date"
+      }, {
+        "parameter": "appointmentEndDate",
+        "value": "$session.params.original_appointment_object.end_date"
+      }, {
+        "parameter": "original_appointment_object",
+        "value": null
+      } ]
+    },
+    "targetPage": "Check for Reported By Parameter",
+    "name": "26642371-f495-4b23-8a22-39cc8e63fbdd"
+  } ]
+}

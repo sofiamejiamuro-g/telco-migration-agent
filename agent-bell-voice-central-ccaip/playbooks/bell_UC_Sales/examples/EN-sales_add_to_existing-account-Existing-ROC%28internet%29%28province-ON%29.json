@@ -1,0 +1,65 @@
+{
+  "name": "e4656197-a8a6-4372-a7a9-484726986358",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "language": "en"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Sure, let me help you with that.\nLet’s check if we offer Internet and Home phone service in your area. In which province are you looking to get service?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "ontorio"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_aqd",
+      "inputActionParameters": {
+        "language": "en",
+        "line_type": "New",
+        "lob": "Internet",
+        "province": "ON"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "customer wants to add a new internet line and {province} is \"ROC\" or null from identification flow",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "en",
+      "line_type": "New",
+      "lob": "Internet",
+      "province": "AB",
+      "route": "sales_add_to_existing_account",
+      "utterance": "I'm just hoping to simply add Internet to my package."
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "AS {LOB} IS INTERNET we ask the customer about province and he mentioned it as {province}=\"ON\". so we are transferring customer to aqd",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "line_type": "New",
+      "lob": "Internet",
+      "province": "ON"
+    }
+  },
+  "displayName": "EN-sales_add_to_existing-account-Existing-ROC(internet)(province-ON)",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 414,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

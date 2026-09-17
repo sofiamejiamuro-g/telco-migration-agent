@@ -1,0 +1,298 @@
+{
+  "name": "b0d34242-3d58-4899-8eb5-2368394bf943",
+  "displayName": "Prompt Other Amount",
+  "form": {
+    "parameters": [ {
+      "displayName": "other_payment_amount",
+      "required": true,
+      "entityType": "@sys.number-sequence",
+      "fillBehavior": {
+        "initialPromptFulfillment": {
+        
+        },
+        "repromptEventHandlers": [ {
+          "event": "sys.no-input-1",
+          "triggerFulfillment": {
+            "messages": [ {
+              "text": {
+                "text": [ "I didn't quite get that. Can you try again?" ]
+              },
+              "languageCode": "en"
+            }, {
+              "text": {
+                "text": [ "Je n’ai pas tout à fait compris. Pouvez-vous réessayer?" ]
+              },
+              "languageCode": "fr-ca"
+            } ]
+          },
+          "name": "7be2b79b-b6be-40d3-81f3-0ae64a8ab2ed"
+        }, {
+          "event": "sys.no-match-1",
+          "triggerFulfillment": {
+            "messages": [ {
+              "text": {
+                "text": [ "I didn't quite get that. Can you try again?" ]
+              },
+              "languageCode": "en"
+            }, {
+              "text": {
+                "text": [ "Je n’ai pas tout à fait compris. Pouvez-vous réessayer?" ]
+              },
+              "languageCode": "fr-ca"
+            } ]
+          },
+          "name": "10df66b5-8926-482b-bd81-e933e556291c"
+        }, {
+          "event": "sys.no-input-2",
+          "triggerFulfillment": {
+            "messages": [ {
+              "text": {
+                "text": [ "I still didn't get that" ]
+              },
+              "languageCode": "en"
+            }, {
+              "text": {
+                "text": [ "Je n’ai toujours pas compris" ]
+              },
+              "languageCode": "fr-ca"
+            } ]
+          },
+          "name": "3aac92f4-a231-4e83-9d47-2215eb4bdd1a"
+        }, {
+          "event": "sys.no-match-2",
+          "triggerFulfillment": {
+            "messages": [ {
+              "text": {
+                "text": [ "I still didn't get that" ]
+              },
+              "languageCode": "en"
+            }, {
+              "text": {
+                "text": [ "Je n’ai toujours pas compris" ]
+              },
+              "languageCode": "fr-ca"
+            } ]
+          },
+          "name": "821e9f26-882e-48ad-8e89-ea0ce8963977"
+        }, {
+          "targetFlow": "bell_determine_handover",
+          "event": "sys.no-input-3",
+          "triggerFulfillment": {
+          
+          },
+          "name": "f2f9d14d-7a5e-4656-8c63-04caebde50c8"
+        }, {
+          "targetFlow": "bell_determine_handover",
+          "event": "sys.no-match-3",
+          "triggerFulfillment": {
+          
+          },
+          "name": "bfd906be-88ba-498d-a663-22d20907ab00"
+        } ]
+      }
+    } ]
+  },
+  "entryFulfillment": {
+    "messages": [ {
+      "text": {
+        "text": [ "How much would you like to pay?" ]
+      },
+      "languageCode": "en"
+    }, {
+      "text": {
+        "text": [ "D’accord, combien aimeriez-vous payer?" ]
+      },
+      "languageCode": "fr-ca"
+    } ],
+    "setParameterActions": [ {
+      "parameter": "other_payment_amount",
+      "value": null
+    } ]
+  },
+  "transitionRoutes": [ {
+    "intent": "context.confirm_pay_full_balance",
+    "condition": "$session.params.current_account_balance \u003c= 0",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Check amount Balance Less",
+    "name": "16e09fe2-6b2a-4dc1-b94d-e7cf409c0f29"
+  }, {
+    "intent": "context.confirm_pay_full_balance",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Prompt Pay Full Balance",
+    "name": "7899347f-9227-4d83-90c6-347bbbdfa42b"
+  }, {
+    "condition": "$session.params.other_payment_amount != null",
+    "triggerFulfillment": {
+      "generators": [ {
+        "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/c04b950b-c924-4a38-84d8-06e8da7030ef",
+        "inputParameters": [ {
+          "key": "ip_amount",
+          "value": "$session.params.other_payment_amount"
+        } ],
+        "outputParameter": "$request.generative.other_payment_amount"
+      } ]
+    },
+    "name": "6fef5300-4a70-4365-9f8e-d8573921ef44"
+  }, {
+    "condition": "$session.params.other_payment_amount != null",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "other_payment_amount",
+        "value": "$request.generative.other_payment_amount"
+      }, {
+        "parameter": "other_payment_amount",
+        "value": "$sys.func.TO_NUMBER($session.params.other_payment_amount)"
+      } ]
+    },
+    "name": "51895e98-06ee-4916-9702-90765e7c2db7"
+  }, {
+    "condition": "$session.params.other_payment_amount = -100",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "other_amount_counter",
+        "value": "$sys.func.ADD(1, $session.params.other_amount_counter)"
+      }, {
+        "parameter": "other_payment_amount",
+        "value": null
+      } ]
+    },
+    "targetPage": "No Match Counter",
+    "name": "9d2ec6bf-774d-4edf-b4bb-c0813868358f"
+  }, {
+    "condition": "($session.params.special_status = \"bell_col_aul\" OR $session.params.special_status = \"bell_col_sus\") AND $session.params.other_payment_amount != null",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "from_restricted",
+        "value": "$sys.func.IF(\"$session.params.other_payment_amount \u003c $session.params.due_amount\", true, null)"
+      } ],
+      "generators": [ {
+        "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/699af4a5-d41f-47b3-a735-9489ddc4be5f",
+        "outputParameter": "$session.params.amount_paid"
+      } ]
+    },
+    "targetPage": "Amount Already Provided",
+    "name": "f456f7fd-b351-4687-b488-1a52b4a6db90"
+  }, {
+    "condition": "$session.params.special_status = \"bell_col_delinquent\" AND $session.params.other_payment_amount != null",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "from_non_restricted",
+        "value": "$sys.func.IF(\"$session.params.other_payment_amount \u003c $session.params.due_amount\", true, null)"
+      } ],
+      "generators": [ {
+        "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/699af4a5-d41f-47b3-a735-9489ddc4be5f",
+        "outputParameter": "$session.params.amount_paid"
+      } ]
+    },
+    "targetPage": "Amount Already Provided",
+    "name": "b64de065-918b-48d3-a8d2-6babb8d93363"
+  }, {
+    "condition": "$session.params.other_payment_amount != null",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "amount_paid",
+        "value": "$session.params.other_payment_amount"
+      } ]
+    },
+    "targetPage": "Amount Validation",
+    "name": "ea47d3df-760f-4276-85e4-e33cfa132a26"
+  } ],
+  "eventHandlers": [ {
+    "event": "sys.no-input-1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I didn't quite get that. Can you try again?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je n’ai pas tout à fait compris. Pouvez-vous réessayer?" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "17ed953d-1702-48b8-a0f8-7a1a5fbc7bc7"
+  }, {
+    "event": "sys.no-match-1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I didn't quite get that. Can you try again?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je n’ai pas tout à fait compris. Pouvez-vous réessayer?" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "67111c0b-7be3-48a5-ba5a-270624ce03d4"
+  }, {
+    "event": "sys.no-input-2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I still didnt get that" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je n’ai toujours pas compris" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "8b9bf133-ba7e-4c60-8763-aa175c9315fc"
+  }, {
+    "event": "sys.no-match-2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I still didnt get that" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je n’ai toujours pas compris" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "b8d5a48b-013c-4e15-996f-c23a77953e14"
+  }, {
+    "targetFlow": "bell_determine_handover",
+    "event": "sys.no-input-3",
+    "triggerFulfillment": {
+    
+    },
+    "name": "75379a02-256c-4078-8cd1-3f4e28cc0bf8"
+  }, {
+    "targetFlow": "bell_determine_handover",
+    "event": "sys.no-match-3",
+    "triggerFulfillment": {
+    
+    },
+    "name": "e3e098e9-05d7-4f2d-b27a-b0f8252e2d34"
+  } ],
+  "advancedSettings": {
+    "speechAdaptationSettings": {
+      "enableManualSpeechAdaptation": true,
+      "biasingPhraseSets": [ {
+        "biasingPhrases": [ {
+          "value": "$OOV_CLASS_NUMERIC_SEQUENCE",
+          "boost": 20
+        } ],
+        "displayName": "CLASS_NUMERIC_SEQUENCE"
+      } ]
+    }
+  },
+  "speakerIdSettings": {
+  
+  }
+}

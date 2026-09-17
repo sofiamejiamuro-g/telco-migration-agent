@@ -1,0 +1,58 @@
+{
+  "name": "96f69771-984f-4fdb-8ed1-09d259e09f9f",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "brand": "bell",
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "À propos de quel service communiquez- vous avec nous?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Netflix"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_aqd",
+      "inputActionParameters": {
+        "language": "fr-ca",
+        "streaming_services": "Netflix"
+      },
+      "outputActionParameters": {
+        "language": "fr-ca"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer has questions about device availability, device features, cost, related to devices that Bell sells",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "New",
+      "identification_status": "New",
+      "language": "fr-ca",
+      "route": "sales_device_inquiry",
+      "utterance": "J'ai des questions sur la disponibilité des appareils"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "if any streaming services are captured then call \"bell_aqd\"",
+    "actionParameters": {
+      "language": "fr-ca",
+      "streaming_services": "Netflix"
+    }
+  },
+  "displayName": "FR-sales device inquiry- ID Fail-streaming",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 331,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

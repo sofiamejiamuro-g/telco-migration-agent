@@ -1,0 +1,55 @@
+{
+  "name": "80e279d5-2d9b-4475-87d5-da6b0057ac29",
+  "displayName": "Local Error handing for OTP",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.local_no_match_counter = 1 OR $session.params.local_no_input_counter = 1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "That does not seem right.  Please say or key in the 6 digit verification code I sent you." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Cela ne semble pas exact. Veuillez dire ou entrer un code de vérification de six chiffres que je vous ai envoyé." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "84166705-9c66-4b7b-b372-5fccf6ff4679"
+  }, {
+    "condition": "$session.params.local_no_match_counter \u003e= 2 OR $session.params.local_no_input_counter \u003e= 2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "That still doesn’t seem right." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Cela ne semble toujours pas exact." ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "auth_status",
+        "value": "Fail"
+      }, {
+        "parameter": "status",
+        "value": "SMSTimeout"
+      } ]
+    },
+    "targetPage": "Webhook set-auth-status",
+    "name": "86a021a7-d632-4667-8934-a517c5cd5e7e"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Previous Page",
+    "name": "298308fb-420f-4324-8995-5e938b347e61"
+  } ]
+}

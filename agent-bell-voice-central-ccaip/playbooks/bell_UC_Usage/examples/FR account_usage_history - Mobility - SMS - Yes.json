@@ -1,0 +1,48 @@
+{
+  "name": "d68a6c67-76d6-47ce-a2e4-9f850fe84174",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Bien sûr, je peux vous aider. Souhaitez-vous obtenir des renseignements sur l'utilisation d'Internet ou des services de mobilité?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "mes appelles"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Vous pouvez facilement consulter et suivre votre utilisation des services de mobilité dans MonBell. Je vais envoyer un texto sur l’appareil à partir duquel vous appelez, avec un lien expliquant les étapes à suivre. Est-ce que cela vous convient?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "oui"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "fr-ca",
+        "sms_content": "Bell : Vous pouvez visiter https://m.bell.ca/verifierutilisation pour voir votre utilisation dans l'appli MonBell. ( bell.ca/apropos )",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "User has a question regarding their usage history.",
+    "actionParameters": {
+      "language": "fr-ca",
+      "route": "account_usage_history",
+      "utterance": "j’ai une question concernant mon utilisation"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Disambiguate for LOB then VA offers sms. Customer said yes so we route accordingly"
+  },
+  "displayName": "FR account_usage_history - Mobility - SMS - Yes",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 322,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "fr"
+}

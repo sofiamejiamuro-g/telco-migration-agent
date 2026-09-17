@@ -1,0 +1,124 @@
+{
+  "name": "c8fad3be-806e-4bd2-b053-68ed2b52b914",
+  "displayName": "Webhook Ban Profile Lookup",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "/v1/ibm_mw/nm1_get#ban-profile",
+    "tag": "ban-profile",
+    "setParameterActions": [ {
+      "parameter": "webhook_success",
+      "value": null
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.nm1_get_ban_profile_response.returnCode = \"0\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Malheureusement, cette option libre-service n'est pas disponible pour votre compte." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "Unfortunately, this self serve option is not available for your account." ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "targetFlow": "bell_Feedback",
+    "name": "de97ac7f-86bb-45e3-bbbb-d10d6554614f"
+  }, {
+    "condition": "$session.params.webhook_success = true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "oneBillIndicator",
+        "value": "$session.params.nm1_get_ban_profile_response.oneBillIndicator"
+      }, {
+        "parameter": "accountType",
+        "value": "$session.params.nm1_get_ban_profile_response.accountType"
+      }, {
+        "parameter": "accountSubType",
+        "value": "$session.params.nm1_get_ban_profile_response.accountSubType"
+      }, {
+        "parameter": "pastDueAmount",
+        "value": "$session.params.nm1_get_ban_profile_response.pastDueAmount"
+      }, {
+        "parameter": "accountBalance",
+        "value": "$session.params.nm1_get_ban_profile_response.accountBalance"
+      } ]
+    },
+    "targetPage": "Result Check",
+    "name": "e0a0c87b-585d-4ab4-8f5c-466112277e40"
+  }, {
+    "condition": "$session.params.webhook_success = false",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Failure Cannot Proceed with Payment ",
+    "name": "7e876fc0-db91-4248-971c-527d904b3384"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "c8fad3be-806e-4bd2-b053-68ed2b52b914"
+      }, {
+        "parameter": "flow_id",
+        "value": "ced63037-f058-4dd0-9269-97742185ea0f"
+      }, {
+        "parameter": "page_name",
+        "value": "Webhook Ban Profile Lookup"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Webhook Failure NM1 Outage",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+    
+    },
+    "name": "98f57dd3-b8af-4b7b-9274-236e6830b329"
+  }, {
+    "targetPage": "Webhook Failure NM1 Outage",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+    
+    },
+    "name": "c8e5d85f-dd31-48c8-bfca-9b1dfdf8c9bc"
+  }, {
+    "targetPage": "Webhook Failure NM1 Outage",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+    
+    },
+    "name": "7336a87e-d65c-4de0-9564-d9259edf0ffa"
+  }, {
+    "targetPage": "Webhook Failure NM1 Outage",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+    
+    },
+    "name": "dd0a920e-d3eb-4444-b1a3-2091e648c8ab"
+  }, {
+    "targetPage": "Webhook Failure NM1 Outage",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+    
+    },
+    "name": "582a8e90-a1b2-4651-a646-f85828dacee1"
+  }, {
+    "targetPage": "Webhook Failure NM1 Outage",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+    
+    },
+    "name": "484a5e0d-c8e7-419a-aaf1-1c9adabc277f"
+  } ]
+}

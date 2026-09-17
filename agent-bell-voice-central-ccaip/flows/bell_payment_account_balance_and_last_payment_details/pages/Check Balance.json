@@ -1,0 +1,116 @@
+{
+  "name": "58200c8f-f446-45d9-a08c-663ac1be299b",
+  "displayName": "Check Balance",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "setParameterActions": [ {
+      "parameter": "last_payment_amount_number",
+      "value": "$sys.func.TO_NUMBER($session.params.last_payment_amount)"
+    }, {
+      "parameter": "account_balance_number",
+      "value": "$sys.func.TO_NUMBER($session.params.accountBalance)"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.last_payment_amount = \"\" OR $session.params.last_payment_date = \"\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "last_payment_amount",
+        "value": "$sys.func.IF($session.params.last_payment_amount = \"\", null, $session.params.last_payment_amount)"
+      }, {
+        "parameter": "last_payment_date",
+        "value": "$sys.func.IF($session.params.last_payment_date = \"\", null, $session.params.last_payment_date)"
+      } ]
+    },
+    "name": "9c72a40c-cd9d-4894-b05b-0b1fd47d1d4f"
+  }, {
+    "condition": "$session.params.last_payment_date != null AND ($session.params.last_payment_amount_number \u003e 0 OR $session.params.last_payment_amount_number \u003e 0.00) AND ($session.params.account_balance_number = 0 OR $session.params.account_balance_number = 0.0)",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "\u003cspeak\u003e Votre compte est à jour, car vous n'avez aucun solde dû pour le moment. Votre dernier paiement de $$session.params.last_payment_amount à été reçu le \u003csay-as interpret-as=\"date\" format=\"dm\" detail=\"2\"\u003e $session.params.fr_date \u003c/say-as\u003e \u003c/speak\u003e" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "\u003cspeak\u003e You're all up to date as you have no balance owing at this time. Your last payment of $$session.params.last_payment_amount was received on \u003csay-as interpret-as=\"date\" format=\"md\" detail=\"2\"\u003e $session.params.date \u003c/say-as\u003e \u003c/speak\u003e" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "targetFlow": "bell_Feedback",
+    "name": "f5da8a17-cae5-42e1-9f46-4bb914bfb770"
+  }, {
+    "condition": "$session.params.last_payment_date != null AND ($session.params.last_payment_amount_number \u003e 0 OR $session.params.last_payment_amount_number \u003e 0.00)",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Votre solde actuel est de $$session.params.accountBalance et votre dernier paiement de $$session.params.last_payment_amount à été reçu le \u003csay-as interpret-as=\"date\" format=\"dm\" detail=\"2\"\u003e $session.params.fr_date \u003c/say-as\u003e \u003c/speak\u003e" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "\u003cspeak\u003e Your current balance is $ $session.params.accountBalance and your last payment of $ $session.params.last_payment_amount was received on \u003csay-as interpret-as=\"date\" format=\"md\" detail=\"2\"\u003e $session.params.date \u003c/say-as\u003e \u003c/speak\u003e" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "targetFlow": "bell_payment_pitch_one_time_CC_payment 2",
+    "name": "87dbad5f-d74f-49de-9cb2-63bf6afaece1"
+  }, {
+    "condition": "($session.params.last_payment_amount = null OR $session.params.last_payment_amount_number = 0 OR $session.params.last_payment_amount_number = 0.0) AND ($session.params.account_balance_number = 0 OR $session.params.account_balance_number = 0.0)",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Vous n’avez aucun solde dû pour le moment et aucun paiement n’a encore été reçu pour ce compte." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "You don't have a balance owing at this time and there have been no payments received as of yet for this account." ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "targetFlow": "bell_Feedback",
+    "name": "005995a0-4c90-448f-ade8-04a17d6d62f0"
+  }, {
+    "condition": "$session.params.last_payment_amount = null OR $session.params.last_payment_amount_number = 0 OR $session.params.last_payment_amount_number = 0.0",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Votre solde actuel est de $ $session.params.accountBalance. Aucun paiement n’a été reçu pour ce compte jusqu’à présent." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "Your current balance is $ $session.params.accountBalance.  There have been no payments received as of yet for this account." ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "targetFlow": "bell_payment_pitch_one_time_CC_payment 2",
+    "name": "2a2c5523-4090-42e4-978d-332b150e6679"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "58200c8f-f446-45d9-a08c-663ac1be299b"
+      }, {
+        "parameter": "flow_id",
+        "value": "518d29f3-b868-4b90-b9a7-421847b47a19"
+      }, {
+        "parameter": "page_name",
+        "value": "Check Balance"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

@@ -1,0 +1,180 @@
+{
+  "name": "71d32eb5-9e6b-4990-8ccb-656e3515cb1c",
+  "displayName": "Webhook - CLP details",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "v1/account-information/get-clp-details",
+    "tag": "N/A",
+    "returnPartialResponses": true
+  },
+  "transitionRoutes": [ {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "billingcycle_status",
+        "value": "$session.params.get_clp_info_response.billCompleteStatus"
+      }, {
+        "parameter": "clp_balance",
+        "value": "$session.params.get_clp_info_response.curSpendingLimitBal"
+      }, {
+        "parameter": "clp_aul_limit",
+        "value": "$session.params.get_clp_info_response.aul_threshold"
+      }, {
+        "parameter": "clp_sus_limit",
+        "value": "$session.params.get_clp_info_response.sus_threshold"
+      }, {
+        "parameter": "clp_program",
+        "value": "$session.params.get_clp_info_response.spendingLimit"
+      } ]
+    },
+    "name": "7bb3a6f8-c347-45e1-a1e7-3d4c56ef0be7"
+  }, {
+    "condition": "$session.params.webhook_success = false",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "We are currently performing maintenance on our systems so unfortunately I am unable to proceed with providing your credit limit details at this moment. Please call again tomorrow. " ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Nous effectuons actuellement une maintenance sur nos systèmes, par conséquent, je ne peux malheureusement pas vous communiquer les détails de votre limite de crédit pour le moment. Veuillez rappeler demain." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetFlow": "bell_Feedback",
+    "name": "a5afbe42-f4ce-40dc-ab40-a6d51a171738"
+  }, {
+    "condition": "$session.params.webhook_success = true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Check specialty status",
+    "name": "6ed6fe1d-2cdd-4cb7-9c39-01b8281ae98f"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "71d32eb5-9e6b-4990-8ccb-656e3515cb1c"
+      }, {
+        "parameter": "flow_id",
+        "value": "475ba791-1044-4806-ba00-57e97f0a5e24"
+      }, {
+        "parameter": "page_name",
+        "value": "Webhook - CLP details"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ],
+  "eventHandlers": [ {
+    "targetFlow": "bell_Feedback",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "We are currently performing maintenance on our systems so unfortunately I am unable to proceed with providing your credit limit details at this moment. Please call again tomorrow." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Nous effectuons actuellement une maintenance sur nos systèmes, par conséquent, je ne peux malheureusement pas vous communiquer les détails de votre limite de crédit pour le moment. Veuillez rappeler demain." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "6c714bbd-35ac-4e76-9756-0e4ec738ce7a"
+  }, {
+    "targetFlow": "bell_Feedback",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "We are currently performing maintenance on our systems so unfortunately I am unable to proceed with providing your credit limit details at this moment. Please call again tomorrow." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Nous effectuons actuellement une maintenance sur nos systèmes, par conséquent, je ne peux malheureusement pas vous communiquer les détails de votre limite de crédit pour le moment. Veuillez rappeler demain." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "4c126c69-fcb5-4abd-94d7-907199d560ed"
+  }, {
+    "targetFlow": "bell_Feedback",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "We are currently performing maintenance on our systems so unfortunately I am unable to proceed with providing your credit limit details at this moment. Please call again tomorrow." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Nous effectuons actuellement une maintenance sur nos systèmes, par conséquent, je ne peux malheureusement pas vous communiquer les détails de votre limite de crédit pour le moment. Veuillez rappeler demain." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "1fbcdd77-81d5-444e-ba3b-868feb86219f"
+  }, {
+    "targetFlow": "bell_Feedback",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "We are currently performing maintenance on our systems so unfortunately I am unable to proceed with providing your credit limit details at this moment. Please call again tomorrow." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Nous effectuons actuellement une maintenance sur nos systèmes, par conséquent, je ne peux malheureusement pas vous communiquer les détails de votre limite de crédit pour le moment. Veuillez rappeler demain." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "875300de-eec9-4932-9da0-fbafdc2d138d"
+  }, {
+    "targetFlow": "bell_Feedback",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "We are currently performing maintenance on our systems so unfortunately I am unable to proceed with providing your credit limit details at this moment. Please call again tomorrow." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Nous effectuons actuellement une maintenance sur nos systèmes, par conséquent, je ne peux malheureusement pas vous communiquer les détails de votre limite de crédit pour le moment. Veuillez rappeler demain." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "9034aa22-e234-4c1b-a7fd-4e6fb4824b59"
+  }, {
+    "targetFlow": "bell_Feedback",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "We are currently performing maintenance on our systems so unfortunately I am unable to proceed with providing your credit limit details at this moment. Please call again tomorrow." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Nous effectuons actuellement une maintenance sur nos systèmes, par conséquent, je ne peux malheureusement pas vous communiquer les détails de votre limite de crédit pour le moment. Veuillez rappeler demain." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "e9c6cd91-94ef-489b-a927-6070464e4cc7"
+  } ]
+}

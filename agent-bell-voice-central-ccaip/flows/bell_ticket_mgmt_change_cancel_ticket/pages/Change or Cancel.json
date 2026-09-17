@@ -1,0 +1,72 @@
+{
+  "name": "31c51702-25b8-4d4d-8be2-4e4ea9c63510",
+  "displayName": "Change or Cancel",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "intent": "tech_field_tech_visit_cancel",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_app_mgmt_cancel_ticket",
+    "name": "26a65696-0dd7-43b6-9b60-2b6b9b3aba67"
+  }, {
+    "intent": "context.reschedule_appointment",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_ticket_mgmt_acut_change_reschedule_ticket",
+    "name": "08a0e43c-1269-4d88-b5f0-eb810be13b61"
+  }, {
+    "intent": "context.cancel",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_app_mgmt_cancel_ticket",
+    "name": "7315e19c-a4f4-4a0c-89ca-9bd2ee465439"
+  }, {
+    "intent": "context.change",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_ticket_mgmt_acut_change_reschedule_ticket",
+    "name": "1b05047b-5428-41f6-b579-9dfc0fa57c97"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Local Error Handling (Change or Cancel)",
+    "event": "sys.no-input-default",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "global_error_counter",
+        "value": "$sys.func.ADD($session.params.global_error_counter,1)"
+      }, {
+        "parameter": "local_noinput_counter",
+        "value": "$sys.func.ADD($session.params.local_noinput_counter,1)"
+      }, {
+        "parameter": "local_trigger",
+        "value": "no_input"
+      } ]
+    },
+    "name": "bc5a8b8f-6780-4e25-8cd0-43917193d457"
+  }, {
+    "targetPage": "Local Error Handling (Change or Cancel)",
+    "event": "sys.no-match-default",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "global_error_counter",
+        "value": "$sys.func.ADD($session.params.global_error_counter,1)"
+      }, {
+        "parameter": "local_nomatch_counter",
+        "value": "$sys.func.ADD($session.params.local_nomatch_counter,1)"
+      }, {
+        "parameter": "local_trigger",
+        "value": "no_match"
+      } ]
+    },
+    "name": "038a4605-ccd8-4096-9e83-31976c3b7100"
+  } ]
+}

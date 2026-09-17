@@ -1,0 +1,35 @@
+{
+  "name": "21f99677-3cc0-47cb-9585-4b39ade16848",
+  "displayName": "Consolidated Customers",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "setParameterActions": [ {
+      "parameter": "webhook_success",
+      "value": null
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.onebillindicator = \"M\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_va_to_ivr_handoff",
+    "name": "b87f5089-2e16-46fb-abd7-cdd840f644ba"
+  }, {
+    "condition": "($session.params.Bantype = \"I\" AND ($session.params.Bansubtype = \"R\" OR $session.params.Bansubtype = \"N\" OR $session.params.Bansubtype = \"B\" OR $session.params.Bansubtype = \"5\" OR $session.params.Bansubtype = \"E\" OR $session.params.Bansubtype = \"P\")) OR ($session.params.Bantype = \"C\" AND ($session.params.Bansubtype = \"P\" OR $session.params.Bansubtype = \"T\" OR $session.params.Bansubtype = \"V\"))",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Province Look-up Webhook",
+    "name": "ef7d85a6-b763-469e-a3f7-8984172527ec"
+  }, {
+    "condition": "$session.params.Bantype != \"I\" OR $session.params.Bantype != \"C\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Failure NM1 Outage",
+    "name": "1c79581e-8e9f-4b78-a7b0-aa8038c2e5f7"
+  } ]
+}

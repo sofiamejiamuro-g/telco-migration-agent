@@ -1,0 +1,52 @@
+{
+  "name": "f7931432-ccb7-4d25-b21e-92268788bfcc",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "I'll send a text to the device you're calling from, so that you can check out Bell's Internet devices. Is that alright?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "yes"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "brand": "bell",
+        "language": "en",
+        "sms_content": "You can visit m.bell.ca/manageinternetfeatures for information about Internet devices. ( bell.ca/about-us )",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+        "language": "en"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer is looking to get some internet device",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "Existing",
+      "device_type": "Modem",
+      "language": "en",
+      "line_type": "Existing",
+      "lob": "Internet",
+      "route": "sales_order_device",
+      "utterance": "I need another modem for internet service"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Waiting to confirm if the customer agrees to sending a text message to his device",
+    "actionParameters": {
+      "brand": "bell",
+      "device_type": "Modem",
+      "language": "en",
+      "lob": "Internet"
+    }
+  },
+  "displayName": "sales order device- ID Pass, line type mentioned- existing-internet",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 299,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

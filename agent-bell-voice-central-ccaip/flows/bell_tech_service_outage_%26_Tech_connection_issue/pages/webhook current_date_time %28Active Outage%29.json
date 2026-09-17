@@ -1,0 +1,33 @@
+{
+  "name": "7aa24459-a41e-45ff-9793-3f419f797be5",
+  "displayName": "webhook current_date_time (Active Outage)",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "v1/dfcx_support/client_info#local-time",
+    "tag": "local-time",
+    "setParameterActions": [ {
+      "parameter": "longest_etr_from",
+      "value": "$session.params.oc_details_response.failing_services[0].etr.from"
+    }, {
+      "parameter": "longest_etr_to",
+      "value": "$session.params.oc_details_response.failing_services[0].etr.to"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.webhook_success = true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Check ETR (Active Outage)",
+    "name": "8f1b4a65-f8e2-4bf9-ad10-b472de5f71e2"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Check LOB #1 (Active Outage)",
+    "name": "0aefcd85-7f28-416d-a38c-4ac314841c88"
+  } ]
+}

@@ -1,0 +1,63 @@
+{
+  "name": "67c874e4-716e-4013-86d3-f9ca1f61831e",
+  "displayName": "Webhook get-tester-details fail",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "messages": [ {
+      "text": {
+        "text": [ "There was a problem calling the get tester details webhook." ]
+      },
+      "languageCode": "en"
+    }, {
+      "text": {
+        "text": [ "Il y a eu un problème avec le webhook get tester details." ]
+      },
+      "languageCode": "fr-ca"
+    } ],
+    "setParameterActions": [ {
+      "parameter": "get_tester_details_fail_count",
+      "value": "$sys.func.ADD(1,  $session.params.get_tester_details_fail_count)"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.get_tester_details_fail_count \u003c= 2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Let's try that again." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Essayons à nouveau." ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "tester_id",
+        "value": null
+      } ]
+    },
+    "targetPage": "Get Tester Id",
+    "name": "5cf8cd63-6bbf-4634-8928-45adb456775e"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Exiting test Wrapper." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Nous quittons maintenant test wrapper." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetPage": "End Flow",
+    "name": "affb26a7-9800-4cb4-91b2-861df6afd70a"
+  } ]
+}

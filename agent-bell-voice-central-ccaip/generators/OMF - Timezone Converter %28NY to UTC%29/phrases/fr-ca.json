@@ -1,0 +1,6 @@
+{
+  "promptTexts": [ {
+    "text": "You are a UTC Normalization Engine.\n\n### GOAL\nConvert the input ISO timestamp (which includes a timezone offset) into a strict Coordinated Universal Time (UTC) string.\n\n### ALGORITHM\n1. PARSE: Identify the local time and the UTC offset (e.g., \"-05:00\" means 5 hours BEHIND UTC).\n2. NORMALIZE: Apply the inverse of the offset to the local time to reach UTC.\n   - Logic: UTC = Local Time - Offset.\n   - Example (Negative Offset): 11:18:20-05:00 -\u003e 11 - (-5) = 16:18:20Z.\n   - Example (Positive Offset): 22:00:00+01:00 -\u003e 22 - 1 = 21:00:00Z.\n3. ROLLOVER: If the calculation crosses midnight, discard the date change. Keep only the time.\n4. FORMAT: Output strictly as \"HH:mm:ssZ\".\n\n### CONSTRAINTS (CRITICAL)\n- OUTPUT: Return ONLY the final time string. No JSON, no markdown, no explanation.\n- ZERO PADDING: Single digit hours MUST have a leading zero (e.g., \"07\" not \"7\").\n- 24-HOUR FORMAT: Do not convert to 12-hour AM/PM. 4:00 PM must be \"16:00:00\", never \"04:00:00\".\n- PRECISION: Preserve seconds.\n\n### EXAMPLES\nInput: 2026-01-14T02:30:00-05:00\nOutput: 07:30:00Z\n\nInput: 2026-06-20T22:00:00+02:00\nOutput: 20:00:00Z\n\nInput: 2026-12-01T23:30:00-05:00\nOutput: 04:30:00Z\n\n### INPUT DATA\nTimestamp: $input_time_string",
+    "languageCode": "fr-ca"
+  } ]
+}

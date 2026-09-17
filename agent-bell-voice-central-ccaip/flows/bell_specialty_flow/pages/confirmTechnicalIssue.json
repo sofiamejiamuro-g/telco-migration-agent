@@ -1,0 +1,64 @@
+{
+  "name": "ff4f4ef8-668f-4ed6-9c55-7032d1e35173",
+  "displayName": "confirmTechnicalIssue",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "intent": "context.confirm_yes",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "special_status",
+        "value": "bell_privilege"
+      }, {
+        "parameter": "special_queue",
+        "value": "privilege_tech"
+      }, {
+        "parameter": "route",
+        "value": "other_speak_to_agent_technical_support"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "60303b22-ee4b-493c-9174-cb42d9d73c33"
+  }, {
+    "intent": "context.confirm_no",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "special_status",
+        "value": "bell_privilege"
+      }, {
+        "parameter": "special_queue",
+        "value": "privilege_care"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "e322bb6d-c7e7-47a4-a9e6-36afc5da3b3b"
+  } ],
+  "eventHandlers": [ {
+    "targetFlow": "bell_aqd",
+    "event": "sys.no-input-1",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "special_status",
+        "value": "bell_privilege"
+      }, {
+        "parameter": "special_queue",
+        "value": "privilege_care"
+      } ]
+    },
+    "name": "9b41d7cc-2b12-47da-b86f-cfe5e6c15d8e"
+  }, {
+    "targetFlow": "bell_aqd",
+    "event": "sys.no-match-1",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "special_queue",
+        "value": "privilege_care"
+      }, {
+        "parameter": "special_status",
+        "value": "bell_privilege"
+      } ]
+    },
+    "name": "ccb7b698-4ee6-4b4f-a6fe-33b617fc3f91"
+  } ]
+}

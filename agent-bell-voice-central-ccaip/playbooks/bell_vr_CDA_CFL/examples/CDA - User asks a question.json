@@ -1,0 +1,49 @@
+{
+  "name": "5425fe0b-621f-4c65-9c88-452c2b5fe6bc",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "To fix this issue, you need to perform this step now. Please unplug the power cable from the back of the modem, wait 10 seconds, and plug it back in. Please perform that step and let me know when you are done"
+    }
+  }, {
+    "userUtterance": {
+      "text": "How do I do that?"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "No worries, I will take care of it."
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_vr_post_answer",
+      "inputActionParameters": {
+        "customer_answer1_id": "1"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "The customer contacted support stating their internet is not working. The Virtual Repair diagnostic tool ran a check and determined that the customer's modem needs to be restarted (power cycled) to resolve the connectivity issue. The agent is now entering the CDA (Customer Data Acquisition) flow to instruct the customer to manually reboot the device. The system has passed the technical instructions for the power cycle into the input parameters.",
+    "actionParameters": {
+      "acceptable_answers": [ {
+        "choice": "Continue",
+        "id": 0
+      }, {
+        "choice": "I can't complete this step",
+        "id": 1
+      } ],
+      "description": "",
+      "eta_CDA": "Approx. 5 minutes",
+      "title": "Resetting power to your modem",
+      "vr_type": "CDA"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "The Agent correctly initialized the CDA flow using the title and description to instruct the customer to power cycle the modem. When the customer responded with \"How do I do that?\", the Agent successfully identified this as a \"Stuck/Need Help\" trigger (Priority 2) instead of a general FAQ. Consequently, it immediately set customer_answer1_id=1 (corresponding to the \"I don't know\" option) and triggered ${FLOW:bell_vr_post_answer} to provide assistance, bypassing the tool search logic as intended."
+  },
+  "displayName": "CDA - User asks a question",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 459,
+  "languageCode": "en"
+}

@@ -1,0 +1,70 @@
+{
+  "name": "fe55473f-5838-40db-b15b-92e134a59693",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "language": "en"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Sure, let me help you with that.\n\nLet’s check if we offer Internet and Home phone service in your area. In which province are you looking to get service?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "North vancouver"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Get blazing-fast speeds on the Bell network with Bell Mobile Internet. Where you can get up to 5G internet connectivity with a mobile hotspot device so that you can stay connected at home or on the go.\nI'll send a text to the device you're calling from, so that you can learn more about mobile internet on our website. Is that alright?\n"
+    }
+  }, {
+    "userUtterance": {
+      "text": "no"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "en",
+        "route": "sales_plans_inquiry",
+        "sms_send_status": "Declined"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customers want to know about different plans or compare different plans that Bell has and lob identified as \" Internet\" OR \"TV\" OR \"Homephone\" AND province is any synonym of \"ROC\" like \"AB\" OR \"BC\" ",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "New",
+      "device_type": "Wi-fi",
+      "language": "en",
+      "lob": "internet",
+      "province": "BC",
+      "route": "sales_plans_inquiry",
+      "utterance": "I need wi-fi service"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "When province is anything other than ON and QC or is null or empty, ask user for province, extract in {province} parameter and further route based on province",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "lob": "internet",
+      "province": "BC"
+    }
+  },
+  "displayName": "EN - sales plans inquiry- ID Fail, no province is identified- province ROC LOB Wi-fi -no",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 522,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

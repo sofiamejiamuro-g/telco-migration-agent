@@ -1,0 +1,62 @@
+{
+  "name": "0a604d52-cca3-4b34-8f3d-82cf4609568e",
+  "displayName": "Webhook dfcx_support",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "v1/dfcx_support/cpm_profile_info",
+    "tag": "hp-in-ban",
+    "setParameterActions": [ {
+      "parameter": "customer_profile",
+      "value": "$session.params.customer_id_search_response"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "True",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "is_home_phone",
+        "value": "$session.params.hp_in_ban_response.is_home_phone"
+      } ]
+    },
+    "name": "93d7e147-8cb5-4c10-b8f6-6c09c1ac347c"
+  }, {
+    "condition": "$session.params.webhook_success = True",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "webhook_success",
+        "value": null
+      } ]
+    },
+    "targetPage": "OTP Auth - Start",
+    "name": "a251750f-86a9-4056-a73a-a96617aee6d1"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "0a604d52-cca3-4b34-8f3d-82cf4609568e"
+      }, {
+        "parameter": "flow_id",
+        "value": "87797521-bad6-4ad0-8ba5-2ff3b1d9bab2"
+      }, {
+        "parameter": "page_name",
+        "value": "Webhook dfcx_support"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Webhook start-auth-session Error",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+    
+    },
+    "name": "28726f7d-ed68-41a6-a1ff-3714b9197bb4"
+  } ]
+}

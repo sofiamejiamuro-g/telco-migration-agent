@@ -1,0 +1,51 @@
+{
+  "name": "e6b83ab6-cb21-4fb3-a11e-e03eac74b9c6",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Vous recherchez du soutien sur la télévision par satellite, la télévision Fibe ou appli Fibe télé?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "téléphone résidentiel"
+    }
+  }, {
+    "playbookInvocation": {
+      "playbook": "Bell_UC_Technical_Support_Infobot",
+      "playbookInput": {
+        "precedingConversationSummary": "User mentions lob other than TV and tv_subtype is not mentioned, hence invoke this playbook",
+        "actionParameters": {
+          "language": "fr-ca",
+          "lob": "Homephone",
+          "route": "tech_missing_channel_package"
+        }
+      },
+      "playbookOutput": {
+        "actionParameters": {
+          "language": "fr-ca",
+          "lob": "Homephone",
+          "route": "tech_missing_channel_package"
+        }
+      },
+      "playbookState": "OUTPUT_STATE_OK"
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer has issue with missing channels",
+    "actionParameters": {
+      "language": "fr-ca",
+      "utterance": "Mon forfait manque les chaînes auxquelles je me suis abonné depuis 1 an."
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "customer is asked about the service type and mentions lob other than TV, hence route to playbook \"Bell_UC_Technical_Support_Infobot\"",
+    "actionParameters": {
+      "language": "fr-ca",
+      "lob": "Homephone"
+    }
+  },
+  "displayName": "FR-(lob=null) and (tv_sub_type=null) | infobot routing",
+  "retrievalStrategy": "STATIC",
+  "tokenCount": 306,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

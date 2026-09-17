@@ -1,0 +1,239 @@
+{
+  "name": "0e0110bd-2c19-4d77-a03f-80136fc50139",
+  "displayName": "Amount Check",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "conditionalCases": [ {
+      "cases": [ {
+        "condition": "$session.params.payment_attempt = 0 AND $session.params.decimal_payment_attempt = 0",
+        "caseContent": [ {
+          "message": {
+            "text": {
+              "text": [ "Vous avez un solde total de $session.params.currentBalance $. Souhaitez-vous vous engager a payer le montant total?" ]
+            },
+            "languageCode": "fr-ca"
+          }
+        }, {
+          "message": {
+            "text": {
+              "text": [ "You have a total balance of $session.params.currentBalance, would you like to commit to paying the full amount?" ]
+            },
+            "languageCode": "en"
+          }
+        } ]
+      }, {
+        "condition": "$session.params.payment_attempt = 1",
+        "caseContent": [ {
+          "message": {
+            "text": {
+              "text": [ "Votre entente de paiement ne peut pas être inférieure à 10 $. Veuillez entrer un autre montant?" ]
+            },
+            "languageCode": "fr-ca"
+          }
+        }, {
+          "message": {
+            "text": {
+              "text": [ "Your payment arrangement can't be less than $10. Please enter a different amount" ]
+            },
+            "languageCode": "en"
+          }
+        } ]
+      }, {
+        "condition": "$session.params.payment_attempt = 2",
+        "caseContent": [ {
+          "message": {
+            "text": {
+              "text": [ "Le montant entré est inférieur au minimum de 10$ pour l'entente de paiement. Veuillez entrer un montant plus elevé" ]
+            },
+            "languageCode": "fr-ca"
+          }
+        }, {
+          "message": {
+            "text": {
+              "text": [ "The amount entered is below the minimum of $10 for payment arrangement. Please enter a high amount" ]
+            },
+            "languageCode": "en"
+          }
+        } ]
+      }, {
+        "condition": "$session.params.decimal_payment_attempt = 1",
+        "caseContent": [ {
+          "message": {
+            "text": {
+              "text": [ "Le montant entré n'est pas accepté. Vous pouvez entrer le montant sans dépasser deux décimales, par exemple 12,34" ]
+            },
+            "languageCode": "fr-ca"
+          }
+        }, {
+          "message": {
+            "text": {
+              "text": [ "The amount entered is not accepted.  You can enter the amount no more than two decimal places for example 12.34" ]
+            },
+            "languageCode": "en"
+          }
+        } ]
+      }, {
+        "condition": "$session.params.decimal_payment_attempt = 2",
+        "caseContent": [ {
+          "message": {
+            "text": {
+              "text": [ "Je n'ai toujours pas compris." ]
+            },
+            "languageCode": "fr-ca"
+          }
+        }, {
+          "message": {
+            "text": {
+              "text": [ "I still didn't get that" ]
+            },
+            "languageCode": "en"
+          }
+        } ]
+      } ]
+    } ]
+  },
+  "transitionRoutes": [ {
+    "intent": "custom.yes",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "\u003cspeak\u003eLa dernière date pour laquelle vous pouvez vous engager à effectuer un versement pour votre entente de paiement est le \u003csay-as interpret-as=\"date\" format=\"md\" detail=\"2\"\u003e$session.params.calculated_payment_date \u003c/say-as\u003e. Pouvez-vous effectuer un paiement d’ici là?\u003c/speak\u003e" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "\u003cspeak\u003e The latest date you can commit to making a payment arrangement is on  \u003csay-as interpret-as=\"date\" format=\"md\" detail=\"2\"\u003e$session.params.calculated_payment_date \u003c/say-as\u003e. Can you make a payment by then? \u003c/speak\u003e" ]
+        },
+        "languageCode": "en"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "amount",
+        "value": "$session.params.currentBalance"
+      } ]
+    },
+    "targetPage": "Payment Date Confirmation",
+    "name": "82db260f-91f2-48ba-886a-e4fd3164173a"
+  }, {
+    "intent": "context.pa_amount",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "payment_amount",
+        "value": "$session.params.customer_mentioned_amount"
+      } ]
+    },
+    "targetPage": "Capture Amount",
+    "name": "0efcb1de-4304-4ea8-a703-8bec9b50b4b6"
+  }, {
+    "intent": "context.pa_no",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Pour établir des modalités de paiement, le montant minimum requis est de $session.params.pastDueAmount, Souhaitez-vous vous engager à payer ce montant?" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "To set up payment arrangement, the minimum amount required is $$session.params.pastDueAmount, would you like to commit to paying this amount?" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "targetPage": "Due Amount Check",
+    "name": "aa3e2c58-a125-4334-b193-d7c6c4d27929"
+  }, {
+    "condition": "$session.params.payment_attempt = 3",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_aqd",
+    "name": "ff7812cc-5b97-4193-8019-274abaa6bf77"
+  }, {
+    "condition": "$session.params.decimal_payment_attempt = 3",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_aqd",
+    "name": "6c96d44e-ecf2-420a-a5a6-8f8f5c23d7b2"
+  } ],
+  "eventHandlers": [ {
+    "event": "sys.no-input-1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Je n’ai pas tout à fait compris. Pouvez-vous réessayer?" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "I didn't quite get that. Can you try again?" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "df3a7b32-4d1d-4653-b23c-79b3634a6db1"
+  }, {
+    "event": "sys.no-input-2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Je n’ai toujours pas compris" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "I still didn't get that" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "68f5338f-504b-4514-9760-2ca75c900336"
+  }, {
+    "targetFlow": "bell_aqd",
+    "event": "sys.no-input-3",
+    "triggerFulfillment": {
+    
+    },
+    "name": "b791cf78-0925-4d13-8faa-b8e2739292de"
+  }, {
+    "event": "sys.no-match-1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Je n’ai pas tout à fait compris. Pouvez-vous réessayer?" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "I didn't quite get that. Can you try again?" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "8d01ac26-b6ae-467c-9d8d-b2b91aac1883"
+  }, {
+    "event": "sys.no-match-2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Je n’ai toujours pas compris" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "I still didn't get that" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "fa2e4789-4b9c-4cbd-a047-62d8cb07de43"
+  }, {
+    "targetFlow": "bell_aqd",
+    "event": "sys.no-match-3",
+    "triggerFulfillment": {
+    
+    },
+    "name": "975b690d-8d35-4671-9274-be19205ef477"
+  } ]
+}

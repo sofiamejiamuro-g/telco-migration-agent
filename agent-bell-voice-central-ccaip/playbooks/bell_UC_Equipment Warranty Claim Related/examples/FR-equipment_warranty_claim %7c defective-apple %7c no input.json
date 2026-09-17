@@ -1,0 +1,97 @@
+{
+  "name": "1ef83ae5-4a05-4757-acd4-60af5212d9ce",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Pouvez-vous décrire brièvement le problème de votre appareil?\n"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Mon téléphone surchauffe."
+    }
+  }, {
+    "agentUtterance": {
+      "text": " Quel est le fabricant?\n"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Apple"
+    }
+  }, {
+    "agentUtterance": {
+      "text": " La plupart des appareils achetés par l’intermédiaire de Bell sont couverts par une garantie limitée du fabricant. Avez-vous acheté votre appareil au cours des 12 derniers mois? "
+    }
+  }, {
+    "userUtterance": {
+    
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_global_error_count_check",
+      "inputActionParameters": {
+        "global_error_counter": "4",
+        "language": "en"
+      },
+      "outputActionParameters": {
+        "global_error_counter": "5",
+        "language": "en"
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Avez-vous adhéré à notre programme d’entretien de téléphone intelligent?\n"
+    }
+  }, {
+    "userUtterance": {
+      "text": "oui"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Lorsque vous soumettez une demande en ligne ou que vous appelez le Centre d’entretien de téléphone intelligent, votre demande sera traitée par Asurion, l’administrateur du programme d’entretien de téléphone intelligent.\nJe peux vous envoyer un lien pour soumettre votre demande. Est-ce que ça vous convient?\n"
+    }
+  }, {
+    "userUtterance": {
+      "text": "oui"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "email_indicator": "true",
+        "language": "fr-ca",
+        "sms_content": "Mess. de Bell: Vous pouvez consulter le site asur.me/bellclaimsfr pour soumettre votre demande Smartphone Care en ligne.( bell.ca/apropos )"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "customer is asking that his device is having an issue and want to claim warranty",
+    "actionParameters": {
+      "brand": "bell",
+      "global_error_counter": "4",
+      "language": "fr-ca",
+      "noinput_flag": "True",
+      "route": "equipment_warranty_claim",
+      "utterance": "Ma montre est sous garantie et j'ai besoin de déposer une réclamation"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "customer is asked device_issue and here the \"noinput_flag\" is True so proceed further the smart care logic where ask the customer if they enrolled in smartcare program and based on response, transition further to bell_sms trigger",
+    "actionParameters": {
+      "brand": "bell",
+      "device_issue": "Defective",
+      "email_indicator": "true",
+      "global_error_counter": "5",
+      "language": "fr-ca",
+      "manufacturer": "Other",
+      "noinput_flag": "True",
+      "route": "equipment_warranty_claim"
+    }
+  },
+  "displayName": "FR-equipment_warranty_claim | defective-apple | no input",
+  "retrievalStrategy": "STATIC",
+  "tokenCount": 692,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "fr"
+}

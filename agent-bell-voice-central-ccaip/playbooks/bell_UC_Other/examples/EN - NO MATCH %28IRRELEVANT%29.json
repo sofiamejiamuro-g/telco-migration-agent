@@ -1,0 +1,86 @@
+{
+  "name": "1ead4efb-9811-49b3-9f43-161a845819ff",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_global_error_count_check",
+      "inputActionParameters": {
+        "global_error_counter": "0",
+        "language": "en"
+      },
+      "outputActionParameters": {
+        "global_error_counter": "1",
+        "language": "en"
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "I'm unable to provide information on that subject. However, I'd be glad to assist with any inquiries you may have regarding Bell's products and services."
+    }
+  }, {
+    "userUtterance": {
+      "text": "sky is so vast"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_global_error_count_check",
+      "inputActionParameters": {
+        "global_error_counter": "1",
+        "language": "en"
+      },
+      "outputActionParameters": {
+        "global_error_counter": "2",
+        "language": "en"
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "I apologize, I'm still having difficulty understanding your request. To best assist you, could you please rephrase your question or provide more detail about what you're looking for regarding Bell's products and services?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "do you know the recipe of Pasta?"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_global_error_count_check",
+      "inputActionParameters": {
+        "global_error_counter": "2",
+        "language": "en"
+      },
+      "outputActionParameters": {
+        "global_error_counter": "3",
+        "language": "en"
+      }
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_No_Match_3",
+      "inputActionParameters": {
+        "language": "en"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "The user's input is linguistically correct but completely unrelated to the current conversation or outside the scope of Bell customer support. So, if user says something Irrelevant first give the first no match response and if user again says something irrelevant then give second one and even after that if user same something same then send them to bell_No_Match_3 flow.",
+    "actionParameters": {
+      "global_error_counter": "0",
+      "language": "en",
+      "utterance": "What should I buy for groceries"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "As Customer says irrelevant information to Bell mobile products and services, so flow bell_global_error_count_check is called each time and VA respond as per instructions and when 3rd time they say irrelevant things, we send them to bell_No_Match_3 flow",
+    "actionParameters": {
+      "global_error_counter": "3",
+      "language": "en"
+    }
+  },
+  "displayName": "EN - NO MATCH (IRRELEVANT)",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 659,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

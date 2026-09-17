@@ -1,0 +1,267 @@
+{
+  "name": "518d29f3-b868-4b90-b9a7-421847b47a19",
+  "displayName": "bell_payment_account_balance_and_last_payment_details",
+  "transitionRoutes": [ {
+    "intent": "Default Welcome Intent",
+    "triggerFulfillment": {
+    
+    },
+    "name": "d8b7819b-faf8-44e3-a7e1-be45939d65f0"
+  }, {
+    "intent": "other_speak_to_agent",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_determine_handover",
+    "name": "6ac71c64-8709-4b82-b035-d0c0d707b7d8"
+  }, {
+    "intent": "context.payment_faq",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "$request.generative.payment_faq_response" ]
+        },
+        "languageCode": "en"
+      } ],
+      "generators": [ {
+        "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/6286c5a0-80ec-4799-96cc-4a6ba7c49303",
+        "inputParameters": [ {
+          "key": "last-agent-response",
+          "value": "$request.last-agent-utterance"
+        } ],
+        "outputParameter": "$request.generative.payment_faq_response"
+      } ]
+    },
+    "name": "b978452d-de2e-49e2-ae12-89da7d842570"
+  }, {
+    "intent": "context.repeat",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "$request.generative.repeat_response" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "$request.generative.repeat_response" ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "repeat_flag",
+        "value": 1
+      } ],
+      "generators": [ {
+        "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/d2573b7b-849d-43d3-8c64-867837bd84d2",
+        "inputParameters": [ {
+          "key": "request-last-agent-utterance",
+          "value": "$request.last-agent-utterance"
+        } ],
+        "outputParameter": "$request.generative.repeat_response"
+      } ]
+    },
+    "name": "a58f1bd2-1e9d-46a9-bacf-771f37727e8f"
+  }, {
+    "intent": "global_events_full_startover",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "event_type",
+        "value": "full start over"
+      } ]
+    },
+    "targetFlow": "Default Start Flow",
+    "name": "3fcf0e74-4b16-4f4d-9393-ac5e60f1135b"
+  }, {
+    "intent": "global_events_partial_start_over",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "event_type",
+        "value": "partial start over"
+      } ]
+    },
+    "targetFlow": "Default Start Flow",
+    "name": "9f2da744-95cb-4ac4-af90-fec47f363f2e"
+  }, {
+    "condition": "$session.params.identification_status = null",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_Identification",
+    "name": "367e34fb-6de1-4215-8d52-d6f8f108cd82"
+  }, {
+    "condition": "$session.params.identification_status = Fail",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "ID or Auth Failure Confirmation",
+    "name": "fef9b557-f071-405b-8085-91e7e8190c8b"
+  }, {
+    "condition": "$session.params.identification_status = \"Pass\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Ban Type Check",
+    "name": "ecd0d9ad-2759-4097-bf55-6962bfdbd20b"
+  }, {
+    "condition": "$session.params.is_home_phone = true AND $session.params.identification_status = \"Pass\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook NPA XX Lookup",
+    "name": "5522a81d-272a-4b7a-a36f-42b2ac501efc"
+  } ],
+  "eventHandlers": [ {
+    "event": "sys.no-match-default",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I didn't get that. Can you say it again?", "I missed what you said. What was that?", "Sorry, could you say that again?", "Sorry, can you say that again?", "Can you say that again?", "Sorry, I didn't get that. Can you rephrase?", "Sorry, what was that?", "One more time?", "What was that?", "Say that one more time?", "I didn't get that. Can you repeat?", "I missed that, say that again?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "J'ai du mal à comprendre cette question.", "J'ai mal compris votre demande.", "Je n'ai pas saisi ce que vous avez dit.", "Je crois que je ne vous suis pas.", "Je ne comprends pas de quoi vous me parlez." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "J'ai du mal à comprendre cette question.", "J'ai mal compris votre demande.", "Je n'ai pas saisi ce que vous avez dit.", "Je crois que je ne vous suis pas.", "Je ne comprends pas de quoi vous me parlez." ]
+        },
+        "languageCode": "fr"
+      } ]
+    },
+    "name": "6c94b60a-4539-4246-b417-6d7440496b73"
+  }, {
+    "event": "sys.no-input-default",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I didn't get that. Can you say it again?", "I missed what you said. What was that?", "Sorry, could you say that again?", "Sorry, can you say that again?", "Can you say that again?", "Sorry, I didn't get that. Can you rephrase?", "Sorry, what was that?", "One more time?", "What was that?", "Say that one more time?", "I didn't get that. Can you repeat?", "I missed that, say that again?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "J'ai du mal à comprendre cette question.", "J'ai mal compris votre demande.", "Je n'ai pas saisi ce que vous avez dit.", "Je crois que je ne vous suis pas.", "Je ne comprends pas de quoi vous me parlez." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "J'ai du mal à comprendre cette question.", "J'ai mal compris votre demande.", "Je n'ai pas saisi ce que vous avez dit.", "Je crois que je ne vous suis pas.", "Je ne comprends pas de quoi vous me parlez." ]
+        },
+        "languageCode": "fr"
+      } ]
+    },
+    "name": "136df722-b00a-4bb3-a3db-1af30a70a378"
+  }, {
+    "event": "sys.no-input-1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Sorry, I didn't catch that, can you please rephrase your response?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Désolé, je n'ai pas compris, pouvez-vous reformuler votre réponse s'il vous plaît ?" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "5e5a2730-7cd8-4d89-adbc-fb7a2c48260a"
+  }, {
+    "event": "sys.no-input-2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I'm sorry, I still didn't catch that. Can you please rephrase your response?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je suis désolé, je n'ai toujours pas compris. Pouvez-vous reformuler votre réponse s'il vous plait ?" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "c1d91705-c8d1-461b-9bb6-fc49cc6e66e7"
+  }, {
+    "targetFlow": "bell_determine_handover",
+    "event": "sys.no-input-3",
+    "triggerFulfillment": {
+    
+    },
+    "name": "9f2cf222-ed47-4490-b7f6-cbc9a82c5846"
+  }, {
+    "event": "sys.no-match-1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Sorry, I didn't catch that, can you please rephrase your response?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Désolé, je n'ai pas compris, pouvez-vous reformuler votre réponse s'il vous plaît ?" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "dc096954-98f6-44af-9059-9465d8b6fca4"
+  }, {
+    "event": "sys.no-match-2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I'm sorry, I still didn't catch that. Can you please rephrase your response?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je suis désolé, je n'ai toujours pas compris. Pouvez-vous reformuler votre réponse s'il vous plait ?" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "6b077722-9828-4221-960e-adadfd6fbe92"
+  }, {
+    "targetFlow": "bell_determine_handover",
+    "event": "sys.no-match-3",
+    "triggerFulfillment": {
+    
+    },
+    "name": "4a5e17f6-1e42-4532-984c-a95857c12e27"
+  }, {
+    "targetPage": "End Session",
+    "event": "wrapup",
+    "triggerFulfillment": {
+    
+    },
+    "name": "f885e72d-35f9-4ed4-ab49-e4ae65ea46c5"
+  } ],
+  "nluSettings": {
+    "modelType": "MODEL_TYPE_CUSTOM",
+    "classificationThreshold": 0.30000001,
+    "modelTrainingMode": "MODEL_TRAINING_MODE_MANUAL"
+  },
+  "advancedSettings": {
+    "enabled": true,
+    "playbackInterruptionSettings": {
+    
+    }
+  },
+  "nluSettingsList": [ {
+    "modelType": "MODEL_TYPE_CUSTOM",
+    "classificationThreshold": 0.30000001,
+    "modelTrainingMode": "MODEL_TRAINING_MODE_MANUAL",
+    "languageCode": "en"
+  }, {
+    "modelType": "MODEL_TYPE_CUSTOM",
+    "classificationThreshold": 0.30000001,
+    "modelTrainingMode": "MODEL_TRAINING_MODE_MANUAL",
+    "languageCode": "fr-ca"
+  } ],
+  "agentTransitionRouteGroups": [ "HI_account", "HI_disconnect", "HI_equipment", "HI_faq", "HI_other", "HI_payment", "HI_sales", "HI_service", "HI_techsupport" ],
+  "multiLanguageSettings": {
+  
+  }
+}

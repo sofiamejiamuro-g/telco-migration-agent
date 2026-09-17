@@ -1,0 +1,97 @@
+{
+  "name": "7b1b77b5-ca1c-4266-ba44-cd4925c3518f",
+  "displayName": "Account Found",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "setParameterActions": [ {
+      "parameter": "identification_status",
+      "value": "Pass"
+    }, {
+      "parameter": "customer_type",
+      "value": "Existing"
+    }, {
+      "parameter": "customer_data",
+      "value": "$sys.func.FILTER(\"$session.params.customer_id_search_response\",$sys.func.CONCATENATE(\"$..billing_accounts[?(@.billing_account_number == '\",$sys.func.TO_TEXT($session.params.billing_account_number),\"')]\"))"
+    }, {
+      "parameter": "billing_account_info_list",
+      "value": "$sys.func.TO_OBJECT(   $sys.func.TO_TEXT($session.params.customer_data[0]) )"
+    }, {
+      "parameter": "is_prepaid",
+      "value": "$session.params.billing_account_info_list.services[0].is_prepaid"
+    }, {
+      "parameter": "service_id",
+      "value": "$session.params.billing_account_info_list.services[*].service_id"
+    }, {
+      "parameter": "_subscriber_number",
+      "value": "$sys.func.FILTER(\"$session.params.customer_data\", \"$..service_account_number\")"
+    }, {
+      "parameter": "subscriber_number",
+      "value": "$sys.func.GET($session.params._subscriber_number, 0)"
+    } ],
+    "conditionalCases": [ {
+      "cases": [ {
+        "condition": "$session.params.SMB != true OR $session.params.CCC != true OR $session.params.BBM != true OR $session.params.atlantic != true OR $session.params.BNQ != true OR $session.params.MTS != true",
+        "caseContent": [ {
+          "message": {
+            "text": {
+              "text": [ "Thank you. I found the account." ]
+            },
+            "languageCode": "en"
+          }
+        }, {
+          "message": {
+            "text": {
+              "text": [ "Merci. J’ai trouvé le compte." ]
+            },
+            "languageCode": "fr-ca"
+          }
+        } ]
+      } ]
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.nm1_ban = $session.params.account_number AND (($session.params.banType = \"C\" AND $session.params.banSubType = \"V\") OR ($session.params.banType = \"C\" AND $session.params.banSubType = \"T\") OR ($session.params.banType = \"C\" AND $session.params.banSubType = \"P\") OR ($session.params.banType = \"C\" AND $session.params.banSubType = \"7\") OR ($session.params.banType = \"I\" AND $session.params.banSubType = \"B\") OR ($session.params.banType = \"I\" AND $session.params.banSubType = \"N\") OR ($session.params.banType = \"I\" AND $session.params.banSubType = \"5\"))",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "NM1 Info",
+    "name": "ee6282f4-543d-46bc-b339-aee7155602ea"
+  }, {
+    "condition": "$session.params.CCC = true",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_va_to_ivr_handoff",
+    "name": "eff18b89-2504-4b68-ad0c-27333a5580f3"
+  }, {
+    "condition": "$session.params.BNQ = true OR $session.params.SMB = true",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_IVR_Options",
+    "name": "50c3078c-fcc3-4827-8a06-c0c81a16123a"
+  }, {
+    "condition": "$session.params.BBM = true",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_va_to_ivr_handoff_BBM_BNM_SMB",
+    "name": "ccc52259-8afb-4c43-94dc-f5283d83dd58"
+  }, {
+    "condition": "$session.params.region = ATL OR $session.params.region = MTS",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_va_to_ivr_handoff",
+    "name": "fc14fd4a-b508-43d3-98a5-bbaf3f2ea491"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Is Prepaid?",
+    "name": "55df2aa9-508e-403a-914c-9e16f701d9fa"
+  } ]
+}

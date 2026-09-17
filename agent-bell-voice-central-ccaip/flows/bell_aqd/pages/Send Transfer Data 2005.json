@@ -1,0 +1,108 @@
+{
+  "name": "8ff2fb62-0801-47df-a97f-576328080a8d",
+  "displayName": "Send Transfer Data 2005",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "/v1/ivr-transfer/send-transfer-data#agent-transfer",
+    "tag": "agent-transfer",
+    "setParameterActions": [ {
+      "parameter": "department",
+      "value": "$session.params.department_id"
+    }, {
+      "parameter": "cti_rt",
+      "value": "$session.params.route"
+    }, {
+      "parameter": "cti_sd",
+      "value": "$session.params.tfn"
+    }, {
+      "parameter": "apb_transfer_location",
+      "value": "$session.params.apb_location_id"
+    }, {
+      "parameter": "call_id",
+      "value": "$session.params.ccaip_call_id"
+    }, {
+      "parameter": "tag",
+      "value": "agent-transfer"
+    }, {
+      "parameter": "lob",
+      "value": ""
+    }, {
+      "parameter": "_empty_string",
+      "value": ""
+    }, {
+      "parameter": "cti_rt",
+      "value": "$sys.func.IF(\"$session.params.route = $session.params._empty_string\" , other_speak_to_agent, $session.params.route)"
+    } ],
+    "returnPartialResponses": true
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.webhook_success = true",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Let me try to connect you with an agent. I'm going to transfer you now to a different system, which does not yet understand voice instructions. You can continue the conversation using your phone's keypad. Thanks!" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je vais tenter de vous mettre en contact avec un agent. Je vais maintenant vous transférer vers un autre système, qui ne comprend pas encore les instructions vocales. Vous pourrez poursuivre la conversation à l’aide du clavier de votre téléphone. Merci!" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetFlow": "bell_Live Agent Handoff",
+    "name": "107fe5a3-bfa1-47bd-9b20-2aca0608628f"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "AQD Error",
+    "name": "ace384eb-b808-4de5-b5b7-4db5ae275486"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "AQD Error",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+    
+    },
+    "name": "b78a60c4-44d6-4e68-9e7a-0da08e5b0244"
+  }, {
+    "targetPage": "AQD Error",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+    
+    },
+    "name": "8f225d7e-84f2-450e-84ba-256165844985"
+  }, {
+    "targetPage": "AQD Error",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+    
+    },
+    "name": "24444994-fd6c-483e-8a6b-6657b43e6fa5"
+  }, {
+    "targetPage": "AQD Error",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+    
+    },
+    "name": "918fb1d9-389e-4780-9b1c-c8538b76eca7"
+  }, {
+    "targetPage": "AQD Error",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+    
+    },
+    "name": "2beaca13-cbb4-4607-bfa7-78698d219822"
+  }, {
+    "targetPage": "AQD Error",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+    
+    },
+    "name": "3f0145f1-83ed-49c1-833b-d1218356a34f"
+  } ]
+}

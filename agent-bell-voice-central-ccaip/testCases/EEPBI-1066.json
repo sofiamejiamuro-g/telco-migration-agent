@@ -1,0 +1,122 @@
+{
+  "name": "309d01e6-c434-4370-b1ac-dc678cc6e869",
+  "displayName": "EEPBI-1066",
+  "testCaseConversationTurns": [ {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "hi"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "triggeredIntent": {
+        "name": "Default Welcome Intent"
+      },
+      "currentPage": {
+        "name": "Get CX Input",
+        "flow": "bell_Identification"
+      },
+      "textResponses": [ {
+        "text": [ "\u003cspeak\u003eI'm Bell's virtual assistant. I use AI to offer you assistance, quickly. For your security, please only enter personal information (like your account password) when prompted. \u003cbreak time=\"1s\"/\u003e\u003c/speak\u003e" ]
+      }, {
+        "text": [ "Is this concerning the number you are calling from?" ],
+        "allowPlaybackInterruption": true
+      } ],
+      "currentFlow": {
+        "name": "bell_Identification"
+      }
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "yes"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "triggeredIntent": {
+        "name": "context.confirm_yes"
+      },
+      "currentPage": {
+        "name": "Routing Page",
+        "flow": "Default Start Flow"
+      },
+      "textResponses": [ {
+        "text": [ "\u003cspeak\u003eThanks! \u003cbreak time=\"1s\"/\u003e\u003c/speak\u003e" ]
+      }, {
+        "text": [ "How can I help you?" ]
+      } ],
+      "currentFlow": {
+        "name": "Default Start Flow"
+      }
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "I want to make payment"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "triggeredIntent": {
+        "name": "payment_make_payment"
+      },
+      "currentPage": {
+        "name": "Trigger_OTP",
+        "flow": "bell_authentication"
+      },
+      "textResponses": [ {
+        "text": [ "You have been Identified" ]
+      }, {
+        "text": [ "For extra security, I’ll text you a 6-digit code on your phone." ],
+        "allowPlaybackInterruption": true
+      }, {
+        "text": [ "Please say it back to me when you receive it." ],
+        "allowPlaybackInterruption": true
+      } ],
+      "currentFlow": {
+        "name": "bell_authentication"
+      }
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "581781"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "textResponses": [ {
+        "text": [ "Great, that's the correct code!" ],
+        "allowPlaybackInterruption": true
+      }, {
+        "text": [ "You have been authenticated" ],
+        "allowPlaybackInterruption": true
+      }, {
+        "text": [ "This module is under development. You can track your data, call, and text usage at any time in the Bell Mobile app or by logging into My Account. Would you like to receive a text message with a link to view or make changes to your account?" ],
+        "allowPlaybackInterruption": true
+      } ]
+    }
+  } ],
+  "creationTime": {
+    "seconds": 1743587274,
+    "nanos": 330130000
+  },
+  "testConfig": {
+    "flow": "Default Start Flow",
+    "page": "Start Page"
+  },
+  "languageCode": "en"
+}

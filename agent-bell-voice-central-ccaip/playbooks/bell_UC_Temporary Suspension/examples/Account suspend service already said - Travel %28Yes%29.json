@@ -1,0 +1,65 @@
+{
+  "name": "e792073d-0138-411a-8998-be7d9d90d73a",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Thank you. What is the reason for suspending your service?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "I will be travelling for the next 3 months"
+    }
+  }, {
+    "agentUtterance": {
+      "text": " Did you know that you can use your phone while traveling? Would you like to learn more?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "yes"
+    }
+  }, {
+    "playbookInvocation": {
+      "playbook": "bell_UC_Manage Plans and Features Phase2",
+      "playbookInput": {
+        "precedingConversationSummary": "User wants to learn more about using phone while travelling",
+        "actionParameters": {
+          "add_ons": "roaming",
+          "brand": "bell",
+          "language": "en",
+          "lob": "Mobility",
+          "route": "service_add_feature"
+        }
+      },
+      "playbookOutput": {
+        "executionSummary": "User rerouted to \"bell_UC_Manage Plans and Features\" playbook with route as \"service_add_feature\"",
+        "actionParameters": {
+        
+        }
+      },
+      "playbookState": "OUTPUT_STATE_OK"
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer trying to suspend their service as they will be travelling with route \"account_suspend_service\"",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "route": "account_suspend_service",
+      "unique_services": "Mobility",
+      "utterance": "Suspend my service"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "here customer mention the unique services and says \"Yes\" to learn more, so follow the steps and redirect them to \"bell_UC_Manage Plans and Features\" playbook",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "lob": "Mobility",
+      "route": "service_add_feature"
+    }
+  },
+  "displayName": "Account suspend service already said - Travel (Yes)",
+  "retrievalStrategy": "NEVER",
+  "tokenCount": 394,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

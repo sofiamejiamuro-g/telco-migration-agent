@@ -1,0 +1,62 @@
+{
+  "name": "90611a2c-1ba9-4b5d-b4d8-43b3742face9",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "brand": "bell",
+        "language": "en"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "I'll send a text to the device you're calling from, so that you can learn more about all sorts of accessories that Bell has to offer. Is that alright?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "ok"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "en",
+        "sms_content": "Bell: You can visit bell.ca/accessories to view our phone accessories. ( bell.ca/about-us )",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+        "language": "en"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer wants to order Accessories like pods, adaptor or something similar to accessories",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "New",
+      "device_type": "Accessories",
+      "identification_status": "Fail",
+      "language": "en",
+      "line_type": "New",
+      "province": "NB",
+      "route": "sales_device_inquiry",
+      "utterance": "buy Wi-Fi pods"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "we got to know from the utterance that the device type is \"Accessories\" so we offer SMS to customer",
+    "actionParameters": {
+      "device_type": "Accessories",
+      "language": "en"
+    }
+  },
+  "displayName": "sales order device - ID Fail, New,-device_type=accessories-pods",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 392,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

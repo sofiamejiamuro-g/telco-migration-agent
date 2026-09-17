@@ -1,0 +1,29 @@
+{
+  "name": "b96cdfba-9ee9-4054-9278-a99ea6bdf6d0",
+  "displayName": "Webhook Account Information",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "v1/account-information/get-account-balance-details",
+    "tag": "N/A"
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.webhook_success = false",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_aqd",
+    "name": "222f8148-75b3-4103-b59c-0a45c3067c92"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "last_payment_amount",
+        "value": "$session.params.balance_payment_details_response.brs_postpaid_details.last_payment_amount"
+      } ]
+    },
+    "targetPage": "Pre AQD CX Response",
+    "name": "0fcad0a2-db5a-4485-a676-b7c3daf99f79"
+  } ]
+}

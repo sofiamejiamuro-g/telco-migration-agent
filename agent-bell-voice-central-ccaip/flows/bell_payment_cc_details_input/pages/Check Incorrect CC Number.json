@@ -1,0 +1,111 @@
+{
+  "name": "a4508118-225d-4e92-a597-597e1456780a",
+  "displayName": "Check Incorrect CC Number",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.wrong_cc_number_counter \u003e 3",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "To keep things secure, we ask that you call back later or you can also easily complete this step using the MyBell app." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Pour assurer la sécurité, nous vous demandons de réessayer plus tard. Vous pouvez également effectuer un paiement à tout moment à l’aide de l’Appli MonBell." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetPage": "Prompt CX SMS",
+    "name": "4aaa956d-eb6b-4dfb-8a4a-bd9433efbb79"
+  }, {
+    "condition": "$session.params.credit_card_number = $sys.func.TO_TEXT($session.params.cc_from_utterance)",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "For Expiry date, please enter the 2 digit month followed by the last 2 digits of the year." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Pour la date d’expiration, veuillez entrer les deux chiffres du mois, suivis des deux derniers chiffres de l’année." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetPage": "Prompt expiry date",
+    "name": "18e6781e-ccf6-4556-9fbc-01134730aa2a"
+  }, {
+    "condition": "$session.params.cc_from_utterance = 1 AND $session.params.len_alpha_from_utterance = 0",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "For Expiry date, please enter the 2 digit month followed by the last 2 digits of the year." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Pour la date d’expiration, veuillez entrer les deux chiffres du mois, suivis des deux derniers chiffres de l’année." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetPage": "Prompt expiry date",
+    "name": "0269726e-74a1-4f48-85a4-50520eebf4f1"
+  }, {
+    "condition": "$session.params.cc_from_utterance != $session.params.credit_card_number AND $session.params.cc_from_utterance != 0 AND ($session.params.len_cc_from_utterance \u003e= 15 AND $session.params.len_cc_from_utterance \u003c= 16)",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "card_number",
+        "value": "$session.params.cc_from_utterance"
+      }, {
+        "parameter": "check_credit_card_number",
+        "value": "$sys.func.IS_CREDIT_CARD_NUMBER($sys.func.TO_TEXT($session.params.card_number))"
+      }, {
+        "parameter": "len_credit_card_number",
+        "value": "$sys.func.LEN($sys.func.TO_TEXT($session.params.card_number))"
+      }, {
+        "parameter": "amex_check_digits",
+        "value": "$sys.func.MID($sys.func.TO_TEXT($session.params.credit_card_number),1,2)"
+      } ]
+    },
+    "targetPage": "Credit Card Length Validation",
+    "name": "0137643e-e497-401c-b634-03b8996d8617"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "card_number",
+        "value": null
+      } ],
+      "conditionalCases": [ {
+        "cases": [ {
+          "condition": "$session.params.wrong_cc_number_counter \u003c= 3",
+          "caseContent": [ {
+            "message": {
+              "text": {
+                "text": [ "When you're ready, please re-enter your card number using the keypad." ]
+              },
+              "languageCode": "en"
+            }
+          }, {
+            "message": {
+              "text": {
+                "text": [ "Lorsque vous êtes prêt, veuillez ressaisir votre numéro de carte à l'aide du clavier." ]
+              },
+              "languageCode": "fr-ca"
+            }
+          } ]
+        } ]
+      } ]
+    },
+    "targetPage": "Prompt CC Number",
+    "name": "13194a06-6be7-4173-b232-2d0f04fc0fb5"
+  } ]
+}

@@ -1,0 +1,118 @@
+{
+  "name": "123ac058-abea-4b86-8e96-478012ede60a",
+  "displayName": "Webhook Get Ban Profile",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "/v1/ibm_mw/nm1_get#ban-profile",
+    "tag": "ban-profile"
+  },
+  "transitionRoutes": [ {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "clp_balance",
+        "value": "$session.params.get_clp_info_response.curSpendingLimitBal"
+      }, {
+        "parameter": "clp_aul_limit",
+        "value": "$session.params.get_clp_info_response.aul_threshold"
+      }, {
+        "parameter": "clp_sus_limit",
+        "value": "$session.params.get_clp_info_response.sus_threshold"
+      }, {
+        "parameter": "error_return_code",
+        "value": "$session.params.nm1_get_ban_profile_response.returnCode"
+      }, {
+        "parameter": "clp_balance_number",
+        "value": "$sys.func.TO_NUMBER($session.params.clp_balance)"
+      }, {
+        "parameter": "amount_paid_number",
+        "value": "$sys.func.TO_NUMBER($session.params.amount_paid)"
+      }, {
+        "parameter": "amount_paid_clp_number",
+        "value": "$sys.func.TO_NUMBER($session.params.clp_amount_paid)"
+      } ]
+    },
+    "name": "e7e45b94-b09d-4d6f-82eb-d8be8920107b"
+  }, {
+    "condition": "$session.params.webhook_success = false",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Status Change Check",
+    "name": "d4446fc5-955a-4413-8ae0-fc76828afdec"
+  }, {
+    "condition": "$session.params.webhook_success = true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "pastDueAmount",
+        "value": "$session.params.nm1_get_ban_profile_response.pastDueAmount"
+      } ]
+    },
+    "targetPage": "Past Due Amount Check",
+    "name": "3b92411a-8d67-4cc8-9b35-97956d2bbbf7"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "123ac058-abea-4b86-8e96-478012ede60a"
+      }, {
+        "parameter": "flow_id",
+        "value": "d810bc76-3e37-4bbb-a2ef-ad430f390435"
+      }, {
+        "parameter": "page_name",
+        "value": "Webhook Get Ban Profile"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Status Change Check",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+    
+    },
+    "name": "e46b7849-27a8-4aa9-8a58-4f7e416c1d7c"
+  }, {
+    "targetPage": "Status Change Check",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+    
+    },
+    "name": "d236c685-8bd4-45b4-8ba1-ca53835b29e6"
+  }, {
+    "targetPage": "Status Change Check",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+    
+    },
+    "name": "7448957c-98ec-4956-a282-0ba0159a3a6d"
+  }, {
+    "targetPage": "Status Change Check",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+    
+    },
+    "name": "7fa62e9d-814e-4cf7-bf8d-a5f21d8bffa5"
+  }, {
+    "targetPage": "Status Change Check",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+    
+    },
+    "name": "676c1436-ce09-42ce-b9e8-2ee6d38793d8"
+  }, {
+    "targetPage": "Status Change Check",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+    
+    },
+    "name": "b496fb69-df75-40d5-ae92-671b73246355"
+  } ]
+}

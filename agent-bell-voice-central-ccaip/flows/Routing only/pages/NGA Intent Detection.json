@@ -1,0 +1,32 @@
+{
+  "name": "65450f04-a863-44b8-8c73-16b87394a7ff",
+  "displayName": "NGA Intent Detection",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "intent": "Default Welcome Intent",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "NGA UC Routing Page",
+    "name": "1df74ec1-3a73-469d-b282-79e7c2d9ee6c"
+  }, {
+    "condition": "$session.params.language != null OR $session.params.utterance != null",
+    "triggerFulfillment": {
+      "messages": [ {
+        "payload": {
+          "transferToNga": "$session.params.nga_agent_id",
+          "variables": {
+            "dfcx_session_id": "$session.params.dfcx_session_id",
+            "isFromFeedback": true,
+            "language": "$session.params.language",
+            "utterance": "$session.params.utterance"
+          }
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "8d4c3493-04c9-424d-ade5-24d451fce14a"
+  } ]
+}

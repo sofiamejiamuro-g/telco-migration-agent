@@ -1,0 +1,55 @@
+{
+  "name": "06b0ae9f-e1e7-44c8-adef-10ab2f9395f0",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "I'm sorry to hear about your crises. I hope things get better soon. I can help with that. Could you please confirm which service you are looking to suspend?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "I want to suspend my Homephone service as my house is broken in riots."
+    }
+  }, {
+    "agentUtterance": {
+      "text": "I'm really sorry to hear that. You can temporarily suspend your residential services in MyBell. I will send a text to the device you're calling from, with a link to do it yourself. Is that alright?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "No"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "en",
+        "sms_send_status": "Declined"
+      },
+      "outputActionParameters": {
+        "brand": "bell",
+        "language": "en"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer trying to suspend their service due to a tragic situation",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "route": "account_suspend_service",
+      "unique_services": "Internet, Tv, Homephone",
+      "utterance": "Suspend my service as I'm in a havoc crises"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Customer shared a tragic situation that their house is broken in riots so that want to cancel their homephone services. VA empathises with them and asks if they would like to receive SMS. User said no so we set send_status as Declined and call SMS trigger flow",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "sms_send_status": "Declined"
+    }
+  },
+  "displayName": "Empathy Account suspend service - Homephone - No",
+  "retrievalStrategy": "NEVER",
+  "tokenCount": 389,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

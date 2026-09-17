@@ -1,0 +1,184 @@
+{
+  "name": "06bc0686-8058-464d-acd9-51160e01ae3c",
+  "displayName": "Prompt Pay Past Due Amount",
+  "form": {
+    "parameters": [ {
+      "displayName": "customer_mentioned_amount",
+      "entityType": "@sys.number-sequence",
+      "fillBehavior": {
+        "initialPromptFulfillment": {
+        
+        }
+      }
+    } ]
+  },
+  "entryFulfillment": {
+    "messages": [ {
+      "text": {
+        "text": [ "In order to pay enough to restore your services you'll need to make a minimum payment of $ $session.params.due_amount.  Would you like to proceed with that amount?" ]
+      },
+      "languageCode": "en"
+    }, {
+      "text": {
+        "text": [ "Afin de payer suffisamment pour rétablir vos services, vous devrez effectuer un paiement minimum de $ $session.params.due_amount Voulez-vous procéder avec ce montant?" ]
+      },
+      "languageCode": "fr-ca"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "intent": "context.confirm_yes",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Great." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Excellent" ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "amount_paid",
+        "value": "$session.params.due_amount"
+      } ]
+    },
+    "targetFlow": "bell_payment_cc_details_input",
+    "name": "dfabf0a9-1772-41a8-b657-c274d3e33933"
+  }, {
+    "intent": "context.pa_amount_and_no",
+    "condition": "$session.params.customer_mentioned_amount != null",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "other_payment_amount",
+        "value": "$session.params.customer_mentioned_amount"
+      }, {
+        "parameter": "customer_mentioned_amount",
+        "value": null
+      }, {
+        "parameter": "from_restricted",
+        "value": "$sys.func.IF(\"$session.params.other_payment_amount \u003c $session.params.due_amount\", true, null)"
+      } ]
+    },
+    "targetPage": "Amount Already Provided",
+    "name": "f1cb46cc-5987-4b7d-bd15-068fb37da48a"
+  }, {
+    "intent": "context.confirm_no",
+    "condition": "$session.params.other_amount_value != null",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "other_payment_amount",
+        "value": "$session.params.other_amount_value"
+      }, {
+        "parameter": "from_restricted",
+        "value": "$sys.func.IF(\"$session.params.other_payment_amount \u003c $session.params.due_amount\", true, null)"
+      } ]
+    },
+    "targetPage": "Amount Already Provided",
+    "name": "b0bfb4da-df7c-407e-aa7b-145b7af4f1a0"
+  }, {
+    "intent": "context.confirm_no",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "message_type_group",
+        "value": 1
+      } ]
+    },
+    "targetPage": "Prompt Other Amount",
+    "name": "c0d14c31-596b-463c-9424-136cf8810ae4"
+  }, {
+    "intent": "context.confirm_pay_full_balance",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Prompt Pay Full Balance",
+    "name": "732357f2-6260-4293-b7ea-0eb353f1082b"
+  }, {
+    "intent": "context.request_partial_payment",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Prompt Other Amount",
+    "name": "1e452aa1-c4a9-439b-804d-2ba59382bf0e"
+  } ],
+  "eventHandlers": [ {
+    "event": "sys.no-input-1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I didn't quite get that. Can you try again?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je n’ai pas tout à fait compris. Pouvez-vous réessayer?" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "ce1554b1-e231-4194-8b34-012e9c6400cd"
+  }, {
+    "event": "sys.no-input-2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I didn't quite get that. Can you try again?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je n’ai toujours pas compris" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "3630ede8-aab7-40c5-b4be-54ab45966ac2"
+  }, {
+    "event": "sys.no-match-1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I still didn't get that" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je n’ai pas tout à fait compris. Pouvez-vous réessayer?" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "7af759f1-08c1-4366-a8f4-ddf0bef924f8"
+  }, {
+    "event": "sys.no-match-2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I still didn't get that" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je n’ai toujours pas compris" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "46a80684-3453-4e14-a376-7869c575b3da"
+  }, {
+    "targetFlow": "bell_determine_handover",
+    "event": "sys.no-input-3",
+    "triggerFulfillment": {
+    
+    },
+    "name": "24b0c4cb-9990-4d7e-804c-83ae7195769a"
+  }, {
+    "targetFlow": "bell_determine_handover",
+    "event": "sys.no-match-3",
+    "triggerFulfillment": {
+    
+    },
+    "name": "e2b8d0d4-44fa-4def-ae47-708191711ed8"
+  } ]
+}

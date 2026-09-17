@@ -1,0 +1,165 @@
+{
+  "name": "8c63337a-401d-4f36-88f1-28490c2e6840",
+  "displayName": "Webhook DAM Transfer BBM",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "/v1/ivr-transfer/send-transfer-data#dam-transfer",
+    "tag": "dam-transfer",
+    "setParameterActions": [ {
+      "parameter": "dam_id",
+      "value": "BBM"
+    }, {
+      "parameter": "brand",
+      "value": "Bell Mobility"
+    }, {
+      "parameter": "department",
+      "value": "955"
+    }, {
+      "parameter": "account_type",
+      "value": "B"
+    }, {
+      "parameter": "cti_at",
+      "value": "BUSMENU"
+    }, {
+      "parameter": "cti_rt_1",
+      "value": "$sys.func.IF(\"$session.params.route = null\", other_speak_to_agent, $session.params.route)"
+    }, {
+      "parameter": "cti_sd",
+      "value": "$session.params.tfn"
+    }, {
+      "parameter": "cirn",
+      "value": "$sys.func.IF(\"$session.params.cirn = null\", \"$session.params.clid\", $session.params.cirn)"
+    }, {
+      "parameter": "ibm_entry_point",
+      "value": "$session.params.va_ibm_id"
+    }, {
+      "parameter": "department_id_ref",
+      "value": "$sys.func.CONCATENATE(\"REF\", $session.params.department)"
+    }, {
+      "parameter": "_empty_string",
+      "value": ""
+    }, {
+      "parameter": "cti_rt",
+      "value": "$sys.func.IF(\"$session.params.route = $session.params._empty_string\" , other_speak_to_agent, $session.params.route)"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.webhook_success = true",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_Live Agent Handoff",
+    "name": "09c51eab-4d08-4c66-b27b-e392a7306016"
+  }, {
+    "condition": "$session.params.webhook_success = false",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Sorry, I couldn’t transfer you just now. Please try again later." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "e ne peux malheureusement pas effectuer votre transfert pour le moment. Veuillez réessayer un peu plus tard." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetPage": "Webhook DAM transfer failure",
+    "name": "d0ee60ad-f811-4843-ac2b-7b172e2516eb"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "8c63337a-401d-4f36-88f1-28490c2e6840"
+      }, {
+        "parameter": "flow_id",
+        "value": "7236071c-1553-4217-a18d-0a64a4737a9a"
+      }, {
+        "parameter": "page_name",
+        "value": "Webhook DAM Transfer BBM"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Webhook DAM transfer failure",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Sorry, I couldn’t transfer you just now. Please try again later." ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "75e3196a-4c24-4c8b-8dc4-91eda66d2ec7"
+  }, {
+    "targetPage": "Webhook DAM transfer failure",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Sorry, I couldn’t transfer you just now. Please try again later." ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "94865470-5cbc-4393-8aea-219f3ec4a0d9"
+  }, {
+    "targetPage": "Webhook DAM transfer failure",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Sorry, I couldn’t transfer you just now. Please try again later." ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "cb4505f7-6ddb-434c-a550-e232cdb23187"
+  }, {
+    "targetPage": "Webhook DAM transfer failure",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Sorry, I couldn’t transfer you just now. Please try again later." ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "f2cd2f7b-544c-40bf-8de4-9973d491edc8"
+  }, {
+    "targetPage": "Webhook DAM transfer failure",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Sorry, I couldn’t transfer you just now. Please try again later." ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "2fd1c112-237d-4290-ae6a-5488fecf22cf"
+  }, {
+    "targetPage": "Webhook DAM transfer failure",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Sorry, I couldn’t transfer you just now. Please try again later." ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "6886375b-a183-4d5b-8b4b-7d53b26539e2"
+  } ]
+}

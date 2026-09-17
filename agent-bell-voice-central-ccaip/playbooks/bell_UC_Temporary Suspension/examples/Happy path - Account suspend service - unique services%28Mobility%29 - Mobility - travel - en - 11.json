@@ -1,0 +1,58 @@
+{
+  "name": "372143cd-a18f-4121-8110-10b83df12163",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Sure, I can help with that. What is the reason for suspending your service?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "i'm traveling soon"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Did you know that you can use your phone while traveling? Would you like to learn more?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Yes"
+    }
+  }, {
+    "playbookInvocation": {
+      "playbook": "bell_UC_Manage Plans and Features Phase2",
+      "playbookInput": {
+        "actionParameters": {
+          "lob": "Mobility",
+          "route": "service_add_feature"
+        }
+      },
+      "playbookOutput": {
+        "actionParameters": {
+        
+        }
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer wants to suspend his services",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "route": "account_suspend_service",
+      "unique_services": "Mobility",
+      "utterance": "I want to suspend my service"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "VA understood the {utterance}, checked the {unique_services} parameter, found only one value equal to Mobility, and since the {suspension_type} is null, VA asks for the reason behind the suspension, user says he's traveling, VA asks the user if he knows he can use his phone while he's traveling and if he wants to know more, user confirms, it routed the user to bell_UC_Manage Plans and Features Phase2 playbook",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "suspension_type": "travel"
+    }
+  },
+  "displayName": "Happy path - Account suspend service - unique services(Mobility) - Mobility - travel - en - 11",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 360,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

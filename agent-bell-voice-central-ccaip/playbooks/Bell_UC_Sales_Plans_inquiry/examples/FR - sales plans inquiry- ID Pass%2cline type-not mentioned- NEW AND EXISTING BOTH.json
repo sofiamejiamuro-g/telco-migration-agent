@@ -1,0 +1,62 @@
+{
+  "name": "b7cf83e9-06f5-49fd-844b-94bac7b44b7a",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "sales_add_to_existing_account_flow",
+      "inputActionParameters": {
+        "customer_type": "Existing",
+        "identification_status": "Pass",
+        "language": "fr-ca",
+        "line_type": "New",
+        "province": "NB",
+        "route": "sales_add_to_existing_account",
+        "utterance_raw": "Je souhaite commander un nouveau service et modifier mon forfait actuel."
+      },
+      "outputActionParameters": {
+        "language": "fr-ca",
+        "utterance_raw": "Je souhaite commander un nouveau service et modifier mon forfait actuel."
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customers want to know about d plans or compare plans that Bell has",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "Existing",
+      "language": "fr-ca",
+      "line_type": "New",
+      "province": "NB",
+      "route": "sales_plans_inquiry",
+      "utterance": "Je souhaite commander un nouveau service et modifier mon forfait actuel.",
+      "utterance_raw": "Je souhaite commander un nouveau service et modifier mon forfait actuel."
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "customer_type as \"Existing\", as the user mentions they help with BOTH services NEW and CURRENT or EXISTING, set the \"line_type\"=\"New\", and inform the user \"Commençons par vous aide avec votre nouvelle demande de service.\" and route to \"sales_add_to_existing_account_flow\" flow",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca",
+      "line_type": "New",
+      "province": "NB",
+      "route": "sales_add_to_existing_account",
+      "utterance": "Je souhaite commander un nouveau service et modifier mon forfait actuel.",
+      "utterance_raw": "Je souhaite commander un nouveau service et modifier mon forfait actuel."
+    }
+  },
+  "displayName": "FR - sales plans inquiry- ID Pass,line type-not mentioned- NEW AND EXISTING BOTH",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 493,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

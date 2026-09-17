@@ -1,0 +1,75 @@
+{
+  "name": "05d7a488-0cbe-476b-a2b0-b06384a6d87c",
+  "displayName": "CX Input",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "intent": "context.confirm_yes",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_ticket_mgmt_acut_change_reschedule_ticket_technical_intents",
+    "name": "93ccce1b-80e7-431a-8e31-33b184317b83"
+  }, {
+    "intent": "context.confirm_no",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_Feedback",
+    "name": "3afb0533-8780-4a5b-b903-b25d24178f63"
+  }, {
+    "intent": "context.modify.appointment",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_ticket_mgmt_acut_change_reschedule_ticket_technical_intents",
+    "name": "198ba90f-84cb-4e86-bdec-c05fe21829a1"
+  }, {
+    "intent": "context.something.else",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "event_type",
+        "value": "anything else start over"
+      } ]
+    },
+    "targetFlow": "Default Start Flow",
+    "name": "292af145-8574-4460-996f-aceba0d64a13"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Local Error Handling",
+    "event": "sys.no-input-default",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "global_error_counter",
+        "value": "$sys.func.ADD($session.params.global_error_counter,1)"
+      }, {
+        "parameter": "local_noinput_counter",
+        "value": "$sys.func.ADD($session.params.local_noinput_counter,1)"
+      }, {
+        "parameter": "local_trigger",
+        "value": "no_input"
+      } ]
+    },
+    "name": "ab604661-4550-4eda-87ec-e55d68d676db"
+  }, {
+    "targetPage": "Local Error Handling",
+    "event": "sys.no-match-default",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "global_error_counter",
+        "value": "$sys.func.ADD($session.params.global_error_counter,1)"
+      }, {
+        "parameter": "local_nomatch_counter",
+        "value": "$sys.func.ADD($session.params.local_nomatch_counter,1)"
+      }, {
+        "parameter": "local_trigger",
+        "value": "no_match"
+      } ]
+    },
+    "name": "ca9a5c70-fa31-4916-bd90-e0c96c239219"
+  } ]
+}

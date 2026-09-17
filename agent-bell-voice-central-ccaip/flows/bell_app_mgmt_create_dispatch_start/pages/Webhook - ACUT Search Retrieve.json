@@ -1,0 +1,91 @@
+{
+  "name": "97481c62-df72-4066-8b25-227fa906d454",
+  "displayName": "Webhook - ACUT Search Retrieve",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "v1/ticket_management/acut/search#retrieve",
+    "tag": "\"retrieve\""
+  },
+  "transitionRoutes": [ {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "street_number",
+        "value": "$session.params.acut_retrieve_response.acutContext.geographicAddress.urbanPropertyAddress.streetNrFirst"
+      }, {
+        "parameter": "street_name",
+        "value": "$session.params.acut_retrieve_response.acutContext.geographicAddress.urbanPropertyAddress.streetName"
+      }, {
+        "parameter": "sub_unit",
+        "value": "$sys.func.IF(\"$session.params.acut_retrieve_response.acutContext.geographicAddress.urbanPropertyAddress.subUnitNr != null\", $session.params.acut_retrieve_response.acutContext.geographicAddress.urbanPropertyAddress.subUnitNr, \"\")"
+      } ]
+    },
+    "name": "0e37af97-a530-4f68-972a-b3b8a6a875c1"
+  }, {
+    "condition": "$session.params.webhook_success = true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "User Confirmation for address",
+    "name": "619bdc6f-9cc7-46e2-9228-a130cfb31ff4"
+  }, {
+    "condition": "$session.params.webhook_success = false",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Failure - ACUT",
+    "name": "5710c217-3efa-4f6e-af7e-c8588f63482e"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Failure - ACUT",
+    "name": "29bddd41-3751-4cc0-bb90-42023391dcca"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Webhook Failure - ACUT",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+    
+    },
+    "name": "fe7a355e-f9bf-4800-9101-2072bc20d228"
+  }, {
+    "targetPage": "Webhook Failure - ACUT",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+    
+    },
+    "name": "11f14a33-6ddf-4f16-bc71-41ad9d653dd9"
+  }, {
+    "targetPage": "Webhook Failure - ACUT",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+    
+    },
+    "name": "534bcb5e-c42f-4c8f-b1b7-318bcd664d1d"
+  }, {
+    "targetPage": "Webhook Failure - ACUT",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+    
+    },
+    "name": "bc2051b9-be3c-4b77-b0bd-050394d2b9ba"
+  }, {
+    "targetPage": "Webhook Failure - ACUT",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+    
+    },
+    "name": "30b1df43-b78b-4d4c-bd9a-c72ad120fbed"
+  }, {
+    "targetPage": "Webhook Failure - ACUT",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+    
+    },
+    "name": "614fce64-fa0a-4a5a-8811-5eea59261f51"
+  } ]
+}

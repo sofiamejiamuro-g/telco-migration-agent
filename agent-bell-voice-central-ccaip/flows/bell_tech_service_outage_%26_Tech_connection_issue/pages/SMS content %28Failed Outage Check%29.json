@@ -1,0 +1,53 @@
+{
+  "name": "b6becec8-d979-496a-9627-6c9ee564d60a",
+  "displayName": "SMS content (Failed Outage Check)",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.language = \"en\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "sms_type",
+        "value": "Public"
+      }, {
+        "parameter": "sms_content",
+        "value": "Bell: You can visit https://support.bell.ca/outage-check to track the status of the service outage. ( bell.ca/about-us )"
+      } ]
+    },
+    "targetFlow": "bell_SMS Trigger",
+    "name": "5999cdc7-fc39-4a68-9059-df88ac25fe7e"
+  }, {
+    "condition": "$session.params.language = \"fr-ca\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "sms_type",
+        "value": "Public"
+      }, {
+        "parameter": "sms_content",
+        "value": "Bell : Vous pouvez visiter https://soutien.bell.ca/Verification-des-pannes pour suivre le statut de la panne de service. ( bell.ca/apropos )"
+      } ]
+    },
+    "targetFlow": "bell_SMS Trigger",
+    "name": "f64ec636-8c41-40da-9fcb-dcdb832b362c"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "b6becec8-d979-496a-9627-6c9ee564d60a"
+      }, {
+        "parameter": "flow_id",
+        "value": "94d32e37-496f-4fa3-81e8-18fd95281a52"
+      }, {
+        "parameter": "page_name",
+        "value": "SMS content (Failed Outage Check)"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

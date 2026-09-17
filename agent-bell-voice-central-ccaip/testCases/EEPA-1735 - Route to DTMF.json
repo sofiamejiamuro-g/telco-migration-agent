@@ -1,0 +1,137 @@
+{
+  "name": "2be28a92-beb1-4270-939a-d133a7559882",
+  "tags": [ "#bell" ],
+  "displayName": "EEPA-1735 - Route to DTMF",
+  "testCaseConversationTurns": [ {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "Hi"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "sessionParameters": {
+        "Agent_Counter": 0,
+        "CLID": 4155547622,
+        "brand": "bell",
+        "caller_channel": "TFN",
+        "language": "en",
+        "speak_to_agent_counter": 0
+      },
+      "differences": [ {
+        "type": "PAGE",
+        "description": "Page mismatch:\nExpected: \nActual:   Routing Page",
+        "assertionType": "EQUAL",
+        "expectedValue": "",
+        "actualValue": "Routing Page"
+      }, {
+        "type": "INTENT",
+        "description": "Intent mismatch:\nExpected: \nActual:   Default Welcome Intent",
+        "assertionType": "EQUAL",
+        "expectedValue": "",
+        "actualValue": "Default Welcome Intent"
+      }, {
+        "type": "UTTERANCE",
+        "description": "Agent response mismatch",
+        "warning": true,
+        "assertionType": "EQUAL",
+        "expectedValue": "",
+        "actualValue": "Welcome. I’m Bell’s virtual assistant. it’s nice to e-meet you. I use AI to offer you help quickly when you need it. How Can I help you?"
+      } ],
+      "triggeredIntent": {
+        "name": "Default Welcome Intent"
+      },
+      "currentPage": {
+        "name": "Routing Page",
+        "flow": "Default Start Flow"
+      },
+      "textResponses": [ {
+        "text": [ "Welcome. I’m Bell’s virtual assistant. it’s nice to e-meet you. I use AI to offer you help quickly when you need it. How Can I help you?" ]
+      } ],
+      "currentFlow": {
+        "name": "Default Start Flow"
+      },
+      "actions": [ {
+        "userUtterance": {
+          "text": "Hi"
+        }
+      }, {
+        "agentUtterance": {
+          "text": "Welcome. I’m Bell’s virtual assistant. it’s nice to e-meet you. I use AI to offer you help quickly when you need it. How Can I help you?"
+        }
+      } ]
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "languageCode": "en",
+        "dtmf": {
+          "digits": "0",
+          "transformed": true
+        }
+      }
+    },
+    "virtualAgentOutput": {
+      "sessionParameters": {
+        "Agent_Counter": 0,
+        "CLID": 4155547622,
+        "brand": "bell",
+        "caller_channel": "TFN",
+        "language": "en",
+        "speak_to_agent_counter": 0
+      },
+      "differences": [ {
+        "type": "PAGE",
+        "description": "Page mismatch:\nExpected: \nActual:   End Session",
+        "assertionType": "EQUAL",
+        "expectedValue": "",
+        "actualValue": "End Session"
+      }, {
+        "type": "INTENT",
+        "description": "Intent mismatch:\nExpected: \nActual:   context.0_out",
+        "assertionType": "EQUAL",
+        "expectedValue": "",
+        "actualValue": "context.0_out"
+      }, {
+        "type": "UTTERANCE",
+        "description": "Agent response mismatch",
+        "warning": true,
+        "assertionType": "EQUAL",
+        "expectedValue": "",
+        "actualValue": "Bell IVR placeholder"
+      } ],
+      "triggeredIntent": {
+        "name": "f69984c3-c00b-4b5f-99d9-7010b1afa306"
+      },
+      "currentPage": {
+        "name": "End Session",
+        "flow": "bell_IVR_Options"
+      },
+      "textResponses": [ {
+        "text": [ "Bell IVR placeholder" ],
+        "allowPlaybackInterruption": true
+      } ],
+      "currentFlow": {
+        "name": "bell_IVR_Options"
+      },
+      "actions": [ {
+        "agentUtterance": {
+          "text": "Bell IVR placeholder"
+        }
+      } ]
+    }
+  } ],
+  "creationTime": {
+    "seconds": 1731679506,
+    "nanos": 223630000
+  },
+  "testConfig": {
+    "flow": "Default Start Flow",
+    "page": "Start Page"
+  },
+  "languageCode": "en"
+}

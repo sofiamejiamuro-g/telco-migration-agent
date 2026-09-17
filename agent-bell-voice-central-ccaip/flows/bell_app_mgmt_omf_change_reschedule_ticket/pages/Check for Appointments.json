@@ -1,0 +1,67 @@
+{
+  "name": "fe02a09f-1c39-412f-a245-bc0ac69cf87d",
+  "displayName": "Check for Appointments",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.all_appointment_done = \"true\" AND $session.params.appointment_counter = 0",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "omf_selections",
+        "value": null
+      } ]
+    },
+    "targetPage": "Check User Appointment",
+    "name": "7cecc177-46e0-46ee-a962-69b6ee54fb17"
+  }, {
+    "condition": "$session.params.all_appointment_done = \"true\" AND $session.params.appointment_counter \u003e 0",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "omf_selections",
+        "value": "$session.params.omf_selections"
+      } ]
+    },
+    "targetPage": "Check User Appointment",
+    "name": "bc6f1876-2d02-43e2-a263-dc6d01251929"
+  }, {
+    "condition": "$session.params.all_appointment_done = \"false\" AND $session.params.appointment_counter = 0",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "omf_selections",
+        "value": null
+      } ]
+    },
+    "targetPage": "Create Reserve Input",
+    "name": "121bbcb4-1304-470c-9166-403dcc090a8a"
+  }, {
+    "condition": "$session.params.all_appointment_done = \"false\" AND $session.params.appointment_counter \u003e 0",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "omf_selections",
+        "value": "$session.params.omf_selections"
+      } ]
+    },
+    "targetPage": "Create Reserve Input",
+    "name": "21257c92-9256-4209-8378-ea25c7613c20"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "fe02a09f-1c39-412f-a245-bc0ac69cf87d"
+      }, {
+        "parameter": "flow_id",
+        "value": "3cb06ee0-48c8-49e1-8be4-96461dd61130"
+      }, {
+        "parameter": "page_name",
+        "value": "Check for Appointments"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

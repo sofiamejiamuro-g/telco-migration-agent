@@ -1,0 +1,102 @@
+{
+  "name": "d4ec984f-6fd7-4ea1-a8cf-3c47714d6c74",
+  "displayName": "Webhook Check Eligbility",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "v1/payment-arrangement#get-eligibility-criteria",
+    "tag": "get-eligibility-criteria",
+    "setParameterActions": [ {
+      "parameter": "billing_account",
+      "value": "$session.params.billing_account_number"
+    }, {
+      "parameter": "menu_type",
+      "value": "$session.params.menu_type"
+    }, {
+      "parameter": "brand",
+      "value": "$session.params.brand"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "eligibilityCriteria",
+        "value": "$session.params.pmt_arrangement_eligibility_response.showPaymentArrangementLink"
+      }, {
+        "parameter": "webhook_success",
+        "value": "$session.params.webhook_success"
+      }, {
+        "parameter": "installmentDetails",
+        "value": "$session.params.pmt_arrangement_eligibility_response.installmentDetails"
+      }, {
+        "parameter": "installmentCheck",
+        "value": "$sys.func.COUNT($session.params.pmt_arrangement_eligibility_response.installmentDetails)"
+      } ]
+    },
+    "name": "95a94bbc-b3e6-4e6c-a9af-d5459235d614"
+  }, {
+    "condition": "$session.params.webhook_success = true AND $session.params.eligibilityCriteria = true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Check Result",
+    "name": "f1306d4a-66f5-4967-aac1-e53ebf54e211"
+  }, {
+    "condition": "$session.params.webhook_success = false",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Failure",
+    "name": "c14d0211-6845-463a-9ae2-6869f8270953"
+  }, {
+    "condition": "$session.params.eligibilityCriteria = false AND $session.params.webhook_success = true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Check Result",
+    "name": "12bba507-bade-40b3-aed6-a14cefb1333e"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "d4ec984f-6fd7-4ea1-a8cf-3c47714d6c74"
+      }, {
+        "parameter": "flow_id",
+        "value": "722e5c31-76ff-46be-b88e-97e4715d454e"
+      }, {
+        "parameter": "page_name",
+        "value": "Webhook Check Eligbility"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Webhook Failure",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+    
+    },
+    "name": "99508d96-e867-4e4e-adad-bdea1fb83bc5"
+  }, {
+    "targetPage": "Webhook Failure",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+    
+    },
+    "name": "4a4cac6d-7816-4782-8351-63ef77f55abb"
+  }, {
+    "targetPage": "Webhook Failure",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+    
+    },
+    "name": "ab2b8bb1-6324-4fec-9734-06ff53bee769"
+  } ]
+}

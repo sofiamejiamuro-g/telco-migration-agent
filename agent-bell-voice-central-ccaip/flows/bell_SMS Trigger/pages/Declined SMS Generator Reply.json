@@ -1,0 +1,39 @@
+{
+  "name": "397905ab-6137-45af-9057-458c82f0b480",
+  "displayName": "Declined SMS Generator Reply",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "messages": [ {
+      "text": {
+        "text": [ "$request.generative.response" ]
+      },
+      "languageCode": "en"
+    }, {
+      "text": {
+        "text": [ "$request.generative.response" ]
+      },
+      "languageCode": "fr-ca"
+    } ],
+    "generators": [ {
+      "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/8acda5bd-5aaf-43a6-b724-f9f32db050d7",
+      "inputParameters": [ {
+        "key": "intent",
+        "value": "$session.params.route"
+      }, {
+        "key": "vanity_link",
+        "value": "$session.params.vanity_link"
+      } ],
+      "outputParameter": "$request.generative.response"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_Feedback",
+    "name": "b8e3fd2f-e8c7-4a5f-a1ee-61f2a62d47f0"
+  } ]
+}

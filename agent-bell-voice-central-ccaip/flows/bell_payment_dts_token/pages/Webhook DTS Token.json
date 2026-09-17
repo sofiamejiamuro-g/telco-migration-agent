@@ -1,0 +1,81 @@
+{
+  "name": "8142e578-9829-48a5-89cc-673d9c8f8a3b",
+  "displayName": "Webhook DTS Token",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "v1/ugyt-dss-dts",
+    "tag": "get-dts-token-details",
+    "setParameterActions": [ {
+      "parameter": "card_number",
+      "value": "$session.params.card_number",
+      "redact": true
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.webhook_success = True OR $session.params.webhook_success = true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "End Flow",
+    "name": "d0d0e1bb-f6bf-469f-8684-c5d9979741c4"
+  }, {
+    "condition": "$session.params.webhook_success = false OR $session.params.webhook_success = False",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Failure DTS",
+    "name": "94da4c86-28d7-42fc-939e-e7f13c8b2885"
+  }, {
+    "condition": "True",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Failure DTS",
+    "name": "4e2cbdca-a68d-4a8f-9fe7-7cd7beb7c7d7"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Webhook Failure DTS",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+    
+    },
+    "name": "a6f2ea49-be00-45e1-80c4-38eeb03a1fd0"
+  }, {
+    "targetPage": "Webhook Failure DTS",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+    
+    },
+    "name": "d4078610-a58c-41e0-89ca-bbc86cfcc611"
+  }, {
+    "targetPage": "Webhook Failure DTS",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+    
+    },
+    "name": "eb9d256c-1bf9-4a5d-a49b-0fc00f2e285f"
+  }, {
+    "targetPage": "Webhook Failure DTS",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+    
+    },
+    "name": "6319e789-03a1-499d-8dc1-64c7ed5ad550"
+  }, {
+    "targetPage": "Webhook Failure DTS",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+    
+    },
+    "name": "d8df0d0f-d9d5-46a6-9da0-5ccbbc4ee215"
+  }, {
+    "targetPage": "Webhook Failure DTS",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+    
+    },
+    "name": "094e5699-4e3a-4a24-b139-cbb741c09e87"
+  } ]
+}

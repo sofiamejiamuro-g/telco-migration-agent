@@ -1,0 +1,61 @@
+{
+  "name": "9489cb57-6287-442b-8f52-6f5317741841",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "brand": "bell",
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": " À propos de quel service communiquez-vous avec nous?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Internet"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_aqd",
+      "inputActionParameters": {
+        "brand": "bell",
+        "language": "fr-ca",
+        "lob": "Internet"
+      },
+      "outputActionParameters": {
+        "language": "fr-ca"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer has questions about needing a new device, device availability, device features, cost, related to devices that Bell sells",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "New",
+      "identification_status": "Fail",
+      "language": "fr-ca",
+      "province": "ON",
+      "route": "sales_order_device",
+      "utterance": "Je souhaite commander un nouvel appareil"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "We need to check the result from identification flow from the webhook NPANXX, if it is \"ON\" then call bell_aqd flow",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca",
+      "lob": "Internet"
+    }
+  },
+  "displayName": "FR \"sales_order_device\"- ID fail, new-ON",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 359,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

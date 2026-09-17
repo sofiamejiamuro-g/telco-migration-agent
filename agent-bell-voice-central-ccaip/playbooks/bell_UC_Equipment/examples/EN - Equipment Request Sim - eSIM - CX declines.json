@@ -1,0 +1,70 @@
+{
+  "name": "2de1f6ec-7dc8-4461-9e10-ad854717841c",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_tech_intent_apb",
+      "inputActionParameters": {
+      
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "I'd be happy to help you get a new sim.\n\nYou can activate your service instantly with an eSIM. There’s no cost to activate and you won’t have to wait for the delivery of a physical SIM.\n\nWould you like to activate with eSIM now?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "No my phone isn't eSIM compatible"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "You can easily purchase a SIM card by visiting the Bell Mobility website or visiting a local retailer near you.\n\nI'll send you a text message with details on how to purchase a sim card now."
+    }
+  }, {
+    "userUtterance": {
+      "text": "yes"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "brand": "bell",
+        "language": "en",
+        "sms_content": "Bell MSG: As requested, here is a link to order a SIM card online now. See https://www.bell.ca/Mobility/SIM-Cards or visit one of our retail locations by using the store locator tool https://www.bell.ca/Store_Locator (bell.ca/about-us)",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+        "brand": "bell",
+        "language": "en"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer phone isn't eSIM-compatible. Customer needs a physical sim",
+    "actionParameters": {
+      "BAN": "4162675927163",
+      "CLID": "4155547622",
+      "brand": "bell",
+      "language": "en",
+      "route": "equipment_request_sim",
+      "sim_type": "SIM",
+      "utterance": "I would like to get a new sim"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Customer to receive the SMS in their phone",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "sms_content": "Bell MSG: As requested, here is a link to order a SIM card online now. See https://www.bell.ca/Mobility/SIM-Cards or visit one of our retail locations by using the store locator tool https://www.bell.ca/Store_Locator (bell.ca/about-us)",
+      "sms_type": "Public"
+    }
+  },
+  "displayName": "EN - Equipment Request Sim - eSIM - CX declines",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 598,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

@@ -1,0 +1,81 @@
+{
+  "name": "cd5442de-cbd0-4c46-8eca-5199e036485c",
+  "displayName": "Check escalation flag",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "setParameterActions": [ {
+      "parameter": "telephone_number",
+      "value": "$sys.func.IF($session.params.cirn=\"0\", $session.params.clid, $session.params.cirn)"
+    }, {
+      "parameter": "aqd_sub_flow",
+      "value": "Escelation"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.deai_search_by_tn_response.escalation_risk_flg = \"1\" OR $session.params.deai_search_by_tn_response.escalation_risk_flg = 1",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "customer_type",
+        "value": "escalation"
+      }, {
+        "parameter": "l2_brand",
+        "value": "Bell"
+      } ]
+    },
+    "targetPage": "Get queue (﻿menu_id)",
+    "name": "26535f68-39d7-4457-b7f9-8ffc0b081d63"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Check Special Queue | Other Logic",
+    "name": "206fef5b-ea10-4e1b-9f39-a1449d0871f0"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Check Special Queue | Other Logic",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+    
+    },
+    "name": "aaecfc65-f05b-4158-b775-3510a9294fa2"
+  }, {
+    "targetPage": "Check Special Queue | Other Logic",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+    
+    },
+    "name": "d802ed21-1fab-476c-9e2e-ccc29ca9a119"
+  }, {
+    "targetPage": "Check Special Queue | Other Logic",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+    
+    },
+    "name": "74743106-fcc4-41c4-b3a6-d4509a3e49d0"
+  }, {
+    "targetPage": "Check Special Queue | Other Logic",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+    
+    },
+    "name": "b12629ff-2311-4ac8-bc37-f9066c9071bc"
+  }, {
+    "targetPage": "Check Special Queue | Other Logic",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+    
+    },
+    "name": "6e6415c9-9525-4cef-9b56-03fe2dedd925"
+  }, {
+    "targetPage": "Check Special Queue | Other Logic",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+    
+    },
+    "name": "cba1e392-cedf-49d0-b827-0abf55f4bd0a"
+  } ],
+  "description": "WARNING: To minimize latency and redundant processing, do not re-invoke the \"deai-customer-information\" webhook on the current page. The customer data has already been fetched at the Preferred Building page; please reference the existing session parameters for this value."
+}

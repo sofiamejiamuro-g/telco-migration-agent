@@ -1,0 +1,74 @@
+{
+  "name": "3fcb48fc-3aad-4360-a936-dd51a40ec9f2",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70011",
+        "brand": "bell",
+        "language": "en",
+        "lob": "Mobility",
+        "route": "service_change_plan"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Sure, you can easily manage your Mobility plan and add-ons at anytime using MyBell. I'll send a text to the device you're calling from, so that you can easily make changes to your Mobility plan. Is that alright?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "yeah"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "en",
+        "route": "service_change_plan",
+        "sms_content": "Bell: You can visit https://m.bell.ca/managemyplan to view or make changes to your mobile plan in the MyBell app. ( bell.ca/about-us )",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+        "language": "en"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "\nThe {identification_status} is \"Pass\", {customer_type} is \"Existing\", {streaming_services} is null or {lob} is not null so, check for {streaming_services} based on instruction provided in playbook on how to set {streaming_services} within {route} = \"service_change_plan\"",
+    "actionParameters": {
+      "apb_location_id": "70011",
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "en",
+      "lob": "Mobility",
+      "mobility_sub_type": "postpaid",
+      "route": "service_change_plan",
+      "utterance": "I am calling to change the plan that I have"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "As, the {streaming_services} is null or {lob} is mobility so,{lob} and if it is related to streaming service then SET parameter {streaming_services} with correct value provided in playbook instruction within {route} = \"service_change_plan\"",
+    "actionParameters": {
+      "apb_location_id": "70011",
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "en",
+      "lob": "Mobility",
+      "mobility_sub_type": "postpaid",
+      "route": "service_change_plan",
+      "sms_content": "Bell: You can visit https://m.bell.ca/managemyplan to view or make changes to your mobile plan in the MyBell app. ( bell.ca/about-us )",
+      "sms_type": "Public",
+      "utterance": "I want to inquire about changing my Bell Mobility plan."
+    }
+  },
+  "displayName": "EN - service_change_plan- streaming_services-null-lob-mobility-thenCx-Say-postpaid",
+  "retrievalStrategy": "STATIC",
+  "tokenCount": 678,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

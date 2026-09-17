@@ -1,0 +1,25 @@
+{
+  "name": "588afdef-d78c-467a-9410-810cd13a481e",
+  "displayName": "Eligibility Check",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "($session.params.accountType = \"I\" AND ($session.params.accountSubType = \"R\" OR $session.params.accountSubType = \"P\" OR $session.params.accountSubType = \"N\" OR $session.params.accountSubType = \"B\" OR $session.params.accountSubType = \"5\" OR $session.params.accountSubType = \"E\")) OR ($session.params.accountType = \"C\" AND ($session.params.accountSubType = \"P\" OR $session.params.accountSubType = \"V\" OR $session.params.accountSubType = \"T\")) OR ($session.params.oneBillIndicator = \"M\" OR $session.params.oneBillIndicator = \"Y\")",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook NPA",
+    "name": "d40588af-d302-4bb1-963f-22398b4b096c"
+  }, {
+    "condition": "$session.params.accountType != \"I\" OR $session.params.accountType != \"C\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "consolidated_status",
+        "value": "Uneligible"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "53af2732-9cba-41a9-85f8-c12c4bbb58c1"
+  } ]
+}

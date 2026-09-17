@@ -1,0 +1,34 @@
+{
+  "name": "470c6570-992f-4571-9ca8-b634e4223552",
+  "displayName": "Error Webhook intent-sdl-mapping",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "setParameterActions": [ {
+      "parameter": "vanity_link",
+      "value": "$sys.func.IF($request.language=\"en\", \"bell.ca/support\", \"bell.ca/soutien\")"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.language = fr-ca",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "vanity_link",
+        "value": "bell.ca/soutien"
+      } ]
+    },
+    "targetPage": "Declined SMS Generator Reply",
+    "name": "c0a4c09b-1564-4984-9e5c-90e9f10ac9cf"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "vanity_link",
+        "value": "bell.ca/support"
+      } ]
+    },
+    "targetPage": "Declined SMS Generator Reply",
+    "name": "86303f15-07ca-474f-ab54-76e1b0c276a2"
+  } ]
+}

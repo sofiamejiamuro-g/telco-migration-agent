@@ -1,0 +1,73 @@
+{
+  "name": "e64db4e1-fd1f-4496-9afc-f2a38361f5c7",
+  "displayName": "confirm_pending_order",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "setParameterActions": [ {
+      "parameter": "local_nomatch_counter",
+      "value": 0
+    }, {
+      "parameter": "local_noinput_counter",
+      "value": 0
+    }, {
+      "parameter": "local_trigger",
+      "value": null
+    } ]
+  },
+  "transitionRoutes": [ {
+    "intent": "context.confirm_yes",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "special_queue",
+        "value": "cable_internet"
+      }, {
+        "parameter": "intent",
+        "value": "other_speak_to_agent"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "f95693e5-14bb-4455-a191-2059ab846602"
+  }, {
+    "intent": "context.confirm_no",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook- comcentric_ban-profile",
+    "name": "d7b9fca3-85cf-43be-8319-6deb7f3dda83"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Local Error Handling",
+    "event": "sys.no-input-default",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "global_error_counter",
+        "value": "$sys.func.ADD($session.params.global_error_counter,1)"
+      }, {
+        "parameter": "local_trigger",
+        "value": "no_input"
+      }, {
+        "parameter": "local_noinput_counter",
+        "value": "$sys.func.ADD($session.params.local_noinput_counter,1)"
+      } ]
+    },
+    "name": "b5d28f50-2c17-4f7d-bc4b-7f07681c0b6c"
+  }, {
+    "targetPage": "Local Error Handling",
+    "event": "sys.no-match-default",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "global_error_counter",
+        "value": "$sys.func.ADD($session.params.global_error_counter,1)"
+      }, {
+        "parameter": "local_nomatch_counter",
+        "value": "$sys.func.ADD($session.params.local_nomatch_counter,1)"
+      }, {
+        "parameter": "local_trigger",
+        "value": "no_match"
+      } ]
+    },
+    "name": "68c54fc4-f533-4196-8384-c1c0d5c3438b"
+  } ]
+}

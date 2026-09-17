@@ -1,0 +1,112 @@
+{
+  "name": "c72fe888-0b8b-44e5-888c-2332bdb2ae7d",
+  "displayName": "webhook- DEAI- Distributel_pending_order-CIRN",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "v1/deai-customer-information",
+    "tag": "NA",
+    "setParameterActions": [ {
+      "parameter": "telephone_number",
+      "value": "$session.params.CIRN"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.CIRN = null",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "End flow handling",
+    "name": "0f59bda4-ba65-4ea0-9f59-311f20741ea4"
+  }, {
+    "condition": "$session.params.CIRN != null",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "pending_order2",
+        "value": "$session.params.deai_search_by_tn_response.shr_int_partner_nw_pend_ord_flg"
+      } ]
+    },
+    "name": "68bdc5d6-dcca-46cf-a5b7-ee0a5b8ef8c4"
+  }, {
+    "condition": "$session.params.pending_order2 = 1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Are you calling about a pending internet order?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Appelez-vous au sujet d'une commande internet en cours ?" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetPage": "Confirm Pending order-CIRN",
+    "name": "3ed11e97-fb9a-416b-85b8-261fa8b0864b"
+  }, {
+    "condition": "$session.params.pending_order2 != 1",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook- comcentric_ban-profile",
+    "name": "91bcd3f2-3be6-4ebb-9632-7239f1f57629"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_name",
+        "value": "webhook- DEAI- Distributel_pending_order-CIRN"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "d856fe73-a64e-4c72-97bd-099191379603"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Webhook- comcentric_ban-profile",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+    
+    },
+    "name": "20b46765-e17d-4a2b-9c28-7cc56b26d8d0"
+  }, {
+    "targetPage": "Webhook- comcentric_ban-profile",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+    
+    },
+    "name": "f100fc59-1aed-48f1-a43d-73d86f6aea86"
+  }, {
+    "targetPage": "Webhook- comcentric_ban-profile",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+    
+    },
+    "name": "fa6efdd2-8bd7-4ade-aef6-354eca318f92"
+  }, {
+    "targetPage": "Webhook- comcentric_ban-profile",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+    
+    },
+    "name": "fb8ce470-8939-437e-a40d-dc03ca85fc13"
+  }, {
+    "targetPage": "Webhook- comcentric_ban-profile",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+    
+    },
+    "name": "a3bb97b0-b79c-4fae-a2db-6906983bc2d9"
+  }, {
+    "targetPage": "Webhook- comcentric_ban-profile",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+    
+    },
+    "name": "77f4437c-c510-4230-a041-26fde9c61e54"
+  } ]
+}

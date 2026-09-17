@@ -1,0 +1,27 @@
+{
+  "name": "97a9a18c-b029-4c44-bfcb-5760367fa9f2",
+  "displayName": "v1/bell-vr#next-task",
+  "timeout": {
+    "seconds": 15
+  },
+  "serviceDirectory": {
+    "service": "projects/gcp-it-npe-pltfm-apigee/locations/us-central1/namespaces/apigee-nb-usc1-service-dir-namespace/services/apigee-nb-usc1-service",
+    "genericWebService": {
+      "uri": "https://apigee-nane1-uat.int.bell.ca/v1/digital-tools/virtual-repair",
+      "requestHeaders": [ {
+        "key": "x-apikey",
+        "value": "npZmDivP6Hxes3wtQ0tC9RqItjJTY8TgZHbOPNeFwvSYSKPI"
+      } ],
+      "webhookType": "FLEXIBLE",
+      "httpMethod": "POST",
+      "requestBody": "{\n  \"sessionInfo\": {\n    \"dfcx_session_id\": \"$session.params.dfcx_session_id\",\n    \"agent_id\": \"$session.params.agent_id\",\n    \"parameters\": {\n      \"brand\": \"$session.params.brand\",\n      \"menu_type\": \"$session.params.menu_type\",\n      \"province\": \"$session.params.province\",\n      \"vr_context\": \"$session.params.vr_context\"\n    }\n  },\n  \"fulfillmentInfo\": {\n    \"tag\": \"next-task\"\n  },\n  \"languageCode\": \"$request.language\"\n}",
+      "parameterMapping": [ {
+        "key": "vr_next_task_response",
+        "value": "sessionInfo.parameters.vr_next_task_response"
+      }, {
+        "key": "webhook_success",
+        "value": "sessionInfo.parameters.webhook_success"
+      } ]
+    }
+  }
+}

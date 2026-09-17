@@ -1,0 +1,110 @@
+{
+  "name": "d7af4372-799c-4d76-9e9b-721dfa4d6acb",
+  "displayName": "Webhook - WFAS Appointment",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "/v1/ticket_management/wfas#appointment",
+    "tag": "appointment",
+    "setParameterActions": [ {
+      "parameter": "webhook_success",
+      "value": null
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.webhook_success = true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "ticket_number",
+        "value": "$session.params.ticket_number"
+      }, {
+        "parameter": "menu_type",
+        "value": "$session.params.menu_type"
+      }, {
+        "parameter": "operation_context",
+        "value": "modify_after_wfas_reserve"
+      }, {
+        "parameter": "wfas_context_raw",
+        "value": "$session.params.makeAppointment_response.wfas_context"
+      }, {
+        "parameter": "wfas_context",
+        "value": "$sys.func.TO_OBJECT($session.params.wfas_context_raw)"
+      }, {
+        "parameter": "ticket_number_ref",
+        "value": "$sys.func.CONCATENATE(\"REF\", $sys.func.TO_TEXT($session.params.ticket_number))"
+      } ]
+    },
+    "targetPage": "Webhook - ACUT Modify After WFAS Reserve",
+    "name": "15643fae-6e70-474e-a3bf-738b36e7f125"
+  }, {
+    "condition": "$session.params.webhook_success = false",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Failure 2 - ACUT",
+    "name": "80e1e32e-19c2-4d54-8efd-7e0df3894792"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "d7af4372-799c-4d76-9e9b-721dfa4d6acb"
+      }, {
+        "parameter": "flow_id",
+        "value": "daa61f2b-2d60-44bf-9fc3-b0d8955f384d"
+      }, {
+        "parameter": "page_name",
+        "value": "Webhook WFAS"
+      } ]
+    },
+    "targetPage": "Webhook Failure 2 - ACUT",
+    "name": "cleanup-hardstop-route"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Webhook Failure 2 - ACUT",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+    
+    },
+    "name": "fdae056c-1304-4ac5-b68e-0f7c493c3e80"
+  }, {
+    "targetPage": "Webhook Failure 2 - ACUT",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+    
+    },
+    "name": "eae179e6-4eea-4e49-baea-c2f475121507"
+  }, {
+    "targetPage": "Webhook Failure 2 - ACUT",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+    
+    },
+    "name": "dec72f5e-c29e-4215-af0e-c33bd8c39b7a"
+  }, {
+    "targetPage": "Webhook Failure 2 - ACUT",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+    
+    },
+    "name": "1c03fbe6-1814-479b-9bd7-d491c8ce03e8"
+  }, {
+    "targetPage": "Webhook Failure 2 - ACUT",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+    
+    },
+    "name": "804b9a9c-fb95-4771-ae55-857d87830c2f"
+  }, {
+    "targetPage": "Webhook Failure 2 - ACUT",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+    
+    },
+    "name": "3071fef3-df23-4ffd-9f23-cc756db28e9a"
+  } ]
+}

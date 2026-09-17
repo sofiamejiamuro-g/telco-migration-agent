@@ -1,0 +1,59 @@
+{
+  "name": "9bd290b6-27bf-4223-ac22-544e46a42145",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "brand": "bell",
+        "language": "en"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "which service you are inquiring about?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Mobility"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_aqd",
+      "inputActionParameters": {
+        "brand": "bell",
+        "language": "en",
+        "lob": "Mobility"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer wants to order a new device but the value for identification_status is \"Fail\", as you don't know the {lob} you need to ask which service type the customer is looking for?",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "New",
+      "identification_status": "Fail",
+      "language": "en",
+      "route": "sales_order_device",
+      "utterance": "I want to order a new device"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "from the identification flow, know the customer_type as \"New\", and if we don't know the lob we need to ask them regarding that too, if it is mobility or if device type is Phones, Smartwatches, Tablets, Mobile\nInternet, SIM cards, pre-owned then reroute to bell_aqd",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en"
+    }
+  },
+  "displayName": "sales order device - ID fail, new-mobility",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 393,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

@@ -1,0 +1,114 @@
+{
+  "name": "31c432f5-6dfd-4832-bd86-cb53f4e9d1c0",
+  "displayName": "Privilege",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "setParameterActions": [ {
+      "parameter": "priv_flag_Y",
+      "value": "$sys.func.FILTER(   \"$session.params.customer_id_search_response\",   \"$..billing_accounts[*].privilege_flag\" )"
+    }, {
+      "parameter": "previlege_flag",
+      "value": "$sys.func.CONTAIN(   $session.params.priv_flag_Y,   \"Y\" )"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.previlege_flag = true",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Merci d'être membre du programme Privilèges Bell. Appelez-vous à propos d'un problème de soutien technique?" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "Thank you for being a member of the Bell Privlieges program. Are you calling regarding a technical support issue?" ]
+        },
+        "languageCode": "en"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "skip_id",
+        "value": true
+      } ]
+    },
+    "targetPage": "confirmTechnicalIssue",
+    "name": "cdec97a5-6870-458b-a2f1-5e99bde69b45"
+  }, {
+    "condition": "$session.params.previlege_flag = false OR $session.params.webhook_success = false",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Preferred",
+    "name": "31db0c3d-01ff-424d-b1c5-8b5b702b91a0"
+  }, {
+    "condition": "$session.params.previlege_flag != true AND $session.params.previlege_flag != false",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Preferred",
+    "name": "bd9fe268-01ed-41be-b9e2-9564d1ccffc4"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "31c432f5-6dfd-4832-bd86-cb53f4e9d1c0"
+      }, {
+        "parameter": "flow_id",
+        "value": "d35b61b6-c884-44f8-b5c7-aed63cc356ab"
+      }, {
+        "parameter": "page_name",
+        "value": "Privilege"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Preferred",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+    
+    },
+    "name": "47126df4-2e53-457a-adcf-fb910d216a29"
+  }, {
+    "targetPage": "Preferred",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+    
+    },
+    "name": "b0f48cf2-e649-47cb-849e-44756f23e154"
+  }, {
+    "targetPage": "Preferred",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+    
+    },
+    "name": "11d8ada3-b43a-42d9-b678-92c1800f60c4"
+  }, {
+    "targetPage": "Preferred",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+    
+    },
+    "name": "3b0e6086-0df4-44d1-9a5f-b985ab52dc11"
+  }, {
+    "targetPage": "Preferred",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+    
+    },
+    "name": "24757415-b47d-4f0b-8b3d-c5a8216c2bff"
+  }, {
+    "targetPage": "Preferred",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+    
+    },
+    "name": "af6a22ec-d96e-438e-aec1-c16a7c4917ea"
+  } ]
+}

@@ -1,0 +1,237 @@
+{
+  "name": "724c72ca-875c-4046-baff-e425285cca42",
+  "displayName": "HI_smalltalk",
+  "transitionRoutes": [ {
+    "intent": "small_talk.hangup_apology",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I’m sorry to hear that your call dropped. Unfortunately I don’t have details about your last communication. Can you please give me context about the reason of that call and I’ll do my best to help you?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je suis désolé d’apprendre que votre appel a été interrompu. Malheureusement, je n’ai pas de détails sur cette communication. Pourriez-vous me préciser la raison de cet appel et je ferai de mon mieux pour vous aider?" ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "route",
+        "value": "small_talk.hangup_apology"
+      }, {
+        "parameter": "utterance",
+        "value": "$request.user-utterance"
+      } ]
+    },
+    "name": "3819d3f4-d1cc-46bc-9d0b-23d850cfa634",
+    "targetPlaybook": "bell_NLU_Query_Rewriter"
+  }, {
+    "intent": "small_talk.outbound_call",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Thanks for calling us back. Unfortunately I don’t have any details why we’ve reached out but, if you need help with a specific topic, please let me know." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Merci de nous rappeler. Malheureusement, je n’ai pas de détails sur les raisons pour lesquelles nous avons communiqué avec vous, mais si vous avez besoin d’aide pour un\nsujet précis, s'il vous plaît m’en informer." ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "route",
+        "value": "small_talk.outbound_call"
+      }, {
+        "parameter": "utterance",
+        "value": "$request.user-utterance"
+      } ]
+    },
+    "name": "d661fc90-db77-4ca9-bbcc-392a2a7304f5",
+    "targetPlaybook": "bell_NLU_Query_Rewriter"
+  }, {
+    "intent": "small_talk.agent.acquaintance",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "$request.generative.acquaintance_response" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "How else can we help you?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "$request.generative.acquaintance_response" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "Que puis-je faire d'autre pour vous aider?" ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "route",
+        "value": "small_talk.agent.acquaintance"
+      }, {
+        "parameter": "utterance",
+        "value": "$request.user-utterance"
+      } ],
+      "generators": [ {
+        "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/0d0e9c48-7f68-45b5-a777-aa591f2042ad",
+        "outputParameter": "$request.generative.acquaintance_response"
+      } ]
+    },
+    "name": "a4021571-e17e-48cb-8a56-a07cf3048fda",
+    "targetPlaybook": "bell_NLU_Query_Rewriter"
+  }, {
+    "intent": "small_talk.agent.annoying",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "route",
+        "value": "small_talk.agent.annoying"
+      }, {
+        "parameter": "utterance",
+        "value": "$request.user-utterance"
+      } ]
+    },
+    "name": "68512bf9-5591-44c6-8684-db92e2514885"
+  }, {
+    "intent": "small_talk.agent.bad",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "route",
+        "value": "small_talk.agent.bad"
+      }, {
+        "parameter": "utterance",
+        "value": "$request.user-utterance"
+      } ]
+    },
+    "name": "0794373d-fd98-4f02-8393-c7060b384665"
+  }, {
+    "intent": "small_talk.dialog.wrong",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "route",
+        "value": "small_talk.dialog.wrong"
+      }, {
+        "parameter": "utterance",
+        "value": "$request.user-utterance"
+      } ]
+    },
+    "name": "372cf072-af71-4f7b-a688-3c3850b4cde6"
+  }, {
+    "intent": "small_talk.greetings.hello",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Hi, How can we help you?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Salut, comment puis-je t'aider?" ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "route",
+        "value": "small_talk.greetings.hello"
+      }, {
+        "parameter": "utterance",
+        "value": "$request.user-utterance"
+      } ]
+    },
+    "name": "1a93d23a-fdab-418e-a6cf-6857769826db",
+    "targetPlaybook": "bell_NLU_Query_Rewriter"
+  }, {
+    "intent": "small_talk.user.angry",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "route",
+        "value": "small_talk.user.angry"
+      }, {
+        "parameter": "utterance",
+        "value": "$request.user-utterance"
+      } ]
+    },
+    "name": "f76ea419-cdf7-4e91-9de2-3239ed77833d"
+  }, {
+    "intent": "small_talk.agent.AI",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "AI, or artificial intelligence, helps our virtual assistant understand your request and quickly give you the information you need or connect you to the right live agent. How else can we help you?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "L'intelligence artificielle, ou IA, aide notre assistant virtuel à comprendre votre demande. Nous pouvons ensuite rapidement vous donner les renseignements dont vous avez besoin ou vous mettre en contact avec le bon agent. Que puis-je faire d'autre pour vous aider?" ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "route",
+        "value": "small_talk.agent.AI"
+      }, {
+        "parameter": "utterance",
+        "value": "$request.user-utterance"
+      } ]
+    },
+    "name": "44f70490-29ec-4ade-bf2f-bf2de8c0d58a",
+    "targetPlaybook": "bell_NLU_Query_Rewriter"
+  }, {
+    "intent": "small_talk.agent.good",
+    "condition": "$session.params.event_type = \"anything else start over\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "route",
+        "value": "small_talk.appraisal.thank_you"
+      } ]
+    },
+    "name": "ecabd2ea-119a-4440-83eb-5d963a191b41"
+  }, {
+    "intent": "small_talk.appraisal.thank_you",
+    "condition": "$session.params.event_type = \"anything else start over\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "route",
+        "value": "small_talk.appraisal.thank_you"
+      } ]
+    },
+    "name": "e6577553-1658-4fc0-89a6-bfe7f6ba6bb2"
+  }, {
+    "intent": "small_talk.appraisal.well_done",
+    "condition": "$session.params.event_type = \"anything else start over\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "route",
+        "value": "small_talk.appraisal.well_done"
+      } ]
+    },
+    "name": "1eb64ba2-e513-4a26-bf63-e8f84b1a9e84"
+  }, {
+    "intent": "small_talk.greetings.bye",
+    "condition": "$session.params.event_type = \"anything else start over\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "route",
+        "value": "small_talk.greetings.bye"
+      } ]
+    },
+    "name": "62c73082-e980-4d9c-840b-6bef278fbf03"
+  }, {
+    "intent": "small_talk.greetings.nice_to_meet_you",
+    "condition": "$session.params.event_type = \"anything else start over\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "route",
+        "value": "small_talk.greetings.nice_to_meet_you"
+      } ]
+    },
+    "name": "e84de813-be84-4f6d-b99c-645adecbef74"
+  } ]
+}

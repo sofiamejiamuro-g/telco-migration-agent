@@ -1,0 +1,133 @@
+{
+  "name": "ea701c73-95b8-43ff-97d9-4018cb70a079",
+  "displayName": "CC Declined",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "conditionalCases": [ {
+      "cases": [ {
+        "condition": "$session.params.cc_failed_attempt \u003c 2",
+        "caseContent": [ {
+          "message": {
+            "text": {
+              "text": [ "Unfortunately, I wasn't able to process your payment. This can happen for a few different reasons. Would you like to enter your card details again or try using a different card? Please say yes or no." ]
+            },
+            "languageCode": "en"
+          }
+        }, {
+          "message": {
+            "text": {
+              "text": [ "Malheureusement, je n'ai pas pu traiter votre paiement. Cela peut arriver pour plusieurs raisons. Souhaitez-vous saisir à nouveau vos informations de carte ou essayer avec une autre carte? Veuillez répondre oui ou non." ]
+            },
+            "languageCode": "fr-ca"
+          }
+        } ]
+      } ]
+    } ]
+  },
+  "transitionRoutes": [ {
+    "intent": "context.confirm_yes",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "cc_failed_attempt",
+        "value": "$sys.func.ADD(1, $session.params.cc_failed_attempt)"
+      } ]
+    },
+    "targetFlow": "bell_payment_cc_details_input",
+    "name": "c74b933c-fe8c-4ae5-9fe7-11afdb621be3"
+  }, {
+    "intent": "context.confirm_no",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "OK, you can always try again later using the MyBell app." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "D’accord, vous pouvez toujours réessayer plus tard en utilisant l’appli MonBell." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetFlow": "bell_Feedback",
+    "name": "a22624bf-3e8e-448c-9806-b42aa8fd8a59"
+  }, {
+    "condition": "$session.params.cc_failed_attempt = 2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Unfortunately I’m unable to proceed with your request right now. For more information regarding your payment and account status please visit the MyBell app." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Malheureusement, je ne suis pas en mesure de traiter votre demande pour le moment. Pour plus d’informations concernant votre paiement et l’état de votre compte, veuillez consulter l’appli MonBell." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetFlow": "bell_Feedback",
+    "name": "993d1a04-68ec-4f2f-afd6-69ca56ba215e"
+  } ],
+  "eventHandlers": [ {
+    "event": "sys.no-input-1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I didn't quite get that. Can you try again?" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "e9f17e10-9659-427b-8ca0-c0267d858e83"
+  }, {
+    "event": "sys.no-input-2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I still didn’t get that" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "7d9f34a5-42e1-48be-a51d-cd3916618e62"
+  }, {
+    "targetFlow": "bell_determine_handover",
+    "event": "sys.no-input-3",
+    "triggerFulfillment": {
+    
+    },
+    "name": "f6c3a2bb-5ab6-4b86-8b08-0b7401f0278e"
+  }, {
+    "event": "sys.no-match-1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I didn't quite get that. Can you try again?" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "a1e873a0-22a5-4efd-8c4b-93aaa06cb664"
+  }, {
+    "event": "sys.no-match-2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I still didn’t get that" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "2d27cb1a-2187-4cb0-81a9-50bf8782c59a"
+  }, {
+    "targetFlow": "bell_determine_handover",
+    "event": "sys.no-match-3",
+    "triggerFulfillment": {
+    
+    },
+    "name": "949206a7-f8e3-400b-bd43-00b7a66cd8ae"
+  } ]
+}

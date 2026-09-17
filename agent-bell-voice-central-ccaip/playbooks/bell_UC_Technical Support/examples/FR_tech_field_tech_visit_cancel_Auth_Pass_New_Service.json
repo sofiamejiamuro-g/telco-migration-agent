@@ -1,0 +1,76 @@
+{
+  "name": "940b4271-5e8f-4a25-ba9b-ae351e440595",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70012",
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+        "language": "fr-ca"
+      }
+    }
+  }, {
+    "playbookInvocation": {
+      "playbook": "bell_uc_ask_LOB",
+      "playbookInput": {
+        "precedingConversationSummary": "Customer wants to cancel the appointment",
+        "actionParameters": {
+          "language": "fr-ca",
+          "route": "tech_field_tech_visit_cancel"
+        }
+      },
+      "playbookOutput": {
+        "executionSummary": "When user does not provide lob, prompt them to understand what kind of service they are looking for, if the user mentions lob then return lob to the originating Playbook, if not set the default lob and return back",
+        "actionParameters": {
+          "language": "fr-ca",
+          "lob": "Mobility",
+          "route": "tech_field_tech_visit_cancel"
+        }
+      },
+      "playbookState": "OUTPUT_STATE_OK"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Est-ce pour réparer un service existant? "
+    }
+  }, {
+    "userUtterance": {
+      "text": "Non"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_aqd",
+      "inputActionParameters": {
+        "language": "fr-ca",
+        "special_queue": "tech_to_care"
+      },
+      "outputActionParameters": {
+        "language": "fr-ca"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer wants to cancel the appointment",
+    "actionParameters": {
+      "language": "fr-ca",
+      "route": "tech_field_tech_visit_cancel",
+      "utterance": "Je veux annuler mon rendez-vous."
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Trigger bell_aqd flow with special_queue = \"tech_to_care\"",
+    "actionParameters": {
+      "language": "fr-ca",
+      "lob": "Mobility",
+      "route": "tech_field_tech_visit_cancel",
+      "utterance": "Je veux annuler mon rendez-vous."
+    }
+  },
+  "displayName": "FR_tech_field_tech_visit_cancel_Auth_Pass_New_Service",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 514,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "fr"
+}

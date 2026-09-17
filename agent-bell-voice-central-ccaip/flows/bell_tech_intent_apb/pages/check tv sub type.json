@@ -1,0 +1,37 @@
+{
+  "name": "b091e085-2477-4698-a5ef-d70008913983",
+  "displayName": "check tv sub type",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.tv_sub_type = null",
+    "triggerFulfillment": {
+    
+    },
+    "name": "29cff6a8-7c06-44c7-81c8-4bbd7db5bc2d"
+  }, {
+    "condition": "$session.params.tv_sub_type = \"fibe\" OR $session.params.tv_sub_type = \"alt\" OR $session.params.type_sub_type = \"fibe\" OR $session.params.typr_sub_type = \"alt\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "apb_location_id",
+        "value": 70015
+      } ]
+    },
+    "targetFlow": "bell_apb",
+    "name": "94bd6af6-7796-4cd4-84b0-114b03ec16a5"
+  }, {
+    "condition": "$session.params.tv_sub_type = \"sat\" OR $session.params.type_sub_type = \"sat\"",
+    "triggerFulfillment": {
+    
+    },
+    "name": "a16982aa-9a9a-4213-bed9-2adee1ebd476"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "End Flow",
+    "name": "158a50d9-1e00-4913-8c36-bd5f693d7cd0"
+  } ]
+}

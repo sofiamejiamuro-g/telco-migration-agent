@@ -1,0 +1,84 @@
+{
+  "name": "269243cd-f478-46c6-be86-5912819bb2aa",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_global_error_count_check",
+      "inputActionParameters": {
+        "global_error_counter": "1"
+      },
+      "outputActionParameters": {
+        "global_error_counter": "2"
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "I'm unable to provide information on that subject. However, I'd be glad to assist with any inquiries you may have regarding Bell's products and services."
+    }
+  }, {
+    "userUtterance": {
+      "text": "But I need to make a bolognese"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_global_error_count_check",
+      "inputActionParameters": {
+        "global_error_counter": "2"
+      },
+      "outputActionParameters": {
+        "global_error_counter": "3"
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "I apologize, I'm still having difficulty understanding your request. To best assist you, could you please rephrase your question or provide more detail about what you're looking for regarding Bell's products and services?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Can you tell the weather?"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_global_error_count_check",
+      "inputActionParameters": {
+        "global_error_counter": "3"
+      },
+      "outputActionParameters": {
+        "global_error_counter": "4"
+      }
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_No_Match_3",
+      "inputActionParameters": {
+        "brand": "bell",
+        "language": "en"
+      },
+      "outputActionParameters": {
+        "brand": "bell",
+        "language": "en"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "The user's input is linguistically correct but completely unrelated to the current conversation or outside the scope of Bell customer support",
+    "actionParameters": {
+      "brand": "bell",
+      "global_error_counter": "1",
+      "language": "en",
+      "utterance": "What should I buy for groceries"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "As Customer says irrelevant information to bell mobile products and services, so flow bell_global_error_count_check is called each time and VA respond as per instructions and when 3rd time they say irrelevant things, we send them to bell_no_match3 flow",
+    "actionParameters": {
+      "brand": "bell",
+      "global_error_counter": "4",
+      "language": "en"
+    }
+  },
+  "displayName": "No Match - Unrelated",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 603,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

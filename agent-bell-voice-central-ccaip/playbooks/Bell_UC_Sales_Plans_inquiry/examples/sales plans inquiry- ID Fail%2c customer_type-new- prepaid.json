@@ -1,0 +1,59 @@
+{
+  "name": "2c24240e-f1af-4ece-bded-f08f28f64edb",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "language": "en"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Sure, let me help you with that.\n\nWhich service are you inquiring about?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "its pre-paid service"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_va_to_ivr_handoff_prepaid",
+      "inputActionParameters": {
+        "identification_status": "Fail",
+        "language": "en",
+        "lob": "mobility",
+        "mobility_sub_type": "prepaid"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customers want to know about different plans or compare different plans that Bell has and lob identified as \" Internet\" OR \"TV\" OR \"Homephone\"",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "New",
+      "language": "en",
+      "route": "sales_plans_inquiry",
+      "utterance": "I need a plan"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "user mentions prepaid service so route to bell_va_to_ivr_handoff_prepaid",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "mobility_sub_type": "prepaid"
+    }
+  },
+  "displayName": "sales plans inquiry- ID Fail, customer_type-new- prepaid",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 353,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

@@ -1,0 +1,128 @@
+{
+  "name": "707cd4db-2cf3-4629-b792-340617974f76",
+  "displayName": "Confirm CX Account",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "messages": [ {
+      "text": {
+        "text": [ "Looks like you already have a Bell account. Are you looking to add new service or make changes to an existing one?" ]
+      },
+      "languageCode": "en"
+    }, {
+      "text": {
+        "text": [ "On dirait que vous avez déjà un compte Bell. Cherchez-vous à ajouter un nouveau service ou à modifier un service existant ?\n" ]
+      },
+      "languageCode": "fr-ca"
+    } ],
+    "setParameterActions": [ {
+      "parameter": "local_nomatch_counter",
+      "value": 0
+    }, {
+      "parameter": "local_noinput_counter",
+      "value": 0
+    }, {
+      "parameter": "local_trigger",
+      "value": null
+    } ]
+  },
+  "transitionRoutes": [ {
+    "intent": "context.new_account",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "identification_status",
+        "value": "Fail"
+      }, {
+        "parameter": "line_type",
+        "value": "New"
+      }, {
+        "parameter": "customer_type",
+        "value": "Existing"
+      } ]
+    },
+    "targetPage": "Webhook npa-nxx-lookup",
+    "name": "5b13daaf-fc34-4955-ba0b-29ca06b7a62f"
+  }, {
+    "intent": "context.existing_account",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Get CX Number",
+    "name": "75a647e0-4e0b-4416-a82f-eb1178b2a5cf"
+  }, {
+    "intent": "context.business_account",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "va_to_ivr_business_id_sales",
+    "name": "6172139a-02e0-41a6-a7fc-29bb3fdb450a"
+  }, {
+    "condition": "$session.params.va_ivr_cirn_check = true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "identification_status",
+        "value": "Fail"
+      }, {
+        "parameter": "line_type",
+        "value": "New"
+      }, {
+        "parameter": "customer_type",
+        "value": "Existing"
+      } ]
+    },
+    "targetPage": "Webhook npa-nxx-lookup",
+    "name": "2e602a5e-0c82-419c-bc55-37dd3cc47fa3"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Local Error Handling",
+    "event": "sys.no-input-default",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "identification_status",
+        "value": "Fail"
+      }, {
+        "parameter": "line_type",
+        "value": "New"
+      }, {
+        "parameter": "customer_type",
+        "value": "Existing"
+      }, {
+        "parameter": "global_error_counter",
+        "value": "$sys.func.ADD($session.params.global_error_counter,1)"
+      }, {
+        "parameter": "local_noinput_counter",
+        "value": "$sys.func.ADD($session.params.local_noinput_counter,1)"
+      }, {
+        "parameter": "local_trigger",
+        "value": "no_input"
+      } ]
+    },
+    "name": "0080f934-8361-4f0d-8c9e-325ba057412c"
+  }, {
+    "targetPage": "Local Error Handling",
+    "event": "sys.no-match-default",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "identification_status",
+        "value": "Fail"
+      }, {
+        "parameter": "line_type",
+        "value": "New"
+      }, {
+        "parameter": "customer_type",
+        "value": "Existing"
+      }, {
+        "parameter": "global_error_counter",
+        "value": "$sys.func.ADD($session.params.global_error_counter,1)"
+      }, {
+        "parameter": "local_nomatch_counter",
+        "value": "$sys.func.ADD($session.params.local_nomatch_counter,1)"
+      }, {
+        "parameter": "local_trigger",
+        "value": "no_match"
+      } ]
+    },
+    "name": "11102e43-4563-4e5e-8e03-57c45111f3b0"
+  } ]
+}

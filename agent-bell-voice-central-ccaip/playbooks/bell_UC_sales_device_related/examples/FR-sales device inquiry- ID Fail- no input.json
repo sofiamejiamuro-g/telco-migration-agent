@@ -1,0 +1,104 @@
+{
+  "name": "a6ac4d6c-ea1d-4f01-8a92-39e3b25361bd",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "brand": "bell",
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "À propos de quel service communiquez- vous avec nous?"
+    }
+  }, {
+    "userUtterance": {
+    
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_global_error_count_check",
+      "inputActionParameters": {
+        "global_error_counter": "1"
+      },
+      "outputActionParameters": {
+        "global_error_counter": "2"
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Je n’ai pas tout à fait compris. Pouvez-vous réessayer?"
+    }
+  }, {
+    "userUtterance": {
+    
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_global_error_count_check",
+      "inputActionParameters": {
+        "global_error_counter": "2"
+      },
+      "outputActionParameters": {
+        "global_error_counter": "3"
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Êtes-vous toujours là? Pouvez-vous répéter, s’il vous plaît?"
+    }
+  }, {
+    "userUtterance": {
+    
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_global_error_count_check",
+      "inputActionParameters": {
+        "global_error_counter": "3"
+      },
+      "outputActionParameters": {
+        "global_error_counter": "4"
+      }
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_No_Input_3",
+      "inputActionParameters": {
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+        "language": "fr-ca"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer has questions about device availability, device features, cost, related to devices that Bell sells and there's no input from the customer",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "New",
+      "global_error_counter": "1",
+      "identification_status": "Fail",
+      "language": "fr-ca",
+      "route": "sales_device_inquiry",
+      "utterance": "J'ai des questions sur la disponibilité des appareils"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "The customer provides no  information 3 times so flow bell_global_error_count_check is called each time and VA responds as per instructions ,  he was routed to bell_No_Input_3 flow",
+    "actionParameters": {
+      "global_error_counter": "4",
+      "language": "fr-ca"
+    }
+  },
+  "displayName": "FR-sales device inquiry- ID Fail- no input",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 680,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

@@ -1,0 +1,89 @@
+{
+  "name": "93ec2eed-4c8d-4938-9318-81d9074e445e",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Who is the manufacturer?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "gieshdkse"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_global_error_count_check",
+      "inputActionParameters": {
+        "global_error_counter": "1"
+      },
+      "outputActionParameters": {
+        "global_error_counter": "2"
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Sorry, I didn't understand. What was that?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "apple"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Most devices purchased through Bell come within the limited manufacturer's warranty. Did you purchase your device within the last 12 months?\n"
+    }
+  }, {
+    "userUtterance": {
+      "text": "350 days"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "For questions about your iPhone's warranty, please visit an Apple Store or their website for details. I can send you a link to help with your Apple warranty questions. Is that alright?\n"
+    }
+  }, {
+    "userUtterance": {
+      "text": "yes"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "en",
+        "sms_content": "Bell: You can visit checkcoverage.apple.com/?locale=en_CA for information on your iPhone Warranty. ( bell.ca/about-us )",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "customer is inquiring about device_issue=\"defective\"",
+    "actionParameters": {
+      "brand": "bell",
+      "device_issue": "Defective",
+      "global_error_counter": "1",
+      "language": "en",
+      "noinput_flag": "True",
+      "route": "equipment_warranty_claim",
+      "utterance": "Hi my phone is having a poor battery life I need a replacement, is it covered under warranty"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "customer is asked manufacturer and proceed further manufacturer warranty logic. As customer gave a no match, flow bell_global_error_counter_check is called each time",
+    "actionParameters": {
+      "brand": "bell",
+      "device_issue": "Defective",
+      "global_error_counter": "2",
+      "language": "en",
+      "manufacturer": "Apple",
+      "noinput_flag": "True",
+      "route": "equipment_warranty_claim",
+      "sms_content": "Bell msg: You can visit https:/checkcoverage.apple.com/? locale=en CA to validate your iPhone Warranty. (bell.ca/about-us)",
+      "sms_type": "Public"
+    }
+  },
+  "displayName": "EN-equipment_warranty_claim-id-pass-device-issue-defective-no-manufacturer-apple-sms(yes) no match",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 623,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

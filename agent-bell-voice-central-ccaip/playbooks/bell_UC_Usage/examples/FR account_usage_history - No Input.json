@@ -1,0 +1,52 @@
+{
+  "name": "bb13a61f-a87c-4046-bf78-853a2c423739",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Bien sûr, je peux vous aider. Souhaitez-vous obtenir des renseignements sur l'utilisation d'Internet ou des services de mobilité?"
+    }
+  }, {
+    "userUtterance": {
+    
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_global_error_count_check",
+      "inputActionParameters": {
+        "global_error_counter": "1"
+      },
+      "outputActionParameters": {
+        "global_error_counter": "2"
+      }
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "sms_send_status": "Declined"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "User has a question regarding their usage history.",
+    "actionParameters": {
+      "global_error_counter": "1",
+      "language": "fr-ca",
+      "route": "account_usage_history",
+      "utterance": "j’ai une question concernant mon utilisation"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Disambiguate for LOB and customer doesn't say anything for 5 seconds so we route accordingly",
+    "actionParameters": {
+      "global_error_counter": "2"
+    }
+  },
+  "displayName": "FR account_usage_history - No Input",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 307,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "fr"
+}

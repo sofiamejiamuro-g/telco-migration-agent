@@ -1,0 +1,66 @@
+{
+  "name": "d34707bb-1e55-4205-9e15-a412e86c2ed3",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Bien sûr, je peux vous aider. Quelle est la raison de la suspension de votre service?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Je vais voyager."
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Saviez-vous que vous pouvez utiliser votre téléphone pendant vos déplacements? Aimeriez-vous en savoir plus?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "oui"
+    }
+  }, {
+    "playbookInvocation": {
+      "playbook": "bell_UC_Manage Plans and Features Phase2",
+      "playbookInput": {
+        "precedingConversationSummary": "User wants to learn more about using phone while travelling",
+        "actionParameters": {
+          "add_ons": "roaming",
+          "brand": "bell",
+          "language": "fr-ca",
+          "lob": "Mobility",
+          "route": "service_add_feature"
+        }
+      },
+      "playbookOutput": {
+        "executionSummary": "User rerouted to \"bell_UC_Manage Plans and Features\" playbook with route as \"service_add_feature\" and add_ons as \"roaming\"",
+        "actionParameters": {
+          "language": "fr-ca",
+          "lob": "mobility"
+        }
+      },
+      "playbookState": "OUTPUT_STATE_OK"
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer trying to suspend their service as they will be travelling",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca",
+      "route": "account_suspend_service",
+      "unique_services": "Mobility",
+      "utterance": "Je veux suspendre mon service mobility"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "here customer mention the unique services, so follow the steps and redirect them to \"bell_UC_Manage Plans and Features\" playbook",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca",
+      "lob": "Mobility",
+      "route": "service_add_feature"
+    }
+  },
+  "displayName": "FR Account suspend service already said - Travel - Yes",
+  "retrievalStrategy": "NEVER",
+  "tokenCount": 407,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

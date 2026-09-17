@@ -1,0 +1,96 @@
+{
+  "name": "be5875da-b4c3-41c2-9357-835d547d4a5b",
+  "displayName": "Local Error handling - Pin Auth - Start",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.global_error_counter \u003e= 3",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_aqd",
+    "name": "1b42e4cc-8d10-4f16-8491-19727bc2024b"
+  }, {
+    "condition": "$session.params.local_noinput_counter = 1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Sorry, that does not seem right. Please say or key in your 4 digit PIN." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Désolé, cela ne semble pas correct. Veuillez dire ou saisir votre NIP à quatre chiffres." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "a5549d62-19d5-44dd-b42a-81392af54ef6"
+  }, {
+    "condition": "$session.params.local_noinput_counter \u003e= 2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "There seems to be a problem." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Il semble y avoir un problème." ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "auth_status",
+        "value": "Fail"
+      } ]
+    },
+    "targetPage": "End Flow Check",
+    "name": "924e9e52-af4d-40d7-8dc7-8f5f4ed5868f"
+  }, {
+    "condition": "$session.params.local_trigger = \"no_match\" AND $session.params.local_nomatch_counter = 1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Sorry, that does not seem right. Please say or key in your 4 digit PIN." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Désolé, cela ne semble pas correct. Veuillez dire ou saisir votre NIP à quatre chiffres." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "912343c8-22c9-400c-af2b-88c2fdd1448c"
+  }, {
+    "condition": "$session.params.local_trigger = \"no_match\" AND $session.params.local_nomatch_counter \u003e= 2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "There seems to be a problem." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Il semble y avoir un problème." ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "auth_status",
+        "value": "Fail"
+      } ]
+    },
+    "targetPage": "End Flow Check",
+    "name": "5e5c2bb8-c896-47b8-ac58-3c0ae82eb568"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Previous Page",
+    "name": "615319b6-746b-4cd2-9f69-ef50be0f3f03"
+  } ]
+}

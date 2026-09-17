@@ -1,0 +1,48 @@
+{
+  "name": "d37174a6-bfed-447f-8b27-fb57325ef2a1",
+  "displayName": "If another ACUT ticket correct?",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "messages": [ {
+      "text": {
+        "text": [ "I see you have another ticket that was opened on $session.params.recent_ticket_creation_time_obj2.day, $session.params.recent_ticket_creation_time_obj2.month $session.params.recent_ticket_creation_time_obj2.date, $session.params.recent_ticket_creation_time_obj2.year.\nIs this the ticket you are calling about?" ]
+      },
+      "languageCode": "en"
+    }, {
+      "text": {
+        "text": [ "Je vois que vous avez un autre billet qui a été ouvert $session.params.recent_ticket_creation_time_obj2.day_fr, $session.params.recent_ticket_creation_time_obj2.month_fr $session.params.recent_ticket_creation_time_obj2.date, $session.params.recent_ticket_creation_time_obj2.year.\nEst-ce le billet à propos duquel vous appelez?" ]
+      },
+      "languageCode": "fr-ca"
+    } ],
+    "setParameterActions": [ {
+      "parameter": "recent_ticket_creation_time_obj2",
+      "value": "$sys.func.TO_OBJECT($request.generative.recent_ticket_creation_time_obj2)"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "intent": "context.confirm_yes",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "ticket_number",
+        "value": "$session.params.acut_find_response.ticket_summaries[1].acut_trouble_ticket_number"
+      }, {
+        "parameter": "ticket_state",
+        "value": "$session.params.acut_find_response.ticket_summaries[1].ticket_state_category"
+      }, {
+        "parameter": "ticket_number_ref",
+        "value": "$sys.func.CONCATENATE(\"REF\", $sys.func.TO_TEXT($session.params.ticket_number))"
+      } ]
+    },
+    "targetFlow": "bell_acut_ticket_chk_troubleshooting_intents",
+    "name": "47d1ad41-3083-4a34-8ede-1c552e228448"
+  }, {
+    "intent": "context.confirm_no",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_aqd",
+    "name": "1a867d04-796c-4bd8-ae9d-03f3d0bf9c52"
+  } ]
+}

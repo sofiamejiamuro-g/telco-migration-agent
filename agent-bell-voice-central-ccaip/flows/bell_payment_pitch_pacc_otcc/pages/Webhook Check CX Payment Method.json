@@ -1,0 +1,128 @@
+{
+  "name": "fb63c7c6-091c-4939-a1a7-648b56f5d68a",
+  "displayName": "Webhook Check CX Payment Method",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "/v1/pre-auth-payment#get-existing",
+    "tag": "get-existing"
+  },
+  "transitionRoutes": [ {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "payment_method",
+        "value": "$session.params.get_pre_auth_payment_response.paymentMethod"
+      } ]
+    },
+    "name": "e4a71ca6-2147-40b2-915c-b7adad570aa3"
+  }, {
+    "condition": "$session.params.webhook-success = False OR $session.params.webhook-success = false",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Failure Confirmation",
+    "name": "c501e83d-fb8b-4338-965c-92abe8269b3a"
+  }, {
+    "condition": "$session.params.payment_method = \"PreAuthCreditCard\" OR $session.params.payment_method = \"PreAuthBank\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "card_number",
+        "value": null
+      }, {
+        "parameter": "cc_token",
+        "value": null
+      }, {
+        "parameter": "expiry_date",
+        "value": null
+      }, {
+        "parameter": "expiry_month",
+        "value": null
+      }, {
+        "parameter": "expiry_year",
+        "value": null
+      }, {
+        "parameter": "security_code",
+        "value": null
+      }, {
+        "parameter": "cvv_number",
+        "value": null
+      }, {
+        "parameter": "cc_from_utterance",
+        "value": null
+      } ]
+    },
+    "targetFlow": "bell_Feedback",
+    "name": "6ffd8f6f-8667-428f-b325-c879d1270188"
+  }, {
+    "condition": "$session.params.payment_method = \"Regular\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Check CX Prior Status",
+    "name": "679d156e-1d23-4ea7-ac59-f094b007d53b"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "fb63c7c6-091c-4939-a1a7-648b56f5d68a"
+      }, {
+        "parameter": "flow_id",
+        "value": "5ed028e7-19b2-4619-8cae-9bd0842cb48a"
+      }, {
+        "parameter": "page_name",
+        "value": "Webhook Check CX Payment Method"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Webhook Failure Confirmation",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+    
+    },
+    "name": "fb4e809d-04a1-49b3-b33c-270a3e75106f"
+  }, {
+    "targetPage": "Webhook Failure Confirmation",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+    
+    },
+    "name": "869ad3e8-c29f-484f-9406-7ffd2d15bf23"
+  }, {
+    "targetPage": "Webhook Failure Confirmation",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+    
+    },
+    "name": "5f5c167f-3665-45c4-b85f-13b5c32c8908"
+  }, {
+    "targetPage": "Webhook Failure Confirmation",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+    
+    },
+    "name": "d111ad17-1bbd-406c-91a4-7b954bb6e6a1"
+  }, {
+    "targetPage": "Webhook Failure Confirmation",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+    
+    },
+    "name": "14d91ba9-7ef1-46bc-b6b9-b90789b13401"
+  }, {
+    "targetPage": "Webhook Failure Confirmation",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+    
+    },
+    "name": "a1750bef-2cbf-42e7-8e91-a4cd4f62b3f7"
+  } ]
+}

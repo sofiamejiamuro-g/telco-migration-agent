@@ -1,0 +1,96 @@
+{
+  "name": "5408efc2-96c9-4fef-b5f0-22a3014f3a24",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "language": "en"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Sure, let me help you with that.\n\nAre you inquiring about new service or do you want to make changes to your current service?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "new plan"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Which service are you inquiring about?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "want to add new line"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "In order to assist you better."
+    }
+  }, {
+    "playbookInvocation": {
+      "playbook": "bell_uc_ask_LOB",
+      "playbookInput": {
+        "precedingConversationSummary": "customer wants to add a new line and {province} is \"ROC\" or null from identification flow, but does not provide lob",
+        "actionParameters": {
+          "language": "en",
+          "line_type": "New",
+          "route": "sales_add_to_existing_account"
+        }
+      },
+      "playbookOutput": {
+        "executionSummary": "When user does not provide lob, prompt them to understand what kind of service they are looking for, if the user mentions lob then return lob to the originating Playbook, if not set the default lob and return back",
+        "actionParameters": {
+          "language": "en",
+          "line_type": "New",
+          "lob": "TV",
+          "route": "sales_add_to_existing_account"
+        }
+      }
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_aqd",
+      "inputActionParameters": {
+        "language": "en",
+        "line_type": "New",
+        "lob": "TV",
+        "province": "ROC"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "customer wants to add a line and {province} is \"ROC\" or null from identification flow",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "en",
+      "province": "ROC",
+      "route": "sales_add_to_existing_account",
+      "utterance": "I would like to add a line"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "AS {lob} is tv and {province} is ROC from id flow we are transferring agent to aqd",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "line_type": "New",
+      "lob": "TV",
+      "province": "ROC"
+    }
+  },
+  "displayName": "EN-sales_add_to_existing-account-Existing-ROC(tv)",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 628,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

@@ -1,0 +1,60 @@
+{
+  "name": "db80a046-6df9-4d11-8b8e-6f169de2830a",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "language": "fr-ca",
+        "lob": "internet",
+        "province": "ROC"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Bien sûr, laissez-moi vous aider.\nVérifions si nous offrons des services Internet ou de téléphonie résidentielle dans votre secteur. Dans quelle province avez-vous besoin de services?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Lloydminster"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_aqd",
+      "inputActionParameters": {
+        "language": "fr-ca",
+        "lob": "Internet",
+        "special_queue": "cable_internet"
+      },
+      "outputActionParameters": {
+        "language": "fr-ca"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "The customer is asking whether the provider's service is offered at an address or location.",
+    "actionParameters": {
+      "language": "fr-ca",
+      "lob": "Internet",
+      "province": "BC",
+      "route": "sales_confirm_service_coverage",
+      "utterance": "Avez-vous un service Internet à mon emplacement?"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "When province is anything other than ON and QC or is null or empty, ask user for province, extract in {province} parameter and further route based on province",
+    "actionParameters": {
+      "language": "fr-ca",
+      "lob": "Internet",
+      "province": "AB",
+      "utterance": "Avez-vous un service Internet à mon emplacement?"
+    }
+  },
+  "displayName": "FR-sales_service_coverage- internet",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 407,
+  "languageCode": "en"
+}

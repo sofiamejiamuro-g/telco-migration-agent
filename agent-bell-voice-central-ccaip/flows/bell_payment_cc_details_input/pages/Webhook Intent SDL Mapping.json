@@ -1,0 +1,117 @@
+{
+  "name": "edca7bde-c376-4c4a-82af-0c342c992217",
+  "displayName": "Webhook Intent SDL Mapping",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "v1/intent-sdl-mapping",
+    "tag": "NA",
+    "setParameterActions": [ {
+      "parameter": "intent",
+      "value": "$session.params.route"
+    }, {
+      "parameter": "tag",
+      "value": "default"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.webhook_success = True OR $session.params.webhook_success = \"True\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "url",
+        "value": "$session.params.intent_sdl_map_response.url"
+      } ],
+      "conditionalCases": [ {
+        "cases": [ {
+          "condition": "$session.params.route = \"payment_make_payment\"",
+          "caseContent": [ {
+            "message": {
+              "text": {
+                "text": [ "You can review your account details yourself in the MyBell app." ]
+              },
+              "languageCode": "en"
+            }
+          }, {
+            "message": {
+              "text": {
+                "text": [ "You can also learn more about how to make a payment at $session.params.url" ]
+              },
+              "languageCode": "en"
+            }
+          }, {
+            "message": {
+              "text": {
+                "text": [ "Vous pouvez consulter les détails de votre compte vous-même dans l’appli MonBell." ]
+              },
+              "languageCode": "fr-ca"
+            }
+          }, {
+            "message": {
+              "text": {
+                "text": [ "Vous pouvez également en apprendre davantage sur la façon d’effectuer un paiement au $session.params.url" ]
+              },
+              "languageCode": "fr-ca"
+            }
+          } ]
+        }, {
+          "condition": "$session.params.route = \"payment_setup_autopay\" OR \"payment_update_autopay\"",
+          "caseContent": [ {
+            "message": {
+              "text": {
+                "text": [ "Okay. If you'd still like to complete this step, you can do so in the MyBell app. Please visit  $session.params.url for more information." ]
+              },
+              "languageCode": "en"
+            }
+          }, {
+            "message": {
+              "text": {
+                "text": [ "D’accord. Si vous souhaitez toujours configurer le paiement pré-autorisé, vous pouvez le faire dans l’appli MonBell. Veuillez visiter $session.params.url pour en savoir plus." ]
+              },
+              "languageCode": "fr-ca"
+            }
+          } ]
+        }, {
+          "caseContent": [ {
+            "message": {
+              "text": {
+                "text": [ "You can review your account details yourself in the MyBell app." ]
+              },
+              "languageCode": "en"
+            }
+          }, {
+            "message": {
+              "text": {
+                "text": [ "You can also learn more about how to make a payment at $session.params.url" ]
+              },
+              "languageCode": "en"
+            }
+          }, {
+            "message": {
+              "text": {
+                "text": [ "Vous pouvez consulter les détails de votre compte vous-même dans l’appli MonBell." ]
+              },
+              "languageCode": "fr-ca"
+            }
+          }, {
+            "message": {
+              "text": {
+                "text": [ "Vous pouvez également en apprendre davantage sur la façon d’effectuer un paiement au $session.params.url" ]
+              },
+              "languageCode": "fr-ca"
+            }
+          } ]
+        } ]
+      } ]
+    },
+    "targetFlow": "bell_Feedback",
+    "name": "26229f00-6714-4c1a-8193-7ad47dd91d54"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Intent SDL Error Handling",
+    "name": "8e64ebbe-995a-479c-991d-1ce1f69cf9ec"
+  } ]
+}

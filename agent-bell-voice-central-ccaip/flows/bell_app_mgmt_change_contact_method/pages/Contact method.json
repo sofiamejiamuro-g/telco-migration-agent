@@ -1,0 +1,163 @@
+{
+  "name": "5cbd1929-4f13-4ba9-99c6-4c57610c4e7a",
+  "displayName": "Contact method",
+  "form": {
+    "parameters": [ {
+      "displayName": "Contact_Number",
+      "required": true,
+      "entityType": "@sys.phone-number",
+      "fillBehavior": {
+        "initialPromptFulfillment": {
+          "setParameterActions": [ {
+            "parameter": "temp_clid",
+            "value": "$session.params.clid"
+          } ]
+        },
+        "repromptEventHandlers": [ {
+          "targetPage": "Local Error handling",
+          "event": "sys.no-input-default",
+          "triggerFulfillment": {
+            "setParameterActions": [ {
+              "parameter": "global_error_counter",
+              "value": "$sys.func.ADD($session.params.global_error_counter,1)"
+            }, {
+              "parameter": "local_noinput_counter",
+              "value": "$sys.func.ADD($session.params.local_noinput_counter,1)"
+            }, {
+              "parameter": "local_trigger",
+              "value": "no_input"
+            } ]
+          },
+          "name": "dbb48e29-e165-454f-89bf-4a16684c1d28"
+        }, {
+          "targetPage": "Local Error handling",
+          "event": "sys.no-match-default",
+          "triggerFulfillment": {
+            "setParameterActions": [ {
+              "parameter": "global_error_counter",
+              "value": "$sys.func.ADD($session.params.global_error_counter,1)"
+            }, {
+              "parameter": "local_nomatch_counter",
+              "value": "$sys.func.ADD($session.params.local_nomatch_counter,1)"
+            }, {
+              "parameter": "local_trigger",
+              "value": "no_match"
+            } ]
+          },
+          "name": "2c981e04-77a9-47d2-bf87-536bf8b725c4"
+        } ]
+      }
+    } ]
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "intent": "context.home_phone",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_aqd",
+    "name": "2de1c86e-ac63-471d-9036-2cba72cc85fd"
+  }, {
+    "intent": "conxtent.user_declining_to_provide_phone_number",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "In order for us to serve you better, we need you to provide a contact number. In the event your service issue requires agent assistance or a technician visit, they'll use this number to contact you, if necessary. If required the number can be changed later." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Afin que nous puissions mieux vous servir, nous avons besoin que vous fournissiez un numéro de téléphone.  Si votre problème de service nécessite l’aide d’un/une agent(e) ou la visite d’un/une ou la technicien(ne)(ne), ils/elles utiliseront ce numéro pour communiquer avec vous, si nécessaire. Au besoin, le numéro peut être modifié ultérieurement." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetPage": "User input confirmation",
+    "name": "988c0586-ac94-4e76-bed0-cc2f40a51912"
+  }, {
+    "intent": "context.same_number",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "Contact_Number_1",
+        "value": "$sys.func.SUBSTITUTE($session.params.Contact_Number, \"[^0-9]\", \"\")"
+      }, {
+        "parameter": "Contact_Number_len",
+        "value": "$sys.func.LEN($session.params.Contact_Number_1)"
+      }, {
+        "parameter": "Contact_Number_1st_Pos",
+        "value": "$sys.func.MID($session.params.Contact_Number_1, 1, 1)"
+      }, {
+        "parameter": "Contact_Number_11_digit_Valid",
+        "value": "$sys.func.IF(\"$session.params.Contact_Number_1st_Pos =  1  AND $session.params.Contact_Number_len = 11\", $sys.func.MID($session.params.Contact_Number_1,2,10), \"\")"
+      }, {
+        "parameter": "Contact_Number_11_digit_Invalid",
+        "value": "$sys.func.IF(\"$session.params.Contact_Number_1st_Pos !=  1 AND $session.params.Contact_Number_len = 11\", \"\", \"\")"
+      }, {
+        "parameter": "Contact_Number_10_digit_Valid",
+        "value": "$sys.func.IF(\"$session.params.Contact_Number_len = 10\", $session.params.Contact_Number_1, \"\")"
+      }, {
+        "parameter": "Contact_Number_Invalid",
+        "value": "$sys.func.IF(\"$session.params.Contact_Number_len != 10 OR $session.params.Contact_Number_len != 11\", \"\", \"\")"
+      }, {
+        "parameter": "Contact_Number_10",
+        "value": "$sys.func.IF(\"$sys.func.LEN($session.params.Contact_Number_10_digit_Valid) = 10\", \"$session.params.Contact_Number_10_digit_Valid\", \"\")"
+      }, {
+        "parameter": "Contact_Number",
+        "value": "$sys.func.IF(\"$sys.func.LEN($session.params.Contact_Number_11_digit_Valid) = 10\", \"$session.params.Contact_Number_11_digit_Valid\", \"$session.params.Contact_Number_10\")"
+      }, {
+        "parameter": "Contact_Number",
+        "value": "$sys.func.IF(\"($session.params.Contact_Number:0000000000) OR ($session.params.Contact_Number:1111111111) OR ($session.params.Contact_Number:2222222222) OR ($session.params.Contact_Number:3333333333) OR ($session.params.Contact_Number:4444444444) OR ($session.params.Contact_Number:5555555555) OR ($session.params.Contact_Number:6666666666) OR ($session.params.Contact_Number:7777777777) OR ($session.params.Contact_Number:8888888888) OR ($session.params.Contact_Number:9999999999)\", \"\", $session.params.Contact_Number)"
+      }, {
+        "parameter": "Contact_Number_flag",
+        "value": "$sys.func.IS_PHONE_NUMBER($session.params.Contact_Number, \"CA\")"
+      }, {
+        "parameter": "Contact_Number",
+        "value": "$session.params.clid"
+      } ]
+    },
+    "targetPage": "Home phone Check",
+    "name": "705ee11f-498d-4a8c-9e7e-8eb6faa5d8ac"
+  }, {
+    "condition": "$session.params.Contact_Number != null",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "Contact_Number_1",
+        "value": "$sys.func.SUBSTITUTE($session.params.Contact_Number, \"[^0-9]\", \"\")"
+      }, {
+        "parameter": "Contact_Number_len",
+        "value": "$sys.func.LEN($session.params.Contact_Number_1)"
+      }, {
+        "parameter": "Contact_Number_1st_Pos",
+        "value": "$sys.func.MID($session.params.Contact_Number_1, 1, 1)"
+      }, {
+        "parameter": "Contact_Number_11_digit_Valid",
+        "value": "$sys.func.IF(\"$session.params.Contact_Number_1st_Pos =  1  AND $session.params.Contact_Number_len = 11\", $sys.func.MID($session.params.Contact_Number_1,2,10), \"\")"
+      }, {
+        "parameter": "Contact_Number_11_digit_Invalid",
+        "value": "$sys.func.IF(\"$session.params.Contact_Number_1st_Pos !=  1 AND $session.params.Contact_Number_len = 11\", \"\", \"\")"
+      }, {
+        "parameter": "Contact_Number_10_digit_Valid",
+        "value": "$sys.func.IF(\"$session.params.Contact_Number_len = 10\", $session.params.Contact_Number_1, \"\")"
+      }, {
+        "parameter": "Contact_Number_Invalid",
+        "value": "$sys.func.IF(\"$session.params.Contact_Number_len != 10 OR $session.params.Contact_Number_len != 11\", \"\", \"\")"
+      }, {
+        "parameter": "Contact_Number_10",
+        "value": "$sys.func.IF(\"$sys.func.LEN($session.params.Contact_Number_10_digit_Valid) = 10\", \"$session.params.Contact_Number_10_digit_Valid\", \"\")"
+      }, {
+        "parameter": "Contact_Number",
+        "value": "$sys.func.IF(\"$sys.func.LEN($session.params.Contact_Number_11_digit_Valid) = 10\", \"$session.params.Contact_Number_11_digit_Valid\", \"$session.params.Contact_Number_10\")"
+      }, {
+        "parameter": "Contact_Number",
+        "value": "$sys.func.IF(\"($session.params.Contact_Number:0000000000) OR ($session.params.Contact_Number:1111111111) OR ($session.params.Contact_Number:2222222222) OR ($session.params.Contact_Number:3333333333) OR ($session.params.Contact_Number:4444444444) OR ($session.params.Contact_Number:5555555555) OR ($session.params.Contact_Number:6666666666) OR ($session.params.Contact_Number:7777777777) OR ($session.params.Contact_Number:8888888888) OR ($session.params.Contact_Number:9999999999)\", \"\", $session.params.Contact_Number)"
+      }, {
+        "parameter": "Contact_Number_flag",
+        "value": "$sys.func.IS_PHONE_NUMBER($session.params.Contact_Number, \"CA\")"
+      } ]
+    },
+    "targetPage": "Home phone Check",
+    "name": "360a9458-175b-44ca-aaa9-3ab3dbf91fe5"
+  } ]
+}

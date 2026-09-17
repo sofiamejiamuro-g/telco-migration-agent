@@ -1,0 +1,27 @@
+{
+  "name": "79c5d088-245c-4a03-ba8b-78fcfbdefc81",
+  "displayName": "/v1/ticket_management/wfas#cancel",
+  "timeout": {
+    "seconds": 30
+  },
+  "serviceDirectory": {
+    "service": "projects/gcp-it-npe-pltfm-apigee/locations/us-central1/namespaces/apigee-nb-usc1-service-dir-namespace/services/apigee-nb-usc1-service",
+    "genericWebService": {
+      "uri": "https://apigee-nane1-uat.int.bell.ca/v1/ticket_management/wfas",
+      "requestHeaders": [ {
+        "key": "x-apikey",
+        "value": "npZmDivP6Hxes3wtQ0tC9RqItjJTY8TgZHbOPNeFwvSYSKPI"
+      } ],
+      "webhookType": "FLEXIBLE",
+      "httpMethod": "POST",
+      "requestBody": "{\n  \"sessionInfo\": {\n    \"dfcx_session_id\": \"$session.params.dfcx_session_id\",\n    \"agent_id\": \"$session.params.agent_id\",\n    \"parameters\": {\n      \"menu_type\": \"$session.params.menu_type\",\n      \"released_preferred\": \"$session.params.released_preferred\",\n      \"wfas_context\": \"$session.params.wfas_context\"\n    }\n  },\n  \"fulfillmentInfo\": {\n    \"tag\": \"cancel\"\n  },\n  \"languageCode\": \"$request.language\"\n}",
+      "parameterMapping": [ {
+        "key": "cancelAppointment_response",
+        "value": "sessionInfo.parameters.cancelAppointment_response"
+      }, {
+        "key": "webhook_success",
+        "value": "sessionInfo.parameters.webhook_success"
+      } ]
+    }
+  }
+}

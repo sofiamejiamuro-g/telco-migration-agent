@@ -1,0 +1,473 @@
+{
+  "name": "b9831fc6-5d1d-4e1b-af0f-1d2046e886c9",
+  "displayName": "EEPA-2070-CPM Check-WSC",
+  "testCaseConversationTurns": [ {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "hi"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "sessionParameters": {
+        "Agent_Counter": 0,
+        "CLID": 4164204109,
+        "brand": "bell",
+        "caller_channel": "TFN",
+        "language": "en",
+        "speak_to_agent_counter": 0
+      },
+      "differences": [ {
+        "type": "PAGE",
+        "description": "Page mismatch:\nExpected: \nActual:   Routing Page",
+        "assertionType": "EQUAL",
+        "expectedValue": "",
+        "actualValue": "Routing Page"
+      }, {
+        "type": "INTENT",
+        "description": "Intent mismatch:\nExpected: \nActual:   Default Welcome Intent",
+        "assertionType": "EQUAL",
+        "expectedValue": "",
+        "actualValue": "Default Welcome Intent"
+      }, {
+        "type": "UTTERANCE",
+        "description": "Agent response mismatch",
+        "warning": true,
+        "assertionType": "EQUAL",
+        "expectedValue": "",
+        "actualValue": "Welcome. I’m Bell’s virtual assistant. it’s nice to e-meet you. I use AI to offer you help quickly when you need it. How Can I help you?"
+      } ],
+      "triggeredIntent": {
+        "name": "Default Welcome Intent"
+      },
+      "currentPage": {
+        "name": "Routing Page",
+        "flow": "Default Start Flow"
+      },
+      "textResponses": [ {
+        "text": [ "Welcome. I’m Bell’s virtual assistant. it’s nice to e-meet you. I use AI to offer you help quickly when you need it. How Can I help you?" ]
+      } ],
+      "currentFlow": {
+        "name": "Default Start Flow"
+      },
+      "actions": [ {
+        "userUtterance": {
+          "text": "hi"
+        }
+      }, {
+        "agentUtterance": {
+          "text": "Welcome. I’m Bell’s virtual assistant. it’s nice to e-meet you. I use AI to offer you help quickly when you need it. How Can I help you?"
+        }
+      } ]
+    }
+  }, {
+    "userInput": {
+      "injectedParameters": {
+        "caller_channel": "WSC"
+      },
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "make payment"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "sessionParameters": {
+        "Agent_Counter": 0,
+        "CLID": 4164204109,
+        "CPM_Invalid_Counter": 0,
+        "Loud_Counter": 0,
+        "Mistake_Counter": 0,
+        "More_Time_Counter": 0,
+        "PHN_Incorrect_Counter": 0,
+        "PHN_Invalid_Counter": 0,
+        "brand": "bell",
+        "caller_channel": "WSC",
+        "language": "en",
+        "route": "payment_make_payment",
+        "speak_to_agent_counter": 0,
+        "utterance": "make payment"
+      },
+      "differences": [ {
+        "type": "PAGE",
+        "description": "Page mismatch:\nExpected: \nActual:   CIRN Collection Check",
+        "assertionType": "EQUAL",
+        "expectedValue": "",
+        "actualValue": "CIRN Collection Check"
+      }, {
+        "type": "INTENT",
+        "description": "Intent mismatch:\nExpected: \nActual:   payment_make_payment",
+        "assertionType": "EQUAL",
+        "expectedValue": "",
+        "actualValue": "payment_make_payment"
+      }, {
+        "type": "UTTERANCE",
+        "description": "Agent response mismatch",
+        "warning": true,
+        "assertionType": "EQUAL",
+        "expectedValue": "",
+        "actualValue": "Is this concerning the number you are calling from?"
+      } ],
+      "triggeredIntent": {
+        "name": "payment_make_payment"
+      },
+      "currentPage": {
+        "name": "CIRN Collection Check",
+        "flow": "bell_Identification"
+      },
+      "textResponses": [ {
+        "text": [ "Is this concerning the number you are calling from?" ],
+        "allowPlaybackInterruption": true
+      } ],
+      "currentFlow": {
+        "name": "bell_Identification"
+      },
+      "actions": [ {
+        "userUtterance": {
+          "text": "make payment"
+        }
+      }, {
+        "agentUtterance": {
+          "text": "Is this concerning the number you are calling from?"
+        }
+      } ]
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "no"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "sessionParameters": {
+        "Agent_Counter": 0,
+        "CLID": 4164204109,
+        "CPM_Invalid_Counter": 0,
+        "Loud_Counter": 0,
+        "Mistake_Counter": 0,
+        "More_Time_Counter": 0,
+        "PHN_Incorrect_Counter": 1,
+        "PHN_Invalid_Counter": 0,
+        "brand": "bell",
+        "caller_channel": "WSC",
+        "identification_repeat": 0,
+        "language": "en",
+        "route": "payment_make_payment",
+        "speak_to_agent_counter": 0,
+        "utterance": "make payment"
+      },
+      "differences": [ {
+        "type": "PAGE",
+        "description": "Page mismatch:\nExpected: \nActual:   CX Input Custom Fallback 1",
+        "assertionType": "EQUAL",
+        "expectedValue": "",
+        "actualValue": "CX Input Custom Fallback 1"
+      }, {
+        "type": "INTENT",
+        "description": "Intent mismatch:\nExpected: \nActual:   context.confirm_no",
+        "assertionType": "EQUAL",
+        "expectedValue": "",
+        "actualValue": "context.confirm_no"
+      }, {
+        "type": "UTTERANCE",
+        "description": "Agent response mismatch",
+        "warning": true,
+        "assertionType": "EQUAL",
+        "expectedValue": "",
+        "actualValue": "Okay, so what’s the 10-digit number you’re calling about?"
+      } ],
+      "triggeredIntent": {
+        "name": "context.confirm_no"
+      },
+      "currentPage": {
+        "name": "CX Input Custom Fallback 1",
+        "flow": "bell_Identification"
+      },
+      "textResponses": [ {
+        "text": [ "Okay, so what’s the 10-digit number you’re calling about?" ]
+      } ],
+      "currentFlow": {
+        "name": "bell_Identification"
+      },
+      "actions": [ {
+        "userUtterance": {
+          "text": "no"
+        }
+      }, {
+        "agentUtterance": {
+          "text": "Okay, so what’s the 10-digit number you’re calling about?"
+        }
+      } ]
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "16135016890"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "sessionParameters": {
+        "Agent_Counter": 0,
+        "CIRN": "6135016890",
+        "CIRN_1": "16135016890",
+        "CIRN_10": "",
+        "CIRN_10_digit_Valid": "",
+        "CIRN_11_digit_Invalid": "",
+        "CIRN_11_digit_Valid": "6135016890",
+        "CIRN_1st_Pos": "1",
+        "CIRN_Invalid": "",
+        "CIRN_Len": 11,
+        "CIRN_flag": true,
+        "CLID": 4164204109,
+        "CPM_Invalid_Counter": 0,
+        "Loud_Counter": 0,
+        "Mistake_Counter": 0,
+        "More_Time_Counter": 0,
+        "PHN_Incorrect_Counter": 0,
+        "PHN_Invalid_Counter": 0,
+        "brand": "bell",
+        "caller_channel": "WSC",
+        "counter": 1,
+        "identification_repeat": 0,
+        "language": "en",
+        "route": "payment_make_payment",
+        "speak_to_agent_counter": 0,
+        "utterance": "make payment"
+      },
+      "differences": [ {
+        "type": "PAGE",
+        "description": "Page mismatch:\nExpected: \nActual:   Check CX Input",
+        "assertionType": "EQUAL",
+        "expectedValue": "",
+        "actualValue": "Check CX Input"
+      }, {
+        "type": "UTTERANCE",
+        "description": "Agent response mismatch",
+        "warning": true,
+        "assertionType": "EQUAL",
+        "expectedValue": "",
+        "actualValue": "\u003cspeak\u003eThat was \u003csay-as interpret-as='telephone'\u003e6135016890\u003c/say-as\u003e, right?\u003c/speak\u003e"
+      } ],
+      "currentPage": {
+        "name": "Check CX Input",
+        "flow": "bell_Identification"
+      },
+      "textResponses": [ {
+        "text": [ "\u003cspeak\u003eThat was \u003csay-as interpret-as='telephone'\u003e6135016890\u003c/say-as\u003e, right?\u003c/speak\u003e" ],
+        "allowPlaybackInterruption": true
+      } ],
+      "currentFlow": {
+        "name": "bell_Identification"
+      },
+      "actions": [ {
+        "userUtterance": {
+          "text": "16135016890"
+        }
+      }, {
+        "agentUtterance": {
+          "text": "\u003cspeak\u003eThat was \u003csay-as interpret-as='telephone'\u003e6135016890\u003c/say-as\u003e, right?\u003c/speak\u003e"
+        }
+      } ]
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "yes"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "sessionParameters": {
+        "Agent_Counter": 0,
+        "CIRN_1": "16135016890",
+        "CIRN_10": "",
+        "CIRN_10_digit_Valid": "",
+        "CIRN_11_digit_Invalid": "",
+        "CIRN_11_digit_Valid": "6135016890",
+        "CIRN_1st_Pos": "1",
+        "CIRN_Invalid": "",
+        "CIRN_Len": 11,
+        "CIRN_flag": true,
+        "CLID": 4164204109,
+        "CPM_Invalid_Counter": 1,
+        "Loud_Counter": 0,
+        "Mistake_Counter": 0,
+        "More_Time_Counter": 0,
+        "PHN_Incorrect_Counter": 0,
+        "PHN_Invalid_Counter": 0,
+        "brand": "bell",
+        "caller_channel": "WSC",
+        "counter": 1,
+        "customer_id_search_response": "{}",
+        "identification_repeat": 0,
+        "language": "en",
+        "route": "payment_make_payment",
+        "speak_to_agent_counter": 0,
+        "telephone_number": 6135016890,
+        "utterance": "make payment"
+      },
+      "differences": [ {
+        "type": "PAGE",
+        "description": "Page mismatch:\nExpected: \nActual:   CX Input Custom Fallback 1",
+        "assertionType": "EQUAL",
+        "expectedValue": "",
+        "actualValue": "CX Input Custom Fallback 1"
+      }, {
+        "type": "INTENT",
+        "description": "Intent mismatch:\nExpected: \nActual:   context.confirm_yes",
+        "assertionType": "EQUAL",
+        "expectedValue": "",
+        "actualValue": "context.confirm_yes"
+      }, {
+        "type": "UTTERANCE",
+        "description": "Agent response mismatch",
+        "warning": true,
+        "assertionType": "EQUAL",
+        "expectedValue": "",
+        "actualValue": "Thanks!Sorry, we don’t have that number in our records. Please say the 10-digit Bell number you are calling about. You can also use your key pad to enter it."
+      } ],
+      "triggeredIntent": {
+        "name": "context.confirm_yes"
+      },
+      "currentPage": {
+        "name": "CX Input Custom Fallback 1",
+        "flow": "bell_Identification"
+      },
+      "textResponses": [ {
+        "text": [ "Thanks!" ],
+        "allowPlaybackInterruption": true
+      }, {
+        "text": [ "Sorry, we don’t have that number in our records. Please say the 10-digit Bell number you are calling about. You can also use your key pad to enter it." ],
+        "allowPlaybackInterruption": true
+      } ],
+      "currentFlow": {
+        "name": "bell_Identification"
+      },
+      "actions": [ {
+        "userUtterance": {
+          "text": "yes"
+        }
+      }, {
+        "agentUtterance": {
+          "text": "Thanks!\nSorry, we don’t have that number in our records. Please say the 10-digit Bell number you are calling about. You can also use your key pad to enter it."
+        }
+      } ]
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "16135016890"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "sessionParameters": {
+        "Agent_Counter": 0,
+        "CIRN": "6135016890",
+        "CIRN_1": "16135016890",
+        "CIRN_10": "",
+        "CIRN_10_digit_Valid": "",
+        "CIRN_11_digit_Invalid": "",
+        "CIRN_11_digit_Valid": "6135016890",
+        "CIRN_1st_Pos": "1",
+        "CIRN_Invalid": "",
+        "CIRN_Len": 11,
+        "CIRN_flag": true,
+        "CLID": 4164204109,
+        "CPM_Invalid_Counter": 1,
+        "Loud_Counter": 0,
+        "Mistake_Counter": 0,
+        "More_Time_Counter": 0,
+        "PHN_Incorrect_Counter": 0,
+        "PHN_Invalid_Counter": 0,
+        "brand": "bell",
+        "caller_channel": "WSC",
+        "counter": 1,
+        "customer_id_search_response": "{}",
+        "identification_repeat": 0,
+        "identification_status": "Fail",
+        "language": "en",
+        "route": "payment_make_payment",
+        "speak_to_agent_counter": 0,
+        "telephone_number": 6135016890,
+        "utterance": "make payment"
+      },
+      "differences": [ {
+        "type": "UTTERANCE",
+        "description": "Agent response mismatch",
+        "warning": true,
+        "assertionType": "EQUAL",
+        "expectedValue": "",
+        "actualValue": "Thanks!I'm sorry, I can't seem to find this number in our records.Sorry there seems to be a problem, we could not identify youI'm sorry, I'm unable to verify your identity. Please call us at 1-800-BELL-MOB (1-800-235-5662) to speak with a representative."
+      } ],
+      "textResponses": [ {
+        "text": [ "Thanks!" ],
+        "allowPlaybackInterruption": true
+      }, {
+        "text": [ "I'm sorry, I can't seem to find this number in our records." ],
+        "allowPlaybackInterruption": true
+      }, {
+        "text": [ "Sorry there seems to be a problem, we could not identify you" ],
+        "allowPlaybackInterruption": true
+      }, {
+        "text": [ "I'm sorry, I'm unable to verify your identity. Please call us at 1-800-BELL-MOB (1-800-235-5662) to speak with a representative." ],
+        "allowPlaybackInterruption": true
+      } ],
+      "actions": [ {
+        "userUtterance": {
+          "text": "16135016890"
+        }
+      }, {
+        "agentUtterance": {
+          "text": "Thanks!\nI'm sorry, I can't seem to find this number in our records.\nSorry there seems to be a problem, we could not identify you"
+        }
+      }, {
+        "playbookInvocation": {
+          "playbook": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/playbooks/5de122dc-8c9a-4a4a-8332-c5df65125a22",
+          "playbookInput": {
+            "actionParameters": {
+              "CLID": 4164204109,
+              "brand": "bell",
+              "caller_channel": "WSC",
+              "identification_status": "Fail",
+              "language": "en"
+            }
+          },
+          "playbookState": "OUTPUT_STATE_PENDING"
+        }
+      }, {
+        "agentUtterance": {
+          "text": "I'm sorry, I'm unable to verify your identity. Please call us at 1-800-BELL-MOB (1-800-235-5662) to speak with a representative."
+        }
+      } ]
+    }
+  } ],
+  "creationTime": {
+    "seconds": 1738317498,
+    "nanos": 262341000
+  },
+  "testConfig": {
+    "flow": "Default Start Flow",
+    "page": "Start Page"
+  },
+  "languageCode": "en"
+}

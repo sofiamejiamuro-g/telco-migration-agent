@@ -1,0 +1,75 @@
+{
+  "name": "3877ff18-7101-4c57-ab7a-23212ce46c23",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "brand": "bell",
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Désirez-vous ajouter un nouveau service ou modifier votre service\nactuel?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Je veux en savoir plus sur le service actuel"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "À propos de quel service communiquez- vous avec nous?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Montres connectées, tablettes, Internet mobile, cartes SIM, d'occasion"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Je vais envoyer un texto à l'appareil au moyen\nduquel vous appelez, afin que vous puissiez\ndécouvrir les appareils mobiles de Bell, comme\nles téléphones, les tablettes et les montres\nintelligentes, ainsi que le service Internet mobile.\nEst-ce que ça vous convient?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "non"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "fr-ca",
+        "route": "sales_device_inquiry",
+        "sms_send_status": "Declined"
+      },
+      "outputActionParameters": {
+        "language": "fr-ca"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer has questions about device availability, device features, cost, related to devices that Bell sells",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "fr-ca",
+      "route": "sales_device_inquiry",
+      "utterance": "J'ai des questions sur la disponibilité des appareils"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "if lob is Homephone then give corresponding response",
+    "actionParameters": {
+      "language": "fr-ca",
+      "line_type": "Existing"
+    }
+  },
+  "displayName": "FR sales device inquiry- ID Pass,line type-not mentioned- existing- smartwatches-no",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 497,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

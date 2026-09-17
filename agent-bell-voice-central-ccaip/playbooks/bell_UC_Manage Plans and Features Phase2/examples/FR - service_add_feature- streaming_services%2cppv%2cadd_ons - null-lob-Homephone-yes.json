@@ -1,0 +1,73 @@
+{
+  "name": "84eb8674-57d0-44ee-9637-d22beb9b8346",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70011",
+        "brand": "bell",
+        "language": "fr-ca",
+        "route": "service_add_feature"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Je vais envoyer un texto à l’appareil au moyen duquel vous appelez, afin que vous puissiez facilement gérer votre forfait de téléphonie résidentielle, vos options ou votre forfait interurbain à tout moment à l’aide de MonBell. Est-ce que ça vous convient?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "oui s'il vous plait"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "fr-ca",
+        "route": "service_add_feature",
+        "sms_content": "Vous pouvez visiter https://m.bell.ca/e/modifierforfait pour modifier votre forfait téléphonique résidentiel et ses fonctionnalités dans l'appli MonBell. ( bell.ca/apropos )",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+        "language": "fr-ca"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "The {identification_status} is \"Pass\", {customer_type} is \"Existing\", {streaming_services} is null and {ppv} is null and {add_ons} is null and {lob} is \"Homephone\" so, we will prompt user for send SMS confirmation and if user say \"yes\" or anything affirmative then route to \"bell_SMS Trgigger\" flow.",
+    "actionParameters": {
+      "apb_location_id": "70011",
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "fr-ca",
+      "lob": "Homephone",
+      "route": "service_add_feature",
+      "sms_content": "Vous pouvez visiter https://m.bell.ca/e/modifierforfait pour modifier votre forfait téléphonique résidentiel et ses fonctionnalités dans l'appli MonBell. ( bell.ca/apropos )",
+      "sms_type": "Public",
+      "utterance": "Je souhaite transférer mon appel vers mon téléphone fixe."
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "As the {lob} is \"Homephone\" and {streaming_services}, {add_ons}, {ppv} is null then we will prompt user to send SMS and if user say \"yes\" or anything affirmative then send the user to \"bell_SMS Trigger\" flow",
+    "actionParameters": {
+      "apb_location_id": "70011",
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "fr-ca",
+      "lob": "Homephone",
+      "route": "service_add_feature",
+      "sms_content": "Vous pouvez visiter https://m.bell.ca/e/modifierforfait pour modifier votre forfait téléphonique résidentiel et ses fonctionnalités dans l'appli MonBell. ( bell.ca/apropos )",
+      "sms_type": "Public",
+      "utterance": "Je souhaite transférer mon appel vers mon téléphone fixe."
+    }
+  },
+  "displayName": "FR - service_add_feature- streaming_services,ppv,add_ons - null-lob-Homephone-yes",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 744,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

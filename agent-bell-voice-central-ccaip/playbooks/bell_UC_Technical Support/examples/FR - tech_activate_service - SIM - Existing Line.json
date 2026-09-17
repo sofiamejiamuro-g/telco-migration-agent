@@ -1,0 +1,59 @@
+{
+  "name": "620dc419-9fc3-4f44-be91-d335121e69ab",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Je peux certainement vous aider à activer votre service.\n\nActivez-vous une carte SIM pour une ligne existante ou une nouvelle ligne?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "J'essaie de transférer vers une nouvelle carte SIM"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Vous pouvez facilement transférer une ligne existante vers une nouvelle carte SIM ou SIM électronique dans l'application MonBell. Je vais vous envoyer un message texte à l'instant avec des instructions supplémentaires."
+    }
+  }, {
+    "userUtterance": {
+      "text": "oui"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "BAN": "4162675927163",
+        "CLID": "4169705061",
+        "brand": "bell",
+        "language": "fr-ca",
+        "route": "tech_activate_service",
+        "sms_content": "Mess. Bell: Voici un lien dans l'application MonBell où vous pouvez transférer votre service vers une nouvelle carte SIM ou SIM électronique: https://mybell.bell.ca/Login?lang=fr\u0026refreshlink=https://mybell.bell.ca/sso/ssoauth.axsp?ReturnUrl=/PunchInOut/punchin?DirectAccess=ChangeSIM\u0026inserttrackingcode Si vous avez déjà suspendy votre service, vous devrez d’abord le restaurer ici avant de le transférer: https://mybell.bell.caLogin?lang=fr\u0026refreshLink=https://mybell.bell.ca/Punchin.aspx?DirectAccess=RestoreSubscriber (bell.ca/apropos)",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+        "brand": "bell",
+        "language": "fr-ca"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer wants to activate a Physical SIM from an existing eSIM",
+    "actionParameters": {
+      "CLID": "4155547622",
+      "brand": "bell",
+      "language": "fr-ca",
+      "route": "tech_activate_service",
+      "sim_type": "Physical Sim"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Customer has been redirected to \"Steering_SMS Trigger\" playbook and then has been directed to \"Steering_Wrap-up\" playbook",
+    "actionParameters": {
+      "BAN": "4162675927163",
+      "language": "fr-ca"
+    }
+  },
+  "displayName": "FR - tech_activate_service - SIM - Existing Line",
+  "retrievalStrategy": "NEVER",
+  "tokenCount": 564,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

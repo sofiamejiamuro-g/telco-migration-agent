@@ -1,0 +1,140 @@
+{
+  "name": "a37b966b-2d37-4b5e-acd8-b5cd12f921a8",
+  "displayName": "Local Error handling + Ask Date Again",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.global_error_counter \u003e= 3",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_aqd",
+    "name": "d3fee011-0bc8-40e5-a1b8-31015e2725d0"
+  }, {
+    "condition": "$session.params.local_trigger = \"no_input\" AND $session.params.local_noinput_counter = 1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I didn't quite get that." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Can you provide the date again?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je n'ai pas bien compris." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "Pouvez-vous me redonner la date?" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "22a694bf-9884-4c42-b495-d4ac98fee606"
+  }, {
+    "condition": "$session.params.local_trigger = \"no_input\" AND $session.params.local_noinput_counter = 2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I still didn't get that." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Can you provide the date again?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je n'ai toujours pas compris." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "Pouvez-vous me redonner la date?" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "6c3055fc-7d6e-4563-8f45-b41a10643201"
+  }, {
+    "condition": "$session.params.local_trigger = \"no_input\" AND $session.params.local_noinput_counter = 3",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook - WFAS Cancel",
+    "name": "d6a84ce0-d7cc-49e1-81a7-b23aa5696833"
+  }, {
+    "condition": "$session.params.local_trigger = \"no_match\" AND $session.params.local_nomatch_counter = 1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I didn't quite get that." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Can you provide the date again?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je n'ai pas bien compris." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "Pouvez-vous me redonner la date?" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "d3d5ea7f-ddb1-47c8-95d6-3ba22c0bc7e8"
+  }, {
+    "condition": "$session.params.local_trigger = \"no_match\" AND $session.params.local_nomatch_counter = 2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I still didn't get that." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Can you provide the date again?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je n'ai toujours pas compris." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "Pouvez-vous me redonner la date?" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "bdc31dcf-349b-439a-b7d9-129bcc5beaac"
+  }, {
+    "condition": "$session.params.local_trigger = \"no_match\" AND $session.params.local_nomatch_counter = 3",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook - WFAS Cancel",
+    "name": "bf431f04-2f0a-424f-8a96-416413ec3810"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Previous Page",
+    "name": "88bec2af-b487-4e81-bdb3-6bd86cb2377e"
+  } ]
+}

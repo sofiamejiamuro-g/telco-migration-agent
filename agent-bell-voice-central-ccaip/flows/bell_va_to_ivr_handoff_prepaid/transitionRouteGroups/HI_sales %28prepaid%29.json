@@ -1,0 +1,176 @@
+{
+  "name": "3f21c320-0fae-444f-a5cd-4493d7f64c1e",
+  "displayName": "HI_sales (prepaid)",
+  "transitionRoutes": [ {
+    "condition": "$request.generative.is_business : true",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "To get you the best support for your business account, I’ll transfer you to our Business support system. You’ll need to use your phone keypad instead of talking to the virtual assistant. Just a moment while I connect you." ]
+        },
+        "languageCode": "en"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "special_queue",
+        "value": "business"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "92fc4868-0479-4147-9a45-f05c795cbeb7"
+  }, {
+    "intent": "sales_add_to_existing_account",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "route",
+        "value": "sales_add_to_existing_account"
+      }, {
+        "parameter": "mobility_sub_type",
+        "value": null
+      }, {
+        "parameter": "is_prepaid",
+        "value": null
+      }, {
+        "parameter": "utterance",
+        "value": "$request.user-utterance"
+      } ]
+    },
+    "name": "c236aea4-7715-40c5-8bb3-478ceba3ba60",
+    "targetPlaybook": "bell_UC_Sales"
+  }, {
+    "intent": "sales_new_account",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "route",
+        "value": "sales_new_account"
+      }, {
+        "parameter": "is_prepaid",
+        "value": null
+      }, {
+        "parameter": "mobility_sub_type",
+        "value": null
+      }, {
+        "parameter": "utterance",
+        "value": "$request.user-utterance"
+      } ]
+    },
+    "name": "4e1bd1a0-b8ae-4978-977d-ccaba2db435a",
+    "targetPlaybook": "bell_UC_Sales"
+  }, {
+    "intent": "sales_order_device",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "route",
+        "value": "sales_order_device"
+      }, {
+        "parameter": "mobility_sub_type",
+        "value": null
+      }, {
+        "parameter": "is_prepaid",
+        "value": null
+      }, {
+        "parameter": "utterance",
+        "value": "$request.user-utterance"
+      } ]
+    },
+    "name": "f8c9af90-6209-49e5-996a-1be50129c0c6",
+    "targetPlaybook": "bell_UC_sales_device_related"
+  }, {
+    "intent": "sales_device_inquiry",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "route",
+        "value": "sales_device_inquiry"
+      }, {
+        "parameter": "is_prepaid",
+        "value": null
+      }, {
+        "parameter": "mobility_sub_type",
+        "value": null
+      }, {
+        "parameter": "utterance",
+        "value": "$request.user-utterance"
+      } ]
+    },
+    "name": "12500930-f865-478d-828c-fecc81a726fc",
+    "targetPlaybook": "bell_UC_sales_device_related"
+  }, {
+    "intent": "sales_port_in_service",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "route",
+        "value": "sales_port_in_service"
+      }, {
+        "parameter": "apb_location_id",
+        "value": 70018
+      }, {
+        "parameter": "mobility_sub_type",
+        "value": null
+      }, {
+        "parameter": "is_prepaid",
+        "value": null
+      }, {
+        "parameter": "utterance",
+        "value": "$request.user-utterance"
+      } ]
+    },
+    "name": "5546119e-e475-41fa-a3a0-fc19cb0aeb1c",
+    "targetPlaybook": "bell_UC_Sales"
+  }, {
+    "intent": "sales_confirm_service_coverage",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "route",
+        "value": "sales_confirm_service_coverage"
+      }, {
+        "parameter": "is_prepaid",
+        "value": null
+      }, {
+        "parameter": "mobility_sub_type",
+        "value": null
+      }, {
+        "parameter": "utterance",
+        "value": "$request.user-utterance"
+      } ]
+    },
+    "name": "ea91b0d8-f162-47c6-9fc8-26ffd0562cfb",
+    "targetPlaybook": "bell_uc_sales_service_coverage"
+  }, {
+    "intent": "sales_plans_inquiry",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "route",
+        "value": "sales_plans_inquiry"
+      }, {
+        "parameter": "is_prepaid",
+        "value": null
+      }, {
+        "parameter": "mobility_sub_type",
+        "value": null
+      }, {
+        "parameter": "utterance",
+        "value": "$request.user-utterance"
+      } ]
+    },
+    "name": "8dfca81e-0db8-4bfe-99a4-2739137fb6fb",
+    "targetPlaybook": "Bell_UC_Sales_Plans_inquiry"
+  }, {
+    "intent": "sales_vague",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "route",
+        "value": "sales_vague"
+      }, {
+        "parameter": "mobility_sub_type",
+        "value": null
+      }, {
+        "parameter": "is_prepaid",
+        "value": null
+      }, {
+        "parameter": "utterance",
+        "value": "$request.user-utterance"
+      } ]
+    },
+    "name": "2179b8e1-5121-417e-a49c-d7c6e53ec9d2",
+    "targetPlaybook": "bell_uc_disambiguation_for_vague_sales"
+  } ]
+}

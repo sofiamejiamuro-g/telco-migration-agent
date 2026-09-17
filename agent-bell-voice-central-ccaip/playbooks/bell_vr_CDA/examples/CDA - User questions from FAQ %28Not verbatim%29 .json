@@ -1,0 +1,59 @@
+{
+  "name": "6d773a0a-8961-40cb-8d6b-013bb2d0babf",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "To fix this issue, you need to perform this step now. Please try restarting the device you’re having issues with, such as your phone or computer, and reconnect to your Bell Wi-Fi network. Once you're connected, try using the Internet. Please perform that step and let me know when you are done."
+    }
+  }, {
+    "userUtterance": {
+      "text": "I can't find the power button on my phone."
+    }
+  }, {
+    "agentUtterance": {
+      "text": "The restart button varies by device. For mobile devices, you can swipe down from the top of the screen and there should be a restart option, or you can try powering it off and then back on again. Once you have managed to restart it, please reconnect to your Bell Wi-Fi and let me know if the Internet works."
+    }
+  }, {
+    "userUtterance": {
+      "text": "Okay... the Internet is working now."
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Perfect. I'm updating the status now to see what we need to do next."
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_vr_post_answer",
+      "inputActionParameters": {
+        "customer_answer1_id": "0"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "User having a problem with the service and initiating Virtual repair session.",
+    "actionParameters": {
+      "acceptable_answers": [ {
+        "choice": "user_completed_entire_solution",
+        "id": "0"
+      }, {
+        "choice": "user_is_stuck_further_help_requested",
+        "id": "1"
+      } ],
+      "dcx_action_code": "6020",
+      "description": "",
+      "eta_CDA": "Approx. 2 minutes",
+      "faq_question_answer": "Q: How long should I wait before plugging it back in? A: Please wait 15 seconds before reconnecting the power supply. Q: What lights or messages should I see while it restarts? A: The lights during a restart will vary and flash differently depending on the status. The lights indicate status of the device during reboot there are different statuses. Q: How long can that take? A: A restart can vary by device. It can usually take 3 to 5 minutes for the reboot to finish and for the device to be reconfigured. Q: What website can I check? A: You can try navigating to www.bell.ca Q: What website do you want me to check? A: You can try checking the www.bell.ca website. Q: What device do you want me to check it on? A: You can try the one we are troubleshooting with are you able to browse Q: What browser should I use? A: You can pick any browser you like. Q: What is a browser? A: A browser is an app that you use to access websites. For example Chrome, Edge or Safari. Q: How do I restart my device? A: You can restart your device by selecting restart or powering it off and then back on. Q: Where is the restart button? A: The restart button varies by device, for mobile devices you can swipe down from the top and there should be a restart option or you can try powering it off and then back on again.",
+      "language": "en",
+      "title": "Try restarting the device you’re having issues with, such as your phone or computer, and reconnect to your Bell WiFi network. Once you're connected, try using the Internet."
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Tool Evaluation (Stage A): The system successfully called the FAQ tool and received a valid JSON response containing multiple Q\u0026A pairs.\n\nSemantic Search (Stage B, Step 1): The system iterated through the tool's response, comparing the user's query (\"I can't find the power button...\") against the Q field of each snippet.\n\nMatch Identification: A high-confidence semantic match was identified with the question: \"Q: Where is the restart button?\". The system stored the corresponding answer: \"The restart button varies by device...\".\n\nResponse Generation (Stage B, Step 2): Since found_answer was not null, the system output the answer exactly as retrieved from the tool.\n\nFlow Constraint: Immediately after the answer, the system applied the mandatory rule to \"gently re-ask the initial troubleshooting question,\" appending a directive based on the current title to steer the conversation back to the main task."
+  },
+  "displayName": "CDA - User questions from FAQ (Not verbatim) ",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 979,
+  "languageCode": "en"
+}

@@ -1,0 +1,139 @@
+{
+  "name": "5f080bcc-55a0-4b67-91a5-c6bc79ab5200",
+  "displayName": "CVV Validation",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.cvv_number != null",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "len_cvv_number",
+        "value": "$sys.func.LEN($sys.func.TO_TEXT($session.params.cvv_number))"
+      } ]
+    },
+    "name": "795d7f3c-4eae-4fd8-ad31-70b07c16de2e"
+  }, {
+    "condition": "$session.params.len_cvv_number = 3 AND ($session.params.card_brand = VI OR $session.params.card_brand = VISA OR $session.params.card_brand = MC OR $session.params.card_brand = MasterCard)",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Thanks!" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Merci!" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetPage": "Route Based Redirect",
+    "name": "35896ede-0130-4c21-a3a7-4387ef091a1d"
+  }, {
+    "condition": "$session.params.len_cvv_number = 4 AND ($session.params.card_brand = AMEX OR $session.params.card_brand = AX)",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Thanks!" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Merci!" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetPage": "Route Based Redirect",
+    "name": "7e4f0c7c-8cc3-48b1-95c7-882cae33095f"
+  }, {
+    "condition": "$session.params.incorrect_cvv \u003c 2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "That doesn't seem right. What's the code again?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Cela ne semble pas correct. Quel est ce code encore une fois?" ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "incorrect_cvv",
+        "value": "$sys.func.ADD($session.params.incorrect_cvv,1)"
+      }, {
+        "parameter": "cvv_number",
+        "value": null
+      } ]
+    },
+    "targetPage": "Prompt CVV Number",
+    "name": "8bfae130-cb96-4b41-963a-01d20f6324ab"
+  }, {
+    "condition": "$session.params.incorrect_cvv \u003e= 2",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "cvv_number",
+        "value": null
+      } ],
+      "conditionalCases": [ {
+        "cases": [ {
+          "condition": "$session.params.route = \"payment_make_payment\"",
+          "caseContent": [ {
+            "message": {
+              "text": {
+                "text": [ "To keep things secure, we ask that you please try again later. You can also make a payment at any point using the MyBell app." ]
+              },
+              "languageCode": "en"
+            }
+          } ]
+        }, {
+          "condition": "$session.params.route = \"payment_setup_autopay\" OR \"payment_update_autopay\"",
+          "caseContent": [ {
+            "message": {
+              "text": {
+                "text": [ "To keep things secure, we ask that you please try again later. You can also set up your pre-authorized payment at any point using the MyBell app." ]
+              },
+              "languageCode": "en"
+            }
+          } ]
+        }, {
+          "caseContent": [ {
+            "message": {
+              "text": {
+                "text": [ "To keep things secure, you can try again later. You can also easily complete this step on the MyBell app." ]
+              },
+              "languageCode": "en"
+            }
+          } ]
+        } ]
+      } ]
+    },
+    "targetPage": "Prompt CX SMS",
+    "name": "c84378a4-659e-4ff0-89f7-d0d941fbb7c6"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "5f080bcc-55a0-4b67-91a5-c6bc79ab5200"
+      }, {
+        "parameter": "flow_id",
+        "value": "a059ee3e-a2ae-4118-bc6a-65f7330baa63"
+      }, {
+        "parameter": "page_name",
+        "value": "CVV Validation"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

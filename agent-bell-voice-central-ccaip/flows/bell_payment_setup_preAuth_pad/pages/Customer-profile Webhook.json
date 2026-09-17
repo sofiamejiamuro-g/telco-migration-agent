@@ -1,0 +1,137 @@
+{
+  "name": "9ba92561-4211-4269-a86a-a483dbd076b6",
+  "displayName": "Customer-profile Webhook",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "/v1/ibm_mw/nm1_get#customer-profile",
+    "tag": "customer-profile"
+  },
+  "transitionRoutes": [ {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "Bantype",
+        "value": "$session.params.nm1_get_cust_profile_response.banType"
+      }, {
+        "parameter": "Bansubtype",
+        "value": "$session.params.nm1_get_cust_profile_response.banSubType"
+      }, {
+        "parameter": "errorCode",
+        "value": "$session.params.nm1_get_cust_profile_response.returnCode"
+      }, {
+        "parameter": "onebillindicator",
+        "value": "$session.params.nm1_get_cust_profile_response.oneBill"
+      } ]
+    },
+    "name": "a108a559-da0c-4711-86a1-540fa3e6b5cb"
+  }, {
+    "condition": "$session.params.webhook_success = \"false\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "PAD Self-Service SMS Confirmation",
+    "name": "5b1c2922-5c89-4870-a5a9-c033be7743cf"
+  }, {
+    "condition": "$session.params.errorCode = \"0\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "webhook_success",
+        "value": "false"
+      } ]
+    },
+    "targetPage": "PAD Self-Service SMS Confirmation",
+    "name": "21e0b551-f7ec-407e-8603-d8877f5c05d0"
+  }, {
+    "condition": "$session.params.onebillindicator = \"Y\" OR $session.params.onebillindicator = \"M\" OR $session.params.onebillindicator = \"N\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "webhook_success",
+        "value": null
+      } ]
+    },
+    "targetPage": "Consolidated Customers",
+    "name": "40ef7a8c-404e-43a0-9f38-614d2b005b88"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "9ba92561-4211-4269-a86a-a483dbd076b6"
+      }, {
+        "parameter": "flow_id",
+        "value": "97702c6e-5d8f-4b0b-a549-7650c14df7ab"
+      }, {
+        "parameter": "page_name",
+        "value": "Customer-profile Webhook"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "PAD Self-Service SMS Confirmation",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "webhook_success",
+        "value": "nm1"
+      } ]
+    },
+    "name": "90361736-4d73-4696-9832-13ed627be2d5"
+  }, {
+    "targetPage": "PAD Self-Service SMS Confirmation",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "webhook_success",
+        "value": "nm1"
+      } ]
+    },
+    "name": "415cd104-de3f-445e-8080-c5e2fc95d75c"
+  }, {
+    "targetPage": "PAD Self-Service SMS Confirmation",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "webhook_success",
+        "value": "nm1"
+      } ]
+    },
+    "name": "e3008885-3592-462c-a648-1299b055784d"
+  }, {
+    "targetPage": "PAD Self-Service SMS Confirmation",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "webhook_success",
+        "value": "nm1"
+      } ]
+    },
+    "name": "d66ec16b-01ac-42c3-b958-e97f5e723474"
+  }, {
+    "targetPage": "PAD Self-Service SMS Confirmation",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "webhook_success",
+        "value": "nm1"
+      } ]
+    },
+    "name": "e22a9f9c-0f3a-43c0-a903-926acd6cbc75"
+  }, {
+    "targetPage": "PAD Self-Service SMS Confirmation",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "webhook_success",
+        "value": "nm1"
+      } ]
+    },
+    "name": "86815f08-ff31-4d0c-83ae-c99f3a16934a"
+  } ]
+}

@@ -1,0 +1,86 @@
+{
+  "name": "7fdd5412-cf01-48c9-bf21-bbe50dafdce8",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Are you returning a mobility or residential device?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "mobility"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Is the device older then 15 days?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "yes"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Did you sign up for the Device Return Option?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "yes"
+    }
+  }, {
+    "toolUse": {
+      "tool": "EN_Bell_Equipment_Inquires",
+      "action": "EN_Bell_Equipment_Inquires",
+      "inputActionParameters": {
+        "requestBody": {
+          "filter": "Bell Device Return Option",
+          "query": "in store device return option eligibility"
+        }
+      },
+      "outputActionParameters": {
+        "200": {
+          "answer": "",
+          "snippets": [ ]
+        }
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Devices purchased in a store must be returned to the store where the purchase was made along with the original receipt. Products purchased online or at a call centre cannot be returned to a store, even if that’s where the order was picked up.\n\nDo you need help with anything else? "
+    }
+  }, {
+    "userUtterance": {
+      "text": "no"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_Feedback",
+      "inputActionParameters": {
+        "language": "en"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "customer wants to know about how to return a device bought in store",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "route": "equipment_return_device",
+      "utterance": "How do I return my device I bought in a store?"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Customer query answered",
+    "actionParameters": {
+      "language": "en",
+      "route": "equipment_return_device",
+      "utterance": "How do I return my device I bought in a store?"
+    }
+  },
+  "displayName": "equipment_return_device - return device in store",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 473,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en",
+  "retrievalLabels": [ "user:equipment_return_device" ]
+}

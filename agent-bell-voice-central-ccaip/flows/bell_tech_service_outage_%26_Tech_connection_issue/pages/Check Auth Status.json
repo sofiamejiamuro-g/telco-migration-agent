@@ -1,0 +1,36 @@
+{
+  "name": "abf74688-17ca-4af7-a882-ba20f525fff7",
+  "displayName": "Check Auth Status",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.identification_status = \"Pass\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_authentication",
+    "name": "1a73ca7e-a100-4157-9ff2-e26a5d526af7"
+  }, {
+    "condition": "$session.params.auth_status = \"Pass\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Check issue_type (Main Flow)",
+    "name": "2ea35836-24ab-4bad-adf3-12c240e24fba"
+  }, {
+    "condition": "$session.params.auth_status = \"Fail\" OR $session.params.identification_status = \"Fail\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Failed Auth",
+    "name": "14817d79-6a67-4085-8a9e-39fccfdb0bc4"
+  }, {
+    "condition": "$session.params.test_no_active_2861 = true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Check LOB (no active outage)",
+    "name": "29c3254e-9fe5-4ba2-8dec-4a33096dafb0"
+  } ]
+}

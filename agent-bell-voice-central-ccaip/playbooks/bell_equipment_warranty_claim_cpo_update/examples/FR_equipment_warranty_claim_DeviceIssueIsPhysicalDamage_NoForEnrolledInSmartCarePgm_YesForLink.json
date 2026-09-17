@@ -1,0 +1,56 @@
+{
+  "name": "c99b85c6-968e-41d8-b05e-f56fdc9a0a53",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Oui. Tous les téléphones d’occasion certifiés sont couverts par une garantie limitée d’un an de Bell. Cette garantie couvre les défauts de fabrication pendant un an. La garantie ne couvre pas les dommages matériels, les dommagés causés par un liquide ou le câble de recharge. \nPour une protection accrue, vous pouvez également ajouter un forfait Entretien de téléphone mobile/intelligent à votre téléphone d’occasion certifié au moment de l’achat. Ce forfait assure une protection contre la perte,  le vol, les dommages matériels et les défauts non couverts par la garantie.\nAvez-vous adhéré à notre programme d'entretien de téléphone intelligent ?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Non"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Je peux vous envoyer un lien qui vous permettra d'en savoir plus sur notre processus de réparation d’appareil en magasin ou sur d'autres options. Est-ce que ça vous convient ?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Oui"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "brand": "bell",
+        "language": "fr-ca",
+        "sms_content": "Mess. de Bell: Vous pouvez consulter le site https://soutien.bell.ca/Mobilite/Utliser_mon_appareil/Reparations pour en savoir plus sur notre processus de réparation d’appareils en magasin. ( bell.ca/apropos )",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer asking about Certified Preowned device being broken with route \"equipment_warranty_claim\"",
+    "actionParameters": {
+      "brand": "bell",
+      "device_issue": "Physical Damage",
+      "language": "fr-ca",
+      "route": "equipment_warranty_claim",
+      "utterance": "Appareil d’occasion certifié est cassé"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Customer is responded with apt message for Physical Damage and then SMART CARE COVERAGE LOGIC is triggered",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca",
+      "route": "equipment_warranty_claim"
+    }
+  },
+  "displayName": "FR_equipment_warranty_claim_DeviceIssueIsPhysicalDamage_NoForEnrolledInSmartCarePgm_YesForLink",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 499,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

@@ -1,0 +1,143 @@
+{
+  "name": "ae3fc932-6921-4af6-b5d4-b52b8e1ac612",
+  "displayName": "Webhook Capture Payment Amount",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "messages": [ {
+      "text": {
+        "text": [ "Please wait until I confirm your payment." ]
+      },
+      "languageCode": "en"
+    }, {
+      "text": {
+        "text": [ "Veuillez patienter jusqu'à ce que je confirme votre paiement." ]
+      },
+      "languageCode": "fr-ca"
+    } ],
+    "webhook": "v1/one-time-payment#cc-payment-details",
+    "tag": "cc-payment-details",
+    "returnPartialResponses": true
+  },
+  "transitionRoutes": [ {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "isValid",
+        "value": "$session.params.update_otp_cc_details_response.creditCardValidationDetails.isValid"
+      } ]
+    },
+    "name": "043de3a4-349c-462e-88f7-45c1c5726a4c"
+  }, {
+    "condition": "$session.params.webhook_success = true AND $session.params.isValid = true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Process Payment Attempt",
+    "name": "36aae6db-f33a-4620-aa81-b7370da80a6b"
+  }, {
+    "condition": "$session.params.webhook_success = true AND $session.params.isValid = false",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "expiry_month",
+        "value": null
+      }, {
+        "parameter": "expiry_year",
+        "value": null
+      }, {
+        "parameter": "cc_type",
+        "value": null
+      }, {
+        "parameter": "cc_token",
+        "value": null
+      }, {
+        "parameter": "security_code",
+        "value": null
+      }, {
+        "parameter": "card_expiry_date",
+        "value": null
+      }, {
+        "parameter": "credit_card_number",
+        "value": null
+      }, {
+        "parameter": "card_number",
+        "value": null
+      }, {
+        "parameter": "cvv_number",
+        "value": null
+      } ]
+    },
+    "targetPage": "CC Declined",
+    "name": "042a747b-20e1-49a3-b5ad-c7207f8e9f3a"
+  }, {
+    "condition": "$session.params.webhook_success = false",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Failure Confirmation",
+    "name": "8144fd3b-b489-47ab-aae1-d256dbe32db3"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "ae3fc932-6921-4af6-b5d4-b52b8e1ac612"
+      }, {
+        "parameter": "flow_id",
+        "value": "d810bc76-3e37-4bbb-a2ef-ad430f390435"
+      }, {
+        "parameter": "page_name",
+        "value": "Webhook Capture Payment Amount"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Webhook Failure Confirmation",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+    
+    },
+    "name": "ac0f548e-9580-477e-bec3-aa7e33cb6c20"
+  }, {
+    "targetPage": "Webhook Failure Confirmation",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+    
+    },
+    "name": "6cd2e21c-690a-4489-a65a-ed3f7bc45ea1"
+  }, {
+    "targetPage": "Webhook Failure Confirmation",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+    
+    },
+    "name": "7e07b8ae-c730-4594-bdd3-07d248d813aa"
+  }, {
+    "targetPage": "Webhook Failure Confirmation",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+    
+    },
+    "name": "1255c447-e944-4e6e-8a49-894d80c9d7b7"
+  }, {
+    "targetPage": "Webhook Failure Confirmation",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+    
+    },
+    "name": "2cd56d7c-1d46-4bce-8135-96eb4885a6bf"
+  }, {
+    "targetPage": "Webhook Failure Confirmation",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+    
+    },
+    "name": "0d6fc62f-f18d-4b4a-be10-d12b26529c4e"
+  } ]
+}

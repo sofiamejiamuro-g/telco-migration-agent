@@ -1,0 +1,45 @@
+{
+  "name": "a785aa33-8936-40f9-8c8e-f4d1106493ce",
+  "displayName": "Check special_status 2",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.special_status = \"bell_finals\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "customer_type",
+        "value": "finals"
+      }, {
+        "parameter": "additional_info",
+        "value": ""
+      } ]
+    },
+    "targetPage": "Get queue (﻿menu_id)",
+    "name": "8723e989-f931-47dd-9da0-c20a231a77c2"
+  }, {
+    "condition": "$session.params.special_status = \"bell_col_delinquent\" OR $session.params.special_status = \"bell_clp_delinquent\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "customer_type",
+        "value": "delinquent"
+      }, {
+        "parameter": "additional_info",
+        "value": ""
+      } ]
+    },
+    "targetPage": "Get queue (﻿menu_id)",
+    "name": "6f34cfb8-944f-4812-a8bc-cd3c11888fea"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "MTS consolidated bill",
+    "name": "f146ca79-4312-4e98-9ef3-602056aa29fa",
+    "description": "Please do not remove this. This is just to handle any hardstop and hence in c ase of any issue we need to fall back to MTS Consolidated Bill flow"
+  } ]
+}

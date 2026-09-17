@@ -1,0 +1,88 @@
+{
+  "name": "620aea56-1b35-4b7f-b6a7-b8e9fdbf57cc",
+  "actions": [ {
+    "playbookInvocation": {
+      "playbook": "bell_UC_Get_LOB",
+      "playbookInput": {
+        "actionParameters": {
+          "language": "fr-ca",
+          "utterance": "J’ai un problème avec mon service de télévision"
+        }
+      },
+      "playbookOutput": {
+        "actionParameters": {
+          "language": "fr-ca",
+          "lob": "TV"
+        }
+      },
+      "playbookState": "OUTPUT_STATE_OK"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70012",
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+        "language": "fr-ca"
+      }
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70015",
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+        "language": "fr-ca"
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Vous pouvez utiliser notre outil de réparation pour vérifier les pannes de service et dépanner votre équipement. Je vais envoyer un texto sur l’appareil au moyen duquel vous appelez, afin que vous puissiez y accéder rapidement. \nEst-ce que ça vous covient ?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Oui"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "fr-ca",
+        "sms_content": "Hey membre de Bell, vous pouvez visiter https://m.bell.ça/chatvirtualrepaire pour accéder à l’outil de réparation virtuel. (bell.ca/aboutus)",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+        "language": "fr-ca"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer asking about Internet network issue",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca",
+      "lob": "TV",
+      "route": "tech_connection_issue",
+      "utterance": "J’ai un problème avec mon service de télévision"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Customer is given the resolution for internet network issue",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca",
+      "lob": "TV",
+      "route": "tech_connection_issue",
+      "utterance": "J’ai un problème avec mon service de télévision"
+    }
+  },
+  "displayName": "FR_tech_connection_issue_TV_IAmHavingAnIssueWithMyTVService_Yes",
+  "retrievalStrategy": "NEVER",
+  "tokenCount": 614,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

@@ -1,0 +1,61 @@
+{
+  "name": "a7bb11b2-f6d8-4206-9517-5a2399488ba2",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "language": "en"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Sure, let me help you with that.\n\nLet’s check if we offer Internet and Home phone service in your area. In which province are you looking to get service?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Port Coquitlam"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_aqd",
+      "inputActionParameters": {
+        "special_queue": "cornerstone"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customers want to know about different plans or compare different plans that Bell has and lob identified as \" Internet\" OR \"TV\" OR \"Homephone\"",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "New",
+      "identification_status": "Fail",
+      "language": "en",
+      "lob": "internet",
+      "province": "ROC",
+      "route": "sales_plans_inquiry",
+      "utterance": "I want to get I want to get Wi-Fi."
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "If lob is not mentioned, ask for it and route to bell_uc_ask_LOB if user does not mention it, \nWhen province is anything other than ON and QC or is null or empty, ask user for province, extract in {province} parameter and further route based on province",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "lob": "internet",
+      "province": "BC",
+      "special_queue": "cornerstone"
+    }
+  },
+  "displayName": "sales plans inquiry- ID Fail,  ROC- province British Columbia LOB WI-FI -no | BC",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 429,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

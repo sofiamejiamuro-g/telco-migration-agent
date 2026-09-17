@@ -1,0 +1,249 @@
+{
+  "name": "e8db938b-f1e0-4691-a6e1-d69f079a6c30",
+  "displayName": "Confirm CX CC Number",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "messages": [ {
+      "text": {
+        "text": [ " \u003cspeak\u003eThe card number I got is\u003cprosody rate=\"slow\"\u003e\u003csay-as interpret-as='telephone'\u003e$session.params.card_number\u003c/say-as\u003e\u003c/prosody\u003e, is that correct?\u003c/speak\u003e " ]
+      },
+      "languageCode": "en"
+    }, {
+      "text": {
+        "text": [ " \u003cspeak\u003eLe numéro de carte que j’ai obtenu est \u003cprosody rate=\"slow\"\u003e\u003csay-as interpret-as='telephone'\u003e$session.params.card_number\u003c/say-as\u003e\u003c/prosody\u003e, est-ce exact? \u003c/speak\u003e" ]
+      },
+      "languageCode": "fr-ca"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "intent": "context.repeat",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ " \u003cspeak\u003eThe card number I got is\u003cprosody rate=\"slow\"\u003e\u003csay-as interpret-as='telephone'\u003e$session.params.card_number\u003c/say-as\u003e\u003c/prosody\u003e, is that correct?\u003c/speak\u003e " ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ " \u003cspeak\u003eLe numéro de carte que j’ai obtenu est \u003cprosody rate=\"slow\"\u003e\u003csay-as interpret-as='telephone'\u003e$session.params.card_number\u003c/say-as\u003e\u003c/prosody\u003e, est-ce exact? \u003c/speak\u003e" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "a445ceb5-87d4-4e86-89fe-005a96729b68"
+  }, {
+    "intent": "context.confirm_yes",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "For Expiry date, please enter the 2 digit month followed by the last 2 digits of the year." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Pour la date d’expiration, veuillez entrer les deux chiffres du mois, suivis des deux derniers chiffres de l’année." ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "$session.params.expiry_date",
+        "value": null
+      } ]
+    },
+    "targetPage": "Prompt expiry date",
+    "name": "7c5fc660-5e68-453c-9e0c-706042e2a64a"
+  }, {
+    "intent": "context.wrong_cc_number",
+    "condition": "$session.params.wrong_cc_number_counter \u003c= 3",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "number_from_utterance",
+        "value": "$sys.func.SUBSTITUTE($request.user-utterance, \"[a-zA-Z\\\\s,.'\\-`?$]\", \"\")"
+      }, {
+        "parameter": "number_from_utterance",
+        "value": "$sys.func.IF(\"$session.params.number_from_utterance=\\\"\\\"\",0,$session.params.number_from_utterance)"
+      }, {
+        "parameter": "cc_from_utterance",
+        "value": "$sys.func.IF(\"$session.params.cc_from_utterance=null\", $sys.func.TO_NUMBER($session.params.number_from_utterance), $session.params.cc_from_utterance)"
+      }, {
+        "parameter": "len_cc_from_utterance",
+        "value": "$sys.func.LEN($session.params.cc_from_utterance)"
+      }, {
+        "parameter": "alpha_from_utterance",
+        "value": "$sys.func.LEN($session.params.alpha_from_utterance)"
+      }, {
+        "parameter": "wrong_cc_number_counter",
+        "value": "$sys.func.ADD($session.params.wrong_cc_number_counter,1)"
+      } ]
+    },
+    "targetPage": "Check Incorrect CC Number",
+    "name": "a93a823d-e342-4642-b9fc-af7704b6751f"
+  }, {
+    "intent": "context.confirm_cc",
+    "condition": "$session.params.cc_from_utterance = $session.params.card_number",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "For Expiry date, please enter the 2 digit month followed by the last 2 digits of the year." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Pour la date d’expiration, veuillez entrer les deux chiffres du mois, suivis des deux derniers chiffres de l’année." ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "$session.params.expiry_date",
+        "value": null
+      } ]
+    },
+    "targetPage": "Prompt expiry date",
+    "name": "cf0c8c41-fe40-40bd-99a4-017b94925dc3"
+  }, {
+    "intent": "context.confirm_cc",
+    "condition": "$session.params.cc_from_uttrance != $session.params.card_number AND $session.params.wrong_cc_number_counter \u003c= 3",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "number_from_utterance",
+        "value": "$sys.func.SUBSTITUTE($request.user-utterance, \"[a-zA-Z\\\\s,.'\\-`?$]\", \"\")"
+      }, {
+        "parameter": "number_from_utterance",
+        "value": "$sys.func.IF(\"$session.params.number_from_utterance=\\\"\\\"\",0,$session.params.number_from_utterance)"
+      }, {
+        "parameter": "cc_from_utterance",
+        "value": "$sys.func.IF(\"$session.params.cc_from_utterance=null\", $sys.func.TO_NUMBER($session.params.number_from_utterance), $session.params.cc_from_utterance)"
+      }, {
+        "parameter": "len_cc_from_utterance",
+        "value": "$sys.func.LEN($session.params.cc_from_utterance)"
+      }, {
+        "parameter": "alpha_from_utterance",
+        "value": "$sys.func.LEN($session.params.alpha_from_utterance)"
+      }, {
+        "parameter": "wrong_cc_number_counter",
+        "value": "$sys.func.ADD($session.params.wrong_cc_number_counter,1)"
+      } ]
+    },
+    "targetPage": "Check Incorrect CC Number",
+    "name": "c57306df-08a7-448e-9933-4635b23b80ae"
+  } ],
+  "eventHandlers": [ {
+    "event": "sys.no-input-1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I didn't quite get that. Can you try again?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je n’ai pas tout à fait compris. Pouvez-vous réessayer?" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "199aa4a6-aabf-4e31-8f1d-69871a8505a1"
+  }, {
+    "event": "sys.no-match-1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I didn't quite get that. Can you try again?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je n’ai pas tout à fait compris. Pouvez-vous réessayer?" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "dad03a15-da94-467b-9910-63f510f49a06"
+  }, {
+    "event": "sys.no-input-2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I still didn't get that." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je n’ai toujours pas compris." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "aa74686a-b712-4d1b-92fb-24ecb1619ef2"
+  }, {
+    "event": "sys.no-match-2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I still didn't get that." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je n’ai toujours pas compris." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "2aed1560-3b9c-47f4-8477-64bc4aa5c24e"
+  }, {
+    "targetFlow": "bell_Feedback",
+    "event": "sys.no-input-3",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Since I didn't get a number from you, I won't be able to proceed with your payment. You can call back later or you can easily make a payment using the MyBell app." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Puisque je n’ai pas reçu de numéro de votre part, je ne pourrai pas traiter votre paiement. Vous pouvez rappeler plus tard ou vous pouvez facilement effectuer un paiement à l’aide de l’appli MonBell." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "79cc85f5-b97f-45e5-987e-885384b3b089"
+  }, {
+    "targetFlow": "bell_Feedback",
+    "event": "sys.no-match-3",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Since I didn't get a number from you, I won't be able to proceed with your payment. You can call back later or you can easily make a payment using the MyBell app." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Puisque je n’ai pas reçu de numéro de votre part, je ne pourrai pas traiter votre paiement. Vous pouvez rappeler plus tard ou vous pouvez facilement effectuer un paiement à l’aide de l’appli MonBell." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "f782c9fd-4b02-4a48-91e4-2ebe2c1203d5"
+  } ],
+  "advancedSettings": {
+    "speechSettings": {
+      "endpointerSensitivity": 90,
+      "noSpeechTimeout": {
+        "seconds": 10
+      },
+      "models": [ {
+        "key": "en",
+        "value": "telephony_short"
+      }, {
+        "key": "fr-ca",
+        "value": "telephony_short"
+      } ]
+    }
+  },
+  "speakerIdSettings": {
+  
+  }
+}

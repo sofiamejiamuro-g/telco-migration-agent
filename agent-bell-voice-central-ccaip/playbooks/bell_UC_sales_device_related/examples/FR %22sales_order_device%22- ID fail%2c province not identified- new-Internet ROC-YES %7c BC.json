@@ -1,0 +1,78 @@
+{
+  "name": "e0a46f35-3b66-4ece-b5ae-f5f9a0b28cb5",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "brand": "bell",
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": " À propos de quel service communiquez-vous avec nous?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Internet"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Vérifions si nous offrons des services Internet ou de téléphonie résidentielle dans votre secteur. Dans quelle province avez-vous besoin de services?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Langley"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Obtenez des vitesses ultra rapides sur le réseau de Bell grâce au service Internet mobile de Bell. Vous pouvez bénéficier d’une connectivité Internet allant jusqu'à 5G avec un point d'accès sans fil mobile afin de rester connecté à la maison ou lors de voS déplacements. Je vais envoyer un texto à l'appareil au moyen duquel vous appelez, afin que vous puissiez en savoir plus sur le service Internet mobile sur notre site Web. Est-ce que ça vous convient?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "oui"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "fr-ca",
+        "sms_content": "Bell : Vous pouvez visiter bell.ca/technowifi pour plus d'information sur les capsules Wi-Fi. ( bell.ca/apropos )",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer has questions about needing a new device,device availability, device features, cost, related to devices that Bell sells",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "New",
+      "identification_status": "Fail",
+      "language": "fr-ca",
+      "province": "YT",
+      "route": "sales_order_device",
+      "utterance": "J'ai des questions sur la disponibilité des appareils"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "We need to check the result from identification flow from the webhook NPANXX, if not present then ask the user for province and capture it from user response, if it is \"BC\" then if the customer disagreed to send the message call bell_SMS Trigger flow",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca",
+      "lob": "Internet",
+      "province": "BC"
+    }
+  },
+  "displayName": "FR \"sales_order_device\"- ID fail, province not identified- new-Internet ROC-YES | BC",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 595,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

@@ -1,0 +1,54 @@
+{
+  "name": "e936db20-e260-42bc-b6ae-e324572eef8b",
+  "displayName": "Check 1: CLID is WSC on BAN",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "setParameterActions": [ {
+      "parameter": "_ban_account",
+      "value": "$sys.func.FILTER(\"$session.params.customer_id_search_response\", \"$.users[*].billing_accounts[?(@.billing_account_number == '$session.params.billing_account')]\")"
+    }, {
+      "parameter": "_wsc_on_ban",
+      "value": "$sys.func.FILTER(\"$session.params._ban_account\", \"$.[*].services[*].service_id\")"
+    }, {
+      "parameter": "clid_wsc_on_ban",
+      "value": "$sys.func.CONTAIN($session.params._wsc_on_ban, $session.params.clid)"
+    }, {
+      "parameter": "otp_tns",
+      "value": "$session.params.auth_options_response.otp_tns"
+    }, {
+      "parameter": "clid_in_otp_tns",
+      "value": "$sys.func.CONTAIN($session.params.auth_options_response.otp_tns, $sys.func.TO_TEXT($session.params.clid))"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.clid_in_otp_tns = true",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "D'accord, l'envoi du code à 6 chiffres est en cours. " ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "Okay, sending the 6-digit code now. " ]
+        },
+        "languageCode": "en"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "telephone_number",
+        "value": "$session.params.clid"
+      } ]
+    },
+    "targetPage": "Webhook send-otp",
+    "name": "34c2c4ed-075e-43ed-a1b3-03550dc212c5"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Check 2/3/4: Only 1 service number on the BAN of the CIRN",
+    "name": "4c1ba446-3ae0-4f8c-96c6-814d8d332986"
+  } ]
+}

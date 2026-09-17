@@ -1,0 +1,63 @@
+{
+  "name": "b7ddadbe-70a2-4878-bbac-022842133e8b",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "You can easily view your account details such as account and contact number in your MyBell. I'll send a text to the device you're calling from, so you can easily view your account information. Is that alright?"
+    }
+  }, {
+    "userUtterance": {
+    
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_get_sdl_mapping_url",
+      "inputActionParameters": {
+        "brand": "bell",
+        "language": "en",
+        "route": "account_access_information"
+      },
+      "outputActionParameters": {
+        "brand": "bell",
+        "language": "en"
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "No problem at all. For any other questions you can always visit our website at {faq_link}."
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_Feedback",
+      "inputActionParameters": {
+        "brand": "bell",
+        "language": "en"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "The customer is looking for information on their account like account number.",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "route": "account_access_information",
+      "utterance": "what is my account number"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "The customer wants to find their account information if the customer disagrees and says NO call the bell_get_sdl_mapping_url flow and responds with the given message and route the user to the bell_Feedback flow.",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "route": "account_access_information",
+      "utterance": "what is my account number"
+    }
+  },
+  "displayName": "EN_account_access_information_CustomerTypeIsNull_NoResponseToMessageLink",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 405,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

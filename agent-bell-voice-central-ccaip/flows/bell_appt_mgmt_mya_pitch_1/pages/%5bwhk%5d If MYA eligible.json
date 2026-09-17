@@ -1,0 +1,76 @@
+{
+  "name": "4f4da9e6-dd02-4beb-8fd2-fcb0b55147b1",
+  "displayName": "[whk] If MYA eligible",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "/v1/ticket_management/cpm#mya_information",
+    "tag": "\"mya_information\""
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.webhook_success = true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Check MYA URL availability",
+    "name": "e4592148-f19d-4335-a7bf-ba41c9e4a8c6"
+  }, {
+    "condition": "$session.params.webhook_success = false",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "End Flow",
+    "name": "45ee159c-a83d-4c4f-bd66-aa625e3e4513"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "End Flow",
+    "name": "cleanup-hardstop-route"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "End Flow",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+    
+    },
+    "name": "f37962da-9304-4654-89d9-f35b6f6491df"
+  }, {
+    "targetPage": "End Flow",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+    
+    },
+    "name": "30c015e6-fda6-441f-95f8-abb04ab32af8"
+  }, {
+    "targetPage": "End Flow",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+    
+    },
+    "name": "beb5aba4-f80c-4dee-a73a-ffe107903016"
+  }, {
+    "targetPage": "End Flow",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+    
+    },
+    "name": "fe92b01a-be14-41aa-b571-2177225be5a7"
+  }, {
+    "targetPage": "End Flow",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+    
+    },
+    "name": "a85d508f-7f2a-4ee4-97be-7688df94692b"
+  }, {
+    "targetPage": "End Flow",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+    
+    },
+    "name": "da098fcf-f65c-4592-8047-9e5c579cbe9a"
+  } ]
+}

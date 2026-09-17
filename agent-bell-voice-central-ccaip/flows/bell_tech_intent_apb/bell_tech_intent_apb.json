@@ -1,0 +1,461 @@
+{
+  "name": "a1ae3b58-78a4-40cf-8997-ebea2132b901",
+  "displayName": "bell_tech_intent_apb",
+  "transitionRoutes": [ {
+    "intent": "Default Welcome Intent",
+    "triggerFulfillment": {
+    
+    },
+    "name": "f06c2e25-d32d-4bd1-98ef-5ed5d65dd2bb"
+  }, {
+    "intent": "global_events_full_startover",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "event_type",
+        "value": "full start over"
+      } ]
+    },
+    "targetFlow": "Default Start Flow",
+    "name": "a9e65275-c7ca-4c53-b969-f9a848f0272e"
+  }, {
+    "intent": "global_events_partial_start_over",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "event_type",
+        "value": "partial start over"
+      } ]
+    },
+    "targetFlow": "Default Start Flow",
+    "name": "33837e17-8ee8-4710-b448-51854d3d2e5d"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "apb_location_id",
+        "value": 70012
+      } ]
+    },
+    "targetFlow": "bell_apb",
+    "name": "9ff396ce-0a03-42a3-ac8e-8d18fa9ab2cb"
+  }, {
+    "condition": "$session.params.lob = null",
+    "triggerFulfillment": {
+    
+    },
+    "name": "0d209432-58a9-4740-95ab-ded6efc13f39",
+    "targetPlaybook": "bell_uc_ask_LOB"
+  }, {
+    "condition": "$session.params.lob = \"TV\" AND $session.params.tv_sub_type = null",
+    "triggerFulfillment": {
+    
+    },
+    "name": "dbc9d90c-f463-4b4f-8eea-9634c324b484",
+    "targetPlaybook": "Bell_tech_lob"
+  }, {
+    "condition": "$session.params.tv_sub_type = \"alt\" OR $session.params.tv_sub_type = \"fibe\" OR $session.params.tv_sub_type = \"fibe tv app\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "apb_location_id",
+        "value": 70015
+      } ]
+    },
+    "targetFlow": "bell_apb",
+    "name": "818f2c70-f932-4122-9c38-f3a120b7dc60"
+  }, {
+    "condition": "$session.params.tv_sub_type = \"sat\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "apb_location_id",
+        "value": "70015"
+      }, {
+        "parameter": "special_queue",
+        "value": "satellite"
+      } ]
+    },
+    "targetFlow": "bell_apb",
+    "name": "a4f585c3-df13-4f9d-b159-77deb1289c7d"
+  }, {
+    "condition": "$session.params.lob = \"homephone\" OR $session.params.lob = \"Homephone\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "apb_location_id",
+        "value": 70013
+      } ]
+    },
+    "targetFlow": "bell_apb",
+    "name": "e6ed9ec4-7c2d-4b58-928d-fa2e988d5272"
+  }, {
+    "condition": "$session.params.lob = \"Internet\" OR $session.params.lob = \"internet\" OR $session.params.device_type = \"Modem\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "apb_location_id",
+        "value": 70014
+      } ]
+    },
+    "targetFlow": "bell_apb",
+    "name": "a9e9ddc9-fbbc-4137-a91d-87b2621a62b6"
+  }, {
+    "condition": "$session.params.lob = \"Mobility\" OR $session.params.device_type = \"Mobile Phone\" OR $session.params.mobility_sub_type = \"postpaid\" OR $session.params.lob = \"mobility\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "apb_location_id",
+        "value": 70016
+      } ]
+    },
+    "targetFlow": "bell_apb",
+    "name": "f607c83b-4a27-4d73-b695-9873e437281f"
+  }, {
+    "condition": "$session.params.lob = \"smarthome\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "apb_location_id",
+        "value": 70017
+      } ]
+    },
+    "targetPage": "APB and ivr smart home",
+    "name": "0eaee985-ae09-409a-b339-2478bc0632bc"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "End Flow",
+    "name": "298d534e-410f-4ffa-afed-d4196178bf6b"
+  }, {
+    "condition": "$session.params.mobility_sub_type = \"prepaid\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "apb and prepaid ivr",
+    "name": "a929ed65-dc21-452f-9dd9-719ee3058641"
+  } ],
+  "eventHandlers": [ {
+    "event": "sys.no-match-default",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I didn't get that. Can you say it again?", "I missed what you said. What was that?", "Sorry, could you say that again?", "Sorry, can you say that again?", "Can you say that again?", "Sorry, I didn't get that. Can you rephrase?", "Sorry, what was that?", "One more time?", "What was that?", "Say that one more time?", "I didn't get that. Can you repeat?", "I missed that, say that again?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "J'ai du mal à comprendre cette question.", "J'ai mal compris votre demande.", "Je n'ai pas saisi ce que vous avez dit.", "Je crois que je ne vous suis pas.", "Je ne comprends pas de quoi vous me parlez." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "J'ai du mal à comprendre cette question.", "J'ai mal compris votre demande.", "Je n'ai pas saisi ce que vous avez dit.", "Je crois que je ne vous suis pas.", "Je ne comprends pas de quoi vous me parlez." ]
+        },
+        "languageCode": "fr"
+      } ]
+    },
+    "name": "bab8995c-1cad-4d05-b633-4d1d55c36e74"
+  }, {
+    "event": "sys.no-input-default",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I didn't get that. Can you say it again?", "I missed what you said. What was that?", "Sorry, could you say that again?", "Sorry, can you say that again?", "Can you say that again?", "Sorry, I didn't get that. Can you rephrase?", "Sorry, what was that?", "One more time?", "What was that?", "Say that one more time?", "I didn't get that. Can you repeat?", "I missed that, say that again?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "J'ai du mal à comprendre cette question.", "J'ai mal compris votre demande.", "Je n'ai pas saisi ce que vous avez dit.", "Je crois que je ne vous suis pas.", "Je ne comprends pas de quoi vous me parlez." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "J'ai du mal à comprendre cette question.", "J'ai mal compris votre demande.", "Je n'ai pas saisi ce que vous avez dit.", "Je crois que je ne vous suis pas.", "Je ne comprends pas de quoi vous me parlez." ]
+        },
+        "languageCode": "fr"
+      } ]
+    },
+    "name": "270cbecd-cf42-449e-814a-02fb2bee210a"
+  }, {
+    "targetPage": "End Session",
+    "event": "wrapup",
+    "triggerFulfillment": {
+    
+    },
+    "name": "19adbeb5-01f8-4f1d-9b2c-c348ff2e6cec"
+  } ],
+  "nluSettings": {
+    "modelType": "MODEL_TYPE_CUSTOM",
+    "classificationThreshold": 0.30000001,
+    "modelTrainingMode": "MODEL_TRAINING_MODE_MANUAL"
+  },
+  "advancedSettings": {
+    "enabled": true,
+    "playbackInterruptionSettings": {
+    
+    }
+  },
+  "nluSettingsList": [ {
+    "modelType": "MODEL_TYPE_CUSTOM",
+    "classificationThreshold": 0.30000001,
+    "modelTrainingMode": "MODEL_TRAINING_MODE_MANUAL",
+    "languageCode": "en"
+  }, {
+    "modelType": "MODEL_TYPE_ADVANCED",
+    "classificationThreshold": 0.30000001,
+    "modelTrainingMode": "MODEL_TRAINING_MODE_MANUAL",
+    "languageCode": "fr-ca"
+  } ],
+  "inputParameterDefinitions": [ {
+    "name": "lob",
+    "description": "lob",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "STRING"
+      }
+    },
+    "parameterType": {
+      "name": "lob",
+      "openapiJsonSchema": {
+        "type": "string"
+      }
+    }
+  }, {
+    "name": "device_type",
+    "description": "device_type",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "STRING"
+      }
+    },
+    "parameterType": {
+      "name": "device_type",
+      "openapiJsonSchema": {
+        "type": "string"
+      }
+    }
+  }, {
+    "name": "tv_sub_type",
+    "description": "tv_sub_type",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "STRING"
+      }
+    },
+    "parameterType": {
+      "name": "tv_sub_type",
+      "openapiJsonSchema": {
+        "type": "string"
+      }
+    }
+  }, {
+    "name": "type_sub_type",
+    "description": "type_sub_type",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "STRING"
+      }
+    },
+    "parameterType": {
+      "name": "type_sub_type",
+      "openapiJsonSchema": {
+        "type": "string"
+      }
+    }
+  }, {
+    "name": "unique_services",
+    "description": "unique_services",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "STRING"
+      }
+    },
+    "parameterType": {
+      "name": "unique_services",
+      "openapiJsonSchema": {
+        "type": "string"
+      }
+    }
+  }, {
+    "name": "route",
+    "description": "route",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "STRING"
+      }
+    },
+    "parameterType": {
+      "name": "route",
+      "openapiJsonSchema": {
+        "type": "string"
+      }
+    }
+  }, {
+    "name": "sim_type",
+    "description": "sim type",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "STRING"
+      }
+    },
+    "parameterType": {
+      "name": "sim_type",
+      "openapiJsonSchema": {
+        "type": "string"
+      }
+    }
+  }, {
+    "name": "sim_activation_type",
+    "description": "sim activation type",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "STRING"
+      }
+    },
+    "parameterType": {
+      "name": "sim_activation_type",
+      "openapiJsonSchema": {
+        "type": "string"
+      }
+    }
+  }, {
+    "name": "apb_location_id",
+    "description": "apb loc id",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "NUMBER"
+      }
+    },
+    "parameterType": {
+      "name": "apb_location_id",
+      "openapiJsonSchema": {
+        "type": "number"
+      }
+    }
+  } ],
+  "outputParameterDefinitions": [ {
+    "name": "tv_sub_type",
+    "description": "tv_sub_type",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "STRING"
+      }
+    },
+    "parameterType": {
+      "name": "tv_sub_type",
+      "openapiJsonSchema": {
+        "type": "string"
+      }
+    }
+  }, {
+    "name": "lob",
+    "description": "lob",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "STRING"
+      }
+    },
+    "parameterType": {
+      "name": "lob",
+      "openapiJsonSchema": {
+        "type": "string"
+      }
+    }
+  }, {
+    "name": "device_type",
+    "description": "device_type",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "STRING"
+      }
+    },
+    "parameterType": {
+      "name": "device_type",
+      "openapiJsonSchema": {
+        "type": "string"
+      }
+    }
+  }, {
+    "name": "type_sub_type",
+    "description": "type_sub_type",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "STRING"
+      }
+    },
+    "parameterType": {
+      "name": "type_sub_type",
+      "openapiJsonSchema": {
+        "type": "string"
+      }
+    }
+  }, {
+    "name": "special_queue",
+    "description": "special_queue",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "STRING"
+      }
+    },
+    "parameterType": {
+      "name": "special_queue",
+      "openapiJsonSchema": {
+        "type": "string"
+      }
+    }
+  }, {
+    "name": "unique_services",
+    "description": "unique_services",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "STRING"
+      }
+    },
+    "parameterType": {
+      "name": "unique_services",
+      "openapiJsonSchema": {
+        "type": "string"
+      }
+    }
+  }, {
+    "name": "route",
+    "description": "route",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "STRING"
+      }
+    },
+    "parameterType": {
+      "name": "route",
+      "openapiJsonSchema": {
+        "type": "string"
+      }
+    }
+  }, {
+    "name": "sim_type",
+    "description": "sim type",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "STRING"
+      }
+    },
+    "parameterType": {
+      "name": "sim_type",
+      "openapiJsonSchema": {
+        "type": "string"
+      }
+    }
+  }, {
+    "name": "sim_activation_type",
+    "description": "sim activation type",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "STRING"
+      }
+    },
+    "parameterType": {
+      "name": "sim_activation_type",
+      "openapiJsonSchema": {
+        "type": "string"
+      }
+    }
+  } ],
+  "multiLanguageSettings": {
+  
+  }
+}

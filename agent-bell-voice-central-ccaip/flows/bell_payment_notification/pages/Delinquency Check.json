@@ -1,0 +1,73 @@
+{
+  "name": "274db399-ea3e-410e-a926-fa5f8bbd72dc",
+  "displayName": "Delinquency Check",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "delinquent_flag",
+        "value": "$sys.func.GET_FIELD($session.params.billing_account_info_list[0], \"delinquent_flag\")"
+      } ]
+    },
+    "name": "3f53d1f3-fa6f-472a-aa50-120868165b0a"
+  }, {
+    "condition": "$session.params.delinquent_flag = \"D\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Let me connect you with a specialist for next steps." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Permettez-moi de vous mettre en contact avec un spécialiste pour les prochaines étapes." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "9ea2fc32-e1b9-45b9-bc1f-aa64bf3708a1"
+  }, {
+    "condition": "$session.params.delinquent_flag = \"N\" OR $session.params.delinquent_flag != null",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Okay, let me connect you to an agent care representative." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "D’accord, permettez-moi de vous mettre en contact avec un représentant du service aux agents." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "d53cfa91-06a4-4947-b889-804de5bcac15"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "274db399-ea3e-410e-a926-fa5f8bbd72dc"
+      }, {
+        "parameter": "flow_id",
+        "value": "ced63037-f058-4dd0-9269-97742185ea0f"
+      }, {
+        "parameter": "page_name",
+        "value": "Delinquency Check"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

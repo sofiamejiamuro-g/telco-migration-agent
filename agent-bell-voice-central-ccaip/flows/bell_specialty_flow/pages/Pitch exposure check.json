@@ -1,0 +1,41 @@
+{
+  "name": "a1d0dcba-63e9-44b2-a425-cfff435d87a1",
+  "displayName": "Pitch exposure check",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "setParameterActions": [ {
+      "parameter": "pitch_exposure_rate",
+      "value": 100
+    }, {
+      "parameter": "pitch_exposure_roll",
+      "value": "$sys.func.MULTIPLY($sys.func.RAND(), 100)"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.pitch_exposure_roll \u003c= $session.params.pitch_exposure_rate",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Parfait! Avant de configurer votre service Mobilité, nous voudrions vous signaler que vous semblez admissible à des réductions exclusives sur des services Internet, Télé et de diffusion en continu. Voudriez-vous parler à un agent avec qui vous pourrez discuter de tout ça?" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "Great! Before we set up your Mobility service, it looks like you may qualify for exclusive savings on Internet, TV, and streaming services. Would you like to speak with an agent who can help set up everything at the same time?" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "targetPage": "Pitch Interest Check",
+    "name": "a1bce2df-fed7-494e-a81d-b6dc7e489b62"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "End flow handling",
+    "name": "3da0555d-c656-4849-aceb-0a76c50331c8"
+  } ]
+}

@@ -1,0 +1,77 @@
+{
+  "name": "2c10fdce-e03e-4acf-98c9-cb12045cb38e",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "To fix this issue, you need to perform this step now. Please check if the battery is inserted and charging in the modem. Please perform that step and let me know when you are done."
+    }
+  }, {
+    "userUtterance": {
+      "text": "What is a modem?"
+    }
+  }, {
+    "toolUse": {
+      "tool": "EN_Bell_vr_cda_faq",
+      "action": "EN_Bell_vr_cda_faq",
+      "inputActionParameters": {
+        "requestBody": {
+          "query": "6013"
+        }
+      },
+      "outputActionParameters": {
+        "200": {
+          "answer": "Q: What is a Modem? A: Device that allows you to connect to the Internet. Q: What is a Power cord? A: Small black cord with a round end which plugs into a power outlet and provides power to the modem. Q: How does this affect my services? A: Your services will be temporarily unavailable once you unplug the power cable. Q: What are we doing in these steps? A: We’re rebooting your modem to see if restarting your system will allow modem upgrades to install and solve your problem. Q: How do I perform Step 1? A: Locate your modem and remove the power cable from the back. Q: How do I perform Step 2? A: Wait 30 seconds and reconnect the power cable. Q: How do I perform Step 3? A: The lights on the front will blink as the modem goes through its startup routine. This can take up to five minutes.",
+          "snippets": [ {
+            "text": "",
+            "title": "6013",
+            "uri": ""
+          } ]
+        }
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "A modem is device that allows you to connect to the Internet.\nWhen you’re ready, can you take a look and let me know if you were able to complete the check?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Okay, done with it."
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Thank you for letting me know. I'm checking now what will be the next step."
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_vr_post_answer",
+      "inputActionParameters": {
+        "customer_answer1_id": "0"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "User having a problem with the service and initiating Virtual repair session.",
+    "actionParameters": {
+      "acceptable_answers": [ {
+        "choice": "CDA:endNow:success",
+        "id": 0
+      }, {
+        "choice": "CDA:gotoStep1",
+        "id": 1
+      } ],
+      "dcx_action_code": "6013",
+      "more_info": "",
+      "title": "Checking if the battery is inserted and charging in the modem",
+      "vr_type": "CDA"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "The bot prompted a troubleshooting step. The user interrupted with an FAQ, which the bot addressed via the ${TOOL:EN_Bell_vr_cda_faq} tool. Following the response, the user acknowledged that the step was completed."
+  },
+  "displayName": "CDA - User asks a relevant question (FAQ)",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 720,
+  "languageCode": "en"
+}

@@ -1,0 +1,63 @@
+{
+  "name": "7d062f7a-c976-430c-80ae-3bde4c9a38d1",
+  "displayName": "Webhook intake-routing 2 fail",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "messages": [ {
+      "text": {
+        "text": [ "There was a problem calling the intake routing webhook." ]
+      },
+      "languageCode": "en"
+    }, {
+      "text": {
+        "text": [ "Il y a eu un problème avec le webhook intake routing." ]
+      },
+      "languageCode": "fr-ca"
+    } ],
+    "setParameterActions": [ {
+      "parameter": "$session.params.intake_routing_fail_count",
+      "value": "$sys.func.ADD(1, $session.params.intake_routing_fail_count)"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.intake_routing_fail_count \u003c= 2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Let's try that again." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Essayons à nouveau." ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "intake_tfn",
+        "value": null
+      } ]
+    },
+    "targetPage": "Get Spoof TFN",
+    "name": "71a762b4-733d-4030-ab6d-3d091e5fcde9"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Exiting test Wrapper." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ " Nous quittons maintenant test wrapper." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetPage": "End Flow",
+    "name": "cd415ad4-2768-4fdb-93e1-eea6446e458c"
+  } ]
+}

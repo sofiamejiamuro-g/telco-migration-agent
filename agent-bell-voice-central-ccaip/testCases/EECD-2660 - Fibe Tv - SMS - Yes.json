@@ -1,0 +1,147 @@
+{
+  "name": "f107f00b-1b44-46e2-91f7-7d3c476d8019",
+  "displayName": "EECD-2660 - Fibe Tv - SMS - Yes",
+  "testCaseConversationTurns": [ {
+    "userInput": {
+      "injectedParameters": {
+        "clid": "+19055163171",
+        "digital_tools_phase2": true,
+        "tfn": "+18889992321"
+      },
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "hi"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "sessionParameters": {
+        "clid": "+19055163171",
+        "digital_tools_phase2": true,
+        "tfn": "+18889992321"
+      },
+      "triggeredIntent": {
+        "name": "Default Welcome Intent"
+      },
+      "currentPage": {
+        "name": "Get CX Input",
+        "flow": "bell_Identification"
+      },
+      "textResponses": [ {
+        "text": [ "\u003cspeak\u003eI'm Bell's virtual assistant, I use artificial intelligence to learn. \u003cbreak time=\"1s\"/\u003e\u003c/speak\u003e" ]
+      }, {
+        "text": [ "Are you calling about the account associated with the number you’re calling from?" ],
+        "allowPlaybackInterruption": true
+      } ],
+      "currentFlow": {
+        "name": "bell_Identification"
+      }
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "yes"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "triggeredIntent": {
+        "name": "context.confirm_yes"
+      },
+      "currentPage": {
+        "name": "9e8500ed-7468-4e9d-a5bb-c083d9e2a7ac",
+        "flow": "Default Start Flow"
+      },
+      "textResponses": [ {
+        "text": [ "\u003cspeak\u003eThanks! \u003cbreak time=\"1s\"/\u003e\u003c/speak\u003e" ],
+        "allowPlaybackInterruption": true
+      }, {
+        "text": [ "How can I help you?" ],
+        "allowPlaybackInterruption": true
+      }, {
+        "text": [ "You can communicate your concern here." ],
+        "allowPlaybackInterruption": true
+      } ],
+      "currentFlow": {
+        "name": "Default Start Flow"
+      }
+    }
+  }, {
+    "userInput": {
+      "injectedParameters": {
+        "auth_status": "Fail",
+        "tv_sub_type": "fibe"
+      },
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "My tv is not working"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "sessionParameters": {
+        "auth_status": "Fail",
+        "tv_sub_type": "fibe"
+      },
+      "triggeredIntent": {
+        "name": "tech_connection_issue"
+      },
+      "currentPage": {
+        "name": "CX Confirmation(Failed Auth)",
+        "flow": "bell_tech_service_outage_\u0026_Tech_connection_issue"
+      },
+      "textResponses": [ {
+        "text": [ "Since I wasn’t able to authenticate you, I can’t resolve the issue over the phone. But you can use our Virtual Repair Tool to check for service outages and troubleshoot your service yourself." ],
+        "allowPlaybackInterruption": true
+      }, {
+        "text": [ "I'll send a text to the device you are calling from so you can access it quickly. is that alright?" ],
+        "allowPlaybackInterruption": true
+      } ],
+      "currentFlow": {
+        "name": "bell_tech_service_outage_\u0026_Tech_connection_issue"
+      }
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "yes"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "triggeredIntent": {
+        "name": "context.sms_yes"
+      },
+      "currentPage": {
+        "name": "SMS Confirmation",
+        "flow": "bell_SMS Trigger"
+      },
+      "textResponses": [ {
+        "text": [ "The text was sent. If you didn't receive it, please let me know. If you require additional time to review the content, please advise." ],
+        "allowPlaybackInterruption": true
+      } ],
+      "currentFlow": {
+        "name": "bell_SMS Trigger"
+      }
+    }
+  } ],
+  "creationTime": {
+    "seconds": 1758192678,
+    "nanos": 865251000
+  },
+  "testConfig": {
+    "flow": "Default Start Flow",
+    "page": "Start Page"
+  },
+  "languageCode": "en"
+}

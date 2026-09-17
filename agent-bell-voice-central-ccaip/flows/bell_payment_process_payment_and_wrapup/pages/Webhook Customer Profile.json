@@ -1,0 +1,136 @@
+{
+  "name": "02a967a6-eb73-4b26-98d2-106187a5007f",
+  "displayName": "Webhook Customer Profile",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "/v1/ibm_mw/nm1_get#customer-profile",
+    "tag": "customer-profile"
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.webhook_success = False OR $session.params.webhook_success = \"false\" OR $session.params.nm1_get_cust_profile_response.returnCode = \"0\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "card_number",
+        "value": null
+      }, {
+        "parameter": "cc_token",
+        "value": null
+      }, {
+        "parameter": "expiry_date",
+        "value": null
+      }, {
+        "parameter": "expiry_month",
+        "value": null
+      }, {
+        "parameter": "expiry_year",
+        "value": null
+      }, {
+        "parameter": "security_code",
+        "value": null
+      }, {
+        "parameter": "cvv_number",
+        "value": null
+      }, {
+        "parameter": "cc_from_utterance",
+        "value": null
+      } ]
+    },
+    "targetPage": "Webhook Failure Confirmation",
+    "name": "f9c87979-087c-42bc-9ec4-e2e30f17b314"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "webhook_success",
+        "value": "$session.params.webhook_success"
+      }, {
+        "parameter": "pastDueAmount",
+        "value": "$sys.func.TO_NUMBER($session.params.nm1_get_cust_profile_response.pastDueAmount)"
+      }, {
+        "parameter": "accountBalance",
+        "value": "$sys.func.TO_NUMBER($session.params.nm1_get_cust_profile_response.arBalance)"
+      }, {
+        "parameter": "accountType",
+        "value": "$session.params.nm1_get_cust_profile_response.banType"
+      }, {
+        "parameter": "accountSubType",
+        "value": "$session.params.nm1_get_cust_profile_response.banSubType"
+      }, {
+        "parameter": "oneBillIndicator",
+        "value": "$session.params.nm1_get_cust_profile_response.oneBill"
+      } ]
+    },
+    "name": "22905d4f-1cde-4a71-b23f-876ce0b0df5e"
+  }, {
+    "condition": "$session.params.webhook_success = True OR $session.params.webhook_success = \"true\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Check If Status Change",
+    "name": "5c7a42ba-3fec-446b-8015-29a7b21321f0"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "02a967a6-eb73-4b26-98d2-106187a5007f"
+      }, {
+        "parameter": "flow_id",
+        "value": "15649ac7-20d9-448b-a12c-b86f9480280b"
+      }, {
+        "parameter": "page_name",
+        "value": "Webhook Customer Profile"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "SMS Confirmation For Refreshed Balance",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+    
+    },
+    "name": "3eb177f5-56e3-4044-9a02-75fcbfc986b7"
+  }, {
+    "targetPage": "SMS Confirmation For Refreshed Balance",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+    
+    },
+    "name": "88edf756-6813-43cd-990c-049dc8306bda"
+  }, {
+    "targetPage": "SMS Confirmation For Refreshed Balance",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+    
+    },
+    "name": "e2dbce34-f868-443e-ad62-3b9bc0eeaa64"
+  }, {
+    "targetPage": "SMS Confirmation For Refreshed Balance",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+    
+    },
+    "name": "d252c520-3030-4034-9315-944607a05c4d"
+  }, {
+    "targetPage": "SMS Confirmation For Refreshed Balance",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+    
+    },
+    "name": "3add19bd-7447-4f3e-ae5d-660a85a0d2ab"
+  }, {
+    "targetPage": "SMS Confirmation For Refreshed Balance",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+    
+    },
+    "name": "8acab0b3-10a3-4632-a95d-85b4cfe54a45"
+  } ]
+}

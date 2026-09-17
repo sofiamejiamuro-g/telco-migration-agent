@@ -1,0 +1,170 @@
+{
+  "name": "4d83f4b6-34be-45f2-936e-3a65f362d13b",
+  "tags": [ "#Main_flow", "#auth_pass", "#tech_service_outage", "#is_finished_true", "#has_outage_true", "#Active_outage" ],
+  "displayName": "Outage Main Flow Test Case_4",
+  "testCaseConversationTurns": [ {
+    "userInput": {
+      "injectedParameters": {
+        "clid": "+14169880139",
+        "digital_tools_phase2": true,
+        "tfn": "+18338858259"
+      },
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "hi"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "sessionParameters": {
+        "clid": "+14169880139",
+        "digital_tools_phase2": true,
+        "tfn": "+18338858259"
+      },
+      "triggeredIntent": {
+        "name": "Default Welcome Intent"
+      },
+      "currentPage": {
+        "name": "Get CX Input",
+        "flow": "bell_Identification"
+      },
+      "textResponses": [ {
+        "text": [ "\u003cspeak\u003eI'm Bell's virtual assistant, I use artificial intelligence to learn. \u003cbreak time=\"1s\"/\u003e\u003c/speak\u003e" ]
+      }, {
+        "text": [ "Are you calling about the account associated with the number you’re calling from?" ],
+        "allowPlaybackInterruption": true
+      } ],
+      "currentFlow": {
+        "name": "bell_Identification"
+      }
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "yes"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "triggeredIntent": {
+        "name": "context.confirm_yes"
+      },
+      "currentPage": {
+        "name": "9e8500ed-7468-4e9d-a5bb-c083d9e2a7ac",
+        "flow": "Default Start Flow"
+      },
+      "textResponses": [ {
+        "text": [ "\u003cspeak\u003eThanks! \u003cbreak time=\"1s\"/\u003e\u003c/speak\u003e" ],
+        "allowPlaybackInterruption": true
+      }, {
+        "text": [ "How can I help you?" ],
+        "allowPlaybackInterruption": true
+      }, {
+        "text": [ "You can communicate your concern here." ],
+        "allowPlaybackInterruption": true
+      } ],
+      "currentFlow": {
+        "name": "Default Start Flow"
+      }
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "My internet is down"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "triggeredIntent": {
+        "name": "tech_service_outage"
+      },
+      "currentPage": {
+        "name": "Confirm Customer has OTP device",
+        "flow": "bell_authentication"
+      },
+      "textResponses": [ {
+        "text": [ "To assist you, I first need to confirm your identity. We’ll do this with a 6-digit code—can you access the mobile phone linked to your account?" ]
+      } ],
+      "currentFlow": {
+        "name": "bell_authentication"
+      }
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "yes"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "triggeredIntent": {
+        "name": "custom.yes"
+      },
+      "currentPage": {
+        "name": "Trigger_OTP",
+        "flow": "bell_authentication"
+      },
+      "textResponses": [ {
+        "text": [ "I’ll text a 6-digit code to the mobile phone on your account." ]
+      }, {
+        "text": [ "Once you receive the verification code by text, please say it back to me or enter it on your phone keypad." ],
+        "allowPlaybackInterruption": true
+      } ],
+      "currentFlow": {
+        "name": "bell_authentication"
+      }
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "581781"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "currentPage": {
+        "name": "Check CX input? (Active outage)",
+        "flow": "bell_tech_service_outage_\u0026_Tech_connection_issue"
+      },
+      "textResponses": [ {
+        "text": [ "Thanks, that's the correct code." ],
+        "allowPlaybackInterruption": true
+      }, {
+        "text": [ "Just a moment while I check if there are any outage in your area." ],
+        "allowPlaybackInterruption": true
+      }, {
+        "text": [ "Unfortunately, there is currently an Internet outage in your area. But don't worry, our teams are working to restore your service as soon as possible." ],
+        "allowPlaybackInterruption": true
+      }, {
+        "text": [ "I'll send a text to the device you're calling from, so you can easily track the status of this outage. Is that alright?" ],
+        "allowPlaybackInterruption": true
+      } ],
+      "currentFlow": {
+        "name": "bell_tech_service_outage_\u0026_Tech_connection_issue"
+      }
+    }
+  } ],
+  "creationTime": {
+    "seconds": 1758882497,
+    "nanos": 8350000
+  },
+  "testConfig": {
+    "flow": "Default Start Flow",
+    "page": "Start Page"
+  },
+  "languageCode": "en"
+}

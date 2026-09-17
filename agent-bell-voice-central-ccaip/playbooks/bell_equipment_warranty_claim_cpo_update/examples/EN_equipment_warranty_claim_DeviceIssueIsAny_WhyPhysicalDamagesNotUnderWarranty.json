@@ -1,0 +1,61 @@
+{
+  "name": "fd1d1129-92fd-439f-b147-16edcce4af00",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Yes, all certified Pre-owned phone come with a one-year limited warranty from Bell. This warranty covers manufacturer's defects for one year. The warranty does not cover physical, liquid damage or the charging cable. For added protection you can also add a Smart/Phone Care plan to your Certified Pre-owned phone at time of purchase which covers lost, theft, physical damage or defects outside the warranty.\nHave you enrolled in our smart care program? "
+    }
+  }, {
+    "userUtterance": {
+      "text": "Why Physical Damages Not Under Warranty"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Unfortunately damages such as screen cracks, liquid exposures, modifications would not be covered under the warranty. Please find a copy of manufacturer's warranty in your mobile phone's box for detail\nHave you enrolled in our smart care program?\n"
+    }
+  }, {
+    "userUtterance": {
+      "text": "no"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "I can send you an email with a link to learn more about our in-store device repair process or additional options. Is that alright?\n"
+    }
+  }, {
+    "userUtterance": {
+      "text": "no"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "brand": "bell",
+        "language": "en",
+        "sms_send_status": "Declined"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer asking about certified preowned device being broken with route \"equipment_warranty_claim\"",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "route": "equipment_warranty_claim",
+      "utterance": "certified preowned device is broken"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Customer is given the answer for device being broken, customer then asks why isn’t the physical damage under warranty, he is given answer for that condition along with physical damage answer and triggers SMART CARE COVERAGE LOGIC",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en"
+    }
+  },
+  "displayName": "EN_equipment_warranty_claim_DeviceIssueIsAny_WhyPhysicalDamagesNotUnderWarranty",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 461,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

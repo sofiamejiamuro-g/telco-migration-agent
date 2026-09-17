@@ -1,0 +1,50 @@
+{
+  "name": "5f004a6a-da98-413c-abf4-119e2cb381da",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Sure, I can help with that. Are you inquiring about internet or mobility usage?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "internet"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "You can easily view and track your internet data usage in MyBell. I'll send a text to the device you're calling from, with a link explaining the steps to follow. Is that alright?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "no"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "en",
+        "sms_send_status": "Declined"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "User wants to check their usage history.",
+    "actionParameters": {
+      "language": "en",
+      "route": "account_usage_history",
+      "utterance": "I want to check my usage history "
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Disambiguate for LOB. Customer said Internet so VA offers sms. customer said no so we route accordingly",
+    "actionParameters": {
+      "language": "en"
+    }
+  },
+  "displayName": "EN account_usage_history - Internet - SMS - No",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 274,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

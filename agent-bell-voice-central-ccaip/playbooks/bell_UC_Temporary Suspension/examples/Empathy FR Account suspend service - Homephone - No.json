@@ -1,0 +1,55 @@
+{
+  "name": "08252e8f-14d6-4b64-b1b1-abcc6a789a11",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Je suis désolé d'apprendre que vous traversez des difficultés. J'espère que la situation s'améliorera bientôt.. Bien sûr, je peux vous aider. Pourriez-vous confirmer le service que vous souhaitez suspendre?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Homephone"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Je suis vraiment désolé d'apprendre cela. Vous pouvez suspendre temporairement vos services résidentiels dans MonBell. Je vais envoyer un texto à l’appareil à partir duquel vous appelez qui contient un lien pour le faire vous-même. Est-ce que cela vous convient?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "non"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "fr-ca",
+        "sms_send_status": "Declined"
+      },
+      "outputActionParameters": {
+        "brand": "bell",
+        "language": "fr-ca"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer trying to suspend their service as there device is lost",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca",
+      "route": "account_suspend_service",
+      "unique_services": "Internet, Tv, Homephone",
+      "utterance": "Veuillez suspendre mon service car je suis en pleine situation de crise."
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Customer query is resolved.",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca",
+      "sms_send_status": "Declined"
+    }
+  },
+  "displayName": "Empathy FR Account suspend service - Homephone - No",
+  "retrievalStrategy": "NEVER",
+  "tokenCount": 360,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

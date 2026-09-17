@@ -1,0 +1,95 @@
+{
+  "name": "bbca972c-66fb-4aa2-bb12-5d4eddba061b",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70024",
+        "language": "en"
+      },
+      "outputActionParameters": {
+        "language": "en"
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Pay-per-use data roaming will no longer be available as of May 1, 2026. \nBut if you are looking for short time travel we have other great options such as \"roaming\" and \"travel passes\" would you like to learn more?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "yes"
+    }
+  }, {
+    "toolUse": {
+      "tool": "EN_Bell_Manage_plans_and_features",
+      "action": "EN_Bell_Manage_plans_and_features",
+      "inputActionParameters": {
+        "requestBody": {
+          "query": "What's the difference between Travel Pass and Roam Better?"
+        }
+      },
+      "outputActionParameters": {
+        "200": {
+          "answer": "Travel Passes are compatible with Roam Better and take priority over Roam Better when travelling in an eligible destination. If you're using an active Travel Pass in an eligible destination, you won't be charged the Roam Better fee for the duration of your pass.",
+          "snippets": [ {
+            "text": "Travel Passes are compatible with Roam Better and take priority over Roam Better when travelling in an eligible destination (ie, if you're using an active Travel Pass in an eligible destination, you won't be charged the Roam Better fee for the duration of your pass).",
+            "title": "Coverage Map \u0026 Travel Options | Bell Mobility | Bell Canada",
+            "uri": "https://www.bell.ca/Mobility/Coverage_map#:~:text=Travel%20Passes%20are,of%20your%20pass)."
+          }, {
+            "text": "You'll be billed for each Travel Pass you add to your account. * The pass is compatible with Roam Better and takes priority over Roam Better when travelling in an eligible destination (ie, if you're using an active Travel Pass in an eligible destination, you won't be charged the Roam Better fee).",
+            "title": "How do I use my mobile phone outside Canada and how much will it cost? Bell | Support",
+            "uri": "https://support.bell.ca/mobility/network_coverage/where_can_i_use_my_mobile_phone_outside_canada_and_how_much_will_it_cost#:~:text=You'll%20be%20billed,Roam%20Better%20fee)."
+          } ]
+        }
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Travel Passes are compatible with Roam Better and take priority over Roam Better when travelling in an eligible destination. If you're using an active Travel Pass in an eligible destination, you won't be charged the Roam Better fee for the duration of your pass.\n\nwould you like to learn more about it?\n"
+    }
+  }, {
+    "userUtterance": {
+      "text": "yes"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "service_add_feature_flow",
+      "inputActionParameters": {
+        "add_ons": "travel pass",
+        "language": "en",
+        "lob": "Mobility",
+        "route": "service_add_feature",
+        "utterance": "What's the difference between Travel Pass and Roam Better?"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer reports that they want to know the cost of pay-per-use data.",
+    "actionParameters": {
+      "brand": "bell",
+      "identification_status": "pass",
+      "language": "en",
+      "lob": "Mobility",
+      "route": "service_feature_inquiry",
+      "utterance": "How much is the pay per use data?"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Customer reports that they want to know the cost of pay-per-use data. we set directly the lob = \"mobility\", display hard coded message then ask if further information are needed user said yes we update the uttrance with the new value \"What's the difference between Travel Pass and Roam Better?\" then we call the tool display the message then ask if still need more information user respond by yes so we set add_ons to travel pass then we route to service_add_feature_flow flow.",
+    "actionParameters": {
+      "add_ons": "travel pass",
+      "brand": "bell",
+      "language": "en",
+      "route": "service_add_feature",
+      "utterance": "What's the difference between Travel Pass and Roam Better?"
+    }
+  },
+  "displayName": "EN - service_feature_inquiry - Mobility - pay per use - what's the difference - yes after tool",
+  "retrievalStrategy": "STATIC",
+  "tokenCount": 1049,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

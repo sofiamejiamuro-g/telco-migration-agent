@@ -1,0 +1,68 @@
+{
+  "name": "352dd465-f386-49dd-bf37-37edff3d620f",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_tech_intent_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70012",
+        "language": "fr-ca",
+        "lob": "mobility",
+        "utterance": "Pour signaler le bris de mes services mobilité"
+      },
+      "outputActionParameters": {
+        "lob": "mobility"
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Vous pouvez facilement vérifier les pannes de service sur notre site web.\nJe vais envoyer un texto sur l’appareil au moyen duquel vous appelez, afin que vous puissiez y accéder rapidement. Est-ce que ça vous convient?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Ne pouvez-vous pas répondre ici directement ?"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Je ne peux pas vérifier les pannes de service directement, mais le lien dans le SMS vous mènera à notre site web où vous pourrez le faire. Est-ce que je peux vous envoyer le SMS? "
+    }
+  }, {
+    "userUtterance": {
+      "text": "oui"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "fr-ca",
+        "sms_content": "Mess. de Bell : Vous pouvez vous rendre au https://soutien.bell.ca/Verification-des-pannes pour consulter les pannes de courant dans votre secteur. ( vpc.ca/anotresujet )",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "customer is having no phone signals and also asked for more information about SMS",
+    "actionParameters": {
+      "apb_location_id": "70012",
+      "language": "fr-ca",
+      "lob": "mobility",
+      "route": "tech_service_outage",
+      "utterance": "Pour signaler le bris de mes services mobilité"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "customer is transferred to tech_intent_apb for lob Customer asked a question regarding SMS so VA answered them and prompted again for SMS. User then said yes so we route accordingly",
+    "actionParameters": {
+      "apb_location_id": "70012",
+      "language": "fr-ca",
+      "lob": "mobility"
+    }
+  },
+  "displayName": "FR tech_service_outage - {lob-mobility}(sms-query)",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 538,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

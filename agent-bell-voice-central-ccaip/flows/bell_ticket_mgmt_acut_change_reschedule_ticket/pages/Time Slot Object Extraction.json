@@ -1,0 +1,74 @@
+{
+  "name": "4cdb4125-29d4-4d67-8433-e2070510de2f",
+  "displayName": "Time Slot Object Extraction",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "setParameterActions": [ {
+      "parameter": "time_pair_string",
+      "value": "$request.generative.time_pair_string"
+    } ],
+    "generators": [ {
+      "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/dfb07102-1d51-4027-a29b-97c30024100d",
+      "inputParameters": [ {
+        "key": "availability",
+        "value": "$session.params.availability"
+      }, {
+        "key": "full_date",
+        "value": "$session.params.full_date"
+      }, {
+        "key": "time_pair_string",
+        "value": "$session.params.time_pair_string"
+      } ],
+      "outputParameter": "$request.generative.timeslot_object"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "time_slot_object",
+        "value": "$sys.func.TO_OBJECT($request.generative.timeslot_object)"
+      }, {
+        "parameter": "selected_start_time",
+        "value": "$session.params.time_slot_object.start_time"
+      }, {
+        "parameter": "selected_end_time",
+        "value": "$session.params.time_slot_object.end_time"
+      }, {
+        "parameter": "selected_interval_name",
+        "value": "$session.params.time_slot_object.interval_name"
+      }, {
+        "parameter": "selected_date",
+        "value": "$session.params.full_date"
+      }, {
+        "parameter": "day_of_week",
+        "value": "$session.params.day_of_the_week"
+      }, {
+        "parameter": "wfas_context_raw",
+        "value": "$session.params.wfas_availability_response.wfas_context"
+      }, {
+        "parameter": "wfas_context",
+        "value": "$sys.func.TO_OBJECT($session.params.wfas_context_raw)"
+      }, {
+        "parameter": "day_of_week_fr",
+        "value": "$session.params.day_of_the_week_fr"
+      }, {
+        "parameter": "start_time_2",
+        "value": "$session.params.time_slot_object.start_time_2"
+      }, {
+        "parameter": "end_time_2",
+        "value": "$session.params.time_slot_object.end_time_2"
+      }, {
+        "parameter": "start_time_fr_2",
+        "value": "$session.params.time_slot_object.start_time_fr_2"
+      }, {
+        "parameter": "end_time_fr_2",
+        "value": "$session.params.time_slot_object.end_time_fr_2"
+      } ]
+    },
+    "targetPage": "Webhook - WFAS Appointment",
+    "name": "8b29ec08-3575-4435-b7d2-a0b4b73f3059"
+  } ]
+}

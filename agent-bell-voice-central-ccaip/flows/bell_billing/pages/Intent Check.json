@@ -1,0 +1,111 @@
+{
+  "name": "aa5b7e5b-6c94-48b5-af49-783c3381f948",
+  "displayName": "Intent Check",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.route = \"bill_charge_inquiry\" OR $session.params.route = \"bill_remove_service_charge\" OR $session.params.route = \"bill_unexpected_after_cancel\" OR $session.params.route = \"bill_unexpected_after_suspend\" OR $session.params.route = \"bill_promo_expired\" OR $session.params.route = \"bill_deposit_inquiry\" OR $session.params.route = \"payment_restore_service\" OR $session.params.route = \"bill_change_bill_cycle\" OR $session.params.route = \"bill_missing_bill\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_aqd",
+    "name": "d8687469-ee24-4851-98a6-55e1f55b433a"
+  }, {
+    "condition": "$session.params.route = \"bill_contract_terms\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "contract_terms Offer SMS",
+    "name": "1cf10d75-77ff-4726-bac8-31d1e18a4349"
+  }, {
+    "condition": "$session.params.route = \"bill_add_promo\" OR $session.params.route = \"bill_inquire_promo\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "add_promo / inquire_promo Offer SMS",
+    "name": "c78fa6fd-45d7-49d9-8b51-08d965e97c26"
+  }, {
+    "condition": "$session.params.route = \"bill_confirm_due_date\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Authentication Check",
+    "name": "292fb248-9a15-46ca-89f5-80ac5770f5bf"
+  }, {
+    "condition": "$session.params.route = \"bill_missing_promos\" OR $session.params.route = \"bill_missing_promo\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "route",
+        "value": "bill_missing_promos"
+      }, {
+        "parameter": "intent",
+        "value": "bill_missing_promos"
+      } ]
+    },
+    "targetPage": "missing_promo Offer SMS",
+    "name": "26834158-8e1f-4f47-970a-74fc5a65c92a"
+  }, {
+    "condition": "$session.params.route = \"bill_dispute\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "from_billing",
+        "value": "bill_dispute"
+      } ]
+    },
+    "targetPage": "dispute_bill Offer SMS",
+    "name": "7258dd57-9135-4052-a6ff-83e809e7d092"
+  }, {
+    "condition": "$session.params.route = \"bill_switch_format\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "switch_format Offer SMS ",
+    "name": "d33b642c-3ef0-4af5-99aa-376eab5cbcb3"
+  }, {
+    "condition": "$session.params.route = \"bill_device_balance\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "device_balance Offer SMS",
+    "name": "7b73b11a-05d7-445b-8a28-82927b6b24d2"
+  }, {
+    "condition": "$session.params.route = \"bill_view_bill\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "view_bill Offer SMS",
+    "name": "efa8f24d-4526-419a-ba2b-d806dbff127c"
+  }, {
+    "condition": "$session.params.route = \"payment_request_refund\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_payment_request_refund",
+    "name": "b376ffb5-b535-4fa1-abfa-2b3c425086b2"
+  }, {
+    "condition": "$session.params.route = \"payment_not_processing\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_payment_not_processing",
+    "name": "028f2c0c-8a78-4f76-9745-0ee2d3f32bd9"
+  }, {
+    "condition": "$session.params.route = \"bill_reduce_plan\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Sure." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Bien sûr." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetPage": "APB Check",
+    "name": "abef39ff-0cc6-4307-951d-b487062b9f24"
+  } ]
+}

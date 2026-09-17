@@ -1,0 +1,59 @@
+{
+  "name": "97f6d408-bba5-45a3-ab14-289245bdf72b",
+  "displayName": "Check Special Status",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.special_status = \"bell_col_aul\" OR $session.params.special_status = \"bell_col_delinquent\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "No Problem. I can help you get set up with Payment Arrangement." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ " Pas de problème! Je peux vous aider à configurer l’entente de paiement." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetFlow": "bell_payment_arrangement_setup_pa_amount_date_and_processing",
+    "name": "ba0be63f-5228-419a-8a66-a11abc913f44"
+  }, {
+    "condition": "$session.params.special_status = \"bell_col_sus\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Pas de problème! Je peux vous aider à configurer l’entente de paiement.\r\nVeuillez noter que vos services resteront suspendus jusqu’à ce que nous recevions votre futur paiement. Êtes-vous prêt à effectuer un paiement par carte de crédit ou par carte de débit Visa maintenant afin de rétablir vos services immédiatement?" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetPage": "Accept or Reject OTCC",
+    "name": "ec68ae54-e00f-470c-812d-c7ccbd1c69be"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "97f6d408-bba5-45a3-ab14-289245bdf72b"
+      }, {
+        "parameter": "flow_id",
+        "value": "57228ada-e06b-4b6d-b615-3f9af36911b6"
+      }, {
+        "parameter": "page_name",
+        "value": "Check Special Status"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

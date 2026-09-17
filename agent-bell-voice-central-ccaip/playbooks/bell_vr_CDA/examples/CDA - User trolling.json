@@ -1,0 +1,59 @@
+{
+  "name": "fa5c5d01-dbc8-48cd-b7ea-f1bb74d4ab80",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "To fix this issue, you need to perform this step now. Please check if the power light on the front of the modem is solid white. Please perform that step and let me know when you are done."
+    }
+  }, {
+    "userUtterance": {
+      "text": "I think my modem is actually a space toaster and it's currently making me a grilled cheese sandwich. However, I want to make sure we get your internet back up and running, so let's focus on the modem for a second.  Are you able to see if that power light is solid white for me?"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Hmm, that would certainly be a high-tech toaster! However, I want to make sure we get your internet back up and running, so let's focus on the modem for a second. [Pivot] Are you able to see if that power light is solid white for me?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "The sandwich is ready but the moon is made of blue grapes today"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "I see we are having trouble communicating. I will transfer you to an agent who can better assist you."
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_aqd",
+      "inputActionParameters": {
+      
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "User having a problem with the service and initiating Virtual repair session.",
+    "actionParameters": {
+      "acceptable_answers": [ {
+        "choice": "user_completed_entire_solution",
+        "id": "0"
+      }, {
+        "choice": "user_is_stuck_further_help_requested",
+        "id": "1"
+      } ],
+      "dcx_action_code": "6051",
+      "description": "",
+      "eta_CDA": "Approx. 7 minutes",
+      "faq_question_answer": "Q: what is a pod ?\nA: A pod is a small, wireless, device that extends your Wi-Fi network's coverage to areas with a weak signal.\n\nQ: What do pods look like?\nA: Pods are white and would have been provided by us, and they plug into an electrical outlet.\n\nQ: What do the lights on the POD mean?\nA: Lights on the POD indicate the status, they can be blinking white or green.\n\nQ: How do I know if a POD is offline?\nA: When there are no lights or a pulsing white light it can indicate the pod is offline.\n\nQ: Where is the light that could be flashing?\nA: Bell Wi-Fi PODs have a light indicator on the front of the POD. \n \nQ: What colour should the pod flash? \nA: The Bell Wi-Fi POD will typically flash a white light when attempting to pair. When the light is off, and there is power to the pod, it is working correctly.\n\nQ: My pods are not plugged in, what do i do?\nA: Through our troubleshooting i can help with that, but 1st I need to determine and isolate the issue. are your pods flashing?\n\nQ: Where would I find my pod?\nA: Bell Pods are connected into electrical outlets, Pods are white and would have been provided by Bell\n\nQ: What power outlet should I pick?\nA: You can pick another outlet that isn’t the existing one.\n\nQ: What browser should I use?\nA: you can use any browser such as Edge, Chrome or safari.\n\nQ: when I go to the website it is asking me for an administrator password, what is it?\nA: By default your administrator password is the serial number of your modem, it can be found on a label on the back of your modem.\n\nQ: What is my administrator password?\nA: By default your administrator password is the serial number of your modem, it can be found on a label on the back of your modem.\n\nQ: why does my Whole home wi-fi have to be set to on?\nA: in order for Pods to work with the Bell modem this needs to be turned on.\n\nQ: How can I tell if this power outlet is working properly?\nA: To see if the outlet is working properly you can try plugging in a charge from another device to see if it starts to charge.",
+      "language": "en",
+      "title": "Modem Power Light Check"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "detects gibberish or trolling by isolating irrelevant inputs into a final priority case. On the first instance, the bot acknowledges the remark and uses a hard pivot to restate the technical directive; on the second, it automatically triggers a transfer to an agent via ${FLOW:bell_aqd}. This prevents infinite loops and ensures the bot only entertains non-sequiturs for a maximum of one turn before escalating."
+  },
+  "displayName": "CDA - User trolling",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 1076,
+  "languageCode": "en"
+}

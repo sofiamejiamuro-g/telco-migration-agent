@@ -1,0 +1,69 @@
+{
+  "name": "b4c996ce-500b-43e5-b49f-fa04c07e92a4",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "brand": "bell",
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": " À propos de quel service communiquez-vous avec nous?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Internet"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Vérifions si nous offrons des services Internet ou de téléphonie\nrésidentielle dans votre secteur. Dans quelle province avez-vous besoin de\nservices?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "MTS"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_aqd",
+      "inputActionParameters": {
+        "language": "fr-ca",
+        "lob": "Internet",
+        "special_queue": "bell_sales_to_mts"
+      },
+      "outputActionParameters": {
+        "language": "fr-ca"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer has questions about device availability, device features, cost, related to devices that Bell sells, Here we know the lob is Internet and we don't know the province",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "New",
+      "identification_status": "Fail",
+      "language": "fr-ca",
+      "province": "BC",
+      "route": "sales_device_inquiry",
+      "utterance": "J'ai des questions sur la disponibilité des appareils"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "We need to ask the customer which province they are looking for and if it is \"MTS\" then call bell_aqd flow and set special_queue =\nbell_sales_to_mts",
+    "actionParameters": {
+      "language": "fr-ca",
+      "lob": "Internet",
+      "province": "MTS"
+    }
+  },
+  "displayName": "FR sales device inquiry- ID fail,province not identified- new-MTS",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 458,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

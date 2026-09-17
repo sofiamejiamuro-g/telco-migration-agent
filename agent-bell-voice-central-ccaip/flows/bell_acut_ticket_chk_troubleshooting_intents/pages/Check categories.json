@@ -1,0 +1,155 @@
+{
+  "name": "ce4099e9-29d3-4783-89a4-30c716801068",
+  "displayName": "Check categories",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$sys.func.UPPER($session.params.categoryValue) = \"5S\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "special_queue",
+        "value": "tech_acut_cat_5s"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "64f08f29-148e-4bae-8ab5-f1bbab75c93c"
+  }, {
+    "condition": "$sys.func.UPPER($session.params.categoryValue) = \"5M\" OR $sys.func.UPPER($session.params.categoryValue) = \"5A\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "special_queue",
+        "value": "tech_acut_cat_5ma"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "3e75ea78-4b73-4d64-987c-6ed5a2376606"
+  }, {
+    "condition": "$session.params.active_dispatch_count \u003e 1",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "[whk] Acut trouble type",
+    "name": "0cce6e12-6134-4284-a703-e5d09195aa81"
+  }, {
+    "condition": "$session.params.pattern_id != null AND $session.params.pattern_id != \"\" AND $session.params.notificationDetails[0].characteristicSpecification != null AND $session.params.pattern_id != \"$session\\.params\\.notificationDetails[0]\\.characteristicSpecification\\.patternID\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "If outage cleared",
+    "name": "3f809be3-b38a-47c6-8909-0518381c3f04",
+    "description": "Note: when pattern_id exists\nIgnoring outage_indicator for now since it is not available in the object"
+  }, {
+    "condition": "$sys.func.UPPER($session.params.dispatch_type) = \"FIELD\" AND ($sys.func.UPPER($session.params.dispatch_status) = \"OPEN\" OR $sys.func.UPPER($session.params.dispatch_status) = \"SCHEDULED\" OR $sys.func.UPPER($session.params.dispatch_status) = \"ASSIGNED\" OR $sys.func.UPPER($session.params.dispatch_status) = \"ONSITE\" OR $sys.func.UPPER($session.params.dispatch_status) = \"ENROUTE\")",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "[whk] Acut trouble type",
+    "name": "9b07465b-b70c-4877-ad53-8b23f309b304"
+  }, {
+    "condition": "$session.params.trouble_ticket_state = \"606\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "[whk] Acut trouble type",
+    "name": "6e05407a-c43e-4741-9e89-5066382db77d"
+  }, {
+    "condition": "$sys.func.UPPER($session.params.dispatch_status) = \"MANUALHANDLING\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "mya_pitch",
+        "value": true
+      } ]
+    },
+    "targetFlow": "bell_appt_mgmt_mya_pitch_1",
+    "name": "0350de75-e845-44e9-8849-a3a12361237e"
+  }, {
+    "condition": "$session.params.dispatch_type = \"CO\" OR $session.params.dispatch_type = \"CABLE\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "mya_pitch",
+        "value": true
+      } ]
+    },
+    "targetFlow": "bell_appt_mgmt_mya_pitch_1",
+    "name": "dd1052c1-c3f6-4352-9ef3-fb5cb5e6741d"
+  }, {
+    "condition": "$session.params.acut_retrieve_response.vrOutcome = \"speak_to_agent\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Virtual Repair - Message",
+    "name": "92eff638-95ff-4d00-9e63-b593129a9c53"
+  }, {
+    "condition": "$sys.func.LOWER($session.params.acut_retrieve_response.vrOutcome) = \"rma\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Je vois que vous avez récemment exécuté une réparation virtuelle et qu’il a été déterminé que votre équipement doit être remplacé ." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "I see that you recently ran virtual repair and have determined your equipment needs to be replaced. " ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "a144a09a-0823-488d-ab60-b8c781b6fea4"
+  }, {
+    "condition": "$sys.func.LOWER($session.params.acut_retrieve_response.vrOutcome) = \"dispatch\" OR vr_outcome = \"dispatch\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Je vois que vous avez récemment exécuté une réparation virtuelle et qu’il a été déterminé que vous avez besoin d’un(e) technicien(ne)" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "I see that you recently ran virtual repair and it has determined you need a technician." ]
+        },
+        "languageCode": "en"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "street_number",
+        "value": "$session.params.acut_retrieve_response.acutContext.geographicAddress.urbanPropertyAddress.streetNrFirst"
+      }, {
+        "parameter": "street_name",
+        "value": "$session.params.acut_retrieve_response.acutContext.geographicAddress.urbanPropertyAddress.streetName"
+      }, {
+        "parameter": "sub_unit",
+        "value": "$sys.func.IF(\"$session.params.acut_retrieve_response.acutContext.geographicAddress.urbanPropertyAddress.subUnitNr != null\", $session.params.acut_retrieve_response.acutContext.geographicAddress.urbanPropertyAddress.subUnitNr,\"\")"
+      } ]
+    },
+    "targetFlow": "bell_app_mgmt_create_dispatch_start",
+    "name": "b1afbd42-fd3b-45f2-9c89-6ac856f5a500"
+  }, {
+    "condition": "$sys.func.LOWER($session.params.acut_retrieve_response.vrOutcome) = \"nothing\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Je vois qu’il y a une séance de réparation virtuelle active que vous avez lancée." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "I see there is an active virtual repair session that you initiated." ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "59692dc8-d6b1-4400-850a-0a83add05d89"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "[whk] Acut trouble type",
+    "name": "3e5f0870-1a24-47aa-ab35-e5f3970bb687"
+  } ]
+}

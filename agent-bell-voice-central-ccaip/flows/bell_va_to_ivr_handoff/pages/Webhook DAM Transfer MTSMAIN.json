@@ -1,0 +1,96 @@
+{
+  "name": "38ac1a45-7830-4401-b704-933508bc76d5",
+  "displayName": "Webhook DAM Transfer MTSMAIN",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "/v1/ivr-transfer/send-transfer-data#dam-transfer",
+    "tag": "dam-transfer",
+    "setParameterActions": [ {
+      "parameter": "dam_id",
+      "value": "MTSMAIN"
+    }, {
+      "parameter": "brand",
+      "value": "Bell MTS"
+    }, {
+      "parameter": "department",
+      "value": "6102"
+    }, {
+      "parameter": "account_type",
+      "value": "R"
+    }, {
+      "parameter": "cti_at",
+      "value": "A2AMM"
+    }, {
+      "parameter": "cti_rt_1",
+      "value": "$sys.func.IF(\"$session.params.route = null\", other_speak_to_agent, $session.params.route)"
+    }, {
+      "parameter": "cti_sd",
+      "value": "$session.params.tfn"
+    }, {
+      "parameter": "ibm_entry_point",
+      "value": "$session.params.va_ibm_id"
+    }, {
+      "parameter": "department_id_ref",
+      "value": "$sys.func.CONCATENATE(\"REF\", $session.params.department)"
+    }, {
+      "parameter": "_empty_string",
+      "value": ""
+    }, {
+      "parameter": "cti_rt",
+      "value": "$sys.func.IF(\"$session.params.route = $session.params._empty_string\" , other_speak_to_agent, $session.params.route)"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "webhook_success",
+        "value": "$session.params.webhook_success"
+      } ]
+    },
+    "name": "da0b3c7c-f725-403f-bfd6-5ce2b5cf9077"
+  }, {
+    "condition": "$session.params.webhook_success = \"true\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_Live Agent Handoff",
+    "name": "f128cfa6-ae49-4d63-b0e8-6284d4f8442c"
+  }, {
+    "condition": "$session.params.webhook_success = \"false\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "\u003cspeak\u003eSorry, I couldn’t transfer you just now. Please call\u003cprosody rate=\"slow\"\u003e\u003csay-as interpret-as=\"telephone\"\u003e1-800-883-2054 \u003c/say-as\u003e \u003c/prosody\u003efor support.\u003c/speak\u003e" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "\u003cspeak\u003eJe ne peux malheureusement pas effectuer votre transfert pour le moment. Veuillez composer le \u003cprosody rate=\"x-slow\"\u003e\u003csay-as interpret-as=\"telephone\"\u003e 1-800-883-2054 \u003c/say-as\u003e \u003c/prosody\u003epour obtenir de l’aide.\u003c/speak\u003e\n" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetFlow": "bell_wrapup",
+    "name": "3b7a8699-17d8-4bf5-87ad-ab561660ba1d"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "\u003cspeak\u003eSorry, I couldn’t transfer you just now. Please call\u003cprosody rate=\"slow\"\u003e\u003csay-as interpret-as=\"telephone\"\u003e1-800-883-2054 \u003c/say-as\u003e \u003c/prosody\u003efor support.\u003c/speak\u003e" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "\u003cspeak\u003eJe ne peux malheureusement pas effectuer votre transfert pour le moment. Veuillez composer le \u003cprosody rate=\"x-slow\"\u003e\u003csay-as interpret-as=\"telephone\"\u003e 1-800-883-2054 \u003c/say-as\u003e \u003c/prosody\u003epour obtenir de l’aide.\u003c/speak\u003e\n" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetFlow": "bell_wrapup",
+    "name": "ee119c52-42f4-4c92-a8bb-bb6876a0c664"
+  } ]
+}

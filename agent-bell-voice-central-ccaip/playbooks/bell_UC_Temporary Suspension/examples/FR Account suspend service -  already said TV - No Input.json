@@ -1,0 +1,63 @@
+{
+  "name": "a56e85cb-a68f-471a-8d4f-ac8fb7388179",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Bien sûr, je peux vous aider. Vous pouvez suspendre temporairement vos services résidentiels dans MonBell. Je vais envoyer un texto à l’appareil à partir duquel vous appelez qui contient un lien pour le faire vous-même. Est-ce que cela vous convient?"
+    }
+  }, {
+    "userUtterance": {
+    
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_global_error_count_check",
+      "inputActionParameters": {
+        "global_error_counter": "0",
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+        "global_error_counter": "1",
+        "language": "fr-ca"
+      }
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "brand": "bell",
+        "language": "fr-ca",
+        "route": "account_suspend_service",
+        "sms_send_status": "Declined",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+        "brand": "bell",
+        "language": "fr-ca"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer trying to suspend their service as there device is lost",
+    "actionParameters": {
+      "brand": "bell",
+      "global_error_counter": "0",
+      "language": "fr-ca",
+      "route": "account_suspend_service",
+      "unique_services": "Internet, Tv, Homephone",
+      "utterance": "Je veux suspendre mon ou mes service TV"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Customer query is resolved.",
+    "actionParameters": {
+      "brand": "bell",
+      "global_error_counter": "1",
+      "language": "fr-ca"
+    }
+  },
+  "displayName": "FR Account suspend service -  already said TV - No Input",
+  "retrievalStrategy": "NEVER",
+  "tokenCount": 403,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

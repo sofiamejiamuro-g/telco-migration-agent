@@ -1,0 +1,68 @@
+{
+  "name": "a9e54abe-07a1-4d25-b99d-ea3a3d35a5a8",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "language": "fr-ca",
+        "lob": "homephone",
+        "province": "ROC"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Bien sûr, laissez-moi vous aider.\nVérifions si nous offrons des services Internet ou de téléphonie résidentielle dans votre secteur. Dans quelle province avez-vous besoin de services?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "ROC"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Malheureusement, nous n'offrons pas encore de services de téléphonie résidentielle dans votre secteur. Bonne nouvelle, cependant : Bell offre un service de téléphonie mobile incroyable qui couvre plus de 99 % de la population. Est-ce que je vous mets en contact avec un de nos agents, qui pourra vous en dire davantage?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "OUI"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_aqd",
+      "inputActionParameters": {
+        "language": "fr-ca",
+        "lob": "homephone",
+        "province": "ROC"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "The customer is asking whether the provider's service is offered at an address or location.",
+    "actionParameters": {
+      "language": "fr-ca",
+      "lob": "Homephone",
+      "province": "BC",
+      "route": "sales_confirm_service_coverage",
+      "utterance": "Est-ce que vous avez du service téléphonique à domicile chez moi ?"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "When province is anything other than ON and QC or is null or empty, ask user for province, extract in {province} parameter and further route based on province",
+    "actionParameters": {
+      "language": "fr-ca",
+      "lob": "Homephone",
+      "province": "ROC",
+      "utterance": "Est-ce que vous avez du service téléphonique à domicile chez moi ?"
+    }
+  },
+  "displayName": "FR-sales_service_coverage-streaming | homephone | ROC | uxyes",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 506,
+  "languageCode": "en"
+}

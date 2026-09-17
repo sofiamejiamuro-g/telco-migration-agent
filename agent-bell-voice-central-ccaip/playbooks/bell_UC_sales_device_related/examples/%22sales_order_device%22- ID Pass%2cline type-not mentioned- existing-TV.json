@@ -1,0 +1,79 @@
+{
+  "name": "3f810933-a1d3-4690-af47-af3753ee6017",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "brand": "bell",
+        "language": "en"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Are you inquiring about a new service or do you want to make changes to your current service?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "I want to know about current service"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Which service are you inquiring about?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "TV"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "I'll send a text to the device you're calling from, so that you can check out Bell's TV devices.Is that alright?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Yes"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "brand": "bell",
+        "language": "en",
+        "route": "sales_order_device",
+        "sms_content": "Bell: You can visit bell.ca/fibetvequipment for Fibe TV equipment or bell.ca/satellitetvequipment for Satellite TV equipment. ( bell.ca/about-us )",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+        "language": "en"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer has questions about needing a device, device availability, device features, cost, related to devices that Bell sells",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "en",
+      "route": "sales_order_device",
+      "utterance": "I want to order a device"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "from the identification flow, know the customer_type as \"Existing\",if in the utterance or user says that they are looking for{lob} is \"TV\" or {device_type} is\"satellite dish\" or \"receiver\" then ask if they send a text if they didn't agree call feedback flow",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "line_type": "Existing",
+      "lob": "TV"
+    }
+  },
+  "displayName": "\"sales_order_device\"- ID Pass,line type-not mentioned- existing-TV",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 541,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

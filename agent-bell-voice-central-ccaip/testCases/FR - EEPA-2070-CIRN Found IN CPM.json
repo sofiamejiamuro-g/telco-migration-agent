@@ -1,0 +1,101 @@
+{
+  "name": "fc183356-443d-4733-805c-09b8906b3533",
+  "tags": [ "#fr" ],
+  "displayName": "FR - EEPA-2070-CIRN Found IN CPM",
+  "testCaseConversationTurns": [ {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "bonjour"
+        },
+        "languageCode": "fr-ca"
+      }
+    },
+    "virtualAgentOutput": {
+      "triggeredIntent": {
+        "name": "Default Welcome Intent"
+      },
+      "currentPage": {
+        "name": "Routing Page",
+        "flow": "Default Start Flow"
+      },
+      "textResponses": [ {
+        "text": [ "Accueillir. Je suis l'assistant virtuel de Bell. c'est un plaisir de vous rencontrer par voie électronique. J'utilise l'IA pour vous proposer de l'aide rapidement lorsque vous en avez besoin. Comment puis-je t'aider?" ]
+      } ],
+      "currentFlow": {
+        "name": "Default Start Flow"
+      }
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "faire un paiement"
+        },
+        "languageCode": "fr-ca"
+      }
+    },
+    "virtualAgentOutput": {
+      "triggeredIntent": {
+        "name": "payment_make_payment"
+      },
+      "currentPage": {
+        "name": "Get CX Input",
+        "flow": "bell_Identification"
+      },
+      "textResponses": [ {
+        "text": [ "Est-ce concernant le numéro à partir duquel vous appelez?" ],
+        "allowPlaybackInterruption": true
+      } ],
+      "currentFlow": {
+        "name": "bell_Identification"
+      }
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "oui"
+        },
+        "languageCode": "fr-ca"
+      }
+    },
+    "virtualAgentOutput": {
+      "triggeredIntent": {
+        "name": "context.confirm_yes"
+      },
+      "currentPage": {
+        "name": "Trigger_OTP",
+        "flow": "bell_authentication"
+      },
+      "textResponses": [ {
+        "text": [ "Merci!" ],
+        "allowPlaybackInterruption": true
+      }, {
+        "text": [ "Vous avez été identifié" ],
+        "allowPlaybackInterruption": true
+      }, {
+        "text": [ "Pour plus de sécurité, je vais vous envoyer un code à six chiffres par message texte, sur votre téléphone." ],
+        "allowPlaybackInterruption": true
+      }, {
+        "text": [ "Veuillez me le donner lorsque vous l'aurez reçu." ],
+        "allowPlaybackInterruption": true
+      } ],
+      "currentFlow": {
+        "name": "bell_authentication"
+      }
+    }
+  } ],
+  "creationTime": {
+    "seconds": 1738329317,
+    "nanos": 466434000
+  },
+  "testConfig": {
+    "flow": "Default Start Flow",
+    "page": "Start Page"
+  },
+  "languageCode": "fr-ca"
+}

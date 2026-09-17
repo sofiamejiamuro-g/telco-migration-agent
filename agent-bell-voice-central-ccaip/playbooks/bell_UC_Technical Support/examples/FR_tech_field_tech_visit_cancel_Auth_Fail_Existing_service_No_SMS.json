@@ -1,0 +1,94 @@
+{
+  "name": "be8d2cca-0d18-47ac-b721-3fcd52d7f5ea",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70012",
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+        "language": "fr-ca"
+      }
+    }
+  }, {
+    "playbookInvocation": {
+      "playbook": "bell_uc_ask_LOB",
+      "playbookInput": {
+        "precedingConversationSummary": "Customer wants to cancel the appointment, does not mention lob",
+        "actionParameters": {
+          "language": "fr-ca",
+          "route": "tech_field_tech_visit_cancel"
+        }
+      },
+      "playbookOutput": {
+        "executionSummary": "When user does not provide lob, prompt them to understand what kind of service they are looking for, if the user mentions lob then return lob to the originating Playbook, if not set the default lob and return back",
+        "actionParameters": {
+          "language": "fr-ca",
+          "lob": "Mobility",
+          "route": "tech_field_tech_visit_cancel"
+        }
+      },
+      "playbookState": "OUTPUT_STATE_OK"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Est-ce pour réparer un service existant? "
+    }
+  }, {
+    "userUtterance": {
+      "text": "Service existant"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_authentication",
+      "inputActionParameters": {
+      
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Saviez-vous que vous pouvez consulter, reporter ou annuler votre rendez-vous dans l’appli Gérez votre rendez-vous? Je vais envoyer un texto sur l’appareil au moyen duquel vous appelez afin de vous permettre de commencer. Est-ce que ça vous convient?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Non"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_aqd",
+      "inputActionParameters": {
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+        "language": "fr-ca"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer wants to cancel the appointment",
+    "actionParameters": {
+      "language": "fr-ca",
+      "route": "tech_field_tech_visit_cancel",
+      "utterance": "Je veux annuler mon rendez-vous."
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "User has any kind of query, and does not provide LOB, ALWAYS route it to playbook bell_uc_ask_LOB, then return back to originating playbook and The user was sent to flow  bell_authentication and since auth_status = \"Fail\" , asked the user for sms and he said no then asked further query and after the user said no  transferred to bell_aqd",
+    "actionParameters": {
+      "auth_status": "Fail",
+      "language": "fr-ca",
+      "lob": "Mobility",
+      "route": "tech_field_tech_visit_cancel",
+      "utterance": "Je veux annuler mon rendez-vous."
+    }
+  },
+  "displayName": "FR_tech_field_tech_visit_cancel_Auth_Fail_Existing_service_No_SMS",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 724,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "fr"
+}

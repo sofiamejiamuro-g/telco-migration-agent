@@ -1,0 +1,41 @@
+{
+  "name": "49f632d3-b21b-4a72-8ff3-d3d38d2f4372",
+  "displayName": "Set TV Service Id",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.internet_tv_service_id_flag \u003e 0",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "service_id",
+        "value": "$session.params.internet_tv_service_id[0]"
+      } ]
+    },
+    "name": "5374891b-2b11-4f36-a6c3-8ecae4e75cd2",
+    "targetPlaybook": "bell_vr_consent"
+  }, {
+    "condition": "$session.params.homephone_tv_service_id_flag \u003e 0",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "service_id",
+        "value": "$session.params.homephone_tv_service_id[0]"
+      } ]
+    },
+    "name": "1143a4db-b02f-46d9-88f5-c19ba64047a5",
+    "targetPlaybook": "bell_vr_consent"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "service_id",
+        "value": "$session.params.service_tv[0]"
+      } ]
+    },
+    "name": "16d54d1c-9d59-4d85-8f96-02a336076fcb",
+    "targetPlaybook": "bell_vr_consent"
+  } ]
+}

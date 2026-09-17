@@ -1,0 +1,56 @@
+{
+  "name": "10e0b908-c75d-4109-9266-cd810c6c1ed6",
+  "displayName": "Language Based SMS",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.language = \"en\" OR $session.params.language = \"en-ca\" OR $session.params.language = \"en-CA\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "sms_content",
+        "value": "You can visit https://m.bell.ca/ecviewmybill to view your account balance in the MyBell app.  ( bell.ca/about-us )"
+      }, {
+        "parameter": "sms_type",
+        "value": "Public"
+      } ]
+    },
+    "targetFlow": "bell_SMS Trigger",
+    "name": "d0f8f025-aa92-4a7e-8416-3faaa0700ca6"
+  }, {
+    "condition": "$session.params.language = \"fr\" OR $session.params.language = \"fr-ca\" OR $session.params.language = \"fr-CA\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "sms_content",
+        "value": "Mess. de Bell: Vous pouvez visiter  https://m.bell.ca/ecvoirmafacture pour consulter le solde de votre compte dans l'application MonBell.  ( bell.ca/apropos )"
+      }, {
+        "parameter": "sms_type",
+        "value": "Public"
+      } ]
+    },
+    "targetFlow": "bell_SMS Trigger",
+    "name": "409ed49e-5f62-434a-8df8-fda883699c44"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "10e0b908-c75d-4109-9266-cd810c6c1ed6"
+      }, {
+        "parameter": "flow_id",
+        "value": "518d29f3-b868-4b90-b9a7-421847b47a19"
+      }, {
+        "parameter": "page_name",
+        "value": "Language Based SMS"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

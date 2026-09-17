@@ -1,0 +1,51 @@
+{
+  "name": "52036865-5888-4e49-90ec-46dd7a6c1148",
+  "displayName": "Counter For User Confirmation",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.Incorrect_Counter_User_NOT_GIVING_NUMBER \u003c= 2",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Check for Existing Number",
+    "name": "5faf15ce-5b51-4669-9bc7-951c8d2bf261"
+  }, {
+    "condition": "$session.params.Incorrect_Counter_User_NOT_GIVING_NUMBER \u003e 2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "No problem, lets continue anyway." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Pas de problème, continuons quand même." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetPage": "End Flow Check",
+    "name": "550f8308-f327-4547-befb-408f4def8d68"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "52036865-5888-4e49-90ec-46dd7a6c1148"
+      }, {
+        "parameter": "flow_id",
+        "value": "24434330-b99d-41fd-89fc-5730c7869adb"
+      }, {
+        "parameter": "page_name",
+        "value": "Counter For User Confirmation"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

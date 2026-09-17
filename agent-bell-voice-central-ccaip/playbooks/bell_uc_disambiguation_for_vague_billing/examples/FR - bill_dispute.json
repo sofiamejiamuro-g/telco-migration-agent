@@ -1,0 +1,48 @@
+{
+  "name": "2d95e120-044f-42fc-9591-289d64ed1eee",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Je peux vous aider sur plusieurs sujets liés à la facturation. Pour vous diriger au bon endroit, veuillez me donner plus de détails sur votre demande. Par exemple, vous pourriez dire 'un frais particulier' ou 'mon solde total'"
+    }
+  }, {
+    "userUtterance": {
+      "text": "J'ai été facturé à tort"
+    }
+  }, {
+    "playbookInvocation": {
+      "playbook": "bell_UC_Billing",
+      "playbookInput": {
+        "precedingConversationSummary": "Customers are looking to know about their incorrect charges or charge related disputes",
+        "actionParameters": {
+          "language": "fr-ca",
+          "route": "bill_dispute",
+          "utterance": "J'ai été facturé à tort"
+        }
+      },
+      "playbookOutput": {
+        "executionSummary": "Customer query got resolved",
+        "actionParameters": {
+          "language": "fr-ca",
+          "route": "bill_dispute"
+        }
+      },
+      "playbookState": "OUTPUT_STATE_OK"
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer query about \"I need to talk about my bill.\" is addressed",
+    "actionParameters": {
+      "language": "fr-ca",
+      "route": "bill_vague",
+      "utterance": "Je dois parler de ma facture."
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Customer query is addressed and then transferred to \"lucky_UC_Billing\" playbook for further conversation"
+  },
+  "displayName": "FR - bill_dispute",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 318,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

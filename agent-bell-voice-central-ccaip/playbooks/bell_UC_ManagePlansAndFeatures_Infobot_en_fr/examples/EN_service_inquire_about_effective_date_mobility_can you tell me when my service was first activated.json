@@ -1,0 +1,87 @@
+{
+  "name": "4773cad8-039f-41ea-a138-1d5a617446bd",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70024",
+        "language": "en"
+      },
+      "outputActionParameters": {
+        "language": "en"
+      }
+    }
+  }, {
+    "playbookInvocation": {
+      "playbook": "bell_uc_ask_LOB",
+      "playbookInput": {
+        "actionParameters": {
+          "language": "en",
+          "utterance": "Can I change my plan effective date?"
+        }
+      },
+      "playbookOutput": {
+        "actionParameters": {
+          "language": "en"
+        }
+      },
+      "playbookState": "OUTPUT_STATE_OK"
+    }
+  }, {
+    "toolUse": {
+      "tool": "EN_Bell_Manage_plans_and_features",
+      "action": "EN_Bell_Manage_plans_and_features",
+      "inputActionParameters": {
+        "requestBody": {
+          "query": "when my service was first activated"
+        }
+      },
+      "outputActionParameters": {
+        "200": {
+          "answer": "",
+          "snippets": [ ]
+        }
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "To find the effective date for a change to your Bell Mobility rate plan, you can access your account online via Bell or the MyBell app. Did that resolve your query?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "yes"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_Feedback",
+      "inputActionParameters": {
+        "language": "en"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer is asking when his service was first activated",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "lob": "mobility",
+      "route": "service_inquire_about_effective_date",
+      "utterance": "Can you tell me when my service was first activated"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "First,  flow \"bell_apb\" is called and then playbook \"bell_uc_ask_LOB\". Answer to the query is given basis playbook instructions",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en"
+    }
+  },
+  "displayName": "EN_service_inquire_about_effective_date_mobility_can you tell me when my service was first activated",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 532,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

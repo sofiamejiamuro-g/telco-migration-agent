@@ -1,0 +1,29 @@
+{
+  "name": "4a486ea5-778e-4598-a7c9-3a661f802424",
+  "displayName": "Consolidated Customers",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "($session.params.accountType = \"I\" AND ($session.params.accountSubType = \"R\" OR $session.params.accountSubType = \"P\" OR $session.params.accountSubType = \"N\" OR $session.params.accountSubType = \"B\" OR $session.params.accountSubType = \"5\" OR $session.params.accountSubType = \"E\")) OR ($session.params.accountType = \"C\" AND ($session.params.accountSubType = \"P\" OR $session.params.accountSubType = \"V\" OR $session.params.accountSubType = \"T\")) OR ($session.params.oneBillIndicator = \"M\" OR $session.params.oneBillIndicator = \"Y\")",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Province Lookup",
+    "name": "4b383dd9-1b35-4b9a-a5ab-b41d4973a171"
+  }, {
+    "condition": "$session.params.accountType != \"I\" OR $session.params.accountType != \"C\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Failure NM1 Outage",
+    "name": "ff5c537f-4e56-4613-9ef0-315bf6fc7a2a"
+  }, {
+    "condition": "$session.params.nm1_get_cust_profile_response.returnCode = 0",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Failure NM1 Outage",
+    "name": "d6514905-8ccb-42d2-af18-3ef0e1ea8802"
+  } ]
+}

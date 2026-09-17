@@ -1,0 +1,75 @@
+{
+  "name": "568ccd40-888f-4c03-90cb-77dbc5a00382",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Bien sûr, laissez-moi vous aider.\n\nÀ propos de quel service communiquez-vous avec nous?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Téléphone fixe"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Vérifions si nous offrons des services Internet ou de téléphonie\nrésidentielle dans votre secteur. Dans quelle province avez-vous besoin de\nservices?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Northwest Territories"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Malheureusement, nous n'offrons pas encore de services de téléphonie résidentielle dans votre secteur. Bonne nouvelle, cependant: Bell offre un service de téléphonie mobile incroyable qui couvre plus de 99% de\nla population. Est-ce que je vous mets en contact avec nu de nos agents, qui pourra vous en dire davantage?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "oui"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_aqd",
+      "inputActionParameters": {
+        "language": "fr-ca",
+        "lob": "homephone"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customers want to know about different plans or compare different plans that Bell has and lob identified as \" Internet\" OR \"TV\" OR \"Homephone\" and province is \"ROC\"",
+    "actionParameters": {
+      "customer_type": "New",
+      "identification_status": "Fail",
+      "language": "fr-ca",
+      "province": "AB",
+      "route": "sales_plans_inquiry",
+      "utterance": "j'ai besoin d'un plan"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "If lob is not mentioned, ask for it and route to bell_uc_ask_LOB if user does not mention it, \nWhen province is anything other than ON and QC or is null or empty, ask user for province, extract in {province} parameter and further route based on province",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca",
+      "lob": "homephone",
+      "province": "ROC"
+    }
+  },
+  "displayName": "FR - sales plans inquiry- no province identified- province ROC, LOB Homephone",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 571,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "fr"
+}

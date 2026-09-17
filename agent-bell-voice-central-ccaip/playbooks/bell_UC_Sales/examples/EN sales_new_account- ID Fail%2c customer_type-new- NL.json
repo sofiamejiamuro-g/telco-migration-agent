@@ -1,0 +1,88 @@
+{
+  "name": "11ec43d3-8bf0-41f3-a00f-561b658f81be",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "language": "en"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Sure, let me help you with that.\nWhich service are you inquiring about?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "a new service"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "In order to assist you better"
+    }
+  }, {
+    "playbookInvocation": {
+      "playbook": "bell_uc_ask_LOB",
+      "playbookInput": {
+        "precedingConversationSummary": "The Customer wants to sign up or open a new account with Bell, does not mention lob",
+        "actionParameters": {
+          "language": "en",
+          "rouet": "sales_new_account"
+        }
+      },
+      "playbookOutput": {
+        "executionSummary": "When user does not provide lob, prompt them to understand what kind of service they are looking for, if the user mentions lob then return lob to the originating Playbook, if not set the default lob and return back",
+        "actionParameters": {
+          "language": "en",
+          "lob": "Internet",
+          "route": "sales_new_account"
+        }
+      },
+      "playbookState": "OUTPUT_STATE_OK"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_aqd",
+      "inputActionParameters": {
+        "language": "en",
+        "lob": "Internet",
+        "special_queue": "bell_sales_to_atl"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "The Customer wants to sign up or open a new account with Bell and {province} is \"ATL\" or any synonym like \"ATL,Atlantic,NB,NL,NS \" user utterance is \"I want to open a new account\"",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "New",
+      "identification_status": "Fail",
+      "language": "en",
+      "province": "NL",
+      "route": "sales_new_account",
+      "utterance": "I want to open a new account"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "We need to check the result from identification flow from the webhook NPANXX, if it is \"ATL\" then call bell_aqd flow and set special_queue =\nbell_sales_to_atl",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "New",
+      "identification_status": "Fail",
+      "language": "en",
+      "lob": "Internet",
+      "province": "NL",
+      "special_queue": "bell_sales_to_atl"
+    }
+  },
+  "displayName": "EN sales_new_account- ID Fail, customer_type-new- NL",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 636,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

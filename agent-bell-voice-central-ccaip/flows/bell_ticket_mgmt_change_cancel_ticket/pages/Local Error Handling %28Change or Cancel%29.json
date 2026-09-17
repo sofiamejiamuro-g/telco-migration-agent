@@ -1,0 +1,100 @@
+{
+  "name": "9fc9c672-1781-40a9-b9f6-0aabd5c2ca90",
+  "displayName": "Local Error Handling (Change or Cancel)",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.global_error_counter \u003e= 3",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_aqd",
+    "name": "6fd71bf8-0b89-4673-8703-7e52c9d3c8dd"
+  }, {
+    "condition": "$session.params.local_trigger = \"no_input\" AND $session.params.local_noinput_counter = 1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Sorry, I didn't get that. Are you looking to change or cancel your appointment?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Désolé(e), je n'ai pas compris. Souhaitez-vous modifier ou annuler votre rendez-vous ?" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "eb80148b-b04a-4c4c-827c-988c0b7c7bfa"
+  }, {
+    "condition": "$session.params.local_trigger = \"no_input\" AND $session.params.local_noinput_counter = 2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Sorry, I didn't get that. Are you looking to change or cancel your appointment?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Désolé(e), je n'ai pas compris. Souhaitez-vous modifier ou annuler votre rendez-vous ?" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "cb72de61-dfea-4be3-ab39-a5b4d77ecd10"
+  }, {
+    "condition": "$session.params.local_trigger = \"no_input\" AND $session.params.local_noinput_counter = 3",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_aqd",
+    "name": "78610b39-ab2c-4282-9cbc-859a0c89af4a"
+  }, {
+    "condition": "$session.params.local_trigger = \"no_match\" AND $session.params.local_nomatch_counter = 1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Sorry, I didn't get that. Are you looking to change or cancel your appointment?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Désolé(e), je n'ai pas compris. Souhaitez-vous modifier ou annuler votre rendez-vous ?" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "bb90b9b3-0596-423b-92aa-0749c97ab465"
+  }, {
+    "condition": "$session.params.local_trigger = \"no_match\" AND $session.params.local_nomatch_counter = 2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Sorry, I didn't get that. Are you looking to change or cancel your appointment?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Désolé(e), je n'ai pas compris. Souhaitez-vous modifier ou annuler votre rendez-vous ?" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "81859562-2879-4db1-9d5c-28c0e9c0a77a"
+  }, {
+    "condition": "$session.params.local_trigger = \"no_match\" AND $session.params.local_nomatch_counter = 3",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_aqd",
+    "name": "199ec54f-1582-454d-bc4b-f0d51a89e61b"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Previous Page",
+    "name": "1dd25438-2dd4-4cc7-b291-c90ff804234a"
+  } ]
+}

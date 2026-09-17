@@ -1,0 +1,46 @@
+{
+  "name": "b96e7b01-3b0e-4850-ad15-03f7b213958f",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Could you tell me which service you're having issues with? Mobility, Internet, TV, or Homephone?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Just cancel appointment for me."
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Could you specify the type of service you're inquiring about? Internet, TV, or Homephone?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "appointment"
+    }
+  }, {
+    "retrievedContent": {
+      "relevantText": "{utterance}=\"appointment\",{lob}=\"Internet\", {language}=\"en\", {apb_location_id}=70014"
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "User wants to cancel the appointment, but does not mention LOB",
+    "actionParameters": {
+      "language": "en",
+      "route": "tech_field_tech_visit_cancel",
+      "utterance": "I want to cancel my appointment"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "The user failed to specify their lob when prompted, instead insisting twice on discussing about an appointment , return to PARENT playbook",
+    "actionParameters": {
+      "apb_location_id": "70014",
+      "language": "en",
+      "lob": "Internet",
+      "route": "tech_field_tech_visit_cancel"
+    }
+  },
+  "displayName": "EN - extract LOB - tech_field_tech_visit_cancel | no lob",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 275,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

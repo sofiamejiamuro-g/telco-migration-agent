@@ -1,0 +1,61 @@
+{
+  "name": "bacb933e-eed3-40e0-aa59-c70b7000955d",
+  "displayName": "Check l2_brand",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.l2_brand = \"Bell Small Business\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "dam_id",
+        "value": "XFER"
+      }, {
+        "parameter": "cti_at",
+        "value": "VAAT"
+      }, {
+        "parameter": "account_type",
+        "value": "Small Business"
+      }, {
+        "parameter": "brand",
+        "value": "Bell"
+      }, {
+        "parameter": "apb_transfer_location",
+        "value": "$sys.func.IF(\"$session.params.apb_skip = true\", null, \"70032\")"
+      }, {
+        "parameter": "customer_authentication",
+        "value": "$sys.func.IF(\"$session.params.auth_status = 'Pass'\", true, false)"
+      } ]
+    },
+    "targetPage": "Webhook Send Transfer Data",
+    "name": "c40e8e19-b736-4c4e-9051-a303d5c84d76"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "dam_id",
+        "value": "XFER"
+      }, {
+        "parameter": "cti_at",
+        "value": "VAAT"
+      }, {
+        "parameter": "account_type",
+        "value": "Consumer"
+      }, {
+        "parameter": "apb_transfer_location",
+        "value": "$sys.func.IF(\"$session.params.apb_skip = true\", null, \"70032\")"
+      }, {
+        "parameter": "customer_authentication",
+        "value": "$sys.func.IF(\"$session.params.auth_status = 'Pass'\", true, false)"
+      }, {
+        "parameter": "brand",
+        "value": "$sys.func.IF(\"$session.params.intent = other_speak_to_agent\", \"Bell\", $session.params.l2_brand)"
+      } ]
+    },
+    "targetPage": "Webhook Send Transfer Data",
+    "name": "59d77ad0-c656-4cfa-b872-c8f584bd493a"
+  } ]
+}

@@ -1,0 +1,69 @@
+{
+  "name": "685a037f-480f-48e3-a8ec-f1ef8459aa91",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70011"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Je vais envoyer un texto à l’appareil au moyen duquel vous appelez, afin que vous puissiez consulter toutes les options de lecture en continu. Est-ce que ça vous convient?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "oui"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "fr-ca",
+        "route": "service_change_plan",
+        "sms_content": "Bell: Vous pouvez consulter https://subscription.bell.ca/client pour en savoir plus sur nos options de diffusion en continu. ( bell.ca/apropos )",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "As, {identification_status} is \"Pass\" and {streaming_services} is \"netflix\" then we will prompt customer and ask to send message. If customer say \"Yes\" or anything affirmative then we will trigger the FLOW: bell_SMS Trigger ",
+    "actionParameters": {
+      "apb_location_id": "70011",
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "fr-ca",
+      "route": "service_change_plan",
+      "sms_content": "Bell: Vous pouvez consulter https://subscription.bell.ca/client pour en savoir plus sur nos options de diffusion en continu. ( bell.ca/apropos )",
+      "sms_type": "Public",
+      "streaming_services": "netflix",
+      "utterance": "Simplement mettre à niveau mon compte Netflix"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Customer with value such as \"netflix\", \"disney\", \"crave\", \"basic\"  and \"premium\" in the parameter {streaming_services} and {identification_status} = Pass will be prompted to send message and will be routed to bell_SMS Trigger flow.",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "fr-ca",
+      "route": "service_change_plan",
+      "sms_content": "Bell: Vous pouvez consulter https://subscription.bell.ca/client pour en savoir plus sur nos options de diffusion en continu. ( bell.ca/apropos )",
+      "sms_type": "Public",
+      "streaming_services": "netflix",
+      "utterance": "Simplement mettre à niveau mon compte Netflix"
+    }
+  },
+  "displayName": "FR - service_change_plan- streaming service - Netflix",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 626,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

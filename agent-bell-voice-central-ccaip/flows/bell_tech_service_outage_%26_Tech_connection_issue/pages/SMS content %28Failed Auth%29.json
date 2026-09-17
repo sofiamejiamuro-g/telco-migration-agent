@@ -1,0 +1,53 @@
+{
+  "name": "5bce75ae-8c5d-4e61-a00f-0518a3d4c406",
+  "displayName": "SMS content (Failed Auth)",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.language = \"en\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "sms_type",
+        "value": "Public"
+      }, {
+        "parameter": "sms_content",
+        "value": "Bell: You can visit https://m.bell.ca/repairtool to access our Virtual repair tool. ( bell.ca/about-us )"
+      } ]
+    },
+    "targetFlow": "bell_SMS Trigger",
+    "name": "f92eb1db-42d2-4944-a630-997277e1cb55"
+  }, {
+    "condition": "$session.params.language = \"fr-ca\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "sms_type",
+        "value": "Public"
+      }, {
+        "parameter": "sms_content",
+        "value": "Bell : Vous pouvez visiter https://m.bell.ca/reparationvirtuelle pour utiliser notre outil de réparation virtuelle. ( bell.ca/apropos )"
+      } ]
+    },
+    "targetFlow": "bell_SMS Trigger",
+    "name": "74612fac-a2b6-4f9a-8eaa-55e31dab7b3c"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "5bce75ae-8c5d-4e61-a00f-0518a3d4c406"
+      }, {
+        "parameter": "flow_id",
+        "value": "94d32e37-496f-4fa3-81e8-18fd95281a52"
+      }, {
+        "parameter": "page_name",
+        "value": "SMS content (Failed Auth)"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

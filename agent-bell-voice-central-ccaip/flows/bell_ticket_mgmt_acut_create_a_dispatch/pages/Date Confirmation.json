@@ -1,0 +1,104 @@
+{
+  "name": "c73e1df2-97d4-4ccd-8ec8-456d26d90e65",
+  "displayName": "Date Confirmation",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "messages": [ {
+      "text": {
+        "text": [ "\u003cspeak\u003eThat was $session.params.day_of_the_week, $session.params.month \u003csay-as interpret-as=\"ordinal\"\u003e$session.params.date_of_month\u003c/say-as\u003e, correct?\u003c/speak\u003e" ]
+      },
+      "languageCode": "en"
+    }, {
+      "text": {
+        "text": [ "\u003cspeak\u003eC’était $session.params.day_of_the_week_fr, le \u003csay-as interpret-as=\"cardinal\"\u003e$session.params.date_of_month\u003c/say-as\u003e $session.params.month_fr, c’est bien ça?\u003c/speak\u003e" ]
+      },
+      "languageCode": "fr-ca"
+    } ],
+    "setParameterActions": [ {
+      "parameter": "day_object",
+      "value": "$sys.func.TO_OBJECT($request.generative.day_object)"
+    }, {
+      "parameter": "full_date",
+      "value": "$session.params.day_object.full_date"
+    }, {
+      "parameter": "day_of_the_week",
+      "value": "$session.params.day_object.day_of_week"
+    }, {
+      "parameter": "month",
+      "value": "$session.params.day_object.month"
+    }, {
+      "parameter": "date_of_month",
+      "value": "$session.params.day_object.date"
+    }, {
+      "parameter": "day_of_the_week_fr",
+      "value": "$session.params.day_object.day_of_week_fr"
+    }, {
+      "parameter": "month_fr",
+      "value": "$session.params.day_object.month_fr"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "intent": "context.confirm_yes",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Date Outside Range Check",
+    "name": "7879604e-9d3c-43ca-9429-5e5071e094a3"
+  }, {
+    "intent": "context.confirm_no",
+    "condition": "$session.params.ask_date_again = \"true\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "ask_date_again",
+        "value": null
+      } ]
+    },
+    "targetPage": "Webhook - WFAS Cancel",
+    "name": "4d568142-771c-47f2-99d3-7c0c2eba3c4f"
+  }, {
+    "intent": "context.confirm_no",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "day",
+        "value": null
+      } ]
+    },
+    "targetPage": "Ask Date Again",
+    "name": "44f5b890-a3f7-453a-9eac-f55fbd997e81"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Local Error handling + Date confirmation",
+    "event": "sys.no-input-1",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "global_error_counter",
+        "value": "$sys.func.ADD($session.params.global_error_counter,1)"
+      }, {
+        "parameter": "local_noinput_counter",
+        "value": "$sys.func.ADD($session.params.local_noinput_counter,1)"
+      }, {
+        "parameter": "local_trigger",
+        "value": "no_input"
+      } ]
+    },
+    "name": "db850d60-7a0a-4fa9-b1ba-a27d95480c31"
+  }, {
+    "targetPage": "Local Error handling + Date confirmation",
+    "event": "sys.no-match-1",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "global_error_counter",
+        "value": "$sys.func.ADD($session.params.global_error_counter,1)"
+      }, {
+        "parameter": "local_nomatch_counter",
+        "value": "$sys.func.ADD($session.params.local_nomatch_counter,1)"
+      }, {
+        "parameter": "local_trigger",
+        "value": "no_match"
+      } ]
+    },
+    "name": "1e0f492b-4095-4b02-ad88-770860aedea7"
+  } ]
+}

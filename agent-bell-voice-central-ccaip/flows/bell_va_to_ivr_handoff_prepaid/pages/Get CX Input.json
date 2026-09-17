@@ -1,0 +1,189 @@
+{
+  "name": "50bae354-e45b-4bc3-96b4-9d095d9362c8",
+  "displayName": "Get CX Input",
+  "form": {
+    "parameters": [ {
+      "displayName": "service_type",
+      "required": true,
+      "entityType": "@mobility_sub_type",
+      "fillBehavior": {
+        "initialPromptFulfillment": {
+        
+        },
+        "repromptEventHandlers": [ {
+          "event": "sys.no-input-1",
+          "triggerFulfillment": {
+            "messages": [ {
+              "text": {
+                "text": [ "$request.generative.response" ]
+              },
+              "languageCode": "fr-ca"
+            }, {
+              "text": {
+                "text": [ "$request.generative.response" ]
+              },
+              "languageCode": "en"
+            } ],
+            "generators": [ {
+              "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/1b8d360c-c2a0-49b0-9a32-d5542ff42d87",
+              "outputParameter": "$request.generative.response"
+            } ]
+          },
+          "name": "88aac455-7410-4fb0-a590-357bd2ef1064"
+        }, {
+          "event": "sys.no-input-2",
+          "triggerFulfillment": {
+            "messages": [ {
+              "text": {
+                "text": [ "$request.generative.response" ]
+              },
+              "languageCode": "fr-ca"
+            }, {
+              "text": {
+                "text": [ "$request.generative.response" ]
+              },
+              "languageCode": "en"
+            } ],
+            "generators": [ {
+              "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/1bcff408-4981-474e-986a-309d3622718f",
+              "outputParameter": "$request.generative.response"
+            } ]
+          },
+          "name": "931af98b-63eb-4219-a932-a7a3ee82c0e8"
+        }, {
+          "targetFlow": "bell_No_Input_3",
+          "event": "sys.no-input-3",
+          "triggerFulfillment": {
+          
+          },
+          "name": "000be5ba-83e4-4e41-9df6-7248c4434872"
+        }, {
+          "event": "sys.no-match-1",
+          "triggerFulfillment": {
+            "messages": [ {
+              "text": {
+                "text": [ "$request.generative.response" ]
+              },
+              "languageCode": "fr-ca"
+            }, {
+              "text": {
+                "text": [ "$request.generative.response" ]
+              },
+              "languageCode": "en"
+            } ],
+            "generators": [ {
+              "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/f7ef68c2-5424-41ab-94dc-f8c07e3164de",
+              "outputParameter": "$request.generative.response"
+            } ]
+          },
+          "name": "591482c6-58df-4c59-9889-c711b6f5d901"
+        }, {
+          "event": "sys.no-match-2",
+          "triggerFulfillment": {
+            "messages": [ {
+              "text": {
+                "text": [ "$request.generative.response" ]
+              },
+              "languageCode": "fr-ca"
+            }, {
+              "text": {
+                "text": [ "$request.generative.response" ]
+              },
+              "languageCode": "en"
+            } ],
+            "generators": [ {
+              "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/ab9980b0-e324-4bef-8fd6-5e1c1c8d59e1",
+              "outputParameter": "$request.generative.response"
+            } ]
+          },
+          "name": "0026b499-85a5-41f7-b980-fef693df2226"
+        }, {
+          "targetFlow": "bell_No_Match_3",
+          "event": "sys.no-match-3",
+          "triggerFulfillment": {
+          
+          },
+          "name": "71693697-c8f0-477f-a4fc-7502b8468f11"
+        } ]
+      }
+    } ]
+  },
+  "entryFulfillment": {
+    "messages": [ {
+      "text": {
+        "text": [ "Ce numéro semble être associé à un compte mobile prépayé. Appelez-vous au sujet de votre téléphone prépayé ou d’un autre service?" ]
+      },
+      "languageCode": "fr-ca"
+    }, {
+      "text": {
+        "text": [ "I see this number is associated with a prepaid phone account.  Are you calling about your prepaid phone or a different service?" ]
+      },
+      "languageCode": "en"
+    } ],
+    "setParameterActions": [ {
+      "parameter": "service_type",
+      "value": null
+    } ]
+  },
+  "transitionRoutes": [ {
+    "intent": "context.other_account",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Check LOB",
+    "name": "4bf8aeba-2b28-447b-b394-41cd7149316e"
+  }, {
+    "intent": "context.different_service",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Check LOB",
+    "name": "9fd9389d-fc93-483c-ae35-0d6c4f82c33a"
+  }, {
+    "intent": "context.confirm_yes",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "RDAM",
+    "name": "36543164-96d4-44c3-b8b7-408b473d5d78"
+  }, {
+    "intent": "context.confirm_no",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Check LOB",
+    "name": "5dcd1b50-5a23-4686-8b32-277cc0ed080f"
+  }, {
+    "intent": "context.different_number",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Check LOB",
+    "name": "3b648738-dae0-42e7-9c53-a3f43359d5e0"
+  }, {
+    "condition": "$session.params.service_type = \"prepaid\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "RDAM",
+    "name": "b725a845-cb79-4928-be43-a0d097825c07"
+  }, {
+    "condition": "$session.params.service_type != null",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "lob",
+        "value": "$sys.func.UPPER($session.params.service_type)"
+      } ]
+    },
+    "targetPage": "Check LOB",
+    "name": "d5e7e7fa-a815-4a54-a143-bdc6ea159dda"
+  } ],
+  "advancedSettings": {
+    "speechAdaptationSettings": {
+      "enableManualSpeechAdaptation": true
+    }
+  },
+  "speakerIdSettings": {
+  
+  }
+}

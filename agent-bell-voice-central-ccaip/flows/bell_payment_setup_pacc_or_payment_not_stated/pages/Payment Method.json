@@ -1,0 +1,48 @@
+{
+  "name": "40049adb-4b1d-47ce-93f3-5e727045297e",
+  "displayName": "Payment Method",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.payment_method = \"Credit Card\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Advise on Terms \u0026 Conditions",
+    "name": "67d24a37-984f-4cc4-b997-d668df907607"
+  }, {
+    "condition": "$session.params.payment_method = \"Debit\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_payment_setup_preAuth_pad",
+    "name": "8f7be3e9-84e2-4871-8aba-de613658fa50"
+  }, {
+    "condition": "$session.params.payment_method = \"Others\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Fallback Counter For PM",
+    "name": "430417ed-09e5-4ec5-8ee6-f5283f3ae019"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "40049adb-4b1d-47ce-93f3-5e727045297e"
+      }, {
+        "parameter": "flow_id",
+        "value": "6cfb896d-371f-4ad0-b534-840a35dc2828"
+      }, {
+        "parameter": "page_name",
+        "value": "Payment Method"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

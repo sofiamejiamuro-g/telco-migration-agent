@@ -1,0 +1,27 @@
+{
+  "name": "ff69e84b-71ee-4e38-8e79-ce83d2629448",
+  "displayName": "v1/pre-auth-payment#cc-payment-details",
+  "timeout": {
+    "seconds": 30
+  },
+  "serviceDirectory": {
+    "service": "projects/gcp-it-npe-pltfm-apigee/locations/us-central1/namespaces/apigee-nb-usc1-service-dir-namespace/services/apigee-nb-usc1-service",
+    "genericWebService": {
+      "uri": "https://apigee-nane1-uat.int.bell.ca/v1/pre-auth-payment",
+      "requestHeaders": [ {
+        "key": "x-apikey",
+        "value": "npZmDivP6Hxes3wtQ0tC9RqItjJTY8TgZHbOPNeFwvSYSKPI"
+      } ],
+      "webhookType": "FLEXIBLE",
+      "httpMethod": "POST",
+      "requestBody": "{\n  \"sessionInfo\": {\n    \"dfcx_session_id\": \"$session.params.dfcx_session_id\",\n    \"agent_id\": \"$session.params.agent_id\",\n    \"parameters\": {\n      \"brand\": \"$session.params.brand\",\n      \"menu_type\": \"$session.params.menu_type\",\n      \"billing_account\": \"$session.params.billing_account\",\n      \"transaction_id\": \"$session.params.transaction_id\",\n      \"subscriber_number\": \"$session.params.subscriber_number\",\n      \"cc_token\": \"$session.params.cc_token\",\n      \"expiry_year\": \"$session.params.expiry_year\",\n      \"expiry_month\": \"$session.params.expiry_month\",\n      \"security_code\": \"$session.params.security_code\",\n      \"cc_type\": \"$session.params.cc_type\",\n      \"callKey\": \"$session.params.callKey\"\n    }\n  },\n  \"fulfillmentInfo\": {\n    \"tag\": \"cc-payment-details\"\n  },\n  \"languageCode\": \"$request.language\"\n}",
+      "parameterMapping": [ {
+        "key": "update_pre_auth_cc_details_response",
+        "value": "sessionInfo.parameters.update_pre_auth_cc_details_response"
+      }, {
+        "key": "webhook_success",
+        "value": "sessionInfo.parameters.webhook_success"
+      } ]
+    }
+  }
+}

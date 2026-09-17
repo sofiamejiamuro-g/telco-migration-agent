@@ -1,0 +1,56 @@
+{
+  "name": "bbb1666a-da76-4605-b0f5-161e8047de4b",
+  "displayName": "Language Based SMS",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.language = \"en\" OR $session.params.language = \"en-ca\" OR $session.params.language = \"en-CA\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "sms_content",
+        "value": "Bell msg: You can visit https://m.bell.ca/ecnotifypayment to view your payment notification in the MyBell app. ( bell.ca/about-us )"
+      }, {
+        "parameter": "sms_type",
+        "value": "Public"
+      } ]
+    },
+    "targetFlow": "bell_SMS Trigger",
+    "name": "a113d936-3a62-4e03-8ee0-01b9b1746083"
+  }, {
+    "condition": "$session.params.language = \"fr\" OR $session.params.language = \"fr-ca\" OR $session.params.language = \"fr-CA\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "sms_content",
+        "value": "Mess. de Bell: Vous pouvez visiter le https://m.bell.ca/ecavispaiement pour voir votre avis de paiement dans l'application MonBell. (bell.ca/apropos)"
+      }, {
+        "parameter": "sms_type",
+        "value": "Public"
+      } ]
+    },
+    "targetFlow": "bell_SMS Trigger",
+    "name": "2dd70fba-e521-4b7e-a651-7103b5276557"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "bbb1666a-da76-4605-b0f5-161e8047de4b"
+      }, {
+        "parameter": "flow_id",
+        "value": "ced63037-f058-4dd0-9269-97742185ea0f"
+      }, {
+        "parameter": "page_name",
+        "value": "Language Based SMS"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

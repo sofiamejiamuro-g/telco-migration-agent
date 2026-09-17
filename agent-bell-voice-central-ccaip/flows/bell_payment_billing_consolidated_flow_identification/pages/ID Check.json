@@ -1,0 +1,39 @@
+{
+  "name": "6b698e44-2ff0-4e55-964b-b71bb42c73a3",
+  "displayName": "ID Check",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.identification_status = \"Fail\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "consolidated_status",
+        "value": "Fail"
+      } ]
+    },
+    "targetPage": "End Flow",
+    "name": "2ef1f697-bf2f-4d43-9860-c392804874fe"
+  }, {
+    "condition": "$session.params.identification_status = null",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_Identification",
+    "name": "39cda2fc-12a2-4ace-8be5-3e89d8ecda2c"
+  }, {
+    "condition": "($session.params.banType = \"I\" AND ($session.params.banSubType = \"B\" OR $session.params.banSubType = \"N\" OR $session.params.banSubType = \"5\")) OR ($session.params.banType = \"C\" AND ($session.params.banSubType = \"V\" OR $session.params.banSubType = \"T\" OR $session.params.banSubType = \"P\"))",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Get Customer Profile",
+    "name": "4b74748a-4ab7-4730-b829-f69e8a7d5e39"
+  }, {
+    "condition": "$session.params.identification_status = \"Pass\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Get Ban Profile",
+    "name": "7a8ff944-91ad-4c2a-8a56-b485c4aaadec"
+  } ]
+}

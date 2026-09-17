@@ -1,0 +1,45 @@
+{
+  "name": "34d2b41e-35c4-4503-8c5f-930901b853ad",
+  "displayName": "Bypass Contact Method",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$sys.func.UPPER($session.params.lob) = \"INTERNET\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "internet_account_number",
+        "value": "$sys.func.GET($session.params.lob_service_ids,0)"
+      } ]
+    },
+    "targetPage": "[whk] ACUT Search Find - Internet",
+    "name": "e7a4cbb2-7787-4be4-b81a-1667321b93e3"
+  }, {
+    "condition": "$sys.func.UPPER($session.params.lob) = \"TV\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "tv_account_number",
+        "value": "$sys.func.GET($session.params.lob_service_ids,0)"
+      } ]
+    },
+    "targetPage": "[whk] ACUT Search Find - TV",
+    "name": "314a0c86-b273-421b-9847-5b83e476ca61"
+  }, {
+    "condition": "$sys.func.UPPER($session.params.lob) = \"HOMEPHONE\" OR $sys.func.UPPER($session.params.lob) = \"WIRELINE\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "wireline_telephone_number",
+        "value": "$sys.func.GET($session.params.lob_service_ids,0)"
+      } ]
+    },
+    "targetPage": "[whk] ACUT Search Find - Home phone",
+    "name": "71706d9a-4cac-4731-844f-708af19811fa"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_aqd",
+    "name": "232b128d-0e8b-4757-985e-6b9cb17dbef7"
+  } ]
+}

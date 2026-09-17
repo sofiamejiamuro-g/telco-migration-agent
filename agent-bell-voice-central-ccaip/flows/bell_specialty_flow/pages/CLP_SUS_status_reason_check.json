@@ -1,0 +1,91 @@
+{
+  "name": "81e9b64e-6268-41eb-bc96-26027bd5dac4",
+  "displayName": "CLP_SUS_status_reason_check",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.auth_status = \"Pass\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I see your account is currently suspended." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je vois que votre compte est actuellement suspendu." ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "flow",
+        "value": "bell_specialty_flow"
+      }, {
+        "parameter": "special_stauts",
+        "value": "bell_clp_sus"
+      }, {
+        "parameter": "special_queue",
+        "value": "bell_clp"
+      } ]
+    },
+    "targetFlow": "bell_payment_pitch_one_time_CC_payment",
+    "name": "c42f0d33-7f81-4e35-a212-4c49bbd6c884"
+  }, {
+    "condition": "$session.params.auth_status = \"Fail\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Are you calling to make a payment?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Vous appelez pour effectuer un paiement ?" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetPage": "AuthFailCase",
+    "name": "ba3bce4e-124c-4634-b6e1-b6420707661f"
+  }, {
+    "condition": "$session.params.route = null",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "How can I help you? For example, you can say \"I want to restore my services\"." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Comment puis-je vous aider ? Par exemple, vous pouvez dire : « Je souhaite rétablir mes services »." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetPage": "Routing Page",
+    "name": "f0123f43-f654-43f5-8a5e-38f9d54f7ec3"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "81e9b64e-6268-41eb-bc96-26027bd5dac4"
+      }, {
+        "parameter": "flow_id",
+        "value": "d35b61b6-c884-44f8-b5c7-aed63cc356ab"
+      }, {
+        "parameter": "page_name",
+        "value": "CLP_SUS_status_reason_check"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

@@ -1,0 +1,206 @@
+{
+  "name": "3a514357-4001-4774-880a-792cca50a92d",
+  "displayName": "Dynamic ETR Response (Active Outage)",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.current_date = $session.params.from_date AND $session.params.current_time \u003c $session.params.from_time",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Unfortunately, there is currently an $session.params.lob outage in your area. But don't worry, our teams are working on it, and we expect your service to be restored today between $session.params.from_time and $session.params.to_time." ]
+        },
+        "languageCode": "en"
+      } ],
+      "conditionalCases": [ {
+        "cases": [ {
+          "condition": "$session.params.lob = \"Homephone\" OR $session.params.lob = \"homephone\"",
+          "caseContent": [ {
+            "message": {
+              "text": {
+                "text": [ "Malheureusement, il y a actuellement une téléphonie résidentiel panne dans votre région. Mais ne vous inquiétez pas, nos équipes y travaillent et nous prévoyons que votre service sera rétabli le aujourd'hui $session.params.from_time_fr entre $session.params.to_time_fr." ]
+              },
+              "languageCode": "fr-ca"
+            }
+          } ]
+        }, {
+          "condition": "$session.params.lob = \"Mobility\" OR $session.params.lob = \"mobility\"",
+          "caseContent": [ {
+            "message": {
+              "text": {
+                "text": [ "Malheureusement, il y a actuellement une mobilité panne dans votre région. Mais ne vous inquiétez pas, nos équipes y travaillent et nous prévoyons que votre service sera rétabli le aujourd'hui $session.params.from_time_fr entre $session.params.to_time_fr." ]
+              },
+              "languageCode": "fr-ca"
+            }
+          } ]
+        }, {
+          "condition": "$session.params.lob = \"Internet\" OR $session.params.lob = \"internet\"",
+          "caseContent": [ {
+            "message": {
+              "text": {
+                "text": [ "Malheureusement, il y a actuellement une panne d’internet dans votre région. Mais ne vous inquiétez pas, nos équipes y travaillent et nous prévoyons que votre service sera rétabli le aujourd'hui $session.params.from_time_fr entre $session.params.to_time_fr." ]
+              },
+              "languageCode": "fr-ca"
+            }
+          } ]
+        }, {
+          "condition": "$session.params.tv_sub_type = \"sat\"",
+          "caseContent": [ {
+            "message": {
+              "text": {
+                "text": [ "Malheureusement, il y a actuellement une télé satellite panne dans votre région. Mais ne vous inquiétez pas, nos équipes y travaillent et nous prévoyons que votre service sera rétabli le aujourd'hui $session.params.from_time_fr entre $session.params.to_time_fr." ]
+              },
+              "languageCode": "fr-ca"
+            }
+          } ]
+        }, {
+          "condition": "$session.params.lob = \"TV\" OR $session.params.lob = \"tv\"",
+          "caseContent": [ {
+            "message": {
+              "text": {
+                "text": [ "Malheureusement, il y a actuellement une télévision panne dans votre région. Mais ne vous inquiétez pas, nos équipes y travaillent et nous prévoyons que votre service sera rétabli le aujourd'hui $session.params.from_time_fr entre $session.params.to_time_fr." ]
+              },
+              "languageCode": "fr-ca"
+            }
+          } ]
+        } ]
+      } ]
+    },
+    "targetPage": "Check LOB #3 (Active Outage)",
+    "name": "f0eb94cb-b2fd-4a5d-8004-fa4cc39094e9"
+  }, {
+    "condition": "$session.params.current_date \u003c $session.params.from_date",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Unfortunately, there is currently an $session.params.lob outage in your area. But don't worry, our teams are working on it, and we expect your service to be restored today between $session.params.from_time and $session.params.to_time." ]
+        },
+        "languageCode": "en"
+      } ],
+      "conditionalCases": [ {
+        "cases": [ {
+          "condition": "$session.params.lob = \"Homephone\" OR $session.params.lob = \"homephone\"",
+          "caseContent": [ {
+            "message": {
+              "text": {
+                "text": [ "Malheureusement, il y a actuellement une téléphonie résidentiel panne dans votre région. Mais ne vous inquiétez pas, nos équipes y travaillent et nous prévoyons que votre service sera rétabli le aujourd'hui $session.params.from_time_fr entre $session.params.to_time_fr." ]
+              },
+              "languageCode": "fr-ca"
+            }
+          } ]
+        }, {
+          "condition": "$session.params.lob = \"Mobility\" OR $session.params.lob = \"mobility\"",
+          "caseContent": [ {
+            "message": {
+              "text": {
+                "text": [ "Malheureusement, il y a actuellement une mobilité panne dans votre région. Mais ne vous inquiétez pas, nos équipes y travaillent et nous prévoyons que votre service sera rétabli le aujourd'hui $session.params.from_time_fr entre $session.params.to_time_fr." ]
+              },
+              "languageCode": "fr-ca"
+            }
+          } ]
+        }, {
+          "condition": "$session.params.lob = \"Internet\" OR $session.params.lob = \"internet\"",
+          "caseContent": [ {
+            "message": {
+              "text": {
+                "text": [ "Malheureusement, il y a actuellement une panne d’Internet dans votre région. Mais ne vous inquiétez pas, nos équipes y travaillent et nous prévoyons que votre service sera rétabli le aujourd'hui $session.params.from_time_fr entre $session.params.to_time_fr." ]
+              },
+              "languageCode": "fr-ca"
+            }
+          } ]
+        }, {
+          "condition": "$session.params.tv_sub_type = \"sat\"",
+          "caseContent": [ {
+            "message": {
+              "text": {
+                "text": [ "Malheureusement, il y a actuellement une télé satellite panne dans votre région. Mais ne vous inquiétez pas, nos équipes y travaillent et nous prévoyons que votre service sera rétabli le aujourd'hui $session.params.from_time_fr entre $session.params.to_time_fr." ]
+              },
+              "languageCode": "fr-ca"
+            }
+          } ]
+        }, {
+          "condition": "$session.params.lob = \"TV\" OR $session.params.lob = \"tv\"",
+          "caseContent": [ {
+            "message": {
+              "text": {
+                "text": [ "Malheureusement, il y a actuellement une télévision panne dans votre région. Mais ne vous inquiétez pas, nos équipes y travaillent et nous prévoyons que votre service sera rétabli le aujourd'hui $session.params.from_time_fr entre $session.params.to_time_fr." ]
+              },
+              "languageCode": "fr-ca"
+            }
+          } ]
+        } ]
+      } ]
+    },
+    "targetPage": "Check LOB #3 (Active Outage)",
+    "name": "5d95ae32-a9fa-49e6-a632-e28b2ef5d6a4"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Unfortunately, there is currently an $session.params.lob outage in your area. But don't worry, our teams are working on it, and we expect your service to be restored today between $session.params.from_time and $session.params.to_time." ]
+        },
+        "languageCode": "en"
+      } ],
+      "conditionalCases": [ {
+        "cases": [ {
+          "condition": "$session.params.lob = \"Homephone\" OR $session.params.lob = \"homephone\"",
+          "caseContent": [ {
+            "message": {
+              "text": {
+                "text": [ "Malheureusement, il y a actuellement une téléphonie résidentiel panne dans votre région. Mais ne vous inquiétez pas, nos équipes y travaillent et nous prévoyons que votre service sera rétabli le aujourd'hui $session.params.from_time_fr entre $session.params.to_time_fr." ]
+              },
+              "languageCode": "fr-ca"
+            }
+          } ]
+        }, {
+          "condition": "$session.params.lob = \"Mobility\" OR $session.params.lob = \"mobility\"",
+          "caseContent": [ {
+            "message": {
+              "text": {
+                "text": [ "Malheureusement, il y a actuellement une mobilité panne dans votre région. Mais ne vous inquiétez pas, nos équipes y travaillent et nous prévoyons que votre service sera rétabli le aujourd'hui $session.params.from_time_fr entre $session.params.to_time_fr." ]
+              },
+              "languageCode": "fr-ca"
+            }
+          } ]
+        }, {
+          "condition": "$session.params.lob = \"Internet\" OR $session.params.lob = \"internet\"",
+          "caseContent": [ {
+            "message": {
+              "text": {
+                "text": [ "Malheureusement, il y a actuellement une panne d’Internet dans votre région. Mais ne vous inquiétez pas, nos équipes y travaillent et nous prévoyons que votre service sera rétabli le aujourd'hui $session.params.from_time_fr entre $session.params.to_time_fr." ]
+              },
+              "languageCode": "fr-ca"
+            }
+          } ]
+        }, {
+          "condition": "$session.params.tv_sub_type = \"sat\"",
+          "caseContent": [ {
+            "message": {
+              "text": {
+                "text": [ "Malheureusement, il y a actuellement une télé satellite panne dans votre région. Mais ne vous inquiétez pas, nos équipes y travaillent et nous prévoyons que votre service sera rétabli le aujourd'hui $session.params.from_time_fr entre $session.params.to_time_fr." ]
+              },
+              "languageCode": "fr-ca"
+            }
+          } ]
+        }, {
+          "condition": "$session.params.lob = \"TV\" OR $session.params.lob = \"tv\"",
+          "caseContent": [ {
+            "message": {
+              "text": {
+                "text": [ "Malheureusement, il y a actuellement une télévision panne dans votre région. Mais ne vous inquiétez pas, nos équipes y travaillent et nous prévoyons que votre service sera rétabli le aujourd'hui $session.params.from_time_fr entre $session.params.to_time_fr." ]
+              },
+              "languageCode": "fr-ca"
+            }
+          } ]
+        } ]
+      } ]
+    },
+    "targetPage": "Check LOB #3 (Active Outage)",
+    "name": "900a3d3b-790f-4220-bb3c-4aba734ec62d"
+  } ]
+}

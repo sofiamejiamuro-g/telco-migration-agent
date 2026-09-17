@@ -1,0 +1,60 @@
+{
+  "name": "877201fd-5eee-4837-ad97-612e8b86f9f2",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_tech_intent_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70012",
+        "language": "en",
+        "lob": "internet",
+        "utterance": "My internet is not working for the past four days"
+      },
+      "outputActionParameters": {
+        "lob": "internet"
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "You can use our Virtual Repair tool to check for service outages and troubleshoot your equipment. I'll send a text to the device you're calling from so you can access it quickly. Is that alright?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "yes"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "en",
+        "sms_content": "Bell msg: You can visit https://m.bell.ca/chatvirtualrepaire to access the Virtual repair tool. (bell.ca/about-us )",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customers are facing INTERNET outage in their area",
+    "actionParameters": {
+      "apb_location_id": "70012",
+      "language": "en",
+      "lob": "internet",
+      "route": "tech_service_outage",
+      "utterance": "My internet is not working for the past four days"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "customer is transferred to tech_intent_apb for lob",
+    "actionParameters": {
+      "apb_location_id": "70012",
+      "language": "en",
+      "lob": "internet"
+    }
+  },
+  "displayName": "EN tech_service_outage - {lob} internet",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 407,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

@@ -1,0 +1,51 @@
+{
+  "name": "65cf1cd7-1655-474e-a448-ca7b6ee11267",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "brand": "bell",
+        "language": "en"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_aqd",
+      "inputActionParameters": {
+        "language": "en",
+        "lob": "Homephone"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "New customer ask \"i want to order a home phone service\" {lob} is home phone and province is ON from npanxx",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "New",
+      "language": "en",
+      "lob": "homephone",
+      "province": "ON",
+      "route": "sales_order_device",
+      "utterance": "I want to order a home phone service"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "We need to check the result from identification flow from the webhook NPANXX, if it is \"ON\" then call bell_aqd flow",
+    "actionParameters": {
+      "language": "en",
+      "province": "ON"
+    }
+  },
+  "displayName": "\"sales_order_device\"- ID fail, home phone (ON)",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 309,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

@@ -1,0 +1,72 @@
+{
+  "name": "5ad9ad50-5028-4938-abc5-3ccda9c2f113",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Connaissez-vous l'adresse courriel avec laquelle vous vous êtes inscrit ?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Je ne peux pas accéder à cet email"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Je vais envoyer un texto à l’appareil au moyen duquel vous appelez, afin que vous puissiez facilement récupérer votre mot de passe ou votre nom d’utilisateur. Est-ce que ça vous convient ?"
+    }
+  }, {
+    "userUtterance": {
+    
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_get_sdl_mapping_url",
+      "inputActionParameters": {
+        "brand": "bell",
+        "language": "fr-ca",
+        "route": "account_login_assistance"
+      },
+      "outputActionParameters": {
+        "brand": "bell",
+        "language": "fr-ca"
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Pas de problème. Pour toute autre question, vous pouvez toujours consulter notre site web à l’adresse {faq_link}"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_Feedback",
+      "inputActionParameters": {
+        "brand": "bell",
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "The customer is trying to recover their username or password with email  in French language",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "Existing",
+      "language": "fr-ca",
+      "route": "account_login_assistance",
+      "utterance": "Je ne peux pas me connecter"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "The customer wants to recover their username, the customer is identified as a Existing customer does not respond to VA Message then route to bell_get_sdl_mapping_url flow and prompt the user with appropriate message and then call bell_feedback flow.",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca",
+      "route": "account_login_assistance",
+      "utterance": "Je ne peux pas me connecter"
+    }
+  },
+  "displayName": "FR_account_login_assistance_ExistingCust_MFAIsEmpty_IAmUnableToLogin_YesForEmailAddress(ICantAccessThatEmail)_No(EmptyForText)",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 477,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

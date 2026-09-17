@@ -1,0 +1,96 @@
+{
+  "name": "d2f38904-728f-44b5-8e98-ee7072f9c0d1",
+  "displayName": "Local Error handling - Get Postal Code",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.global_error_counter \u003e= 3",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_aqd",
+    "name": "bc7c528a-92a6-42ea-b18b-6e610e8c72a8"
+  }, {
+    "condition": "$session.params.local_trigger = \"no_input\" AND $session.params.local_noinput_counter = 1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "That doesn't seem right. Please say the last three characters of the postal code for your service address." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Cela ne semble pas correct. Veuillez dire les trois derniers caractères du code postal de votre adresse de service ?" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "a018029a-adf5-492e-81a1-97b95aa8ff37"
+  }, {
+    "condition": "$session.params.local_trigger = \"no_input\" AND $session.params.local_noinput_counter \u003e= 2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "That still doesn't seem right." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Cela ne semble toujours pas exact." ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "auth_status",
+        "value": "Fail"
+      } ]
+    },
+    "targetPage": "End Flow Check",
+    "name": "e5018b1c-f704-4390-a10d-d24447c14015"
+  }, {
+    "condition": "$session.params.local_trigger = \"no_match\" AND $session.params.local_nomatch_counter = 1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "That doesn't seem right. Please say the last three characters of the postal code for your service address." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Cela ne semble pas correct. Veuillez dire les trois derniers caractères du code postal de votre adresse de service ?" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "041ed910-db50-4730-8804-272889159465"
+  }, {
+    "condition": "$session.params.local_trigger = \"no_match\" AND $session.params.local_nomatch_counter \u003e= 2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "That still doesn't seem right." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Cela ne semble toujours pas exact." ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "auth_status",
+        "value": "Fail"
+      } ]
+    },
+    "targetPage": "End Flow Check",
+    "name": "52917341-819e-4be7-a846-7f4ba78c80aa"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Previous Page",
+    "name": "bc6ce8b1-df17-4f4c-8f14-5a461f30e5c3"
+  } ]
+}

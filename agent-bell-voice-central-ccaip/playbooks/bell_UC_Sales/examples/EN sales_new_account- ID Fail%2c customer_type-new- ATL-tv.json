@@ -1,0 +1,60 @@
+{
+  "name": "24695411-6e50-461b-b2f9-7901db147c2c",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "language": "en"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Sure, let me help you with that.\n"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_aqd",
+      "inputActionParameters": {
+        "language": "en",
+        "lob": "Internet",
+        "special_queue": "bell_sales_to_atl"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "The Customer wants to sign up or open a new account with Bell and {province} is \"ATL\" or any synonym of this and {lob} is \"tv\"",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "New",
+      "identification_status": "Fail",
+      "language": "en",
+      "lob": "TV",
+      "province": "NL",
+      "route": "sales_new_account",
+      "utterance": "I want to get a new account for my TV service"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "We need to check the result from identification flow from the webhook NPANXX, if it is \"ATL\" then call bell_aqd flow and set special_queue =\nbell_sales_to_atl",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "New",
+      "identification_status": "Fail",
+      "language": "en",
+      "lob": "TV",
+      "special_queue": "bell_sales_to_atl"
+    }
+  },
+  "displayName": "EN sales_new_account- ID Fail, customer_type-new- ATL-tv",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 405,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

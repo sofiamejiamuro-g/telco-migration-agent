@@ -1,0 +1,77 @@
+{
+  "name": "d1b64def-8c6a-4f02-be66-ead93bc8c4be",
+  "displayName": "Check_CX_Inp_2",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "messages": [ {
+      "text": {
+        "text": [ "I understand, but our agents can't offer any compensation at the moment." ]
+      },
+      "languageCode": "en"
+    }, {
+      "text": {
+        "text": [ "Je comprends, mais nos agents ne peuvent vous proposer aucun dédommagement pour le moment." ]
+      },
+      "languageCode": "fr-ca"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "intent": "other_speak_to_agent",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "special_queue",
+        "value": "compensation"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "6af0069a-53e9-429d-ae10-8a6a9ac7d846"
+  }, {
+    "intent": "compenation_request",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "special_queue",
+        "value": "compensation"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "617031e7-fb15-4331-a733-3934130234ba"
+  }, {
+    "intent": "payment_request_refund",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "special_queue",
+        "value": "compensation"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "be9460e6-e7ea-4e4b-b14b-ae3d5af426da"
+  }, {
+    "intent": "context.no_agent",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_Feedback",
+    "name": "f030c340-c8a2-4ae5-a477-c6621cb27cb9"
+  } ],
+  "eventHandlers": [ {
+    "targetFlow": "bell_Feedback",
+    "event": "sys.no-input-1",
+    "triggerFulfillment": {
+    
+    },
+    "name": "9fcd9f61-1d8d-4907-ac94-86c80758681e"
+  } ],
+  "advancedSettings": {
+    "speechSettings": {
+      "endpointerSensitivity": 90,
+      "noSpeechTimeout": {
+        "seconds": 5
+      }
+    }
+  },
+  "speakerIdSettings": {
+  
+  }
+}

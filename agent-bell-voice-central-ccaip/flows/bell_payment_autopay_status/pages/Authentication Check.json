@@ -1,0 +1,48 @@
+{
+  "name": "883b2e32-15fb-4f7c-ab87-b9d663bc914b",
+  "displayName": "Authentication Check",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.auth_status = null",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_authentication",
+    "name": "78bd9640-2d9f-4b54-992c-597d9dac5850"
+  }, {
+    "condition": "$session.params.auth_status = \"Fail\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "ID or Auth or Webhook Failure Confirmtion",
+    "name": "a7e20a9b-fa60-4dd5-82f5-517a684e55b7"
+  }, {
+    "condition": "$session.params.auth_status = \"Pass\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Check PreAuth Payment",
+    "name": "2ca3097b-e5ea-4fd1-b2fe-f3638cdbd593"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "883b2e32-15fb-4f7c-ab87-b9d663bc914b"
+      }, {
+        "parameter": "flow_id",
+        "value": "2270f500-41b4-45fb-89ed-e16938ec3cea"
+      }, {
+        "parameter": "page_name",
+        "value": "Authentication Check"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

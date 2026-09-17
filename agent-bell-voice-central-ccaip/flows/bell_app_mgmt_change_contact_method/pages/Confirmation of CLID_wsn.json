@@ -1,0 +1,87 @@
+{
+  "name": "bffd4961-bd14-4f73-b92f-32114929511a",
+  "displayName": "Confirmation of CLID_wsn",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "intent": "context.confirm_yes",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "number",
+        "value": "$session.params.telephone_number"
+      }, {
+        "parameter": "type",
+        "value": "SMS"
+      }, {
+        "parameter": "contact_method_completed",
+        "value": true
+      } ]
+    },
+    "targetPage": "End Flow Check",
+    "name": "8d21b113-27c3-4471-9081-1f234dcee016"
+  }, {
+    "intent": "context.confirm_no",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "No problem, what mobile number can we reach you on?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Pas de problème, à quel numéro de téléphone mobile pouvons-nous vous joindre?" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetPage": "Contact method",
+    "name": "1b85b818-01d8-4267-b25f-27662a101a18"
+  }, {
+    "intent": "context.use_different_number",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "No problem, what mobile number can we reach you on?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Pas de problème, à quel numéro de téléphone mobile pouvons-nous vous joindre?" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetPage": "Contact method",
+    "name": "0b0ec116-b4e3-4ffa-b8c7-4a19836f0212"
+  }, {
+    "intent": "context.home_phone",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "No problem, what mobile number we can reach you on?" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "7aa52987-78de-4f0e-b819-160690bc4d4f"
+  }, {
+    "intent": "conxtent.user_declining_to_provide_phone_number",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "In order for us to serve you better, we need you to provide a contact number.  In the event your service issue requires agent assistance or a technician visit, they'll use this number to contact you, if necessary. If required the number can be changed later." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Afin que nous puissions mieux vous servir, nous avons besoin que vous fournissiez un numéro de téléphone.  Si votre problème de service nécessite l’aide d’un/une agent(e) ou la visite d’un/une ou la technicien(ne)(ne), ils/elles utiliseront ce numéro pour communiquer avec vous, si nécessaire. Au besoin, le numéro peut être modifié ultérieurement." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetPage": "User input confirmation",
+    "name": "62369b3c-d596-439d-8403-bf6add07c9be"
+  } ]
+}

@@ -1,0 +1,128 @@
+{
+  "name": "e04dc4d5-367a-4f04-bc6e-01d7e5c88590",
+  "displayName": "CLP_colInd_check",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.colInd = \"D\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "special_status",
+        "value": "bell_clp_sus"
+      }, {
+        "parameter": "special_queue",
+        "value": "bell_collections"
+      } ]
+    },
+    "targetFlow": "bell_authentication",
+    "name": "0461dc17-7926-4c87-a67d-dfaa43791f7b"
+  }, {
+    "condition": "$session.params.colInd != \"D\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "special_status",
+        "value": "bell_clp_sus"
+      } ]
+    },
+    "targetFlow": "bell_authentication",
+    "name": "0b7b437e-3567-4576-a4db-651072edd66e"
+  }, {
+    "condition": "$session.params.auth_status = \"Pass\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "\"I see your account is currently suspended\"" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "\"Je vois que votre compte est actuellement suspendu\"" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetFlow": "bell_payment_CLP_details",
+    "name": "e319cd95-b396-4474-90ff-54771bd4b523"
+  }, {
+    "condition": "$session.params.auth_status = \"Fail\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "\"Appelez-vous pour effectuer un paiement ?\"" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetPage": "AuthFailCase",
+    "name": "1b4bde31-1081-4430-b38e-1c60ab9dab41"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Head intent Trigger",
+    "name": "3c06e6c4-d345-4129-92ee-5b80e724cc57"
+  } ],
+  "eventHandlers": [ {
+    "targetFlow": "bell_authentication",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "special_status",
+        "value": "bell_clp_sus"
+      } ]
+    },
+    "name": "ea670850-9bf4-4250-9854-da3ce8ce56b2"
+  }, {
+    "targetFlow": "bell_authentication",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "special_status",
+        "value": "bell_clp_sus"
+      } ]
+    },
+    "name": "66c0a9f2-ee7c-4a69-a109-32823e2c0aa0"
+  }, {
+    "targetFlow": "bell_authentication",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "special_status",
+        "value": "bell_clp_sus"
+      } ]
+    },
+    "name": "d2a39d81-591a-482a-8bec-22b946a53fd1"
+  }, {
+    "targetFlow": "bell_authentication",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "special_status",
+        "value": "bell_clp_sus"
+      } ]
+    },
+    "name": "ef10bb67-8494-44e5-9f11-c3d7fb9da1f8"
+  }, {
+    "targetFlow": "bell_authentication",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "special_status",
+        "value": "bell_clp_sus"
+      } ]
+    },
+    "name": "ad60111e-846e-4dba-98ca-2dca6d6328fd"
+  }, {
+    "targetFlow": "bell_authentication",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "special_status",
+        "value": "bell_clp_sus"
+      } ]
+    },
+    "name": "5f9d365a-c19a-4c27-8d7d-287b893fa78c"
+  } ]
+}

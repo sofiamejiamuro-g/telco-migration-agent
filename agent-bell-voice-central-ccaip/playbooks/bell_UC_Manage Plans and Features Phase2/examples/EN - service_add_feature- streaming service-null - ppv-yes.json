@@ -1,0 +1,73 @@
+{
+  "name": "84711aa1-7050-4265-8826-c51f0b50476f",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70011"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "You can order Pay-per-view programming up to 24 hours in advance. For major events, it may be extended to 72 hours. The easiest way to order would be using the Fibe TV App or go to fibetv.ca. And if you are a satellite TV customer please call 18666867337 and follow the prompts.Do you have any other questions on pay-per-view?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "yes"
+    }
+  }, {
+    "playbookInvocation": {
+      "playbook": "bell_UC_ManagePlansAndFeatures_Infobot_en_fr_deprecated",
+      "playbookInput": {
+        "precedingConversationSummary": "identification_status = \"Pass\" and ppv = \"ppv\" and route = \"service_feature_inquiry\"",
+        "actionParameters": {
+          "identification_status": "Pass",
+          "language": "en",
+          "ppv": "ppv",
+          "route": "service_feature_inquiry",
+          "utterance": "Can I order pay per view stuff here?"
+        }
+      },
+      "playbookOutput": {
+        "executionSummary": "Follow the instructions provided in this playbook for {route} = \"service_feature_inquiry\"",
+        "actionParameters": {
+          "language": "en"
+        }
+      },
+      "playbookState": "OUTPUT_STATE_OK"
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "As, {identification_status} is \"Pass\" and {streaming_services} is null and {ppv} = \"ppv\" then we will prompt customer with message and based on user response will proceed.",
+    "actionParameters": {
+      "apb_location_id": "70011",
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "en",
+      "ppv": "ppv",
+      "route": "service_add_feature",
+      "utterance": "Can I order pay per view stuff here?"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Customer with {streaming_services} = null and {lob} = null and {identification_status} = Pass and {ppv} = \"ppv\" then will prompt user with some message and if user reply with yes or anything affirmative then set {route} = \"service_feature_inquiry\" and CALL PLAYBOOK: \"bell_UC_ManagePlansAndFeatures_Infobot_en_fr\"",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "en",
+      "ppv": "ppv",
+      "route": "service_feature_inquiry",
+      "utterance": "Can I order pay per view stuff here?"
+    }
+  },
+  "displayName": "EN - service_add_feature- streaming service-null - ppv-yes",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 659,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

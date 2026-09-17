@@ -1,0 +1,69 @@
+{
+  "name": "3968f7fc-0bf0-462f-a739-7ad4e7c5ed1a",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "brand": "bell",
+        "language": "en"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Which service are you Inquiring about?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Internet"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Let's check if we offer Internet and Home phone service in your area. In which province are you looking to get service?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "ON"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_aqd",
+      "inputActionParameters": {
+        "brand": "bell",
+        "language": "en",
+        "lob": "Internet"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer has questions about needing a new device,device availability, device features, cost, related to devices that Bell sells",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "New",
+      "identification_status": "Fail",
+      "language": "en",
+      "province": "AB",
+      "route": "sales_order_device",
+      "utterance": "I want to order a new device"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "We need to check the result from identification flow from the webhook NPANXX, if it is \"ON\" then call bell_aqd flow",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "province": "ON"
+    }
+  },
+  "displayName": "\"sales_order_device\"- ID fail, province not identified- new-ON",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 395,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

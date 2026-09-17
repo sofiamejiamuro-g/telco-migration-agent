@@ -1,0 +1,53 @@
+{
+  "name": "a6dd9c62-8c03-4375-8f94-70ba03046b54",
+  "displayName": "Lang based SMS",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.language = \"en\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "sms_content",
+        "value": "Bell: You can visit m.bell.ca/setup for step-by-step instructions to set up your equipment. \u2028 ( bell.ca/about-us )"
+      }, {
+        "parameter": "sms_type",
+        "value": "Public"
+      } ]
+    },
+    "targetFlow": "bell_SMS Trigger",
+    "name": "684864e8-1f21-40a9-908b-9600ae8978f0"
+  }, {
+    "condition": "$session.params.language = \"fr-ca\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "sms_type",
+        "value": "Public"
+      }, {
+        "parameter": "sms_content",
+        "value": "Bell : Vous pouvez visiter m.bell.ca/configuration et suivre les instructions étape par étape pour configurer votre équipement.  ( bell.ca/apropos )"
+      } ]
+    },
+    "targetFlow": "bell_SMS Trigger",
+    "name": "e9c945b3-d466-4cd9-871a-77aed05689b1"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "a6dd9c62-8c03-4375-8f94-70ba03046b54"
+      }, {
+        "parameter": "flow_id",
+        "value": "918644a0-f504-4e8f-91eb-c311a5082207"
+      }, {
+        "parameter": "page_name",
+        "value": "Lang based SMS"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

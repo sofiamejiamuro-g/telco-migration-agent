@@ -1,0 +1,117 @@
+{
+  "name": "5047f24e-4768-43c8-94a2-10147c62f636",
+  "displayName": "Webhook Update Order",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "v1/payment-notification#update-order",
+    "tag": "update-order",
+    "setParameterActions": [ {
+      "parameter": "amount_paid",
+      "value": "$session.params.amount_paid_by_user"
+    }, {
+      "parameter": "payment_method",
+      "value": "$session.params.payment_method"
+    }, {
+      "parameter": "transaction_id",
+      "value": "$session.params.transaction_id"
+    }, {
+      "parameter": "brand",
+      "value": "$session.params.brand"
+    }, {
+      "parameter": "menu_type",
+      "value": "$session.params.menu_type"
+    }, {
+      "parameter": "billing_account",
+      "value": "$session.params.billing_account"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.webhook_success = false",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Failure Cannot Proceed with Payment ",
+    "name": "0d7bfe31-2f8d-4c93-a654-f320a8342266"
+  }, {
+    "condition": "$session.params.webhook_success = true",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Perfect. I'm submitting your payment details now, just a moment." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Parfait. Je soumets vos informations de paiement maintenant, un instant." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetPage": "Webhook Submit Order",
+    "name": "afad1c38-d836-4970-be3c-8c6d7110e163"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "5047f24e-4768-43c8-94a2-10147c62f636"
+      }, {
+        "parameter": "flow_id",
+        "value": "ced63037-f058-4dd0-9269-97742185ea0f"
+      }, {
+        "parameter": "page_name",
+        "value": "Webhook Update Order"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Webhook Failure Cannot Proceed with Payment ",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+    
+    },
+    "name": "b695bf57-a138-4357-b424-d0db80947e42"
+  }, {
+    "targetPage": "Webhook Failure Cannot Proceed with Payment ",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+    
+    },
+    "name": "922ca6da-7b28-4567-b8aa-be6b3e200801"
+  }, {
+    "targetPage": "Webhook Failure Cannot Proceed with Payment ",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+    
+    },
+    "name": "d3ae26da-6c26-4186-8f2a-f99e46c75544"
+  }, {
+    "targetPage": "Webhook Failure Cannot Proceed with Payment ",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+    
+    },
+    "name": "ba8c1fd8-3e49-49db-b5f7-5724005c0aa6"
+  }, {
+    "targetPage": "Webhook Failure Cannot Proceed with Payment ",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+    
+    },
+    "name": "27cac53d-1d5d-49a8-8a94-4d29b0a64e91"
+  }, {
+    "targetPage": "Webhook Failure Cannot Proceed with Payment ",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+    
+    },
+    "name": "7b088088-5ad1-4eb0-95cc-756bd623a1d2"
+  } ]
+}

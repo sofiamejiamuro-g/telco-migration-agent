@@ -1,0 +1,71 @@
+{
+  "name": "fe3b10a6-86b8-49e0-8e40-aedb2a8f7b74",
+  "displayName": "Consolidated Customers",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.profile_not_found = true",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Unfortunately, this self serve option is not available for your account" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Malheureusement, cette option libre-service n’est pas disponible pour votre compte." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetFlow": "bell_Feedback",
+    "name": "ef65b81a-1343-401f-a7d0-d68b1d230402"
+  }, {
+    "condition": "($session.params.accountType = \"I\" AND ($session.params.accountSubType = \"R\" OR $session.params.accountSubType = \"P\" OR $session.params.accountSubType = \"N\" OR $session.params.accountSubType = \"B\" OR $session.params.accountSubType = \"5\" OR $session.params.accountSubType = \"E\")) OR ($session.params.accountType = \"C\" AND ($session.params.accountSubType = \"P\" OR $session.params.accountSubType = \"V\" OR $session.params.accountSubType = \"T\")) OR ($session.params.oneBillIndicator = \"M\" OR $session.params.oneBillIndicator = \"Y\")",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Province Lookup",
+    "name": "9f303ff0-3cca-4c19-8df2-c23bf23d932e"
+  }, {
+    "condition": "$session.params.accountType != \"I\" OR $session.params.accountType != \"C\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Unfortunately, this self serve option is not available for your account" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Malheureusement, cette option libre-service n’est pas disponible pour votre compte." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetFlow": "bell_Feedback",
+    "name": "c7d93bb5-5857-4a6d-8f36-b9f94bcc6888"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "fe3b10a6-86b8-49e0-8e40-aedb2a8f7b74"
+      }, {
+        "parameter": "flow_id",
+        "value": "57228ada-e06b-4b6d-b615-3f9af36911b6"
+      }, {
+        "parameter": "page_name",
+        "value": "Consolidated Customers"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

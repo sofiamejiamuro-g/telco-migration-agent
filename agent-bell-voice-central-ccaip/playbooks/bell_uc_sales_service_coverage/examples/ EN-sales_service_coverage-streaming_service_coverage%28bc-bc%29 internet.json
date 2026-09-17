@@ -1,0 +1,68 @@
+{
+  "name": "22c508e1-140d-4274-b8e7-ef52647fd0c7",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "language": "en",
+        "lob": "internet"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Sure, let me help you with that.\nLet's check if we offer Internet and Home phone service in your area. In which province are you looking to get service?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Prince Rupert"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Get blazing-fast speeds on the Bell network with Bell Mobile Internet. Where you can get up to 5G internet connectivity with a mobile hotspot device so that you can stay connected at home or on the go. I'll send a text to the device you're calling from, so that you can learn more about mobile internet on our website. Is that alright?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "yes"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "en",
+        "lob": "Internet",
+        "sms_content": "Bell: You can visit bell.ca/mobileinternetdevices to view our Mobile Internet devices. ( bell.ca/about-us )",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+        "language": "en"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "The customer is asking whether the provider's internet service is offered at an address or location.",
+    "actionParameters": {
+      "language": "en",
+      "lob": "Internet",
+      "province": "AB",
+      "route": "sales_confirm_service_coverage",
+      "utterance": "Do you have internet service at my location"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Ask for province when province is anything other than ON or QC, then based on extracted province route it accordingly ",
+    "actionParameters": {
+      "language": "en",
+      "lob": "Internet",
+      "province": "BC",
+      "utterance": "Do you have internet service at my location"
+    }
+  },
+  "displayName": " EN-sales_service_coverage-streaming_service_coverage(bc-bc) internet",
+  "retrievalStrategy": "STATIC",
+  "tokenCount": 503,
+  "languageCode": "en"
+}

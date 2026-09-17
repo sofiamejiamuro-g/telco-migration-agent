@@ -1,0 +1,27 @@
+{
+  "name": "bfcc6e46-674d-414d-8373-672663def983",
+  "displayName": "v1/bell-vr#start-process",
+  "timeout": {
+    "seconds": 10
+  },
+  "serviceDirectory": {
+    "service": "projects/gcp-it-npe-pltfm-apigee/locations/us-central1/namespaces/apigee-nb-usc1-service-dir-namespace/services/apigee-nb-usc1-service",
+    "genericWebService": {
+      "uri": "https://apigee-nane1-uat.int.bell.ca/v1/digital-tools/virtual-repair",
+      "requestHeaders": [ {
+        "key": "x-apikey",
+        "value": "npZmDivP6Hxes3wtQ0tC9RqItjJTY8TgZHbOPNeFwvSYSKPI"
+      } ],
+      "webhookType": "FLEXIBLE",
+      "httpMethod": "POST",
+      "requestBody": "{\n  \"sessionInfo\": {\n    \"dfcx_session_id\": \"$session.params.dfcx_session_id\",\n    \"agent_id\": \"$session.params.agent_id\",\n    \"parameters\": {\n      \"brand\": \"$session.params.brand\",\n      \"service_id\": \"$session.params.service_id\",\n      \"callback_number\": \"$session.params.callback_number\",\n      \"caller_id\": \"$session.params.caller_id\",\n      \"calling_from_landline\": \"$session.params.calling_from_landline\",\n      \"preferred_contact_method\": \"$session.params.preferred_contact_method\",\n      \"menu_type\": \"$session.params.menu_type\"\n    }\n  },\n  \"fulfillmentInfo\": {\n    \"tag\": \"start-process\"\n  },\n  \"languageCode\": \"$request.language\"\n}",
+      "parameterMapping": [ {
+        "key": "vr_start_response",
+        "value": "sessionInfo.parameters.vr_start_response"
+      }, {
+        "key": "webhook_success",
+        "value": "sessionInfo.parameters.webhook_success"
+      } ]
+    }
+  }
+}

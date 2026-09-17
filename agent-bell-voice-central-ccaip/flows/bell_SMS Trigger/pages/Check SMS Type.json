@@ -1,0 +1,44 @@
+{
+  "name": "2d736075-dc95-40c0-9a92-27e36705b70c",
+  "displayName": "Check SMS Type",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.sms_type = \"Public\" OR $session.params.sms_type = null",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Check if asked for different number",
+    "name": "5924e8ec-1f5e-42e3-9167-29a5fbaf6f6a"
+  }, {
+    "condition": "$session.params.sms_type = \"Private\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Route to Authentication",
+    "name": "3aa8fae3-ddac-46fc-a542-634baffd3f61"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "2d736075-dc95-40c0-9a92-27e36705b70c"
+      }, {
+        "parameter": "flow_id",
+        "value": "b5addc0e-1d3b-4354-9541-c698dba5f163"
+      }, {
+        "parameter": "page_name",
+        "value": "Check SMS Type"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

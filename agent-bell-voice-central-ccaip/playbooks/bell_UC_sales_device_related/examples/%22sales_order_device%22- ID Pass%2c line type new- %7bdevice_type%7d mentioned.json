@@ -1,0 +1,70 @@
+{
+  "name": "a51c6fdc-9a15-43ff-82b4-6c21a1215f31",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "brand": "bell",
+        "language": "en"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Are you inquiring about a new service or do you want to make changes to your current service?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "new service"
+    }
+  }, {
+    "playbookInvocation": {
+      "playbook": "bell_UC_Sales",
+      "playbookInput": {
+        "actionParameters": {
+          "customer_type": "Existing",
+          "device_type": "Modem",
+          "identification_status": "Pass",
+          "line_type": "New",
+          "route": "sales_add_to_existing_account"
+        }
+      },
+      "playbookOutput": {
+        "actionParameters": {
+        
+        }
+      },
+      "playbookState": "OUTPUT_STATE_OK"
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer wants to order a device and {device_type} is \"Modem\"",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "Existing",
+      "device_type": "Modem",
+      "identification_status": "Pass",
+      "language": "en",
+      "province": "AB",
+      "route": "sales_order_device",
+      "utterance": "I want to order a modem, please."
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "set {line_type} = \"New\" as the {utterance} contains the value \"new\" and transition to bell_UC_Sales playbook with {route} = \"sales_add_to_existing_account\" along with {device_type} or {lob} if captured",
+    "actionParameters": {
+      "brand": "bell",
+      "device_type": "Modem",
+      "language": "en",
+      "line_type": "New"
+    }
+  },
+  "displayName": "\"sales_order_device\"- ID Pass, line type new- {device_type} mentioned",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 444,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

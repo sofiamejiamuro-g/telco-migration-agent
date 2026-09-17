@@ -1,0 +1,72 @@
+{
+  "name": "2f1e3c33-2a15-493d-af36-e459f5e4c7e2",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Can you briefly describe your device's issue?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "warranty claim info"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "If you brought a certified pre-owned phone, it's subject to the Bell limited warranty, valid for 12 months from the purchase date. If your phone is not working due to a manufacturer issue that occurs within 12 months of your purchase, we will replace the phone with a comparable unit.\nDid you purchase your device within the last 12 months?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "No"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Have you enrolled in our smart care program?\n"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Yes"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "When submitting a request online or calling the Smart Phone Care Center, your request will be processed by Asurion, the administrator of the Smartphone Care program. I can send you a link to submit your request. Is that alright?\n"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Yes"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "brand": "bell",
+        "language": "en",
+        "sms_content": "Bell msg: You can visit asur.me/bellclaims to submit your Smartphone Care request online.( bell.ca/about-us )",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer asking about Warranty claim for Certified Preowned phone with route \"equipment_warranty_claim\"",
+    "actionParameters": {
+      "brand": "bell",
+      "device_issue": "Anything else",
+      "language": "en",
+      "route": "equipment_warranty_claim",
+      "utterance": "Warranty claim for Certified Preowned phone"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Customer is asked about device issue and since customer just wanted to know warranty info, he is responded with apt message for \"Anything else\" issue and then user is prompted to tell whether he purchased the device within last 12 months. User says \"No\", so he is rerouted to SMART CARE COVERAGE LOGIC",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "route": "equipment_warranty_claim"
+    }
+  },
+  "displayName": "EN_equipment_warranty_claim_DeviceIssueIsAnythingElse_NoForPurchasedWithinLastYear_YesForSmartCarePgm_YesForLink",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 530,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

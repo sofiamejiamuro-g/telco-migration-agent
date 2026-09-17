@@ -1,0 +1,169 @@
+{
+  "name": "7de5a55c-dba5-4522-a423-3f6abb53ce83",
+  "displayName": "PAD Self-Service SMS Confirmation",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "conditionalCases": [ {
+      "cases": [ {
+        "condition": "$session.params.webhook_success = \"nm1\"",
+        "caseContent": [ {
+          "message": {
+            "text": {
+              "text": [ "Nous effectuons actuellement une maintenance sur nos systèmes. Malheureusement, je ne peux pas procéder à la mise à jour de vos paiements préautorisés. Je vais envoyer un texto à l’appareil depuis lequel vous appelez afin que vous puissiez passer à cette étape. Cela vous convient-il?" ]
+            },
+            "languageCode": "fr-ca"
+          }
+        }, {
+          "message": {
+            "text": {
+              "text": [ "We are currently performing maintenance on our systems so unfortunately I am unable to proceed with updating your pre authorized payments. I'll send a text to the device you're calling from, so that you can proceed with this step. Is that alright?" ]
+            },
+            "languageCode": "en"
+          }
+        } ]
+      }, {
+        "caseContent": [ {
+          "message": {
+            "text": {
+              "text": [ "Afin de protéger votre vie privée, vous pouvez seulement configurer le prélèvement automatique par l’entremise de MonBell. Je vais envoyer un texto à l’appareil à partir duquel vous appelez afin que vous puissiez effectuer cette opération vous-même. Cela vous va?" ]
+            },
+            "languageCode": "fr-ca"
+          }
+        }, {
+          "message": {
+            "text": {
+              "text": [ "To protect your privacy, you can only set up pre-authorized debit through MyBell. I'll send a text to the device you're calling from so that you can complete this yourself. Is this alright?" ]
+            },
+            "languageCode": "en"
+          }
+        } ]
+      } ]
+    } ]
+  },
+  "transitionRoutes": [ {
+    "intent": "context.sms_yes",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Language Based Message",
+    "name": "f23a2ea4-9ba1-4cd4-8ac3-dde9a18a6fc7"
+  }, {
+    "intent": "context.different_number",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "different_number",
+        "value": true
+      } ]
+    },
+    "targetPage": "Language Based Message",
+    "name": "48a8f90c-e4e5-4d04-8a76-6af8cbf0fcaa"
+  }, {
+    "intent": "context.sms_no",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Intent SDL Mapping",
+    "name": "5787a36a-ca77-4858-a48a-4c4affe879ea"
+  } ],
+  "eventHandlers": [ {
+    "event": "sys.no-input-1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Je n’ai pas tout à fait compris. Pouvez-vous réessayer?" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "I didn't quite get that. Can you try again?" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "6dc173df-2f42-497c-82a8-0c8116358436"
+  }, {
+    "event": "sys.no-match-1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Je n’ai pas tout à fait compris. Pouvez-vous réessayer?" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "I didn't quite get that. Can you try again?" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "b14fe9c0-34e0-460d-852c-058b8a90f771"
+  }, {
+    "event": "sys.no-input-2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Je n’ai toujours pas compris." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "I still didn't get that" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "d432175d-9750-4056-b6dd-d879ec23a526"
+  }, {
+    "event": "sys.no-match-2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Je n’ai toujours pas compris." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "I still didn't get that" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "3a555113-7ebb-42c1-b716-4b3cb06b1f20"
+  }, {
+    "targetFlow": "bell_Feedback",
+    "event": "sys.no-input-3",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "D’accord. Si vous souhaitez quand même configurer le prélèvement automatique, vous pouvez le faire dans MonBell. Veuillez consulter le site bell.ca/soutien pour obtenir plus d’informations." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "Okay. If you'd still like to set up Pre-Authorized debit, you can do so in MyBell. Please visit bell.ca/support for more information." ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "7e25b835-f8d6-45f9-856a-96250e65cb21"
+  }, {
+    "targetFlow": "bell_Feedback",
+    "event": "sys.no-match-3",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "D’accord. Si vous souhaitez quand même configurer le prélèvement automatique, vous pouvez le faire dans MonBell. Veuillez consulter le site bell.ca/soutien pour obtenir plus d’informations." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "Okay. If you'd still like to set up Pre-Authorized debit, you can do so in MyBell. Please visit bell.ca/support for more information." ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "c5d070c6-a853-44a5-9553-03ab10a4b66c"
+  } ]
+}

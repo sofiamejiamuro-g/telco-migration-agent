@@ -1,0 +1,111 @@
+{
+  "name": "0f14d046-28a8-4a83-b0c7-bb2751c2a058",
+  "displayName": "Webhook get-configs",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "v2/get-configs-for-dialogflow",
+    "tag": "default",
+    "setParameterActions": [ {
+      "parameter": "webhook_success",
+      "value": "null"
+    }, {
+      "parameter": "domain",
+      "value": "Consumer"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.route = null OR $session.params.route = \"\" OR $session.params.intent = \"\\\\$session\\.params\\.route\" OR $session.params.intent = \"$session\\.params\\.route\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "route",
+        "value": "other_speak_to_agent"
+      } ]
+    },
+    "name": "1e131d13-cd85-4077-9942-056dd5995b0a",
+    "description": "This is used to preset the null route to \"other_speak_to_agent\" before calling the dam transfer webhook"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "IVR Handover",
+    "name": "71b6917d-99a8-4dc3-a62f-c9cc3e898d40"
+  }, {
+    "condition": "$session.params.webhook_success = true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "menu_id",
+        "value": "$session.params.config.DEFAULT_MENU_ID"
+      }, {
+        "parameter": "menu_id_ref",
+        "value": "$sys.func.CONCATENATE(\"REF\", $sys.func.TO_TEXT($session.params.menu_id))"
+      } ]
+    },
+    "targetPage": "Webhook get department-id",
+    "name": "47dfaff2-d604-417d-a614-0f539289c496"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "0f14d046-28a8-4a83-b0c7-bb2751c2a058"
+      }, {
+        "parameter": "flow_id",
+        "value": "00000000-0000-0000-0000-000000000000"
+      }, {
+        "parameter": "page_name",
+        "value": "Webhook get-configs"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "IVR Handover",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+    
+    },
+    "name": "330d3b18-2eb2-456e-86aa-30854ea44260"
+  }, {
+    "targetPage": "IVR Handover",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+    
+    },
+    "name": "6a1f2531-96fc-44fb-ad78-85a9877b7914"
+  }, {
+    "targetPage": "IVR Handover",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+    
+    },
+    "name": "bb4e1253-4083-4aff-93ba-38a01d0596f4"
+  }, {
+    "targetPage": "IVR Handover",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+    
+    },
+    "name": "ebc9714d-d3c0-4fd8-9ded-cb28ee219eed"
+  }, {
+    "targetPage": "IVR Handover",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+    
+    },
+    "name": "348295f7-01ba-48eb-a845-48348a2b99b0"
+  }, {
+    "targetPage": "IVR Handover",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+    
+    },
+    "name": "f4878cd6-2bcc-4235-a3a2-2f721b751402"
+  } ]
+}

@@ -1,0 +1,171 @@
+{
+  "name": "479bd1c6-6709-45a5-ba23-5fa25eb02aa1",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Veuillez confirmer que la batterie est bien insérée et en charge dans votre modem.\nUne fois que c’est fait, dites-moi simplement si vous avez pu effectuer cette étape, et nous continuerons à partir de là."
+    }
+  }, {
+    "userUtterance": {
+      "text": "J’ai besoin de parler à un agent très urgemment. S’il vous plaît, ne dites rien. J’ai besoin d’aide de votre part. Connectez-moi simplement à un agent, c’est très, très URGENT."
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Je comprends que vous souhaitez parler à un agent. Essayons de résoudre cela rapidement. Pouvez-vous vérifier si la batterie est bien insérée et en charge dans votre modem ? Une fois que ce sera fait, dites-le-moi et nous continuerons."
+    }
+  }, {
+    "userUtterance": {
+      "text": "Non, un agent en direct dès que possible."
+    }
+  }, {
+    "agentUtterance": {
+      "text": "D’accord, je comprends que vous êtes pressé. Je vais vous mettre en relation avec un agent."
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_aqd",
+      "inputActionParameters": {
+      
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "User having a problem with the service and initiating Virtual repair session.",
+    "actionParameters": {
+      "acceptable_answers": [ {
+        "choice": "CDA:endNow:success",
+        "id": 0
+      }, {
+        "choice": "CDA:gotoStep1",
+        "id": 1
+      } ],
+      "vr_next_task_response_PB": {
+        "acceptable_answers": [ {
+          "choice": "CDA:endNow:success",
+          "id": 0
+        }, {
+          "choice": "CDA:gotoStep1",
+          "id": 1
+        } ],
+        "step_verbiage": {
+          "description": "",
+          "more_info": [ {
+            "description": "Additional details about how this affects your services and related equipment, or any other relevant information",
+            "members": [ ],
+            "title": ""
+          }, {
+            "description": "",
+            "members": [ ],
+            "title": "How does this affect my services?"
+          }, {
+            "description": "",
+            "members": [ {
+              "description": "Device that allows you to connect to the Internet.",
+              "title": "Modem:"
+            }, {
+              "description": "Works as backup power to run the modem in case of a power outage.",
+              "title": "Modem battery:"
+            } ],
+            "title": "Hardware involved"
+          } ],
+          "title": "Checking if the battery is inserted and charging in the modem"
+        },
+        "vr_context": {
+          "all_steps": {
+            "cda_steps": {
+              "header": {
+                "acceptable_answers": [ {
+                  "choice": "CDA:endNow:success",
+                  "id": 0
+                }, {
+                  "choice": "CDA:gotoStep1",
+                  "id": 1
+                } ],
+                "step_verbiage": {
+                  "description": "",
+                  "title": "Checking if the battery is inserted and charging in the modem"
+                }
+              },
+              "more_info": [ {
+                "description": "Additional details about how this affects your services and related equipment, or any other relevant information",
+                "members": [ ],
+                "title": ""
+              }, {
+                "description": "",
+                "members": [ ],
+                "title": "How does this affect my services?"
+              }, {
+                "description": "",
+                "members": [ {
+                  "description": "Device that allows you to connect to the Internet.",
+                  "title": "Modem:"
+                }, {
+                  "description": "Works as backup power to run the modem in case of a power outage.",
+                  "title": "Modem battery:"
+                } ],
+                "title": "Hardware involved"
+              } ],
+              "steps": {
+                "acceptable_answers": [ {
+                  "choice": "Continue",
+                  "id": 0
+                }, {
+                  "choice": "I can't complete this step",
+                  "id": 1
+                } ],
+                "step_verbiage": [ {
+                  "description": "Underneath your modem, slide the lever on the battery compartment to open the door.",
+                  "title": "Step 1"
+                }, {
+                  "description": "Make sure the battery is locked into place and does not slide out.",
+                  "title": "Step 2"
+                }, {
+                  "description": "Press the battery lightly to ensure correct placement, then close the compartment door.",
+                  "title": "Step 3"
+                } ]
+              }
+            },
+            "content_raw": {
+            
+            },
+            "current_step_index": -1,
+            "submit_entries": {
+              "0": {
+                "paramInput": "Yes"
+              },
+              "1": {
+                "paramInput": "No"
+              },
+              "header:0": {
+                "paramInput": "Yes"
+              }
+            },
+            "timeout": "",
+            "total_steps": 3
+          },
+          "dcx_action_code": "6030",
+          "is_expecting_answer": true,
+          "is_finished": false,
+          "previous_status": {
+          
+          },
+          "skip_solution": false,
+          "solution_eta": "Approx. 3 minutes",
+          "sp_id": "fb7e2b0c-4b9c-4f57-9f3b-4cf90a6de169",
+          "status_changed": true,
+          "type": "CDA"
+        }
+      },
+      "vr_type": "CDA"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "User stopped the resolution process and was adamant to talk to the live agent, so he has been transferred to the live agent."
+  },
+  "displayName": "CDA - User insists on live agent -2 (french)",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 1156,
+  "languageCode": "en"
+}

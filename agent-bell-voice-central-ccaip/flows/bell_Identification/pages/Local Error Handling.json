@@ -1,0 +1,142 @@
+{
+  "name": "acde38ec-001e-454b-b828-aa767c95270e",
+  "displayName": "Local Error Handling",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.local_trigger = \"no_input\" AND $session.params.local_noinput_counter \u003c 3",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "$request.generative.response" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "$request.generative.response" ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "generators": [ {
+        "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/7be942f9-6872-4334-8700-688c4635b495",
+        "outputParameter": "$request.generative.response"
+      } ]
+    },
+    "targetPage": "Previous Page",
+    "name": "a7abc741-8475-43d7-8f2b-feffdcf10e63"
+  }, {
+    "condition": "$session.params.local_trigger = \"no_input\" AND $session.params.local_noinput_counter \u003e= 3",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "\u003cspeak\u003eSorry, I still didn't get that. You can visit \u003csay-as interpret-as=\"url\"\u003ebell.ca/support\u003c/say-as\u003e for help \u003cbreak time=\"1s\"/\u003eThanks for calling us, and have a great day! \u003c/speak\u003e" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "\u003cspeak\u003eDésolé, je n'ai toujours pas compris. Vous pouvez vous rendre à l'adresse \u003csay-as interpret-as=\"url\"\u003ebell.ca/soutien\u003c/say-as\u003e\u003cbreak time=\"1s\"/\u003e Merci d'avoir appelé et passer une bonne journée !\u003c/speak\u003e " ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "identification_status",
+        "value": "Fail"
+      } ]
+    },
+    "targetFlow": "bell_End the Conversation",
+    "name": "3b53866c-e1b1-4748-a02a-918e8a267d5f"
+  }, {
+    "condition": "$session.params.semantic_void = 3 AND ($session.params.CPM_Invalid_Counter \u003c= 2 OR $session.params.PHN_Invalid_Counter \u003c= 2)",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Sorry, I can't seem to find that number in our records. However, I'll still do my best to help you." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Désolé, je ne parviens pas à trouver ce numéro dans nos dossiers. Soyez sans crainte, je ferai quand même de mon mieux pour vous servir." ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "identification_status",
+        "value": "Fail"
+      } ]
+    },
+    "targetPage": "End Flow Check",
+    "name": "e086b614-1647-49db-9693-abc5f7ccfa65"
+  }, {
+    "condition": "$session.params.aqd_counter = 3",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ " I'm sorry, I can't seem to find this number in our records. But don’t worry, I'll still help you however I can. " ]
+        },
+        "languageCode": "en"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "identification_status",
+        "value": "Fail"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "b6731dc1-e5c4-4412-add8-7d3fd4671c3d"
+  }, {
+    "condition": "$session.params.global_error_counter \u003e= 3",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_aqd",
+    "name": "64f7367b-1b6d-4412-8a22-fbbda205afc0"
+  }, {
+    "condition": "$session.params.local_trigger = \"no_match\" AND $session.params.local_nomatch_counter \u003c 3",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "$request.generative.response" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "$request.generative.response" ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "generators": [ {
+        "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/0b25479b-53f1-48d8-b334-f7b14d626fcb",
+        "outputParameter": "$request.generative.response"
+      } ]
+    },
+    "name": "7ccdcccf-3921-423f-aebc-266c5cb59bdc"
+  }, {
+    "condition": "$session.params.local_trigger = \"no_match\" AND $session.params.local_nomatch_counter \u003e= 3",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Sorry, I can't seem to find that number in our records.  But don’t worry, I'll still help you however I can.\n" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je ne trouve malheureusement pas ce numéro dans nos dossiers. Mais rassurez-vous, je ferai de mon mieux pour vous aider" ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "identification_status",
+        "value": "Fail"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "04eea438-8d93-4dc7-bcf4-4a4d0c5baef1"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Previous Page",
+    "name": "453df838-a0a7-4e90-a5d5-f4c02974054c"
+  } ]
+}

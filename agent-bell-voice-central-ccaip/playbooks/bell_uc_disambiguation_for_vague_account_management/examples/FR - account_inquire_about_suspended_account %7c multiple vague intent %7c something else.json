@@ -1,0 +1,59 @@
+{
+  "name": "55fe026b-b84b-475d-9f98-5d0b1267aeb0",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Sur quel aspect spécifique de votre compte souhaitez-vous vous renseigner ? Vous cherchez votre numéro de compte, ou autre chose ?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "autre chose"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Pouvez-vous décrire la situation à laquelle vous êtes confronté avec votre compte afin que je puisse vous proposer les options appropriées ?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Mon service est suspendu, alors que je n'ai manqué aucun paiement. Pouvez-vous m'expliquer pourquoi ?"
+    }
+  }, {
+    "playbookInvocation": {
+      "playbook": "bell_UC_Account Management",
+      "playbookInput": {
+        "precedingConversationSummary": "Customer trying to inquiry about a suspended account",
+        "actionParameters": {
+          "language": "fr-ca",
+          "route": "account_inquire_about_suspended_account",
+          "utterance": "Mon service est suspendu, alors que je n'ai manqué aucun paiement. Pouvez-vous m'expliquer pourquoi cela se produit ?"
+        }
+      },
+      "playbookOutput": {
+        "executionSummary": "Customer query is addressed and then transferred to \"bell_UC_account_management\" playbook for further conversation",
+        "actionParameters": {
+          "language": "fr-ca",
+          "route": "account_inquire_about_suspended_account"
+        }
+      },
+      "playbookState": "OUTPUT_STATE_OK"
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer query about \"Question about my account\" is addressed",
+    "actionParameters": {
+      "language": "fr-ca",
+      "route": "account_vague",
+      "utterance": "Question sur mon compte"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Customer query is addressed and then transferred to \"bell_UC_account_management\" playbook for further conversation",
+    "actionParameters": {
+      "language": "fr-ca"
+    }
+  },
+  "displayName": "FR - account_inquire_about_suspended_account | multiple vague intent | something else",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 412,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

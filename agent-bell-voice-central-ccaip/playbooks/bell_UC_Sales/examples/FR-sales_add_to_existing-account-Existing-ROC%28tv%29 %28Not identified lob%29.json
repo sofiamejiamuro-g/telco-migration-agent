@@ -1,0 +1,86 @@
+{
+  "name": "95cfe70e-fde9-4dd5-af47-58e9573a0de2",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+        "language": "fr-ca"
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Bien sûr, laissez-moi vous aider.\nÀ propos de quel service communiquez-vous avec nous?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Que?"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Pour mieux vous aider"
+    }
+  }, {
+    "playbookInvocation": {
+      "playbook": "bell_uc_ask_LOB",
+      "playbookInput": {
+        "precedingConversationSummary": "User's lob is to be captured",
+        "actionParameters": {
+          "ine_type": "New",
+          "language": "fr-ca",
+          "route": "sales_add_to_existing_account"
+        }
+      },
+      "playbookOutput": {
+        "executionSummary": "User's lob is captured and stored in parameter {lob}",
+        "actionParameters": {
+          "lob": "TV"
+        }
+      },
+      "playbookState": "OUTPUT_STATE_OK"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_aqd",
+      "inputActionParameters": {
+        "language": "fr-ca",
+        "line_type": "New",
+        "lob": "TV",
+        "province": "ROC"
+      },
+      "outputActionParameters": {
+        "language": "fr-ca"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "customer wants to add a new internet line and {province} is \"ROC\" or null from identification flow",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "fr-ca",
+      "line_type": "New",
+      "province": "ROC",
+      "route": "sales_add_to_existing_account",
+      "utterance": "Je souhaite ajouter un nouveau service"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "AS {lob} is tv and {province} is ROC from id flow we are transferring agent to aqd",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca",
+      "line_type": "New",
+      "lob": "TV",
+      "province": "ROC"
+    }
+  },
+  "displayName": "FR-sales_add_to_existing-account-Existing-ROC(tv) (Not identified lob)",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 546,
+  "languageCode": "en"
+}

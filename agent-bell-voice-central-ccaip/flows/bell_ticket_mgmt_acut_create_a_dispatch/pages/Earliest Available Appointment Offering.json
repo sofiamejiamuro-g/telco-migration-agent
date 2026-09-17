@@ -1,0 +1,170 @@
+{
+  "name": "d2cb6fdc-195f-40ba-9e20-ce7a41338663",
+  "displayName": "Earliest Available Appointment Offering",
+  "form": {
+    "parameters": [ {
+      "displayName": "date",
+      "entityType": "@sys.date",
+      "fillBehavior": {
+        "initialPromptFulfillment": {
+        
+        }
+      }
+    } ]
+  },
+  "entryFulfillment": {
+    "messages": [ {
+      "text": {
+        "text": [ "\u003cspeak\u003eThe next available time slot is $session.params.day_of_week, $session.params.month \u003csay-as interpret-as=\"ordinal\"\u003e$session.params.date_of_month\u003c/say-as\u003e between $session.params.start_time_2 and $session.params.end_time_2. Does that work for you?\u003c/speak\u003e" ]
+      },
+      "languageCode": "en"
+    }, {
+      "text": {
+        "text": [ "\u003cspeak\u003eLa prochaine plage horaire disponible est le $session.params.day_of_week_fr, le \u003csay-as interpret-as=\"cardinal\"\u003e$session.params.date_of_month\u003c/say-as\u003e $session.params.month_fr entre $session.params.start_time_fr_2 et $session.params.end_time_fr_2. Est-ce que cela vous convient?\u003c/speak\u003e" ]
+      },
+      "languageCode": "fr-ca"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "intent": "context.confirm_yes",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "selected_date",
+        "value": "$session.params.date"
+      }, {
+        "parameter": "selected_start_time",
+        "value": "$session.params.start_time"
+      }, {
+        "parameter": "selected_end_time",
+        "value": "$session.params.end_time"
+      }, {
+        "parameter": "selected_interval_name",
+        "value": "$session.params.interval_name"
+      }, {
+        "parameter": "wfas_context_raw",
+        "value": "$session.params.wfas_availability_response.wfas_context"
+      }, {
+        "parameter": "wfas_context",
+        "value": "$sys.func.TO_OBJECT($session.params.wfas_context_raw)"
+      } ]
+    },
+    "targetPage": "Webhook - WFAS Appointment",
+    "name": "18348fee-bbc6-420a-a944-a2062799414c"
+  }, {
+    "intent": "context.confirm_no",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "rejected_date",
+        "value": "$session.params.date"
+      } ],
+      "generators": [ {
+        "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/b0cb025a-aac0-472d-96d2-ca481f609082",
+        "inputParameters": [ {
+          "key": "availability",
+          "value": "$session.params.availability"
+        }, {
+          "key": "original_end_date",
+          "value": "$session.params.original_end_date"
+        }, {
+          "key": "original_start_date",
+          "value": "$session.params.original_start_date"
+        }, {
+          "key": "rejected_date",
+          "value": "$session.params.rejected_date"
+        } ],
+        "outputParameter": "$request.generative.appointment_date_range"
+      } ]
+    },
+    "targetPage": "Ask What Day Works",
+    "name": "eb6a421a-a3c8-4d2a-bf5d-5583d18a80f0"
+  }, {
+    "intent": "context.reject_timeslot",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "rejected_date",
+        "value": "$session.params.rejected_date"
+      } ],
+      "generators": [ {
+        "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/b0cb025a-aac0-472d-96d2-ca481f609082",
+        "inputParameters": [ {
+          "key": "availability",
+          "value": "$session.params.availability"
+        }, {
+          "key": "original_end_date",
+          "value": "$session.params.original_end_date"
+        }, {
+          "key": "original_start_date",
+          "value": "$session.params.original_start_date"
+        }, {
+          "key": "rejected_date",
+          "value": "$session.params.rejected_date"
+        } ],
+        "outputParameter": "$request.generative.appointment_date_range"
+      } ]
+    },
+    "targetPage": "Ask What Day Works",
+    "name": "7ac8def2-9fac-4727-858a-33b3852021ec"
+  }, {
+    "intent": "context.other_date",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Date Formatter 2",
+    "name": "f28bba53-db8f-4030-b20d-8002fc3cd694"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Local error handling + Earliest Available Appointment Offering",
+    "event": "sys.no-input-1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Je n'ai pas bien compris." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "\u003cspeak\u003eLa prochaine plage horaire disponible est le $session.params.day_of_week_fr, le \u003csay-as interpret-as=\"cardinal\"\u003e$session.params.date_of_month\u003c/say-as\u003e $session.params.month_fr entre $session.params.start_time_fr_2 et $session.params.end_time_fr_2. Est-ce que cela vous convient?\u003c/speak\u003e" ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "global_error_counter",
+        "value": "$sys.func.ADD($session.params.global_error_counter,1)"
+      }, {
+        "parameter": "local_trigger",
+        "value": "no_input"
+      }, {
+        "parameter": "local_noinput_counter",
+        "value": "$sys.func.ADD($session.params.local_noinput_counter,1)"
+      } ]
+    },
+    "name": "d8a665cf-5d9c-43af-a767-9c9bd01f17d8"
+  }, {
+    "targetPage": "Local error handling + Earliest Available Appointment Offering",
+    "event": "sys.no-match-1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Je n'ai pas bien compris." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "\u003cspeak\u003eLa prochaine plage horaire disponible est le $session.params.day_of_week_fr, le \u003csay-as interpret-as=\"cardinal\"\u003e$session.params.date_of_month\u003c/say-as\u003e $session.params.month_fr entre $session.params.start_time_fr_2 et $session.params.end_time_fr_2. Est-ce que cela vous convient?\u003c/speak\u003e" ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "global_error_counter",
+        "value": "local_nomatch_counter"
+      }, {
+        "parameter": "local_trigger",
+        "value": "no_match"
+      }, {
+        "parameter": "local_nomatch_counter",
+        "value": "$sys.func.ADD($session.params.local_nomatch_counter,1)"
+      } ]
+    },
+    "name": "ba620750-014d-4374-aa56-75626f6e43f2"
+  } ]
+}

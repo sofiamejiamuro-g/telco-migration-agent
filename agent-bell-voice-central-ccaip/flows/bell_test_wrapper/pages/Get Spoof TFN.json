@@ -1,0 +1,200 @@
+{
+  "name": "bb5900e2-c2de-42b7-9cd4-e9f4cd9827f4",
+  "displayName": "Get Spoof TFN",
+  "form": {
+    "parameters": [ {
+      "displayName": "intake_tfn",
+      "required": true,
+      "entityType": "@sys.phone-number",
+      "fillBehavior": {
+        "initialPromptFulfillment": {
+          "messages": [ {
+            "text": {
+              "text": [ "Veuillez saisir le faux TFN pour votre test." ]
+            },
+            "languageCode": "fr-ca"
+          }, {
+            "text": {
+              "text": [ "Please enter the spoof TFN for your test." ]
+            },
+            "languageCode": "en"
+          } ]
+        },
+        "repromptEventHandlers": [ {
+          "event": "sys.no-input-1",
+          "triggerFulfillment": {
+            "messages": [ {
+              "text": {
+                "text": [ "Veuillez saisir le faux TFN pour votre test." ]
+              },
+              "languageCode": "fr-ca"
+            }, {
+              "text": {
+                "text": [ "Please enter the spoof TFN for your test." ]
+              },
+              "languageCode": "en"
+            } ]
+          },
+          "name": "75506a1a-df33-4a96-8bc5-877e6e10c8eb"
+        }, {
+          "event": "sys.no-input-2",
+          "triggerFulfillment": {
+            "messages": [ {
+              "text": {
+                "text": [ "Veuillez saisir le faux TFN pour votre test." ]
+              },
+              "languageCode": "fr-ca"
+            }, {
+              "text": {
+                "text": [ "Please enter the spoof TFN for your test." ]
+              },
+              "languageCode": "en"
+            } ]
+          },
+          "name": "64a973de-ef07-4792-8f2b-27cecc283f6a"
+        }, {
+          "targetPage": "End Flow",
+          "event": "sys.no-input-3",
+          "triggerFulfillment": {
+            "messages": [ {
+              "text": {
+                "text": [ "Vous n'avez pas saisi un faux TFN. Nous quittons maintenant test wrapper." ]
+              },
+              "languageCode": "fr-ca"
+            }, {
+              "text": {
+                "text": [ "You have not entered a spoof TFN. Exiting test wrapper." ]
+              },
+              "languageCode": "en"
+            } ]
+          },
+          "name": "1b9436ee-6563-43d6-be17-3c5661592231"
+        }, {
+          "event": "sys.no-match-1",
+          "triggerFulfillment": {
+            "messages": [ {
+              "text": {
+                "text": [ "Veuillez saisir un numéro valide à 10 chiffres" ]
+              },
+              "languageCode": "fr-ca"
+            }, {
+              "text": {
+                "text": [ "Please enter Valid 10 digit number" ]
+              },
+              "languageCode": "en"
+            } ]
+          },
+          "name": "3f55e8fb-8e4c-4150-8149-2220e7b7320b"
+        }, {
+          "targetPage": "End Flow",
+          "event": "sys.no-match-2",
+          "triggerFulfillment": {
+            "messages": [ {
+              "text": {
+                "text": [ "Vous n'avez pas saisi un faux TFN. Nous quittons maintenant test wrapper." ]
+              },
+              "languageCode": "fr-ca"
+            }, {
+              "text": {
+                "text": [ "You have not entered a spoof TFN. Exiting test wrapper." ]
+              },
+              "languageCode": "en"
+            } ]
+          },
+          "name": "644d02b5-fe08-4818-b456-947bb180823b"
+        } ]
+      },
+      "advancedSettings": {
+        "dtmfSettings": {
+          "enabled": true,
+          "maxDigits": 11,
+          "finishDigit": "#",
+          "useSystemEntityRule": false,
+          "interdigitTimeoutDuration": {
+            "seconds": 10
+          },
+          "endpointingTimeoutDuration": {
+            "seconds": 10
+          }
+        }
+      }
+    } ]
+  },
+  "entryFulfillment": {
+    "messages": [ {
+      "text": {
+        "text": [ "Bienvenue $session.params.tester_firstname !" ]
+      },
+      "languageCode": "fr-ca"
+    }, {
+      "text": {
+        "text": [ "Welcome $session.params.tester_firstname!" ]
+      },
+      "languageCode": "en"
+    } ],
+    "advancedSettings": {
+      "playbackInterruptionSettings": {
+      
+      },
+      "dtmfSettings": {
+        "useSystemEntityRule": false
+      }
+    }
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.intake_tfn != null AND $sys.func.LEN($sys.func.TO_TEXT($session.params.intake_tfn)) != 10",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Veuillez saisir un numéro à 10 chiffres." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "Please enter a 10 digit number." ]
+        },
+        "languageCode": "en"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "spoof_tfn",
+        "value": null
+      }, {
+        "parameter": "intake_tfn",
+        "value": null
+      } ]
+    },
+    "targetPage": "Current Page",
+    "name": "c199dae9-dac9-48ee-bc6e-56adf1b88ee6"
+  }, {
+    "condition": "$session.params.intake_tfn != null AND $sys.func.LEN($sys.func.TO_TEXT($session.params.intake_tfn)) = 10",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "tfn",
+        "value": "$session.params.intake_tfn"
+      } ]
+    },
+    "targetPage": "Webhook intake-routing 2",
+    "name": "13e3a05e-6e9f-484b-83a7-a4462e666477"
+  } ],
+  "advancedSettings": {
+    "speechSettings": {
+      "endpointerSensitivity": 70,
+      "noSpeechTimeout": {
+        "seconds": 30
+      },
+      "models": [ {
+        "key": "en",
+        "value": "telephony_short"
+      }, {
+        "key": "fr",
+        "value": ""
+      }, {
+        "key": "fr-ca",
+        "value": "telephony_short"
+      } ]
+    }
+  },
+  "speakerIdSettings": {
+  
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "name": "61940118-b267-4aef-ad94-a4d5ce212308",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "brand": "bell",
+        "language": "en"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Which service are you inquiring about?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "it's for my mobile phone I want to replace it by another one"
+    }
+  }, {
+    "playbookInvocation": {
+      "playbook": "bell_UC_Equipment",
+      "playbookInput": {
+        "precedingConversationSummary": "follow instructions under \"equipment_upgrade_device\"",
+        "actionParameters": {
+          "language": "en",
+          "lob": "Mobility",
+          "route": "equipment_upgrade_device"
+        }
+      },
+      "playbookOutput": {
+        "actionParameters": {
+          "language": "en"
+        }
+      },
+      "playbookState": "OUTPUT_STATE_OK"
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer says he was looking for new devices",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "en",
+      "line_type": "Existing",
+      "route": "sales_device_inquiry",
+      "utterance": "I would like to make changes to existing account"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "customer was asked lob and as device_type is mobile phone is transferred to equipment playbook ",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "line_type": "Existing",
+      "lob": "Mobility",
+      "route": "equipment_upgrade_device"
+    }
+  },
+  "displayName": "EN - sales device inquiry- ID Pass,line type-not mentioned-mobility | existing",
+  "retrievalStrategy": "STATIC",
+  "tokenCount": 396,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

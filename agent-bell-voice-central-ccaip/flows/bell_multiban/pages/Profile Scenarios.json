@@ -1,0 +1,83 @@
+{
+  "name": "536f711f-f0d8-439d-bbac-b98e7771e2dd",
+  "displayName": "Profile Scenarios",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "billing_account_mobility",
+        "value": "$sys.func.UNIQUE(   $sys.func.FILTER(     \"$session.params.customer_id_search_response\",     \"$..billing_accounts[?(@.services[*].service_type =~ /(?i)^Mobility$/)].billing_account_number\"   ) )"
+      }, {
+        "parameter": "n_billing_account_mobility",
+        "value": "$sys.func.COUNT($session.params.billing_account_mobility)"
+      }, {
+        "parameter": "billing_account_internet",
+        "value": "$sys.func.UNIQUE(   $sys.func.FILTER(     \"$session.params.customer_id_search_response\",     \"$..billing_accounts[?(@.services[*].service_type =~ /(?i)^Internet$/)].billing_account_number\"   ) )"
+      }, {
+        "parameter": "n_billing_account_internet",
+        "value": "$sys.func.COUNT($session.params.billing_account_internet)"
+      }, {
+        "parameter": "billing_account_tv",
+        "value": "$sys.func.UNIQUE(   $sys.func.FILTER(     \"$session.params.customer_id_search_response\",     \"$..billing_accounts[?(@.services[*].service_type =~ /(?i)^TV$/)].billing_account_number\"   ) )"
+      }, {
+        "parameter": "n_billing_account_tv",
+        "value": "$sys.func.COUNT($session.params.billing_account_tv)"
+      }, {
+        "parameter": "billing_account_homephone",
+        "value": "$sys.func.UNIQUE(   $sys.func.FILTER(     \"$session.params.customer_id_search_response\",     \"$..billing_accounts[?(@.services[*].service_type =~ /(?i)^Homephone$/)].billing_account_number\"   ) )"
+      }, {
+        "parameter": "n_billing_account_homephone",
+        "value": "$sys.func.COUNT($session.params.billing_account_homephone)"
+      }, {
+        "parameter": "unique_postcode_list_all",
+        "value": "$sys.func.UNIQUE($sys.func.FILTER(\"$session.params.customer_id_search_response\", \"$..billing_accounts[*].billing_address.postcode\"))"
+      }, {
+        "parameter": "n_postcode",
+        "value": "$sys.func.COUNT($session.params.unique_postcode_list_all)"
+      } ]
+    },
+    "name": "4c195962-1de0-472d-9136-ccd1eeab3fd5"
+  }, {
+    "condition": "$session.params.n_billing_account_internet = 1 OR $session.params.n_billing_account_tv = 1 OR $session.params.n_billing_account_mobility = 1 OR $session.params.n_billing_account_homephone = 1",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "lob",
+        "value": null
+      } ]
+    },
+    "targetPage": "LOB",
+    "name": "7305e19d-7e23-4e86-818e-66afed939b55"
+  }, {
+    "condition": "$session.params.n_postcode \u003e 1",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "postcode_list_all",
+        "value": "$sys.func.FILTER(\"$session.params.customer_id_search_response\", \"$..billing_accounts[*].billing_address.postcode\")"
+      }, {
+        "parameter": "n_postcode_list_all",
+        "value": "$sys.func.COUNT($session.params.postcode_list_all)"
+      }, {
+        "parameter": "i",
+        "value": 0
+      } ]
+    },
+    "targetPage": "Check - Unique Postcode",
+    "name": "e2d3279c-7189-4288-a6d7-1ec71c367619"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "entry_route",
+        "value": "ban_number"
+      } ]
+    },
+    "targetPage": "Account Number",
+    "name": "addd5f7e-eeb5-4173-990e-ae1fb76fb701"
+  } ]
+}

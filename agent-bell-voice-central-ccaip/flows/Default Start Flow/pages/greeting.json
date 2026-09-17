@@ -1,0 +1,138 @@
+{
+  "name": "bd8901cc-0373-46a0-95ae-a611721b6e96",
+  "displayName": "greeting",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "conditionalCases": [ {
+      "cases": [ {
+        "condition": "$session.params.BBM_flag != false",
+        "caseContent": [ {
+          "message": {
+            "text": {
+              "text": [ "\u003cspeak\u003eI'm Bell's virtual assistant, I use artificial intelligence to learn. \u003cbreak time=\"1s\"/\u003e\u003c/speak\u003e" ]
+            },
+            "languageCode": "en"
+          }
+        }, {
+          "message": {
+            "text": {
+              "text": [ "\u003cspeak\u003eJe suis l'assistant virtuel de Bell, j'utilise l'intelligence artificielle pour apprendre. \u003cbreak time=\"1s\"/\u003e\u003c/speak\u003e" ]
+            },
+            "languageCode": "fr-ca"
+          }
+        } ]
+      } ]
+    } ],
+    "nextActionOverride": {
+    
+    }
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.language_tmp = \"en-US\" OR $session.params.language_tmp = \"en\" OR $session.params.language_tmp = \"en-CA\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "language",
+        "value": "en"
+      } ]
+    },
+    "name": "6fe1c6e9-7ced-41f5-96e2-8ad2d239a78c"
+  }, {
+    "condition": "$session.params.language_tmp = \"fr-ca\" OR $session.params.language_tmp = \"fr-CA\" OR $session.params.language_tmp = \"fr\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "language",
+        "value": "fr-ca"
+      } ]
+    },
+    "name": "adfeaeba-1db8-42dc-81b7-00a7245d386b"
+  }, {
+    "condition": "$session.params.language = \"en-US\" OR $session.params.language = \"en\" OR $session.params.language = \"en-CA\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "language",
+        "value": "en"
+      } ]
+    },
+    "name": "e6deafaf-e9b2-49d3-8c22-65a2630835c9"
+  }, {
+    "condition": "$session.params.language = \"fr-ca\" OR $session.params.language = \"fr-CA\" OR $session.params.language = \"fr\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "language",
+        "value": "fr-ca"
+      } ]
+    },
+    "name": "4a595457-d033-4bd7-8b32-7dc3cab14aa3"
+  }, {
+    "condition": "$session.params.va_entry_flow = \"BCE_PrefBldg\"",
+    "triggerFulfillment": {
+      "conditionalCases": [ {
+        "cases": [ {
+          "condition": "$session.params.va_ibm_id_pass != true",
+          "caseContent": [ {
+            "message": {
+              "text": {
+                "text": [ "Are you calling to activate or inquire about your Preferred Building rate service?" ]
+              },
+              "languageCode": "en"
+            }
+          }, {
+            "message": {
+              "text": {
+                "text": [ "Appelez-vous pour activer ou pour vous renseigner sur votre service d’Immeuble à taux préférentiel ?" ]
+              },
+              "languageCode": "fr-ca"
+            }
+          } ]
+        } ]
+      } ]
+    },
+    "targetPage": "CX confirmation",
+    "name": "010eb1ab-a173-48f9-8e48-120ed82998af"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_specialty_flow",
+    "name": "35e15e95-35b0-453b-a8eb-4597d1230d0d"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Entry Point Check",
+    "name": "cb36c739-c9f3-4a07-ada2-eaf8bbdda8aa"
+  }, {
+    "condition": "$session.params.identification_status != null",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "language",
+        "value": "$sys.func.IF(\"$session.params.language = null\", \"$request.language\", $session.params.language)"
+      } ]
+    },
+    "targetFlow": "bell_Identification",
+    "name": "656d013b-4ddb-42da-86cc-aceddfad40a7"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "bd8901cc-0373-46a0-95ae-a611721b6e96"
+      }, {
+        "parameter": "flow_id",
+        "value": "00000000-0000-0000-0000-000000000000"
+      }, {
+        "parameter": "page_name",
+        "value": "greeting"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

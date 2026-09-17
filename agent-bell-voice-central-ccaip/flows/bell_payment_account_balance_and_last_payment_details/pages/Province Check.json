@@ -1,0 +1,47 @@
+{
+  "name": "4bc9c56b-f9dc-4abb-9eba-9dce7f7ea234",
+  "displayName": "Province Check",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "province",
+        "value": "$session.params.npa_nxx_lookup_response.province"
+      } ]
+    },
+    "name": "f2f103c7-1382-4792-95c2-1b0744f117f3"
+  }, {
+    "condition": "$session.params.oneBillIndicator = \"Y\" AND ($session.params.province = \"NB\" OR $session.params.province = \"NL\" OR $session.params.province = \"NS\" OR $session.params.province = \"PE\")",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "oneBillIndicator",
+        "value": "Y"
+      } ]
+    },
+    "targetFlow": "bell_va_to_ivr_handoff",
+    "name": "626a1e15-b191-4158-b439-27a5427954e0"
+  }, {
+    "condition": "$session.params.oneBillIndicator = \"M\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "oneBillIndicator",
+        "value": "M"
+      } ]
+    },
+    "targetFlow": "bell_va_to_ivr_handoff",
+    "name": "43700fda-992a-4b4f-8ed8-d5b4a62d3f3f"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Authentication Check",
+    "name": "ad8e2cff-ece7-463a-a6a5-dc884d39a01a"
+  } ]
+}

@@ -1,0 +1,34 @@
+{
+  "name": "d2c58f0a-357e-4bb5-9cef-5ffde3b6b8bd",
+  "displayName": "Find recent order",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "generators": [ {
+      "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/f923684e-b58e-4e7c-ac82-93f763785c2e",
+      "inputParameters": [ {
+        "key": "filtered_ticket_creation_times",
+        "value": "filtered_issueDate"
+      } ],
+      "outputParameter": "$request.generative.sorted_issueDate"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "recent_order_summary_raw_1",
+        "value": "$session.params.order_summary_response.order_summaries[0]"
+      }, {
+        "parameter": "recent_order_summary_1",
+        "value": "$sys.func.TO_OBJECT($session.params.recent_order_summary_raw_1)"
+      }, {
+        "parameter": "lineOfBusiness_1",
+        "value": "$session.params.recent_order_summary_1.serviceAttributes[0].lineOfBusiness"
+      } ]
+    },
+    "targetPage": "If correct OMF ticket?",
+    "name": "9317afb0-c812-4be7-96c5-2dbbe63d2a9f"
+  } ]
+}

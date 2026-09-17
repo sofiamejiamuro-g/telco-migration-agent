@@ -1,0 +1,34 @@
+{
+  "name": "2601d756-66c1-4a81-81c1-b2bafe006626",
+  "displayName": "Check OTP Eligibity",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "setParameterActions": [ {
+      "parameter": "count_otp_tns",
+      "value": "$sys.func.COUNT($session.params.auth_options_response.otp_tns)"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.count_otp_tns = 0",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "auth_status",
+        "value": "Fail"
+      } ]
+    },
+    "targetPage": "End Flow",
+    "name": "43cc1ed2-0621-4a9e-877e-88c3ccca8260"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "repeat_attempt_count",
+        "value": 0
+      } ]
+    },
+    "targetPage": "Confirm customer has access  to OTP device",
+    "name": "c523f780-b222-4889-a06c-901c9977a61c"
+  } ]
+}

@@ -1,0 +1,191 @@
+{
+  "name": "ced6d0c1-8609-4cc4-8a93-4878d1435d57",
+  "displayName": "Fetch ticket status",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "order_status",
+        "value": "$session.params.order_detail_response.requestState.orderStatus"
+      }, {
+        "parameter": "account_action",
+        "value": "$session.params.order_detail_response.bceOrderList[0].customerAccountRequests[0].accountAction"
+      }, {
+        "parameter": "is_siahcc",
+        "value": "$session.params.order_detail_response.isSiahcc"
+      }, {
+        "parameter": "onebox_shipping_required",
+        "value": "$session.params.order_detail_response.OneBoxShippingRequired"
+      }, {
+        "parameter": "state_restriction",
+        "value": "$session.params.order_detail_response.bceOrderList[0].stateRestrictionList.stateRestriction"
+      }, {
+        "parameter": "early_termination_penalty",
+        "value": "$session.params.order_detail_response.earlyTerminationPenalty"
+      }, {
+        "parameter": "contains_coded_orders",
+        "value": "$session.params.order_detail_response.contains_coded_orders"
+      }, {
+        "parameter": "no_shipping_changes",
+        "value": "$session.params.order_detail_response.bceOrderList[0].stateRestrictionList.stateRestriction[1]"
+      }, {
+        "parameter": "order_detail_response_raw",
+        "value": "$session.params.order_detail_response"
+      }, {
+        "parameter": "order_detail_response",
+        "value": "$sys.func.TO_OBJECT($session.params.order_detail_response_raw)"
+      }, {
+        "parameter": "field_work",
+        "value": "$session.params.order_detail_response.fieldWorkFlag"
+      }, {
+        "parameter": "customer_work",
+        "value": "$session.params.order_detail_response.customerWorkFlag"
+      }, {
+        "parameter": "start_time",
+        "value": "$session.params.order_detail_response.merged_calendar_context[0].startTime"
+      }, {
+        "parameter": "end_time",
+        "value": "$session.params.order_detail_response.merged_calendar_context[0].endTime"
+      }, {
+        "parameter": "date",
+        "value": "$sys.func.MID($session.params.order_detail_response.merged_calendar_context[0].date, 1, 10)"
+      }, {
+        "parameter": "original_appointment_date",
+        "value": "$session.params.order_detail_response.merged_calendar_context[0].date"
+      } ],
+      "generators": [ {
+        "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/9b0c0ae7-7ad6-4d87-878f-9dbeb224a40a",
+        "inputParameters": [ {
+          "key": "date",
+          "value": "$session.params.date"
+        }, {
+          "key": "end_time",
+          "value": "$session.params.end_time"
+        }, {
+          "key": "start_time",
+          "value": "$session.params.start_time"
+        } ],
+        "outputParameter": "$request.generative.date_time_object"
+      } ]
+    },
+    "name": "e1ecebd0-fd4b-4d1d-806c-b79e495f45a3"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "line_of_business",
+        "value": "$session.params.order_detail_response.merged_calendar_context[0].lineOfBusiness"
+      }, {
+        "parameter": "cutoff_time",
+        "value": "$session.params.order_detail_response.calendar_context[0].cutoffTime"
+      }, {
+        "parameter": "date_time_object",
+        "value": "$sys.func.TO_OBJECT($request.generative.date_time_object)"
+      }, {
+        "parameter": "day_of_week",
+        "value": "$session.params.date_time_object.day_of_week"
+      }, {
+        "parameter": "month_name",
+        "value": "$session.params.date_time_object.month_name"
+      }, {
+        "parameter": "date_of_month",
+        "value": "$session.params.date_time_object.date_of_month"
+      }, {
+        "parameter": "startTime",
+        "value": "$session.params.date_time_object.startTime"
+      }, {
+        "parameter": "endTime",
+        "value": "$session.params.date_time_object.endTime"
+      }, {
+        "parameter": "endTimeUpdated",
+        "value": "$session.params.date_time_object.endTimeUpdated"
+      }, {
+        "parameter": "calendar_context",
+        "value": "$session.params.order_detail_response.calendar_context"
+      }, {
+        "parameter": "merged_calendar_context",
+        "value": "$session.params.order_detail_response.merged_calendar_context"
+      } ]
+    },
+    "name": "e97ea385-056c-4b4b-8272-27a08dcade0f"
+  }, {
+    "condition": "$session.params.order_status = \"HeldInOCS\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Held Orders",
+    "name": "05ce22a5-93bc-4d11-8e86-2dd82bca31e0"
+  }, {
+    "condition": "$session.params.account_action = \"Create\" AND $session.params.is_siahcc = \"N\" AND ($session.params.field_work = true OR $session.params.customer_work = true)",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Full Install (Tech Visit)",
+    "name": "9dab4bba-38e4-4db5-929b-570e669538ce"
+  }, {
+    "condition": "$session.params.account_action = \"Create\" AND $session.params.onebox_shipping_required = \"Y\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Self Install Mailout",
+    "name": "5e367903-ea1a-4fe6-aaaf-fc71ed98a2b3"
+  }, {
+    "condition": "$session.params.account_action = \"Create\" OR $session.params.is_siahcc = \"Y\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Home Connection Check",
+    "name": "7f7b4e1b-7744-4d0b-9243-0a46555a56a5"
+  }, {
+    "condition": "$session.params.account_action = \"Change\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Change Orders",
+    "name": "5f07e526-ff15-4496-951f-1bc99af21bd8"
+  }, {
+    "condition": "$session.params.account_action = \"Move\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Move Orders",
+    "name": "ef602bfd-2ba9-4f94-b724-08f26da52e30"
+  }, {
+    "condition": "$session.params.account_action = \"Remove\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Disconnect orders",
+    "name": "2a5b3157-d4ea-49a8-a28b-e7869385f47f"
+  }, {
+    "condition": "$session.params.early_termination_penalty = true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Early Termination penalty",
+    "name": "bcfccbd9-6edf-40ed-a92f-3b5aab56ee71"
+  }, {
+    "condition": "$session.params.contains_coded_orders = true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "OMF coded orders",
+    "name": "72a9743e-36a9-41bc-b6bf-2fc555787620"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "special_queue",
+        "value": "tech_to_care"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "c1db4325-82ef-404b-b1c4-dc1b3d3a5f95"
+  } ]
+}

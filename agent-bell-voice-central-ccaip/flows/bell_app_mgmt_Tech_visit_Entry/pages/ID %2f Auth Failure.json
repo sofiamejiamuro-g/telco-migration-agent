@@ -1,0 +1,52 @@
+{
+  "name": "a1588da5-b0da-4604-959d-cc5a6db9e628",
+  "displayName": "ID / Auth Failure",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "messages": [ {
+      "text": {
+        "text": [ "Since I wasn’t able to authenticate you, I can’t verify if there’s an active appointment on your account. Did you know that you can view, reschedule, or cancel your appointment in the manage your Appointment app. I'll send you a text to the device your calling from, so that you can get started. Is that alright?" ]
+      },
+      "languageCode": "en"
+    }, {
+      "text": {
+        "text": [ "Comme je n'ai pas pu vous authentifier, je ne peux pas vérifier si votre compte comporte un rendez-vous actif. Saviez-vous que vous pouvez consulter, reporter ou annuler votre rendez-vous dans l’appli Gérez votre rendez-vous? Je vais envoyer un texto sur l’appareil au moyen duquel vous appelez, afin de vous permettre de commencer. Est-ce que cela vous convient?" ]
+      },
+      "languageCode": "fr-ca"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "intent": "context.sms_yes",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Language Based SMS",
+    "name": "2f06d21d-ed36-4e00-acc5-af6984ed5df8"
+  }, {
+    "intent": "context.sms_no",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Check appointment type entity",
+    "name": "6d4d7c59-1648-4e1f-a577-009579daa785"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Check appointment type entity",
+    "event": "sys.no-input-default",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "global_error_counter",
+        "value": "$sys.func.ADD($session.params.global_error_counter,1)"
+      }, {
+        "parameter": "local_trigger",
+        "value": "no_input"
+      }, {
+        "parameter": "local_noinput_counter",
+        "value": "$sys.func.ADD($session.params.local_noinput_counter,1)"
+      } ]
+    },
+    "name": "56cc837c-1513-412f-a489-9a9674307c70"
+  } ]
+}

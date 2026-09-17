@@ -1,0 +1,87 @@
+{
+  "name": "917289c3-9920-46e4-965a-56982cab8f51",
+  "displayName": "Error_handler",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "setParameterActions": [ {
+      "parameter": "counter_post_task",
+      "value": "$sys.func.ADD($session.params.counter_post_task,1)"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.counter_post_task \u003c= 2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Oops! Something went wrong on my end. Let me try that again for you." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ " \u003cspeak\u003e\u003cbreak time=\"5s\"/\u003e\u003c/speak\u003e" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Oups ! Une erreur s'est produite de mon côté. Permettez-moi de réessayer pour vous." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "outputAudioText": {
+          "text": "Oups ! Une erreur s'est produite de mon côté. Permettez-moi de réessayer pour vous."
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "outputAudioText": {
+          "ssml": "\u003cspeak\u003e\u003cbreak time=\"10s\"/\u003e\u003c/speak\u003e"
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetFlow": "bell_vr_post_answer",
+    "name": "e429c274-562c-4a50-9f7e-9cd8ec97e44d"
+  }, {
+    "condition": "$session.params.counter_post_task = 3",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I need to connect you to an agent." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "J'ai besoin que vous vous connectiez à un agent." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "outputAudioText": {
+          "text": "J'ai besoin que vous vous connectiez à un agent."
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetFlow": "bell_vr_api_failure_handler",
+    "name": "1affe7b9-5a4a-4fc2-aa7d-33abc4da8f45"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "917289c3-9920-46e4-965a-56982cab8f51"
+      }, {
+        "parameter": "flow_id",
+        "value": "8d91d7f0-057b-4a9d-8961-9b74abfc2ec8"
+      }, {
+        "parameter": "page_name",
+        "value": "Error_handler"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

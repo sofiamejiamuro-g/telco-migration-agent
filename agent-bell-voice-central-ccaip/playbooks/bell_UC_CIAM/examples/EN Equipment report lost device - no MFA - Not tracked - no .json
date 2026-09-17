@@ -1,0 +1,47 @@
+{
+  "name": "805dec00-3f22-4671-ae46-6fe0e1511c96",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "I'm sorry to hear that. Have you tried using a tracking feature like \"Find my iPhone\" or \"Find my Device\"?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "No"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Understood. I would suggest temporarily suspending your service to prevent unauthorized use. I will send a text to the device you're calling from, with a link to do it yourself. Is that alright?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Not now may be"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "en",
+        "sms_send_status": "Declined"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "User has lost their device",
+    "actionParameters": {
+      "language": "en",
+      "route": "equipment_report_lost_device",
+      "utterance": "I lost my device"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "VA asks user if they have tracked their phone. User denies so we suggest them to suspend their service and prompt them for SMS with link. User denies so we call SMS_flow with sms_send_status as \"Declined\""
+  },
+  "displayName": "EN Equipment report lost device - no MFA - Not tracked - no ",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 296,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

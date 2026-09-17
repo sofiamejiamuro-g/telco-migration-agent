@@ -1,0 +1,71 @@
+{
+  "name": "ff1df12b-4a23-4978-876b-bdd063a81800",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_tech_intent_apb",
+      "inputActionParameters": {
+      
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Pourriez-vous me dire avec quel service vous rencontrez des problèmes ?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Mobility"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Vous pouvez facilement vérifier les pannes de service sur notre site web\nJe vais envoyer un texto sur l’appareil au moyen duquel vous appelez, afin que vous puissiez y accéder rapidement. Est-ce que ça vous convient?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "oui"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "fr-ca",
+        "route": "Est-ce qu'il y a une panne?",
+        "sms_content": "Mess. de Bell : Vous pouvez vous rendre au https://soutien.bell.ca/Verification-des-pannes pour consulter les pannes de courant dans votre secteur. ( vpc.ca/anotresujet )",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+        "language": "fr-ca",
+        "sms_content": "Mess. de Bell : Vous pouvez vous rendre au https://soutien.bell.ca/Verification-des-pannes pour consulter les pannes de courant dans votre secteur. ( vpc.ca/anotresujet )",
+        "sms_type": "Public"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customers are facing outage in their area, they reported this issue for {lob} = Mobility when asked used said yes to the sms flow",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca",
+      "lob": "Mobility",
+      "route": "tech_service_outage",
+      "utterance": "Est-ce qu'il y a une panne?"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "User is redirected sms_trigger flow",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca",
+      "lob": "Mobility",
+      "route": "tech_service_outage",
+      "sms_content": "Mess. de Bell : Vous pouvez vous rendre au https://soutien.bell.ca/Verification-des-pannes pour consulter les pannes de courant dans votre secteur. ( vpc.ca/anotresujet )",
+      "sms_type": "Public",
+      "utterance": "Est-ce qu'il y a une panne?"
+    }
+  },
+  "displayName": "FR tech_service_outage - Mobility - SMS Yes",
+  "retrievalStrategy": "NEVER",
+  "tokenCount": 597,
+  "languageCode": "en"
+}

@@ -1,0 +1,190 @@
+{
+  "name": "e6ad19ec-bf26-4ce7-b0ef-7d638ae47568",
+  "displayName": "NM1 Webhook CIRN",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "/v1/ibm_mw/nm1_get#customer-profile",
+    "tag": "customer-profile",
+    "setParameterActions": [ {
+      "parameter": "ibm_application_id",
+      "value": "$session.params.va_ibm_id"
+    }, {
+      "parameter": "phone",
+      "value": "$session.params.CIRN"
+    }, {
+      "parameter": "webhook_success",
+      "value": null
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "($session.params.webhook_success = \"True\" OR $session.params.webhook_success = \"true\") AND $session.params.nm1_grant = true AND (($session.params.nm1_get_cust_profile_response.banType = \"C\" AND ($session.params.nm1_get_cust_profile_response.banSubType = \"V\" OR $session.params.nm1_get_cust_profile_response.banSubType = \"T\" OR $session.params.nm1_get_cust_profile_response.banSubType = \"P\" OR $session.params.nm1_get_cust_profile_response.banSubType = \"7\")) OR ($session.params.nm1_get_cust_profile_response.banType = \"I\" AND ($session.params.nm1_get_cust_profile_response.banSubType = \"B\" OR $session.params.nm1_get_cust_profile_response.banSubType = \"N\" OR $session.params.nm1_get_cust_profile_response.banSubType = \"5\")))",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ " Are you calling about the account associated with the number you’re calling from?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Communiquez-vous avec nous au sujet du numéro à partir duquel vous nous appelez présentement?" ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "nm1_flag",
+        "value": true
+      } ]
+    },
+    "targetPage": "CIRN Collection Check",
+    "name": "f4477ab1-db0e-437c-b4d7-b0d72ac2ebf6"
+  }, {
+    "condition": "($session.params.nm1_get_cust_profile_response.banType = C AND $session.params.ivr_handoff != true AND $session.params.nm1_grant = true) AND ($session.params.nm1_get_cust_profile_response.banSubType = 5 OR $session.params.nm1_get_cust_profile_response.banSubType = R OR $session.params.nm1_get_cust_profile_response.banSubType = Z OR $session.params.nm1_get_cust_profile_response.banSubType = U OR $session.params.nm1_get_cust_profile_response.banSubType = G OR $session.params.nm1_get_cust_profile_response.banSubType = F) AND ($session.params.nm1_get_cust_profile_response.marketSegment = ENT OR $session.params.nm1_get_cust_profile_response.marketSegment = MED)",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ " Are you calling about the account associated with the number you’re calling from?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Communiquez-vous avec nous au sujet du numéro à partir duquel vous nous appelez présentement?" ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "CCC_asked",
+        "value": "yes"
+      }, {
+        "parameter": "nm1_flag",
+        "value": true
+      } ]
+    },
+    "targetPage": "CIRN Collection Check",
+    "name": "d690d1b2-5cac-4192-8e48-ba87c88de800"
+  }, {
+    "condition": "($session.params.webhook_success = \"True\" OR $session.params.webhook_success = \"true\") AND $session.params.nm1_grant = true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "nm1_grant",
+        "value": null
+      }, {
+        "parameter": "nm1_flag",
+        "value": true
+      } ]
+    },
+    "targetPage": "Ask CX for Different CIRN",
+    "name": "ef8e2458-a5fa-4d9d-a00f-0c21eb9af883"
+  }, {
+    "condition": "$session.params.webhook_success = \"True\" OR $session.params.webhook_success = \"true\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "banType",
+        "value": "$session.params.nm1_get_cust_profile_response.banType"
+      }, {
+        "parameter": "banSubType",
+        "value": "$session.params.nm1_get_cust_profile_response.banSubType"
+      }, {
+        "parameter": "marketSegment",
+        "value": "$session.params.nm1_get_cust_profile_response.marketSegment"
+      }, {
+        "parameter": "nm1_message",
+        "value": "$session.params.nm1_get_cust_profile_response.message"
+      }, {
+        "parameter": "nm1_ban",
+        "value": "$session.params.nm1_get_cust_profile_response.banNumber"
+      }, {
+        "parameter": "nm1_service_type",
+        "value": "$session.params.nm1_get_cust_profile_response.siOwner"
+      }, {
+        "parameter": "nm1_account",
+        "value": true
+      }, {
+        "parameter": "nm1_flag",
+        "value": true
+      } ]
+    },
+    "targetPage": "Webhook search-by-tn CIRN",
+    "name": "6f4af855-5a02-48cf-947e-51ad4029e2af"
+  }, {
+    "condition": "($session.params.webhook_success = \"False\" OR $session.params.webhook_success = \"false\") AND $session.params.nm1_grant = true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "nm1_grant",
+        "value": true
+      } ]
+    },
+    "targetPage": "Ask CX for Different CIRN",
+    "name": "3c1ae7b2-f8c7-42c6-b357-5725a5c648bf"
+  }, {
+    "condition": "$session.params.webhook_success = \"False\" OR $session.params.webhook_success = \"false\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook search-by-tn CIRN",
+    "name": "377e0411-890b-4378-9eec-235c688cecfb"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "e6ad19ec-bf26-4ce7-b0ef-7d638ae47568"
+      }, {
+        "parameter": "flow_id",
+        "value": "8df7f836-8c64-4019-9506-2cedc52519c8"
+      }, {
+        "parameter": "page_name",
+        "value": "NM1 Webhook CIRN"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Webhook search-by-tn CIRN",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+    
+    },
+    "name": "16d77217-6637-43b9-8530-3ffc247b4aa1"
+  }, {
+    "targetPage": "Webhook search-by-tn CIRN",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+    
+    },
+    "name": "cc810493-6eba-4963-94bb-e1f04dbb6a23"
+  }, {
+    "targetPage": "Webhook search-by-tn CIRN",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+    
+    },
+    "name": "f19c65ac-4866-47fc-8332-54b99c1895ad"
+  }, {
+    "targetPage": "Webhook search-by-tn CIRN",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+    
+    },
+    "name": "add0f321-9449-41f7-8bf4-f481e0a6a6cc"
+  }, {
+    "targetPage": "Webhook search-by-tn CIRN",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+    
+    },
+    "name": "002705cd-61af-4f1d-928c-20ef4258e63b"
+  }, {
+    "targetPage": "Webhook search-by-tn CIRN",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+    
+    },
+    "name": "ba9f0102-ca96-4b45-9d16-78c82f7bc505"
+  } ]
+}

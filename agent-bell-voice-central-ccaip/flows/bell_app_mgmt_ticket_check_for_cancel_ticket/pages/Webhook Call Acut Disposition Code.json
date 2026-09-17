@@ -1,0 +1,123 @@
+{
+  "name": "0171841b-94b6-4792-b770-0f2e1d784465",
+  "displayName": "Webhook Call Acut Disposition Code",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "v1/dfcx_support/content_lookup#disposition-code",
+    "tag": "disposition-code"
+  },
+  "transitionRoutes": [ {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "webhook_success",
+        "value": "$session.params.webhook_success"
+      }, {
+        "parameter": "disposition_code_message",
+        "value": "$session.params.acut_disposition_code_response.disposition_code_message"
+      } ]
+    },
+    "name": "c0fb0c55-aad5-4d3f-940c-d15a2bd3fda7"
+  }, {
+    "condition": "$session.params.webhook_success = true",
+    "triggerFulfillment": {
+      "conditionalCases": [ {
+        "cases": [ {
+          "condition": "$session.params.disposition_code_message = null OR $session.params.disposition_code_message = \"\"",
+          "caseContent": [ {
+            "message": {
+              "text": {
+                "text": [ "I don't see any active appointments on your account however, $session.params.trouble_type_message  $session.params.main_task_status_message on $session.params.resolution_date_formatted." ]
+              },
+              "languageCode": "en"
+            }
+          }, {
+            "message": {
+              "text": {
+                "text": [ "Je ne vois aucun rendez-vous actif sur votre compte$session.params.trouble_type_message  $session.params.main_task_status_message le $session.params.resolution_date_formatted." ]
+              },
+              "languageCode": "fr-ca"
+            }
+          } ]
+        }, {
+          "caseContent": [ {
+            "message": {
+              "text": {
+                "text": [ "I don't see any active appointments on your account however, $session.params.trouble_type_message  $session.params.main_task_status_message on $session.params.resolution_date_formatted $session.params.disposition_code_message." ]
+              },
+              "languageCode": "en"
+            }
+          }, {
+            "message": {
+              "text": {
+                "text": [ "Je ne vois aucun rendez-vous actif sur votre compte$session.params.trouble_type_message  $session.params.main_task_status_message le $session.params.resolution_date_formatted $session.params.disposition_code_message." ]
+              },
+              "languageCode": "fr-ca"
+            }
+          } ]
+        } ]
+      } ]
+    },
+    "targetFlow": "bell_Feedback",
+    "name": "5c333292-2b82-4692-914b-97f77b967dc8"
+  }, {
+    "condition": "$session.params.webhook_success = false",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Failure - ACUT",
+    "name": "4a0a2ae4-e0d1-4369-b7fd-a1151d779f40"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Failure - ACUT",
+    "name": "f309bc84-cd84-44d0-a889-7fdfbaa3cb03"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Webhook Failure - ACUT",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+    
+    },
+    "name": "ef4bf3ff-347c-4162-9c4a-2c4b9899b2b6"
+  }, {
+    "targetPage": "Webhook Failure - ACUT",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+    
+    },
+    "name": "87570b7c-9b39-4f95-b1fe-4ff1f19b5e7c"
+  }, {
+    "targetPage": "Webhook Failure - ACUT",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+    
+    },
+    "name": "a03ed35e-7d41-4854-a0a2-da62b4e568da"
+  }, {
+    "targetPage": "Webhook Failure - ACUT",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+    
+    },
+    "name": "20c2235f-2113-430c-8663-568d28e08456"
+  }, {
+    "targetPage": "Webhook Failure - ACUT",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+    
+    },
+    "name": "35921732-4d5c-45f6-8225-78963de21fe3"
+  }, {
+    "targetPage": "Webhook Failure - ACUT",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+    
+    },
+    "name": "3fbcb917-931d-4361-a266-15f411b2c716"
+  } ]
+}

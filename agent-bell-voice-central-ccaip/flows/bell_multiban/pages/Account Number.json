@@ -1,0 +1,445 @@
+{
+  "name": "dbaffca6-9e4a-448d-b5c8-320ee9b614e2",
+  "displayName": "Account Number",
+  "form": {
+    "parameters": [ {
+      "displayName": "account_number",
+      "required": true,
+      "entityType": "@sys.phone-number",
+      "fillBehavior": {
+        "initialPromptFulfillment": {
+        
+        },
+        "repromptEventHandlers": [ {
+          "targetPage": "Check No Match Counter",
+          "event": "sys.no-match-1",
+          "triggerFulfillment": {
+            "setParameterActions": [ {
+              "parameter": "no_match_counter",
+              "value": "$sys.func.ADD($session.params.no_match_counter,1)"
+            }, {
+              "parameter": "global_error_counter",
+              "value": "$sys.func.ADD($session.params.global_error_counter,1)"
+            } ],
+            "conditionalCases": [ {
+              "cases": [ {
+                "condition": "$session.params.no_match_counter = 0",
+                "caseContent": [ {
+                  "message": {
+                    "text": {
+                      "text": [ "You can find your account number on your bill, or in the MyBell app under the My Profile section. I'll give you some time to find it." ]
+                    },
+                    "languageCode": "en"
+                  }
+                }, {
+                  "message": {
+                    "text": {
+                      "text": [ "Vous trouverez votre numéro de compte sur votre facture ou dans l'application MonBell, à la section Mon profil. Je vous donne un peu de temps pour le trouver." ]
+                    },
+                    "languageCode": "fr-ca"
+                  }
+                } ]
+              }, {
+              
+              } ]
+            } ]
+          },
+          "name": "da7dadc5-e0a2-453c-a97e-465bb0015522"
+        }, {
+          "targetPage": "Check No Match Counter",
+          "event": "sys.no-input-1",
+          "triggerFulfillment": {
+            "setParameterActions": [ {
+              "parameter": "no_match_counter",
+              "value": "$sys.func.ADD($session.params.no_match_counter,1)"
+            }, {
+              "parameter": "global_error_counter",
+              "value": "$sys.func.ADD($session.params.global_error_counter,1)"
+            } ],
+            "conditionalCases": [ {
+              "cases": [ {
+                "condition": "$session.params.no_match_counter = 0",
+                "caseContent": [ {
+                  "message": {
+                    "text": {
+                      "text": [ "You can find your account number on your bill, or in the MyBell app under the My Profile section. I'll give you some time to find it." ]
+                    },
+                    "languageCode": "en"
+                  }
+                }, {
+                  "message": {
+                    "text": {
+                      "text": [ "Vous trouverez votre numéro de compte sur votre facture ou dans l'application MonBell, à la section Mon profil. Je vous donne un peu de temps pour le trouver." ]
+                    },
+                    "languageCode": "fr-ca"
+                  }
+                } ]
+              }, {
+              
+              } ]
+            } ]
+          },
+          "name": "d8038940-5a9e-495f-b70f-7a9e04b43acb"
+        }, {
+          "targetPage": "Check No Match Counter",
+          "event": "sys.no-match-2",
+          "triggerFulfillment": {
+            "setParameterActions": [ {
+              "parameter": "identification_status",
+              "value": "Fail"
+            }, {
+              "parameter": "global_error_counter",
+              "value": "$sys.func.ADD($session.params.global_error_counter,1)"
+            } ],
+            "conditionalCases": [ {
+              "cases": [ {
+                "condition": "$session.params.no_match_counter = 1",
+                "caseContent": [ {
+                  "message": {
+                    "text": {
+                      "text": [ "Sorry, I can’t find your account. But don't worry, let's continue." ]
+                    },
+                    "languageCode": "en"
+                  }
+                }, {
+                  "message": {
+                    "text": {
+                      "text": [ "Je ne parviens malheureusement pas à trouver votre compte. Soyez sans crainte, on continue." ]
+                    },
+                    "languageCode": "fr-ca"
+                  }
+                } ]
+              }, {
+                "condition": "$session.params.no_match_counter = 2"
+              } ]
+            } ]
+          },
+          "name": "5c8b9a79-c910-4b8b-9ec7-a9f18da589ac"
+        }, {
+          "targetPage": "Check No Match Counter",
+          "event": "sys.no-input-2",
+          "triggerFulfillment": {
+            "setParameterActions": [ {
+              "parameter": "no_match_counter",
+              "value": "$sys.func.ADD($session.params.no_match_counter,1)"
+            }, {
+              "parameter": "global_error_counter",
+              "value": "$sys.func.ADD($session.params.global_error_counter,1)"
+            } ],
+            "conditionalCases": [ {
+              "cases": [ {
+                "condition": "$session.params.no_match_counter = 0",
+                "caseContent": [ {
+                  "message": {
+                    "text": {
+                      "text": [ "You can find your account number on your bill, or in the MyBell app under the My Profile section. I'll give you some time to find it." ]
+                    },
+                    "languageCode": "en"
+                  }
+                }, {
+                  "message": {
+                    "text": {
+                      "text": [ "Vous trouverez votre numéro de compte de neuf chiffres sur votre facture, ou dans l’application Virgin Plus Mon compte, dans la section Mon profil. Je vous donne un peu de temps pour le trouver." ]
+                    },
+                    "languageCode": "fr-ca"
+                  }
+                } ]
+              }, {
+              
+              } ]
+            } ]
+          },
+          "name": "c22487be-68bc-4674-9dad-197b1d55e1dc"
+        } ]
+      },
+      "advancedSettings": {
+        "dtmfSettings": {
+          "enabled": true,
+          "maxDigits": 9,
+          "finishDigit": "#",
+          "useSystemEntityRule": false,
+          "interdigitTimeoutDuration": {
+            "seconds": 10
+          },
+          "endpointingTimeoutDuration": {
+            "seconds": 10
+          }
+        }
+      }
+    } ]
+  },
+  "entryFulfillment": {
+    "conditionalCases": [ {
+      "cases": [ {
+        "condition": "$session.params.entry_route = ban_number",
+        "caseContent": [ {
+          "message": {
+            "text": {
+              "text": [ "I found several accounts related to your number. So I know we’re talking about the right one, could you please tell me your account number?" ]
+            },
+            "languageCode": "en"
+          }
+        }, {
+          "message": {
+            "text": {
+              "text": [ "J’ai trouvé plusieurs comptes associés à votre numéro. Pour nous assurer de parler du bon, pourriez-vous me donner votre numéro de compte?" ]
+            },
+            "languageCode": "fr-ca"
+          }
+        } ]
+      }, {
+      
+      } ]
+    } ]
+  },
+  "transitionRoutes": [ {
+    "intent": "other_speak_to_agent",
+    "condition": "$session.params.s2a_counter = 0",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "$request.generative.ban_1" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "$request.generative.ban_1" ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "s2a_counter",
+        "value": "$sys.func.ADD($session.params.s2a_counter,1)"
+      } ],
+      "generators": [ {
+        "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/16b9bad0-fb26-438f-9507-50a138641533",
+        "outputParameter": "$request.generative.ban_1"
+      } ]
+    },
+    "name": "69f0b03e-a545-4f5a-9d1b-a723b9e3a165"
+  }, {
+    "intent": "other_speak_to_agent",
+    "condition": "$session.params.s2a_counter = 1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "$request.generative.ban_2" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "$request.generative.ban_2" ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "s2a_counter",
+        "value": "$sys.func.ADD($session.params.s2a_counter,1)"
+      } ],
+      "generators": [ {
+        "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/c3c0b64d-01e9-402d-af8d-7702e973b37f",
+        "outputParameter": "$request.generative.ban_2"
+      } ]
+    },
+    "name": "c28cdb6a-7578-4ea1-ad2a-6cc10a76e24f"
+  }, {
+    "intent": "other_speak_to_agent",
+    "condition": "$session.params.s2a_counter = 2",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "identification_status",
+        "value": "Fail"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "9aee14c4-b5a8-4d3c-b956-048db35d02b4"
+  }, {
+    "condition": "$session.params.global_error_counter \u003e= 3",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "identification_status",
+        "value": "Fail"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "d8476459-89a7-4ccf-9a84-bee0f51fd67c"
+  }, {
+    "condition": "$session.params.account_number != null",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "account_number_present?",
+        "value": "$sys.func.CONTAIN($session.params.billing_account_number_list, $sys.func.TO_TEXT($session.params.account_number))"
+      } ]
+    },
+    "targetPage": "Identify Single Ban",
+    "name": "6022aa27-d078-4a90-bc0d-e3081871df3f"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Check No Match Counter",
+    "event": "sys.no-match-1",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "no_match_counter",
+        "value": "$sys.func.ADD($session.params.no_match_counter,1)"
+      }, {
+        "parameter": "global_error_counter",
+        "value": "$sys.func.ADD($session.params.global_error_counter,1)"
+      } ],
+      "conditionalCases": [ {
+        "cases": [ {
+          "condition": "$session.params.no_match_counter = 0",
+          "caseContent": [ {
+            "message": {
+              "text": {
+                "text": [ "You can find your 9-digit account number on your bill, or in the MyBell Account app under the My Profile section. I'll give you some time to find it." ]
+              },
+              "languageCode": "en"
+            }
+          } ]
+        }, {
+        
+        } ]
+      } ]
+    },
+    "name": "de6fbb20-507d-4dd4-be16-9514e24ead86"
+  }, {
+    "event": "sys.no-input-1",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "global_error_counter",
+        "value": "$sys.func.ADD($session.params.global_error_counter,1)"
+      } ]
+    },
+    "name": "51d38c3b-34fe-450f-9c58-77bf84665803"
+  }, {
+    "targetPage": "End Flow",
+    "event": "sys.no-match-2",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "identification_status",
+        "value": "Fail"
+      }, {
+        "parameter": "global_error_counter",
+        "value": "$sys.func.ADD($session.params.global_error_counter,1)"
+      } ],
+      "conditionalCases": [ {
+        "cases": [ {
+          "condition": "$session.params.no_match_counter = 1",
+          "caseContent": [ {
+            "message": {
+              "text": {
+                "text": [ "Sorry, I can’t find your account. But don't worry, let's continue." ]
+              },
+              "languageCode": "en"
+            }
+          } ]
+        }, {
+          "condition": "$session.params.no_match_counter = 2"
+        } ]
+      } ]
+    },
+    "name": "ae3254a2-0321-4ff1-b621-ae3a46707185"
+  }, {
+    "targetPage": "Check No Match Counter",
+    "event": "sys.no-input-2",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "no_match_counter",
+        "value": "$sys.func.ADD($session.params.no_match_counter,1)"
+      }, {
+        "parameter": "global_error_counter",
+        "value": "$sys.func.ADD($session.params.global_error_counter,1)"
+      } ],
+      "conditionalCases": [ {
+        "cases": [ {
+          "condition": "$session.params.no_match_counter = 0",
+          "caseContent": [ {
+            "message": {
+              "text": {
+                "text": [ "You can find your account number on your bill, or in the MyBell app under the My Profile section. I'll give you some time to find it." ]
+              },
+              "languageCode": "en"
+            }
+          } ]
+        }, {
+        
+        } ]
+      } ]
+    },
+    "name": "f232486c-2839-4750-91d0-d3be2cf9eb7f"
+  }, {
+    "event": "sys.no-input-3",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "global_error_counter",
+        "value": "$sys.func.ADD($session.params.global_error_counter,1)"
+      } ]
+    },
+    "name": "3d76eb91-15d0-49de-860f-86a0b85fc4bd"
+  }, {
+    "targetPage": "End Flow",
+    "event": "sys.no-input-4",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "identification_status",
+        "value": "Fail"
+      }, {
+        "parameter": "global_error_counter",
+        "value": "$sys.func.ADD($session.params.global_error_counter,1)"
+      } ],
+      "conditionalCases": [ {
+        "cases": [ {
+          "condition": "$session.params.no_match_counter = 1",
+          "caseContent": [ {
+            "message": {
+              "text": {
+                "text": [ "Sorry, I can’t find your account. But don't worry, let's continue." ]
+              },
+              "languageCode": "en"
+            }
+          } ]
+        }, {
+          "condition": "$session.params.no_match_counter = 2"
+        } ]
+      } ]
+    },
+    "name": "264582c5-6268-4e88-a404-85c4ce51ac74"
+  } ],
+  "advancedSettings": {
+    "speechSettings": {
+      "endpointerSensitivity": 90,
+      "noSpeechTimeout": {
+        "seconds": 30
+      },
+      "models": [ {
+        "key": "en",
+        "value": "telephony_short"
+      }, {
+        "key": "fr-ca",
+        "value": "telephony_short"
+      } ]
+    },
+    "speechAdaptationSettings": {
+      "enableManualSpeechAdaptation": true,
+      "biasingPhraseSets": [ {
+        "biasingPhrases": [ {
+          "value": "information",
+          "boost": 20
+        } ],
+        "displayName": "Information"
+      }, {
+        "biasingPhrases": [ {
+          "value": "$POSTALCODE",
+          "boost": 15
+        }, {
+          "value": "$OOV_CLASS_POSTALCODE",
+          "boost": 20
+        } ],
+        "displayName": "canadian_postal_code"
+      } ]
+    }
+  },
+  "speakerIdSettings": {
+  
+  }
+}

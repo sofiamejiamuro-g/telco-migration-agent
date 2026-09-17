@@ -1,0 +1,120 @@
+{
+  "name": "843a3427-3e52-4899-a3d3-392a9333b0be",
+  "displayName": "Global Error Handling",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.global_error_counter \u003e= 3",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_aqd",
+    "name": "87883660-bf60-4d6b-9431-8e3a5eb32979"
+  }, {
+    "condition": "$session.params.local_trigger = \"no_match\" AND $session.params.local_nomatch_counter = 1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Je suis désolé, je n'ai pas bien saisie. Qu'est-ce que vous avez dit?" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "Sorry, I didn't understand. What was that?" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "26bddfe3-c77f-47bc-a17c-4236a1bff98a"
+  }, {
+    "condition": "$session.params.local_trigger = \"no_match\" AND $session.params.local_nomatch_counter = 2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "J’ai de la difficulté à comprendre. Pouvez-vous répéter, s’il vous plaît?" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "I’m having trouble understanding. Can you repeat please?" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "1e550858-31c3-4558-8460-2bb4ce37d632"
+  }, {
+    "condition": "$session.params.local_trigger = \"no_match\" AND $session.params.local_nomatch_counter = 3",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "\u003cspeak\u003eExcusez-moi, je n'ai toujours pas compris. Vous pouvez consulter notre foire aux questions sur \u003csay-as interpret-as=\"url\"\u003ebell.ca/soutien-prepaye\u003c/say-as\u003e\u003c/speak\u003e" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "\u003cspeak\u003eI still didn’t get that. You can check out our frequently asked questions at \u003csay-as interpret-as=\"url\"\u003ebell.ca/prepaid-support\u003c/say-as\u003e\u003c/speak\u003e" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "targetFlow": "bell_wrapup",
+    "name": "a3cf47f7-f3e2-46a5-9659-e5eb39a75ef6"
+  }, {
+    "condition": "$session.params.local_noinput_counter = 1 AND $session.params.local_trigger = \"no_input\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Désolé, je n'ai pas bien compris. Pourriez-vous réessayer?" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "Sorry, I didn’t quite get that. Can you try again?" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "5c432d71-6444-458c-987d-7fb6a3e96e1a"
+  }, {
+    "condition": "$session.params.local_noinput_counter = 2 AND $session.params.local_trigger = \"no_input\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Êtes-vous toujours là? Pouvez-vous répéter s'il vous plaît?" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "Are you still there? Can you repeat please?" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "ab013e56-cb1b-476a-8cad-02ae6d6e810c"
+  }, {
+    "condition": "$session.params.local_noinput_counter = 3 AND $session.params.local_trigger = \"no_input\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "\u003cspeak\u003eVous pouvez consulter notre foire aux questions sur  \u003csay-as interpret-as=\"url\"\u003ebell.ca/soutien-prepaye\u003c/say-as\u003e\u003c/speak\u003e" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "\u003cspeak\u003eYou can check out our frequently asked questions at \u003csay-as interpret-as=\"url\"\u003ebell.ca/prepaid-support\u003c/say-as\u003e\u003c/speak\u003e" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "targetFlow": "bell_wrapup",
+    "name": "e363c6a8-653a-4b03-a3b6-51e0d92228eb"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Previous Page",
+    "name": "e151152e-331f-46a5-879e-4eb5bca1fe4c"
+  } ]
+}

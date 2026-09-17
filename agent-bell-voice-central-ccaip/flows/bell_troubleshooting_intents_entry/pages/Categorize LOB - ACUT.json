@@ -1,0 +1,85 @@
+{
+  "name": "3e449576-d722-4781-bed4-15d001842bbb",
+  "displayName": "Categorize LOB - ACUT",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "setParameterActions": [ {
+      "parameter": "ticket_state",
+      "value": "Active"
+    }, {
+      "parameter": "number_of_days_interval",
+      "value": 60
+    }, {
+      "parameter": "lob_service_ids",
+      "value": "$sys.func.FILTER(\"$session.params.billing_account_info_list\", \"$..services[?(@.service_type in $session.params.lob_list)].service_id\")"
+    }, {
+      "parameter": "_lob_count",
+      "value": "$sys.func.COUNT($session.params.lob_service_ids)"
+    }, {
+      "parameter": "lob_count",
+      "value": "$sys.func.TO_NUMBER($session.params._lob_count)"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.lob_count \u003e 1 OR $session.params.lob_count = 0",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Intent determination",
+    "name": "0c8bb3dd-5cb1-456d-89b9-87d9d37618cd"
+  }, {
+    "condition": "$session.params.from_flow = \"bell_vr_kickout\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Bypass Contact Method",
+    "name": "4fe982ed-7a33-4d91-9eef-1d8728c3bbf9"
+  }, {
+    "condition": "$sys.func.UPPER($session.params.lob) = \"HOMEPHONE\" OR $sys.func.UPPER($session.params.lob) = \"INTERNET\" OR $sys.func.UPPER($session.params.lob) = \"TV\" OR $sys.func.UPPER($session.params.lob) = \"WIRELINE\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_app_mgmt_change_contact_method",
+    "name": "b805f361-1ca0-4b0f-821e-937ee01356da"
+  }, {
+    "condition": "$sys.func.UPPER($session.params.lob) = \"INTERNET\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "internet_account_number",
+        "value": "$sys.func.GET($session.params.lob_service_ids,0)"
+      } ]
+    },
+    "targetPage": "[whk] ACUT Search Find - Internet",
+    "name": "d7c596d6-0ccc-406d-9101-dc4f4953b315"
+  }, {
+    "condition": "$sys.func.UPPER($session.params.lob) = \"TV\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "tv_account_number",
+        "value": "$sys.func.GET($session.params.lob_service_ids,0)"
+      } ]
+    },
+    "targetPage": "[whk] ACUT Search Find - TV",
+    "name": "17237fc6-d579-4f52-aba9-d81d403998cc"
+  }, {
+    "condition": "$sys.func.UPPER($session.params.lob) = \"HOMEPHONE\" OR $sys.func.UPPER($session.params.lob) = \"WIRELINE\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "wireline_telephone_number",
+        "value": "$sys.func.GET($session.params.lob_service_ids,0)"
+      } ]
+    },
+    "targetPage": "[whk] ACUT Search Find - Home phone",
+    "name": "31ca4112-cdd0-4bc3-881a-1b6665966d6d"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_aqd",
+    "name": "9fa2ed5f-85ec-42ee-8df6-5417d0e6d533"
+  } ],
+  "description": "NOTE: number_of_days_interval: 14 (60 for testing) and ticket_state: \"Active\" are set here"
+}

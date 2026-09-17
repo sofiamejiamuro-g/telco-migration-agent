@@ -1,0 +1,44 @@
+{
+  "name": "3aaf865d-3ede-4d21-85ed-8344e64815ca",
+  "displayName": "Fibe TV",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.FIBE_COUNT = 1",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_rehit_Fibe_TV",
+    "name": "ac42c55f-fea3-45d3-b8cf-154ba287e2a3"
+  }, {
+    "condition": "$session.params.FIBE_COUNT != 1",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_rehit_SMS",
+    "name": "6432d7e0-edda-42c8-9eb9-3760f4b26643"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "3aaf865d-3ede-4d21-85ed-8344e64815ca"
+      }, {
+        "parameter": "flow_id",
+        "value": "29168022-af9d-47b0-8051-575528402df8"
+      }, {
+        "parameter": "page_name",
+        "value": "Fibe TV"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

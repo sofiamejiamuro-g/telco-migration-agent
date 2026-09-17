@@ -1,0 +1,69 @@
+{
+  "name": "56c917f8-40f2-422b-8d9f-2a2e2b0854df",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "I'm sorry to hear that. Have you tried using a tracking feature like \"Find my iPhone\" or \"Find my Device\"?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "yes"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Understood, I would suggest temporarily suspending your service to prevent unauthorized use. I will send a text to the device you are calling from, with a link to do it yourelf, it that alright?"
+    }
+  }, {
+    "userUtterance": {
+    
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_global_error_count_check",
+      "inputActionParameters": {
+        "global_error_counter": "0",
+        "language": "en"
+      },
+      "outputActionParameters": {
+        "global_error_counter": "1",
+        "language": "en"
+      }
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "brand": "bell",
+        "language": "en",
+        "route": "equipment_report_lost_device",
+        "sms_send_status": "Declined"
+      },
+      "outputActionParameters": {
+        "brand": "bell",
+        "language": "en"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer to report about a device lost or stolen",
+    "actionParameters": {
+      "brand": "bell",
+      "global_error_counter": "0",
+      "language": "en",
+      "route": "equipment_report_lost_device",
+      "utterance": "I'd like to report my phone as stolen"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Customer has been redirected to \"Steering_SMS Trigger\" playbook",
+    "actionParameters": {
+      "brand": "bell",
+      "global_error_counter": "1",
+      "language": "en"
+    }
+  },
+  "displayName": "Equipment Report Lost Device - No input sms trigger",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 418,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

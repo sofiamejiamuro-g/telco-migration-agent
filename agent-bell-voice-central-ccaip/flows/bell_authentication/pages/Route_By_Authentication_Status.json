@@ -1,0 +1,44 @@
+{
+  "name": "c09c7dd6-02ed-4eee-be71-708465bc0f0e",
+  "displayName": "Route_By_Authentication_Status",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.auth_status != null",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "End Flow Check",
+    "name": "2c676bfb-4b74-4a4f-8d25-73c86c058bd6"
+  }, {
+    "condition": "$session.params.auth_status = null",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Route_by_caller_channel",
+    "name": "df0bbe6c-56f2-4288-8a07-6007652f05ba"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "c09c7dd6-02ed-4eee-be71-708465bc0f0e"
+      }, {
+        "parameter": "flow_id",
+        "value": "5f8f4b4a-558a-4e66-9d28-a31389981b36"
+      }, {
+        "parameter": "page_name",
+        "value": "Route_By_Authentication_Status"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

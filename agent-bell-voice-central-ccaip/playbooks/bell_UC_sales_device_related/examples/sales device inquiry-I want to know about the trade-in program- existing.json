@@ -1,0 +1,65 @@
+{
+  "name": "7945851f-fc3d-4ae8-9939-ce7abce8da3b",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Are you inquiring about a new service or do you want to make changes to your current service?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Existing Service"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "I'll send a text to the device you're calling from, so that you can check out all the trade-in options and learn more about Bell's trade-in program. Is that alright?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "yes"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "en",
+        "sms_content": "Bell: You can visit bell.ca/trade-in to find out more about the Bell Trade-in program. (bell.ca/about-us)",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+        "language": "en"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "customer wants to know about the trade in program, customer type is existing and we don't know the line_type",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "en",
+      "route": "sales_device_inquiry",
+      "utterance": "I would like to know more about the recovery program"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "As we don't know the line type, we need to ask the customer, if the customer says \"Existing Line\" then we should ask the customer if we can send the text, if customer agrees then send the text",
+    "actionParameters": {
+      "language": "en",
+      "line_type": "Existing"
+    }
+  },
+  "displayName": "sales device inquiry-I want to know about the trade-in program- existing",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 459,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

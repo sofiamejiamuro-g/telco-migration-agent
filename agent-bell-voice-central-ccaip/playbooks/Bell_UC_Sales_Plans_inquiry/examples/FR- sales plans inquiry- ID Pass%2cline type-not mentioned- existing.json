@@ -1,0 +1,57 @@
+{
+  "name": "f725b4f0-874d-4c10-80f4-06aaf2c9816e",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Désirez-vous ajouter un nouveau service ou modifier votre service actuel?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Je souhaite ajouter une option de voyage/itinérance à mon forfait."
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "service_add_feature_flow",
+      "inputActionParameters": {
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customers want to know about different plans or compare different plans that Bell has",
+    "actionParameters": {
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "fr-ca",
+      "route": "sales_plans_inquiry",
+      "utterance": "j'ai besoin d'un plan"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "from the identification flow, know the customer_type as \"Existing\", as we don't know the line type, we need to ask the customer, if customer says that they are looking to make changes in the current service, we need to set \"line_type\" as \"Existing\" and reroute to \"service_add_feature\" ",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca",
+      "line_type": "Existing",
+      "route": "service_add_feature"
+    }
+  },
+  "displayName": "FR- sales plans inquiry- ID Pass,line type-not mentioned- existing",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 391,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "fr"
+}

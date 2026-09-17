@@ -1,0 +1,76 @@
+{
+  "name": "c207f881-9405-45b9-bea9-fb0854682f1b",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70011",
+        "brand": "bell",
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "playbookInvocation": {
+      "playbook": "bell_uc_ask_LOB",
+      "playbookInput": {
+        "precedingConversationSummary": "Passing the user {utterance} to extract the parameter {lob} when {identification_status} is \"Pass\"",
+        "actionParameters": {
+          "brand": "bell",
+          "language": "fr-ca"
+        }
+      },
+      "playbookOutput": {
+        "executionSummary": "returns the parameter {lob} based on user input provided or {utterance}",
+        "actionParameters": {
+          "lob": "Mobility"
+        }
+      },
+      "playbookState": "OUTPUT_STATE_OK"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Bien sûr, vous pouvez facilement gérer votre forfait Mobilité et vos options à tout moment grâce à MyBell. J'enverrai un SMS à l'appareil d'où vous appelez pour que vous puissiez facilement modifier votre forfait Mobilité. Ça vous convient ?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "oui"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "sms_content": "Bell: Vous pouvez consulter le site https://m.bell.ca/gerermonforfait pour consulter ou modifier votre forfait mobile dans l'application MonBell. (bell.ca/a-propos-de-nous)",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "customer wants to remove any additional features/add-ons they have on their plan and if parameter {lob} is null in session then we need to call PLAYBOOK:bell_uc_ask_LOB to extract the lob value",
+    "actionParameters": {
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "fr-ca",
+      "route": "service_remove_feature",
+      "utterance": "je veux supprimer une fonctionnalité"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "User is rerouted to check lob playbook to extract the parameter \"lob\" and return back",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca",
+      "lob": "Mobility"
+    }
+  },
+  "displayName": "FR - service_remove_feature - lob null",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 583,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

@@ -1,0 +1,35 @@
+{
+  "name": "2fc8df7f-e797-4e20-810e-23a1240025db",
+  "displayName": "Credit Card Length Validation",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "($session.params.amex_check_digits = \"34\" OR $session.params.amex_check_digits = \"37\") AND $session.params.len_credit_card_number = 15",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Credit Card Validation",
+    "name": "ef119d00-d6bd-4297-a39d-122eec256968"
+  }, {
+    "condition": "$session.params.amex_check_digits != \"34\" AND $session.params.amex_check_digits != \"37\" AND $session.params.len_credit_card_number = 16",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Credit Card Validation",
+    "name": "4b1e4693-4ce0-44b8-a868-43bec69f621a"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "check_credit_card_number",
+        "value": false
+      } ]
+    },
+    "targetPage": "No Match Handling",
+    "name": "628e4104-76f7-42fc-9e3d-c8676bc47815"
+  } ]
+}

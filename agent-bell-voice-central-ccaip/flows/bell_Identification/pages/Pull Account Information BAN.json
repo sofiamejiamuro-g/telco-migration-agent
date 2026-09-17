@@ -1,0 +1,38 @@
+{
+  "name": "0351795e-9a0a-4e32-919a-376d96557ce5",
+  "displayName": "Pull Account Information BAN",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "phone",
+        "value": "$session.params.CLID"
+      } ]
+    },
+    "name": "a0acce22-c853-49fc-949f-36e5ae799120"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "webhook": "/v1/ibm_mw/nm1_get#customer-profile",
+      "tag": "customer-profile",
+      "setParameterActions": [ {
+        "parameter": "ibm_application_id",
+        "value": "$session.params.va_ibm_id"
+      } ]
+    },
+    "name": "a7ea5eac-57df-40e3-ba9a-ede6b714bd5f"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook search-by-ban",
+    "name": "989304ef-a730-4213-9281-d10be9165721"
+  } ]
+}

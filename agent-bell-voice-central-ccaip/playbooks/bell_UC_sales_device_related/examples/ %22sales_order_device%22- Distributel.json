@@ -1,0 +1,63 @@
+{
+  "name": "c679b908-83d7-4c5c-83a9-0e03e23136bf",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "brand": "bell",
+        "language": "en"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Are you inquiring about a new service or do you want to make changes to your current service?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Current service"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_aqd",
+      "inputActionParameters": {
+        "brand": "bell",
+        "language": "en",
+        "lob": "Internet",
+        "special_queue": "cable_internet"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "customer want to order internet AND province is ROC",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "Existing",
+      "language": "en",
+      "lob": "Internet",
+      "route": "sales_order_device",
+      "shr_int_partner_new_elig_flg": "1",
+      "utterance": "hi i want to order an internet device"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "If flag \"shr_int_partner_new_elig_flg\" then {special_queue} is set to \"cable_internet\" User is routed to AQD",
+    "actionParameters": {
+      "language": "en",
+      "line_type": "Existing",
+      "lob": "Internet",
+      "special_queue": "cable_internet"
+    }
+  },
+  "displayName": " \"sales_order_device\"- Distributel",
+  "retrievalStrategy": "NEVER",
+  "tokenCount": 382,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

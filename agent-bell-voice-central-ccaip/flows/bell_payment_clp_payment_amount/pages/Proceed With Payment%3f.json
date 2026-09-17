@@ -1,0 +1,44 @@
+{
+  "name": "c049d2e9-0d74-4af1-94ea-fccc518ead62",
+  "displayName": "Proceed With Payment?",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "intent": "context.confirm_yes",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "amount_paid",
+        "value": "$session.params.clp_amount_paid"
+      } ]
+    },
+    "targetFlow": "bell_payment_cc_details_input",
+    "name": "d9f0db07-f154-4c82-ade1-647ac8dc4738"
+  }, {
+    "intent": "context.confirm_no",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "clp_amount_paid",
+        "value": null
+      } ]
+    },
+    "targetPage": "Don't Proceed With Payment",
+    "name": "9fb8e319-86e7-441f-aea3-add6891e7e53"
+  }, {
+    "intent": "context.pa_amount_and_no",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "clp_amount_paid",
+        "value": "$session.params.customer_mentioned_amount"
+      }, {
+        "parameter": "customer_mentioned_amount",
+        "value": null
+      }, {
+        "parameter": "clp_amount_paid",
+        "value": "$sys.func.TO_NUMBER($session.params.clp_amount_paid)"
+      } ]
+    },
+    "targetPage": "Amount Validation",
+    "name": "4c3a844c-0517-45e2-b2aa-fce33987146c"
+  } ]
+}

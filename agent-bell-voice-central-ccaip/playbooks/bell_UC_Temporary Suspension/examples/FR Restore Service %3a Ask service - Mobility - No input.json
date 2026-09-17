@@ -1,0 +1,78 @@
+{
+  "name": "095bcbc8-4680-4cad-aca0-890150fe6da1",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Bien sûr, je peux vous aider. Pourriez-vous confirmer le service que vous souhaitez rétablir?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Mobility"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "C’est noté. Pourquoi votre service est-il présentement suspendu?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "J'ai perdu mon cellulaire."
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Merci. Vous pouvez facilement rétablir votre service de mobilité dans MonBell. Je vais envoyer un texto à l’appareil à partir duquel vous appelez qui contient un lien pour le faire vous-même. Est-ce que cela vous convient?"
+    }
+  }, {
+    "userUtterance": {
+    
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_global_error_count_check",
+      "inputActionParameters": {
+        "global_error_counter": "0",
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+        "global_error_counter": "1",
+        "language": "fr-ca"
+      }
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "brand": "bell",
+        "language": "fr-ca",
+        "sms_send_status": "Declined",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "User wants to restore their service",
+    "actionParameters": {
+      "brand": "bell",
+      "global_error_counter": "0",
+      "language": "fr-ca",
+      "route": "account_restore_service",
+      "unique_services": "MOBILITY, INTERNET, TV",
+      "utterance": "Je veux rétablir mon ou mes service"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "User declines sms and routed to sms flow",
+    "actionParameters": {
+      "brand": "bell",
+      "global_error_counter": "1",
+      "language": "fr-ca",
+      "sms_send_status": "Declined"
+    }
+  },
+  "displayName": "FR Restore Service : Ask service - Mobility - No input",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 474,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

@@ -1,0 +1,95 @@
+{
+  "name": "524bc21d-3c86-4fea-a9c4-29d81a091173",
+  "displayName": "Check ID / Auth",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.identification_status = null",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_Identification",
+    "name": "efef896d-39ac-48eb-85d1-61cb9365a655"
+  }, {
+    "condition": "$session.params.identification_status = \"Fail\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Since I was unable to verify your account, I'm unable to provide you with your Credit Limit Balance or account details." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Comme je n'ai pas pu vérifier votre compte, je ne suis pas en mesure de vous fournir le solde de votre limite de crédit ou les détails de votre compte." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetFlow": "bell_Feedback",
+    "name": "2e20f18c-0dc4-44b3-85f4-63b3c654e402"
+  }, {
+    "condition": "$session.params.auth_status = null",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_authentication",
+    "name": "8ea5816e-6d30-454a-832c-eb6e1575a4cb"
+  }, {
+    "condition": "$session.params.auth_status = \"Fail\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Since I was unable to verify your account, I'm unable to provide you with your Credit Limit Balance or account details." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Comme je n'ai pas pu vérifier votre compte, je ne suis pas en mesure de vous fournir le solde de votre limite de crédit ou les détails de votre compte." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetFlow": "bell_Feedback",
+    "name": "32d189d5-f4ba-45c2-bb64-52cbd401142b"
+  }, {
+    "condition": "$session.params.auth_status = \"Pass\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "apb_location_id",
+        "value": 70010
+      } ]
+    },
+    "targetFlow": "bell_apb",
+    "name": "1c9e2628-8f29-46a7-8041-4871918d3340"
+  }, {
+    "condition": "$session.params.identification_status = \"Pass\" AND $session.params.auth_status = \"Pass\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook - CLP details",
+    "name": "4df42a41-4440-426b-a39e-bf69bf9bfae4"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "524bc21d-3c86-4fea-a9c4-29d81a091173"
+      }, {
+        "parameter": "flow_id",
+        "value": "475ba791-1044-4806-ba00-57e97f0a5e24"
+      }, {
+        "parameter": "page_name",
+        "value": "Check ID / Auth"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

@@ -1,0 +1,48 @@
+{
+  "name": "b501d5e1-9489-4a43-afb4-23e48a017a03",
+  "actions": [ {
+    "agentUtterance": {
+      "text": " I can help with several billing topics. To get you to the right place, please tell me more about your request. For example, you could say, 'a specific charge' or 'my total balance.' "
+    }
+  }, {
+    "userUtterance": {
+      "text": "I would like to verify the due date for my current bill to ensure I can make the payment before the deadline."
+    }
+  }, {
+    "playbookInvocation": {
+      "playbook": "bell_UC_Billing",
+      "playbookInput": {
+        "precedingConversationSummary": "Customers is looking to confirm the due bill date",
+        "actionParameters": {
+          "language": "en",
+          "route": "bill_confirm_due_date",
+          "utterance": "I would like to verify the due date for my current bill to ensure I can make the payment before the deadline."
+        }
+      },
+      "playbookOutput": {
+        "executionSummary": "Customer query is addressed and then transferred to \"bell_UC_Billing\" playbook for further conversation",
+        "actionParameters": {
+          "language": "en",
+          "route": "bill_confirm_due_date"
+        }
+      },
+      "playbookState": "OUTPUT_STATE_OK"
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer query about \"I need help understanding my bill\" is addressed",
+    "actionParameters": {
+      "language": "en",
+      "route": "bill_vague",
+      "utterance": "I need help understanding my bill"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Customer query is addressed and then transferred to \"bell_UC_Billing\" playbook for further conversation"
+  },
+  "displayName": "EN -  bill_confirm_due_date",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 354,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

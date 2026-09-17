@@ -1,0 +1,63 @@
+{
+  "name": "388a1c50-5304-41a4-a455-9b8a527c1832",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "If you brought a certified pre-owned phone, it's subject to the Bell limited warranty, valid for 12 months from the purchase date. If your phone is not working due to a manufacturer issue that occurs within 12 months of your purchase, we will replace the phone with a comparable unit.\nDid you purchase your device within the last 12 months?\n"
+    }
+  }, {
+    "userUtterance": {
+      "text": "No"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Have you enrolled in our smart care program?\n"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Yes"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "When submitting a request online or calling the Smart Phone Care Center, your request will be processed by Asurion, the administrator of the Smartphone Care program. I can send you a link to submit your request. Is that alright?\n"
+    }
+  }, {
+    "userUtterance": {
+      "text": "No"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "brand": "bell",
+        "language": "en",
+        "sms_send_status": "Declined"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer asking about Preloved phone button not working with route \"equipment_warranty_claim\"",
+    "actionParameters": {
+      "brand": "bell",
+      "device_issue": "Defective",
+      "language": "en",
+      "route": "equipment_warranty_claim",
+      "utterance": "My Preloved phone button is not working"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Customer is responded with apt message for Defective issue and then user is prompted to tell whether he purchased the device within last 12 months. User says \"No\", so he is rerouted to SMART CARE COVERAGE LOGIC",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "route": "equipment_warranty_claim"
+    }
+  },
+  "displayName": "EN_equipment_warranty_claim_DeviceIssueIsDefective_NoForPurchasedWithinLastYear_YesForSmartCarePgm_NoForLink",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 441,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

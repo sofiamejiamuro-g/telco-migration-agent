@@ -1,0 +1,98 @@
+{
+  "name": "ca0e46a1-4ff7-4dc8-a9d1-5e2408392c38",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "language": "en"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Sure, let me help you with that.\nWhich service are you inquiring about?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "I want to join bell services"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "In order to assist you better."
+    }
+  }, {
+    "playbookInvocation": {
+      "playbook": "bell_uc_ask_LOB",
+      "playbookInput": {
+        "precedingConversationSummary": "The Customer wants to sign up or open a new account with Bell",
+        "actionParameters": {
+          "language": "en",
+          "route": "sales_new_account"
+        }
+      },
+      "playbookOutput": {
+        "executionSummary": "When user does not provide lob, prompt them to understand what kind of service they are looking for, if the user mentions lob then return lob to the originating Playbook, if not set the default lob and return back",
+        "actionParameters": {
+          "language": "en",
+          "lob": "Mobility",
+          "route": "sales_new_account"
+        }
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Have you already placed a mobile phone order with us?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Yes I have an order"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Are you looking for help with your order or do you have questions\nabout your SIM card or eSIM?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "i need assistance in activation of the sim"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_aqd",
+      "inputActionParameters": {
+        "special_queue": "sales_port_ncs"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "The Customer wants to sign up or open a new account with Bell",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "New",
+      "identification_status": "Fail",
+      "language": "en",
+      "route": "sales_new_account",
+      "utterance": "I want to join Bell services"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "from the identification flow, know the customer_type as \"New\", as we don't know the swrvice, we need to ask the customer, which service they are inquiring about? if {lob} captured is \"mobility\" then we will ask \"Have you already placed a mobile phone order with us? if customer says they need assistance then call bell_aqd and set special queue=\"sales_port_ncs\"",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "New",
+      "identification_status": "Fail",
+      "language": "en",
+      "lob": "Mobility"
+    }
+  },
+  "displayName": "EN sales_new_account- ID Fail, customer_type-new- mobility-no",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 688,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

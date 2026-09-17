@@ -1,0 +1,83 @@
+{
+  "name": "ed891399-24cb-43ca-b06f-5e5e645a8c9d",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_tech_intent_apb",
+      "inputActionParameters": {
+      
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Ça me fait plaisir de t'aider à obtenir une nouvelle carte SIM.\n\nTu peux activer ton service instantanément avec une carte SIM électronique. Il n'y a aucun frais pour l'activer et tu n'auras pas à attendre la livraison d'une carte SIM physique.\n\nVotre téléphone est-il compatible avec une eSIM?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Je veux une carte SIM physique."
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Vous pouvez activer facilement une carte SIM électronique en ligne. Je vais vous envoyer un message texte à l’instant avec des instructions supplémentaires."
+    }
+  }, {
+    "userUtterance": {
+    
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_global_error_count_check",
+      "inputActionParameters": {
+        "global_error_counter": "0",
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+        "global_error_counter": "1",
+        "language": "fr-ca"
+      }
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "brand": "bell",
+        "language": "fr-ca",
+        "sms_content": "MSG Bell: Pour activer une eSIM, visitez :  https://support.bell.ca/esim-setup#card-link-content-panel (bell.ca/about-us)",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+        "brand": "bell",
+        "language": "fr-ca"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Since the customer has requested an eSIM, we only need to confirm if their phone is eSIM-compatible. Make sure that route input param matches.",
+    "actionParameters": {
+      "BAN": "4162675927163",
+      "brand": "bell",
+      "global_error_counter": "0",
+      "language": "fr-ca",
+      "route": "equipment_request_sim",
+      "sim_type": "eSIM",
+      "utterance": "Je voudrais obtenir une nouvelle carte SIM"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Customer to receive the SMS in their phone",
+    "actionParameters": {
+      "brand": "bell",
+      "global_error_counter": "1",
+      "language": "fr-ca",
+      "sms_content": "Bell MSG : Tel que demandé, voici un lien pour configurer une eSIM en ligne dès maintenant.  Voir: : https://support.bell.ca/esim-setup#card-link-content-panel (bell.ca/about-us",
+      "sms_type": "Public"
+    }
+  },
+  "displayName": "FR - Equipment Request Sim -- Physical SIM - eSIM",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 672,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

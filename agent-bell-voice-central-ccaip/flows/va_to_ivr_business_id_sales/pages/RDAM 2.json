@@ -1,0 +1,38 @@
+{
+  "name": "e103ebdf-61a2-4ec1-8c0a-ed988df31e4b",
+  "displayName": "RDAM 2",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "messages": [ {
+      "text": {
+        "text": [ "Okay, I’ll connect you now. You’ll need to use your phone keypad instead of talking to the virtual assistant.  Just a moment while I connect you.\n" ]
+      },
+      "languageCode": "en"
+    }, {
+      "text": {
+        "text": [ "Je vous mets en contact. Vous devrez vous servir du clavier de votre téléphone au lieu de parler à l’assistant virtuel. Veuillez patienter un moment." ]
+      },
+      "languageCode": "fr-ca"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.va_entry_flow = \"IBM_transfer\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "special_queue",
+        "value": "business"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "423a5632-0ddf-46d2-906d-354be244889b"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "webhook-get-config",
+    "name": "bd2265bd-5a34-4811-b934-673aa1220f05"
+  } ]
+}

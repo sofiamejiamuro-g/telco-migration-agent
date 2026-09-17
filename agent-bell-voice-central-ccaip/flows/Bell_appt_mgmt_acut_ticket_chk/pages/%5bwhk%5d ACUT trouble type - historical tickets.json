@@ -1,0 +1,100 @@
+{
+  "name": "638a2f0d-cb98-4198-a069-a1da902994d7",
+  "displayName": "[whk] ACUT trouble type - historical tickets",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.acut_retrieve_response != null OR $session.params.acut_retrieve_response != \"\"",
+    "triggerFulfillment": {
+      "webhook": "v1/dfcx_support/content_lookup#acut-trouble-types",
+      "tag": "\"acut-trouble-types\"",
+      "setParameterActions": [ {
+        "parameter": "worked_on_code",
+        "value": "$session.params.acut_retrieve_response.workedOn"
+      }, {
+        "parameter": "worked_on_sub_code",
+        "value": "$session.params.acut_retrieve_response.workedOnSubcode"
+      }, {
+        "parameter": "trouble_type_code",
+        "value": "$session.params.acut_retrieve_response.troubleTicketInteractionType"
+      }, {
+        "parameter": "task_type",
+        "value": "$session.params.acut_retrieve_response.serviceCategory"
+      }, {
+        "parameter": "trouble_ticket_state",
+        "value": "$session.params.acut_retrieve_response.acutContext.troubleTicketState"
+      }, {
+        "parameter": "closedTime",
+        "value": "$session.params.acut_retrieve_response.resolutionInfo.closedTime"
+      } ],
+      "generators": [ {
+        "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/c8d9aa7a-0227-4da7-8256-fd4d68a2aa75",
+        "inputParameters": [ {
+          "key": "date-time",
+          "value": "$session.params.closedTime"
+        } ],
+        "outputParameter": "$request.generative.closedTimeObj"
+      } ]
+    },
+    "targetPage": "[whk] Main task status - Historical",
+    "name": "41c24139-5289-411d-a953-c4c2177fc69d"
+  }, {
+    "condition": "$session.params.webhook_success = \"False\" OR $session.params.webhook_success = false",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Failure - ACUT",
+    "name": "433f7a80-6a6f-46d9-83af-c9f5585c48e8"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Failure - ACUT",
+    "name": "cleanup-hardstop-route"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Webhook Failure - ACUT",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+    
+    },
+    "name": "0f78e4e7-6324-4ca6-b2ee-9cd28719b0af"
+  }, {
+    "targetPage": "Webhook Failure - ACUT",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+    
+    },
+    "name": "47c6c442-7be6-4352-8190-011ecba9e82a"
+  }, {
+    "targetPage": "Webhook Failure - ACUT",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+    
+    },
+    "name": "73182ffe-0014-4ed8-b299-e6e01e1e37a8"
+  }, {
+    "targetPage": "Webhook Failure - ACUT",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+    
+    },
+    "name": "c74d0687-52bd-4435-ab36-678b966c4ab1"
+  }, {
+    "targetPage": "Webhook Failure - ACUT",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+    
+    },
+    "name": "bb097eee-b65a-4004-b2ee-8066c9bb9f62"
+  }, {
+    "targetPage": "Webhook Failure - ACUT",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+    
+    },
+    "name": "46e40b0d-8958-41c8-b906-d780ec4914de"
+  } ]
+}

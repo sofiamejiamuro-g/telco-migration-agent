@@ -1,0 +1,80 @@
+{
+  "name": "ac1628dd-7c4a-4800-81a5-13c4479a07f1",
+  "displayName": "Check - Unique Postcode",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.postcode_count = 1",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Postcode",
+    "name": "0bc567d9-aae6-4983-829a-b8b23b60ee17"
+  }, {
+    "condition": "$session.params.i \u003c $session.params.n_postcode",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "i_postcode",
+        "value": "$sys.func.GET($session.params.unique_postcode_list_all, $session.params.i)"
+      }, {
+        "parameter": "postcode_count",
+        "value": "$sys.func.FILTER(\"$session.params.postcode_list_all\", $sys.func.CONCATENATE(\"$.[?(@ == '\", $sys.func.GET($session.params.unique_postcode_list_all, $session.params.i),\"' )]\"))"
+      }, {
+        "parameter": "i",
+        "value": "$sys.func.ADD($session.params.i,1)"
+      }, {
+        "parameter": "postcode_count",
+        "value": "$sys.func.COUNT($session.params.postcode_count)"
+      } ]
+    },
+    "targetPage": "Check - Unique Postcode",
+    "name": "a9f4ff12-6266-49f9-b6e0-b57f4ed58525"
+  }, {
+    "condition": "$session.params.lob_postcode_count = 1",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Get Postal",
+    "name": "64db5aa2-8e74-44f1-8489-6df124396d47"
+  }, {
+    "condition": "$session.params.lob_i \u003c $session.params.n_postcode",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "i_postcode",
+        "value": "$sys.func.GET($session.params.unique_postcode_list_all, $session.params.lob_i)"
+      }, {
+        "parameter": "postcode_count",
+        "value": "$sys.func.FILTER(\"$session.params.lob_postcode_list_all\", $sys.func.CONCATENATE(\"$.[?(@ == '\", $sys.func.GET($session.params.unique_postcode_list_all, $session.params.lob_i),\"' )]\"))"
+      }, {
+        "parameter": "lob_i",
+        "value": "$sys.func.ADD($session.params.lob_i,1)"
+      }, {
+        "parameter": "lob_postcode_count",
+        "value": "$sys.func.COUNT($session.params.postcode_count)"
+      } ]
+    },
+    "targetPage": "Check - Unique Postcode",
+    "name": "fd0e664b-04d4-471f-9864-5b6a130ba3c6"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Could you also tell me the account number you're calling about?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "J'aurais aussi besoin du numéro de compte en question." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetPage": "Account Number",
+    "name": "12c02f02-3d30-4b94-90eb-63e9a35d7fa5"
+  } ]
+}

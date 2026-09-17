@@ -1,0 +1,48 @@
+{
+  "name": "d1525ec0-9e7c-4826-a3cd-6a22b4cd265c",
+  "displayName": "Check LOB - OMF summary",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$sys.func.UPPER($session.params.lob) = \"TV\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "[whk] OMF Order Summary - TV",
+    "name": "b9e5e8e6-54ed-44ca-be8a-523fc97faad8"
+  }, {
+    "condition": "$sys.func.UPPER($session.params.lob) = \"INTERNET\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "[whk] OMF Order Summary - Internet",
+    "name": "5a2116ab-a482-4e58-a490-120f6ac58381"
+  }, {
+    "condition": "$sys.func.UPPER($session.params.lob) = \"HOMEPHONE\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "[whk] OMF Order Summary - Homephone",
+    "name": "0ed014f9-b0c8-4b88-bd6a-ed87bdc7b9ad"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "d1525ec0-9e7c-4826-a3cd-6a22b4cd265c"
+      }, {
+        "parameter": "flow_id",
+        "value": "5ea404f8-de10-4476-880f-d17773565fad"
+      }, {
+        "parameter": "page_name",
+        "value": "Check LOB - OMF summary"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

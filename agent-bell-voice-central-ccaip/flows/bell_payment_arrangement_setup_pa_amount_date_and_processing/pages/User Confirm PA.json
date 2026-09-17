@@ -1,0 +1,53 @@
+{
+  "name": "c74779a4-c8c6-419a-a78e-635cff50852e",
+  "displayName": "User Confirm PA",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "intent": "context.confirm_yes",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "\u003cspeak\u003e The latest date you can commit to making a payment arrangement is on  \u003csay-as interpret-as=\"date\" format=\"md\" detail=\"2\"\u003e$session.params.calculated_payment_date \u003c/say-as\u003e. Can you make a payment by then? \u003c/speak\u003e" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "\u003cspeak\u003eLa dernière date pour laquelle vous pouvez vous engager à effectuer un versement pour votre entente de paiement est le \u003csay-as interpret-as=\"date\" format=\"md\" detail=\"2\"\u003e$session.params.calculated_payment_date \u003c/say-as\u003e. Pouvez-vous effectuer un paiement d’ici là?\u003c/speak\u003e" ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "amount",
+        "value": "$session.params.payment_amount"
+      } ]
+    },
+    "targetPage": "Payment Date Confirmation",
+    "name": "6a809be2-adb1-454e-9f35-7586e3705166"
+  }, {
+    "intent": "context.confirm_no",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "To set up payment arrangement, the minimum amount required is $$session.params.payment_amount, would you like to commit to paying this amount?\n" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Pour établir des modalités de paiement, le montant minimum requis est de $session.params.payment_amount, Souhaitez-vous vous engager à payer ce montant?" ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "payment_amount",
+        "value": "$session.params.pastDueAmount"
+      } ]
+    },
+    "targetPage": "Due Amount Check",
+    "name": "04533956-e3eb-4d16-ad8d-0b12d5934b2e"
+  } ]
+}

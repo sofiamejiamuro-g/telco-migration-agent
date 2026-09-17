@@ -1,0 +1,63 @@
+{
+  "name": "4ae68d76-1dff-4a69-86c7-9c0c77204fc9",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Vous pouvez facilement consulter les renseignements de votre compte, comme votre numéro de compte et vos coordonnées, dans MonBell. Je vais envoyer un texto à l'appareil au moyen duquel vous appelez, afin que vous puissiez facilement consulter les renseignements de votre compte. Est-ce que ça vous convient ?"
+    }
+  }, {
+    "userUtterance": {
+    
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_get_sdl_mapping_url",
+      "inputActionParameters": {
+        "brand": "bell",
+        "language": "fr-ca",
+        "route": "account_access_information"
+      },
+      "outputActionParameters": {
+        "brand": "bell",
+        "language": "fr-ca"
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Pas de problème. Pour toute autre question, vous pouvez toujours consulter notre site web à l'adresse {faq_link}."
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_Feedback",
+      "inputActionParameters": {
+        "brand": "bell",
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "The customer is looking for information on their account like account number in French language",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca",
+      "route": "account_access_information",
+      "utterance": "quel est mon numéro de compte"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "The customer wants to find their account information if the customer disagrees and says NO call the bell_get_sdl_mapping_url flow and responds with the given message and route the user to the bell_Feedback flow.",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca",
+      "route": "account_access_information",
+      "utterance": "quel est mon numéro de compte"
+    }
+  },
+  "displayName": "FR_account_access_information_CustomerTypeIsNull_NoResponseToMessageLink",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 436,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

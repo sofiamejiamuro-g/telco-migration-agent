@@ -1,0 +1,185 @@
+{
+  "name": "2bc76227-a18a-43ee-a28d-e3e336d798f5",
+  "displayName": "Webhook Intent SDL Mapping",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "v1/intent-sdl-mapping",
+    "tag": "\"default\"",
+    "setParameterActions": [ {
+      "parameter": "brand",
+      "value": "bell"
+    }, {
+      "parameter": "language",
+      "value": "$request.language"
+    }, {
+      "parameter": "intent",
+      "value": "$session.params.route"
+    }, {
+      "parameter": "webhook_success",
+      "value": null
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.webhook_success = true",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Okay. If you'd still like to set up Pre-Authorized debit, you can do so in MyBell. Please visit $session.params.vanity_url for more information." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "D’accord. Si vous souhaitez quand même configurer le prélèvement automatique, vous pouvez le faire dans MonBell. Veuillez consulter le site $session.params.vanity_url pour obtenir plus d’informations." ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "vanity_url",
+        "value": "$session.params.intent_sdl_map_response.url"
+      } ]
+    },
+    "targetFlow": "bell_Feedback",
+    "name": "45dfe462-8218-47b5-b800-82e8d62090b9"
+  }, {
+    "condition": "$session.params.webhook_success = false",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Okay. If you'd still like to set up Pre-Authorized debit, you can do so in MyBell. Please visit bell.ca/support for more information." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "D’accord. Si vous souhaitez quand même configurer le prélèvement automatique, vous pouvez le faire dans MonBell. Veuillez consulter le site bell.ca/soutien pour obtenir plus d’informations." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetFlow": "bell_Feedback",
+    "name": "b42b0650-2331-4139-8c65-fc967793adda"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "2bc76227-a18a-43ee-a28d-e3e336d798f5"
+      }, {
+        "parameter": "flow_id",
+        "value": "97702c6e-5d8f-4b0b-a549-7650c14df7ab"
+      }, {
+        "parameter": "page_name",
+        "value": "Webhook Intent SDL Mapping"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ],
+  "eventHandlers": [ {
+    "targetFlow": "bell_Feedback",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Okay. If you'd still like to set up Pre-Authorized debit, you can do so in MyBell. Please visit bell.ca/support for more information." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "D’accord. Si vous souhaitez quand même configurer le prélèvement automatique, vous pouvez le faire dans MonBell. Veuillez consulter le site bell.ca/soutien pour obtenir plus d’informations." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "8594acad-1718-4e24-a628-74865098d4fe"
+  }, {
+    "targetFlow": "bell_Feedback",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Okay. If you'd still like to set up Pre-Authorized debit, you can do so in MyBell. Please visit bell.ca/support for more information." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "D’accord. Si vous souhaitez quand même configurer le prélèvement automatique, vous pouvez le faire dans MonBell. Veuillez consulter le site bell.ca/soutien pour obtenir plus d’informations." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "4e698659-30e3-46a2-89ff-a9b31c5368fe"
+  }, {
+    "targetFlow": "bell_Feedback",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Okay. If you'd still like to set up Pre-Authorized debit, you can do so in MyBell. Please visit bell.ca/support for more information." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "D’accord. Si vous souhaitez quand même configurer le prélèvement automatique, vous pouvez le faire dans MonBell. Veuillez consulter le site bell.ca/soutien pour obtenir plus d’informations." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "d280ce08-1547-4a11-94fd-2e54aef04712"
+  }, {
+    "targetFlow": "bell_Feedback",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Okay. If you'd still like to set up Pre-Authorized debit, you can do so in MyBell. Please visit bell.ca/support for more information." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "D’accord. Si vous souhaitez quand même configurer le prélèvement automatique, vous pouvez le faire dans MonBell. Veuillez consulter le site bell.ca/soutien pour obtenir plus d’informations." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "0a6d3c59-b4af-4ecd-8d68-0dd6a00d0049"
+  }, {
+    "targetFlow": "bell_Feedback",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Okay. If you'd still like to set up Pre-Authorized debit, you can do so in MyBell. Please visit bell.ca/support for more information." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "D’accord. Si vous souhaitez quand même configurer le prélèvement automatique, vous pouvez le faire dans MonBell. Veuillez consulter le site bell.ca/soutien pour obtenir plus d’informations." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "8bb5ece1-8303-425c-9a2c-e7f3328d5d53"
+  }, {
+    "targetFlow": "bell_Feedback",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Okay. If you'd still like to set up Pre-Authorized debit, you can do so in MyBell. Please visit bell.ca/support for more information." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "D’accord. Si vous souhaitez quand même configurer le prélèvement automatique, vous pouvez le faire dans MonBell. Veuillez consulter le site bell.ca/soutien pour obtenir plus d’informations." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "7d1212d6-de67-41bc-8893-44453461a71d"
+  } ]
+}

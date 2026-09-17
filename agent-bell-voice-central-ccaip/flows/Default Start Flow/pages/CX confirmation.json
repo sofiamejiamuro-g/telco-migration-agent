@@ -1,0 +1,117 @@
+{
+  "name": "535a0701-bbcd-4548-80ba-2fcb087c7af2",
+  "displayName": "CX confirmation",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "setParameterActions": [ {
+      "parameter": "va_ibm_id_pass",
+      "value": true
+    } ]
+  },
+  "transitionRoutes": [ {
+    "intent": "custom.yes",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "special_queue",
+        "value": "pref_bldg"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "b64f65b5-991f-4986-8eba-de3e14a4be92"
+  }, {
+    "intent": "custom.no",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "temp_flag",
+        "value": 1
+      } ]
+    },
+    "targetFlow": "bell_specialty_flow",
+    "name": "f03b9ed2-689a-4775-bb89-bd1805c3b9ec"
+  }, {
+    "intent": "context.user_asks_more_time",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Absolutely. Please take a moment to find your number." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Absolument. Veuillez prendre un moment pour trouver votre numéro." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "5c104033-8d24-43bb-ad44-1551d56ccc27"
+  }, {
+    "intent": "context.cant_say_out_loud",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "No worries, if you can't read your number out loud, you can enter it using your key pad." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ " Ne t'inquiète pas, si tu ne peux pas lire ton numéro à voix haute, tu peux le saisir à l'aide de ton clavier.\n" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "5927f0df-d4c2-4660-80a2-617c882d45af"
+  }, {
+    "intent": "context.user_makes_mistake",
+    "triggerFulfillment": {
+    
+    },
+    "name": "b490e088-ef8e-4222-b756-410dc91d0bfd"
+  }, {
+    "condition": "$session.params.temp_flag = 1",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "temp_flag",
+        "value": null
+      } ]
+    },
+    "targetPage": "Entry Point Check",
+    "name": "27e1449c-668e-4976-b77f-0eea668f12c5"
+  } ],
+  "eventHandlers": [ {
+    "event": "sys.no-input-1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Sorry, I didn't quite get that. Can you try again, or you can enter it using your key pad?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Désolé, je n’ai pas tout à fait compris. Pouvez-vous réessayer, ou le saisir à l’aide de votre clavier?" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "02692bc0-68b8-458c-822e-9a20b435aea7"
+  }, {
+    "event": "sys.no-input-2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ " I still wasn't able to get that. If you need more time, please let me know." ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "885c0641-c4b3-412f-be0e-fab56aa44426"
+  }, {
+    "targetFlow": "bell_wrapup",
+    "event": "sys.no-input-3",
+    "triggerFulfillment": {
+    
+    },
+    "name": "b5fd8b8e-bab1-4120-bc11-8ad0bf088cec"
+  } ]
+}

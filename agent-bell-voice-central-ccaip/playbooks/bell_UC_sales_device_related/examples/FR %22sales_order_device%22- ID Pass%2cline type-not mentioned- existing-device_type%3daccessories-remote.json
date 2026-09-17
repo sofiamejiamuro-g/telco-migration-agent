@@ -1,0 +1,63 @@
+{
+  "name": "0c924008-a225-48e4-a268-eaca173f1669",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "brand": "bell",
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Je vais envoyer un texto à l'appareil au moyer duquel vous appelez, afin que vous puissiez découvrir les appareils Internet de Bell. Est-се que ça vous convient?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "oui"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "brand": "bell",
+        "language": "fr-ca",
+        "sms_content": "Bell : Vous pouvez visiter bell.ca/accessoirestelephones pour découvrir nos accessoires pour les téléphones cellulaires. ( bell.ca/apropos )",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+        "language": "fr-ca"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "customer want to order a new accessories",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "Existing",
+      "device_type": "Accessories",
+      "identification_status": "Pass",
+      "language": "fr-ca",
+      "line_type": "Existing",
+      "route": "sales_order_device"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "we got to know from the utterance that the device type as accessories",
+    "actionParameters": {
+      "brand": "bell",
+      "device_type": "Accessories",
+      "language": "fr-ca",
+      "line_type": "Existing"
+    }
+  },
+  "displayName": "FR \"sales_order_device\"- ID Pass,line type-not mentioned- existing-device_type=accessories-remote",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 394,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

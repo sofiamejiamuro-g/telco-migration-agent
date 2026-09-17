@@ -1,0 +1,116 @@
+{
+  "name": "ae1aa566-568f-48db-819b-a6ca35e84280",
+  "displayName": "Webhook Pre-auth CC Payment Details",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "v1/pre-auth-payment#cc-payment-details",
+    "tag": "cc-payment-details",
+    "setParameterActions": [ {
+      "parameter": "transaction_id",
+      "value": "$session.params.transaction_id"
+    }, {
+      "parameter": "cc_token",
+      "value": "$session.params.cc_token"
+    }, {
+      "parameter": "expiry_year",
+      "value": "$sys.func.MID($sys.func.TO_TEXT($session.params.expiry_date),3,2)",
+      "redact": true
+    }, {
+      "parameter": "expiry_month",
+      "value": "$sys.func.MID($sys.func.TO_TEXT($session.params.expiry_date),1,2)",
+      "redact": true
+    }, {
+      "parameter": "security_code",
+      "value": "$session.params.cvv_number",
+      "redact": true
+    }, {
+      "parameter": "webhook_success",
+      "value": null
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.webhook_success = True OR $session.params.webhook_success = true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "route",
+        "value": "payment_make_payment"
+      }, {
+        "parameter": "from_pacc_otcc",
+        "value": "true"
+      } ]
+    },
+    "targetFlow": "bell_payment_process_pacc_registration",
+    "name": "5d1b0ccb-fe2b-400f-ab9b-cff0a3b67119"
+  }, {
+    "condition": "$session.params.webhook_success = False OR $session.params.webhook_success = false",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Failure Confirmation",
+    "name": "aa913c8c-fe03-44d7-9be5-aa53b75179a7"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "ae1aa566-568f-48db-819b-a6ca35e84280"
+      }, {
+        "parameter": "flow_id",
+        "value": "5ed028e7-19b2-4619-8cae-9bd0842cb48a"
+      }, {
+        "parameter": "page_name",
+        "value": "Webhook Pre-auth CC Payment Details"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Webhook Failure Confirmation",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+    
+    },
+    "name": "a5b6d634-a373-4d47-9b48-da4e27c2d69f"
+  }, {
+    "targetPage": "Webhook Failure Confirmation",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+    
+    },
+    "name": "4273554e-1aec-4f0d-9875-c453e58ffb2b"
+  }, {
+    "targetPage": "Webhook Failure Confirmation",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+    
+    },
+    "name": "4f05eb11-197b-4636-8188-7e49662de3fe"
+  }, {
+    "targetPage": "Webhook Failure Confirmation",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+    
+    },
+    "name": "1f40fe80-9160-4551-92a8-e2b306a6d282"
+  }, {
+    "targetPage": "Webhook Failure Confirmation",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+    
+    },
+    "name": "4f041abb-8d21-4053-b022-a61a5826579a"
+  }, {
+    "targetPage": "Webhook Failure Confirmation",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+    
+    },
+    "name": "5b48779c-7a88-4689-89b3-65b953563034"
+  } ]
+}

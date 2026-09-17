@@ -1,0 +1,62 @@
+{
+  "name": "a47e83be-c967-4938-a911-fe8ac28e25b7",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "You are testing Identification\n\nWould you like to receive a text message with a link to view or make changes to your account?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "yes"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_Identification",
+      "inputActionParameters": {
+        "CLID": 4155547622,
+        "brand": "bell",
+        "language": "en",
+        "route": "payment_setup_autopay"
+      },
+      "outputActionParameters": {
+        "identification_status": "Pass",
+        "language": "en"
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "The text message has been sent. Once received simply click on the My Account link."
+    }
+  }, {
+    "playbookInvocation": {
+      "playbook": "bell_Steering_Wrap-up",
+      "playbookInput": {
+        "actionParameters": {
+          "language": "en"
+        }
+      },
+      "playbookOutput": {
+        "actionParameters": {
+          "language": "en"
+        }
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer looking to setup a autopay in their account and so first they are identified and then responded and redirected to wrapup",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "route": "payment_setup_autopay"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Customer to receive the SMS for the setting up auto pay and then responded and redirected to wrap-up",
+    "actionParameters": {
+      "language": "en"
+    }
+  },
+  "displayName": "Setup autopay - Yes - id pass",
+  "retrievalStrategy": "STATIC",
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

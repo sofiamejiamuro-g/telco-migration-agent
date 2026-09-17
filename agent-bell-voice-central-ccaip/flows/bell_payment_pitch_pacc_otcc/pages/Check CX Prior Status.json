@@ -1,0 +1,44 @@
+{
+  "name": "545698ea-353c-47bf-a026-8e3bebff21b9",
+  "displayName": "Check CX Prior Status",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.moved_out_of_col = true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Prompt To Enroll PACC - in Collection",
+    "name": "d3ea04c3-c361-4a88-a68c-5c46368c6472"
+  }, {
+    "condition": "$session.params.no_change_col_status = true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Prompt To Enroll PACC - Not in Collection",
+    "name": "7db21767-fe92-4a38-8c46-fa7da743b255"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "545698ea-353c-47bf-a026-8e3bebff21b9"
+      }, {
+        "parameter": "flow_id",
+        "value": "5ed028e7-19b2-4619-8cae-9bd0842cb48a"
+      }, {
+        "parameter": "page_name",
+        "value": "Check CX Prior Status"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

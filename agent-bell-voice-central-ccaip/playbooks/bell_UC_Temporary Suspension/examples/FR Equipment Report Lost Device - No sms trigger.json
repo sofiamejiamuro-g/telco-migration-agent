@@ -1,0 +1,55 @@
+{
+  "name": "a798bb25-e8b7-4e5c-b25b-1bbb2001c4a9",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Je suis désolé d’entendre cela. Avez-vous essayé d’utiliser une option de suivi comme « Trouver mon iPhone » ou « Trouver mon appareil »?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "oui"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "C’est noté. Je vous suggère de suspendre temporairement votre service pour empêcher toute utilisation non autorisée. Je vais envoyer un texto à l’appareil à partir duquel vous appelez qui contient un lien pour le faire vous-même. Est-ce que cela vous convient?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "non"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "brand": "bell",
+        "language": "fr-ca",
+        "route": "equipment_report_lost_device",
+        "sms_send_status": "Declined"
+      },
+      "outputActionParameters": {
+        "brand": "bell",
+        "language": "fr-ca"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer to report about a device lost or stolen",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca",
+      "route": "equipment_report_lost_device",
+      "utterance": "J’ai perdu mon téléphone."
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Customer has been redirected to \"Steering_SMS Trigger\" playbook",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca"
+    }
+  },
+  "displayName": "FR Equipment Report Lost Device - No sms trigger",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 342,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

@@ -1,0 +1,99 @@
+{
+  "name": "4eeff793-1d9e-49cb-b38f-8f211200eeab",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Sure, I can help with that. Could you please confirm which service you are looking to suspend?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Im looking to suspend my mobility services"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Thank you. What is the reason for suspending your service?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "My phone is lost"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Understood. Have you tried using a tracking feature like \"Find my iPhone\" or \"Find my Device\"?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "yes"
+    }
+  }, {
+    "agentUtterance": {
+      "text": " Understood, I would suggest temporarily suspending your service to prevent unauthorized use. I will send a text to the device you are calling from, with a link to do it yourelf, is that alright? "
+    }
+  }, {
+    "userUtterance": {
+    
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_global_error_count_check",
+      "inputActionParameters": {
+        "global_error_counter": "0",
+        "language": "en"
+      },
+      "outputActionParameters": {
+        "global_error_counter": "1",
+        "language": "en"
+      }
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "langauge": "en",
+        "sms_send_status": "Declined"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "No problem at all. For any other questions you can always visit our website at {faq_link}"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_Feedback",
+      "inputActionParameters": {
+        "brand": "bell",
+        "language": "en"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer trying to suspend their service ",
+    "actionParameters": {
+      "brand": "bell",
+      "global_error_counter": "0",
+      "language": "en",
+      "route": "account_suspend_service",
+      "unique_services": "Mobility",
+      "utterance": "Suspend my service"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Customer query is resolved and we update the {route} as \"equipment_report_lost_device\"",
+    "actionParameters": {
+      "brand": "bell",
+      "global_error_counter": "1",
+      "language": "en",
+      "route": "equipment_report_lost_device"
+    }
+  },
+  "displayName": "Account suspend service - unique service - Lost - en",
+  "retrievalStrategy": "NEVER",
+  "tokenCount": 600,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

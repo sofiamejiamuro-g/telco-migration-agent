@@ -1,0 +1,56 @@
+{
+  "name": "9da41039-b805-40ae-aa4c-f849d7fc5275",
+  "displayName": "Webhook Province Lookup",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "v1/npa-nxx-lookup",
+    "tag": "NA",
+    "setParameterActions": [ {
+      "parameter": "temp_number",
+      "value": "$sys.func.IF(\"$session.params.CIRN = null\" , $sys.func.TO_TEXT($session.params.clid), $sys.func.TO_TEXT($session.params.CIRN))"
+    }, {
+      "parameter": "npa",
+      "value": "$sys.func.MID($session.params.temp_number, 1, 3)"
+    }, {
+      "parameter": "nxx",
+      "value": "$sys.func.MID($session.params.temp_number, 4, 3)"
+    } ],
+    "returnPartialResponses": true
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.webhook_success = true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Province Lookup",
+    "name": "aa43a50a-5f6b-4aff-9cc6-c07120e0a939"
+  }, {
+    "condition": "$session.params.webhook_success = false",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_aqd",
+    "name": "1fa8ee5f-38c9-4733-883f-584ef2e46aeb"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "9da41039-b805-40ae-aa4c-f849d7fc5275"
+      }, {
+        "parameter": "flow_id",
+        "value": "27d30ebb-004e-434a-98f4-e2c03fd42fcf"
+      }, {
+        "parameter": "page_name",
+        "value": "Webhook Province Lookup"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

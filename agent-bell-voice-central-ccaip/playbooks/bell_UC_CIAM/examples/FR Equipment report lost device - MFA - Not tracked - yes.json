@@ -1,0 +1,49 @@
+{
+  "name": "8aecc8c1-fb49-4834-9614-3cacc9c3d801",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Je suis désolée d’entendre cela. Cela peut certainement être frustrant, surtout si vous l’utilisez pour recevoir des codes de vérification uniques. La prochaine fois que vous ouvrirez une session dans MonBell, nous vous offrirons la possibilité de recevoir votre code de vérification par courriel plutôt que par téléphone. De cette façon, vous pourrez tout de même ouvrir une session en toute sécurité. Pour en savoir plus sur l’AMF, vous pouvez visiter le site bell.ca/mybellmfa. Avez-vous essayé d’utiliser une option de suivi comme \" Trouver mon iPhone \" ou \" Trouver mon appareil\"?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Non, je ne pense pas."
+    }
+  }, {
+    "agentUtterance": {
+      "text": "C’est noté. Je vous suggère de suspendre temporairement votre service pour empêcher toute utilisation non autorisée. Je vais envoyer un texto à l’appareil à partir duquel vous appelez, avec un lien pour le faire vous-même. Est-ce que cela vous convient?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "D'accord, bien sûr"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "fr-ca",
+        "sms_content": "Vous pouvez localiser votre téléphone au icloud.com/find si vous avez un iPhone, ou au google.com/android/find si vous avez un Android. Pour suspendre temporairement votre service, rendez-vous au bell.ca/suspendreligne et suivez les étapes. ( bell.ca/apropos )",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "User has lost their mfa device",
+    "actionParameters": {
+      "language": "fr-ca",
+      "mfa": "mfa",
+      "route": "equipment_report_lost_device",
+      "utterance": "J'ai perdu mon dispositif d'authentification multifacteur"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "We sympathise and inform them more about MFA, VA asks user if they have tracked their phone. User denies so we suggest them to suspend their service and prompt them for SMS with link. User agrees on SMS so we send them SMS with link to track their device and suspend their service"
+  },
+  "displayName": "FR Equipment report lost device - MFA - Not tracked - yes",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 526,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

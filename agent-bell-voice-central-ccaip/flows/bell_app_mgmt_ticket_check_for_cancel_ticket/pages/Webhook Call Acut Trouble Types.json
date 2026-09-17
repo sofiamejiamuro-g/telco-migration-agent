@@ -1,0 +1,115 @@
+{
+  "name": "5b99b3b6-c80b-4317-b829-1b63c0039d0e",
+  "displayName": "Webhook Call Acut Trouble Types",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "v1/dfcx_support/content_lookup#acut-trouble-types",
+    "tag": "acut_trouble_types"
+  },
+  "transitionRoutes": [ {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "trouble_type_message",
+        "value": "$session.params.acut_trouble_type_response.trouble_type_message"
+      }, {
+        "parameter": "webhook_success",
+        "value": "$session.params.webhook_success"
+      } ]
+    },
+    "name": "7fcfe337-371e-4152-9fb8-4388e697660d"
+  }, {
+    "condition": "($session.params.webhook_success = true OR $session.params.webhook_success = \"true\") AND $session.params.ticket_dispatch_status = \"None\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Call Dispatch Task",
+    "name": "0c56319a-25ed-4cc2-9cdb-d30e44fad3c8"
+  }, {
+    "condition": "($session.params.webhook_success = true OR $session.params.webhook_success = \"true\") AND $session.params.ticket_dispatch_status = \"all_with_dispatch\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "webhook_success",
+        "value": null
+      } ]
+    },
+    "targetPage": "Webhook Call Dispatch Task",
+    "name": "b09bbfcf-bfe4-43d6-a073-5684b006a8f3"
+  }, {
+    "condition": "($session.params.webhook_success = true OR $session.params.webhook_success = \"true\") AND $session.params.ticket_dispatch_status = \"all_without_dispatch\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "ticket_status",
+        "value": "ABC"
+      } ]
+    },
+    "targetPage": "Webhook Call Main Task",
+    "name": "9b3071c4-eb78-402c-b9fa-9d5ba43cbb85"
+  }, {
+    "condition": "($session.params.webhook_success = true OR $session.params.webhook_success = \"true\") AND $session.params.ticket_dispatch_status = \"historical/closed\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Call Main Task",
+    "name": "faf6a783-a1d1-4a4e-87bf-5e1b67aec031"
+  }, {
+    "condition": "$session.params.webhook_success = false OR $session.params.webhook_success = \"false\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Failure - ACUT",
+    "name": "1d02df06-90fa-4628-ba39-5927d373c89f"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Failure - ACUT",
+    "name": "9796ac0e-7a94-4fe1-9551-b8f75cddd4ca"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Webhook Failure - ACUT",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+    
+    },
+    "name": "7be98dd3-b670-4d19-92d7-a5aa95053ef3"
+  }, {
+    "targetPage": "Webhook Failure - ACUT",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+    
+    },
+    "name": "6d41d1fb-66cf-43e1-943b-dc3311f63e3d"
+  }, {
+    "targetPage": "Webhook Failure - ACUT",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+    
+    },
+    "name": "874c9d23-0dfc-4b3e-8156-ffac4c8b6b48"
+  }, {
+    "targetPage": "Webhook Failure - ACUT",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+    
+    },
+    "name": "9f0fff1c-26f4-4b87-8a2c-0551bc3c6597"
+  }, {
+    "targetPage": "Webhook Failure - ACUT",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+    
+    },
+    "name": "d9dce6eb-166a-48c3-8ae4-40414c25c90f"
+  }, {
+    "targetPage": "Webhook Failure - ACUT",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+    
+    },
+    "name": "1ae95483-f8de-4b09-b56c-d5f70c6faccc"
+  } ]
+}

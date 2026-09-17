@@ -1,0 +1,126 @@
+{
+  "name": "af775e7e-b951-439f-ac7f-a0c8e7ad3e54",
+  "displayName": "Payment Arrangement Prompt",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "messages": [ {
+      "text": {
+        "text": [ "It seems your balance owing is less than the past due amount. We highly recommend making a payment arrangement to avoid further action against your account. Would you like to proceed?" ]
+      },
+      "languageCode": "en"
+    }, {
+      "text": {
+        "text": [ "Il semble que votre solde dû est inférieur au montant en souffrance. Il est fortement recommandé de prendre des dispositions de paiement pour éviter toute autre action contre votre compte. Souhaitez-vous continuer?" ]
+      },
+      "languageCode": "fr-ca"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "intent": "context.confirm_yes",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_payment_arrangment_setup_id_auth_eligibility_Checks",
+    "name": "7f10e19e-ca3f-4b01-9bf9-23aa23a1d9d6"
+  }, {
+    "intent": "context.confirm_no",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Please hold while we transfer you to an agent." ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "7edddbd1-8d02-44aa-b92b-f928665a3bd6"
+  }, {
+    "intent": "other_speak_to_agent",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_determine_handover",
+    "name": "535ad6a6-fa9d-4199-aa58-0f3eec2dec26"
+  } ],
+  "eventHandlers": [ {
+    "event": "sys.no-input-1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I didn't quite get that. Can you try again?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je n'ai pas tout à fait compris. Pouvez-vous réessayer?" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "873699bc-9095-4d7a-bcaa-3eb6e88da811"
+  }, {
+    "event": "sys.no-match-1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I didn't quite get that. Can you try again?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je n'ai pas tout à fait compris. Pouvez-vous réessayer?" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "14677d1e-56f2-4e36-a33a-b5e13bd03159"
+  }, {
+    "event": "sys.no-input-2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I still didn't get that." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je n'ai toujours pas compris" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "0fa69a3e-8a29-4789-a882-4ed44260f749"
+  }, {
+    "event": "sys.no-match-2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I still didn't get that." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je n'ai toujours pas compris" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "6797bdac-a7bb-4ae9-bfdb-b42e627bae39"
+  }, {
+    "targetFlow": "bell_determine_handover",
+    "event": "sys.no-match-3",
+    "triggerFulfillment": {
+    
+    },
+    "name": "59531a09-cf71-4f7d-9e3d-27d5a44a5d1f"
+  }, {
+    "targetFlow": "bell_determine_handover",
+    "event": "sys.no-input-3",
+    "triggerFulfillment": {
+    
+    },
+    "name": "29b922e4-5053-439c-9c7c-4534656b469c"
+  } ]
+}

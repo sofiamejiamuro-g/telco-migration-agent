@@ -1,0 +1,64 @@
+{
+  "name": "8d3803c8-0502-4b18-a108-3ba58bd2314f",
+  "displayName": "Route_by_caller_channel",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "setParameterActions": [ {
+      "parameter": "caller_channel",
+      "value": "$session.params.va_caller_channel"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.caller_channel != \"WSC\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook search-by-tn clid",
+    "name": "36be8871-9dbb-44e3-a824-4a9513c07575"
+  }, {
+    "condition": "$session.params.caller_channel = \"WSC\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Are you calling about the account associated with number you’re calling from? " ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Communiquez-vous avec nous au sujet du numéro à partir duquel vous nous appelez présentement?" ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "CIRN",
+        "value": null
+      }, {
+        "parameter": "clid_pass",
+        "value": true
+      } ]
+    },
+    "targetPage": "CIRN Collection Check",
+    "name": "15e1d49c-2a72-446b-90a0-5d6ad1b90bd4"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "8d3803c8-0502-4b18-a108-3ba58bd2314f"
+      }, {
+        "parameter": "flow_id",
+        "value": "8df7f836-8c64-4019-9506-2cedc52519c8"
+      }, {
+        "parameter": "page_name",
+        "value": "Route_by_caller_channel"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

@@ -1,0 +1,77 @@
+{
+  "name": "e4ebe62b-ad5d-4504-81f8-6e8c4fdc5f61",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "brand": "bell",
+        "language": "en"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Are you inquiring about a new service or do you want to make changes to your current service?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "I want to know about current service"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Which service are you inquiring about?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Homephone"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Sorry, we don't sell any Home phone equipment. However, we do offer Home phone service. Can I connect you with an agent to learn more about our Home phone packages?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "yes"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_aqd",
+      "inputActionParameters": {
+        "brand": "bell",
+        "language": "en",
+        "lob": "Homephone"
+      },
+      "outputActionParameters": {
+        "language": "en"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer has questions about needing a device, device availability, device features, cost, related to devices that Bell sells",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "en",
+      "route": "sales_order_device",
+      "utterance": "I want to order a device"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "if lob is Homephone then give corresponding response",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "line_type": "Existing",
+      "lob": "Homephone"
+    }
+  },
+  "displayName": "\"sales_order_device\"- ID Pass,line type-not mentioned- existing-homephone",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 436,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

@@ -1,0 +1,131 @@
+{
+  "name": "c79cc13f-7c29-49f9-923a-8f8bcc5c07c4",
+  "displayName": "DAM BBM- Transfer",
+  "testCaseConversationTurns": [ {
+    "userInput": {
+      "injectedParameters": {
+        "clid": "+16133722524",
+        "tfn": 8000212355
+      },
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "Hi"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "sessionParameters": {
+        "clid": "+16133722524",
+        "tfn": 8000212355
+      },
+      "triggeredIntent": {
+        "name": "Default Welcome Intent"
+      },
+      "currentPage": {
+        "name": "CIRN Collection Check",
+        "flow": "bell_Identification"
+      },
+      "textResponses": [ {
+        "text": [ "\u003cspeak\u003eI'm Bell's virtual assistant, I use artificial intelligence to learn. \u003cbreak time=\"1s\"/\u003e\u003c/speak\u003e" ]
+      }, {
+        "text": [ "If you're looking to order a new service, please say 'new service.'  Otherwise, what’s the 10-digit phone number associated with your service?" ],
+        "allowPlaybackInterruption": true
+      } ],
+      "currentFlow": {
+        "name": "bell_Identification"
+      }
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "4507521522"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "currentPage": {
+        "name": "Check CX Input",
+        "flow": "bell_Identification"
+      },
+      "textResponses": [ {
+        "text": [ "\u003cspeak\u003eThat was \u003cprosody rate=\"slow\"\u003e\u003csay-as interpret-as='telephone'\u003e4507521522\u003c/say-as\u003e\u003c/prosody\u003e, right?\u003c/speak\u003e" ],
+        "allowPlaybackInterruption": true
+      } ],
+      "currentFlow": {
+        "name": "bell_Identification"
+      }
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "yes"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "triggeredIntent": {
+        "name": "context.confirm_yes"
+      },
+      "currentPage": {
+        "name": "Get CX Input",
+        "flow": "bell_va_to_ivr_handoff_BBM_BNM_SMB"
+      },
+      "textResponses": [ {
+        "text": [ "\u003cspeak\u003eThanks! \u003cbreak time=\"1s\"/\u003e\u003c/speak\u003e" ],
+        "allowPlaybackInterruption": true
+      }, {
+        "text": [ "I see that this number is associated with a Business account.  Do you want to discuss that account or a different one?" ],
+        "allowPlaybackInterruption": true
+      } ],
+      "currentFlow": {
+        "name": "bell_va_to_ivr_handoff_BBM_BNM_SMB"
+      }
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "business account"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "triggeredIntent": {
+        "name": "context.account_business"
+      },
+      "currentPage": {
+        "name": "Start Page",
+        "flow": "bell_Live Agent Handoff"
+      },
+      "textResponses": [ {
+        "text": [ "Okay great. To get you the best support, I’ll transfer you to our business support system.\n\nOkay, I’ll connect you now. You’ll need to use your phone keypad instead of talking to the virtual assistant. Next time, you can call \u003cspeak\u003e\u003cprosody rate=\"x-slow\"\u003e\u003csay-as interpretas='telephone'\u003e888-788-2355\u003c/say-as\u003e\u003c/prosody\u003e\u003c/speak\u003e for business support. Just a moment while I connect you." ],
+        "allowPlaybackInterruption": true
+      }, {
+        "text": [ "Please wait. I am connecting you to a live agent. " ],
+        "allowPlaybackInterruption": true
+      } ],
+      "currentFlow": {
+        "name": "bell_Live Agent Handoff"
+      }
+    }
+  } ],
+  "creationTime": {
+    "seconds": 1758082031,
+    "nanos": 186204000
+  },
+  "testConfig": {
+    "flow": "Default Start Flow",
+    "page": "Start Page"
+  },
+  "languageCode": "en"
+}

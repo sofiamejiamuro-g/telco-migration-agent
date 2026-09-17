@@ -1,0 +1,169 @@
+{
+  "name": "e448ccc1-12ad-44f7-9952-1cbb28d0a803",
+  "displayName": "Amount Validation",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "setParameterActions": [ {
+      "parameter": "amount_paid_number",
+      "value": "$sys.func.ROUND($sys.func.TO_NUMBER($session.params.amount_paid), 2)"
+    }, {
+      "parameter": "amount_paid",
+      "value": "$sys.func.TO_TEXT($sys.func.ROUND($sys.func.TO_NUMBER($session.params.amount_paid), 2))"
+    }, {
+      "parameter": "amount_paid_length",
+      "value": "$sys.func.LEN($session.params.amount_paid)"
+    }, {
+      "parameter": "amount_paid_sub",
+      "value": "$sys.func.SUBSTITUTE($session.params.amount_paid, \"\\.\",'')"
+    }, {
+      "parameter": "has_decimal",
+      "value": "$sys.func.IF(\"$session.params.amount_paid_sub=$session.params.amount_paid\", false, true)"
+    }, {
+      "parameter": "amount_decimal",
+      "value": "$sys.func.MID($session.params.amount_paid, $sys.func.MINUS($sys.func.LEN($session.params.amount_paid), 1), 2)"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.suggest_amount_flag = 0 AND $session.params.amount_paid_length \u003e= 4 AND $session.params.has_decimal = false",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "amount_integer",
+        "value": "$sys.func.MID($session.params.amount_paid, 1, $sys.func.MINUS($sys.func.LEN($session.params.amount_paid), 2))"
+      }, {
+        "parameter": "suggested_amount_value",
+        "value": "$sys.func.CONCATENATE($sys.func.CONCATENATE($session.params.amount_integer, \".\"), $session.params.amount_decimal)"
+      }, {
+        "parameter": "amount_paid_number",
+        "value": "$sys.func.ROUND($sys.func.TO_NUMBER($session.params.suggested_amount_value), 2)"
+      }, {
+        "parameter": "amount_paid",
+        "value": "$sys.func.TO_TEXT($session.params.amount_paid_number)"
+      }, {
+        "parameter": "suggest_amount_flag",
+        "value": 1
+      }, {
+        "parameter": "other_payment_amount",
+        "value": "$session.params.amount_paid_number"
+      } ]
+    },
+    "name": "68a35fb6-66a8-4fca-a8e1-7c117c480c45"
+  }, {
+    "condition": "$session.params.amount_correction_required = 1 AND $session.params.amount_paid_length != 6 AND $session.params.has_decimal = false",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "amount_integer",
+        "value": "$sys.func.MID($session.params.amount_paid, 1, $sys.func.MINUS($sys.func.LEN($session.params.amount_paid), 1))"
+      }, {
+        "parameter": "amount_decimal",
+        "value": "$sys.func.MID($session.params.amount_paid, $sys.func.LEN($session.params.amount_paid), 1)"
+      }, {
+        "parameter": "suggested_amount_value",
+        "value": "$sys.func.CONCATENATE($sys.func.CONCATENATE($session.params.amount_integer, \".\"), $session.params.amount_decimal)"
+      }, {
+        "parameter": "amount_paid_number",
+        "value": "$sys.func.TO_NUMBER($session.params.suggested_amount_value)"
+      }, {
+        "parameter": "amount_paid",
+        "value": "$sys.func.TO_TEXT($session.params.amount_paid_number)"
+      }, {
+        "parameter": "suggest_amount_flag",
+        "value": "$sys.func.ADD($session.params.suggest_amount_flag, 1)"
+      } ],
+      "conditionalCases": [ {
+        "cases": [ {
+          "condition": "$session.params.amount_paid_number \u003e= 1",
+          "caseContent": [ {
+            "message": {
+              "text": {
+                "text": [ "OK $$session.params.amount_paid_number" ]
+              },
+              "languageCode": "en"
+            }
+          } ]
+        } ]
+      } ]
+    },
+    "name": "bbdc6d5f-6e5a-4e23-b3a6-6468a08e8394"
+  }, {
+    "condition": "$session.params.amount_paid_number \u003e= 1 AND $session.params.amount_paid_number \u003c= 10000",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "That was $$session.params.amount_paid_number, correct?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "C'était $$session.params.amount_paid_number. n'est-ce pas ?" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetPage": "Proceed With Payment?",
+    "name": "e6f49d76-3ed3-4600-9807-6d0043eec034"
+  }, {
+    "condition": "$session.params.bad_amount \u003c= 2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "We can only take payments between $1 and $10,000 " ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Désolé, nous pouvons seulement accepter des paiements jusqu'à 10,000 $" ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "other_payment_amount",
+        "value": null
+      }, {
+        "parameter": "bad_amount",
+        "value": "$sys.func.ADD(1,$session.params.bad_amount)"
+      } ]
+    },
+    "targetPage": "Prompt Other Amount",
+    "name": "9d28848f-4dc9-49e0-a0bd-17f19a455348"
+  }, {
+    "condition": "$session.params.bad_amount \u003e 2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "We can only take payments between $1 and $10,000" ]
+        },
+        "languageCode": "en"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "bad_amount",
+        "value": 0
+      }, {
+        "parameter": "otccp_exit_2",
+        "value": "true"
+      } ]
+    },
+    "targetFlow": "bell_Feedback",
+    "name": "4c8e0651-a0df-49c8-9737-577a1b01d1ee"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "e448ccc1-12ad-44f7-9952-1cbb28d0a803"
+      }, {
+        "parameter": "flow_id",
+        "value": "5f9ad0a8-5f25-4bd1-96dd-a2b5b74312df"
+      }, {
+        "parameter": "page_name",
+        "value": "Amount Validation"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

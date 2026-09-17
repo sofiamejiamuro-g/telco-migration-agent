@@ -1,0 +1,55 @@
+{
+  "name": "2f792d25-4c9a-4d55-b35c-dd3dcb919e8f",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "A quels renseignements du compte souhaitez-vous apporter des changements?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "changement de nom"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "N'oubliez pas que le changement de nom dans MonBell n'a aucune incidence sur vos renseignements de facturation. Si vous devez changer le nom sur votre facture en raison d’un changement de nom légal, ou si vous souhaitez transférer la propriété du compte, vous devrez parler à un agent. Voulez-vous changer votre nom d’affichage MonBell ou le nom figurant sur votre facture ?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "nom du projet de loi"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_aqd",
+      "inputActionParameters": {
+        "account_detail_type": "nom du projet de loi",
+        "brand": "bell",
+        "language": "fr-ca",
+        "utterance": "Je veux changer les détails de mon compte"
+      },
+      "outputActionParameters": {
+        "brand": "bell",
+        "language": "fr-ca"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "The customer wants to make update to their account information - including updating name, emails, address, billing address.",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca",
+      "route": "account_update_details",
+      "utterance": "Je veux changer les détails de mon compte"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "The {update_detail_type} parameter is empty so we prompt the user with appropriate response then the customer says they want to update their bill name and are routed to bell_aqd flow.",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca"
+    }
+  },
+  "displayName": "FR - Account Update Details (account_detail_type = \"\") [bill name](Step5.1.1, 1A)",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 395,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

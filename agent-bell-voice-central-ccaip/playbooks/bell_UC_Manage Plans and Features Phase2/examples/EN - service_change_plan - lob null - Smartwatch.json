@@ -1,0 +1,59 @@
+{
+  "name": "82fa66ad-9b1f-4ef3-a5d7-8b58d6e33486",
+  "actions": [ {
+    "playbookInvocation": {
+      "playbook": "bell_uc_ask_LOB",
+      "playbookInput": {
+        "precedingConversationSummary": "Passing the user {utterance} to extract the parameter {lob} when {identification_status} is \"Pass\"",
+        "actionParameters": {
+          "brand": "bell",
+          "identification_status": "Pass",
+          "language": "en",
+          "route": "service_change_plan",
+          "utterance": "My Galaxy smart watch"
+        }
+      },
+      "playbookOutput": {
+        "executionSummary": "returns the parameter {lob} based on user input provided or {utterance}",
+        "actionParameters": {
+          "identification_status": "Pass",
+          "language": "en",
+          "lob": "Mobility",
+          "utterance": "My Galaxy smart watch"
+        }
+      },
+      "playbookState": "OUTPUT_STATE_OK"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Sure, you can easily manage your Mobility plan and add-ons at anytime using MyBell. I'll send a text to the device you're calling from, so that you can easily make changes to your Mobility plan. Is that alright?"
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "The customer requesting to modify there existing service plan and if parameter {lob} is null in session then we need to call PLAYBOOK:bell_uc_ask_LOB to extract the lob value",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "en",
+      "route": "service_change_plan",
+      "utterance": "I would like to  change my smartwatch plan"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "User is rerouted to check lob playbook to extract the parameter \"lob\" and return back",
+    "actionParameters": {
+      "brand": "bell",
+      "identification_status": "Pass",
+      "language": "en",
+      "lob": "Mobility",
+      "route": "service_change_plan",
+      "utterance": "I would like to  change my smartwatch plan"
+    }
+  },
+  "displayName": "EN - service_change_plan - lob null - Smartwatch",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 432,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

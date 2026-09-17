@@ -1,0 +1,119 @@
+{
+  "name": "4599108b-52ea-43fd-b8c9-055c6fc2d55e",
+  "displayName": "Webhook Get Customer Profile",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "/v1/ibm_mw/nm1_get#customer-profile",
+    "tag": "customer-profile",
+    "setParameterActions": [ {
+      "parameter": "phone",
+      "value": "$session.params.cirn"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.webhook_success = false OR $session.params.nm1_get_cust_profile_response.returnCode = \"0\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Failure NM1 Outage",
+    "name": "a31f78fd-f2b8-4caa-a0b5-00937803ed5a"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "oneBillIndicator",
+        "value": "$session.params.nm1_get_cust_profile_response.oneBill"
+      }, {
+        "parameter": "accountType",
+        "value": "$session.params.nm1_get_cust_profile_response.banType"
+      }, {
+        "parameter": "accountSubType",
+        "value": "$session.params.nm1_get_cust_profile_response.banSubType"
+      }, {
+        "parameter": "pastDueAmount",
+        "value": "$session.params.nm1_get_cust_profile_response.pastDueAmount"
+      }, {
+        "parameter": "accountBalance",
+        "value": "$session.params.nm1_get_cust_profile_response.arBalance"
+      } ]
+    },
+    "targetPage": "Consolidated Customers",
+    "name": "292aae5f-9af5-4d44-afdf-7de4df674ff9"
+  }, {
+    "condition": "$session.params.accountType != 'I' AND $session.params.accountType != 'C'",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Malheureusement, cette option libre-service n'est pas disponible pour votre compte." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetPage": "Webhook Failure NM1 Outage",
+    "name": "0ce7e470-7b16-4153-bf72-e2516511949f"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "4599108b-52ea-43fd-b8c9-055c6fc2d55e"
+      }, {
+        "parameter": "flow_id",
+        "value": "79610380-24f4-4284-b946-244d0aa037d8"
+      }, {
+        "parameter": "page_name",
+        "value": "Consolidated Invoices"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Webhook Failure NM1 Outage",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+    
+    },
+    "name": "e8bd6722-ab6a-4357-9465-8a314c475656"
+  }, {
+    "targetPage": "Webhook Failure NM1 Outage",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+    
+    },
+    "name": "c4adc33a-34a1-46e8-8e83-0fb67ff559f6"
+  }, {
+    "targetPage": "Webhook Failure NM1 Outage",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+    
+    },
+    "name": "4cce8cba-3f62-4e44-92ae-2cba7b4db3a4"
+  }, {
+    "targetPage": "Webhook Failure NM1 Outage",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+    
+    },
+    "name": "844ecf11-c3fc-4f97-8571-7f2978ad8ec2"
+  }, {
+    "targetPage": "Webhook Failure NM1 Outage",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+    
+    },
+    "name": "9ea375bd-8122-46b1-883c-9fb341439450"
+  }, {
+    "targetPage": "Webhook Failure NM1 Outage",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+    
+    },
+    "name": "f848687a-059b-480e-826a-b49b8ab942c4"
+  } ]
+}

@@ -1,0 +1,70 @@
+{
+  "name": "a3f8ca3c-95ae-4194-9df7-b719c5ceefdf",
+  "displayName": "Check Special Status",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.special_status = \"bell_privilege\" AND $session.params.special_queue = \"privilege_tech\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "customer_type",
+        "value": "privilege_tech"
+      }, {
+        "parameter": "l2_brand",
+        "value": "Bell Mobility"
+      }, {
+        "parameter": "brand",
+        "value": "Bell"
+      }, {
+        "parameter": "aqd_sub_flow",
+        "value": "Privilege"
+      } ]
+    },
+    "targetPage": "Get queue (﻿menu_id)",
+    "name": "7df6739f-31c1-41ab-b540-a1ee8cdfa8ac",
+    "description": "This check is for Privilege. Please do not remove or change any parameter presets done below"
+  }, {
+    "condition": "$session.params.special_status = \"bell_privilege\" AND $session.params.special_queue = \"privilege_care\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "customer_type",
+        "value": "privilege_care"
+      }, {
+        "parameter": "l2_brand",
+        "value": "Bell Mobility"
+      }, {
+        "parameter": "brand",
+        "value": "Bell"
+      }, {
+        "parameter": "aqd_sub_flow",
+        "value": "Privilege"
+      } ]
+    },
+    "targetPage": "Get queue (﻿menu_id)",
+    "name": "42c4b13e-2151-431a-892f-cba08a1f4482",
+    "description": "This check is for Privilege Care. Please do not remove or change any parameter presets done below"
+  }, {
+    "condition": "$session.params.special_status = \"bell_finals\" OR $session.params.special_status = \"bell_finals_fraud\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Check collections agency",
+    "name": "1772d303-b213-4cd9-8878-8c2c19a122cc",
+    "description": "this path can be removed later on if not needed"
+  }, {
+    "condition": "$session.params.special_status = null OR $session.params.special_status != \"bell_privilege\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "customer_type",
+        "value": "privilege_care"
+      } ]
+    },
+    "targetPage": "Check Special Queue ",
+    "name": "98f20184-1bc9-4d82-896d-70b18cc576bc",
+    "description": "This check is if special_status/special_queue is not \"bell_privilege\"."
+  } ]
+}

@@ -1,0 +1,87 @@
+{
+  "name": "36c50d7f-0a52-4604-8537-1a8791f6a0cf",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70012",
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+        "language": "fr-ca"
+      }
+    }
+  }, {
+    "playbookInvocation": {
+      "playbook": "bell_uc_ask_LOB",
+      "playbookInput": {
+        "precedingConversationSummary": "Customer wants a technician for existing service , does not mention lob",
+        "actionParameters": {
+          "language": "fr-ca",
+          "route": "tech_field_tech_visits"
+        }
+      },
+      "playbookOutput": {
+        "executionSummary": "When user does not provide lob, prompt them to understand what kind of service they are looking for, if the user mentions lob then return lob to the originating Playbook, if not set the default lob and return back",
+        "actionParameters": {
+          "language": "fr-ca",
+          "lob": "Internet",
+          "route": "tech_field_tech_visits"
+        }
+      },
+      "playbookState": "OUTPUT_STATE_OK"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Est-ce pour un nouveau service ou avez-vous besoin d’aide pour votre service actuel?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Actuel"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70014",
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+        "language": "fr-ca"
+      }
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_tech_field_tech_visit",
+      "inputActionParameters": {
+        "language": "fr-ca",
+        "route": "tech_connection_issue"
+      },
+      "outputActionParameters": {
+        "language": "fr-ca"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer wants a technician for existing service of internet",
+    "actionParameters": {
+      "language": "fr-ca",
+      "route": "tech_field_tech_visits",
+      "utterance": "J’ai besoin d’un technicien"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Reroute to tech_connection_issue",
+    "actionParameters": {
+      "language": "fr-ca",
+      "lob": "Internet",
+      "route": "tech_field_tech_visits",
+      "utterance": "J’ai besoin d’un technicien"
+    }
+  },
+  "displayName": "FR_tech_field_tech_visits_existing_service_Internet",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 597,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

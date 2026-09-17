@@ -1,0 +1,63 @@
+{
+  "name": "c7cb66d4-413a-4fcc-a07f-a9c6b255d7b1",
+  "displayName": "COL_SUS_Check",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "setParameterActions": [ {
+      "parameter": "billing_account_status",
+      "value": "$sys.func.CONTAIN(   $session.params.billing_status_list,   \"suspended\" )"
+    }, {
+      "parameter": "code1",
+      "value": "$sys.func.CONTAIN($session.params.billing_reason_code_list, \"CSN\")"
+    }, {
+      "parameter": "code2",
+      "value": "$sys.func.CONTAIN($session.params.billing_reason_code_list, \"NSPC\")"
+    }, {
+      "parameter": "code3",
+      "value": "$sys.func.CONTAIN($session.params.billing_reason_code_list, \"SNP1\")"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$page.params.looping = \"false\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "test input",
+    "name": "af19df64-8529-461f-9c4e-f68bd0e11887"
+  }, {
+    "condition": "$session.params.banStatus = \"S\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "COL_SUS_status_check",
+    "name": "03ba1225-67df-44ea-b240-cee6b100b970"
+  }, {
+    "condition": "$session.params.banStatus != \"S\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "COL_AUL_Check",
+    "name": "a93a9807-5ed4-4372-b938-b64a9933ada8"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "c7cb66d4-413a-4fcc-a07f-a9c6b255d7b1"
+      }, {
+        "parameter": "flow_id",
+        "value": "d35b61b6-c884-44f8-b5c7-aed63cc356ab"
+      }, {
+        "parameter": "page_name",
+        "value": "COL_SUS_Check"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

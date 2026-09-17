@@ -1,0 +1,48 @@
+{
+  "name": "d117c5e3-2844-4315-b75c-7c9338037185",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Je peux vous aider sur plusieurs sujets liés à la facturation. Pour vous diriger au bon endroit, veuillez me donner plus de détails sur votre demande. Par exemple, vous pourriez dire 'un frais particulier' ou 'mon solde total'."
+    }
+  }, {
+    "userUtterance": {
+      "text": "Il me manque les crédits et les promotions que j'aurais dû recevoir ce mois-ci, et j'apprécierais de l'aide pour résoudre ce problème ainsi que toute information sur le moment où les futures promotions seront appliquées à mon compte."
+    }
+  }, {
+    "playbookInvocation": {
+      "playbook": "bell_UC_Billing",
+      "playbookInput": {
+        "precedingConversationSummary": "Customers are looking to know about their incorrect charges or charge related disputes",
+        "actionParameters": {
+          "language": "fr-ca",
+          "route": "bill_missing_promos",
+          "utterance": "Il me manque les crédits et les promotions que j'aurais dû recevoir ce mois-ci, et j'apprécierais de l'aide pour résoudre ce problème ainsi que toute information sur le moment où les futures promotions seront appliquées à mon compte."
+        }
+      },
+      "playbookOutput": {
+        "executionSummary": "Customer query got resolved",
+        "actionParameters": {
+          "language": "fr-ca",
+          "route": "bill_missing_promos"
+        }
+      },
+      "playbookState": "OUTPUT_STATE_OK"
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer query about \"Question about changes on my bill\" is addressed",
+    "actionParameters": {
+      "language": "fr-ca",
+      "route": "bill_vague",
+      "utterance": "Question sur les changements sur ma facture"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Customer query is addressed and then transferred to \"lucky_UC_Billing\" playbook for further conversation"
+  },
+  "displayName": "FR - bill_missing_promos",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 409,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

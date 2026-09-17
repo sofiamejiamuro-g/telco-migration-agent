@@ -1,0 +1,56 @@
+{
+  "name": "9bac38c0-1c20-4652-9d00-d76d82e01abb",
+  "displayName": "Language Based SMS",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.language = \"en\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "sms_content",
+        "value": "Bell: You can visit https://m.bell.ca/mylogin, then select the reminder for your upcoming visit.  ( bell.ca/about-us )"
+      }, {
+        "parameter": "sms_type",
+        "value": "Public"
+      } ]
+    },
+    "targetFlow": "bell_SMS Trigger",
+    "name": "707cf080-5ca8-4548-a53b-d22da2050c52"
+  }, {
+    "condition": "$session.params.language = \"fr-ca\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "sms_content",
+        "value": "Bell : Vous pouvez visiter https://m.bell.ca/maconnexion et sélectionner le rappel pour votre rendez-vous à venir. \u2028  ( bell.ca/apropos )"
+      }, {
+        "parameter": "sms_type",
+        "value": "Public"
+      } ]
+    },
+    "targetFlow": "bell_SMS Trigger",
+    "name": "4714cdf5-c222-47e1-87ce-739d9a69be8d"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "9bac38c0-1c20-4652-9d00-d76d82e01abb"
+      }, {
+        "parameter": "flow_id",
+        "value": "d880b5cc-5fe9-4f15-bed6-c0b5dc393f0e"
+      }, {
+        "parameter": "page_name",
+        "value": "Language Based SMS"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

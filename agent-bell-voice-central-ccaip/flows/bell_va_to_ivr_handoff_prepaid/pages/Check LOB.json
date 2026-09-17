@@ -1,0 +1,174 @@
+{
+  "name": "9bbf2eb5-a185-4669-833a-e35065ac5c97",
+  "displayName": "Check LOB",
+  "form": {
+    "parameters": [ {
+      "displayName": "lob",
+      "required": true,
+      "entityType": "@lob",
+      "fillBehavior": {
+        "initialPromptFulfillment": {
+          "messages": [ {
+            "text": {
+              "text": [ "Okay, can you tell me which service you need help with?" ]
+            },
+            "languageCode": "en"
+          }, {
+            "text": {
+              "text": [ "D'accord, pouvez-vous me dire pour quel service vous avez besoin d'aide ?" ]
+            },
+            "languageCode": "fr-ca"
+          } ]
+        },
+        "repromptEventHandlers": [ {
+          "event": "sys.no-match-1",
+          "triggerFulfillment": {
+            "messages": [ {
+              "text": {
+                "text": [ "$request.generative.resp" ]
+              },
+              "languageCode": "en"
+            }, {
+              "text": {
+                "text": [ "$request.generative.resp" ]
+              },
+              "languageCode": "fr-ca"
+            } ],
+            "generators": [ {
+              "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/f7ef68c2-5424-41ab-94dc-f8c07e3164de",
+              "outputParameter": "$request.generative.resp"
+            } ]
+          },
+          "name": "ba952150-51c1-4f99-ac97-ef97f149472b"
+        }, {
+          "event": "sys.no-match-2",
+          "triggerFulfillment": {
+            "messages": [ {
+              "text": {
+                "text": [ "$request.generative.resp" ]
+              },
+              "languageCode": "en"
+            }, {
+              "text": {
+                "text": [ "$request.generative.resp" ]
+              },
+              "languageCode": "fr-ca"
+            } ],
+            "generators": [ {
+              "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/ab9980b0-e324-4bef-8fd6-5e1c1c8d59e1",
+              "outputParameter": "$request.generative.resp"
+            } ]
+          },
+          "name": "a1ee9287-d848-448d-9f1b-2c5cd710706b"
+        }, {
+          "targetFlow": "bell_No_Match_3",
+          "event": "sys.no-match-3",
+          "triggerFulfillment": {
+          
+          },
+          "name": "e31073f6-e300-483b-a8d3-ea9f2f5f756b"
+        }, {
+          "event": "sys.no-input-1",
+          "triggerFulfillment": {
+            "messages": [ {
+              "text": {
+                "text": [ "$request.generative.response" ]
+              },
+              "languageCode": "en"
+            }, {
+              "text": {
+                "text": [ "$request.generative.response" ]
+              },
+              "languageCode": "fr-ca"
+            } ],
+            "generators": [ {
+              "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/1b8d360c-c2a0-49b0-9a32-d5542ff42d87",
+              "outputParameter": "$request.generative.response"
+            } ]
+          },
+          "name": "00350ef7-0953-4a69-9524-dc238bd97951"
+        }, {
+          "event": "sys.no-input-2",
+          "triggerFulfillment": {
+            "messages": [ {
+              "text": {
+                "text": [ "$request.generative.response" ]
+              },
+              "languageCode": "en"
+            }, {
+              "text": {
+                "text": [ "$request.generative.response" ]
+              },
+              "languageCode": "fr-ca"
+            } ],
+            "generators": [ {
+              "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/1bcff408-4981-474e-986a-309d3622718f",
+              "outputParameter": "$request.generative.response"
+            } ]
+          },
+          "name": "d4c5debb-8774-4ae8-91f3-df2b71b87149"
+        }, {
+          "targetFlow": "bell_No_Input_3",
+          "event": "sys.no-input-3",
+          "triggerFulfillment": {
+          
+          },
+          "name": "add36562-a13c-4eb4-ad3e-11d895773fb4"
+        } ]
+      }
+    } ]
+  },
+  "entryFulfillment": {
+    "setParameterActions": [ {
+      "parameter": "ban",
+      "value": "$session.params.billing_account_number_list[0]"
+    }, {
+      "parameter": "lob",
+      "value": null
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.lob = \"Internet\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "lob",
+        "value": "INTERNET"
+      } ]
+    },
+    "name": "2a69e1eb-6c54-41c4-9a90-d4f9fd952abb"
+  }, {
+    "condition": "$session.params.lob = \"Mobility\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "lob",
+        "value": "MOBILITY"
+      } ]
+    },
+    "name": "8ee32e02-8efd-4d0f-bb44-7ed353865fa8"
+  }, {
+    "condition": "$session.params.lob = \"Homephone\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "lob",
+        "value": "HOMEPHONE"
+      } ]
+    },
+    "name": "3ea189d0-051b-400a-b49e-a46c8feddef6"
+  }, {
+    "condition": "$session.params.lob = \"smarthome\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "lob",
+        "value": "SMARTHOME"
+      } ]
+    },
+    "name": "f03603d5-5cd8-4cee-8fde-79e66c82768a"
+  }, {
+    "condition": "$session.params.lob != null",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Check Number of BANS",
+    "name": "c3d7e64e-64a6-48f7-b8e0-66b443dfc6ee"
+  } ]
+}

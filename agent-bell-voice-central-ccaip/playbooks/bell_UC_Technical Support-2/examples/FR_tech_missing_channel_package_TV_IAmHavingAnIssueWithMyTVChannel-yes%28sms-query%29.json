@@ -1,0 +1,65 @@
+{
+  "name": "9e816d2f-8321-4cb5-9daf-a4468066c554",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_tech_intent_apb",
+      "inputActionParameters": {
+        "language": "fr-ca",
+        "lob": "TV",
+        "utterance": "Je pense qu'il me manque une chaîne dans mon forfait"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Je vais envoyer un texto à l'appareil au moyen duquel vous appelez, afin que vous puissiez facilement synchroniser votre programmation télé à partir de MonBell. Est-ce que ça vous convient?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Le lien est-il sûr ?"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Oui, absolument. Le lien est une URL officielle et sécurisée qui mène directement aux informations demandées. Souhaitez-vous que je vous envoie le SMS ?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "oui"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "fr-ca",
+        "sms_content": "Mess. de Bell: Visitez https://m.bell.ca/supportsynchprogf et suivez les instructions à l'écran pour synchronisez votre programmation ( bell.ca/apropos )",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer asking about a missing channel in their tv and also more information about SMS",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca",
+      "route": "tech_missing_channel_package",
+      "utterance": "Je pense qu'il me manque une chaîne dans mon forfait"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Customer declines for the instruction given VA so, will be sent to aqd Customer asked a question regarding SMS so VA answered them and prompted again for SMS. User then said yes so we route accordingly",
+    "actionParameters": {
+      "language": "fr-ca",
+      "route": "tech_missing_channel_package"
+    }
+  },
+  "displayName": "FR_tech_missing_channel_package_TV_IAmHavingAnIssueWithMyTVChannel-yes(sms-query)",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 476,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

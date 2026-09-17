@@ -1,0 +1,69 @@
+{
+  "name": "0d8339e8-4d0f-4a32-92be-44b79c9c0730",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "what account details are you making changes to?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "change my pin"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Great news! You can easily update your MyBell profile online, including your email address, PIN and recovery profile. I'll send a text to the device you're calling from, so that you can easily make the changes. Is that alright?"
+    }
+  }, {
+    "userUtterance": {
+    
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_get_sdl_mapping_url",
+      "inputActionParameters": {
+        "brand": "bell",
+        "language": "en",
+        "route": "account_update_details"
+      },
+      "outputActionParameters": {
+        "brand": "bell",
+        "language": "en"
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "No problem at all. For any other questions you can always visit our website at {faq_link}."
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_Feedback",
+      "inputActionParameters": {
+        "brand": "bell",
+        "language": "en"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "The customer wants to make update to their account information - including updating name, emails, address, billing address.",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "route": "account_update_details",
+      "utterance": "I want to change my account details"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "The {update_detail_type} parameter is empty so we prompt the user with appropriate response then the customer says they want to update their PIN so we prompt the user with the message the user gives no response to receive a message on their device so we route them to bell_get_sdl_mapping_url flow prompt the user with appropriate {faq_link} prompt and then route then user to bell_Feedback flow.",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en"
+    }
+  },
+  "displayName": "EN - Account Update Details (account_detail_type = \"\") [PIN] - NoResponseForMessageLink(Step 5.3)",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 478,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

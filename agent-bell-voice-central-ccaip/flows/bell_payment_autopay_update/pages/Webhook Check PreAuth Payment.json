@@ -1,0 +1,136 @@
+{
+  "name": "6af1165e-09fd-4a80-b405-8a5120d98277",
+  "displayName": "Webhook Check PreAuth Payment",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "/v1/pre-auth-payment#get-existing",
+    "tag": "get-existing"
+  },
+  "transitionRoutes": [ {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "payment_method",
+        "value": "$session.params.get_pre_auth_payment_response.paymentMethod"
+      }, {
+        "parameter": "apb_location_id",
+        "value": 70010
+      } ]
+    },
+    "targetFlow": "bell_apb",
+    "name": "18a00bf7-0bcc-439f-877a-e2260f32a061"
+  }, {
+    "condition": "$session.params.payment_method = \"PreAuthBank\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Customer on PAD",
+    "name": "705c1c4e-4fde-44e8-811e-4beac7de18ec"
+  }, {
+    "condition": "$session.params.payment_method = \"PreAuthCreditCard\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Customer on PACC",
+    "name": "7ff32513-df8d-4394-b97c-e568ac936849"
+  }, {
+    "condition": "$session.params.payment_method = \"Regular\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "You are currently not set up with Pre-Authorized payments. To set up pre-authorized payment, you can do so in the MyBell. Please visit bell.ca/support for more information." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Vous n’êtes actuellement pas inscrit aux paiements pré-autorisés. Vous pouvez configurer le paiement pré-autorisé dans MonBell. Veuillez visiter le site  bell.ca/soutien pour en savoir plus." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetFlow": "bell_Feedback",
+    "name": "ebc182b4-52da-4936-8e83-10c0a165d43c"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "6af1165e-09fd-4a80-b405-8a5120d98277"
+      }, {
+        "parameter": "flow_id",
+        "value": "00208917-47d8-4e61-a709-01d206b91ce4"
+      }, {
+        "parameter": "page_name",
+        "value": "Webhook Check PreAuth Payment"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "ID or Auth or NM1 or PACC or Webhook Failure Confirmation",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "webhook_success",
+        "value": "false"
+      } ]
+    },
+    "name": "24edf449-7b5e-47c2-b0c1-cb8b8b851536"
+  }, {
+    "targetPage": "ID or Auth or NM1 or PACC or Webhook Failure Confirmation",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "webhook_success",
+        "value": "false"
+      } ]
+    },
+    "name": "2175fdda-384a-4992-bbf1-cb5722aa11ec"
+  }, {
+    "targetPage": "ID or Auth or NM1 or PACC or Webhook Failure Confirmation",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "webhook_success",
+        "value": "false"
+      } ]
+    },
+    "name": "ba3b222a-6423-4867-b6af-ad40472fb695"
+  }, {
+    "targetPage": "ID or Auth or NM1 or PACC or Webhook Failure Confirmation",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "webhook_success",
+        "value": "false"
+      } ]
+    },
+    "name": "43eb5d75-b8c0-45c0-ae59-4822ef3cbe76"
+  }, {
+    "targetPage": "ID or Auth or NM1 or PACC or Webhook Failure Confirmation",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "webhook_success",
+        "value": "false"
+      } ]
+    },
+    "name": "e9a5f3e4-ba3f-43dd-8ca8-9c91ad5bda71"
+  }, {
+    "targetPage": "ID or Auth or NM1 or PACC or Webhook Failure Confirmation",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "webhook_success",
+        "value": "false"
+      } ]
+    },
+    "name": "a1c7b77c-f79b-4d85-87e6-c3026c4334dc"
+  } ]
+}

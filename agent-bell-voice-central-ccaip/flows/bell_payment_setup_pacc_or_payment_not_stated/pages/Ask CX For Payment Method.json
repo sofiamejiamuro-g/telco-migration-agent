@@ -1,0 +1,141 @@
+{
+  "name": "9b2be0da-81b2-429d-86fc-5a85565577e5",
+  "displayName": "Ask CX For Payment Method",
+  "form": {
+    "parameters": [ {
+      "displayName": "payment_method",
+      "required": true,
+      "entityType": "@payment_method",
+      "fillBehavior": {
+        "initialPromptFulfillment": {
+        
+        },
+        "repromptEventHandlers": [ {
+          "targetPage": "Fallback Counter For PM",
+          "event": "sys.no-match-1",
+          "triggerFulfillment": {
+          
+          },
+          "name": "9b8b2f18-3d29-4a37-8205-5ff2712e84cd"
+        }, {
+          "targetPage": "Fallback Counter For PM",
+          "event": "sys.no-match-2",
+          "triggerFulfillment": {
+          
+          },
+          "name": "f101fb23-1153-4de6-ac53-9e8dc99eaa5c"
+        }, {
+          "targetFlow": "bell_Feedback",
+          "event": "sys.no-match-3",
+          "triggerFulfillment": {
+            "messages": [ {
+              "text": {
+                "text": [ "Okay. If you'd still like to set up Pre-Authorized payment, you can do so in MyBell. Please visit bell.ca/support for more information." ]
+              },
+              "languageCode": "en"
+            }, {
+              "text": {
+                "text": [ "D’accord. Si vous souhaitez tout de même configurer le paiement préautorisé, vous pouvez le faire dans MonBell. Veuillez consulter bell.ca/soutien pour en savoir plus." ]
+              },
+              "languageCode": "fr-ca"
+            } ]
+          },
+          "name": "5a192df6-7697-4a81-8aa7-f948c13f7fb0"
+        }, {
+          "event": "sys.no-input-1",
+          "triggerFulfillment": {
+            "messages": [ {
+              "text": {
+                "text": [ "I didn't quite get that. Can you try again?" ]
+              },
+              "languageCode": "en"
+            }, {
+              "text": {
+                "text": [ "Je n’ai pas tout à fait compris. Pouvez-vous réessayer?" ]
+              },
+              "languageCode": "fr-ca"
+            } ]
+          },
+          "name": "e68a6512-c471-4adc-acd6-3004f1e1ce7a"
+        }, {
+          "event": "sys.no-input-2",
+          "triggerFulfillment": {
+            "messages": [ {
+              "text": {
+                "text": [ "I still didn't get that" ]
+              },
+              "languageCode": "en"
+            }, {
+              "text": {
+                "text": [ "Je n’ai toujours pas compris." ]
+              },
+              "languageCode": "fr-ca"
+            } ]
+          },
+          "name": "91612f5b-7049-46a5-bccd-f95b73135993"
+        }, {
+          "targetFlow": "bell_Feedback",
+          "event": "sys.no-input-3",
+          "triggerFulfillment": {
+            "messages": [ {
+              "text": {
+                "text": [ "Okay. If you'd still like to set up Pre-Authorized payment, you can do so in MyBell. Please visit bell.ca/support for more information." ]
+              },
+              "languageCode": "en"
+            }, {
+              "text": {
+                "text": [ "D’accord. Si vous souhaitez tout de même configurer le paiement préautorisé, vous pouvez le faire dans MonBell. Veuillez consulter bell.ca/soutien pour en savoir plus." ]
+              },
+              "languageCode": "fr-ca"
+            } ]
+          },
+          "name": "40207463-8d63-44ed-93ef-d2d9c41c23e2"
+        } ]
+      }
+    } ]
+  },
+  "entryFulfillment": {
+    "conditionalCases": [ {
+      "cases": [ {
+        "condition": "$session.params.incorrect_payment_method_counter = 0",
+        "caseContent": [ {
+          "message": {
+            "text": {
+              "text": [ "Would you like to set up pre-authorized payments using debit or credit card?" ]
+            },
+            "languageCode": "en"
+          }
+        }, {
+          "message": {
+            "text": {
+              "text": [ "Souhaitez-vous configurer des paiements pré-autorisés par carte de débit ou de crédit?" ]
+            },
+            "languageCode": "fr-ca"
+          }
+        } ]
+      } ]
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.payment_method = \"Credit Card\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Advise on Terms \u0026 Conditions",
+    "name": "20d3100f-4694-4176-94a9-4714707cbffb"
+  }, {
+    "condition": "$session.params.payment_method = \"Others\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Fallback Counter For PM",
+    "name": "0910c730-914c-4714-8783-161f800220f6"
+  }, {
+    "condition": "$session.params.payment_method = \"Debit\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_payment_setup_preAuth_pad",
+    "name": "081a9db8-f7ea-46ac-9405-ae63a9ee64b0"
+  } ]
+}

@@ -1,0 +1,174 @@
+{
+  "name": "4685be98-0599-411e-9b14-696da40e03f1",
+  "displayName": "Webhook ACUT search - find",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "setParameterActions": [ {
+      "parameter": "number_of_days_interval",
+      "value": 60
+    }, {
+      "parameter": "ticket_state",
+      "value": "Active"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$sys.func.UPPER($session.params.lob) = \"INTERNET\"",
+    "triggerFulfillment": {
+      "webhook": "/v1/ticket_management/acut/search#find-internet_account_number",
+      "tag": "find"
+    },
+    "name": "cb6bb058-2cf3-42d1-ac0b-2fe1b736e4cc"
+  }, {
+    "condition": "$sys.func.UPPER($session.params.lob) = \"TV\"",
+    "triggerFulfillment": {
+      "webhook": "/v1/ticket_management/acut/search#find-tv_account_number",
+      "tag": "find"
+    },
+    "name": "0b76f94c-18b9-4877-9fa0-4a897f264b97"
+  }, {
+    "condition": "$sys.func.UPPER($session.params.lob) = \"HOMEPHONE\" OR $sys.func.UPPER($session.params.lob) = \"WIRELINE\"",
+    "triggerFulfillment": {
+      "webhook": "/v1/ticket_management/acut/search#find-wireline_telephone_number",
+      "tag": "find"
+    },
+    "name": "25b3afa6-44fa-4575-ab96-b7d41ade5316"
+  }, {
+    "condition": "$session.params.webhook_success = True",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "ticket_summaries",
+        "value": "$sys.func.GET_FIELD($session.params.acut_find_response, \"ticket_summaries\")"
+      }, {
+        "parameter": "n_acut_tickets",
+        "value": "$sys.func.COUNT($session.params.ticket_summaries)"
+      }, {
+        "parameter": "ticket_summary1",
+        "value": "$sys.func.GET($session.params.ticket_summaries,0)"
+      }, {
+        "parameter": "ticket_creation_time1",
+        "value": "$session.params.ticket_summary1.ticket_creation_time"
+      }, {
+        "parameter": "day",
+        "value": "$sys.func.TO_NUMBER($sys.func.MID($session.params.ticket_creation_time1,9,2))"
+      }, {
+        "parameter": "month",
+        "value": "$sys.func.TO_NUMBER($sys.func.MID($session.params.ticket_creation_time1,6,2))"
+      }, {
+        "parameter": "year",
+        "value": "$sys.func.TO_NUMBER($sys.func.MID($session.params.ticket_creation_time1,1,4))"
+      }, {
+        "parameter": "date_formatted",
+        "value": "$sys.func.TO_OBJECT(\"{'day' : $session.params.day , 'month' : $session.params.month , 'year' : $session.params.year}\")"
+      }, {
+        "parameter": "date_formatted",
+        "value": "$sys.func.FORMAT_DATE($session.params.date_formatted, \"EEEE, MMMM dd\", $session.params.language )"
+      }, {
+        "parameter": "ticket_summary2",
+        "value": "$sys.func.GET($session.params.ticket_summaries,1)"
+      }, {
+        "parameter": "ticket_creation_time2",
+        "value": "$session.params.ticket_summary2.ticket_creation_time"
+      }, {
+        "parameter": "day2",
+        "value": "$sys.func.TO_NUMBER($sys.func.MID($session.params.ticket_creation_time2,9,2))"
+      }, {
+        "parameter": "month2",
+        "value": "$sys.func.TO_NUMBER($sys.func.MID($session.params.ticket_creation_time2,6,2))"
+      }, {
+        "parameter": "year2",
+        "value": "$sys.func.TO_NUMBER($sys.func.MID($session.params.ticket_creation_time2,1,4))"
+      }, {
+        "parameter": "date_formatted2",
+        "value": "$sys.func.TO_OBJECT(\"{'day' : $session.params.day2 , 'month' : $session.params.month2 , 'year' : $session.params.year2}\")"
+      }, {
+        "parameter": "date_formatted2",
+        "value": "$sys.func.FORMAT_DATE($session.params.date_formatted2, \"EEEE, MMMM dd\", $session.params.language )"
+      }, {
+        "parameter": "ticket_number1",
+        "value": "$session.params.ticket_summary1.acut_trouble_ticket_number"
+      }, {
+        "parameter": "ticket_number2",
+        "value": "$session.params.ticket_summary2.acut_trouble_ticket_number"
+      }, {
+        "parameter": "ticket_state1",
+        "value": "$session.params.ticket_summary1.ticket_state_category"
+      }, {
+        "parameter": "ticket_state2",
+        "value": "$session.params.ticket_summary2.ticket_state_category"
+      } ]
+    },
+    "targetPage": "Ticket check",
+    "name": "bc44a951-f678-42b3-bf93-76d51588561f"
+  }, {
+    "condition": "$session.params.webhook_success = False",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Ticket check",
+    "name": "46ccb84e-e1b8-41b3-8e3b-5c29464de7d4"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "4685be98-0599-411e-9b14-696da40e03f1"
+      }, {
+        "parameter": "flow_id",
+        "value": "d880b5cc-5fe9-4f15-bed6-c0b5dc393f0e"
+      }, {
+        "parameter": "page_name",
+        "value": "Webhook ACUT search - find"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Webhook Failure ACUT search",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+    
+    },
+    "name": "358fab48-a512-4c80-850e-c5b2fb5a6d13"
+  }, {
+    "targetPage": "Webhook Failure ACUT search",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+    
+    },
+    "name": "86adb588-0b8f-4646-9b82-8306a32166bb"
+  }, {
+    "targetPage": "Webhook Failure ACUT search",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+    
+    },
+    "name": "45bf3bbd-c69f-41e1-a467-35c4a2710440"
+  }, {
+    "targetPage": "Webhook Failure ACUT search",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+    
+    },
+    "name": "2a98a204-6b9b-409a-9e49-0f4073498ff3"
+  }, {
+    "targetPage": "Webhook Failure ACUT search",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+    
+    },
+    "name": "d2cc6a92-776a-4d39-ac52-6e000f7a51ef"
+  }, {
+    "targetPage": "Webhook Failure ACUT search",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+    
+    },
+    "name": "9f2d3dd0-88a3-4bad-b29f-e8ac21ae1a43"
+  } ]
+}

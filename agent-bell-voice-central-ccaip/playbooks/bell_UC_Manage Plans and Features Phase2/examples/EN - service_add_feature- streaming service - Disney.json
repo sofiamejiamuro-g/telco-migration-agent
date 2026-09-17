@@ -1,0 +1,70 @@
+{
+  "name": "c6ab0cfb-67c8-47c0-878c-8c133194a6fc",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70011"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "I'll send a text to the device you're calling from, so that you can easily view all streaming options. Is that alright?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "yes"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "en",
+        "route": "service_add_feature",
+        "sms_content": "Bell: You can visit https://m.bell.ca/activatesube to add a streaming service in the MyBell app. (bell.ca/about-us)",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+        "language": "en",
+        "sms_content": "Bell: You can visit https://m.bell.ca/activatesube to find out more about our streaming options. (bell.ca/about-us)"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "As, {identification_status} is \"Pass\" and {streaming_services} is \"disney\" then we will prompt customer and ask to send message. If customer say \"Yes\" or anything affirmative then we will trigger the FLOW: bell_SMS Trigger ",
+    "actionParameters": {
+      "apb_location_id": "70011",
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "en",
+      "route": "service_add_feature",
+      "sms_content": "Bell: You can visit https://m.bell.ca/activatesube to find out more about our streaming options. (bell.ca/about-us)",
+      "sms_type": "Public",
+      "streaming_services": "disney",
+      "utterance": "I'd like to get Disney"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Customer with value such as \"netflix\", \"disney\", \"crave\", \"basic\"  and \"premium\" in the parameter {streaming_services} and {identification_status} = Pass will be prompted to send message and will be routed to bell_SMS Trigger flow.",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "en",
+      "route": "service_add_feature",
+      "sms_content": "Bell: You can visit https://m.bell.ca/activatesube to find out more about our streaming options. (bell.ca/about-us)",
+      "sms_type": "Public",
+      "streaming_services": "disney",
+      "utterance": "I'd like to get Disney"
+    }
+  },
+  "displayName": "EN - service_add_feature- streaming service - Disney",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 652,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

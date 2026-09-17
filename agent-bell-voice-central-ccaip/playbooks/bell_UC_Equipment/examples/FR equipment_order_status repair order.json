@@ -1,0 +1,57 @@
+{
+  "name": "669295dd-8a3a-49d7-84f8-4bd2274ccfc9",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Avez-vous des questions sur un surclassement d’appareil, un nouvel appareil ou une commande de réparation?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Commande de réparation"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "D'accord. Vous pouvez consulter le statut de votre réparation mobile sur l'appli MonBell. Je vais envoyer un texto sur l'appareil au moyen duquel vous appelez afin que vous puissiez faire le suivi de votre envoi. Est-ce que ça vous convient?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "oui"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "fr-ca",
+        "sms_content": "Bell: Vous pouvez visiter bell.ca/reparationsuivi pour vérifier le statut de votre demande de réparation en ligne.",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+        "language": "fr-ca",
+        "sms_content": "Bell: Vous pouvez visiter bell.ca/reparationsuivi pour vérifier le statut de votre demande de réparation en ligne.",
+        "sms_type": "Public"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer has stated that he wants to know the status of his mobile phone. device_type is \"Mobile phone\" so we inform customer about device upgrade or new device or repair device. ",
+    "actionParameters": {
+      "device_type": "Mobile phone",
+      "identification_status": "Pass",
+      "language": "fr-ca",
+      "route": "equipment_order_status",
+      "utterance": "Je veux savoir le statut de ma commande de téléphone mobile."
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "customer says repair order. so we inform customer about the SMS according to the instructions. customer says yes so we call bell_SMS_trigger flow",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca",
+      "sms_type": "Public"
+    }
+  },
+  "displayName": "FR equipment_order_status repair order",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 440,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "fr"
+}

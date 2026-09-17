@@ -1,0 +1,121 @@
+{
+  "name": "705f3aeb-171c-4676-8798-e55eb8d9b79a",
+  "displayName": "Webhook intake-routing 2",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "v1/dfcx/intake-routing",
+    "tag": "N/A",
+    "setParameterActions": [ {
+      "parameter": "webhook_success",
+      "value": null
+    } ],
+    "returnPartialResponses": true
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.webhook_success = \"true\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "TFN lookup Webhook succeeded." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Le Webhook recherche TFN a réussi." ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "caller_channel",
+        "value": "$session.params.intake_routing_lookup_response.va_caller_channel"
+      }, {
+        "parameter": "va_entry_flow",
+        "value": "$session.params.intake_routing_lookup_response.va_entry_flow"
+      }, {
+        "parameter": "va_ibm_id",
+        "value": "$session.params.intake_routing_lookup_response.va_ibm_id"
+      }, {
+        "parameter": "tfn",
+        "value": "$session.params.intake_tfn"
+      } ],
+      "advancedSettings": {
+        "dtmfSettings": {
+          "useSystemEntityRule": false
+        }
+      }
+    },
+    "targetPage": "Get Spoof CLID",
+    "name": "ab62a9a0-c272-402f-b9bc-745bd5c13e8c"
+  }, {
+    "condition": "$session.params.webhook_success != \"true\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook intake-routing 2 fail",
+    "name": "00311675-0432-4381-a8c0-f2b91e25a16a"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "705f3aeb-171c-4676-8798-e55eb8d9b79a"
+      }, {
+        "parameter": "flow_id",
+        "value": "1819189a-3e6b-4603-aeaf-3ecc162de16e"
+      }, {
+        "parameter": "page_name",
+        "value": "Webhook intake-routing 2"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Webhook intake-routing 2 fail",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+    
+    },
+    "name": "670c0820-7ced-41ac-8c6b-29f821590782"
+  }, {
+    "targetPage": "Webhook intake-routing 2 fail",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+    
+    },
+    "name": "717ef5ac-dfee-4c5a-8cd7-3ca98cdce460"
+  }, {
+    "targetPage": "Webhook intake-routing 2 fail",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+    
+    },
+    "name": "63fbca0a-b6a7-4ae1-8ae4-647000cf5598"
+  }, {
+    "targetPage": "Webhook intake-routing 2 fail",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+    
+    },
+    "name": "ac00be86-b6fc-4b6f-8168-056c9abad307"
+  }, {
+    "targetPage": "Webhook intake-routing 2 fail",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+    
+    },
+    "name": "f70e75c4-f84b-4071-aaa0-3c87fd772da7"
+  }, {
+    "targetPage": "Webhook intake-routing 2 fail",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+    
+    },
+    "name": "2decef7a-2a56-4eac-b6da-d7b11ccccf7f"
+  } ]
+}

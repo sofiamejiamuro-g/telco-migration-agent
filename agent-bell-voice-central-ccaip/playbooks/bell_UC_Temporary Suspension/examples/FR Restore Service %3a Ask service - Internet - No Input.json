@@ -1,0 +1,72 @@
+{
+  "name": "780dcd5b-fcc1-4543-9b7f-4d84ff59c45c",
+  "actions": [ {
+    "agentUtterance": {
+      "text": " Bien sûr, je peux vous aider. Pourriez-vous confirmer le service que vous souhaitez rétablir?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Internet"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Merci. Vous pouvez facilement rétablir vos services résidentiels dans MonBell. Je vais envoyer un texto à l’appareil à partir duquel vous appelez qui contient un lien pour le faire vous-même. Est-ce que cela vous convient?"
+    }
+  }, {
+    "userUtterance": {
+    
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_global_error_count_check",
+      "inputActionParameters": {
+        "global_error_counter": "0",
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+        "global_error_counter": "1",
+        "language": "fr-ca"
+      }
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "brand": "bell",
+        "language": "fr-ca",
+        "route": "account_restore_service",
+        "sms_send_status": "Declined",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "User wants to restore their service",
+    "actionParameters": {
+      "brand": "bell",
+      "global_error_counter": "0",
+      "language": "fr-ca",
+      "route": "account_restore_service",
+      "unique_services": "MOBILITY, INTERNET, TV",
+      "utterance": "Je veux rétablir mon ou mes service"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "User didn't said anything and routed to sms flow",
+    "actionParameters": {
+      "brand": "bell",
+      "global_error_counter": "1",
+      "language": "fr-ca",
+      "route": "account_restore_service",
+      "sms_send_status": "Declined"
+    }
+  },
+  "displayName": "FR Restore Service : Ask service - Internet - No Input",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 452,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

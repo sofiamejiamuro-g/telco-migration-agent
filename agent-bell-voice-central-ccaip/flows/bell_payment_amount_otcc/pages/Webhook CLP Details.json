@@ -1,0 +1,104 @@
+{
+  "name": "f2251a19-efe2-4c18-aa03-7b62b3c83ee8",
+  "displayName": "Webhook CLP Details",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "v1/account-information/get-clp-details",
+    "tag": "N/A",
+    "setParameterActions": [ {
+      "parameter": "billing_account",
+      "value": "$session.params.billing_account_number"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.webhook_success = false OR $session.params.webhook_success = False",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Create Order",
+    "name": "309d34e5-fc61-4d05-9308-4fc5768f0fc9"
+  }, {
+    "condition": "$session.params.webhook_success = true OR $session.params.webhook_success = True",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "spending_limit",
+        "value": "$session.params.get_clp_info_response.spendingLimit"
+      }, {
+        "parameter": "clp_aul_limit",
+        "value": "$session.params.get_clp_info_response.aul_threshold"
+      }, {
+        "parameter": "clp_sus_limit",
+        "value": "$session.params.get_clp_info_response.sus_threshold"
+      }, {
+        "parameter": "clp_balance",
+        "value": "$session.params.get_clp_info_response.curSpendingLimitBal"
+      } ]
+    },
+    "targetPage": "Check if CX is on CLP",
+    "name": "ceece5b9-37a2-49a1-857a-63fc8e23200b"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "f2251a19-efe2-4c18-aa03-7b62b3c83ee8"
+      }, {
+        "parameter": "flow_id",
+        "value": "5f9ad0a8-5f25-4bd1-96dd-a2b5b74312df"
+      }, {
+        "parameter": "page_name",
+        "value": "Webhook CLP Details"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Webhook Create Order",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+    
+    },
+    "name": "7addac1c-abc9-4386-b5eb-55e3dba4e555"
+  }, {
+    "targetPage": "Webhook Create Order",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+    
+    },
+    "name": "9cd08549-6941-49cf-842f-6446ab408f31"
+  }, {
+    "targetPage": "Webhook Create Order",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+    
+    },
+    "name": "36dfd88a-bc6e-4ede-b58d-785bb30a0006"
+  }, {
+    "targetPage": "Webhook Create Order",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+    
+    },
+    "name": "9ca7cc4a-c1f5-4f1b-8e2e-1b75b457c42e"
+  }, {
+    "targetPage": "Webhook Create Order",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+    
+    },
+    "name": "feae637d-18e3-445b-b8d0-ca8f6a0c693d"
+  }, {
+    "targetPage": "Webhook Create Order",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+    
+    },
+    "name": "7daf632a-b7cb-400c-b14e-095fdd8cbd1d"
+  } ]
+}

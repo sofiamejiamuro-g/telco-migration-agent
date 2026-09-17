@@ -1,0 +1,87 @@
+{
+  "name": "ce64674d-7c9e-457a-9fcc-29f716f8ac33",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70011",
+        "brand": "bell",
+        "language": "en",
+        "route": "service_add_feature"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Which service are you calling about? "
+    }
+  }, {
+    "userUtterance": {
+      "text": "my mobile phone"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "You can view the travel options available in My Bell. I'll send a text with a link to the device you're calling from. Is that alright?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "yes"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "add_ons": "roaming",
+        "language": "en",
+        "route": "service_add_feature",
+        "sms_content": "Bell: You can visit https://m.bell.ca/trip to view your travel options in the MyBell app. ( bell.ca/about-us )",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+        "language": "en"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "The {identification_status} is \"Pass\", {customer_type} is \"Existing\", {streaming_services} is null and {ppv} is null and {add_ons} is \"roaming\" and {lob} is null so, we will prompt user for send SMS confirmation and if user say \"yes\" or anything affirmative then route to \"bell_SMS Trigger\" flow.",
+    "actionParameters": {
+      "add_ons": "data travel pass",
+      "apb_location_id": "70011",
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "is_prepaid": "false",
+      "language": "en",
+      "mobility_sub_type": "postpaid",
+      "route": "service_add_feature",
+      "sms_content": "Bell: You can visit https://m.bell.ca/trip to view your travel options in the MyBell app. ( bell.ca/about-us )",
+      "sms_type": "Public",
+      "utterance": "Can you add  Data Travel Pass please"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "As the {lob} is null and {streaming_services}, {ppv} is null and {add_ons} = \"roaming\" then we will prompt user to send SMS and if user say \"yes\" or anything affirmative then send the user to \"bell_SMS Trigger\" flow",
+    "actionParameters": {
+      "add_ons": "data travel pass",
+      "apb_location_id": "70011",
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "is_prepaid": "false",
+      "language": "en",
+      "lob": "Mobility",
+      "mobility_sub_type": "postpaid",
+      "route": "service_add_feature",
+      "sms_content": "Bell: You can visit https://m.bell.ca/trip to view your travel options in the MyBell app. ( bell.ca/about-us )",
+      "sms_type": "Public",
+      "utterance": "Can you add  Data Travel Pass please"
+    }
+  },
+  "displayName": "EN - service_add_feature- Roaming | Mobility",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 774,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

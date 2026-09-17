@@ -1,0 +1,68 @@
+{
+  "name": "c9e044cc-44d4-4948-ad6d-1df703be9cb9",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_tech_intent_apb",
+      "inputActionParameters": {
+      
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "I'd be happy to help you get a new sim.\n\nWould you like to activate with eSIM now?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "SIM"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "You can easily activate an eSIM online. I’ll send you a text now with further instructions."
+    }
+  }, {
+    "userUtterance": {
+      "text": "yes"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "brand": "bell",
+        "language": "en",
+        "sms_content": "Bell msg: To activate an eSIM, visit: https://support.bell.ca/esim-setup#card-link-content-panel (bell.ca/about-us)",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+        "brand": "bell",
+        "language": "en"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer needs a new sim",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "route": "equipment_request_sim",
+      "sim_type": "eSIM",
+      "utterance": "I need a new sim"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Customer to receive the SMS in their phone",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "sms_content": "Bell MSG: As requested, here is a link to set up an eSIM online now. See: https://support.bell.ca/esim-setup#card-link-content-panel (bell.ca/about-us)",
+      "sms_type": "Public"
+    }
+  },
+  "displayName": "EN - Equipment Request Sim - eSIM - CX Confirms SIM",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 442,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

@@ -1,0 +1,66 @@
+{
+  "name": "c6d9c7a1-f915-4bc1-839b-a848ee8a3c10",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_tech_intent_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70012",
+        "language": "en",
+        "utterance": "Is there outage in my area?"
+      },
+      "outputActionParameters": {
+        "lob": "Internet"
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "You can use our Virtual Repair tool to check for service outages and troubleshoot your equipment. I'll send a text to the device you're calling from so you can access it quickly. Is that alright?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "no get me to an agent"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Could you tell me why you'd like to speak to an agent?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "My Internet hasn't been working for a day, I need someone to fix it."
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_aqd",
+      "inputActionParameters": {
+        "language": "en",
+        "lob": "Internet"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "The customer is inquiring about an outage in their area.",
+    "actionParameters": {
+      "apb_location_id": "70012",
+      "brand": "Bell",
+      "language": "en",
+      "route": "tech_service_outage",
+      "utterance": "Is there outage in my area?"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "The customer is transferred to bell_tech_intent_apb flow for lob extraction and VA asked to send an SMS but the customer asked to connect with an agent. The flow get routed to bell_aqd.",
+    "actionParameters": {
+      "apb_location_id": "70012",
+      "language": "en",
+      "lob": "Internet"
+    }
+  },
+  "displayName": "EN tech_service_outage - Agent - VA Asked Reason - AQD",
+  "retrievalStrategy": "STATIC",
+  "tokenCount": 451,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

@@ -1,0 +1,57 @@
+{
+  "name": "5885d70b-e91e-4beb-9706-81ead15c35e8",
+  "displayName": "Webhook Intent SDL Mapping",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "v1/intent-sdl-mapping",
+    "tag": "NA",
+    "setParameterActions": [ {
+      "parameter": "intent",
+      "value": "$session.params.route"
+    }, {
+      "parameter": "tag",
+      "value": "default"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.webhook_success = True OR $session.params.webhook_success = true",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "You can review your account details and billing preferences yourself in the MyBell app.\n\nYou can also learn more about your account details at $session.params.vanity_url" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Vous pouvez consulter les détails de votre compte et vos préférences de facturation vous-même dans l'appli MonBell.\n\nVous pouvez également en apprendre davantage sur les détails de votre compte à l'adresse $session.params.vanity_url" ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "vanity_url",
+        "value": "$session.params.intent_sdl_map_response.url"
+      } ]
+    },
+    "targetFlow": "bell_Feedback",
+    "name": "9ba7d4f6-2b49-4247-8096-1d12737fb8fd"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "You can review your account details and billing preferences yourself in the MyBell app." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Vous pouvez consulter les détails de votre compte et vos préférences de facturation vous-même dans l'appli MonBell." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetFlow": "bell_Feedback",
+    "name": "c5d6d6a6-e0c5-483d-9921-916cddf2a653"
+  } ]
+}

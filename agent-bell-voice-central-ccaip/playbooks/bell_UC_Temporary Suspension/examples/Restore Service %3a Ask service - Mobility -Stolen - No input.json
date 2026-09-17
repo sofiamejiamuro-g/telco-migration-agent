@@ -1,0 +1,78 @@
+{
+  "name": "3ed186ca-77a7-44d5-9f21-50401755c2e8",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Sure, I can help with that. Could you please confirm which service you are looking to restore?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Mobility"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Got it. Why is your service currently suspended?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "My Phone is stolen"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Thank you. You can easily restore your mobility service in MyBell. I will send a text to the device you're calling from, with a link to do it yourself. Is that alright?"
+    }
+  }, {
+    "userUtterance": {
+    
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_global_error_count_check",
+      "inputActionParameters": {
+        "global_error_counter": "1",
+        "language": "en"
+      },
+      "outputActionParameters": {
+        "global_error_counter": "2",
+        "language": "en"
+      }
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "brand": "bell",
+        "language": "en",
+        "sms_send_status": "Declined",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "User wants to restore their service",
+    "actionParameters": {
+      "brand": "bell",
+      "global_error_counter": "1",
+      "language": "en",
+      "route": "account_restore_service",
+      "unique_services": "MOBILITY, INTERNET, TV",
+      "utterance": "I want to restore my service"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "User declines sms and routed to sms flow",
+    "actionParameters": {
+      "brand": "bell",
+      "global_error_counter": "2",
+      "language": "en",
+      "sms_send_status": "Declined"
+    }
+  },
+  "displayName": "Restore Service : Ask service - Mobility -Stolen - No input",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 444,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

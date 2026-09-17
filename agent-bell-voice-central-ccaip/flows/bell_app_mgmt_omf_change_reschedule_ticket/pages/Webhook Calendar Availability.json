@@ -1,0 +1,116 @@
+{
+  "name": "c86dff66-8375-421b-a664-3d1debf28562",
+  "displayName": "Webhook Calendar Availability",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "v1/ticket_management/omf/calendar#availability",
+    "tag": "availability",
+    "setParameterActions": [ {
+      "parameter": "startDate",
+      "value": "$request.generative.start_date_utc"
+    }, {
+      "parameter": "endDate",
+      "value": "$request.generative.end_date_utc"
+    }, {
+      "parameter": "accountNumber",
+      "value": "$session.params.billing_account_number"
+    }, {
+      "parameter": "intervals",
+      "value": [ "AllDay" ]
+    }, {
+      "parameter": "today_date",
+      "value": "$request.generative.start_date_utc"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "consistent_calendars",
+        "value": "$session.params.omf_calendaring_response.consistent_calendars"
+      }, {
+        "parameter": "calendarInformationList_1",
+        "value": "$sys.func.COUNT($session.params.omf_calendaring_response.installationDetailList.installationDetail)"
+      }, {
+        "parameter": "calendarInformationList",
+        "value": "$sys.func.TO_NUMBER($session.params.calendarInformationList_1)"
+      }, {
+        "parameter": "list_of_date_offered",
+        "value": "$session.params.calendar_data.calendarInformationList.CalendarInformation[0].calendarAppointmentData.dateOfferedList.dateOffered"
+      }, {
+        "parameter": "date_available",
+        "value": "$session.params.omf_calendaring_response.calendarInformationList.CalendarInformation"
+      }, {
+        "parameter": "calender_availibility_response",
+        "value": "$session.params.omf_calendaring_response"
+      } ]
+    },
+    "name": "d2047530-6544-46cc-8cf0-60807908ec07"
+  }, {
+    "condition": "$session.params.webhook_success = true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Check Calendar Consistency",
+    "name": "041ce86c-fdd1-45c0-8475-9d1bd380ce66"
+  }, {
+    "condition": "$session.params.webhook_success = false",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Failure - OMF",
+    "name": "40719cca-9e2f-40e4-b7bd-1019962bcf91"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Failure - OMF",
+    "name": "20f8c66f-2ed9-4e42-ab16-27c099b1b879"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Webhook Failure - OMF",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+    
+    },
+    "name": "4c321b4d-e100-49c3-83ea-5a3401c81c71"
+  }, {
+    "targetPage": "Webhook Failure - OMF",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+    
+    },
+    "name": "69709eac-1fc6-4dbb-a2e2-80d02a242963"
+  }, {
+    "targetPage": "Webhook Failure - OMF",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+    
+    },
+    "name": "4972944d-2321-4193-ad18-74b81df823c2"
+  }, {
+    "targetPage": "Webhook Failure - OMF",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+    
+    },
+    "name": "966f5a72-4e6d-4475-8d03-13706be38483"
+  }, {
+    "targetPage": "Webhook Failure - OMF",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+    
+    },
+    "name": "4856ea65-5edb-47c9-a10c-db78856bd228"
+  }, {
+    "targetPage": "Webhook Failure - OMF",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+    
+    },
+    "name": "7c5879ee-636e-4a6d-9cd9-52112fc8d673"
+  } ]
+}

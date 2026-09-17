@@ -1,0 +1,41 @@
+{
+  "name": "560957a0-881e-4bc8-af1c-4a6fc2ca5cad",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Pour quel service souhaitez-vous prendre rendez-vous? Internet, Télé ou Téléphonie résidentielle?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "télévision"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Pour quel type de service Télé est le rendez-vous? Télé Fibe, appli Télé Fibe ou Télé Satellite?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Sat télé"
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "User wants to schedule the appointment, but does not mention LOB",
+    "actionParameters": {
+      "language": "fr-ca",
+      "route": "tech_field_tech_visits",
+      "utterance": "Je souhaite prendre rendez-vous avec un technicien."
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "User wants to schedule, which can be any of these routes or intent (tech_field_tech_visits | tech_change_appointment | tech_field_tech_visit_cancel), but does not mention LOB , so route ask them about lob and extract the lob if mentioned and of lob is TV then ask about TV subtype and capture the same, and return back to PARENT PLAYBOOK OR FLOW",
+    "actionParameters": {
+      "apb_location_id": "70015",
+      "language": "fr-ca",
+      "lob": "TV",
+      "route": "tech_field_tech_visits"
+    }
+  },
+  "displayName": "FR - extract LOB - tech_field_tech_visits | tech_change_appointment | tech_field_tech_visit_cancel | TV | subtype",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 293,
+  "languageCode": "en"
+}

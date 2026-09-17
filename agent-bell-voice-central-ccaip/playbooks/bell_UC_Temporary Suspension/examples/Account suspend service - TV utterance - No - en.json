@@ -1,0 +1,46 @@
+{
+  "name": "8d63a13e-dd87-419a-bd52-d5d07db8720e",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Sure, I can help with that. You can temporarily suspend your residential services in MyBell. I will send a text to the device you're calling from, with a link to do it yourself. Is that alright?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "no"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "route": "account_suspend_service",
+        "sms_send_status": "Declined"
+      },
+      "outputActionParameters": {
+        "brand": "bell",
+        "language": "en"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer trying to suspend their TV service",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "route": "account_suspend_service",
+      "unique_services": "Internet, Tv, WIRELINE",
+      "utterance": "I want to suspend my TV service"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Customer query is resolved.",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en"
+    }
+  },
+  "displayName": "Account suspend service - TV utterance - No - en",
+  "retrievalStrategy": "NEVER",
+  "tokenCount": 250,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

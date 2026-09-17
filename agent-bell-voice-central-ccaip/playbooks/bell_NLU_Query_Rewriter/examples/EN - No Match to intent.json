@@ -1,0 +1,72 @@
+{
+  "name": "369c7265-dedf-4c4c-99e5-743e89c4491d",
+  "actions": [ {
+    "toolUse": {
+      "tool": "inline-action",
+      "action": "match_intent",
+      "inputActionParameters": {
+        "language": "en",
+        "revised_user_query": "can you hear me",
+        "second_intent_true": "false"
+      },
+      "outputActionParameters": {
+        "result": "codeblocks_no_match"
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Sorry, I didn't understand. Can you please say that again?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "I want to know the calling history for the last 2 days"
+    }
+  }, {
+    "toolUse": {
+      "tool": "inline-action",
+      "action": "match_intent",
+      "inputActionParameters": {
+        "language": "en",
+        "revised_user_query": "I want to know the calling history for the last 2 days",
+        "second_intent_true": "false"
+      },
+      "outputActionParameters": {
+        "result": ""
+      }
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_Query_Rewriter",
+      "inputActionParameters": {
+        "language": "en",
+        "route": "account_usage_history",
+        "utterance": "I want to know the calling history for the last 2 days"
+      },
+      "outputActionParameters": {
+        "language": "en",
+        "route": "account_usage_history",
+        "utterance": "I want to know the calling history for the last 2 days"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "The user came to the bot with a query",
+    "actionParameters": {
+      "language": "en",
+      "utterance": "can you hear me"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "The first user input is a no-match, and then user provide an in scope query next, so the route is set to \"account_usage_history\" and the bell_Query_Rewriter flow is invoked for further processing.",
+    "actionParameters": {
+      "language": "en",
+      "route": "account_usage_history",
+      "utterance": "I want to know the calling history for the last 2 days"
+    }
+  },
+  "displayName": "EN - No Match to intent",
+  "retrievalStrategy": "NEVER",
+  "tokenCount": 447,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

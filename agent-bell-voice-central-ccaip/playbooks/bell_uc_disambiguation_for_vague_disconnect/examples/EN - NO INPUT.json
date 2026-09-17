@@ -1,0 +1,84 @@
+{
+  "name": "5c715dfd-5b4c-4f66-b05e-1bdc667e3c5c",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_global_error_count_check",
+      "inputActionParameters": {
+        "global_error_counter": "0"
+      },
+      "outputActionParameters": {
+        "global_error_counter": "1"
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "I didn’t quite get that. Can you try again?"
+    }
+  }, {
+    "userUtterance": {
+    
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_global_error_count_check",
+      "inputActionParameters": {
+        "global_error_counter": "1"
+      },
+      "outputActionParameters": {
+        "global_error_counter": "2"
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Are you still there? Can you repeat please?"
+    }
+  }, {
+    "userUtterance": {
+    
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_global_error_count_check",
+      "inputActionParameters": {
+        "global_error_counter": "2"
+      },
+      "outputActionParameters": {
+        "global_error_counter": "3"
+      }
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_No_Match_3",
+      "inputActionParameters": {
+        "brand": "bell",
+        "language": "en"
+      },
+      "outputActionParameters": {
+        "brand": "bell",
+        "language": "en"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "The customer is not giving any input",
+    "actionParameters": {
+      "brand": "bell",
+      "global_error_counter": "0",
+      "language": "en",
+      "utterance": ""
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "The customer provides no  information 3 times so flow bell_global_error_count_check is called each time and VA responds as per instructions ,   was routed to No_Input_3 flow",
+    "actionParameters": {
+      "brand": "bell",
+      "global_error_counter": "3",
+      "language": "en"
+    }
+  },
+  "displayName": "EN - NO INPUT",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 498,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

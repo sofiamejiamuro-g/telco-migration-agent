@@ -1,0 +1,142 @@
+{
+  "name": "ec35d600-48d8-4527-a61a-1ea8f45dd169",
+  "displayName": "Route - NGA - payment",
+  "transitionRoutes": [ {
+    "condition": "$session.params.route = payment_auto_payment_status",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "route",
+        "value": "payment_auto_payment_status"
+      } ]
+    },
+    "targetFlow": "bell_payment_autopay_status",
+    "name": "9724e041-3245-40dd-b8d5-d31f29b667cc"
+  }, {
+    "condition": "$session.params.route = payment_cancel_autopay",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "route",
+        "value": "payment_cancel_autopay"
+      } ]
+    },
+    "targetFlow": "bell_payment_autopay_cancel",
+    "name": "3d29a0f3-6249-42b5-884e-5c9c52ba3b98"
+  }, {
+    "condition": "$session.params.route = payment_not_processing",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "route",
+        "value": "payment_not_processing"
+      } ]
+    },
+    "name": "6bf73589-a1ec-4760-8bbb-fde4e063d93d",
+    "targetPlaybook": "bell_UC_Payments"
+  }, {
+    "condition": "$session.params.route = payment_request_refund",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "route",
+        "value": "payment_request_refund"
+      } ]
+    },
+    "name": "793fbf2e-aea0-4104-a0f8-5320606366a3",
+    "targetPlaybook": "bell_UC_Payments"
+  }, {
+    "condition": "$session.params.route = payment_setup_payment_arrangements",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "route",
+        "value": "payment_setup_payment_arrangements"
+      } ]
+    },
+    "targetFlow": "bell_payment_arrangment_setup_id_auth_eligibility_Checks",
+    "name": "c68d0c66-aa11-49d0-b5d2-2b1e9eee58e7"
+  }, {
+    "condition": "$session.params.route = payment_update_payment_arrangements",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "route",
+        "value": "payment_update_payment_arrangements"
+      } ]
+    },
+    "targetFlow": "bell_payment_update_payment_arrangements",
+    "name": "6bdf4bef-59d0-4361-98da-d98df2e89b0e"
+  }, {
+    "condition": "$session.params.route = payment_make_payment",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "route",
+        "value": "payment_make_payment"
+      } ]
+    },
+    "targetFlow": "bell_payment_one_time_CC_payment",
+    "name": "0c4d9246-9f4c-4e36-b653-c76168b0325b"
+  }, {
+    "condition": "$session.params.route = payment_confirm_made",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "route",
+        "value": "payment_confirm_made"
+      } ]
+    },
+    "name": "88daefc1-165c-4398-80bf-c5bae60e8b14",
+    "targetPlaybook": "bell_UC_Payments"
+  }, {
+    "condition": "$session.params.route = payment_setup_autopay",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "route",
+        "value": "payment_setup_autopay"
+      } ]
+    },
+    "targetFlow": "bell_payment_setup_pacc_or_payment_not_stated",
+    "name": "ef024c96-dd1d-4846-b559-5391006e0e24"
+  }, {
+    "condition": "$session.params.route = payment_update_autopay",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "route",
+        "value": "payment_update_autopay"
+      } ]
+    },
+    "targetFlow": "bell_payment_autopay_update",
+    "name": "1ac5e4a2-99f6-4645-b530-12b0970c71e0"
+  }, {
+    "condition": "$session.params.route = payment_restore_service",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "route",
+        "value": "payment_restore_service"
+      } ]
+    },
+    "targetFlow": "bell_billing",
+    "name": "874d88bf-988e-4112-b4bd-e5942dbb952b"
+  }, {
+    "condition": "$session.params.route = payment_vague",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "route",
+        "value": "payment_vague"
+      } ]
+    },
+    "name": "9adcff8c-bf8c-46cb-9147-e579788a3b37",
+    "targetPlaybook": "bell_uc_disambiguation_for_vague_payment"
+  }, {
+    "condition": "$session.params.route = payment_report_made",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "route",
+        "value": "payment_report_made"
+      } ]
+    },
+    "name": "c6ff9eda-6336-48c0-9a38-28857f7ec5f3",
+    "targetPlaybook": "bell_UC_Payments"
+  }, {
+    "condition": "$session.params.route = context_PAMultipleInstallments",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_payment_arrangement_setup_mutilple_installments",
+    "name": "74f3faf4-2ba6-4f27-b44f-fbdfecc0cc00"
+  } ]
+}

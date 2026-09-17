@@ -1,0 +1,30 @@
+{
+  "name": "b5a40293-8056-40e7-9fdd-f47879253c6e",
+  "displayName": "webhook Success (Main Flow)",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "v1/dfcx_support/cpm_profile_info#services-in-address",
+    "tag": "services-in-address",
+    "setParameterActions": [ {
+      "parameter": "customer_profile",
+      "value": "$sys.func.TO_TEXT($session.params.customer_id_search_response)"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.webhook_success = \"true\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Check LOB (Main Flow)",
+    "name": "cdbfa69c-5bab-4b8b-93ca-9ae39eab3043"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Failed Outage Check",
+    "name": "2a01db6b-a7ac-4966-867e-883b61b94416"
+  } ]
+}

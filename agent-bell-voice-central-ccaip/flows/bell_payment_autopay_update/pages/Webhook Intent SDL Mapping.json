@@ -1,0 +1,185 @@
+{
+  "name": "db06c270-946e-4de5-8cd4-f61b639b058c",
+  "displayName": "Webhook Intent SDL Mapping",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "v1/intent-sdl-mapping",
+    "tag": "\"default\"",
+    "setParameterActions": [ {
+      "parameter": "brand",
+      "value": "bell"
+    }, {
+      "parameter": "language",
+      "value": "$request.language"
+    }, {
+      "parameter": "intent",
+      "value": "$session.params.route"
+    }, {
+      "parameter": "webhook_success",
+      "value": null
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.webhook_success = true",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Okay. If you'd still like to update Pre-Authorized payments, you can do so in MyBell. Please visit  $session.params.vanity_url  on how to update Pre-Authorized payments." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "D’accord. Si vous souhaitez toujours mettre à jour les paiements pré-autorisés, vous pouvez le faire dans MonBell. Veuillez visiter  $session.params.vanity_url pour savoir comment mettre à jour les paiements pré-autorisés." ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "vanity_url",
+        "value": "$session.params.intent_sdl_map_response.url"
+      } ]
+    },
+    "targetFlow": "bell_Feedback",
+    "name": "a95ddc25-9b5f-4402-960f-96c8f725860f"
+  }, {
+    "condition": "$session.params.webhook_success = false",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Okay. If you'd still like to update Pre-Authorized payments, you can do so in MyBell. Please visit  bell.ca/support  on how to update Pre-Authorized payments." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "D’accord. Si vous souhaitez toujours mettre à jour les paiements pré-autorisés, vous pouvez le faire dans MonBell. Veuillez visiter  bell.ca/soutien pour savoir comment mettre à jour les paiements pré-autorisés." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetFlow": "bell_Feedback",
+    "name": "c058034c-fe0f-49d0-b093-cfb5cc8ea531"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "db06c270-946e-4de5-8cd4-f61b639b058c"
+      }, {
+        "parameter": "flow_id",
+        "value": "00208917-47d8-4e61-a709-01d206b91ce4"
+      }, {
+        "parameter": "page_name",
+        "value": "Webhook Intent SDL Mapping"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ],
+  "eventHandlers": [ {
+    "targetFlow": "bell_Feedback",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Okay. If you'd still like to update Pre-Authorized payments, you can do so in the MyBell. Please visit  bell.ca/support  on how to update Pre-Authorized payments." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "D’accord. Si vous souhaitez toujours mettre à jour les paiements pré-autorisés, vous pouvez le faire dans MonBell. Veuillez visiter  bell.ca/soutien pour savoir comment mettre à jour les paiements pré-autorisés." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "4a864698-2c14-445a-81e1-b6e4153493cd"
+  }, {
+    "targetFlow": "bell_Feedback",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Okay. If you'd still like to update Pre-Authorized payments, you can do so in the MyBell. Please visit  bell.ca/support  on how to update Pre-Authorized payments." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "D’accord. Si vous souhaitez toujours mettre à jour les paiements pré-autorisés, vous pouvez le faire dans MonBell. Veuillez visiter  bell.ca/soutien pour savoir comment mettre à jour les paiements pré-autorisés." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "26a88a71-099c-4048-b6a3-8fb7378026d5"
+  }, {
+    "targetFlow": "bell_Feedback",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Okay. If you'd still like to update Pre-Authorized payments, you can do so in the MyBell. Please visit  bell.ca/support  on how to update Pre-Authorized payments." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "D’accord. Si vous souhaitez toujours mettre à jour les paiements pré-autorisés, vous pouvez le faire dans MonBell. Veuillez visiter  bell.ca/soutien pour savoir comment mettre à jour les paiements pré-autorisés." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "ec385e19-fb58-49fe-a2da-b5913b807906"
+  }, {
+    "targetFlow": "bell_Feedback",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Okay. If you'd still like to update Pre-Authorized payments, you can do so in the MyBell. Please visit  bell.ca/support  on how to update Pre-Authorized payments." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "D’accord. Si vous souhaitez toujours mettre à jour les paiements pré-autorisés, vous pouvez le faire dans MonBell. Veuillez visiter  bell.ca/soutien pour savoir comment mettre à jour les paiements pré-autorisés." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "b68b18ac-bbca-49bd-834d-5eb35c5a1942"
+  }, {
+    "targetFlow": "bell_Feedback",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Okay. If you'd still like to update Pre-Authorized payments, you can do so in the MyBell. Please visit  bell.ca/support  on how to update Pre-Authorized payments." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "D’accord. Si vous souhaitez toujours mettre à jour les paiements pré-autorisés, vous pouvez le faire dans MonBell. Veuillez visiter  bell.ca/soutien pour savoir comment mettre à jour les paiements pré-autorisés." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "62b49551-353b-4095-a375-eaa5910c9b64"
+  }, {
+    "targetFlow": "bell_Feedback",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Okay. If you'd still like to update Pre-Authorized payments, you can do so in the MyBell. Please visit  bell.ca/support  on how to update Pre-Authorized payments." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "D’accord. Si vous souhaitez toujours mettre à jour les paiements pré-autorisés, vous pouvez le faire dans MonBell. Veuillez visiter  bell.ca/soutien pour savoir comment mettre à jour les paiements pré-autorisés." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "2c7a11c5-974b-4e86-a26d-66203072c37a"
+  } ]
+}

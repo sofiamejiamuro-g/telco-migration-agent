@@ -1,0 +1,136 @@
+{
+  "name": "d2b58f45-16fc-436e-98f9-2f2d3ebb9f3e",
+  "displayName": "Webhook Check Balance",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "v1/account-information/get-clp-details",
+    "tag": "N/A",
+    "setParameterActions": [ {
+      "parameter": "is_prepaid",
+      "value": "false"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "clp_balance",
+        "value": "$session.params.get_clp_info_response.curSpendingLimitBal"
+      } ]
+    },
+    "name": "2bb0cc33-15d9-490b-8b5e-440ff1928f16"
+  }, {
+    "condition": "$session.params.webhook_success = false",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I'm sorry, I can't help you with confirming your Credit Limit Balance or account details at this time." ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "targetFlow": "bell_Feedback",
+    "name": "77629ffb-f3cf-4a00-aa2e-47ef4e76175d"
+  }, {
+    "condition": "$session.params.webhook_success = true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "CLP Balance",
+    "name": "0e903d5e-8986-4c22-aabb-fd3961778086"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "d2b58f45-16fc-436e-98f9-2f2d3ebb9f3e"
+      }, {
+        "parameter": "flow_id",
+        "value": "3c7a6898-5854-41b5-900b-4554be02d70d"
+      }, {
+        "parameter": "page_name",
+        "value": "Webhook Check Balance"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ],
+  "eventHandlers": [ {
+    "targetFlow": "bell_Feedback",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I'm sorry, I can't help you with confirming your Credit Limit Balance or account details at this time." ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "0caef618-61e7-4444-a2b5-ddb2e5fea79f"
+  }, {
+    "targetFlow": "bell_Feedback",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I'm sorry, I can't help you with confirming your Credit Limit Balance or account details at this time." ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "a29a00dd-4484-4ac0-8d6b-3601a83a241e"
+  }, {
+    "targetFlow": "bell_Feedback",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I'm sorry, I can't help you with confirming your Credit Limit Balance or account details at this time." ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "4ff2d6e4-df1b-4b0b-8142-6582b1b7bebf"
+  }, {
+    "targetFlow": "bell_Feedback",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I'm sorry, I can't help you with confirming your Credit Limit Balance or account details at this time." ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "cdf4601e-1f08-4ace-bc79-0aa7d1d9193f"
+  }, {
+    "targetFlow": "bell_Feedback",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I'm sorry, I can't help you with confirming your Credit Limit Balance or account details at this time." ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "d8337602-6600-49e9-bf8e-24dc57e597a7"
+  }, {
+    "targetFlow": "bell_Feedback",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I'm sorry, I can't help you with confirming your Credit Limit Balance or account details at this time." ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "db47efd7-303b-4279-8c2f-0d1bb5655e4e"
+  } ]
+}

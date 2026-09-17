@@ -1,0 +1,63 @@
+{
+  "name": "7802741f-04fe-4e70-997b-fc186e45d876",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Chaque code de vérification AMF ne peut être entrê que cinq fois avant son expiration. Si vous atteignez votre limite de renvoi, vous pouvez cliquer sur « essayer une autre méthode » et sélectionner une autre méthode pour recevoir votre code.\n\nJe vais envoyer un message texte à l’appareil au moyen duquel vous appellez. Si vous avez d’autres questions sur l’authentification multifactorielle, la page contient tous les renseignements dont vous avez besoin. Est-ce que ça vous convient ?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Non"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_get_sdl_mapping_url",
+      "inputActionParameters": {
+        "brand": "bell",
+        "language": "fr-ca",
+        "route": "account_login_assistance"
+      },
+      "outputActionParameters": {
+        "brand": "bell",
+        "language": "fr-ca"
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Pas de problème. Pour toute autre question, vous pouvez toujours consulter notre site web à l’adresse {faq_link}"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_Feedback",
+      "inputActionParameters": {
+        "brand": "bell",
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "The user wants to login to their account.",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "Existing",
+      "language": "fr-ca",
+      "route": "account_login_assistance",
+      "utterance": "Mon MFA ne fonctionne pas. Pouvez-vous m’aider ?"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "The user is an \"Existing\" Customer and has a {mfa} then prompts the user with an appropriate response. If the customer agrees to receive the SMS link and send the user to bell_SMS Trigger flow.",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca",
+      "utterance": "Mon MFA ne fonctionne pas. Pouvez-vous m’aider ?"
+    }
+  },
+  "displayName": "FR_account_login_assistance_ExistingCust_MFAIsNotNull_MyMFAIsNotWorking_NoForText",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 493,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

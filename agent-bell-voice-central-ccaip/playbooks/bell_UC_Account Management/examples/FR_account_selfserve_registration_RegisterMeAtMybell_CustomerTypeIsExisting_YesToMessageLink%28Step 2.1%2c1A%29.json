@@ -1,0 +1,49 @@
+{
+  "name": "a6621b14-1fdc-47d3-a77e-6c6827f36660",
+  "actions": [ {
+    "agentUtterance": {
+      "text": " L'utilisation  de MonBell est un excellent moyen de gérer vos services au moment qui vous convient. Je vais envoyer un texto à l'appareil au moyen duquel vous appelez, afin que vous puissiez créer votre compte. Est-ce que ça vous convient ?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Oui"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "brand": "bell",
+        "language": "fr-ca",
+        "sms_content": "Vous pouvez visiter https://m.bell.ca/telechargerapp pour ouvrir une session dans l'appli MonBell. (bell.ca/apropos)",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "The customer is trying to register in the MyBell Application.",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "Existing",
+      "language": "fr-ca",
+      "route": "account_selfserve_registration",
+      "utterance": "inscrivez-moi à MyBell"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "If the customer agrees and says yes then reroute to bell_SMS Trigger flow",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca",
+      "route": "account_selfserve_registration",
+      "sms_content": "Vous pouvez visiter https://m.bell.ca/telechargerapp pour ouvrir une session dans l'appli MonBell. (bell.ca/apropos)"
+    }
+  },
+  "displayName": "FR_account_selfserve_registration_RegisterMeAtMybell_CustomerTypeIsExisting_YesToMessageLink(Step 2.1,1A)",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 357,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

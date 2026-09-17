@@ -1,0 +1,76 @@
+{
+  "name": "3508c9b2-cab9-47dd-917c-ff8c5f9d13f3",
+  "displayName": "Trigger rehit",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "v1/sat-rehit",
+    "tag": "sat-rehit"
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.webhook_success = true",
+    "triggerFulfillment": {
+    
+    },
+    "name": "310dbda0-e7b4-4d31-bedf-3afd3db600f6",
+    "targetPlaybook": "Bell_tv_rehit_SatTV_FibeTV"
+  }, {
+    "condition": "$session.params.webhook_success = false",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_rehit_SMS",
+    "name": "bd97869e-7ab1-46a4-8c95-f370e5861e80"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_aqd",
+    "name": "185260a9-9ec1-4038-a44a-b53674af9f0b"
+  } ],
+  "eventHandlers": [ {
+    "targetFlow": "bell_rehit_SMS",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+    
+    },
+    "name": "8535265e-223c-4787-9159-38a7839d7367"
+  }, {
+    "targetFlow": "bell_rehit_SMS",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+    
+    },
+    "name": "49bf4807-13b3-4f75-9317-e70056af5a20"
+  }, {
+    "targetFlow": "bell_rehit_SMS",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+    
+    },
+    "name": "a05dd6dc-fc80-49f0-8d10-95b38f572218"
+  }, {
+    "targetFlow": "bell_rehit_SMS",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+    
+    },
+    "name": "f1b03d6e-464d-4265-9739-2acf2d306fbb"
+  }, {
+    "targetFlow": "bell_rehit_SMS",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+    
+    },
+    "name": "9691d247-6818-41fc-ab03-ec2e5433647a"
+  }, {
+    "targetFlow": "bell_rehit_SMS",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+    
+    },
+    "name": "8b5e2c31-3e89-4444-8abc-a054200a5cee"
+  } ]
+}

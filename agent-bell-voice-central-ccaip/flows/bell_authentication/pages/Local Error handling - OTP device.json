@@ -1,0 +1,98 @@
+{
+  "name": "cb0f56cb-3fd9-4ad2-bd21-95e892886859",
+  "displayName": "Local Error handling - OTP device",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.global_error_counter \u003e= 3",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_aqd",
+    "name": "9665cc07-a762-415b-82a7-953e80caf802"
+  }, {
+    "condition": "$session.params.local_noinput_counter = 1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Do you have access to a mobile number listed on your account?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Avez-vous accès au numéro de téléphone portable associé à votre compte ?" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetPage": "Previous Page",
+    "name": "7a99723c-466b-487c-b183-df3df09dd13d"
+  }, {
+    "condition": "$session.params.local_noinput_counter \u003e= 2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "There seems to be a problem." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Il semble y avoir un problème." ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "auth_status",
+        "value": "Fail"
+      } ]
+    },
+    "targetPage": "End Flow Check",
+    "name": "4aba0123-cf42-44bd-bec0-c7876f3a0d1c"
+  }, {
+    "condition": "$session.params.local_trigger = \"no_match\" AND $session.params.local_nomatch_counter = 1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I can help you with your Bell products and Services, but I will need to verify your account before continuing. Do you have access to a mobile number listed on your account?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je peux vous aider avec vos produits et services Bell, mais je dois d'abord vérifier votre compte. Avez-vous accès au numéro de téléphone mobile associé à votre compte ?" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetPage": "Previous Page",
+    "name": "285e9c4c-1eea-4776-b6ab-c8977d367987"
+  }, {
+    "condition": "$session.params.local_trigger = \"no_match\" OR $session.params.local_nomatch_counter \u003e= 2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "There seems to be a problem." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Il semble y avoir un problème." ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "auth_status",
+        "value": "Fail"
+      } ]
+    },
+    "targetPage": "End Flow Check",
+    "name": "25c70480-eb26-4ca4-ae5a-4543df88f108"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Previous Page",
+    "name": "03013f70-91e0-48cc-87c5-6e5f81b2a976"
+  } ]
+}

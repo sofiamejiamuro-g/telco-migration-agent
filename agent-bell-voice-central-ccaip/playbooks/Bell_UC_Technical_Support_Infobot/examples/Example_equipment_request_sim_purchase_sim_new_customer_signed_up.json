@@ -1,0 +1,93 @@
+{
+  "name": "6a85460a-500b-4291-a2fb-a5c859557c67",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_tech_intent_apb",
+      "inputActionParameters": {
+        "language": "en",
+        "route": "equipment_request_sim",
+        "utterance": "purchase sim"
+      },
+      "outputActionParameters": {
+        "lob": "mobility"
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Are you an existing customer or a new customer?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "new"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Have you already signed up with Bell?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "yes"
+    }
+  }, {
+    "toolUse": {
+      "tool": "EN_Bell Tech Support Wireless",
+      "action": "EN_Bell Tech Support Wireless",
+      "inputActionParameters": {
+        "requestBody": {
+          "query": "Purchase physical sim"
+        }
+      },
+      "outputActionParameters": {
+        "200": {
+          "answer": "You can order a new physical SIM card online or visit a Bell store or authorized dealer.",
+          "snippets": [ {
+            "text": "You can update the existing SIM card for your mobile phone with a new SIM card or eSIM (where applicable) by logging into MyBell . If you need a new SIM card, you can order one online or visit a Bell store or authorized dealer.",
+            "title": "Update your existing Mobile phone SIM card/eSIM",
+            "uri": "https://support.bell.ca/mobility/smartphones_and_mobile_internet/how_to_update_my_sim_card#:~:text=You%20can%20update,or%20authorized%20dealer."
+          }, {
+            "text": "To unlock your SIM card: Log in to MyBell and retrieve your unlock key. Enter the unlock key on your mobile phone. Note: Entering an incorrect unlock key 10 times will permanently lock your SIM card. If you need a new SIM card, please visit a Bell store or order one online.",
+            "title": "SIM Card troubleshooting",
+            "uri": "https://support.bell.ca/mobility/smartphones_and_mobile_internet/i_get_an_error_message_on_my_phone_that_says_sim_card_locked#:~:text=To%20unlock%20your,order%20one%20online."
+          } ]
+        }
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "You can order a new physical SIM card online or visit a Bell store or authorized dealer.\n\nDid this information help you?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "yes"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_Feedback",
+      "inputActionParameters": {
+        "language": "en"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "User want's to buy an esim, route equipment_request_sim where parameter lob is null or not set",
+    "actionParameters": {
+      "global_error_counter": "0",
+      "route": "equipment_request_sim",
+      "utterance": "purchase sim"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "customer query was answered",
+    "actionParameters": {
+      "langauge": "en"
+    }
+  },
+  "displayName": "Example_equipment_request_sim_purchase_sim_new_customer_signed_up",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 736,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

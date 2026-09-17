@@ -1,0 +1,71 @@
+{
+  "name": "ba6ed9ae-0410-406b-80e7-b336c440ff24",
+  "displayName": "Check If Status Change",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.special_status != \"bell_col_sus\" AND $session.params.special_status != \"bell_col_aul\" AND $session.params.special_status != \"bell_col_delinquent\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "no_change_col_status",
+        "value": true
+      } ]
+    },
+    "targetPage": "No Change in Collection Status",
+    "name": "676f0fda-e625-489c-8663-a579916de081"
+  }, {
+    "condition": "$session.params.pastDueAmount = 0 OR $session.params.pastDueAmount = 0.0",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "moved_out_of_col",
+        "value": true
+      } ]
+    },
+    "targetPage": "Move Out of Collection",
+    "name": "2de63a56-c104-4924-b729-0dc629969c0f"
+  }, {
+    "condition": "$session.params.pastDueAmount \u003e 0",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "You still have a past due amount of $ $session.params.pastDueAmount . You will need to make a Payment Arrangement. Please consider making an additional payment to avoid further action against your account." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Vous avez toujours un montant en souffrance de $$session.params.pastDueAmount. Vous devrez contacter l'entente de paiement. Veuillez envisager d'effectuer un paiement supplémentaire afin d'éviter d'autres mesures contre votre compte." ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "moved_out_of_col",
+        "value": true
+      } ]
+    },
+    "targetFlow": "bell_payment_pitch_pacc_otcc",
+    "name": "20a037f3-e4eb-466b-86cc-53e16557393d"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "ba6ed9ae-0410-406b-80e7-b336c440ff24"
+      }, {
+        "parameter": "flow_id",
+        "value": "15649ac7-20d9-448b-a12c-b86f9480280b"
+      }, {
+        "parameter": "page_name",
+        "value": "Check If Status Change"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

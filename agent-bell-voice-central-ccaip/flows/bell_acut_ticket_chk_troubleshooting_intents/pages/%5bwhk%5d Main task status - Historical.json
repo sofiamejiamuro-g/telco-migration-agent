@@ -1,0 +1,79 @@
+{
+  "name": "aee92419-1dba-4126-803c-2f8f5fb4b5e3",
+  "displayName": "[whk] Main task status - Historical",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "setParameterActions": [ {
+      "parameter": "closedTimeObj",
+      "value": "$sys.func.TO_OBJECT($request.generative.closedTimeObj)"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.webhook_success = true",
+    "triggerFulfillment": {
+      "webhook": "v1/dfcx_support/acut_content_lookup#main-task",
+      "tag": "\"main-task\""
+    },
+    "targetPage": "[whk] ACUT Disposition code - Historical",
+    "name": "f43430c6-79d9-4874-a696-93cf74e247bf"
+  }, {
+    "condition": "$session.params.webhook_success = false",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Failure - ACUT",
+    "name": "2728900b-1563-4889-a69e-7bf2e2b2f4d0"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Failure - ACUT",
+    "name": "cleanup-hardstop-route"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Webhook Failure - ACUT",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+    
+    },
+    "name": "bfbe6961-47f5-4ac0-9429-7a33cbbaaeba"
+  }, {
+    "targetPage": "Webhook Failure - ACUT",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+    
+    },
+    "name": "9f87c911-c80e-4a4c-9284-a0146cdfd2f5"
+  }, {
+    "targetPage": "Webhook Failure - ACUT",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+    
+    },
+    "name": "68681e0e-19ac-47b8-b0d7-c5b59aa3b61f"
+  }, {
+    "targetPage": "Webhook Failure - ACUT",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+    
+    },
+    "name": "dbf9e5da-f3d7-4bbc-a3cf-053401af8927"
+  }, {
+    "targetPage": "Webhook Failure - ACUT",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+    
+    },
+    "name": "d4328c08-c4d6-44c0-be56-065ef2988dcd"
+  }, {
+    "targetPage": "Webhook Failure - ACUT",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+    
+    },
+    "name": "5803f331-4ead-4e65-8e25-5961391b956a"
+  } ]
+}

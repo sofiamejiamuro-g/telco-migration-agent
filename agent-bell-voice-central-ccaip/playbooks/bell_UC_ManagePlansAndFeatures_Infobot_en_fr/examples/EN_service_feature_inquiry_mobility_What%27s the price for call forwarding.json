@@ -1,0 +1,90 @@
+{
+  "name": "d2ecd405-ed81-45aa-b0df-5a7abbaff585",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70024",
+        "language": "en"
+      },
+      "outputActionParameters": {
+        "language": "en"
+      }
+    }
+  }, {
+    "playbookInvocation": {
+      "playbook": "bell_uc_ask_LOB",
+      "playbookInput": {
+        "actionParameters": {
+          "language": "en",
+          "utterance": "What's the price for call forwarding?"
+        }
+      },
+      "playbookOutput": {
+        "actionParameters": {
+          "language": "en"
+        }
+      },
+      "playbookState": "OUTPUT_STATE_OK"
+    }
+  }, {
+    "toolUse": {
+      "tool": "EN_Bell_Manage_plans_and_features",
+      "action": "EN_Bell_Manage_plans_and_features",
+      "inputActionParameters": {
+        "requestBody": {
+          "query": "What's the price for call forwarding?"
+        }
+      },
+      "outputActionParameters": {
+        "200": {
+          "answer": "Call forwarding on a pay-per-use basis costs $0.25 a minute, and charges are automatically added to your account. You can subscribe to the service if it is not already in your rate plan.",
+          "snippets": [ {
+            "text": "* You can use Call Forwarding on a pay-per-use basis for $0.25 a minute. Charges will be automatically added to your account if you currently do not subscribe to the service or if it is not in your rate plan.",
+            "title": "Enhance Your Mobile Experience| Bell Mobility | Bell Canada",
+            "uri": "https://www.bell.ca/Mobility/Features#:~:text=*%20You%20can,your%20rate%20plan."
+          } ]
+        }
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Call forwarding on a pay-per-use basis costs $0.25 a minute, and charges are automatically added to your account. You can subscribe to the service if it is not already in your rate plan.\n\nCould you please let me know if your query is answered?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Yes"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_Feedback",
+      "inputActionParameters": {
+        "language": "en"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer is asking about the price for call forwarding\n ",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "route": "service_feature_inquiry",
+      "utterance": "What's the price for call forwarding?"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "First, flow \"bell_apb\" is called and then playbook \"bell_uc_ask_LOB\". Post that, data store is triggered for user {utterance}",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en"
+    }
+  },
+  "displayName": "EN_service_feature_inquiry_mobility_What's the price for call forwarding",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 708,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

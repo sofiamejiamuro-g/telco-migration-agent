@@ -1,0 +1,49 @@
+{
+  "name": "e1f235bc-9604-436b-b84e-55d02860cad2",
+  "displayName": "Mob Sales Eligibility Check",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "generators": [ {
+      "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/0a4eae57-11d4-4284-a4f5-953d7445d9a2",
+      "outputParameter": "$request.generative.mob_sales_pitch"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.route = \"sales_vague\" OR $session.params.route = \"sales_add_to_existing_account\" OR $session.params.route = \"sales_device_inquiry\" OR $session.params.route = \"sales_confirm_service_coverage\" OR $session.params.route = \"sales_new_account\" OR $session.params.route = \"sales_order_device\" OR $session.params.route = \"sales_plans_inquiry\" OR $session.params.route = \"sales_port_in_service\" OR $session.params.route = \"sales_vague\" OR $session.params.route = \"disconnect_cancel_service\" OR $session.params.route = \"disconnect_close_account\" OR $session.params.route = \"disconnect_confirm_cancellation\" OR $session.params.route = \"disconnect_port_out_number\" OR $session.params.route = \"disconnect_vague\" OR $session.params.route = \"other_accessibility_enrolment\" OR $session.params.route = \"other_accessibility_feedback\" OR $session.params.route = \"other_accessibility_services\" OR $session.params.route = \"other_accessibility_vague\" OR $session.params.route = \"account_restore_service\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "End Flow",
+    "name": "3a7e6122-1481-4151-8e63-58401ba05814"
+  }, {
+    "condition": "$request.generative.mob_sales_pitch = \"true\" OR $request.generative.mob_sales_pitch = \"True\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Hoops Check",
+    "name": "3a2e23e9-1153-4753-a1d6-62e783532f19"
+  }, {
+    "condition": "$request.generative.mob_sales_pitch = \"false\" OR $request.generative.mob_sales_pitch = \"False\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "End Flow",
+    "name": "39d8ae24-a884-46e4-a067-e1574cd40264"
+  }, {
+    "condition": "$session.params.no_match_1 != \"\" OR $session.params.no_match_2 != \"\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "End Flow",
+    "name": "60e2bda0-b675-437a-b498-a7d0e4097602"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "name": "f0b35d2c-40e5-4291-aa77-d89166e3851a",
+    "targetPlaybook": "bell_Steering_Wrap-up"
+  } ]
+}

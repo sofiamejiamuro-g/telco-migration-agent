@@ -1,0 +1,74 @@
+{
+  "name": "e0d0863a-698b-45b5-b980-aaa0c3905e15",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Veuillez vous assurer que la batterie est insérée et en charge dans votre modem."
+    }
+  }, {
+    "userUtterance": {
+      "text": "Hmm… peut-être ? Je l'ai ouvert mais je ne suis pas sûr."
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Merci d'avoir essayé ! Juste pour clarifier, avez-vous pu suivre l'étape complètement ?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Non, je n'ai pas vraiment réussi à l'ouvrir."
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Pas de soucis, je m'en occupe."
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_vr_post_answer",
+      "inputActionParameters": {
+        "customer_answer1_id": "1"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "User having a problem with the service and initiating Virtual repair session.",
+    "actionParameters": {
+      "acceptable_answers": [ {
+        "choice": "CDA:endNow:success",
+        "id": 0
+      }, {
+        "choice": "CDA:gotoStep1",
+        "id": 1
+      } ],
+      "more_info": [ {
+        "description": "Additional details about how this affects your services and related equipment, or any other relevant information",
+        "members": [ ],
+        "title": ""
+      }, {
+        "description": "",
+        "members": [ ],
+        "title": "How does this affect my services?"
+      }, {
+        "description": "",
+        "members": [ {
+          "description": "Device that allows you to connect to the Internet.",
+          "title": "Modem:"
+        }, {
+          "description": "Works as backup power to run the modem in case of a power outage.",
+          "title": "Modem battery:"
+        } ],
+        "title": "Hardware involved"
+      } ],
+      "title": "Checking if the battery is inserted and charging in the modem",
+      "vr_type": "CDA"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "This Dialogflow CX execution outlines a troubleshooting attempt where the agent instructs the user to ensure the modem battery is inserted and charging.\n\nThe user's initial response, \"Hmm… maybe? I opened it but not sure,\" indicates uncertainty about completing the step. The agent seeks clarification: \"Thanks for trying! Just to clarify, were you able to follow the step completely?\" The user then explicitly states, \"No, I couldn’t really get it open,\" confirming their inability to perform the required action. The agent acknowledges this with \"No worries, I'll take care of it,\" followed by a VR_post_answer tool call, signaling a pivot or escalation due to the user's inability to complete the step."
+  },
+  "displayName": "CDA - User gives a vague or unclear response (french)",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 587,
+  "languageCode": "en"
+}

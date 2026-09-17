@@ -1,0 +1,55 @@
+{
+  "name": "b060a804-d46b-4c3d-a53c-2b4b21bdd9b8",
+  "displayName": "Check if asked for different number",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "generators": [ {
+      "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/d63afedb-81b0-492d-8004-957c2556097d",
+      "outputParameter": "$request.generative.other_number"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "intent": "context_smsfaq",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "$request.generative.response . \n" ]
+        },
+        "languageCode": "en"
+      } ],
+      "generators": [ {
+        "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/72d3f90b-6256-4993-aef3-fa428df7d997",
+        "inputParameters": [ {
+          "key": "intent",
+          "value": "$session.params.route"
+        } ],
+        "outputParameter": "$request.generative.response"
+      } ]
+    },
+    "targetPage": "Trigger SMS to CLID",
+    "name": "a4e1950a-cfa6-47ba-b781-ef7383e35f7c"
+  }, {
+    "condition": "$request.generative.other_number : \"true\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Use different Number",
+    "name": "60bbb942-2da3-4203-9efa-f83c8a09aea8"
+  }, {
+    "condition": "$session.params.is_in_account = true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Trigger SMS to Provided Number",
+    "name": "3a36a043-92f1-4227-b7dc-5ba620273331"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Trigger SMS to CLID",
+    "name": "3e78fc74-122a-463d-8528-c86c65048681"
+  } ]
+}

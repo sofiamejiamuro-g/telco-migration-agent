@@ -1,0 +1,244 @@
+{
+  "name": "8d65c722-3f33-479c-8c5f-cda5a677f034",
+  "displayName": "Local Error Handling",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.global_error_counter \u003e= 3",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_aqd",
+    "name": "09a013bc-43dd-4b8f-a65f-c806e37723e5"
+  }, {
+    "condition": "$session.params.local_trigger = \"no_input\" AND $session.params.local_noinput_counter = 1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I didn't quite get that." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je n'ai pas bien compris." ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "conditionalCases": [ {
+        "cases": [ {
+          "condition": "$session.params.sub_unit != null",
+          "caseContent": [ {
+            "message": {
+              "text": {
+                "text": [ "The address we have on file for you is $session.params.sub_unit $session.params.street_number $session.params.street_name, Is this still correct?" ]
+              },
+              "languageCode": "en"
+            }
+          }, {
+            "message": {
+              "text": {
+                "text": [ "L'adresse que nous avons dans nos dossiers pour vous est $session.params.sub_unit $session.params.street_number $session.params.street_name, est-ce toujours correct ?" ]
+              },
+              "languageCode": "fr-ca"
+            }
+          } ]
+        }, {
+          "caseContent": [ {
+            "message": {
+              "text": {
+                "text": [ "The address we have on file for you is $session.params.street_number $session.params.street_name, Is this still correct?" ]
+              },
+              "languageCode": "en"
+            }
+          }, {
+            "message": {
+              "text": {
+                "text": [ "L'adresse que nous avons dans nos dossiers pour vous est $session.params.street_number $session.params.street_name, est-ce toujours correct ?" ]
+              },
+              "languageCode": "fr-ca"
+            }
+          } ]
+        } ]
+      } ]
+    },
+    "name": "2ffb1149-99e0-45df-952f-d8a574acc7b2"
+  }, {
+    "condition": "$session.params.local_trigger = \"no_input\" AND $session.params.local_noinput_counter = 2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I still didn't get that." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je n'ai toujours pas compris." ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "conditionalCases": [ {
+        "cases": [ {
+          "condition": "$session.params.sub_unit != null",
+          "caseContent": [ {
+            "message": {
+              "text": {
+                "text": [ "The address we have on file for you is $session.params.sub_unit $session.params.street_number $session.params.street_name, Is this still correct?" ]
+              },
+              "languageCode": "en"
+            }
+          }, {
+            "message": {
+              "text": {
+                "text": [ "L'adresse que nous avons dans nos dossiers pour vous est $session.params.sub_unit $session.params.street_number $session.params.street_name, est-ce toujours correct ?" ]
+              },
+              "languageCode": "fr-ca"
+            }
+          } ]
+        }, {
+          "caseContent": [ {
+            "message": {
+              "text": {
+                "text": [ "The address we have on file for you is $session.params.street_number $session.params.street_name, Is this still correct?" ]
+              },
+              "languageCode": "en"
+            }
+          }, {
+            "message": {
+              "text": {
+                "text": [ "L'adresse que nous avons dans nos dossiers pour vous est $session.params.street_number $session.params.street_name, est-ce toujours correct ?" ]
+              },
+              "languageCode": "fr-ca"
+            }
+          } ]
+        } ]
+      } ]
+    },
+    "name": "ff2a928c-4973-40c1-aa03-97bb628b0dad"
+  }, {
+    "condition": "$session.params.local_trigger = \"no_input\" AND $session.params.local_noinput_counter = 3",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_No_Input_3",
+    "name": "bd01e67e-6f36-4223-8c13-0edcf5bcddd9"
+  }, {
+    "condition": "$session.params.local_trigger = \"no_match\" AND $session.params.local_nomatch_counter = 1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I didn't quite get that." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je n'ai pas bien compris." ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "conditionalCases": [ {
+        "cases": [ {
+          "condition": "$session.params.sub_unit != null",
+          "caseContent": [ {
+            "message": {
+              "text": {
+                "text": [ "The address we have on file for you is $session.params.sub_unit $session.params.street_number $session.params.street_name, Is this still correct?" ]
+              },
+              "languageCode": "en"
+            }
+          }, {
+            "message": {
+              "text": {
+                "text": [ "L'adresse que nous avons dans nos dossiers pour vous est $session.params.sub_unit $session.params.street_number $session.params.street_name, est-ce toujours correct ?" ]
+              },
+              "languageCode": "fr-ca"
+            }
+          } ]
+        }, {
+          "caseContent": [ {
+            "message": {
+              "text": {
+                "text": [ "The address we have on file for you is $session.params.street_number $session.params.street_name, Is this still correct?" ]
+              },
+              "languageCode": "en"
+            }
+          }, {
+            "message": {
+              "text": {
+                "text": [ "L'adresse que nous avons dans nos dossiers pour vous est $session.params.street_number $session.params.street_name, est-ce toujours correct ?" ]
+              },
+              "languageCode": "fr-ca"
+            }
+          } ]
+        } ]
+      } ]
+    },
+    "name": "7d1b653f-d657-471d-9cda-935b0dbe10c0"
+  }, {
+    "condition": "$session.params.local_trigger = \"no_match\" AND $session.params.local_nomatch_counter = 2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I still didn't get that." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je n'ai toujours pas compris." ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "conditionalCases": [ {
+        "cases": [ {
+          "condition": "$session.params.sub_unit != null",
+          "caseContent": [ {
+            "message": {
+              "text": {
+                "text": [ "The address we have on file for you is $session.params.sub_unit $session.params.street_number $session.params.street_name, Is this still correct?" ]
+              },
+              "languageCode": "en"
+            }
+          }, {
+            "message": {
+              "text": {
+                "text": [ "L'adresse que nous avons dans nos dossiers pour vous est $session.params.sub_unit $session.params.street_number $session.params.street_name, est-ce toujours correct ?" ]
+              },
+              "languageCode": "fr-ca"
+            }
+          } ]
+        }, {
+          "caseContent": [ {
+            "message": {
+              "text": {
+                "text": [ "The address we have on file for you is $session.params.street_number $session.params.street_name, Is this still correct?" ]
+              },
+              "languageCode": "en"
+            }
+          }, {
+            "message": {
+              "text": {
+                "text": [ "L'adresse que nous avons dans nos dossiers pour vous est $session.params.street_number $session.params.street_name, est-ce toujours correct ?" ]
+              },
+              "languageCode": "fr-ca"
+            }
+          } ]
+        } ]
+      } ]
+    },
+    "name": "e2490eb0-9af6-4227-9431-6577b9a3f2a8"
+  }, {
+    "condition": "$session.params.local_trigger = \"no_match\" AND $session.params.local_nomatch_counter = 3",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_No_Match_3",
+    "name": "27675f53-7d40-426c-955d-c7205dc264aa"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Previous Page",
+    "name": "8377582a-155a-4615-a8d7-eb4dcf12f8ad"
+  } ]
+}

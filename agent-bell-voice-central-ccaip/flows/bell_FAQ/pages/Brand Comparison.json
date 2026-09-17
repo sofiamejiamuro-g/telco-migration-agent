@@ -1,0 +1,81 @@
+{
+  "name": "c3259bfb-d636-45a3-bb13-bbf6bac24d38",
+  "displayName": "Brand Comparison",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.NGA = \"true\" AND (($sys.func.LOWER($session.params.utterance) : \"chatr\" OR $sys.func.LOWER($session.params.utterance) : \"eastlink\" OR $sys.func.LOWER($session.params.utterance) : \"fido\" OR $sys.func.LOWER($session.params.utterance) : \"fizz\" OR $sys.func.LOWER($session.params.utterance) : \"freedom\" OR $sys.func.LOWER($session.params.utterance) : \"koodo\" OR $sys.func.LOWER($session.params.utterance) : \"northwestel\" OR $sys.func.LOWER($session.params.utterance) : \"public\" OR $sys.func.LOWER($session.params.utterance) : \"roger\" OR $sys.func.LOWER($session.params.utterance) : \"saskTel\" OR $sys.func.LOWER($session.params.utterance) : \"ssi micro\" OR $sys.func.LOWER($session.params.utterance) : \"tbayTel\" OR $sys.func.LOWER($session.params.utterance) : \"telus\" OR $sys.func.LOWER($session.params.utterance) : \"videotron\" OR $sys.func.LOWER($session.params.utterance) : \"vidéotron\") AND ($sys.func.LOWER($session.params.utterance) : \"bell\" OR $sys.func.LOWER($session.params.utterance) : \"lucky\" OR $sys.func.LOWER($session.params.utterance) : \"virgin\"))",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "We consistently offer the best value and competitive pricing. Visit bell.ca to see our latest offers." ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "targetFlow": "bell_Feedback",
+    "name": "a6fc867f-7ac4-4ed5-8956-c4ad8397e584"
+  }, {
+    "condition": "$session.params.NGA = true AND ($sys.func.LOWER($session.params.utterance) : \"bell\" OR $sys.func.LOWER($session.params.utterance) : \"lucky\" OR $sys.func.LOWER($session.params.utterance) : \"virgin\" OR $sys.func.LOWER($session.params.utterance) : \"you\")",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "We don't play favourites within the family, so each brand is great in its own way. Visit bell.ca to see our latest offers." ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "targetFlow": "bell_Feedback",
+    "name": "25dd8237-2f74-4c70-9bdb-3d6158a6e31a"
+  }, {
+    "condition": "($sys.func.LOWER($request.user-utterance) : \"chatr\" OR $sys.func.LOWER($request.user-utterance) : \"eastlink\" OR $sys.func.LOWER($request.user-utterance) : \"fido\" OR $sys.func.LOWER($request.user-utterance) : \"fizz\" OR $sys.func.LOWER($request.user-utterance) : \"freedom\" OR $sys.func.LOWER($request.user-utterance) : \"koodo\" OR $sys.func.LOWER($request.user-utterance) : \"northwestel\" OR $sys.func.LOWER($request.user-utterance) : \"public\" OR $sys.func.LOWER($request.user-utterance) : \"roger\" OR $sys.func.LOWER($request.user-utterance) : \"saskTel\" OR $sys.func.LOWER($request.user-utterance) : \"ssi micro\" OR $sys.func.LOWER($request.user-utterance) : \"tbayTel\" OR $sys.func.LOWER($request.user-utterance) : \"telus\" OR $sys.func.LOWER($request.user-utterance) : \"videotron\" OR $sys.func.LOWER($request.user-utterance) : \"vidéotron\") AND ($sys.func.LOWER($request.user-utterance) : \"bell\" OR $sys.func.LOWER($request.user-utterance) : \"lucky\" OR $sys.func.LOWER($request.user-utterance) : \"virgin\")",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "We consistently offer the best value and competitive pricing. Visit bell.ca to see our latest offers." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Nous offrons régulièrement la meilleure valeur et des prix compétitifs. Visitez bell.ca pour découvrir nos dernières offres." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetFlow": "bell_Feedback",
+    "name": "9361664d-7306-40b3-a43a-143615ac00b1"
+  }, {
+    "condition": "$sys.func.LOWER($request.user-utterance) : \"bell\" OR $sys.func.LOWER($request.user-utterance) : \"lucky\" OR $sys.func.LOWER($request.user-utterance) : \"virgin\" OR $sys.func.LOWER($request.user-utterance) : \"you\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "We don't play favourites within the family, so each brand is great in its own way. Visit bell.ca to see our latest offers." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Chaque marque est excellente à sa manière, nous ne favorisons aucun membre de la famille. Visitez bell.ca pour découvrir nos dernières offres." ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "advancedSettings": {
+        "dtmfSettings": {
+          "useSystemEntityRule": false
+        }
+      }
+    },
+    "targetFlow": "bell_Feedback",
+    "name": "4bef0115-6aa2-4691-bf5b-16c140306519"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_Feedback",
+    "name": "6463a734-89c7-4e15-b777-e2bd859851c5"
+  } ]
+}

@@ -1,0 +1,144 @@
+{
+  "name": "a0ae17c1-395d-48e8-8624-dbbe2c3163ee",
+  "displayName": "Payment Setup Confirmation",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "messages": [ {
+      "text": {
+        "text": [ "Pour le moment, vous ne pouvez configurer que plusieurs versements dans l'appli MonBell. Je vais envoyer un texto à l'appareil avec lequel vous appelez afin que vous puissiez configurer votre entente de paiement dans l'appli MonBell. Est-ce que cela vous convient?" ]
+      },
+      "languageCode": "fr-ca"
+    }, {
+      "text": {
+        "text": [ "At this time, you can only set up multiple installments on the MyBell app. I'll send a text to the device you're calling from so that you can set up your payment arrangement in MyBell. Is that alright?" ]
+      },
+      "languageCode": "en"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "intent": "context.confirm_yes",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "LangBased SMS",
+    "name": "f12424c3-618a-4c2d-8d4c-3a5145284618"
+  }, {
+    "intent": "context.confirm_no",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_aqd",
+    "name": "99fc8e04-4323-4196-ba9a-ea1696a01df3"
+  }, {
+    "intent": "context.different_number",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "different_number",
+        "value": true
+      } ]
+    },
+    "targetPage": "LangBased SMS",
+    "name": "89f35782-1009-46e4-a39b-d551dd773bf3"
+  } ],
+  "eventHandlers": [ {
+    "event": "sys.no-input-1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Désolé, je n'ai pas compris, pouvez-vous reformuler votre réponse s'il vous plaît ?" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "Sorry, I didn't catch that, can you please rephrase your response? " ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "5223a076-4aa9-437a-a0a7-9c85720a54fe"
+  }, {
+    "event": "sys.no-input-2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Je suis désolé, je n'ai toujours pas compris. Pouvez-vous reformuler votre réponse s'il vous plait ?" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "I'm sorry, I still didn't catch that. Can you please rephrase your response?" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "f81efa3d-6e76-4b24-b945-287574a1deb4"
+  }, {
+    "targetFlow": "bell_Feedback",
+    "event": "sys.no-input-3",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Si vous souhaitez toujours prendre une entente de paiement, vous pouvez le faire dans MonBell. Veuillez consulter le site bell.ca/soutien pour plus d'information." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ " If you'd still like to set up Payment Arrangement, you can do so in MyBell. Please visit bell.ca/support for more information." ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "f3d732aa-edd4-4ca3-a919-5617ccefe3b2"
+  }, {
+    "event": "sys.no-match-1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Désolé, je n'ai pas compris, pouvez-vous reformuler votre réponse s'il vous plaît ?" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "Sorry, I didn't catch that, can you please rephrase your response? " ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "992eb277-d816-48a3-8542-36a3b01886c5"
+  }, {
+    "event": "sys.no-match-2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Je suis désolé, je n'ai toujours pas compris. Pouvez-vous reformuler votre réponse s'il vous plait ?" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "I'm sorry, I still didn't catch that. Can you please rephrase your response?" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "32440ac5-2f16-47e9-9270-3cf88856b030"
+  }, {
+    "targetFlow": "bell_Feedback",
+    "event": "sys.no-match-3",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Si vous souhaitez toujours prendre une entente de paiement, vous pouvez le faire dans MonBell. Veuillez consulter le site bell.ca/soutien pour plus d'information." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ " If you'd still like to set up Payment Arrangement, you can do so in MyBell. Please visit bell.ca/support for more information." ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "d784fd22-94a3-461a-b9c9-d02d2cd6f459"
+  } ]
+}

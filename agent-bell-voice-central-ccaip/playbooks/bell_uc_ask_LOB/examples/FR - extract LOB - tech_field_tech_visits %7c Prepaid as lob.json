@@ -1,0 +1,44 @@
+{
+  "name": "f41246c6-af2e-4997-bd39-d2497948f6f2",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Pourriez-vous me dire pour quel service vous souhaitez prendre rendez-vous? Internet, TV, ou Téléphonie résidentielle?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "prepaid"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_va_to_ivr_handoff_prepaid",
+      "inputActionParameters": {
+        "lob_Prepaid": "true"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "User wants to book the appointment, but does not mention LOB",
+    "actionParameters": {
+      "language": "fr-ca",
+      "route": "tech_field_tech_visits",
+      "utterance": "Je souhaite prendre rendez-vous avec un technicien."
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "The user said \"prepaid\" when asked for lob",
+    "actionParameters": {
+      "apb_location_id": "70014",
+      "language": "fr-ca",
+      "lob_Prepaid": "true",
+      "route": "tech_field_tech_visits"
+    }
+  },
+  "displayName": "FR - extract LOB - tech_field_tech_visits | Prepaid as lob",
+  "retrievalStrategy": "STATIC",
+  "tokenCount": 254,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

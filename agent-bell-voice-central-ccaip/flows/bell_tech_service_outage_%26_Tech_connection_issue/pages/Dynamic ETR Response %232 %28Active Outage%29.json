@@ -1,0 +1,133 @@
+{
+  "name": "4af5a405-6d94-4044-b6a9-be77549c9074",
+  "displayName": "Dynamic ETR Response #2 (Active Outage)",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "generators": [ {
+      "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/bbe7b512-3c53-441b-a2aa-f41dccbb5e91",
+      "inputParameters": [ {
+        "key": "current_date",
+        "value": "$session.params.current_date"
+      }, {
+        "key": "from_date",
+        "value": "$session.params.from_date"
+      } ],
+      "outputParameter": "$request.generative.days_until_restoration"
+    }, {
+      "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/e89b23ac-eb4e-47e2-88af-1ff62aa6f839",
+      "inputParameters": [ {
+        "key": "longest_etr_from",
+        "value": "$session.params.longest_etr_from"
+      }, {
+        "key": "longest_etr_to",
+        "value": "$session.params.longest_etr_to"
+      } ],
+      "outputParameter": "$request.generative.formatted_etr"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "formatted_etr_raw",
+        "value": "$request.generative.formatted_etr"
+      }, {
+        "parameter": "formatted_etr",
+        "value": "$sys.func.TO_OBJECT($session.params.formatted_etr_raw)"
+      }, {
+        "parameter": "month_date",
+        "value": "$session.params.formatted_etr.month_date"
+      }, {
+        "parameter": "fromTime",
+        "value": "$session.params.formatted_etr.fromTime"
+      }, {
+        "parameter": "toTime",
+        "value": "$session.params.formatted_etr.toTime"
+      }, {
+        "parameter": "month_date_fr",
+        "value": "$session.params.formatted_etr.month_date_fr"
+      }, {
+        "parameter": "fromTime_fr",
+        "value": "$session.params.formatted_etr.fromTime_fr"
+      }, {
+        "parameter": "toTime_fr",
+        "value": "$session.params.formatted_etr.toTime_fr"
+      } ]
+    },
+    "name": "823e7631-fece-4578-bf2b-b020eb366bb1"
+  }, {
+    "condition": "$session.params.current_date = $session.params.from_date AND $session.params.current_time \u003c $session.params.from_time AND $request.generative.days_until_restoration = 0",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Malheureusement, il y a actuellement une panne dans votre région. Mais ne vous inquiétez pas, nos équipes y travaillent et nous prévoyons que votre service sera rétabli le aujourd'hui $session.params.fromTime_fr entre $session.params.toTime_fr." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "Unfortunately, there is currently an outage in your area. But don't worry, our teams are working on it, and we expect your service to be restored today between $session.params.fromTime and $session.params.toTime." ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "targetPage": "Check LOB #3 (Active Outage)",
+    "name": "eed696d3-1437-42ea-8061-a847f74231ea",
+    "description": "Same Day Scenario"
+  }, {
+    "condition": "$session.params.current_date \u003c $session.params.from_date AND $request.generative.days_until_restoration = 1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Malheureusement, il y a actuellement une panne dans votre région. Mais ne vous inquiétez pas, nos équipes y travaillent et nous prévoyons que votre service sera rétabli le aujourd'hui $session.params.fromTime_fr entre $session.params.toTime_fr." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "Unfortunately, there is currently an outage in your area. But don't worry, our teams are working on it, and we expect your service to be restored tomorrow between $session.params.fromTime and $session.params.toTime." ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "targetPage": "Check LOB #3 (Active Outage)",
+    "name": "3f0e7a66-414f-4393-9b46-78f1316a16d3",
+    "description": "Next Day Scenario"
+  }, {
+    "condition": "$session.params.current_date \u003c $session.params.from_date AND $request.generative.days_until_restoration \u003e 1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Malheureusement, une panne d'internet est en cours dans votre région. Mais ne vous inquiétez pas, nos équipes travaillent dessus et nous prévoyons que votre service sera rétabli le $session.params.month_date_fr entre $session.params.fromTime_fr et $session.params.toTime_fr." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "Unfortunately, there is currently an outage in your area. But don't worry, our teams are working on it, and we expect your service to be restored on $session.params.month_date between $session.params.fromTime and $session.params.toTime." ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "targetPage": "Check LOB #3 (Active Outage)",
+    "name": "68befb69-9e39-4441-840d-e6a0d17c9cfe",
+    "description": "Beyond the next day scenario"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Malheureusement, une panne d'internet est en cours dans votre région. Mais ne vous inquiétez pas, nos équipes travaillent dessus et nous prévoyons que votre service sera rétabli le $session.params.month_date_fr entre $session.params.fromTime_fr et $session.params.toTime_fr." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "Unfortunately, there is currently an outage in your area. But don't worry, our teams are working on it, and we expect your service to be restored on $session.params.month_date between $session.params.fromTime and $session.params.toTime." ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "targetPage": "Check LOB #3 (Active Outage)",
+    "name": "ba8cd085-8d6a-4ffd-8138-a4cbf1144195",
+    "description": "no current_date_time scenario"
+  } ]
+}

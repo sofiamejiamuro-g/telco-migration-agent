@@ -1,0 +1,85 @@
+{
+  "name": "b61b0941-3c79-4bf4-97a4-1cc500e38834",
+  "displayName": "CX Input - Full Install",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "messages": [ {
+      "text": {
+        "text": [ "Souhaitiez-vous replanifier votre rendez-vous?" ]
+      },
+      "languageCode": "fr-ca"
+    }, {
+      "text": {
+        "text": [ "Were you looking to reschedule your appointment?" ]
+      },
+      "languageCode": "en"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "intent": "context.confirm_yes",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_app_mgmt_omf_change_reschedule_ticket",
+    "name": "22f30356-9990-4dfc-acb0-a14455f40e03"
+  }, {
+    "intent": "context.confirm_no",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_Feedback",
+    "name": "4efc5758-3e9f-49d4-a60e-db5355076f25"
+  }, {
+    "intent": "context.modify.appointment",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_app_mgmt_omf_change_reschedule_ticket",
+    "name": "13b06306-eed5-4c8b-8773-ee10c91fbb70"
+  }, {
+    "intent": "context.something.else",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "event_type",
+        "value": "anything else start over"
+      } ]
+    },
+    "targetFlow": "Default Start Flow",
+    "name": "6e456ad6-1e04-4020-bce8-a713e2eff232"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Local Error Handling",
+    "event": "sys.no-input-1",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "global_error_counter",
+        "value": "$sys.func.ADD($session.params.global_error_counter,1)"
+      }, {
+        "parameter": "local_noinput_counter",
+        "value": "$sys.func.ADD($session.params.local_noinput_counter,1)"
+      }, {
+        "parameter": "local_trigger",
+        "value": "no_input"
+      } ]
+    },
+    "name": "a55af898-0f86-4643-8de6-8518b3deff7f"
+  }, {
+    "targetPage": "Local Error Handling",
+    "event": "sys.no-match-1",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "global_error_counter",
+        "value": "$sys.func.ADD($session.params.global_error_counter,1)"
+      }, {
+        "parameter": "local_nomatch_counter",
+        "value": "$sys.func.ADD($session.params.local_nomatch_counter,1)"
+      }, {
+        "parameter": "local_trigger",
+        "value": "no_match"
+      } ]
+    },
+    "name": "099ec8c7-4943-4922-b3ae-428035deec25"
+  } ]
+}

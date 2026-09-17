@@ -1,0 +1,62 @@
+{
+  "name": "48d70a8f-dcef-400a-915b-a09d596acf4d",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Which device are you looking to check the status of?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "it is regarding my smart watch order"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Are you inquiring about device upgrade, new device, or a repair order?\n"
+    }
+  }, {
+    "userUtterance": {
+      "text": "new device"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Got it, you can view and check the status of your device order on the MyBell. I'll send a text to the device you are calling from, so that you can track your shipment. Is that alright?\n"
+    }
+  }, {
+    "userUtterance": {
+      "text": "yes"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "en",
+        "sms_content": "You can visit https://www.bell.ca/shipping-tracker to track your order in the My Bell app ( bell.ca/about-us )",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "customer is inquiring about their order status and lob is null and device_type is null",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "route": "equipment_order_status",
+      "utterance": "My order has been seriously delayed, I'm waiting for the installation"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "customer is asked device_type and then proceeds as per instructions",
+    "actionParameters": {
+      "brand": "bell",
+      "device_type": "Smart watch",
+      "language": "en"
+    }
+  },
+  "displayName": "EN equipment_order_status (smart watch)-(new order)-(sms-yes)",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 380,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

@@ -1,0 +1,42 @@
+{
+  "name": "468525a4-4c73-4e9b-a330-619a34fae915",
+  "displayName": "If correct ACUT ticket?",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "intent": "context.confirm_yes",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "ticket_number",
+        "value": "$session.params.acut_find_response.ticket_summaries[0].acut_trouble_ticket_number"
+      }, {
+        "parameter": "ticket_state",
+        "value": "$session.params.acut_find_response.ticket_summaries[0].ticket_state_category"
+      }, {
+        "parameter": "ticket_number_ref",
+        "value": "$sys.func.CONCATENATE(\"REF\", $sys.func.TO_TEXT($session.params.ticket_number))"
+      } ]
+    },
+    "targetFlow": "bell_acut_ticket_chk_troubleshooting_intents",
+    "name": "daea4d50-d87c-42a4-aa6d-d0bbb97bc530"
+  }, {
+    "intent": "context.confirm_no",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "recent_ticket_creation_time",
+        "value": "$session.params.acut_find_response.ticket_summaries[1].ticket_creation_time"
+      } ],
+      "generators": [ {
+        "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/c8d9aa7a-0227-4da7-8256-fd4d68a2aa75",
+        "inputParameters": [ {
+          "key": "date-time",
+          "value": "$session.params.recent_ticket_creation_time"
+        } ],
+        "outputParameter": "$request.generative.recent_ticket_creation_time_obj2"
+      } ]
+    },
+    "targetPage": "If another ACUT ticket correct?",
+    "name": "d941319f-2c5c-4d42-8523-2b6b0290fb6a"
+  } ]
+}

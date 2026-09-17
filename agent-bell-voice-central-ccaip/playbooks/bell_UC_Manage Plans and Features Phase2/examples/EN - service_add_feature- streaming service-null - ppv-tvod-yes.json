@@ -1,0 +1,73 @@
+{
+  "name": "1a3c168a-5a09-414a-82cf-8fd92305ce94",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70011"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "The easiest way to order would be using the Fibe TV App or go to fibetv.ca. Do you have any other questions on pay-per-view?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "yes"
+    }
+  }, {
+    "playbookInvocation": {
+      "playbook": "bell_UC_ManagePlansAndFeatures_Infobot_en_fr_deprecated",
+      "playbookInput": {
+        "precedingConversationSummary": "identification_status = \"Pass\" and ppv = \"tvod\" and route = \"service_feature_inquiry\"",
+        "actionParameters": {
+          "identification_status": "Pass",
+          "language": "en",
+          "ppv": "tvod",
+          "route": "service_feature_inquiry",
+          "utterance": "Looking for a video on demand"
+        }
+      },
+      "playbookOutput": {
+        "executionSummary": "Follow the instructions provided in this playbook for {route} = \"service_feature_inquiry\"",
+        "actionParameters": {
+          "language": "en"
+        }
+      },
+      "playbookState": "OUTPUT_STATE_OK"
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "As, {identification_status} is \"Pass\" and {streaming_services} is null and {ppv} = \"tvod\" then we will prompt customer with message and based on user response will proceed.",
+    "actionParameters": {
+      "apb_location_id": "70011",
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "en",
+      "ppv": "tvod",
+      "route": "service_add_feature",
+      "utterance": "Looking for a video on demand"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Customer with {streaming_services} = null and {lob} = null and {identification_status} = Pass and {ppv} = \"tvod\" then will prompt user with some message and if user reply with yes or anything affirmative then set {route} = \"service_feature_inquiry\" and CALL PLAYBOOK: \"bell_UC_ManagePlansAndFeatures_Infobot_en_fr\"",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "en",
+      "ppv": "tvod",
+      "route": "service_feature_inquiry",
+      "utterance": "Looking for a video on demand"
+    }
+  },
+  "displayName": "EN - service_add_feature- streaming service-null - ppv-tvod-yes",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 591,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

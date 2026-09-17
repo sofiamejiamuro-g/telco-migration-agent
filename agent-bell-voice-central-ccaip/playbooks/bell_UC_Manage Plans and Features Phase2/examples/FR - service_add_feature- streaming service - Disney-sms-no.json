@@ -1,0 +1,66 @@
+{
+  "name": "11f471e3-02f6-43b2-bf1b-09daa0da6afc",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70011"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Je vais envoyer un texto à l’appareil au moyen duquel vous appelez, afin que vous puissiez consulter toutes les options de lecture en continu. Est-ce que ça vous convient?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "non, je ne veux pas de texte"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "brand": "bell",
+        "language": "fr-ca",
+        "route": "service_add_feature",
+        "sms_send_status": "Declined"
+      },
+      "outputActionParameters": {
+        "language": "fr-ca",
+        "route": "service_add_feature"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "As, {identification_status} is \"Pass\" and {streaming_services} is \"disney\" then we will prompt customer and ask to send message. If customer say \"Yes\" or anything affirmative then we will trigger the FLOW: bell_SMS Trigger ",
+    "actionParameters": {
+      "apb_location_id": "70011",
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "fr-ca",
+      "route": "service_add_feature",
+      "streaming_services": "disney",
+      "utterance": "Je veux ajouter Disney plus"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Customer with value such as \"netflix\", \"disney\", \"crave\", \"basic\"  and \"premium\" in the parameter {streaming_services} and {identification_status} = Pass will be prompted to send message and will be routed to bell_SMS Trigger flow.",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "fr-ca",
+      "route": "service_add_feature",
+      "streaming_services": "disney",
+      "utterance": "Je veux ajouter Disney plus"
+    }
+  },
+  "displayName": "FR - service_add_feature- streaming service - Disney-sms-no",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 507,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

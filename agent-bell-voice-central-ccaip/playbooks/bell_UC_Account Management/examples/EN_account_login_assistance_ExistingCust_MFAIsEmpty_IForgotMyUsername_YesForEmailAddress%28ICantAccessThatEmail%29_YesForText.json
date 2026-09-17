@@ -1,0 +1,58 @@
+{
+  "name": "25d93a7e-5c56-48bc-ae51-2e653b0a2480",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Do you know the email address you registered with?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "I can't access that email"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "I'll send a text to the device you're calling from, so that you can easily recover your password or username. Is that alright?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Yes"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "brand": "bell",
+        "language": "en",
+        "route": "account_login_assistance",
+        "sms_content": "You can visit https://m.bell.ca/resetpassword to reset your login information for the MyBell app. (bell.ca/about-us)",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+        "brand": "bell",
+        "language": "en"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "The customer is trying to recover their username or password with email.",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "Existing",
+      "language": "en",
+      "route": "account_login_assistance",
+      "utterance": "I forgot my username"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "The customer wants to recover their username with email, the customer is identified as a Existing customer and if the customer agrees to receive a text on their device route them to bell_SMS trigger flow",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "route": "account_login_assistance"
+    }
+  },
+  "displayName": "EN_account_login_assistance_ExistingCust_MFAIsEmpty_IForgotMyUsername_YesForEmailAddress(ICantAccessThatEmail)_YesForText",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 360,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

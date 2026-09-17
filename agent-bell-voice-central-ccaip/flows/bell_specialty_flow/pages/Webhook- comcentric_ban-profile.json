@@ -1,0 +1,313 @@
+{
+  "name": "c74fa2d4-cbe1-47f4-a3e6-d114bb0dd79b",
+  "displayName": "Webhook- comcentric_ban-profile",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "/v1/ibm_mw/nm1_get#customer-profile",
+    "tag": "customer-profile",
+    "setParameterActions": [ {
+      "parameter": "phone",
+      "value": "$session.params.clid"
+    }, {
+      "parameter": "billing_account",
+      "value": "$session.params.billing_account_number"
+    }, {
+      "parameter": "application_id",
+      "value": "$session.params.ibm_application_id"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "siOwner",
+        "value": "$session.params.nm1_get_cust_profile_response.siOwner"
+      }, {
+        "parameter": "comcentric_no_match_counter",
+        "value": 0
+      } ]
+    },
+    "name": "d62ceebd-91ab-45c9-be8e-0ae3e040fda2"
+  }, {
+    "condition": "$session.params.siOwner = \"COM1\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Are you calling about your Bruce telecom brand or bell service?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Appelez-vous au sujet de votre marque de télécommunications Bruce ou de votre service Bell ?" ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "comcentric_brand",
+        "value": "Bruce_telecom"
+      } ]
+    },
+    "targetPage": "confirm bell brand",
+    "name": "6c6a36aa-ad9d-46ed-9096-97c558634337"
+  }, {
+    "condition": "$session.params.siOwner = \"COM2\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Are you calling about your Huron telecom brand or bell service?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Appelez-vous au sujet de votre marque de télécommunications Huron ou de votre service Bell ?" ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "comcentric_brand",
+        "value": "Huron_telecom"
+      } ]
+    },
+    "targetPage": "confirm bell brand",
+    "name": "5b88f627-01b3-48cf-88b8-e694963f13c4"
+  }, {
+    "condition": "$session.params.siOwner = \"COM3\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Are you calling about your Hay Communications or bell service?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Appelez-vous au sujet de votre service Hay Communications ou Bell ?" ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "comcentric_brand",
+        "value": "Hay_communications"
+      } ]
+    },
+    "targetPage": "confirm bell brand",
+    "name": "19f7adb1-3d5e-408a-9a76-ebc8936dbbcd"
+  }, {
+    "condition": "$session.params.siOwner = \"COM4\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Are you calling about your Brooke telecom brand or bell service?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Appelez-vous à propos de votre marque de télécommunications Brooke ou de votre service Bell ?" ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "comcentric_brand",
+        "value": "Brooke_telecom"
+      } ]
+    },
+    "targetPage": "confirm bell brand",
+    "name": "8396867d-82fe-4bdd-b71b-bacf2ef8f700"
+  }, {
+    "condition": "$session.params.siOwner = \"COM5\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Are you calling about your Tuckersmith Communications or bell service?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Appelez-vous au sujet de votre service Tuckersmith Communications ou Bell ?" ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "comcentric_brand",
+        "value": "Tuckersmith_communications"
+      } ]
+    },
+    "targetPage": "confirm bell brand",
+    "name": "37e7c73f-78c7-48a2-8d7c-16f131cacbd2"
+  }, {
+    "condition": "$session.params.siOwner = \"COM6\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Are you calling about your Quadro Communications or bell service?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Appelez-vous au sujet de votre service Quadro Communications ou Bell ?" ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "comcentric_brand",
+        "value": "Quadro_communications"
+      } ]
+    },
+    "targetPage": "confirm bell brand",
+    "name": "a38a7831-df7d-4704-a78c-9630427dfdb7"
+  }, {
+    "condition": "$session.params.siOwner = \"COM7\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Are you calling about your Mornington Communications or bell service?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Appelez-vous au sujet de votre service Mornington Communications ou Bell ?" ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "comcentric_brand",
+        "value": "Mornington_communications"
+      } ]
+    },
+    "targetPage": "confirm bell brand",
+    "name": "3355399e-c44d-4f70-877c-2614888df098"
+  }, {
+    "condition": "$session.params.siOwner = \"COM9\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Are you calling about your Execulink or bell service?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Appelez-vous au sujet de votre service Execulink ou Bell ?" ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "comcentric_brand",
+        "value": "Execulink"
+      } ]
+    },
+    "targetPage": "confirm bell brand",
+    "name": "c782583c-d5a0-4163-b689-ab538e00bdc6"
+  }, {
+    "condition": "$session.params.siOwner = \"COMA\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Are you calling about your Wightman or bell service?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Appelez-vous au sujet de votre service Wightman ou Bell ?" ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "comcentric_brand",
+        "value": "Wightman"
+      } ]
+    },
+    "targetPage": "confirm bell brand",
+    "name": "54f58520-7228-4a04-9ef5-cb7e2cef082a"
+  }, {
+    "condition": "$session.params.siOwner = \"COMB\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Are you calling about your Sogetel or bell service?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Appelez-vous au sujet de votre service Sogetel ou Bell ?" ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "comcentric_brand",
+        "value": "Sogetel"
+      } ]
+    },
+    "targetPage": "confirm bell brand",
+    "name": "c1dc30b1-fda3-4ec1-93ce-4db5e7ae9e14"
+  }, {
+    "condition": "$session.params.siOwner != \"COM1\" AND $session.params.siOwner != \"COM2\" AND $session.params.siOwner != \"COM3\" AND $session.params.siOwner != \"COM4\" AND $session.params.siOwner != \"COM5\" AND $session.params.siOwner != \"COM6\" AND $session.params.siOwner != \"COM7\" AND $session.params.siOwner != \"COM9\" AND $session.params.siOwner != \"COMA\" AND $session.params.siOwner != \"COMB\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook-Final_Checks-ibm nm1-customer-profile",
+    "name": "1173fd99-fe98-4d7a-90b3-c2ef72b22815"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "c74fa2d4-cbe1-47f4-a3e6-d114bb0dd79b"
+      }, {
+        "parameter": "flow_id",
+        "value": "d35b61b6-c884-44f8-b5c7-aed63cc356ab"
+      }, {
+        "parameter": "page_name",
+        "value": "Webhook- comcentric_ban-profile"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Webhook-Final_Checks-ibm nm1-customer-profile",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+    
+    },
+    "name": "aa3d28f9-acde-45e5-bece-a673a1c27c4d"
+  }, {
+    "targetPage": "Webhook-Final_Checks-ibm nm1-customer-profile",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+    
+    },
+    "name": "1e6c4459-c99f-439d-acb3-10de20c5ed4c"
+  }, {
+    "targetPage": "Webhook-Final_Checks-ibm nm1-customer-profile",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+    
+    },
+    "name": "37798905-fb53-4e37-a3b5-25f289dcb891"
+  }, {
+    "targetPage": "Webhook-Final_Checks-ibm nm1-customer-profile",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+    
+    },
+    "name": "9956a9a5-c6e1-44a3-b82e-97aa4806b981"
+  }, {
+    "targetPage": "Webhook-Final_Checks-ibm nm1-customer-profile",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+    
+    },
+    "name": "c419176c-e608-4e0c-96c9-d2fd4046e872"
+  }, {
+    "targetPage": "Webhook-Final_Checks-ibm nm1-customer-profile",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+    
+    },
+    "name": "2b5ad13a-8c2a-4db4-83a0-f3fcb4003db1"
+  } ]
+}

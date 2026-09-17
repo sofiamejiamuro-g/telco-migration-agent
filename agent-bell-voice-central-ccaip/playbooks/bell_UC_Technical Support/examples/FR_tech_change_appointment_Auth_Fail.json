@@ -1,0 +1,64 @@
+{
+  "name": "c3a3a2d5-545a-4656-a434-c70075f4aadc",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70012"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_authentication",
+      "inputActionParameters": {
+      
+      },
+      "outputActionParameters": {
+        "auth_status": "Fail"
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "N'ayant pas pu vous authentifier, je ne peux pas vérifier si un rendez-vous est enregistré sur votre compte. Saviez-vous que vous pouvez consulter, reporter ou annuler votre rendez-vous dans l'application « Gérer vos rendez-vous » ? Je vous envoie un SMS sur l'appareil depuis lequel vous appelez pour que vous puissiez commencer. Est-ce que cela vous convient ?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "oui"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+      
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "The user want to change his appointment",
+    "actionParameters": {
+      "language": "fr-ca",
+      "route": "tech_change_appointment",
+      "utterance": "Je souhaite modifier mon rendez-vous"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "The user was sent to flow bell_apb and bell_authentication and since auth_status = \"Fail\" , asked the user for sms and he said yes then transferred the user to bell_SMS_Trigger flow ",
+    "actionParameters": {
+      "auth_status": "Fail",
+      "language": "fr-ca",
+      "route": "tech_change_appointment",
+      "utterance": "I want to update on my appointment"
+    }
+  },
+  "displayName": "FR_tech_change_appointment_Auth_Fail",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 466,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "fr"
+}

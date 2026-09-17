@@ -1,0 +1,156 @@
+{
+  "name": "e01b6d59-c373-4402-a268-b0cd6bf10ad2",
+  "displayName": "Check amount Balance Less",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "conditionalCases": [ {
+      "cases": [ {
+        "condition": "$session.params.current_account_balance \u003e 0",
+        "caseContent": [ {
+          "message": {
+            "text": {
+              "text": [ "Votre solde actuel est de $ $session.params.current_account_balance. Vous n'avez aucun montant à payer pour le moment. Souhaitez-vous tout de même effectuer un paiement par carte de crédit ou carte de débit Visa ?" ]
+            },
+            "languageCode": "fr-ca"
+          }
+        }, {
+          "message": {
+            "text": {
+              "text": [ "Your current balance is $session.params.current_account_balance. You don't have any amount due right now. Do you still want to make a credit card or Visa Debit payment?" ]
+            },
+            "languageCode": "en"
+          }
+        } ]
+      }, {
+        "caseContent": [ {
+          "message": {
+            "text": {
+              "text": [ "Vous n'avez aucun montant à payer pour le moment. Souhaitez-vous tout de même effectuer un paiement par carte de crédit ou carte de débit Visa ?" ]
+            },
+            "languageCode": "fr-ca"
+          }
+        }, {
+          "message": {
+            "text": {
+              "text": [ "You don't have any amount due right now. Do you still want to make a credit card or Visa Debit payment?" ]
+            },
+            "languageCode": "en"
+          }
+        } ]
+      } ]
+    } ]
+  },
+  "transitionRoutes": [ {
+    "intent": "context.sms_yes + topup_yes + autopay_yes + auto_pay_update_yes ",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "amount_paid",
+        "value": "$session.params.current_account_balance"
+      } ]
+    },
+    "targetPage": "Prompt Other Amount : Not in Collection/Current Balance is less",
+    "name": "682f9687-bea7-452c-8003-3ca902ee920a"
+  }, {
+    "intent": "context.confirm_no(Deny SMS + Deny Top up + Deny Auto top up + Deny Auto top up update)",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "otccp_exit_2",
+        "value": true
+      } ]
+    },
+    "targetFlow": "bell_Feedback",
+    "name": "b71f0df6-354a-48cc-8921-8d79cfd1a99c"
+  }, {
+    "intent": "context.pa_amount",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "amount_paid",
+        "value": "$session.params.customer_mentioned_amount"
+      } ]
+    },
+    "targetPage": "Amount Validation",
+    "name": "aa733a8e-b3ee-45a9-9948-3280b221ff97"
+  } ],
+  "eventHandlers": [ {
+    "event": "sys.no-input-1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ " Je n’ai pas tout à fait compris." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "I didn't quite get that. " ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "1fad55f3-cf46-40a9-8acd-713b77132c9b"
+  }, {
+    "event": "sys.no-input-2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Je n’ai toujours pas compris" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "I still didnt get that" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "373386b9-e6bf-4865-a709-38eee0272734"
+  }, {
+    "targetFlow": "bell_determine_handover",
+    "event": "sys.no-input-3",
+    "triggerFulfillment": {
+    
+    },
+    "name": "138db0ce-5992-46df-a7a8-93f17784b633"
+  }, {
+    "event": "sys.no-match-1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ " Je n’ai pas tout à fait compris." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "I didn't quite get that." ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "b70cfa37-e436-44ec-bfa6-5afdb649b6d3"
+  }, {
+    "event": "sys.no-match-2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Je n’ai toujours pas compris" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "I still didnt get that" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "ed14bd0e-7fef-44a5-8c29-f0cb0969a15e"
+  }, {
+    "targetFlow": "bell_determine_handover",
+    "event": "sys.no-match-3",
+    "triggerFulfillment": {
+    
+    },
+    "name": "5767d941-827c-4925-9ee8-f453fc7661f2"
+  } ],
+  "description": "This page is for account that has 0 balance but still wants to make payment."
+}

@@ -1,0 +1,60 @@
+{
+  "name": "f6222115-abea-4a1d-9017-572cdeb3cc5b",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Veuillez noter que le retour des articles à notre entrepôt et leur traitement peut prendre de 7 à 10 jours à compter du moment où vous avez envoyé le colis. Si des frais de non-retour de l'équipement vous ont été facturés, il peut s'écouler 1 à 2 cycles de facturation pour que le retour apparaisse à votre facture.\n\nAvez-vous votre numéro de suivi?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "non"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Pourquoi avez-vous décidé de retourner votre appareil?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "j'ai l'option de retour"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Equipment returns can be tracked on either the Canada Post or Purolator website. Once the device has been received, it is normally processed in 7 to 10 days. I can also send you a text message with a link to track your shipment. Is that alright?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "non"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "fr-ca",
+        "route": "equipment_return_device",
+        "sms_send_status": "Declined"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "le client souhaite une mise à jour du statut de retour de son téléphone portable",
+    "actionParameters": {
+      "language": "fr-ca",
+      "lob": "mobility",
+      "route": "equipment_return_device",
+      "utterance": "avez-vous déjà reçu mon retour"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Le client a demandé le numéro de suivi et a répondu qu'il ne l'avait pas. On lui a demandé la raison du retour et il a répondu qu'il n'était pas satisfait. Le client ne souhaite pas recevoir de SMS.",
+    "actionParameters": {
+      "language": "fr-ca"
+    }
+  },
+  "displayName": "equipment_return_device 6B FR",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 456,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

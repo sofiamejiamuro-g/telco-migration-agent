@@ -1,0 +1,95 @@
+{
+  "name": "f0ecaee8-767a-4253-82eb-a2614447f2e3",
+  "displayName": "Phone Number Validation",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.Contact_Number_flag = true AND $sys.func.LEN($session.params.Contact_Number) = 10 AND $session.params.Phone_Incorrect_Counter \u003c= 1",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "counter",
+        "value": 1
+      } ]
+    },
+    "targetPage": "Check CX Input",
+    "name": "c91ff382-6bc3-495f-bac2-b043b6e86ddb"
+  }, {
+    "condition": "($session.params.Contact_Number_flag = false AND $session.params.Phone_Invalid_Counter \u003c= 2) OR ($sys.func.LEN($session.params.Contact_Number) != 10 AND $session.params.Phone_Invalid_Counter \u003c= 2)",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Pourriez-vous répéter ce numéro de téléphone à 10 chiffres une fois de plus s’il vous plaît? Vous pouvez également le saisir sur votre téléphone, si vous préférez." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "Could you please provide a 10-digit Canadian phone number? You can also enter it on your phone, if you prefer." ]
+        },
+        "languageCode": "en"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "Phone_Invalid_Counter",
+        "value": "$sys.func.ADD(1, $session.params.Phone_Invalid_Counter)"
+      }, {
+        "parameter": "Contact_Number",
+        "value": null
+      } ]
+    },
+    "targetPage": "Collect phone number",
+    "name": "5606c207-018f-4f7b-97fd-31fdac2f4228"
+  }, {
+    "condition": "$session.params.Contact_Number_flag = true AND $sys.func.LEN($session.params.Contact_Number) = 10 AND $session.params.Phone_Incorrect_Counter \u003e 1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "\u003cspeak\u003e C’était le \u003csay-as interpret-as=\"telephone\"\u003e$session.params.Contact_Number\u003c/say-as\u003e, n’est-ce pas?\u003c/speak\u003e" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "\u003cspeak\u003e That was \u003csay-as interpret-as=\"telephone\"\u003e$session.params.Contact_Number\u003c/say-as\u003e, right? \u003c/speak\u003e" ]
+        },
+        "languageCode": "en"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "number",
+        "value": "$session.params.phone_number"
+      }, {
+        "parameter": "type",
+        "value": "SMS"
+      } ]
+    },
+    "targetPage": "Final User Confirmation",
+    "name": "83966fce-7184-45ad-834f-1069558a83f2"
+  }, {
+    "condition": "($session.params.Contact_Number_flag = false AND $session.params.Phone_Invalid_Counter \u003e 2) OR ($sys.func.LEN($session.params.Contact_Number) != 10 AND $session.params.Phone_Invalid_Counter \u003e 2)",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "Contact_Number",
+        "value": null
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "c2843621-e52c-4688-8157-267a5dbb607c"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "f0ecaee8-767a-4253-82eb-a2614447f2e3"
+      }, {
+        "parameter": "flow_id",
+        "value": "24434330-b99d-41fd-89fc-5730c7869adb"
+      }, {
+        "parameter": "page_name",
+        "value": "Phone Number Validation"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

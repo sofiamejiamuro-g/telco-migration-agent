@@ -1,0 +1,61 @@
+{
+  "name": "7cf372a7-621d-45a9-bf12-bf94cb36b98b",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Please note it can take 7-10 days from the time you sent your package for items to arrive at our warehouse and to be processed. If you were billed equipment non-return fees, it can take 1-2 bill cycles for the return to be credited and to appear on your bill.\n\nDo you have your tracking number?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "no"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Why did you deicide to return your device?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "as part of the return option"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Equipment returns can be tracked on either the Canada Post or Purolator website. Once the device has been received, it is normally processed in 7 to 10 days. I can also send you a text message with a link to track your shipment. Is that alright?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "no"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "en",
+        "route": "equipment_return_device",
+        "sms_send_status": "Declined"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "customer wants return status update of his mobile phone",
+    "actionParameters": {
+      "language": "en",
+      "lob": "mobility",
+      "route": "equipment_return_device",
+      "utterance": "I'm wondering if you have received my return yet"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "customer asked for tracking number and they said that they don't have it. Customer was asked for his reason for return and they said that they're not happy with it.",
+    "actionParameters": {
+      "language": "en",
+      "lob": "Mobility"
+    }
+  },
+  "displayName": "equipment_return_device 6B",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 420,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

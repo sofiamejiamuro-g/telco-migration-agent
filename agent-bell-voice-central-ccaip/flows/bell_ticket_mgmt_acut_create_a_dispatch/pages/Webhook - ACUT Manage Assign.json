@@ -1,0 +1,89 @@
+{
+  "name": "011d0117-c841-4a65-a564-cfe9a0d06828",
+  "displayName": "Webhook - ACUT Manage Assign",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "/v1/ticket_management/acut/manage#assign",
+    "tag": "assign",
+    "setParameterActions": [ {
+      "parameter": "ticket_number",
+      "value": "$session.params.ticket_number"
+    }, {
+      "parameter": "menu_type",
+      "value": "$session.params.menu_type"
+    }, {
+      "parameter": "dispatch_type",
+      "value": "$session.params.dispatch_type"
+    }, {
+      "parameter": "ticket_number_ref",
+      "value": "$sys.func.CONCATENATE(\"REF\", $sys.func.TO_TEXT($session.params.ticket_number))"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.webhook_success = true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Summarize Updated Appointment",
+    "name": "c48cdcc0-f12d-4ac7-a0b6-4db7999f5c3c"
+  }, {
+    "condition": "$session.params.webhook_success = false",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Failure 2 - ACUT",
+    "name": "4fae1265-dd25-4661-b401-87dde82c830f"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Failure 2 - ACUT",
+    "name": "cleanup-hardstop-route"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Webhook Failure 2 - ACUT",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+    
+    },
+    "name": "95f545e4-9891-4ce6-8faf-b57f2c08b2e7"
+  }, {
+    "targetPage": "Webhook Failure 2 - ACUT",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+    
+    },
+    "name": "924ede7f-6d27-458d-bd8c-dd32a3b350d2"
+  }, {
+    "targetPage": "Webhook Failure 2 - ACUT",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+    
+    },
+    "name": "72461bdd-843d-483b-9586-2fa40e8952c3"
+  }, {
+    "targetPage": "Webhook Failure 2 - ACUT",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+    
+    },
+    "name": "91f5ff9f-34be-4b21-ba37-5025cd6c69cd"
+  }, {
+    "targetPage": "Webhook Failure 2 - ACUT",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+    
+    },
+    "name": "6c73c464-65fc-4b2b-bf93-56c578225d98"
+  }, {
+    "targetPage": "Webhook Failure 2 - ACUT",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+    
+    },
+    "name": "a73173fc-286d-43e9-9622-d1a0edada88c"
+  } ]
+}

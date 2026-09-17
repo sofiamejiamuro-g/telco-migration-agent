@@ -1,0 +1,103 @@
+{
+  "name": "3e91ba94-7998-4e42-b581-58cdb483bfdd",
+  "displayName": "S2A LOB",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "messages": [ {
+      "text": {
+        "text": [ "$request.generative.lob_1" ]
+      },
+      "languageCode": "fr-ca"
+    }, {
+      "text": {
+        "text": [ "$request.generative.lob_1" ]
+      },
+      "languageCode": "en"
+    } ],
+    "generators": [ {
+      "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/6ec1347f-fed6-4e6d-805e-23f988941f44",
+      "outputParameter": "$request.generative.lob_1"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.lob = null",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "coming_from",
+        "value": "s2a"
+      } ]
+    },
+    "name": "abb1abe2-1122-4761-87ee-ad9d52ffec49",
+    "targetPlaybook": "bell_UC_Get_LOB"
+  }, {
+    "condition": "$session.params.lob_agent_2 = true",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "$request.generative.lob_2" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "$request.generative.lob_2" ]
+        },
+        "languageCode": "en"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "coming_from",
+        "value": "s2a_2"
+      } ],
+      "generators": [ {
+        "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/2b8cc9ae-3d8e-41d2-8682-9fa60497ab14",
+        "outputParameter": "$request.generative.lob_2"
+      } ]
+    },
+    "name": "2f15a3aa-3336-4f2b-ad05-6fb6c9e3751d",
+    "targetPlaybook": "bell_UC_Get_LOB"
+  }, {
+    "condition": "$session.params.lob != null",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "billing_accounts_lob",
+        "value": "$sys.func.FILTER(\"$session.params.customer_id_search_response\",$sys.func.CONCATENATE(\"$..billing_accounts[?(@.services[*].service_type =~ /(?i)^\",$sys.func.TO_TEXT($session.params.lob),\"$/)].billing_account_number\"))"
+      }, {
+        "parameter": "n_billing_accounts_lob",
+        "value": "$sys.func.COUNT($session.params.billing_accounts_lob)"
+      } ]
+    },
+    "targetPage": "Lob Present?",
+    "name": "8a0ba572-1163-4c7e-afa4-53078dee2b2f"
+  }, {
+    "condition": "$session.params.lob = null AND $session.params.n_postcode \u003e 1",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "lob_postcode_list_all",
+        "value": "$sys.func.FILTER(\"$session.params.customer_id_search_response\", \"$..billing_accounts[*].billing_address.postcode\")"
+      }, {
+        "parameter": "n_lob_postcode_list_all",
+        "value": "$sys.func.COUNT($session.params.lob_postcode_list_all)"
+      } ]
+    },
+    "targetPage": "Check - Unique Postcode",
+    "name": "ea3de686-e748-40ab-b11e-4c92f3f3da72"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ " J'aurais aussi besoin du numéro de compte en question." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "Could you also tell me the account number you're calling about?" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "targetPage": "Account Number",
+    "name": "cf436a86-d801-45ff-9efb-7b6683b0baee"
+  } ]
+}

@@ -1,0 +1,57 @@
+{
+  "name": "f9dbbab5-f6c0-4d3b-b02e-615fa7fcede7",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "brand": "bell",
+        "language": "en"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_aqd",
+      "inputActionParameters": {
+        "brand": "bell",
+        "device_type": "Modem",
+        "language": "en",
+        "special_queue": "bell_sales_to_atl"
+      },
+      "outputActionParameters": {
+        "language": "en"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer has questions about needing a new modem with route \"sales_order_device\"",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "New",
+      "device_type": "Receiver",
+      "identification_status": "Fail",
+      "language": "en",
+      "lob": "Internet",
+      "province": "ATL",
+      "route": "sales_order_device",
+      "utterance": "I want to order a receiver"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Calls \"bell_apb\" first to get apb_location. Since customer type is New and device_type is Receiver, it then checks province which is \"ON\" in this case, thereby calling \"bell_aqd\" flow",
+    "actionParameters": {
+      "brand": "bell",
+      "device_type": "Receiver",
+      "language": "en",
+      "lob": "Internet"
+    }
+  },
+  "displayName": "EN_sales_order_device_CustIsNew | receiver | ProvinceIsATL",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 362,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

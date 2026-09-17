@@ -1,0 +1,27 @@
+{
+  "name": "453aac91-f2d5-47da-81f0-83a815959218",
+  "displayName": "v1/digital-tools/outage-check#failed-details",
+  "timeout": {
+    "seconds": 30
+  },
+  "serviceDirectory": {
+    "service": "projects/gcp-it-npe-pltfm-apigee/locations/us-central1/namespaces/apigee-nb-usc1-service-dir-namespace/services/apigee-nb-usc1-service",
+    "genericWebService": {
+      "uri": "https://apigee-nane1-uat.int.bell.ca/v1/digital-tools/outage-check",
+      "requestHeaders": [ {
+        "key": "x-apikey",
+        "value": "npZmDivP6Hxes3wtQ0tC9RqItjJTY8TgZHbOPNeFwvSYSKPI"
+      } ],
+      "webhookType": "FLEXIBLE",
+      "httpMethod": "POST",
+      "requestBody": "{\n  \"sessionInfo\": {\n    \"dfcx_session_id\": \"$session.params.dfcx_session_id\",\n    \"agent_id\": \"$session.params.agent_id\",\n    \"parameters\": {\n      \"pf_id\": \"$session.params.pf_id\",\n      \"has_outage\": \"$session.params.has_outage\",\n      \"is_finished\": \"$session.params.is_finished\",\n      \"tz_offset\": \"$session.params.tz_offset\"\n    }\n  },\n  \"fulfillmentInfo\": {\n    \"tag\": \"failed-details\"\n  },\n  \"languageCode\": \"$request.language\"\n}",
+      "parameterMapping": [ {
+        "key": "oc_details_response",
+        "value": "sessionInfo.parameters.oc_details_response"
+      }, {
+        "key": "webhook_success",
+        "value": "sessionInfo.parameters.webhook_success"
+      } ]
+    }
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "name": "ac8002b6-a138-4656-88d5-b71b504becd0",
+  "displayName": "Webhook State",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.webhook_success = True OR $session.params.webhook_success = \"True\" OR $session.params.webhook_success = true OR $session.params.webhook_success = \"true\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Expiry Date Processing",
+    "name": "63c927c0-4f88-4d05-a7a9-048d58a264aa"
+  }, {
+    "condition": "$session.params.webhook_success != True OR $session.params.webhook_success != \"True\" OR $session.params.webhook_success != true OR $session.params.webhook_success != \"true\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Get Propensity To Sell Then End Flow",
+    "name": "4d216c28-523a-4d43-89b0-c6fcfe47c962"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "ac8002b6-a138-4656-88d5-b71b504becd0"
+      }, {
+        "parameter": "flow_id",
+        "value": "7b79b75c-6cee-409d-b609-9b5561813ec0"
+      }, {
+        "parameter": "page_name",
+        "value": "Webhook State"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

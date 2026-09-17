@@ -1,0 +1,76 @@
+{
+  "name": "b974e542-af6f-46a3-acfa-33499d79d641",
+  "displayName": "Webhook get timezone (Main Flow)",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "v1/npa-nxx-lookup",
+    "tag": "N/A",
+    "setParameterActions": [ {
+      "parameter": "npa",
+      "value": "$sys.func.MID($session.params.cirn, 1, 3)"
+    }, {
+      "parameter": "nxx",
+      "value": "$sys.func.MID($session.params.cirn, 4, 3)"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.webhook_success = true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Get Outage Details (Main Flow)",
+    "name": "a9e7e313-8a2d-4ed2-80d6-57149e042ea9"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Failed Outage Check",
+    "name": "24831e03-d404-4a02-9f41-8bac392030b3"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Failed Outage Check",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+    
+    },
+    "name": "0b0532b4-7fa4-4d59-a16e-a18a0183cadf"
+  }, {
+    "targetPage": "Failed Outage Check",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+    
+    },
+    "name": "afb6330b-25bd-4934-9360-9a9ab2477483"
+  }, {
+    "targetPage": "Failed Outage Check",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+    
+    },
+    "name": "33bc7fae-9ef6-4bad-8000-b0eac58ba837"
+  }, {
+    "targetPage": "Failed Outage Check",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+    
+    },
+    "name": "1a1ec033-f483-4f1d-a88c-715aaa5bef38"
+  }, {
+    "targetPage": "Failed Outage Check",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+    
+    },
+    "name": "fdc6293a-918f-4c97-970a-479f2109c214"
+  }, {
+    "targetPage": "Failed Outage Check",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+    
+    },
+    "name": "f6824f2b-9805-4992-81a6-1729ba38b25d"
+  } ]
+}

@@ -1,0 +1,135 @@
+{
+  "name": "8f898b52-01a5-4843-a644-aa22bceb146d",
+  "displayName": "Province Look-up Webhook",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "v1/npa-nxx-lookup",
+    "tag": "N/A",
+    "setParameterActions": [ {
+      "parameter": "temp_number",
+      "value": "$sys.func.IF(\"$session.params.CIRN = null\" , $sys.func.TO_TEXT($session.params.clid), $sys.func.TO_TEXT($session.params.CIRN))"
+    }, {
+      "parameter": "npa",
+      "value": "$sys.func.MID($session.params.temp_number, 1, 3)"
+    }, {
+      "parameter": "nxx",
+      "value": "$sys.func.MID($session.params.temp_number, 4, 3)"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "Province",
+        "value": "$session.params.npa_nxx_lookup_response.province"
+      } ]
+    },
+    "name": "4eb7ff63-dd30-4bd4-ba9a-052b545c37cb"
+  }, {
+    "condition": "$session.params.webhook_success = \"false\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "ID or Auth or NM1 or PACC or Webhook Failure Confirmation",
+    "name": "81de0810-271b-4277-a87a-6c209342879d"
+  }, {
+    "condition": "$session.params.onebillindicator = \"Y\" AND ($session.params.Province = \"NB\" OR $session.params.Province = \"NL\" OR $session.params.Province = \"NS\" OR $session.params.Province = \"PE\")",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_va_to_ivr_handoff",
+    "name": "20de2f8b-695f-44a4-95f8-2dbd47bfdee7"
+  }, {
+    "condition": "$session.params.onebillindicator = \"N\" AND $session.params.Province != \"NB\" AND $session.params.Province != \"NL\" AND $session.params.Province != \"NS\" AND $session.params.Province != \"PE\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "webhook_success",
+        "value": null
+      } ]
+    },
+    "targetPage": "Authentication Check",
+    "name": "4aeb4570-855e-40c8-a1d3-b33fb86f243c"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "8f898b52-01a5-4843-a644-aa22bceb146d"
+      }, {
+        "parameter": "flow_id",
+        "value": "6cfb896d-371f-4ad0-b534-840a35dc2828"
+      }, {
+        "parameter": "page_name",
+        "value": "Province Look-up Webhook"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "ID or Auth or NM1 or PACC or Webhook Failure Confirmation",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "webhook_success",
+        "value": "false"
+      } ]
+    },
+    "name": "95349040-a1c2-4189-b962-b8801cf8aa5f"
+  }, {
+    "targetPage": "ID or Auth or NM1 or PACC or Webhook Failure Confirmation",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "webhook_success",
+        "value": "false"
+      } ]
+    },
+    "name": "77d9389b-dd30-4bfb-8f6c-498d470921b3"
+  }, {
+    "targetPage": "ID or Auth or NM1 or PACC or Webhook Failure Confirmation",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "webhook_success",
+        "value": "false"
+      } ]
+    },
+    "name": "08f5da4e-96c8-427b-b816-1a16231a7299"
+  }, {
+    "targetPage": "ID or Auth or NM1 or PACC or Webhook Failure Confirmation",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "webhook_success",
+        "value": "false"
+      } ]
+    },
+    "name": "1e8552df-cd63-4140-a553-3e2177e60a96"
+  }, {
+    "targetPage": "ID or Auth or NM1 or PACC or Webhook Failure Confirmation",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "webhook_success",
+        "value": "false"
+      } ]
+    },
+    "name": "00db78a3-89ab-4f0f-b8f3-ba2bdfc1e00e"
+  }, {
+    "targetPage": "ID or Auth or NM1 or PACC or Webhook Failure Confirmation",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "webhook_success",
+        "value": "false"
+      } ]
+    },
+    "name": "9765e73d-cf5c-48fb-9fba-cf5ec268a694"
+  } ]
+}

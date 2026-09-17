@@ -1,0 +1,46 @@
+{
+  "name": "46199c44-0b35-458a-ac0d-54e4faceb9d3",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Multi-Factor Authentication, or MFA, is an essential safeguard that helps protect your account and personal information. You can learn more about MFA on our website. I will send a text to the device you're calling from, with a link to learn more. Is that alright?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "what will the SMS have?"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "The text message will contain link so that you can learn more about MFA. Is that alright?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "No"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "en",
+        "sms_send_status": "Declined"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer has inquired about multi factor authetication",
+    "actionParameters": {
+      "language": "en",
+      "route": "account_mfa_inquiry"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "VA responded to user and asked if they would like to receive the SMS. User denies so we call bell_SMS_Trigger flow with sms_send_status as Declined"
+  },
+  "displayName": "EN Account MFA Inquiry - No - Contextual",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 287,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

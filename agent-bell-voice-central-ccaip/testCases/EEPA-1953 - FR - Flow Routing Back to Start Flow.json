@@ -1,0 +1,62 @@
+{
+  "name": "7204ad84-061e-426a-8bfa-fad9645ea789",
+  "displayName": "EEPA-1953 - FR - Flow Routing Back to Start Flow",
+  "notes": "Ensure that flow routes back to \"Default Start Flow\" and sets CLID when user prompts that he needs help with another number.",
+  "testCaseConversationTurns": [ {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "Je veux parler d’un autre numéro."
+        },
+        "languageCode": "fr-ca"
+      }
+    },
+    "virtualAgentOutput": {
+      "triggeredIntent": {
+        "name": "global_events_full_startover"
+      },
+      "currentPage": {
+        "name": "Get Phone Number",
+        "flow": "Default Start Flow"
+      },
+      "textResponses": [ {
+        "text": [ "D'accord, quel est l'autre numéro de téléphone ?" ]
+      } ],
+      "currentFlow": {
+        "name": "Default Start Flow"
+      }
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "5198729519"
+        },
+        "languageCode": "fr-ca"
+      }
+    },
+    "virtualAgentOutput": {
+      "currentPage": {
+        "name": "Routing Page",
+        "flow": "Default Start Flow"
+      },
+      "textResponses": [ {
+        "text": [ "Et maintenant de quoi voulez-vous parler ?" ]
+      } ],
+      "currentFlow": {
+        "name": "Default Start Flow"
+      }
+    }
+  } ],
+  "creationTime": {
+    "seconds": 1733953658,
+    "nanos": 371403000
+  },
+  "testConfig": {
+    "flow": "bell_sms_trigger - old",
+    "page": "Start Page"
+  },
+  "languageCode": "fr-ca"
+}

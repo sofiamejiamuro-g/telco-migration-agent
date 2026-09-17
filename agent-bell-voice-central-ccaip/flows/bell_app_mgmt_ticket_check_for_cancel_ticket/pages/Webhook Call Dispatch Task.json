@@ -1,0 +1,115 @@
+{
+  "name": "f5d098ec-1e71-4ce2-919c-fc8c6f1f193f",
+  "displayName": "Webhook Call Dispatch Task",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "v1/dfcx_support/acut_content_lookup#dispatch-task",
+    "tag": "dispatch-task"
+  },
+  "transitionRoutes": [ {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "webhook_success",
+        "value": "$session.params.webhook_success"
+      }, {
+        "parameter": "dispatch_task_status_message",
+        "value": "$session.params.acut_task_status_response.dispatch_task_status_message"
+      } ]
+    },
+    "name": "9db33e54-e9f0-4ab6-ace0-764bb744e3ec"
+  }, {
+    "condition": "$session.params.webhook_success = true AND $session.params.ticket_dispatch_status = \"None\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "$session.params.trouble_type_message . $session.params.dispatch_task_status_message. Votre rendez-vous est prévu le $session.params.date_formatted. Est-ce la raison de votre appel?" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "$session.params.trouble_type_message . $session.params.dispatch_task_status_message. Your appointment is on $session.params.date_formatted. Is this what your calling about?" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "targetPage": "User Confirmation",
+    "name": "b125dc91-ec68-42d0-9ca0-4ca63ff69249"
+  }, {
+    "condition": "$session.params.webhook_success = true AND $session.params.ticket_dispatch_status = \"all_with_dispatch\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "J’ai trouvé un billet avec la planification d’un(e) technicien(ne) $session.params.trouble_type_message $session.params.dispatch_task_status_message. Malheureusement, nous ne pouvons pas annuler ce billet." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "I have found a ticket with a technician scheduled however, $session.params.trouble_type_message $session.params.dispatch_task_status_message. Unfortunately we can not cancel this ticket." ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "e8dbab6d-7cda-49d0-97bb-529d7419f12a"
+  }, {
+    "condition": "$session.params.webhook_success = false",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Failure - ACUT",
+    "name": "59f1b219-049d-4e1a-9731-8527ce73bd8b"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Failure - ACUT",
+    "name": "32bdef0d-7039-49d7-b795-cb6483bd27cd"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Webhook Failure - ACUT",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+    
+    },
+    "name": "dcfd8edd-8bda-4c63-9392-c6c1c40ce990"
+  }, {
+    "targetPage": "Webhook Failure - ACUT",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+    
+    },
+    "name": "6d3b269e-c9cf-4072-bf70-a9fba73fb551"
+  }, {
+    "targetPage": "Webhook Failure - ACUT",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+    
+    },
+    "name": "8928f596-9390-4633-80ef-76bd9afbb906"
+  }, {
+    "targetPage": "Webhook Failure - ACUT",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+    
+    },
+    "name": "6889677b-afaf-4790-b9bf-f83077b531d7"
+  }, {
+    "targetPage": "Webhook Failure - ACUT",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+    
+    },
+    "name": "cbb35f81-f26e-4144-b91a-5b8e6319e3dc"
+  }, {
+    "targetPage": "Webhook Failure - ACUT",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+    
+    },
+    "name": "0a6afc1a-85cb-4b8b-972d-c2718fe18b2e"
+  } ]
+}

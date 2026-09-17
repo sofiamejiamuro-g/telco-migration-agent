@@ -1,0 +1,94 @@
+{
+  "name": "2cd0488f-149f-4e79-8833-99986026a10a",
+  "displayName": "Check CX Input",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "messages": [ {
+      "text": {
+        "text": [ "\u003cspeak\u003e That was \u003csay-as interpret-as=\"telephone\"\u003e$session.params.Contact_Number\u003c/say-as\u003e, right? \u003c/speak\u003e" ]
+      },
+      "languageCode": "en"
+    }, {
+      "text": {
+        "text": [ "\u003cspeak\u003e C’était le \u003csay-as interpret-as=\"telephone\"\u003e$session.params.Contact_Number\u003c/say-as\u003e, n’est-ce pas?\u003c/speak\u003e" ]
+      },
+      "languageCode": "fr-ca"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "intent": "context.confirm_yes",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "number",
+        "value": "$session.params.Contact_Number"
+      }, {
+        "parameter": "type",
+        "value": "SMS"
+      } ]
+    },
+    "targetPage": "End Flow Check",
+    "name": "293c7ecc-5ce9-455d-b768-4397a1a33c83"
+  }, {
+    "intent": "context.confirm_no",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Sorry, could you please repeat the number?  You can also use your keypad to enter it, if you prefer." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Désolé, pourriez-vous répéter le numéro? Vous pouvez également utiliser votre clavier pour le saisir si vous préférez." ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "Phone_Incorrect_Counter",
+        "value": "$sys.func.ADD(1, $session.params.Phone_Incorrect_Counter)"
+      }, {
+        "parameter": "Contact_Number",
+        "value": null
+      } ]
+    },
+    "targetPage": "Collect phone number",
+    "name": "8d46d691-65bc-4c20-a41e-978119b3ec7e"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Local Error handling - Check CX Input",
+    "event": "sys.no-input-default",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "global_error_counter",
+        "value": "$sys.func.ADD($session.params.global_error_counter,1)"
+      }, {
+        "parameter": "local_noinput_counter",
+        "value": "$sys.func.ADD($session.params.local_noinput_counter,1)"
+      }, {
+        "parameter": "local_trigger",
+        "value": "no_input"
+      } ]
+    },
+    "name": "6fbb5502-e43e-4bfe-a8b2-fb042b600dbe"
+  }, {
+    "targetPage": "Local Error handling - Check CX Input",
+    "event": "sys.no-match-default",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "global_error_counter",
+        "value": "$sys.func.ADD($session.params.global_error_counter,1)"
+      }, {
+        "parameter": "local_nomatch_counter",
+        "value": "$sys.func.ADD($session.params.local_nomatch_counter,1)"
+      }, {
+        "parameter": "local_trigger",
+        "value": "no_match"
+      } ]
+    },
+    "name": "05db0f63-4835-46d3-9a48-21f7bb25d600"
+  } ],
+  "speakerIdSettings": {
+  
+  }
+}

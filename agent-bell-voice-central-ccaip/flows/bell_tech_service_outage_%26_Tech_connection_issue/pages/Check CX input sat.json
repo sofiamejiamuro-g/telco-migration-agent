@@ -1,0 +1,135 @@
+{
+  "name": "54287dca-ea00-45cf-8940-f5c27b9abef2",
+  "displayName": "Check CX input sat",
+  "form": {
+    "parameters": [ {
+      "displayName": "error_code_outage_param",
+      "required": true,
+      "entityType": "@error_code_outage",
+      "fillBehavior": {
+        "initialPromptFulfillment": {
+        
+        },
+        "repromptEventHandlers": [ {
+          "targetPage": "Local Error Handling (Check CX Input) (No Active Outage)",
+          "event": "sys.no-input-default",
+          "triggerFulfillment": {
+            "setParameterActions": [ {
+              "parameter": "global_error_counter",
+              "value": "$sys.func.ADD($session.params.global_error_counter,1)"
+            }, {
+              "parameter": "local_noinput_counter",
+              "value": "$sys.func.ADD($session.params.local_noinput_counter,1)"
+            }, {
+              "parameter": "local_trigger",
+              "value": "no_input"
+            } ],
+            "generators": [ {
+              "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/1b8d360c-c2a0-49b0-9a32-d5542ff42d87",
+              "outputParameter": "$request.generative.response"
+            } ]
+          },
+          "name": "e0cabea1-0c8d-4806-90a4-6493bdc14033"
+        }, {
+          "targetPage": "Local Error Handling (Check CX Input) (No Active Outage)",
+          "event": "sys.no-match-default",
+          "triggerFulfillment": {
+            "setParameterActions": [ {
+              "parameter": "aglobal_error_counter",
+              "value": "$sys.func.ADD($session.params.global_error_counter,1)"
+            }, {
+              "parameter": "local_nomatch_counter",
+              "value": "$sys.func.ADD($session.params.local_nomatch_counter,1)"
+            }, {
+              "parameter": "local_trigger",
+              "value": "no_match"
+            } ],
+            "generators": [ {
+              "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/f7ef68c2-5424-41ab-94dc-f8c07e3164de",
+              "outputParameter": "$request.generative.response"
+            } ]
+          },
+          "name": "18fd66f9-21b1-4d98-b8a6-a22f3b44ad7e"
+        } ]
+      }
+    } ]
+  },
+  "entryFulfillment": {
+    "messages": [ {
+      "text": {
+        "text": [ "Are you missing any TV channels or seeing any error codes on the screen?" ]
+      },
+      "languageCode": "en"
+    }, {
+      "text": {
+        "text": [ "Avez-vous des chaînes de télévision manquantes ou voyez-vous des codes d’erreur à l’écran?" ]
+      },
+      "languageCode": "fr-ca"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "intent": "tech_missing_channel_package",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_rehit",
+    "name": "1f273760-9d1e-4cec-8d5d-2898a6ffaff2"
+  }, {
+    "intent": "context.confirm_yes",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_rehit",
+    "name": "2eaf43cc-512b-4761-a76f-7796e4f85ea3"
+  }, {
+    "intent": "context.confirm_no",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "route",
+        "value": "tech_connection_issue"
+      } ]
+    },
+    "name": "ffabd80e-962c-4bcd-acc0-29407ff45125",
+    "targetPlaybook": "Bell_UC_Technical_Support_Infobot"
+  }, {
+    "condition": "$session.params.error_code_outage_param = 129 OR $session.params.error_code_outage_param = 128 OR $session.params.error_code_outage_param = 005 OR $session.params.error_code_outage_param = 013 OR $session.params.error_code_outage_param = 014 OR $session.params.error_code_outage_param = 022",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_rehit",
+    "name": "f7ba2782-7b20-41b0-a814-c052fc781df6"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Local Error Handling (Check CX Input) (No Active Outage)",
+    "event": "sys.no-input-default",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "global_error_counter",
+        "value": "$sys.func.ADD($session.params.global_error_counter,1)"
+      }, {
+        "parameter": "local_noinput_counter",
+        "value": "$sys.func.ADD($session.params.local_noinput_counter,1)"
+      }, {
+        "parameter": "local_trigger",
+        "value": "no_input"
+      } ]
+    },
+    "name": "99fd9e83-eae4-414e-a1a7-077aeb01c818"
+  }, {
+    "targetPage": "Local Error Handling (Check CX Input) (No Active Outage)",
+    "event": "sys.no-match-default",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "global_error_counter",
+        "value": "$sys.func.ADD($session.params.global_error_counter,1)"
+      }, {
+        "parameter": "local_nomatch_counter",
+        "value": "$sys.func.ADD($session.params.local_nomatch_counter,1)"
+      }, {
+        "parameter": "local_trigger",
+        "value": "no_match"
+      } ]
+    },
+    "name": "3a81400e-6760-4d91-87fa-64fc4b307c7d"
+  } ]
+}

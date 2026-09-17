@@ -1,0 +1,49 @@
+{
+  "name": "960c8604-5cd1-4885-8f9a-8fd3a7dd2075",
+  "displayName": "Check ticket state",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$sys.func.UPPER($session.params.ticket_state) != \"FINALIZED\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "ticket_state",
+        "value": "Active"
+      } ]
+    },
+    "targetPage": "[whk] Acut search retrieve",
+    "name": "3332eac2-6400-4107-b80e-8dc0666e2404",
+    "description": "For active acut tickets path\nNOTE: Set ticket_state = \"active\" before routing to this flow for this path"
+  }, {
+    "condition": "$sys.func.UPPER($session.params.ticket_state) = \"FINALIZED\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "[whk] Acut search retrieve",
+    "name": "24075eef-17db-4256-9862-a255aa15c707",
+    "description": "EECD-2832\nHistorical (closed) ticket flow path \nNOTE: Set ticket_state = \"finalized\" before routing to this flow for this path"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "960c8604-5cd1-4885-8f9a-8fd3a7dd2075"
+      }, {
+        "parameter": "flow_id",
+        "value": "8a90f25b-071b-4fb8-b4f6-490bf1aaf589"
+      }, {
+        "parameter": "page_name",
+        "value": "Check ticket state"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

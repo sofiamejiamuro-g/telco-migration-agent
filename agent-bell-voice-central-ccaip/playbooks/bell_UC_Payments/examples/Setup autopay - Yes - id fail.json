@@ -1,0 +1,62 @@
+{
+  "name": "f014444b-f8d6-4e3a-a943-9cf8893f76d8",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "You are testing Identification\n\nWould you like to receive a text message with a link to view or make changes to your account?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "yes"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_Identification",
+      "inputActionParameters": {
+        "CLID": 4155547622,
+        "brand": "bell",
+        "language": "en",
+        "route": "payment_setup_autopay"
+      },
+      "outputActionParameters": {
+        "identification_status": "Fail",
+        "language": "en"
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Sorry, I couldn't send the text message at the moment as we couldn't identify"
+    }
+  }, {
+    "playbookInvocation": {
+      "playbook": "bell_Steering_Wrap-up",
+      "playbookInput": {
+        "actionParameters": {
+          "language": "en"
+        }
+      },
+      "playbookOutput": {
+        "actionParameters": {
+          "language": "en"
+        }
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer looking to setup a autopay in their account and so first they are identified and then responded and redirected to wrapup",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "route": "payment_setup_autopay"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "message delivery failure case due to unsuccessful identification, customer is responded and redirected to wrap up",
+    "actionParameters": {
+      "language": "en"
+    }
+  },
+  "displayName": "Setup autopay - Yes - id fail",
+  "retrievalStrategy": "NEVER",
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

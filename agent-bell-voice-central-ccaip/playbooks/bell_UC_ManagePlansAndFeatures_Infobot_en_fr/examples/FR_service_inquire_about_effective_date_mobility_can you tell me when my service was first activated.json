@@ -1,0 +1,127 @@
+{
+  "name": "b89f5d93-173a-4047-984f-619a95ae978d",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70024",
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+        "language": "fr-ca"
+      }
+    }
+  }, {
+    "playbookInvocation": {
+      "playbook": "bell_uc_ask_LOB",
+      "playbookInput": {
+        "actionParameters": {
+          "language": "fr-ca",
+          "utterance": "Pouvez-vous me dire à quelle date mon service a été activé pour la première fois?"
+        }
+      },
+      "playbookOutput": {
+        "actionParameters": {
+          "language": "fr-ca"
+        }
+      },
+      "playbookState": "OUTPUT_STATE_OK"
+    }
+  }, {
+    "toolUse": {
+      "tool": "FR_Bell_Manage_plans_and_features",
+      "action": "FR_Bell_Manage_plans_and_features",
+      "inputActionParameters": {
+        "requestBody": {
+          "query": "Pouvez-vous me dire à quelle date mon service a été activé pour la première fois?"
+        }
+      },
+      "outputActionParameters": {
+        "200": {
+          "answer": "",
+          "snippets": [ ]
+        }
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Pour connaître la date d'entrée en vigueur d'une modification de votre forfait Bell Mobilité, vous pouvez accéder à votre compte en ligne via Bell ou l'application MonBell. Est-ce que cela vous aide ?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "non"
+    }
+  }, {
+    "toolUse": {
+      "tool": "FR_Bell_Manage_plans_and_features",
+      "action": "FR_Bell_Manage_plans_and_features",
+      "inputActionParameters": {
+        "requestBody": {
+          "query": "Pouvez-vous me dire à quelle date mon service a été activé pour la première fois?"
+        }
+      },
+      "outputActionParameters": {
+        "200": {
+          "answer": "",
+          "snippets": [ ]
+        }
+      }
+    }
+  }, {
+    "toolUse": {
+      "tool": "FR_Generic_Datastore",
+      "action": "FR_Generic_Datastore",
+      "inputActionParameters": {
+        "requestBody": {
+          "query": "Pouvez-vous me dire à quelle date mon service a été activé pour la première fois?"
+        }
+      },
+      "outputActionParameters": {
+        "200": {
+          "answer": "",
+          "snippets": [ ]
+        }
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Je comprends que cela puisse être frustrant. Malheureusement, je n'ai pas trouvé de solution immédiate. Cependant, je peux vous mettre en contact avec un agent qui pourra vous aider à trouver les informations dont vous avez besoin. Souhaitez-vous contacter un agent ?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "non"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_Feedback",
+      "inputActionParameters": {
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer is asking when his service was first activated",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca",
+      "lob": "mobility",
+      "route": "service_inquire_about_effective_date",
+      "utterance": "Pouvez-vous me dire à quelle date mon service a été activé pour la première fois?"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "First,  flow \"bell_apb\" is called and then playbook \"bell_uc_ask_LOB\". Answer to the query is given basis playbook instructions",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca"
+    }
+  },
+  "displayName": "FR_service_inquire_about_effective_date_mobility_can you tell me when my service was first activated",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 889,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

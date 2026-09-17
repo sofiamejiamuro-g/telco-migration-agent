@@ -1,0 +1,70 @@
+{
+  "name": "99989e79-5c7b-467a-91c1-a8fee02e276d",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_tech_intent_apb",
+      "inputActionParameters": {
+      
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Ça me fait plaisir de t'aider à obtenir une nouvelle carte SIM.\n\nVotre téléphone est-il compatible avec une eSIM?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Non, mon téléphone n'est pas compatible avec eSIM."
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Vous pouvez facilement acheter une carte SIM en visitant le site web de Bell Mobilité ou en vous rendant chez un détaillant près de chez vous.\n\nJe vous envoie un texto avec les détails sur la façon d'acheter une carte SIM maintenant."
+    }
+  }, {
+    "userUtterance": {
+      "text": "oui"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "brand": "bell",
+        "language": "fr-ca",
+        "sms_content": "MSG Bell: Tel que demandé, voici un lien pour commander une carte SIM en ligne dès maintenant. Consultez https://www.bell.ca/Mobilite/Cartes-SIM ou visitez l'un de nos magasins en utilisant l'outil de localisation [invalid URL removed] (bell.ca/a-propos-de-nous)",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+        "brand": "bell",
+        "language": "fr-ca"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Since the customer has requested an eSIM, we only need to confirm if their phone is eSIM-compatible.",
+    "actionParameters": {
+      "BAN": "4162675927163",
+      "CLID": "4155547622",
+      "brand": "bell",
+      "language": "fr-ca",
+      "route": "equipment_request_sim",
+      "sim_type": "eSIM",
+      "utterance": "J'ai besoin d'une nouvelle carte SIM"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Customer to receive the SMS in their phone",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca",
+      "sms_content": "Bell MSG : Tel que demandé, voici un lien pour configurer une eSIM en ligne dès maintenant.  Voir: : https://support.bell.ca/esim-setup#card-link-content-panel (bell.ca/about-us",
+      "sms_type": "Public"
+    }
+  },
+  "displayName": "FR - Equipment Request Sim - eSIM - CX Declines",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 592,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

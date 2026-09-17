@@ -1,0 +1,84 @@
+{
+  "name": "06da319a-921b-4ea0-9a41-ea63feb23c83",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_tech_intent_apb",
+      "inputActionParameters": {
+      
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "I'd be happy to help you get a new sim.\n\nYou can activate your service instantly with an eSIM. There’s no cost to activate and you won’t have to wait for the delivery of a physical SIM.\n\nWould you like to activate with eSIM now?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "I want a physical SIM"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "You can easily purchase a SIM card online or by visiting a local retailer near you. I’ll send you a text now with further instructions."
+    }
+  }, {
+    "userUtterance": {
+    
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_global_error_count_check",
+      "inputActionParameters": {
+        "global_error_counter": "6",
+        "language": "en"
+      },
+      "outputActionParameters": {
+        "global_error_counter": "7",
+        "language": "en"
+      }
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "brand": "bell",
+        "language": "en",
+        "sms_content": "Bell MSG: As requested, here is a link to order a SIM card online now. See https://www.bell.ca/Mobility/SIM-Cards or visit one of our retail locations by using the store locator tool https://www.bell.ca/Store_Locator (bell.ca/about-us)",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+        "brand": "bell",
+        "language": "en"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer wants a physical sim",
+    "actionParameters": {
+      "BAN": "4162675927163",
+      "CLID": "4155547622",
+      "brand": "bell",
+      "global_error_counter": "6",
+      "language": "en",
+      "route": "equipment_request_sim",
+      "sim_type": "SIM",
+      "utterance": "I would like to get a new sim"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Customer to receive the SMS in their phone",
+    "actionParameters": {
+      "brand": "bell",
+      "global_error_counter": "7",
+      "language": "en",
+      "sms_content": "Bell MSG: As requested, here is a link to order a SIM card online now. See https://www.bell.ca/Mobility/SIM-Cards or visit one of our retail locations by using the store locator tool https://www.bell.ca/Store_Locator (bell.ca/about-us)",
+      "sms_type": "Public"
+    }
+  },
+  "displayName": "EN - Equipment Request Sim - Physical SIM - eSIM",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 675,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

@@ -1,0 +1,109 @@
+{
+  "name": "7a0dcb36-32cd-45f3-a6dd-6c61cd979ee1",
+  "displayName": "Date Outside Range Check",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "generators": [ {
+      "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/d6afaa57-031e-4ff7-8204-6b093559a56b",
+      "inputParameters": [ {
+        "key": "availability",
+        "value": "$session.params.availability"
+      }, {
+        "key": "full_date",
+        "value": "$session.params.full_date"
+      } ],
+      "outputParameter": "$request.generative.date_within_range"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "date_within_range",
+        "value": "$request.generative.date_within_range"
+      } ]
+    },
+    "name": "938d17d6-a093-423a-83aa-60613d4999d5"
+  }, {
+    "condition": "$session.params.date_within_range_second_time = \"true\" AND $session.params.date_within_range = \"true\" AND ($session.params.dates_array_count \u003e 0 OR $session.params.dates_available = \"true\")",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "date_within_range_second_time",
+        "value": null
+      }, {
+        "parameter": "date_within_range",
+        "value": null
+      } ]
+    },
+    "targetPage": "Dynamic Interval Names",
+    "name": "a8ddb7ec-f0f9-4d58-a6e6-f2afba770770"
+  }, {
+    "condition": "$session.params.date_within_range = \"true\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "date_within_range",
+        "value": null
+      } ]
+    },
+    "targetPage": "Dynamic Interval Names",
+    "name": "ba39aa53-cf30-44c8-be0d-ec56ee844c6a"
+  }, {
+    "condition": "($session.params.date_within_range_second_time = \"true\" AND $session.params.date_within_range = \"false\") OR ($session.params.dates_array_count = 0 OR $session.params.dates_available = \"false\")",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Malheureusement, nous n'avons pas de rendez-vous disponible ce jour-là." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "Unfortunately we do not have an available appointment on that day." ]
+        },
+        "languageCode": "en"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "date_within_range_second_time",
+        "value": null
+      }, {
+        "parameter": "date_within_range",
+        "value": null
+      } ]
+    },
+    "targetPage": "Webhook - WFAS Cancel",
+    "name": "c6ed9249-f955-4c68-8114-2e311c2a52de"
+  }, {
+    "condition": "$session.params.date_within_range = \"false\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "date_range_begin",
+        "value": "$sys.func.FORMAT_DATE($sys.func.ADD_DATE($sys.func.NOW(), 14, \"DAYS\"), \"yyyy-MM-dd\", $session.params.language)"
+      }, {
+        "parameter": "date_range_end",
+        "value": "$sys.func.FORMAT_DATE($sys.func.ADD_DATE($sys.func.NOW(), 28, \"DAYS\"), \"yyyy-MM-dd\", $session.params.language)"
+      } ]
+    },
+    "targetPage": "Webhook - WFAS Check Availability",
+    "name": "42d0b935-24a7-41cf-b456-64a58c5fb8f9"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "flow_id",
+        "value": "c7cd06ab-a0e6-440b-804d-a28d6547b318"
+      }, {
+        "parameter": "page_id",
+        "value": "7a0dcb36-32cd-45f3-a6dd-6c61cd979ee1"
+      }, {
+        "parameter": "page_name",
+        "value": "Date Outside Range Check"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "09d88984-c933-4a9f-86af-e41270bc480a"
+  } ]
+}

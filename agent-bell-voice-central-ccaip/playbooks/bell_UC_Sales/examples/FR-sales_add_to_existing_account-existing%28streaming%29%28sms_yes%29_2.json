@@ -1,0 +1,69 @@
+{
+  "name": "a2a9ff67-58a7-41d0-b718-2a565efc6035",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+        "language": "fr-ca"
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Bien sûr, laissez-moi vous aider.\nDésirez-vous ajouter un nouveau service ou modifier votre service actuel?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "nouvelle ligne"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Je vais envoyer un texto à l’appareil au moyen duquel vous appelez, afin que vous puissiez consulter toutes les options de lecture en continu. Est-ce que ça vous convient?\n\n"
+    }
+  }, {
+    "userUtterance": {
+      "text": "oui"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "fr-ca",
+        "line_type": "New",
+        "sms_content": "Bell: Vous pouvez visiter subscription.bell.ca/client pour vous abonner à un service de diffusion en continu dans l'appli MonBell. ( bell.ca/apropos )",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+        "language": "fr-ca"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "customer wants to add streaming services like crave,Netflix,Disney,basic, premiun",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "fr-ca",
+      "route": "sales_add_to_existing_account",
+      "streaming_services": "Netflix",
+      "utterance": "J'aimerais ajouter Netflix"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "customer is asked about sms and is agreed to receive the sms",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca",
+      "line_type": "New",
+      "streaming_services": "crave"
+    }
+  },
+  "displayName": "FR-sales_add_to_existing_account-existing(streaming)(sms_yes)_2",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 475,
+  "languageCode": "en"
+}

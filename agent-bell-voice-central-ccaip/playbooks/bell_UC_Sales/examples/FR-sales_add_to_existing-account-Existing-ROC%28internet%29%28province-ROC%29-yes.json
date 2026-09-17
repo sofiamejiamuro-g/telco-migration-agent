@@ -1,0 +1,72 @@
+{
+  "name": "62e2b46f-bd6b-4396-b293-32ba014da75d",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+        "language": "fr-ca"
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Bien sûr, laissez-moi vous aider.\nVérifions si nous offrons des services Internet ou de téléphonie résidentielle dans votre secteur. Dans quelle province avez-vous besoin de services?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Alberta"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Obtenez des vitesses ultrarapides sur le réseau de Bell grâce au service Internet mobile de Bell. Vous pouvez bénéficier d’une connectivité Internet allant jusqu’à 5G avec un point d’accès sans fil mobile afin de rester connecté à la maison ou lors de vos déplacements.\nJe vais envoyer un texto à l’appareil au moyen duquel vous appelez, afin que vous puissiez en savoir plus sur le service Internet mobile sur notre site Web. Est-ce que ça vous convient?\n\n"
+    }
+  }, {
+    "userUtterance": {
+      "text": "oui"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "fr-ca",
+        "line_type": "New",
+        "sms_content": "Bell: Vous pouvez visiter bell.ca/mobileinternetdevices pour consulter nos appareils avec Internet mobile. ( bell.ca/apropos )",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+        "language": "fr-ca"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "customer wants to add a new internet line and {province} is \"ROC\" or null from identification flow",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "fr-ca",
+      "line_type": "New",
+      "lob": "Internet",
+      "province": "ROC",
+      "route": "sales_add_to_existing_account",
+      "utterance": "Comment puis-je ajouter un nouveau service Internet à mon compte ?"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "customer is asked {province} and is asked about sms and as user agrees to sms we are transferring user to sms flow",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca",
+      "line_type": "New",
+      "lob": "Internet",
+      "province": "ROC"
+    }
+  },
+  "displayName": "FR-sales_add_to_existing-account-Existing-ROC(internet)(province-ROC)-yes",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 582,
+  "languageCode": "en"
+}

@@ -1,0 +1,55 @@
+{
+  "name": "d1b0effd-3d08-4197-9d73-d659272301d1",
+  "displayName": "Local error handling for Phone Number",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.local_no_match_phone = 1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Désolé, cela ne semble pas exact. Veuillez dire ou entrer le numéro de téléphone de 10 chiffres auquel vous souhaitez que le code soit envoyé. Il doit être associé à votre compte." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "Sorry, that doesn’t seem right. Please say or key in the 10-digit phone number you’d like us to send the code to. It needs to be a number associated with your account." ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "e1eb16fc-5d73-411b-8e77-7323a9d4ebe1"
+  }, {
+    "condition": "$session.params.local_no_match_phone \u003e= 2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Cela ne semble toujours pas exact." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "Sorry that still does not seem right." ]
+        },
+        "languageCode": "en"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "auth_status",
+        "value": "False"
+      }, {
+        "parameter": "status",
+        "value": "SMSTimeout"
+      } ]
+    },
+    "targetPage": "Webhook set-auth-status",
+    "name": "1c0a8fbc-99d3-47b9-8c46-51e67d80c286"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Previous Page",
+    "name": "7d83d716-2c7d-4ef5-98ca-8013bc2eb03b"
+  } ]
+}

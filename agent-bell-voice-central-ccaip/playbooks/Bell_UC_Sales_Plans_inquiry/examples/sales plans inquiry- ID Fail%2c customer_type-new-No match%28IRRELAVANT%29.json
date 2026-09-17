@@ -1,0 +1,103 @@
+{
+  "name": "743bf37f-9078-495e-8019-e791bdbd27ba",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "language": "en"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Sure, let me help you with that.\n\nWhich service are you inquiring about?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "the sky is blue"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_global_error_count_check",
+      "inputActionParameters": {
+        "global_error_counter": "0"
+      },
+      "outputActionParameters": {
+        "global_error_counter": "1"
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "I'm unable to provide information on that subject. However, I'd be glad to assist with any inquiries you may have regarding Bell's products and services."
+    }
+  }, {
+    "userUtterance": {
+      "text": "the grass is green"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_global_error_count_check",
+      "inputActionParameters": {
+        "global_error_counter": "1"
+      },
+      "outputActionParameters": {
+        "global_error_counter": "2"
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "I apologize, I'm still having difficulty understanding your request. To best assist you, could you please rephrase your question or provide more detail about what you're looking for regarding Bell's products and services?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "the sky is vast"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_global_error_count_check",
+      "inputActionParameters": {
+        "global_error_counter": "2"
+      },
+      "outputActionParameters": {
+        "global_error_counter": "3"
+      }
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_No_Match_3",
+      "inputActionParameters": {
+        "language": "en"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customers want to know about different plans or compare different plans that Bell has and Previous conversation not relevant",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "New",
+      "global_error_counter": "0",
+      "language": "en",
+      "route": "sales_plans_inquiry",
+      "utterance": "I need a plan"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "As Customer says irrelevant information to bell mobile products and services, so flow bell_global_error_count_check is called each time and VA respond as per instructions and when 3nd time they say irrelevant things, we send them to bell_no_match3 flow",
+    "actionParameters": {
+      "brand": "bell",
+      "global_error_counter": "3",
+      "language": "en"
+    }
+  },
+  "displayName": "sales plans inquiry- ID Fail, customer_type-new-No match(IRRELAVANT)",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 723,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

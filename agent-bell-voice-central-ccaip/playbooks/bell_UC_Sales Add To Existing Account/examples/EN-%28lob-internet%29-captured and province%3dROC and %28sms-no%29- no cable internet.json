@@ -1,0 +1,69 @@
+{
+  "name": "59d86970-9985-4a37-b003-b9b2b1166acc",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "language": "en"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Sure, let me help you with that.\n\nLet’s check if we offer Internet and Home phone service in your area. In which province are you looking to get service?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "British Columbia"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Get blazing-fast speeds on the Bell network with Bell Mobile Internet. Where you can get up to 5G internet connectivity with a mobile hotspot device so you can stay connected at home or on the go.\nI'll send a text to the device you're calling from, so that you can learn more and easily place an order on our website. Is that alright?\n\n"
+    }
+  }, {
+    "userUtterance": {
+      "text": "no"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "en",
+        "route": "sales_add_to_existing_account",
+        "sms_send_status": "Declined"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "customer is asking about adding a new line and lob is \"internet\" and province is \"ROC\" and {shr_int_partner_nw_elig_flg} is not equal to 1",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "en",
+      "lob": "internet",
+      "province": "ROC",
+      "utterance": "how do I add internet service to my current account?"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Then provide the response and ask the customer if you can send sms or not, if customer says \"no\" or denies then call bell_SMS Trigger flow",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "lob": "internet",
+      "province": "ROC"
+    }
+  },
+  "displayName": "EN-(lob-internet)-captured and province=ROC and (sms-no)- no cable internet",
+  "retrievalStrategy": "STATIC",
+  "tokenCount": 512,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

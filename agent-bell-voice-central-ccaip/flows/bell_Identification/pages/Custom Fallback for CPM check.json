@@ -1,0 +1,143 @@
+{
+  "name": "f378a9ef-ff53-486c-95a6-59516563c5b9",
+  "displayName": "Custom Fallback for CPM check",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.aqd_counter = 3 AND $session.params.CPM_Invalid_Counter != 2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Désolé, je ne parviens pas à trouver ce numéro dans nos dossiers. Soyez sans crainte, je ferai quand même de mon mieux pour vous servir." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "I'm sorry, I can't seem to find this number in our records. But don’t worry, I'll still help you however I can." ]
+        },
+        "languageCode": "en"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "identification_status",
+        "value": "Fail"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "180ba76b-910e-4c2a-b49c-3e75ddf617a7"
+  }, {
+    "condition": "$session.params.semantic_void = 3 AND $session.params.CPM_Invalid_Counter \u003c= 2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Désolé, je ne parviens pas à trouver ce numéro dans nos dossiers. Soyez sans crainte, je ferai quand même de mon mieux pour vous servir." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "Sorry, I can't seem to find that number in our records.  But don’t worry, I'll still help you however I can." ]
+        },
+        "languageCode": "en"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "identification_status",
+        "value": "Fail"
+      } ]
+    },
+    "targetPage": "End Flow Check",
+    "name": "0e35264b-b1a1-42d9-9ce8-ba80d65cbbfa"
+  }, {
+    "condition": "$session.params.CPM_Invalid_Counter \u003e= 2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Je ne trouve malheureusement pas ce numéro dans nos dossiers. Mais rassurez-vous, je ferai de mon mieux pour vous aider" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "Sorry, I can't seem to find that number in our records.  But don’t worry, I'll still help you however I can." ]
+        },
+        "languageCode": "en"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "identification_status",
+        "value": "Fail"
+      } ]
+    },
+    "targetPage": "End Flow Check",
+    "name": "a06a8c93-7a14-44dc-a2c1-3c490f5229da"
+  }, {
+    "condition": "$session.params.CPM_Invalid_Counter = 1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ " Réessayons. Pouvez-vous s’il vous plaît répéter votre numéro de 10 chiffres?  Vous pouvez aussi utiliser le clavier de votre téléphone." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "$request.generative.response" ]
+        },
+        "languageCode": "en"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "CPM_Invalid_Counter",
+        "value": "$sys.func.ADD(1, $session.params.CPM_Invalid_Counter)"
+      } ],
+      "generators": [ {
+        "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/77722bcc-7482-4d12-be94-76ef43407593",
+        "outputParameter": "$request.generative.response"
+      } ]
+    },
+    "targetPage": "CIRN Collection Check",
+    "name": "eeb64dcd-50c6-44a8-a0ca-611ef99a076e"
+  }, {
+    "condition": "$session.params.CPM_Invalid_Counter = 0",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Désolé, ça ne semble pas exact. Quel était le numéro de 10 chiffres? Vous pouvez aussi utiliser le clavier de votre téléphone. Si vous voulez un nouveau service, dites « nouveau service »." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "$request.generative.response" ]
+        },
+        "languageCode": "en"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "CPM_Invalid_Counter",
+        "value": "$sys.func.ADD(1, $session.params.CPM_Invalid_Counter)"
+      } ],
+      "generators": [ {
+        "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/77722bcc-7482-4d12-be94-76ef43407593",
+        "outputParameter": "$request.generative.response"
+      } ]
+    },
+    "targetPage": "CIRN Collection Check",
+    "name": "e4e28822-e84a-42d4-a2fb-44909d2d3663"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "f378a9ef-ff53-486c-95a6-59516563c5b9"
+      }, {
+        "parameter": "flow_id",
+        "value": "8df7f836-8c64-4019-9506-2cedc52519c8"
+      }, {
+        "parameter": "page_name",
+        "value": "Custom Fallback for CPM check"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

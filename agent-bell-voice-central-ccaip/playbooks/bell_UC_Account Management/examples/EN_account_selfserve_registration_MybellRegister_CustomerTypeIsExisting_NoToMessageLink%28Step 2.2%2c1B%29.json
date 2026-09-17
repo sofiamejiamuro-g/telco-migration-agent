@@ -1,0 +1,66 @@
+{
+  "name": "13aacfcf-c1cc-44bf-8842-cbd3e8b00539",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Using MyBell is a great way to manage your service on your time. I'll send you a text to the device you are calling from, with a link to sign up for your account. Is that alright?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "No"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_get_sdl_mapping_url",
+      "inputActionParameters": {
+        "brand": "bell",
+        "language": "en",
+        "route": "account_selfserve_registration"
+      },
+      "outputActionParameters": {
+        "brand": "bell",
+        "language": "en"
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "No problem at all. For any other questions you can always visit our website at {faq_link}."
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_Feedback",
+      "inputActionParameters": {
+        "brand": "bell",
+        "customer_type": "Existing",
+        "language": "en",
+        "sms_send_status": "Declined"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "The customer is trying to register in the MyBell Application.",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "Existing",
+      "language": "en",
+      "route": "account_selfserve_registration",
+      "utterance": "mybell register"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "If the customer disagrees and says No then reroute the user to bell_feedback flow.",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "route": "account_selfserve_registration",
+      "utterance": "mybell register"
+    }
+  },
+  "displayName": "EN_account_selfserve_registration_MybellRegister_CustomerTypeIsExisting_NoToMessageLink(Step 2.2,1B)",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 400,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

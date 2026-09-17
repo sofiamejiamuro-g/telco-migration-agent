@@ -1,0 +1,60 @@
+{
+  "name": "bf99b5e7-bbf8-48f9-924e-5cc6e054e779",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "brand": "bell",
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "je vais envoyer un texto à l'appareil au moyen duquel vous appelez, afin que vous puissiez facilement consulter et gérer vos forfaits dans MonBell. Est-ce que ça vous convient?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Oui"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "fr-ca",
+        "sms_content": "Bell: Vous pouvez visiter https://mybell.bell.ca/MesServices pour voir ou gérer vos services dans l'appli MonBell. ( bell.ca/apropos)",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "customer wants to know about the details of their current subscription",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "fr-ca",
+      "route": "service_confirm_current_plan",
+      "utterance": "Je voudrais savoir à quoi je suis abonné ?"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Ask if user wants to receives the sms, if customer agreed then call \"bell_SMS Trigger\" flow",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "fr-ca"
+    }
+  },
+  "displayName": "FR - service_confirm_current_plan- ID pass-yes",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 393,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

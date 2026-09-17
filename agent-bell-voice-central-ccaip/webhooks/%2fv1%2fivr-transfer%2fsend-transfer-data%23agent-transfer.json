@@ -1,0 +1,27 @@
+{
+  "name": "5eb5bd49-08de-412d-bbc6-a4c2f09d0809",
+  "displayName": "/v1/ivr-transfer/send-transfer-data#agent-transfer",
+  "timeout": {
+    "seconds": 30
+  },
+  "serviceDirectory": {
+    "service": "projects/gcp-it-npe-pltfm-apigee/locations/us-central1/namespaces/apigee-nb-usc1-service-dir-namespace/services/apigee-nb-usc1-service",
+    "genericWebService": {
+      "uri": "https://apigee-nane1-uat.int.bell.ca/v1/ivr-transfer/send-transfer-data",
+      "requestHeaders": [ {
+        "key": "x-apikey",
+        "value": "npZmDivP6Hxes3wtQ0tC9RqItjJTY8TgZHbOPNeFwvSYSKPI"
+      } ],
+      "webhookType": "FLEXIBLE",
+      "httpMethod": "POST",
+      "requestBody": "{\n  \"sessionInfo\": {\n    \"dfcx_session_id\": \"$session.params.dfcx_session_id\",\n    \"agent_id\": \"$session.params.agent_id\",\n    \"parameters\": {\n      \"language\": \"$session.params.language\",\n      \"call_id\": \"$session.params.call_id\",\n      \"dam_id\": \"$session.params.dam_id\",\n      \"brand\": \"$session.params.brand\",\n      \"department\": \"$session.params.department\",\n      \"account_type\": \"$session.params.account_type\",\n      \"cti_at\": \"$session.params.cti_at\",\n      \"cti_rt\": \"$session.params.cti_rt\",\n      \"cti_sd\": \"$session.params.cti_sd\",\n      \"clid\": \"$session.params.clid\",\n      \"cirn\": \"$session.params.cirn\",\n      \"additional_info\": \"$session.params.additional_info\",\n      \"customer_authentication\": \"$session.params.customer_authentication\",\n      \"callKey\": \"$session.params.callKey\"\n    }\n  },\n  \"fulfillmentInfo\": {\n    \"tag\": \"$session.params.tag\"\n  },\n  \"languageCode\": \"$request.language\"\n}",
+      "parameterMapping": [ {
+        "key": "dam_transfer_response",
+        "value": "sessionInfo.parameters.dam_transfer_response"
+      }, {
+        "key": "webhook_success",
+        "value": "sessionInfo.parameters.webhook_success"
+      } ]
+    }
+  }
+}

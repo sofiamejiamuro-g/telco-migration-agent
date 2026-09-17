@@ -1,0 +1,82 @@
+{
+  "name": "e54fcd4a-36a6-41c8-a389-54c609115058",
+  "displayName": "Language Based SMS",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.language = \"en\" AND ($session.params.route = \"payment_update_autopay\" OR $session.params.route = \"payment_setup_autopay\")",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "sms_type",
+        "value": "Public"
+      }, {
+        "parameter": "sms_content",
+        "value": "You can visit https://m.bell.ca/chatpreauthorizedbanke to complete setting up Pre Authorized payment in MyBell. (bell.ca/about-us )"
+      } ]
+    },
+    "targetFlow": "bell_SMS Trigger",
+    "name": "fe5ac1bc-d64e-4f19-b1ca-047b9e3dade3"
+  }, {
+    "condition": "$session.params.language = \"en\" AND $session.params.route = \"payment_make_payment\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "sms_type",
+        "value": "Public"
+      }, {
+        "parameter": "sms_content",
+        "value": "Bell msg: You can visit https://m.bell.ca/ecmanagepayment to make a payment in the MyBell app.\u2028 ( bell.ca/about-us )"
+      } ]
+    },
+    "targetFlow": "bell_SMS Trigger",
+    "name": "bcab03da-5963-47c6-aba7-060b2e86a054"
+  }, {
+    "condition": "$session.params.language = \"fr-ca\" AND ($session.params.route = \"payment_update_autopay\" OR $session.params.route = \"payment_setup_autopay\")",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "sms_type",
+        "value": "Public"
+      }, {
+        "parameter": "sms_content",
+        "value": "Vous pouvez visiter le https://m.bell.ca/chatpreauthorizedbankf pour terminer la configuration du prélèvement automatique dans MonBell. ( bell.ca/apropos )"
+      } ]
+    },
+    "targetFlow": "bell_SMS Trigger",
+    "name": "2a418347-f6c1-4fe1-8f30-bce2ce9381d8"
+  }, {
+    "condition": "$session.params.language = \"fr-ca\" AND $session.params.route = \"payment_make_payment\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "sms_type",
+        "value": "Public"
+      }, {
+        "parameter": "sms_content",
+        "value": "Mess. de Bell: Vous pouvez visiter https://m.bell.ca/ecgererpaiement pour effectuer un paiement dans l'application MonBell. ( bell.ca/apropos )"
+      } ]
+    },
+    "targetFlow": "bell_SMS Trigger",
+    "name": "a98c127c-837c-4291-a727-798fe384754e"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "e54fcd4a-36a6-41c8-a389-54c609115058"
+      }, {
+        "parameter": "flow_id",
+        "value": "67b3b6e0-78cf-42b8-979f-55751a4fdf3e"
+      }, {
+        "parameter": "page_name",
+        "value": "Language Based SMS"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

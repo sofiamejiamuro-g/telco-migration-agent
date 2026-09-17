@@ -1,0 +1,328 @@
+{
+  "name": "0a1510a2-b7b1-4626-b66b-8387cabd9a94",
+  "displayName": "bell_sms_trigger - old",
+  "transitionRoutes": [ {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "SMS_Counter",
+        "value": 0
+      }, {
+        "parameter": "Loud_Counter",
+        "value": 0
+      }, {
+        "parameter": "More_Time_Counter",
+        "value": 0
+      }, {
+        "parameter": "Mistake_Counter",
+        "value": 0
+      }, {
+        "parameter": "PHN_Invalid_Counter",
+        "value": 0
+      }, {
+        "parameter": "fallback_counter",
+        "value": 0
+      }, {
+        "parameter": "repeat_counter",
+        "value": 0
+      } ],
+      "nextActionOverride": {
+      
+      }
+    },
+    "targetFlow": "bell_SMS Trigger",
+    "name": "2fcc463a-4a45-4449-89d2-749f8703d4f4"
+  } ],
+  "eventHandlers": [ {
+    "event": "sys.no-match-default",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Je n'ai pas compris. Pouvez-vous répéter, s'il vous plaît ?", "J'ai manqué ce que vous avez dit. Qu'est-ce que c'était ?", "Désolé, pourriez-vous répéter cela ?", "Excusez-moi, pouvez-vous répéter cela ?", "Pouvez-vous répéter cela ?", "Désolé, je n'ai pas compris. Pouvez-vous reformuler ?", "Pardon, qu'est-ce que c'était ?", "Encore une fois ?", "Qu'est-ce que c'était ?", "Pouvez-vous répéter cela encore une fois ?", "Je n'ai pas compris. Pouvez-vous répéter ?", "J'ai manqué ça, pouvez-vous répéter ?" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "I didn't get that. Can you say it again?", "I missed what you said. What was that?", "Sorry, could you say that again?", "Sorry, can you say that again?", "Can you say that again?", "Sorry, I didn't get that. Can you rephrase?", "Sorry, what was that?", "One more time?", "What was that?", "Say that one more time?", "I didn't get that. Can you repeat?", "I missed that, say that again?" ]
+        },
+        "languageCode": "en"
+      } ],
+      "nextActionOverride": {
+      
+      }
+    },
+    "name": "3b90853b-0daa-4070-8c4e-5204c66ef2d0"
+  }, {
+    "event": "sys.no-input-default",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Je n'ai pas compris. Pouvez-vous répéter, s'il vous plaît ?", "J'ai manqué ce que vous avez dit. Qu'est-ce que c'était ?", "Désolé, pourriez-vous répéter cela ?", "Excusez-moi, pouvez-vous répéter cela ?", "Pouvez-vous répéter cela ?", "Désolé, je n'ai pas compris. Pouvez-vous reformuler ?", "Pardon, qu'est-ce que c'était ?", "Encore une fois ?", "Qu'est-ce que c'était ?", "Pouvez-vous répéter cela encore une fois ?", "Je n'ai pas compris. Pouvez-vous répéter ?", "J'ai manqué ça, pouvez-vous répéter ?" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "I didn't get that. Can you say it again?", "I missed what you said. What was that?", "Sorry, could you say that again?", "Sorry, can you say that again?", "Can you say that again?", "Sorry, I didn't get that. Can you rephrase?", "Sorry, what was that?", "One more time?", "What was that?", "Say that one more time?", "I didn't get that. Can you repeat?", "I missed that, say that again?" ]
+        },
+        "languageCode": "en"
+      } ],
+      "nextActionOverride": {
+      
+      }
+    },
+    "name": "9828b9a8-da48-4fe5-9fe5-0fc36a6dfade"
+  }, {
+    "targetPage": "End Session",
+    "event": "wrapup",
+    "triggerFulfillment": {
+    
+    },
+    "name": "6ba0c737-151e-4d66-8faf-bc1ebde093f8"
+  } ],
+  "nluSettings": {
+    "modelType": "MODEL_TYPE_CUSTOM",
+    "classificationThreshold": 0.30000001,
+    "modelTrainingMode": "MODEL_TRAINING_MODE_MANUAL",
+    "multiIntentSettings": {
+    
+    }
+  },
+  "advancedSettings": {
+    "enabled": true,
+    "playbackInterruptionSettings": {
+    
+    }
+  },
+  "nluSettingsList": [ {
+    "modelType": "MODEL_TYPE_CUSTOM",
+    "classificationThreshold": 0.30000001,
+    "modelTrainingMode": "MODEL_TRAINING_MODE_MANUAL",
+    "multiIntentSettings": {
+    
+    },
+    "languageCode": "fr-ca"
+  }, {
+    "modelType": "MODEL_TYPE_CUSTOM",
+    "classificationThreshold": 0.30000001,
+    "modelTrainingMode": "MODEL_TRAINING_MODE_MANUAL",
+    "multiIntentSettings": {
+    
+    },
+    "languageCode": "en"
+  } ],
+  "inputParameterDefinitions": [ {
+    "name": "sms_content",
+    "description": "SMS Content",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "STRING"
+      }
+    },
+    "parameterType": {
+      "name": "sms_content",
+      "openapiJsonSchema": {
+        "type": "string"
+      }
+    }
+  }, {
+    "name": "BAN",
+    "description": "Billing Account Number",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "NUMBER"
+      }
+    },
+    "parameterType": {
+      "name": "BAN",
+      "openapiJsonSchema": {
+        "type": "number"
+      }
+    }
+  }, {
+    "name": "CLID",
+    "description": "CLID",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "NUMBER"
+      }
+    },
+    "parameterType": {
+      "name": "CLID",
+      "openapiJsonSchema": {
+        "type": "number"
+      }
+    }
+  }, {
+    "name": "sms_type",
+    "description": "Private/Public",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "STRING"
+      }
+    },
+    "parameterType": {
+      "name": "sms_type",
+      "openapiJsonSchema": {
+        "type": "string"
+      }
+    }
+  }, {
+    "name": "brand",
+    "description": "Brand",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "STRING"
+      }
+    },
+    "parameterType": {
+      "name": "brand",
+      "openapiJsonSchema": {
+        "type": "string"
+      }
+    }
+  }, {
+    "name": "caller_channel",
+    "description": "caller_channel",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "STRING"
+      }
+    },
+    "parameterType": {
+      "name": "caller_channel",
+      "openapiJsonSchema": {
+        "type": "string"
+      }
+    }
+  }, {
+    "name": "self_help_status",
+    "description": "self_help_status",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "STRING"
+      }
+    },
+    "parameterType": {
+      "name": "self_help_status",
+      "openapiJsonSchema": {
+        "type": "string"
+      }
+    }
+  }, {
+    "name": "utterance2",
+    "description": "utterance2",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "STRING"
+      }
+    },
+    "parameterType": {
+      "name": "utterance2",
+      "openapiJsonSchema": {
+        "type": "string"
+      }
+    }
+  }, {
+    "name": "email_indicator",
+    "description": "Indicates if email is to be sent to customer",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "STRING"
+      }
+    },
+    "parameterType": {
+      "name": "email_indicator",
+      "openapiJsonSchema": {
+        "type": "string"
+      }
+    }
+  }, {
+    "name": "sms_send_status",
+    "description": "Sms Send Status",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "STRING"
+      }
+    },
+    "parameterType": {
+      "name": "sms_send_status",
+      "openapiJsonSchema": {
+        "type": "string"
+      }
+    }
+  }, {
+    "name": "language",
+    "description": "language",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "STRING"
+      }
+    },
+    "parameterType": {
+      "name": "language",
+      "openapiJsonSchema": {
+        "type": "string"
+      }
+    }
+  } ],
+  "outputParameterDefinitions": [ {
+    "name": "sms_send_status",
+    "description": "SMS Sending Status",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "STRING"
+      }
+    },
+    "parameterType": {
+      "name": "sms_send_status",
+      "openapiJsonSchema": {
+        "type": "string"
+      }
+    }
+  }, {
+    "name": "caller_channel",
+    "description": "caller_channel",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "STRING"
+      }
+    },
+    "parameterType": {
+      "name": "caller_channel",
+      "openapiJsonSchema": {
+        "type": "string"
+      }
+    }
+  }, {
+    "name": "self_help_status",
+    "description": "self_help_status",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "STRING"
+      }
+    },
+    "parameterType": {
+      "name": "self_help_status",
+      "openapiJsonSchema": {
+        "type": "string"
+      }
+    }
+  }, {
+    "name": "brand_num",
+    "description": "Brand number",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "NUMBER"
+      }
+    },
+    "parameterType": {
+      "name": "brand_num",
+      "openapiJsonSchema": {
+        "type": "number"
+      }
+    }
+  } ],
+  "multiLanguageSettings": {
+  
+  }
+}

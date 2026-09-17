@@ -1,0 +1,55 @@
+{
+  "name": "f8866c30-6e28-469b-b7a1-5df4f6d9c7cc",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Could you tell me which service you're having issues with? Mobility, Internet, TV, or Homephone?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Transfer me to an agent."
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Could you specify the type of service you're inquiring about? Mobility, Internet, TV, or Homephone?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Agent"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_aqd",
+      "inputActionParameters": {
+        "apb_location_id": "70014",
+        "lob": "Internet",
+        "route": "tech_service_outage"
+      },
+      "outputActionParameters": {
+        "apb_location_id": "70014",
+        "lob": "Internet",
+        "route": "tech_service_outage"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "User wants to know about outage, but does not mention LOB",
+    "actionParameters": {
+      "language": "en",
+      "route": "tech_service_outage",
+      "utterance": "I'm wondering if there's an outage."
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "User wants to know about outage, but does not mention LOB, so route ask them about lob and extract the lob if mentioned",
+    "actionParameters": {
+      "apb_location_id": "70014",
+      "language": "en",
+      "lob": "Internet",
+      "route": "tech_service_outage"
+    }
+  },
+  "displayName": "EN - extract LOB - tech_service_outage | no lob",
+  "retrievalStrategy": "STATIC",
+  "tokenCount": 355,
+  "languageCode": "en"
+}

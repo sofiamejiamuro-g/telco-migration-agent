@@ -1,0 +1,71 @@
+{
+  "name": "5216f190-fcce-4f64-8e10-c094faf8ed52",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Bien sûr, laissez-moi vous aider. À propos de quel service communiquez-vous avec nous?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Internet"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Vérifions si nous offrons des services Internet ou de téléphonie résidentielle dans votre secteur. Dans quelle province avez-vous besoin de\nservices?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "MTS"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_aqd",
+      "inputActionParameters": {
+        "language": "fr-ca",
+        "lob": "Internet",
+        "special_queue": "bell_sales_to_mts"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "The Customer wants to sign up or open a new account with Bell and province is not identified, but {lob} is identified as \"Internet\" with route as \"sales_new_account\" and customer_type is \"New\"",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "New",
+      "language": "fr-ca",
+      "province": "AB",
+      "route": "sales_new_account",
+      "utterance": "Je souhaite adhérer aux services Bell"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "We need to check the result from identification flow from the webhook NPANXX, If no province is identified then we need ask them what province they are looking for and if it is \"MTS\" then call \"bell_aqd\" flow and set special_queue =\nbell_sales_to_mts",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "New",
+      "identification_status": "Fail",
+      "language": "fr-ca",
+      "lob": "Internet",
+      "province": "MTS",
+      "special_queue": "bell_sales_to_mts"
+    }
+  },
+  "displayName": "FR - sales_new_account- ID Fail, customer_type-new- no province identified-MTS",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 513,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

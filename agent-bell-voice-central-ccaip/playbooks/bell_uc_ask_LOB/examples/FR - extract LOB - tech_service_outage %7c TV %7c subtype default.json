@@ -1,0 +1,50 @@
+{
+  "name": "283945d2-c9c2-48ed-bca2-4728ddaeb238",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Pourriez-vous me dire avec quel service vous rencontrez des problèmes? Mobilité, Internet, Télé ou Téléphonie résidentielle?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "TV"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Sur quel type de service de télévision vous renseignez-vous? Télé Fibe, appli Télé Fibe ou Télé Satellite?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Je veux vérifier une panne"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Pourriez-vous préciser le type de service de télévision sur lequel vous vous renseignez?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Service à la clientèle."
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "User wants to schedule the appointment, lob is \"TV\", but does not mention tv_sub_type",
+    "actionParameters": {
+      "language": "fr-ca",
+      "route": "tech_service_outage",
+      "utterance": "Je veux voir s'il y a une panne de courant dans ma région."
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "User wants to check outage in their area, Ask the user for LOB, user mentions the lob as \"TV\", but does not mention tv_sub_type , so ask about TV subtype and capture the same, if not mentioned set to default tv_sub_type = \"fibe\", and RETURN BACK TO PARENT PLAYBOOK OR FLOW",
+    "actionParameters": {
+      "apb_location_id": "70015",
+      "language": "fr-ca",
+      "lob": "TV",
+      "route": "tech_service_outage",
+      "tv_sub_type": "fibe"
+    }
+  },
+  "displayName": "FR - extract LOB - tech_service_outage | TV | subtype default",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 358,
+  "languageCode": "en"
+}

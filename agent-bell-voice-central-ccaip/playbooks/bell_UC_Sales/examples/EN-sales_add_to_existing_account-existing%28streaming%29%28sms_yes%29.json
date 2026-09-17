@@ -1,0 +1,77 @@
+{
+  "name": "49b7a96f-5bc2-4153-bac3-416c4cf042bf",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "language": "en"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Sure, Let me help you with that.\nAre you inquiring about new service or do you want to make changes to your current service?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "new line"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Which service are you inquiring about?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "its about netflix"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "I'll send a text to the device you're calling from, so that you can easily view all streaming options. Is that alright?\n"
+    }
+  }, {
+    "userUtterance": {
+      "text": "yes"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "en",
+        "line_type": "New",
+        "sms_content": "Bell: You can visit subscription.bell.ca/customer to add a streaming service in the MyBell app. ( bell.ca/about-us )",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "customer wants to add streaming services like crave,Netflix,Disney,basic, premiun",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "en",
+      "route": "sales_add_to_existing_account",
+      "utterance": "Well basically, I need to get another line."
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "customer is asked about sms and is agreed to receive the sms",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "line_type": "New",
+      "streaming_services": "netflix"
+    }
+  },
+  "displayName": "EN-sales_add_to_existing_account-existing(streaming)(sms_yes)",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 480,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

@@ -1,0 +1,58 @@
+{
+  "name": "1d903b1c-880f-4e2d-a4b7-0371c6b101e0",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70011",
+        "brand": "bell",
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Je vais envoyer un texto à l’appareil au moyen duquel vous appelez, afin que vous puissiez consulter toutes les options de lecture en continu. Est-ce que ça vous convient?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Oui"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "sms_content": "Bell: Vous pouvez consulter https://m.bell.ca/activatesubf pour en savoir plus sur nos options de diffusion en continu. ( bell.ca/apropos)",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "As, {identification_status} is \"Pass\" and {streaming_services} is \"disney\" then we will prompt customer and ask to send message. If customer say \"Yes\" or anything affirmative then we will trigger the FLOW: bell_SMS Trigger ",
+    "actionParameters": {
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "fr-ca",
+      "route": "service_remove_feature",
+      "utterance": "je veux supprimer Disney"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Ask if user wants to receives the sms, if says yes then send the sms by calling sms_trigger flow",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "streaming_services": "Disney"
+    }
+  },
+  "displayName": "FR - service_remove_feature - Disney",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 422,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

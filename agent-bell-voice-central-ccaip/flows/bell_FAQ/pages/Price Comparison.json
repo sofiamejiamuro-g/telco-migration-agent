@@ -1,0 +1,78 @@
+{
+  "name": "c5008440-e669-4b8f-bbb6-8569d5d1cdd1",
+  "displayName": "Price Comparison",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "($sys.func.LOWER($request.user-utterance) : \"chatr\" OR $sys.func.LOWER($request.user-utterance) : \"eastlink\" OR $sys.func.LOWER($request.user-utterance) : \"fido\" OR $sys.func.LOWER($request.user-utterance) : \"fizz\" OR $sys.func.LOWER($request.user-utterance) : \"freedom\" OR $sys.func.LOWER($request.user-utterance) : \"koodo\" OR $sys.func.LOWER($request.user-utterance) : \"northwestel\" OR $sys.func.LOWER($request.user-utterance) : \"public\" OR $sys.func.LOWER($request.user-utterance) : \"rogers\" OR $sys.func.LOWER($request.user-utterance) : \"saskTel\" OR $sys.func.LOWER($request.user-utterance) : \"ssi micro\" OR $sys.func.LOWER($request.user-utterance) : \"tbayTel\" OR $sys.func.LOWER($request.user-utterance) : \"telus\" OR $sys.func.LOWER($request.user-utterance) : \"videotron\" OR $sys.func.LOWER($request.user-utterance) : \"vidéotron\") AND ($sys.func.LOWER($request.user-utterance) : \"virgin\" OR $sys.func.LOWER($request.user-utterance) : \"lucky\" OR $sys.func.LOWER($request.user-utterance) : \"bell\" OR $sys.func.LOWER($request.user-utterance) : \"you\" OR $sys.func.LOWER($request.user-utterance) : \"vous\" OR $sys.func.LOWER($request.user-utterance) : \"tu\")",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Bell consistently offers the best value and competitive pricing. Visit bell.ca to see our latest offers." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Bell offre régulièrement la meilleure valeur et des prix compétitifs. Visitez bell.ca/accueil pour découvrir nos dernières offres." ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "advancedSettings": {
+        "dtmfSettings": {
+          "useSystemEntityRule": false
+        }
+      }
+    },
+    "name": "ea862a6d-fbc3-4a39-835a-bd1331440912"
+  }, {
+    "condition": "$sys.func.LOWER($request.user-utterance) : \"virgin\" OR $sys.func.LOWER($request.user-utterance) : \"lucky\" OR $sys.func.LOWER($request.user-utterance) : \"bell\" OR $sys.func.LOWER($request.user-utterance) : \"you\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Bell, Virgin Plus and Lucky Mobile are one big family, and we don't like to compare within the family. Each brand offers its best value to meet your needs. Visit bell.ca to see our latest offers." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Bell, Virgin Plus et Lucky Mobile font partie de la même grande famille, et on n'aime pas se comparer entre nous. Chaque marque vous offre un service de qualité pour subvenir à vos besoins. Visitez bell.ca pour découvrir nos dernières offres." ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "advancedSettings": {
+        "dtmfSettings": {
+          "useSystemEntityRule": false
+        }
+      }
+    },
+    "name": "c231724c-9ff0-4cf4-84e2-a484a67f85d8"
+  }, {
+    "condition": "false",
+    "triggerFulfillment": {
+    
+    },
+    "name": "0a784699-679a-41e7-9133-805ed74110d7"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "c5008440-e669-4b8f-bbb6-8569d5d1cdd1"
+      }, {
+        "parameter": "flow_id",
+        "value": "5cdd2f01-b83d-470c-86c5-368354a50ccb"
+      }, {
+        "parameter": "page_name",
+        "value": "Price Comparison"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

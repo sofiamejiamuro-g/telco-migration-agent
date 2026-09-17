@@ -1,0 +1,77 @@
+{
+  "name": "93fe8623-f94b-40ed-aa3b-b95166b3c283",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "brand": "bell",
+        "language": "en"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Are you inquiring about a new service or do you want to make\nchanges to your current service?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "I want to know about current service"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Which service are you inquiring about?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Smartwatches"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "I'll send a text to the device you're calling from, so that you can check out Bell's mobility devices such as phones, tablets, smartwatches, and mobile internet. Is that alright?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "no"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "brand": "bell",
+        "language": "en",
+        "route": "sales_order_device",
+        "sms_send_status": "Declined"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer has questions about device availability, device features, cost, related to devices that Bell sells",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "Existing",
+      "device_type": "smartwatches",
+      "language": "en",
+      "route": "sales_order_device",
+      "utterance": "sales_order_device"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "if lob is Homephone then give corresponding response",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "line_type": "Existing"
+    }
+  },
+  "displayName": "sales_order_device- ID Pass,line type-not mentioned- existing- smartwatches-no",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 445,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

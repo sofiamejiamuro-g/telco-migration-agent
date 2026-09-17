@@ -1,0 +1,69 @@
+{
+  "name": "8ea0fbf9-66db-48e3-9c0c-b72b30fe281b",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "brand": "bell",
+        "language": "en"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Are you inquiring about a new service or do you want to make changes to your current service?\n"
+    }
+  }, {
+    "userUtterance": {
+      "text": "existing"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "I'll send a text to the device you're calling from, so that you can learn more about all sorts of accessories that Bell has to offer. Is that alright?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "no thank you\n"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "en",
+        "route": "sales_device_inquiry",
+        "sms_send_status": "Declined"
+      },
+      "outputActionParameters": {
+        "language": "en"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer has questions about device availability, device features, cost, related to devices that Bell sells",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "en",
+      "route": "sales_device_inquiry",
+      "utterance": "Show me the latest phone accessories"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "we got to know from the utterance that the device type",
+    "actionParameters": {
+      "customer_type": "Existing",
+      "language": "en",
+      "line_type": "Existing",
+      "lob": "Accessories"
+    }
+  },
+  "displayName": "sales device inquiry- ID pass, new-device_type=accessories-no",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 409,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

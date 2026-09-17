@@ -1,0 +1,90 @@
+{
+  "name": "cf6c30a6-9633-4821-aca1-bb0c23b6a2ac",
+  "displayName": "Visit status",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.field_work = \"true\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "\u003cspeak\u003eI found an order related to your $session.params.line_of_business service. Your appointment is on $session.params.day_of_week, $session.params.month_name \u003csay-as interpret-as=\"ordinal\"\u003e$session.params.date_of_month\u003c/say-as\u003e. The Technician can arrive any time between $session.params.startTime and $session.params.endTime. And remember, an appointment scheduled from $session.params.startTime to $session.params.endTime can start at $session.params.endTimeUpdated and finish later.\u003c/speak\u003e" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "\u003cspeak\u003e J’ai trouvé une commande liée à votre service $session.params.line_of_business. Votre rendez-vous est prévu le $session.params.day_of_week, \u003csay-as interpret-as=\"cardinal\"\u003e$session.params.date_of_month\u003c/say-as\u003e $session.params.month_name. Le ou la technicien(ne) peut arriver à tout moment entre $session.params.startTime et $session.params.endTime. N'oubliez pas qu'un rendez-vous prévu entre $session.params.startTime et $session.params.endTime peut commencer à $session.params.endTimeUpdated et se terminer plus tard.\u003c/speak\u003e" ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "special_queue",
+        "value": "tech_to_care"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "2b8ab6b5-afba-46d7-a6cb-b390b34ecb11"
+  }, {
+    "condition": "$session.params.customer_work = \"false\" AND $session.params.field_work = \"false\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "\u003cspeak\u003eI found an order related to your $session.params.line_of_business service. Your order is due to be completed by $session.params.day_of_week, $session.params.month_name \u003csay-as interpret-as=\"ordinal\"\u003e$session.params.date_of_month\u003c/say-as\u003e. This work will be done on our end and a technician is not required.\u003c/speak\u003e" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "\u003cspeak\u003eJ’ai trouvé une commande liée à votre service $session.params.line_of_business. Votre commande doit être traitée d’ici le $session.params.day_of_week, le \u003csay-as interpret-as=\"cardinal\"\u003e$session.params.date_of_month\u003c/say-as\u003e $session.params.month_name. e travail sera effectué de notre côté et la visite d’un(e) technicien(ne) n’est pas requis\u003c/speak\u003e" ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "special_queue",
+        "value": "tech_to_care"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "050c895f-e585-4801-a197-712d5bef339e"
+  }, {
+    "condition": "$session.params.field_work = \"false\" AND $session.params.customer_work = \"true\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "\u003cspeak\u003eI found an order related to your $session.params.line_of_business service. Your order is due to be completed by $session.params.day_of_week, $session.params.month_name \u003csay-as interpret-as=\"ordinal\"\u003e$session.params.date_of_month\u003c/say-as\u003e. This work will be done on our end and a technician is not required.\u003c/speak\u003e" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "\u003cspeak\u003eJ’ai trouvé une commande liée à votre service $session.params.line_of_business. Votre commande doit être traitée d’ici le $session.params.day_of_week, le \u003csay-as interpret-as=\"cardinal\"\u003e$session.params.date_of_month\u003c/say-as\u003e $session.params.month_name. e travail sera effectué de notre côté et la visite d’un(e) technicien(ne) n’est pas requis\u003c/speak\u003e" ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "special_queue",
+        "value": "tech_to_care"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "ff4427cb-28fd-4acf-8188-1921663d975f"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "cf6c30a6-9633-4821-aca1-bb0c23b6a2ac"
+      }, {
+        "parameter": "flow_id",
+        "value": "918644a0-f504-4e8f-91eb-c311a5082207"
+      }, {
+        "parameter": "page_name",
+        "value": "Visit status"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

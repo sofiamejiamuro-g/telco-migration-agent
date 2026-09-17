@@ -1,0 +1,77 @@
+{
+  "name": "581f4f8d-5607-4f90-8acf-49b292a248a3",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70011",
+        "brand": "bell",
+        "language": "fr-ca",
+        "route": "service_change_plan"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Vous pouvez modifier votre forfait de programmation Bell Télé en tout temps à l’aide de MonBell. Je vais envoyer un texto à l’appareil au moyen duquel vous appelez, afin que vous puissiez facilement apporter des changements à votre programmation. Est-ce que ça vous convient?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "quel sera le prix des SMS"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Le SMS est gratuit. J'enverrai un SMS sur l'appareil depuis lequel vous appelez, avec un lien pour suspendre temporairement votre service. Ça vous convient ?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "oui"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "fr-ca",
+        "route": "service_change_plan",
+        "sms_send_status": "Declined"
+      },
+      "outputActionParameters": {
+        "language": "fr-ca"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "The {identification_status} is \"Pass\", {customer_type} is \"Existing\", {streaming_services} is null and {lob} is \"TV\" so, we will prompt user for send SMS confirmation and if user say \"yes\" or anything affirmative then route to \"bell_SMS Trgigger\" flow.",
+    "actionParameters": {
+      "apb_location_id": "70011",
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "fr-ca",
+      "lob": "TV",
+      "route": "service_change_plan",
+      "sms_type": "Public",
+      "utterance": "Je compte modifier mon forfait TV actuel"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "As the {lob} is \"Internet\" and {streaming_services} is null then we will prompt user to send SMS and if user say \"yes\" or anything affirmative then send the user to \"bell_SMS Trigger\" flow",
+    "actionParameters": {
+      "apb_location_id": "70011",
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "fr-ca",
+      "lob": "TV",
+      "route": "service_change_plan",
+      "utterance": "Je compte modifier mon forfait TV actuel "
+    }
+  },
+  "displayName": "FR - service_change_plan- streaming_services - null-lob-TV-sms-yes contextual",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 619,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

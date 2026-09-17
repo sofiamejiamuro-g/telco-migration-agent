@@ -1,0 +1,45 @@
+{
+  "name": "e3f2edaf-a004-4fce-9661-312fdbe32b6d",
+  "displayName": "Local Error handling - Check CX input",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.global_error_counter \u003e= 3 OR $session.params.local_trigger = \"no_input\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  }, {
+    "condition": "$session.params.local_trigger = \"no_match\" AND $session.params.local_nomatch_counter \u003c 3",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I'll send a text to the device you're calling from, so you can easily synchronize your TV programming through MyBell. Is that alright?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je vais envoyer un texto à l’appareil au moyen duquel vous appelez, afin que vous puissiez facilement synchroniser votre programmation télé à partir de MonBell. Est-ce que ça vous convient?" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "46854b97-63d5-467b-ad17-cdee42e12644"
+  }, {
+    "condition": "$session.params.local_trigger = \"no_match\" AND $session.params.local_nomatch_counter \u003e= 3",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_No_Match_3",
+    "name": "b4bceb63-4110-4b43-a2eb-308f0942fbfd"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Previous Page",
+    "name": "76fd927b-4321-46ad-9d17-8992371cda0c"
+  } ]
+}

@@ -1,0 +1,48 @@
+{
+  "name": "b8644b36-0d29-4ebb-bb42-4b236106f618",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "I'm sorry to hear that. Have you tried using a tracking feature like \"Find my iPhone\" or \"Find my Device\"?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Yes I have"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Understood. I would suggest temporarily suspending your service to prevent unauthorized use. I will send a text to the device you're calling from, with a link to do it yourself. Is that alright?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Cool"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "en",
+        "sms_content": "Bell: To temporarily suspend your service, you can visit bell.ca/suspendline and follow the steps. ( bell.ca/about-us )",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "User has lost their device",
+    "actionParameters": {
+      "language": "en",
+      "route": "equipment_report_lost_device",
+      "utterance": "I lost my device"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "VA asks user if they have tracked their phone. User has already tracked so we suggest them to suspend their service and prompt them for SMS with link. User agrees so we send the SMS with link to suspend their service"
+  },
+  "displayName": "EN Equipment report lost device - no MFA - tracked - yes",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 327,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

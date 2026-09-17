@@ -1,0 +1,64 @@
+{
+  "name": "7add978b-f0ec-4c00-8e08-97152db0bd53",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Can you briefly describe your problem?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "My screen is cracked, i need warranty."
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Have you enrolled in our SmartCare Program?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "yes"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "When submitting a request online or calling the Smart Phone Care Center, your request will be processed by Asurion, the administrator of the Smartphone Care program. I can send you a link to submit your request. Is that alright?\n"
+    }
+  }, {
+    "userUtterance": {
+      "text": "yes"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "en",
+        "sms_content": "Bell: You can visit asur.me/bellclaims to submit a Smart/Phone Care request. ( bell.ca/about-us )",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "customer is asking \" hi my phone is not working I need a warranty\"",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "route": "equipment_warranty_claim",
+      "utterance": "Hi I need warranty for my phone, it is not working."
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "customer is asked device_issue and proceed further the smart care logic",
+    "actionParameters": {
+      "brand": "bell",
+      "device_issue": "Physical Damage",
+      "email_indicator": "true",
+      "language": "en",
+      "route": "equipment_warranty_claim"
+    }
+  },
+  "displayName": "EN-equipment_warranty_claim | physical | smartcare(yes)-sms(yes)",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 384,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

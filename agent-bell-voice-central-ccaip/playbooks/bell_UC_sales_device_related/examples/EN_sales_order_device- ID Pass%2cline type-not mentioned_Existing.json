@@ -1,0 +1,70 @@
+{
+  "name": "bfbd1a73-d67f-4286-bfcf-110c65f018fb",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "brand": "bell",
+        "language": "en"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Are you inquiring about a new service or do you want to make changes to your current service?\n"
+    }
+  }, {
+    "userUtterance": {
+      "text": "current"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "I'll send a text to the device you're calling from, so that you can check out Bell's Internet devices. Is that alright?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Yes"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "brand": "bell",
+        "language": "en",
+        "sms_content": "Bell: You can visit Bell.ca/wifi to find out more about Bell Internet devices. (bell.ca/about-us)"
+      },
+      "outputActionParameters": {
+        "language": "en"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer has questions about needing a device, device availability, device features, cost, related to devices that Bell sells",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "Existing",
+      "device_type": "Modem",
+      "identification_status": "Pass",
+      "language": "en",
+      "lob": "Internet",
+      "route": "sales_order_device",
+      "utterance": "I want to order a modem"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "from the identification flow, know the customer_type as \"Existing\", as we don't know the line type, we need to ask the customer, if customer says that they are looking for new service we need to set \"line_type\" as \"New\" and reroute to \"sales_add_to_existing_account\" in this playbook",
+    "actionParameters": {
+      "brand": "bell",
+      "device_type": "Modem",
+      "language": "en"
+    }
+  },
+  "displayName": "EN_sales_order_device- ID Pass,line type-not mentioned_Existing",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 490,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

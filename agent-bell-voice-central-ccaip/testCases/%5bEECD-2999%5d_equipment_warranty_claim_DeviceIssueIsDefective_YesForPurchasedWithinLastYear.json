@@ -1,0 +1,173 @@
+{
+  "name": "d8d96996-752d-4633-b261-eb721ef5f1d3",
+  "displayName": "[EECD-2999]_equipment_warranty_claim_DeviceIssueIsDefective_YesForPurchasedWithinLastYear",
+  "testCaseConversationTurns": [ {
+    "userInput": {
+      "injectedParameters": {
+        "CLID": 4169880153,
+        "tfn": 8000212355
+      },
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "Hi"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "sessionParameters": {
+        "CLID": 4169880153,
+        "tfn": 8000212355
+      },
+      "triggeredIntent": {
+        "name": "Default Welcome Intent"
+      },
+      "currentPage": {
+        "name": "Get CX Input",
+        "flow": "bell_Identification"
+      },
+      "textResponses": [ {
+        "text": [ "\u003cspeak\u003eI'm Bell's virtual assistant, I use artificial intelligence to learn. \u003cbreak time=\"1s\"/\u003e\u003c/speak\u003e" ]
+      }, {
+        "text": [ "Are you calling about the account associated with the number you’re calling from?" ],
+        "allowPlaybackInterruption": true
+      } ],
+      "currentFlow": {
+        "name": "bell_Identification"
+      }
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "yes"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "triggeredIntent": {
+        "name": "context.confirm_yes"
+      },
+      "currentPage": {
+        "name": "Routing Page",
+        "flow": "Default Start Flow"
+      },
+      "textResponses": [ {
+        "text": [ "\u003cspeak\u003eThanks! \u003cbreak time=\"1s\"/\u003e\u003c/speak\u003e" ],
+        "allowPlaybackInterruption": true
+      }, {
+        "text": [ "How can I help you?" ],
+        "allowPlaybackInterruption": true
+      } ],
+      "currentFlow": {
+        "name": "Default Start Flow"
+      }
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "Warranty claim for Certified Preowned phone"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "textResponses": [ {
+        "text": [ "One moment please" ]
+      }, {
+        "text": [ "If you brought a certified pre-owned phone, it's subject to the Bell limited warranty, valid for 12 months from the purchase date. If your phone is not working due to a manufacturer issue that occurs within 12 months of your purchase, we will replace the phone with a comparable unit.\nDid you purchase your device within the last 12 months?\n" ]
+      } ]
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "yes"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "triggeredIntent": {
+        "name": "Default Welcome Intent"
+      },
+      "currentPage": {
+        "name": "Confirm customer has access  to OTP device",
+        "flow": "bell_agent_transfer_authentication"
+      },
+      "textResponses": [ {
+        "text": [ "In order to help with that, I need to make sure I'm talking to the right person.  We now use a 6-digit code to verify your account.  Do you have access to a mobile phone we have on file?" ]
+      } ],
+      "currentFlow": {
+        "name": "bell_agent_transfer_authentication"
+      }
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "yes"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "triggeredIntent": {
+        "name": "custom.yes"
+      },
+      "currentPage": {
+        "name": "Trigger OTP",
+        "flow": "bell_agent_transfer_authentication"
+      },
+      "textResponses": [ {
+        "text": [ "I’ll text a 6-digit code to the mobile phone on your account." ]
+      }, {
+        "text": [ "Once you receive the verification code by text, please say it back to me or punch it into your phone." ]
+      } ],
+      "currentFlow": {
+        "name": "bell_agent_transfer_authentication"
+      }
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "581781"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "currentPage": {
+        "name": "Start Page",
+        "flow": "bell_Live Agent Handoff"
+      },
+      "textResponses": [ {
+        "text": [ "Great, that's the correct PIN." ]
+      }, {
+        "text": [ "Let me check for an available agent. I'll likely be silent for some time during the transfer. You'll know it's successful when you're greeted again. Please stay on the line. Thanks!" ],
+        "allowPlaybackInterruption": true
+      } ],
+      "currentFlow": {
+        "name": "bell_Live Agent Handoff"
+      }
+    }
+  } ],
+  "creationTime": {
+    "seconds": 1759319363,
+    "nanos": 238762000
+  },
+  "testConfig": {
+    "flow": "Default Start Flow",
+    "page": "Start Page"
+  },
+  "languageCode": "en"
+}

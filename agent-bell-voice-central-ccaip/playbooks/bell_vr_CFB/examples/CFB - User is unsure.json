@@ -1,0 +1,55 @@
+{
+  "name": "fdb70831-dc19-459f-a15f-6e787eb72fc3",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Could you check your receiver and see if there’s a blue light on it?\n"
+    }
+  }, {
+    "userUtterance": {
+      "text": "I don’t know, actually."
+    }
+  }, {
+    "agentUtterance": {
+      "text": "No worries, let's see how we can help with that."
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_vr_post_answer",
+      "inputActionParameters": {
+        "customer_answer1_id": "1"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "User's internet is not working and they have initiated virtual repair process wherein it will ask the user some questions so they can help them.",
+    "actionParameters": {
+      "acceptable_answers": [ {
+        "choice": "Yes",
+        "id": 0,
+        "sub-choices": [ ],
+        "title": ""
+      }, {
+        "choice": "No",
+        "id": 1,
+        "sub-choices": [ ],
+        "title": ""
+      } ],
+      "dcx_action_code": "6505",
+      "title": "Is there a blue light on your receiver?",
+      "vr_type": "CFB"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Turn 1: The Instruction\n\nAction: Generate Instruction\n\nLogic: The bot generated the standard troubleshooting directive to check the receiver's light status.\n\nTurn 2: The Block\n\nUser Input: \"I don’t know, actually.\"\n\nIntent: Stuck / Inability to Perform Step (Priority 2).\n\nLogic Execution:\n\nClassification: The bot analyzed \"I don't know\" and determined it was not a valid status (Red/Blue/Off) nor a clarification question.\n\nMapping: It matched the input to Case Priority 2 (Stuck/How-to), interpreting the user's lack of knowledge as an inability to locate or verify the device state.\n\nAction: Instead of re-asking the question (which might frustrate a user who can't find the device), it executed the prompt's specific acknowledgement action: \"No worries, let's see how we can help with that.\"\n\nSystem Outcome\n\nFlow Triggered: ${FLOW:bell_vr_post_answer}\n\nContext: The system transitioned to the post-answer flow, likely passing an ID for \"I don't know\" / \"Help Needed.\" This allows the next step to assist the user in locating the receiver or bypassing the step.",
+    "actionParameters": {
+    
+    }
+  },
+  "displayName": "CFB - User is unsure",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 574,
+  "languageCode": "en"
+}

@@ -1,0 +1,6 @@
+{
+  "promptTexts": [ {
+    "text": "### INSTRUCTION\nYou are a JSON data extraction tool. Your ONLY task is to analyze the 'BAN' and extract specific information regarding \"DTH\" technology services into a new JSON object.\n\n### CORE LOGIC\n1.  **Filter:** Scan the input JSON for all service objects where \"technology_type\" is exactly \"DTH\".\n2.  **Count:** Calculate the total number of service objects that match this criteria. Assign this to the key \"sat_tv_count\".\n3.  **Extract IDs:** Collect the \"service_id\" for every matching \"DTH\" object.\n4.  **Format IDs (CRITICAL):**\n    - If the count is 0, \"sat_tv_service_id\" should be an empty string \"\".\n    - If the count is 1, \"sat_tv_service_id\" should be a single string of that ID.\n    - If the count is more than 1, \"sat_tv_service_id\" MUST be a JSON list (array) of strings containing all extracted IDs.\n\n### INPUT\n- BAN: $BAN\n\n### CONSTRAINTS\n- Output Format: Output MUST be a single, literal, unformatted JSON object on one line. No markdown, no backticks, no explanations.\n- Output Keys: ONLY \"sat_tv_count\" and \"sat_tv_service_id\".\n\n### RESPONSE\n{\"sat_tv_count\": 0, \"sat_tv_service_id\": \"\"}",
+    "languageCode": "fr-ca"
+  } ]
+}

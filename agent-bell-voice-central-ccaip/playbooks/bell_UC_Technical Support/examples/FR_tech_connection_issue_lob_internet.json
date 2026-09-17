@@ -1,0 +1,80 @@
+{
+  "name": "2185852d-0f77-4e3d-b2ac-b124bdd28deb",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70012",
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Pouvez-vous me dire pour quel service vous avez besoin d’aide ?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "internet"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70014",
+        "language": "fr-ca",
+        "lob": "internet"
+      },
+      "outputActionParameters": {
+        "language": "fr-ca"
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Vous pouvez utiliser notre outil de réparation pour vérifier les pannes de service et dépanner votre équipement. Je vais envoyer un texto sur l’appareil au moyen duquel vous appelez, afin que vous puissiez y accéder rapidement. \nEst-ce que ça vous convient ?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Oui"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "fr-ca",
+        "sms_content": "Hey membre de Bell, vous pouvez visiter https://m.bell.ça/chatvirtualrepaire pour accéder à l’outil de réparation virtuel. (bell.ca/aboutus)",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "The customer is having a technical issue with their internet.",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca",
+      "lob": "Internet",
+      "route": "tech_connection_issue",
+      "utterance": "J’ai un problème de connexion"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "first, ask the customer which service is causing them an issue. Once they've specified, follow up by asking if they want an SMS sent to their number. If the customer responds with \"yes,\" the system should then transition the conversation to the bell_SMS Trigger flow to complete the process. This ensures a smooth, conditional transfer based on user confirmation.",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca",
+      "lob": "Internet",
+      "route": "tech_connection_issue",
+      "utterance": "J’ai un problème de connexion"
+    }
+  },
+  "displayName": "FR_tech_connection_issue_lob_internet",
+  "retrievalStrategy": "NEVER",
+  "tokenCount": 600,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

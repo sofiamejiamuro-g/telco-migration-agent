@@ -1,0 +1,126 @@
+{
+  "name": "4c644e30-4072-41bb-b89c-7b547be82ee3",
+  "displayName": "Webhook Create Reserve Input",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "v1/dfcx_support/omf_calendar#selected-interval",
+    "tag": "selected-interval",
+    "setParameterActions": [ {
+      "parameter": "day",
+      "value": "$session.params.day"
+    }, {
+      "parameter": "calendarIdentifier",
+      "value": "$session.params.calendarIdentifier"
+    }, {
+      "parameter": "interval",
+      "value": "$session.params.interval"
+    }, {
+      "parameter": "estimatedStartTime",
+      "value": "$session.params.estimatedStartTime"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "omf_selected_interval_response_raw",
+        "value": "$session.params.omf_selected_interval_response"
+      }, {
+        "parameter": "omf_selected_interval_response",
+        "value": "$sys.func.TO_OBJECT($session.params.omf_selected_interval_response_raw)"
+      }, {
+        "parameter": "omf_selections_obj",
+        "value": "$session.params.omf_selected_interval_response.omf_selections"
+      }, {
+        "parameter": "omf_selections",
+        "value": "[$session.params.omf_selections_obj]"
+      } ]
+    },
+    "name": "6968cf3d-5211-415f-84d4-2b26df5231c5"
+  }, {
+    "condition": "$session.params.webhook_success = true",
+    "triggerFulfillment": {
+      "conditionalCases": [ {
+        "cases": [ {
+          "condition": "$session.params.all_appointment_done = \"true\"",
+          "caseContent": [ {
+            "message": {
+              "text": {
+                "text": [ "Great. Your $session.params.line_of_business_selected appointment is on $session.params.day_of_week, $session.params.date from $session.params.start_time to $session.params.end_time." ]
+              },
+              "languageCode": "en"
+            }
+          }, {
+            "message": {
+              "text": {
+                "text": [ "Parfait. Votre $session.params.line_of_business_selected rendez-vous est prévu le $session.params.day_of_week, $session.params.date de $session.params.start_time à $session.params.end_time." ]
+              },
+              "languageCode": "fr-ca"
+            }
+          } ]
+        } ]
+      } ]
+    },
+    "targetPage": "Webhook Calendar Reserve",
+    "name": "6135bfef-813f-499d-8dd9-31aaa4f191db"
+  }, {
+    "condition": "$session.params.webhook_success = false",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Failure - OMF",
+    "name": "3f0ad9f6-0ba6-4f70-bf1b-77c4beffc618"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Failure - OMF",
+    "name": "24b7df51-ddab-4bcb-8940-1694c92ab323"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Webhook Failure - OMF",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+    
+    },
+    "name": "107a41a4-d0ed-42e8-8265-834ae59dc0f6"
+  }, {
+    "targetPage": "Webhook Failure - OMF",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+    
+    },
+    "name": "2a0a27ad-ff16-4a09-992a-d7bb2c5ae9fd"
+  }, {
+    "targetPage": "Webhook Failure - OMF",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+    
+    },
+    "name": "a4e9e255-4683-410b-9ac1-5166aea3401f"
+  }, {
+    "targetPage": "Webhook Failure - OMF",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+    
+    },
+    "name": "413bdf7b-808d-49cf-bad1-3127d6b0e280"
+  }, {
+    "targetPage": "Webhook Failure - OMF",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+    
+    },
+    "name": "3ceb9f2d-ec6f-4365-acd9-7aa4e6b17200"
+  }, {
+    "targetPage": "Webhook Failure - OMF",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+    
+    },
+    "name": "11bbbfb4-a442-46c3-8b2b-17f1761f6b09"
+  } ]
+}

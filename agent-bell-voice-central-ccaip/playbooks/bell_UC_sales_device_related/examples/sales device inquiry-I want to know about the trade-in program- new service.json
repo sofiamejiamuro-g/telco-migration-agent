@@ -1,0 +1,65 @@
+{
+  "name": "0fa20062-9042-4069-8273-39b0ec2911d3",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Are you inquiring about a new service or do you want to make\nchanges to your current service?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "New service"
+    }
+  }, {
+    "playbookInvocation": {
+      "playbook": "bell_UC_Sales",
+      "playbookInput": {
+        "precedingConversationSummary": "follow the instructions under the route \"sales_add_to_existing_account\"",
+        "actionParameters": {
+          "customer_type": "Existing",
+          "language": "en",
+          "line_type": "New",
+          "route": "sales_add_to_existing_account",
+          "utterance": "new service"
+        }
+      },
+      "playbookOutput": {
+        "actionParameters": {
+          "language": "en"
+        }
+      },
+      "playbookState": "OUTPUT_STATE_OK"
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "customer wants to know about the trade in program, customer type is existing and we don't know the line_type",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "en",
+      "route": "sales_device_inquiry",
+      "utterance": "I want to know about the trade-in program"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "As we don't know the line type, we need to ask the customer, if the customer says \"New Line\" then we should reroute to \"sales_add_to_existing_account\" ",
+    "actionParameters": {
+      "line_type": "New",
+      "route": "sales_add_to_existing_account"
+    }
+  },
+  "displayName": "sales device inquiry-I want to know about the trade-in program- new service",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 439,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

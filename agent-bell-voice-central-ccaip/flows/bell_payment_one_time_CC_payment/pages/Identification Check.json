@@ -1,0 +1,64 @@
+{
+  "name": "0364b80e-ea87-45c8-9614-aeb0e1bdc523",
+  "displayName": "Identification Check",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.proceed_with_ot_payment = true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "APB Check",
+    "name": "6efa087c-fbd9-4722-aa20-958e8f234ec6"
+  }, {
+    "condition": "$session.params.identification_status = null",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_Identification",
+    "name": "a9fe9a79-e17d-4fd9-95a4-fe9b48010294"
+  }, {
+    "condition": "$session.params.identification_status = \"Fail\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "intent",
+        "value": "$session.params.route"
+      }, {
+        "parameter": "brand",
+        "value": "$session.params.brand"
+      } ]
+    },
+    "targetPage": "ID/Auth Fail",
+    "name": "1af6f8b1-3f69-459b-b6cc-c301891ad9ee"
+  }, {
+    "condition": "$session.params.identification_status = \"Pass\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Ban Type Check",
+    "name": "ee10be50-9982-4cef-85e2-ae3894d38825"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "0364b80e-ea87-45c8-9614-aeb0e1bdc523"
+      }, {
+        "parameter": "flow_id",
+        "value": "79610380-24f4-4284-b946-244d0aa037d8"
+      }, {
+        "parameter": "page_name",
+        "value": "Identification Check"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

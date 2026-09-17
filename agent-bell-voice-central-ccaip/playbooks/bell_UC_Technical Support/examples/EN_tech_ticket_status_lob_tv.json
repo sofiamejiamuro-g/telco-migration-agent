@@ -1,0 +1,85 @@
+{
+  "name": "1a416d0f-d75b-4295-85ef-2425b79f5325",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70012"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "playbookInvocation": {
+      "playbook": "bell_uc_ask_LOB",
+      "playbookInput": {
+        "precedingConversationSummary": "User wants to check the status of order",
+        "actionParameters": {
+          "language": "en",
+          "route": "tech_ticket_status"
+        }
+      },
+      "playbookOutput": {
+        "executionSummary": "When user does not provide lob, prompt them to understand what kind of service they are looking for, if the user mentions lob then return lob to the originating Playbook, if not set the default lob and return back",
+        "actionParameters": {
+          "language": "en",
+          "lob": "TV",
+          "route": "tech_ticket_status"
+        }
+      },
+      "playbookState": "OUTPUT_STATE_OK"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_authentication",
+      "inputActionParameters": {
+      
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70014"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_tech_change_appointment_flow",
+      "inputActionParameters": {
+      
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "User wants to check the status of order",
+    "actionParameters": {
+      "language": "en",
+      "route": "tech_ticket_status",
+      "utterance": "i need to know the status of my order"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "User does not mention lob, so route to bell_uc_ask_LOB playbook and extract lob and save",
+    "actionParameters": {
+      "language": "en",
+      "lob": "TV",
+      "route": "tech_ticket_status"
+    }
+  },
+  "displayName": "EN_tech_ticket_status_lob_tv",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 564,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

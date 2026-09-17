@@ -1,0 +1,121 @@
+{
+  "name": "e341a2ce-fbf3-4816-889e-82a556511606",
+  "displayName": "dispute_bill Offer SMS",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "messages": [ {
+      "text": {
+        "text": [ "To help with that, the MyBell app provides a detailed view of your bill, often clarifying billing questions and helping you understand changes in your bill. I'll send a text to the device you're calling from with a link to the MyBell app. Is that alright?" ]
+      },
+      "languageCode": "en"
+    }, {
+      "text": {
+        "text": [ "Pour vous aider, l'application MonBell offre une vue détaillée de votre facture, ce qui permet souvent de clarifier les questions de facturation et de mieux comprendre les changements apportés à votre facture. Je vais envoyer un message texte à l'appareil à partir duquel vous appelez avec un lien vers l'application MonBell. Est-ce que cela vous convient ?" ]
+      },
+      "languageCode": "fr-ca"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "intent": "context.sms_yes",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "SMS Content",
+    "name": "80b24186-8258-4520-9a69-0c05a9b61641"
+  }, {
+    "intent": "context.sms_no",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_aqd",
+    "name": "40fe1648-d321-410d-b0b7-199eec4fb9ef"
+  }, {
+    "intent": "context.different_number",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "SMS Content",
+    "name": "fccb25fb-a547-463e-b1fc-711e4a7da310"
+  } ],
+  "eventHandlers": [ {
+    "event": "sys.no-input-1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Sorry, I didn't catch that, can you please rephrase your response?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Désolé, je n'ai pas compris, pouvez-vous reformuler votre réponse s'il vous plaît ?" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "3521ba6f-7a70-4d09-82b7-f5598a524a3b"
+  }, {
+    "event": "sys.no-input-2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I'm sorry, I still didn't catch that. Can you please rephrase your response?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je suis désolé, je n'ai toujours pas compris. Pouvez-vous reformuler votre réponse s'il vous plait ?" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "049d0332-b678-46a9-97f9-179a09b02638"
+  }, {
+    "targetPage": "dispute_bill SMS Declined",
+    "event": "sys.no-input-3",
+    "triggerFulfillment": {
+    
+    },
+    "name": "0483a6cb-b6eb-4b00-979a-51f3f7191240"
+  }, {
+    "event": "sys.no-match-1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Sorry, I didn't catch that, can you please rephrase your response?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Désolé, je n'ai pas compris, pouvez-vous reformuler votre réponse s'il vous plaît ?" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "a34fbefe-dec9-4b60-b4d8-14b3f6de3523"
+  }, {
+    "event": "sys.no-match-2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I'm sorry, I still didn't catch that. Can you please rephrase your response?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je suis désolé, je n'ai toujours pas compris. Pouvez-vous reformuler votre réponse s'il vous plait ?" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "29f6cedf-ef9a-437d-bdad-29dd196a8863"
+  }, {
+    "targetPage": "dispute_bill SMS Declined",
+    "event": "sys.no-match-3",
+    "triggerFulfillment": {
+    
+    },
+    "name": "093e14a9-48af-4ab3-926a-43c1da63b541"
+  } ]
+}

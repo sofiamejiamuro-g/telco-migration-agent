@@ -1,0 +1,140 @@
+{
+  "name": "43818143-87f9-4c94-811e-8f48c6537451",
+  "displayName": "Local Error Handling (CX confirmation on ACUT ticket)",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.global_error_counter \u003e= 3",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_aqd",
+    "name": "40f40bec-1826-4de2-aea4-d193589bf458"
+  }, {
+    "condition": "$session.params.local_trigger = \"no_input\" AND $session.params.local_noinput_counter = 1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I didn't quite get that." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "I see you have a ticket that was opened on $session.params.date_formatted. Is this the ticket you are calling about?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je n'ai pas bien compris." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "Je vois que vous avez un billet qui a été ouvert le $session.params.date_formatted. S’agit-il du billet pour lequel vous appelez?" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "003b808a-41fe-42bf-b729-df8d8d7ca13c"
+  }, {
+    "condition": "$session.params.local_trigger = \"no_input\" AND $session.params.local_noinput_counter = 2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I still didn't get that." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "I see you have a ticket that was opened on $session.params.date_formatted. Is this the ticket you are calling about?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je n'ai toujours pas compris." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "Je vois que vous avez un billet qui a été ouvert le $session.params.date_formatted. S’agit-il du billet pour lequel vous appelez?" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "0dfe985c-7b6b-40eb-b04a-e375c303ff01"
+  }, {
+    "condition": "$session.params.local_trigger = \"no_input\" AND $session.params.local_noinput_counter = 3",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_No_Input_3",
+    "name": "6fae07c8-348b-41d2-ade8-3204f2ae5fb9"
+  }, {
+    "condition": "$session.params.local_trigger = \"no_match\" AND $session.params.local_nomatch_counter = 1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I didn't quite get that." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "I see you have a ticket that was opened on $session.params.date_formatted. Is this the ticket you are calling about?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je n'ai pas bien compris." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "Je vois que vous avez un billet qui a été ouvert le $session.params.date_formatted. S’agit-il du billet pour lequel vous appelez?" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "acc64bbb-e5e9-4f8b-bb0d-8b1c4b45f65a"
+  }, {
+    "condition": "$session.params.local_trigger = \"no_match\" AND $session.params.local_nomatch_counter = 2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I still didn't get that." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "I see you have a ticket that was opened on $session.params.date_formatted. Is this the ticket you are calling about?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je n'ai toujours pas compris." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "Je vois que vous avez un billet qui a été ouvert le $session.params.date_formatted. S’agit-il du billet pour lequel vous appelez?" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "b17c97df-de09-4583-b4cd-ab05ff4e2ab7"
+  }, {
+    "condition": "$session.params.local_trigger = \"no_match\" AND $session.params.local_nomatch_counter = 3",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_No_Match_3",
+    "name": "2025ac2e-1679-4f36-8b9d-7e5c9f406754"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Previous Page",
+    "name": "1ea7bad3-3d3f-4bdc-8604-0646bf5621d4"
+  } ]
+}

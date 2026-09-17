@@ -1,0 +1,103 @@
+{
+  "name": "8cd64914-4267-48ac-b7fc-4aec08247a8d",
+  "displayName": "Webhook Get Customer Profile",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "/v1/ibm_mw/nm1_get#customer-profile",
+    "tag": "customer-profile"
+  },
+  "transitionRoutes": [ {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "oneBillIndicator",
+        "value": "$session.params.nm1_get_cust_profile_response.oneBill"
+      }, {
+        "parameter": "accountType",
+        "value": "$session.params.nm1_get_cust_profile_response.banType"
+      }, {
+        "parameter": "accountSubType",
+        "value": "$session.params.nm1_get_cust_profile_response.banSubType"
+      }, {
+        "parameter": "pastDueAmount",
+        "value": "$session.params.nm1_get_cust_profile_response.pastDueAmount"
+      }, {
+        "parameter": "accountBalance",
+        "value": "$session.params.nm1_get_cust_profile_response.arBalance"
+      } ]
+    },
+    "name": "cab9445e-3a72-49a0-b78d-b7d81195d311"
+  }, {
+    "condition": "$session.params.nm1_get_cust_profile_response.returnCode = 0",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Failure NM1 Outage",
+    "name": "c23939a1-16ce-45b9-8524-9a52ef1a0f79"
+  }, {
+    "condition": "$session.params.webhook_success = false",
+    "triggerFulfillment": {
+    
+    },
+    "name": "6bab8534-89ef-438e-933a-6bf08dd78669"
+  }, {
+    "condition": "$session.params.webhook_success = true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Consolidated Customers",
+    "name": "bedb8d61-cb9d-4279-87be-000525fe11c5"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_aqd",
+    "name": "bfbf83ad-9248-4fcc-8b2b-62dfffdd0dfe"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Webhook Failure NM1 Outage",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+    
+    },
+    "name": "74b2caa3-c494-4b67-b516-840482a794db"
+  }, {
+    "targetPage": "Webhook Failure NM1 Outage",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+    
+    },
+    "name": "55e6afc3-8888-46c2-8972-b1aabce215dd"
+  }, {
+    "targetPage": "Webhook Failure NM1 Outage",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+    
+    },
+    "name": "4bce6346-9160-42c2-9e38-3383f6654ef3"
+  }, {
+    "targetPage": "Webhook Failure NM1 Outage",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+    
+    },
+    "name": "1e47cf4e-da1e-4ca0-a188-505486a4ba27"
+  }, {
+    "targetPage": "Webhook Failure NM1 Outage",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+    
+    },
+    "name": "99d07b71-f8cb-48be-9b3c-be3e6b60a621"
+  }, {
+    "targetPage": "Webhook Failure NM1 Outage",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+    
+    },
+    "name": "940e6fe9-5ecb-44de-989f-89b7ae853a71"
+  } ]
+}

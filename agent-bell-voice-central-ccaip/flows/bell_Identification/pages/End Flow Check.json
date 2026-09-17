@@ -1,0 +1,28 @@
+{
+  "name": "24be7cd6-523a-4af0-a2d8-e17b0e34050a",
+  "displayName": "End Flow Check",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.identification_fallback_flag = 1",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "utterance",
+        "value": "$session.params.utterance_fallback"
+      }, {
+        "parameter": "identification_fallback_flag",
+        "value": null
+      } ]
+    },
+    "name": "54ff2060-2c31-47d8-86ac-8e409d5a9ec2",
+    "targetPlaybook": "bell_NLU_Query_Rewriter"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "End Flow",
+    "name": "710aa142-749a-4f12-992e-7fbd34c7f95f"
+  } ]
+}

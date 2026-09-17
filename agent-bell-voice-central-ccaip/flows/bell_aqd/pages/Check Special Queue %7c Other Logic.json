@@ -1,0 +1,84 @@
+{
+  "name": "a3170e8a-4c98-45ab-a612-e45c679812e0",
+  "displayName": "Check Special Queue | Other Logic",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "setParameterActions": [ {
+      "parameter": "aqd_sub_flow",
+      "value": "Other Logic"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.special_queue = null",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Get queue (﻿menu_id)",
+    "name": "b25d69ed-b32b-4c0b-84bc-0a1fe38f7279"
+  }, {
+    "condition": "$session.params.special_queue = \"bell_sales_to_mts\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "brand",
+        "value": "Bell MTS"
+      } ]
+    },
+    "targetPage": "Get queue (﻿menu_id)",
+    "name": "8c18dc5e-8d73-436a-a691-4b1a03f70630"
+  }, {
+    "condition": "$session.params.special_queue = \"bell_sales_to_atl\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "brand",
+        "value": "Bell Aliant"
+      } ]
+    },
+    "targetPage": "Get queue (﻿menu_id)",
+    "name": "9c658302-eb77-4249-8154-a6f47e86350a"
+  }, {
+    "condition": "$session.params.special_queue = \"bell_finals\" OR $session.params.special_queue = \"bell_finals_fraud\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Get queue (﻿menu_id)",
+    "name": "55b0f7df-2c2a-4fb1-91ed-92e9652347af"
+  }, {
+    "condition": "$session.params.special_queue = \"accessibility\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "brand",
+        "value": "Bell"
+      }, {
+        "parameter": "customer_type",
+        "value": "accessibility"
+      } ]
+    },
+    "targetPage": "Get queue (﻿menu_id)",
+    "name": "e17e0ca1-6eea-4a67-beab-8232de0c27ae"
+  }, {
+    "condition": "$session.params.special_queue = \"COM1\" OR $session.params.special_queue = \"COM2\" OR $session.params.special_queue = \"COM3\" OR $session.params.special_queue = \"COM4\" OR $session.params.special_queue = \"COM5\" OR $session.params.special_queue = \"COM6\" OR $session.params.special_queue = \"COM7\" OR $session.params.special_queue = \"COM9\" OR $session.params.special_queue = \"COMA\" OR $session.params.special_queue = \"COMB\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "brand",
+        "value": "Bell"
+      }, {
+        "parameter": "customer_type",
+        "value": "$session.params.special_queue"
+      } ]
+    },
+    "targetPage": "Get queue (﻿menu_id)",
+    "name": "b3dd67cb-1064-4486-9f2d-aee99bb579ed"
+  }, {
+    "condition": "$session.params.special_queue != null",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "customer_type",
+        "value": "$session.params.special_queue"
+      } ]
+    },
+    "targetPage": "Get queue (﻿menu_id)",
+    "name": "0e9b8bee-6521-437a-b9da-32cf12f3c847"
+  } ]
+}

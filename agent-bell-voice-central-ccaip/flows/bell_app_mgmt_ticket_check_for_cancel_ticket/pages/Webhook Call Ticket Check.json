@@ -1,0 +1,166 @@
+{
+  "name": "aa798c72-f422-4603-bc89-47d774771888",
+  "displayName": "Webhook Call Ticket Check",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "v1/ticket_management/acut/search#retrieve",
+    "tag": "retrieve"
+  },
+  "transitionRoutes": [ {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "category_value",
+        "value": "$session.params.acut_retrieve_response.acutContext.categoryValue"
+      }, {
+        "parameter": "active_dispatch_count_1",
+        "value": "$session.params.acut_find_response.ticket_summaries[0].active_dispatch_count"
+      }, {
+        "parameter": "dispatch_id",
+        "value": "$session.params.acut_find_response.ticket_summaries[0].dispatches[0].dispatch_id"
+      }, {
+        "parameter": "dispatch_type",
+        "value": "$session.params.acut_retrieve_response.dispatch[0].dispatchType"
+      }, {
+        "parameter": "dispatch_status",
+        "value": "$session.params.acut_retrieve_response.dispatch[0].dispatchStatus"
+      }, {
+        "parameter": "trouble_type_code",
+        "value": "$session.params.acut_retrieve_response.troubleTicketInteractionType"
+      }, {
+        "parameter": "task_type",
+        "value": "$session.params.acut_retrieve_response.serviceCategory"
+      }, {
+        "parameter": "worked_on_code",
+        "value": "$session.params.acut_retrieve_response.workedOn"
+      }, {
+        "parameter": "worked_on_sub_code",
+        "value": "$session.params.acut_retrieve_response.workedOnSubcode"
+      }, {
+        "parameter": "trouble_ticket_state",
+        "value": "$session.params.acut_retrieve_response.acutContext.troubleTicketState"
+      }, {
+        "parameter": "task_type",
+        "value": "$session.params.acut_retrieve_response.serviceCategory"
+      }, {
+        "parameter": "resolution_comment",
+        "value": "$session.params.acut_retrieve_response.acutContext.resolutionInfo.comment"
+      }, {
+        "parameter": "closed_time",
+        "value": "$session.params.acut_retrieve_response.acutContext.resolutionInfo.comment.closedTime"
+      }, {
+        "parameter": "active_dispatch_count",
+        "value": "$sys.func.TO_NUMBER($session.params.active_dispatch_count_1)"
+      }, {
+        "parameter": "acut_context_raw",
+        "value": "$session.params.acut_retrieve_response.acutContext"
+      }, {
+        "parameter": "acut_context",
+        "value": "$sys.func.TO_OBJECT($session.params.acut_context_raw)"
+      }, {
+        "parameter": "appointment_start_date",
+        "value": "$session.params.acut_context.appointments.latestAppointment.appointmentStartDate"
+      }, {
+        "parameter": "day",
+        "value": "$sys.func.TO_NUMBER($sys.func.MID($session.params.appointment_start_date,9,2))"
+      }, {
+        "parameter": "month",
+        "value": "$sys.func.TO_NUMBER($sys.func.MID($session.params.appointment_start_date,6,2))"
+      }, {
+        "parameter": "year",
+        "value": "$sys.func.TO_NUMBER($sys.func.MID($session.params.appointment_start_date,1,4))"
+      }, {
+        "parameter": "date_formatted",
+        "value": "$sys.func.TO_OBJECT(\"{'day' : $session.params.day , 'month' : $session.params.month , 'year' : $session.params.year}\")"
+      }, {
+        "parameter": "date_formatted",
+        "value": "$sys.func.FORMAT_DATE($session.params.date_formatted, \"EEEE, MMMM dd\", $session.params.language )"
+      }, {
+        "parameter": "resolution_date",
+        "value": "$session.params.acut_retrieve_response.resolutionInfo.closedTime"
+      }, {
+        "parameter": "day1",
+        "value": "$sys.func.TO_NUMBER($sys.func.MID($session.params.resolution_date,9,2))"
+      }, {
+        "parameter": "month1",
+        "value": "$sys.func.TO_NUMBER($sys.func.MID($session.params.resolution_date,6,2))"
+      }, {
+        "parameter": "year1",
+        "value": "$sys.func.TO_NUMBER($sys.func.MID($session.params.resolution_date,1,4))"
+      }, {
+        "parameter": "resolution_date_formatted",
+        "value": "$sys.func.TO_OBJECT(\"{'day1' : $session.params.day1 , 'month1' : $session.params.month1 , 'year1' : $session.params.year1}\")"
+      }, {
+        "parameter": "resolution_date_formatted",
+        "value": "$sys.func.FORMAT_DATE($session.params.resolution_date_formatted, \"EEEE, MMMM dd\", $session.params.language)\""
+      } ]
+    },
+    "name": "f033715d-74a0-47a1-b8a0-75c019776ade"
+  }, {
+    "condition": "$session.params.webhook_success = true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Check for Ticket Value",
+    "name": "a6ad57e4-55fb-40ad-8979-31d1e5b76387"
+  }, {
+    "condition": "$session.params.webhook_success = false",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Failure - ACUT",
+    "name": "9be7e48e-19a1-4aca-a796-de1658b5dc79"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Failure - ACUT",
+    "name": "8a627ee2-d442-49af-9def-3ab73e8f2f4a"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Webhook Failure - ACUT",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+    
+    },
+    "name": "1c37c10e-4831-406a-9066-964e5226c2f6"
+  }, {
+    "targetPage": "Webhook Failure - ACUT",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+    
+    },
+    "name": "5d947d50-51a4-4130-abbf-805545ac9e0a"
+  }, {
+    "targetPage": "Webhook Failure - ACUT",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+    
+    },
+    "name": "a7bd808f-24f1-4160-b65b-a8c98debb6b8"
+  }, {
+    "targetPage": "Webhook Failure - ACUT",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+    
+    },
+    "name": "eaf7b818-cebd-435f-8c64-ae85782c48b1"
+  }, {
+    "targetPage": "Webhook Failure - ACUT",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+    
+    },
+    "name": "e08b00fc-665b-463c-8133-005c8ceee7dc"
+  }, {
+    "targetPage": "Webhook Failure - ACUT",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+    
+    },
+    "name": "9e46db3f-6b74-455a-bb40-74ff03b35a45"
+  } ]
+}

@@ -1,0 +1,55 @@
+{
+  "name": "7e683f34-fc95-4c71-8ef2-df36f70d4ed2",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Bien sûr, je peux vous aider. Pourquoi votre service est-il présentement suspendu?\n"
+    }
+  }, {
+    "userUtterance": {
+      "text": "J'ai perdu mon cellulaire"
+    }
+  }, {
+    "agentUtterance": {
+      "text": " Merci. Vous pouvez facilement rétablir votre service de mobilité dans MonBell. Je vais envoyer un texto à l’appareil à partir duquel vous appelez qui contient un lien pour le faire vous-même. Est-ce que cela vous convient?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "non"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "brand": "bell",
+        "language": "fr-ca",
+        "sms_send_status": "Declined",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "User wants to restore their mobility service",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca",
+      "route": "account_restore_service",
+      "unique_services": "MOBILITY",
+      "utterance": "Je veux rétablir mon service mobility"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "User is offered for sms and routed to sms flow",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca"
+    }
+  },
+  "displayName": "FR Restore Service : Mobility-lost - no",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 313,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

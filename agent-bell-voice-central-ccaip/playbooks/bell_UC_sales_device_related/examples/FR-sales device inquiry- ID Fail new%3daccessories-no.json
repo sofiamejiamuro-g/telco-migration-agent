@@ -1,0 +1,60 @@
+{
+  "name": "704c9185-8014-43cb-a423-1625c835c4fe",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "brand": "bell",
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Je vais envoyer un texto à l'appareil au moyen\nduquel vous appelez, afin que vous puissiez en\nsavoir plus sur toutes les sortes d'accessoires que\nBell a à offrir. Est-ce que ça vous convient?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Non"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "fr-ca",
+        "route": "sales_device_inquiry",
+        "sms_send_status": "Declined"
+      },
+      "outputActionParameters": {
+        "language": "fr-ca"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer has questions about device availability, device features, cost, related to devices that Bell sells",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "New",
+      "device_type": "Accessories",
+      "identification_status": "Fail",
+      "language": "fr-ca",
+      "route": "sales_device_inquiry",
+      "utterance": "Montrez-moi les derniers accessoires pour téléphone."
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "we got to know from the utterance that the device type",
+    "actionParameters": {
+      "device_type": "Accessories",
+      "language": "fr-ca"
+    }
+  },
+  "displayName": "FR-sales device inquiry- ID Fail new=accessories-no",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 386,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

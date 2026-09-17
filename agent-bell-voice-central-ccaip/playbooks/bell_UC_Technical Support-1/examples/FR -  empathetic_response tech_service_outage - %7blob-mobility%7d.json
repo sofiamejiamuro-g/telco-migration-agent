@@ -1,0 +1,60 @@
+{
+  "name": "d7189435-840c-41e4-83b6-7c1819aabb3a",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_tech_intent_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70012",
+        "language": "fr-ca",
+        "lob": "mobility",
+        "utterance": "Pour signaler le bris de mes services mobilité"
+      },
+      "outputActionParameters": {
+        "lob": "mobility"
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Je suis sincèrement désolé(e) des difficultés que vous rencontrez ; je suis là pour vous soutenir et vous faciliter les choses autant que possible. Nous sommes désolés d'apprendre que vous rencontrez des problèmes avec le téléphone de votre mère. Vous pouvez facilement vérifier les pannes de service sur notre site web. Je vais envoyer un texto sur l’appareil au moyen duquel vous appelez, afin que vous puissiez y accéder rapidement. Est-ce que ça vous convient?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "oui"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "fr-ca",
+        "sms_content": "Mess. de Bell : Vous pouvez vous rendre au https://soutien.bell.ca/Verification-des-pannes pour consulter les pannes de courant dans votre secteur. ( vpc.ca/anotresujet )",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "customer is having no phone signals",
+    "actionParameters": {
+      "apb_location_id": "70012",
+      "language": "fr-ca",
+      "lob": "mobility",
+      "route": "tech_service_outage",
+      "utterance": "Je souhaite signaler une interruption du service de téléphonie mobile de ma mère, elle est vraiment très contrariée."
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "customer is transferred to tech_intent_apb for lob",
+    "actionParameters": {
+      "apb_location_id": "70012",
+      "language": "fr-ca",
+      "lob": "mobility"
+    }
+  },
+  "displayName": "FR -  empathetic_response tech_service_outage - {lob-mobility}",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 490,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

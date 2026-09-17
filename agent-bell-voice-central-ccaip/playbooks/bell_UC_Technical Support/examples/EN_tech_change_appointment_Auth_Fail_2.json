@@ -1,0 +1,64 @@
+{
+  "name": "9e85d148-bb44-4f4f-aec3-03405a31bae1",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70012"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_authentication",
+      "inputActionParameters": {
+      
+      },
+      "outputActionParameters": {
+        "auth_status": "Fail"
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Since I wasn’t able to authenticate you, I can’t verify if there’s an active appointment on your account. Did you know that you can view, reschedule, or cancel your appointment in the manage your Appointment app. I'll send you a text to the device your calling from, so that you can get started. Is that alright?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Yes"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+      
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "The user was sent to flow bell_apb and bell_authentication and since auth_status = \"Fail\" , asked the user for sms and he said yes then transferred the user to bell_SMS_Trigger flow ",
+    "actionParameters": {
+      "language": "en",
+      "route": "tech_change_appointment",
+      "utterance": "I want to update on my appointment"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "The user was sent to flow bell_apb and bell_authentication and since auth_status = \"Fail\" , asked the user for sms and he said yes then transferred the user to bell_SMS_Trigger flow ",
+    "actionParameters": {
+      "auth_status": "Fail",
+      "language": "en",
+      "route": "tech_change_appointment",
+      "utterance": "I want to update on my appointment"
+    }
+  },
+  "displayName": "EN_tech_change_appointment_Auth_Fail_2",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 487,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "fr"
+}

@@ -1,0 +1,72 @@
+{
+  "name": "8c65cd87-a9a6-4622-9ee9-4248742503d6",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Sure, I can help with that. Could you please confirm which service you are looking to suspend?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Im looking to suspend my mobility services"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Thank you. What is the reason for suspending your service?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "My phone is lost"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Understood. Have you tried using a tracking feature like \"Find my iPhone\" or \"Find my Device\"?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "No"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Understood, I would suggest temporarily suspending your service to prevent unauthorized use. I will send a text to the device you are calling from, with a link to do it yourelf, is that alright?\""
+    }
+  }, {
+    "userUtterance": {
+      "text": "Yes"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "brand": "bell",
+        "language": "en",
+        "sms_content": "You can track you device by visiting icloud.com/find for iphone or google.com/android/find for Android. to temporarily suspend your mobility service, visit bell.ca/suspendline and follow the steps. (bell.ca/about-us)",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer trying to suspend their service",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "route": "account_suspend_service",
+      "unique_services": "Mobility",
+      "utterance": "Suspend my service"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Customer query is resolved and we update the {route} as \"equipment_report_lost_device\"",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "route": "equipment_report_lost_device"
+    }
+  },
+  "displayName": "Account suspend service - unique service - Moblity - Lost - en",
+  "retrievalStrategy": "NEVER",
+  "tokenCount": 449,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

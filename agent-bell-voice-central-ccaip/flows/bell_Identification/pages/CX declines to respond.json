@@ -1,0 +1,52 @@
+{
+  "name": "b86b4ac9-e774-43bd-890e-48a52e4df3b9",
+  "displayName": "CX declines to respond",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "messages": [ {
+      "text": {
+        "text": [ "$request.generative.dontWannaTell" ]
+      },
+      "languageCode": "fr-ca"
+    }, {
+      "text": {
+        "text": [ "$request.generative.dontWannaTell" ]
+      },
+      "languageCode": "en"
+    } ],
+    "setParameterActions": [ {
+      "parameter": "line_type",
+      "value": "New"
+    }, {
+      "parameter": "customer_type",
+      "value": "New"
+    }, {
+      "parameter": "identification_status",
+      "value": "Fail"
+    } ],
+    "generators": [ {
+      "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/9d885aa6-10fc-450c-875a-2b1123919ff3",
+      "outputParameter": "$request.generative.dontWannaTell"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "intent": "context.confirm_yes",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "route",
+        "value": "sales_new_account"
+      } ]
+    },
+    "targetFlow": "bell_Query_Rewriter",
+    "name": "023edb7b-3d29-4cd5-a69d-ad80371d1364"
+  }, {
+    "intent": "context.confirm_no",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "End Flow Check",
+    "name": "e53399ad-72b8-43ec-9692-fe91ed1979e5"
+  } ]
+}

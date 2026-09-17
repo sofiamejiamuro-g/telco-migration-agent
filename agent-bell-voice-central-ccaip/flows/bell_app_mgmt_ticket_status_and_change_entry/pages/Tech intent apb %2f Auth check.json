@@ -1,0 +1,72 @@
+{
+  "name": "4e94729b-d932-4d07-be10-368082acb453",
+  "displayName": "Tech intent apb / Auth check",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "True",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_tech_intent_apb",
+    "name": "a8d30ee6-436e-4c6c-849f-a4d9e4c08141"
+  }, {
+    "condition": "$session.params.identification_status = null",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_Identification",
+    "name": "ba863fec-dde2-4aff-b79e-702c94ed9287"
+  }, {
+    "condition": "$session.params.identification_status = \"Fail\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "ID / Auth Failure",
+    "name": "02e8c034-0da1-45b1-9265-c844e9b52620"
+  }, {
+    "condition": "$session.params.auth_status = null",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_authentication",
+    "name": "b2c2c43d-5079-47ab-b7c8-4543055222dc"
+  }, {
+    "condition": "$session.params.auth_status = \"Pass\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Check LOB",
+    "name": "89e63ebf-45bf-45e5-8a59-73afdf504b02"
+  }, {
+    "condition": "$session.params.auth_status = \"Fail\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "ID / Auth Failure",
+    "name": "40742c05-2c1f-4d69-9c8f-b14d0949233e"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "4e94729b-d932-4d07-be10-368082acb453"
+      }, {
+        "parameter": "flow_id",
+        "value": "d880b5cc-5fe9-4f15-bed6-c0b5dc393f0e"
+      }, {
+        "parameter": "page_name",
+        "value": "Tech intent apb / Auth check"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

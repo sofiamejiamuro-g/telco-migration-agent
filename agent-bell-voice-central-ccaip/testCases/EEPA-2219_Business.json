@@ -1,0 +1,113 @@
+{
+  "name": "d3f1aa0c-83e5-4f3e-bc5c-70d4c6aa88fd",
+  "displayName": "EEPA-2219_Business",
+  "testCaseConversationTurns": [ {
+    "userInput": {
+      "injectedParameters": {
+        "BBM": true,
+        "call_id": 7689,
+        "clid": "+19059859320",
+        "non_consumer": true,
+        "single_non_consumer_ban": true,
+        "test_multiban": true,
+        "tfn": "+18338858259"
+      },
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "hi"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "sessionParameters": {
+        "BBM": true,
+        "call_id": 7689,
+        "clid": "+19059859320",
+        "non_consumer": true,
+        "single_non_consumer_ban": true,
+        "test_multiban": true,
+        "tfn": "+18338858259"
+      },
+      "triggeredIntent": {
+        "name": "Default Welcome Intent"
+      },
+      "currentPage": {
+        "name": "Business BAN Check",
+        "flow": "bell_multiban"
+      },
+      "textResponses": [ {
+        "text": [ "I found several accounts related to your number. So I know we’re talking about the right one, could you tell me whether you're calling about a business account?" ],
+        "allowPlaybackInterruption": true
+      } ],
+      "currentFlow": {
+        "name": "bell_multiban"
+      }
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "yes"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "triggeredIntent": {
+        "name": "custom.yes"
+      },
+      "currentPage": {
+        "name": "Get CX Input",
+        "flow": "bell_va_to_ivr_handoff_BBM_BNM_SMB"
+      },
+      "textResponses": [ {
+        "text": [ "I see that this number is associated with a Business account.  Do you want to discuss that account or a different one?\n" ],
+        "allowPlaybackInterruption": true
+      } ],
+      "currentFlow": {
+        "name": "bell_va_to_ivr_handoff_BBM_BNM_SMB"
+      }
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "this one"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "triggeredIntent": {
+        "name": "context.account_business"
+      },
+      "currentPage": {
+        "name": "Start Page",
+        "flow": "bell_Live Agent Handoff"
+      },
+      "textResponses": [ {
+        "text": [ "Okay great. To get you the best support, I’ll transfer you to our business support system.\n\nOkay, I’ll connect you now. You’ll need to use your phone keypad instead of talking to the virtual assistant. Next time, you can call \u003cspeak\u003e\u003cprosody rate=\"x-slow\"\u003e\u003csay-as interpretas='telephone'\u003e888-788-2355\u003c/say-as\u003e\u003c/prosody\u003e\u003c/speak\u003e for business support. Just a moment while I connect you." ],
+        "allowPlaybackInterruption": true
+      }, {
+        "text": [ "Please wait. I am connecting you to a live agent. " ],
+        "allowPlaybackInterruption": true
+      } ],
+      "currentFlow": {
+        "name": "bell_Live Agent Handoff"
+      }
+    }
+  } ],
+  "creationTime": {
+    "seconds": 1756719695,
+    "nanos": 507578000
+  },
+  "testConfig": {
+    "flow": "Default Start Flow",
+    "page": "Start Page"
+  },
+  "languageCode": "en"
+}

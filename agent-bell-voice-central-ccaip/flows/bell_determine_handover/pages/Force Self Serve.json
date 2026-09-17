@@ -1,0 +1,99 @@
+{
+  "name": "8824bd80-6579-4dcf-86c8-7b54c033eead",
+  "displayName": "Force Self Serve",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "messages": [ {
+      "text": {
+        "text": [ "$request.generative.custom_intent You can also visit $session.params.url for more help." ]
+      },
+      "languageCode": "en"
+    }, {
+      "text": {
+        "text": [ "$request.generative.custom_intent Vous pouvez également visiter $session.params.url pour obtenir de l'aide." ]
+      },
+      "languageCode": "fr-ca"
+    } ],
+    "generators": [ {
+      "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/049ded2b-6210-42fb-b1e5-32f99f12f5c5",
+      "inputParameters": [ {
+        "key": "intent",
+        "value": "$session.params.route"
+      } ],
+      "outputParameter": "$request.generative.custom_intent"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "intent": "custom.yes",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Okay." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "D'accord" ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "advancedSettings": {
+        "dtmfSettings": {
+          "useSystemEntityRule": false
+        }
+      }
+    },
+    "targetFlow": "bell_Feedback",
+    "name": "90f0dd35-d0b2-46c2-9318-11fccca7e497"
+  }, {
+    "intent": "other_speak_to_agent",
+    "triggerFulfillment": {
+      "advancedSettings": {
+        "dtmfSettings": {
+          "useSystemEntityRule": false
+        }
+      }
+    },
+    "targetPage": "Force Self Serve 2",
+    "name": "bcbda1f8-01f3-44a4-a5e4-65ccf4842f35"
+  }, {
+    "intent": "context.exception",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_aqd",
+    "name": "c7c32aa4-7dec-4016-a178-67ab3cf1ffaf"
+  }, {
+    "intent": "custom.no",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Okay." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "D'accord" ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "advancedSettings": {
+        "dtmfSettings": {
+          "useSystemEntityRule": false
+        }
+      }
+    },
+    "targetFlow": "bell_Feedback",
+    "name": "95762e44-2c65-4418-b717-636e56d8d0c3"
+  } ],
+  "eventHandlers": [ {
+    "targetFlow": "bell_Feedback",
+    "event": "sys.no-input-1",
+    "triggerFulfillment": {
+    
+    },
+    "name": "6158c6e2-2204-43d0-8b90-f50edfdf1e45"
+  } ]
+}

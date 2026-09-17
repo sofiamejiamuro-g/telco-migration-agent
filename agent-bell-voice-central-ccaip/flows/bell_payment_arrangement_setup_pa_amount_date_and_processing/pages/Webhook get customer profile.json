@@ -1,0 +1,116 @@
+{
+  "name": "36b842ab-9495-47c6-aa15-8ab9123f9471",
+  "displayName": "Webhook get customer profile",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "/v1/ibm_mw/nm1_get#ban-profile",
+    "tag": "ban-profile",
+    "setParameterActions": [ {
+      "parameter": "billing_account",
+      "value": "$session.params.billing_account"
+    }, {
+      "parameter": "ibm_application_id ",
+      "value": "$sys.func.IF(\"$session.params.intake_routing_lookup_response.va_ibm_id = null\", LUC_Entry, $session.params.intake_routing_lookup_response.va_ibm_id)"
+    }, {
+      "parameter": "webhook_success",
+      "value": "$session.params.webhook_success"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "pastDueAmount",
+        "value": "$session.params.nm1_get_cust_profile_response.pastDueAmount"
+      }, {
+        "parameter": "webhook_success",
+        "value": "$session.params.webhook_success"
+      } ]
+    },
+    "name": "a138c52b-280f-483b-900c-64293d2f9016"
+  }, {
+    "condition": "$session.params.webhook_success = \"false\" OR $session.params.nm1_get_cust_profile_response.returnCode = 0 OR $session.params.nm1_get_ban_profile_response.returnCode = 0",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Failure Confirmation",
+    "name": "89ae3449-accd-4196-96af-1d8dd06c6774"
+  }, {
+    "condition": "$session.params.webhook_success = \"true\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "payment_attempt",
+        "value": 0
+      }, {
+        "parameter": "decimal_payment_attempt",
+        "value": 0
+      } ]
+    },
+    "targetPage": "Amount Check",
+    "name": "38f529f6-304e-47f4-a708-61502e50d050"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "36b842ab-9495-47c6-aa15-8ab9123f9471"
+      }, {
+        "parameter": "flow_id",
+        "value": "f769e9bc-195d-4bb3-a5d0-6244de842e69"
+      }, {
+        "parameter": "page_name",
+        "value": "Webhook get customer profile"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Webhook Failure Confirmation",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+    
+    },
+    "name": "7cbb3cec-6758-4b0b-a3a8-f1dcbfdcd0c2"
+  }, {
+    "targetPage": "Webhook Failure Confirmation",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+    
+    },
+    "name": "576ad8be-0957-4758-9de3-302678dfa2d4"
+  }, {
+    "targetPage": "Webhook Failure Confirmation",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+    
+    },
+    "name": "cc1ff7ae-f13c-40df-9252-59f3e15b9db8"
+  }, {
+    "targetPage": "Webhook Failure Confirmation",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+    
+    },
+    "name": "baabcc1e-4867-4f1c-b3ae-46e94428d0f8"
+  }, {
+    "targetPage": "Webhook Failure Confirmation",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+    
+    },
+    "name": "7c5bfa8d-ad09-4145-b509-983d092c908a"
+  }, {
+    "targetPage": "Webhook Failure Confirmation",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+    
+    },
+    "name": "9983e389-9530-4718-808a-76176c55e5ca"
+  } ]
+}

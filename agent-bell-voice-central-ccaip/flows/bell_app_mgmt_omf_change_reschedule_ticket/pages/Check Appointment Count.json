@@ -1,0 +1,44 @@
+{
+  "name": "d2b0f288-33b8-422e-857d-c63f3c88d687",
+  "displayName": "Check Appointment Count",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.calendarInformationList \u003e 1",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "all_appointment_done",
+        "value": "false"
+      } ]
+    },
+    "targetPage": "Offer Appointments",
+    "name": "f2e921c3-e18c-4ffc-9446-e21eebe2d418"
+  }, {
+    "condition": "$session.params.calendarInformationList = 1",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Offer First Appointment",
+    "name": "3d97e10c-a4ea-4025-a40f-beeb50b2b1c5"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "d2b0f288-33b8-422e-857d-c63f3c88d687"
+      }, {
+        "parameter": "flow_id",
+        "value": "3cb06ee0-48c8-49e1-8be4-96461dd61130"
+      }, {
+        "parameter": "page_name",
+        "value": "Check Appointment Count"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

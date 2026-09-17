@@ -1,0 +1,272 @@
+{
+  "name": "3844cbc5-d4d4-4f2e-bbee-2dab8f8c4ed2",
+  "displayName": "Trigger OTP",
+  "form": {
+    "parameters": [ {
+      "displayName": "pin",
+      "required": true,
+      "entityType": "@sys.number-sequence",
+      "fillBehavior": {
+        "initialPromptFulfillment": {
+        
+        },
+        "repromptEventHandlers": [ {
+          "targetPage": "Local Error handing for OTP",
+          "event": "sys.no-input-1",
+          "triggerFulfillment": {
+            "setParameterActions": [ {
+              "parameter": "local_no_input_counter",
+              "value": "$sys.func.ADD($session.params.local_no_input_counter,1)"
+            } ]
+          },
+          "name": "571d387d-4ff5-420f-a581-25a616ac19a3"
+        }, {
+          "targetPage": "Local Error handing for OTP",
+          "event": "sys.no-match-1",
+          "triggerFulfillment": {
+            "setParameterActions": [ {
+              "parameter": "local_no_match_counter",
+              "value": "$sys.func.ADD($session.params.local_no_match_counter,1)"
+            } ]
+          },
+          "name": "27f502d5-2d41-43b4-a825-a5e9f285d5dc"
+        } ]
+      }
+    } ]
+  },
+  "entryFulfillment": {
+    "setParameterActions": [ {
+      "parameter": "pin",
+      "value": null
+    } ]
+  },
+  "transitionRoutes": [ {
+    "intent": "context.resend",
+    "condition": "$session.params.PIN_Resend_Counter \u003e= 2",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "auth_status",
+        "value": "Fail"
+      }, {
+        "parameter": "status",
+        "value": "SMSTimeout"
+      } ]
+    },
+    "targetPage": "Webhook set-auth-status",
+    "name": "c980a41f-2deb-4c34-9f2d-75ceda00158f"
+  }, {
+    "intent": "context.resend",
+    "condition": "$session.params.PIN_Resend_Counter = 1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Veuillez vérifier de nouveau; le message pourrait ne pas être arrivé instantanément." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "Please check again; the message might not have arrived instantly." ]
+        },
+        "languageCode": "en"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "PIN_Resend_Counter",
+        "value": "$sys.func.ADD(1, $session.params.PIN_Resend_Counter)"
+      } ]
+    },
+    "name": "51bbf6e6-604d-4e80-981e-34272d7250b3"
+  }, {
+    "intent": "context.resend",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Parfois, le message peut prendre un certain temps à arriver. Pourriez-vous s’il vous plaît revérifier?" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "Some times, the message takes a moment to arrive. Can you please check again?" ]
+        },
+        "languageCode": "en"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "PIN_Resend_Counter",
+        "value": "$sys.func.ADD(1, $session.params.PIN_Resend_Counter)"
+      } ]
+    },
+    "name": "8c31808b-0179-40eb-9442-774529782b45"
+  }, {
+    "intent": "context.pin_not_received",
+    "condition": "$session.params.PIN_Resend_Counter \u003e= 2",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "auth_status",
+        "value": "Fail"
+      }, {
+        "parameter": "status",
+        "value": "SMSTimeout"
+      } ]
+    },
+    "targetPage": "Webhook set-auth-status",
+    "name": "a8986e81-8be2-4449-b2d0-73d5573b49c9"
+  }, {
+    "intent": "context.pin_not_received",
+    "condition": "$session.params.PIN_Resend_Counter = 1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Veuillez vérifier de nouveau; le message pourrait ne pas être arrivé instantanément." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "Please check again; the message might not have arrived instantly." ]
+        },
+        "languageCode": "en"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "PIN_Resend_Counter",
+        "value": "$sys.func.ADD(1, $session.params.PIN_Resend_Counter)"
+      } ]
+    },
+    "name": "3c8cf3db-f80d-446b-a058-d0f6d31c909f"
+  }, {
+    "intent": "context.pin_not_received",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Parfois, le message peut prendre un certain temps à arriver. Pourriez-vous s’il vous plaît revérifier?" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "Some times, the message takes a moment to arrive. Can you please check again?" ]
+        },
+        "languageCode": "en"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "PIN_Resend_Counter",
+        "value": "$sys.func.ADD(1, $session.params.PIN_Resend_Counter)"
+      } ]
+    },
+    "name": "e9897927-618b-446e-8f4f-1ca9854121ae"
+  }, {
+    "intent": "other_speak_to_agent",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "local_no_match_counter",
+        "value": "$sys.func.ADD($session.params.local_no_match_counter,1)"
+      }, {
+        "parameter": "auth_repeat",
+        "value": 0
+      } ]
+    },
+    "targetPage": "Local Error handing for OTP",
+    "name": "d990e3cc-6eb4-44d0-853f-ada7e571880e"
+  }, {
+    "intent": "context.cant_say_out_loud",
+    "condition": "$session.params.Loud_Counter \u003e= 2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "il semble y avoir un problème." ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "intent",
+        "value": "$session.params.route"
+      } ]
+    },
+    "targetPage": "Webhook SDL mapping",
+    "name": "0b104be1-3d80-4002-9ef7-b7a91c068049"
+  }, {
+    "intent": "context.user_asks_more_time",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "\u003cspeak\u003eAbsolument. Veuillez prendre un moment pour trouver votre numéro. \u003cbreak time=\"5s\"/\u003e \u003c/speak\u003e" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "Absolutely. Please take a moment to find your number." ]
+        },
+        "languageCode": "en"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "More_Time_Counter",
+        "value": "$sys.func.ADD(1, $session.params.More_Time_Counter)"
+      } ]
+    },
+    "name": "57d67199-7e1d-4f09-8ea0-72befe082d93"
+  }, {
+    "intent": "context.cant_say_out_loud",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Ne t'inquiète pas, si tu ne peux pas lire ton numéro à voix haute, tu peux le saisir à l'aide de ton clavier." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "No worries, if you can't read your number out loud, you can enter it using your key pad." ]
+        },
+        "languageCode": "en"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "Loud_Counter",
+        "value": "$sys.func.ADD(1, $session.params.Loud_Counter)"
+      } ]
+    },
+    "name": "3391796c-9e1d-4309-9044-fe4379d9c9c1"
+  }, {
+    "intent": "context.user_makes_mistake",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Pas de souci; veuillez dire ou saisir à nouveau votre numéro lorsque vous êtes prêt(e)." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "No worries, please say or re-enter your number when ready." ]
+        },
+        "languageCode": "en"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "global_error_counter",
+        "value": "$sys.func.ADD(1, $session.params.global_error_counter)"
+      }, {
+        "parameter": "Mistake_Counter",
+        "value": "$sys.func.ADD(1, $session.params.Mistake_Counter)"
+      } ]
+    },
+    "name": "5b8e72cc-a198-494f-ab79-9fa08878e503"
+  }, {
+    "condition": "$session.params.pin != null",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook validate-otp",
+    "name": "abf7bfbe-1a3a-4981-a809-cb02a05de541"
+  } ],
+  "advancedSettings": {
+    "speechSettings": {
+      "endpointerSensitivity": 90,
+      "noSpeechTimeout": {
+        "seconds": 60
+      },
+      "models": [ {
+        "key": "en",
+        "value": "telephony_short"
+      }, {
+        "key": "fr-ca",
+        "value": "telephony_short"
+      } ]
+    }
+  },
+  "speakerIdSettings": {
+  
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "name": "e0c9a135-e80c-4286-b5ac-331b560ff876",
+  "actions": [ {
+    "toolUse": {
+      "tool": "inline-action",
+      "action": "match_intent",
+      "inputActionParameters": {
+        "language": "fr-ca",
+        "revised_user_query": "est-ce que tu m'entends?",
+        "second_intent_true": "false"
+      },
+      "outputActionParameters": {
+        "result": "codeblocks_no_match"
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Je n'ai pas bien compris. Pouvez-vous réessayer."
+    }
+  }, {
+    "userUtterance": {
+      "text": "Je veux avoir l'historique de mes appels du mois dernier"
+    }
+  }, {
+    "toolUse": {
+      "tool": "inline-action",
+      "action": "match_intent",
+      "inputActionParameters": {
+        "language": "fr-ca",
+        "revised_user_query": "Je veux avoir l'historique de mes appels du mois dernier",
+        "second_intent_true": "false"
+      },
+      "outputActionParameters": {
+        "result": ""
+      }
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_Query_Rewriter",
+      "inputActionParameters": {
+        "language": "fr-ca",
+        "route": "account_usage_history",
+        "utterance": "Je veux avoir l'historique de mes appels du mois dernier"
+      },
+      "outputActionParameters": {
+        "language": "fr-ca",
+        "route": "account_usage_history",
+        "utterance": "Je veux avoir l'historique de mes appels du mois dernier"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "The user came to the bot with a query",
+    "actionParameters": {
+      "language": "fr-ca",
+      "utterance": "est-ce que tu m'entends?"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "the first user input is a no-match, so the playbook gives the user a chance to give an in scope query, and the user does provide an in scope query next, so the route is set to \"account_usage_history\" and the bell_Query_Rewriter Flow is invoked for further processing.",
+    "actionParameters": {
+      "language": "fr-ca",
+      "route": "account_usage_history",
+      "utterance": "Je veux avoir l'historique de mes appels du mois dernier"
+    }
+  },
+  "displayName": "FR - No Match to intent",
+  "retrievalStrategy": "NEVER",
+  "tokenCount": 481,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "fr-ca"
+}

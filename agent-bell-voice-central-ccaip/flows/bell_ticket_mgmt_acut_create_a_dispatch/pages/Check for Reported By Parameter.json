@@ -1,0 +1,37 @@
+{
+  "name": "644da322-c24b-44f0-a1ef-ace0d12c2b9c",
+  "displayName": "Check for Reported By Parameter",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "setParameterActions": [ {
+      "parameter": "stored_contact_number",
+      "value": "$session.params.number"
+    }, {
+      "parameter": "stored_contact_type",
+      "value": "$session.params.type"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.acut_retrieve_response.reported_by != null AND $session.params.acut_retrieve_response.reported_by != \"\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "reported_by",
+        "value": "$session.params.acut_retrieve_response.reported_by"
+      } ]
+    },
+    "targetPage": "Contact Data Check",
+    "name": "729f8540-0b1d-4836-8dd0-a3cf37a33f7f"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "reported_by",
+        "value": "$session.params.contact_name"
+      } ]
+    },
+    "targetPage": "Contact Data Check",
+    "name": "01628a3a-93fd-45eb-b80c-ac02d099dfca"
+  } ]
+}

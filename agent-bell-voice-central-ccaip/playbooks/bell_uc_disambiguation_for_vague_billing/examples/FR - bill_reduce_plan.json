@@ -1,0 +1,52 @@
+{
+  "name": "0a7dbd5b-bd15-4ee1-a463-e421313aa3c8",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Sur quels frais de facture spécifiques demandez-vous ?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Pourriez-vous m'expliquer comment je peux réduire ma facture en modifiant mon forfait ou en supprimant certains services, et également me dire s'il existe des promotions ou des économies dont je peux profiter pour réduire davantage les coûts ?"
+    }
+  }, {
+    "playbookInvocation": {
+      "playbook": "bell_UC_Billing",
+      "playbookInput": {
+        "precedingConversationSummary": "Customers is looking to reduce the bill",
+        "actionParameters": {
+          "language": "fr-ca",
+          "route": "bill_reduce_plan",
+          "utterance": "Pourriez-vous m'expliquer comment je peux réduire ma facture en modifiant mon forfait ou en supprimant certains services, et également me dire s'il existe des promotions ou des économies dont je peux profiter pour réduire davantage les coûts ?"
+        }
+      },
+      "playbookOutput": {
+        "executionSummary": "Customer query got resolved",
+        "actionParameters": {
+          "language": "fr-ca",
+          "route": "bill_reduce_plan"
+        }
+      },
+      "playbookState": "OUTPUT_STATE_OK"
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer query about \"I want to ask about bill charges\" is addressed",
+    "actionParameters": {
+      "language": "fr-ca",
+      "route": "bill_vague",
+      "utterance": "Je veux poser des questions sur les frais de facturation"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Customer query is addressed and then directed to \"lucky_uc_billing\" playbook",
+    "actionParameters": {
+      "language": "fr-ca",
+      "route": "bill_view_bill"
+    }
+  },
+  "displayName": "FR - bill_reduce_plan",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 381,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

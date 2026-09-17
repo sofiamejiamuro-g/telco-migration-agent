@@ -1,0 +1,32 @@
+{
+  "name": "7a1cb606-b4e5-4d64-8060-bb62464aa8a3",
+  "displayName": "Logic Router",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$sys.func.TO_NUMBER($session.params.expiry_year) \u003c $sys.func.TO_NUMBER($session.params.current_year) AND $session.params.auth_status = \"Pass\" AND $session.params.nm1_get_cust_profile_response.paymentMethod = \"C\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Check Expiry Date",
+    "name": "3e7bea35-761a-4b6b-a000-7814664329ba"
+  }, {
+    "condition": "($sys.func.TO_NUMBER($session.params.expiry_year) = $sys.func.TO_NUMBER($session.params.current_year) AND $sys.func.TO_NUMBER($session.params.expiry_month) \u003c= $sys.func.TO_NUMBER($session.params.current_month)) AND $session.params.auth_status = \"Pass\" AND $session.params.nm1_get_cust_profile_response.paymentMethod = \"C\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Check Expiry Date",
+    "name": "a52cddd4-dd0d-47ea-b7aa-f7d9feb4666c"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Get Propensity To Sell Then End Flow",
+    "name": "c3ee229e-30ce-4ccb-8383-6232d7ece8c8"
+  } ]
+}

@@ -1,0 +1,58 @@
+{
+  "name": "ce313b5f-d61b-46ca-849e-3237178efb8b",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70011",
+        "brand": "bell",
+        "language": "en"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "I'll send a text to the device you're calling from, so that you can easily view all streaming options. Is that alright?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "yeah"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "sms_content": "Bell: You can visit https://m.bell.ca/activatesube to find out more about our streaming options. (bell.ca/about-us)",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "As, {identification_status} is \"Pass\" and {streaming_services} is \"Disney\" then we will prompt customer and ask to send message. If customer say \"Yes\" or anything affirmative then we will trigger the FLOW: bell_SMS Trigger ",
+    "actionParameters": {
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "en",
+      "route": "service_remove_feature",
+      "utterance": "i want to remove Disney"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Ask if user wants to receives the sms, if says yes then send the sms by calling sms_trigger flow",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "streaming_services": "Disney"
+    }
+  },
+  "displayName": "EN - service_remove_feature - Disney",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 409,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

@@ -1,0 +1,44 @@
+{
+  "name": "6af61048-dbe8-49c1-9562-6db4db97a652",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Sure, I can help with that. You can temporarily suspend your residential services in MyBell. I will send a text to the device you're calling from, with a link to do it yourself. Is that alright?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "yes"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+      
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer wants to suspend his internet service ",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "route": "account_suspend_service",
+      "unique_services": "Internet, Tv, WIRELINE",
+      "utterance": "I want to suspend my internet service"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "VA understood the {utterance}, checked the {unique_services} parameter, found multiple values, rechecked the {utterance} and found it mentions Internet related term, VA asks if it can send a text to the device he's calling from, user confirms, it routed the user to bell_SMS Trigger flow",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en"
+    }
+  },
+  "displayName": "Happy path - Account suspend service - unique services(Multiple) - Internet utterance - yes - en - 20",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 291,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

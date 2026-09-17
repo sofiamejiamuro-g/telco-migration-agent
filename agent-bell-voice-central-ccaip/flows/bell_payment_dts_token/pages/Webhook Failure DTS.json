@@ -1,0 +1,144 @@
+{
+  "name": "e85fe050-d25f-405a-8a9c-8dbd8a86c6f7",
+  "displayName": "Webhook Failure DTS",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "messages": [ {
+      "text": {
+        "text": [ "Thanks for your patience. It looks like I'm having trouble completing the next step right now. There's nothing wrong on your end. I'll send a text to the device you're calling from, so that you can proceed with your payment yourself in the My Account App. Is that alright?" ]
+      },
+      "languageCode": "en"
+    }, {
+      "text": {
+        "text": [ "Merci de votre patience. Il semble que j'aie de la difficulté à effectuer la prochaine étape en ce moment. Il n'y a rien de mal de votre côté. Je vais envoyer un texto à l'appareil à partir duquel vous appelez, afin que vous puissiez effectuer votre paiement vous-même dans l'Appli Mon Compte. Est-ce que cela vous convient?" ]
+      },
+      "languageCode": "fr-ca"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "intent": "context.confirm_yes",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Language Based SMS",
+    "name": "e59cc96d-04d4-4b08-a1aa-810d7c2ed6be"
+  }, {
+    "intent": "context.confirm_no",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "SDL Intent Mapping",
+    "name": "b9609f5b-6d8e-43b8-91ef-e2949b3aedee"
+  }, {
+    "intent": "context.different_number",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "different_number",
+        "value": true
+      } ]
+    },
+    "targetPage": "Language Based SMS",
+    "name": "a3baf4f0-d026-4761-abd7-eb120348c203"
+  } ],
+  "eventHandlers": [ {
+    "event": "sys.no-input-1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I didn't quite get that. Can you try again?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je n’ai pas tout à fait compris. Pouvez-vous réessayer?" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "5cbe3033-8b70-472e-b685-96f9203f612a"
+  }, {
+    "event": "sys.no-input-2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I still didn't get that" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je n’ai toujours pas compris." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "2aac40ce-3f08-4739-a270-d3c9717c9d2d"
+  }, {
+    "targetFlow": "bell_aqd",
+    "event": "sys.no-input-3",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "If you'd still like to complete your Pre-Authorized payment request, you can do so in the My Account app. Please visit  vpc.ca/support for more information." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Si vous souhaitez toujours effectuer une demande de paiements pré-autorisés, vous pouvez le faire dans l’appli Mon compte. Veuillez visiter https://vpc.ca/soutien pour en savoir plus." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "8a99c610-57ed-4a37-af81-b7205531345b"
+  }, {
+    "event": "sys.no-match-1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I didn't quite get that. Can you try again?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je n’ai pas tout à fait compris. Pouvez-vous réessayer?" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "700b9124-f6be-44ce-be74-688ef25bfc3d"
+  }, {
+    "event": "sys.no-match-2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I still didn't get that" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je n’ai toujours pas compris." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "c89847a1-b70b-41df-9295-d05782ba54c9"
+  }, {
+    "targetFlow": "bell_aqd",
+    "event": "sys.no-match-3",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "If you'd still like to complete your Pre-Authorized payment request, you can do so in the My Account app. Please visit  vpc.ca/support for more information." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Si vous souhaitez toujours effectuer une demande de paiements pré-autorisés, vous pouvez le faire dans l’appli Mon compte. Veuillez visiter https://vpc.ca/soutien pour en savoir plus." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "1c7f13c0-75c3-4a08-b74f-ec2189c40a33"
+  } ]
+}

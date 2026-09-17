@@ -1,0 +1,69 @@
+{
+  "name": "af0edd6d-c060-4595-898c-ea8a7ecaf209",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_tech_intent_apb",
+      "inputActionParameters": {
+        "language": "en",
+        "lob": "TV"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "I'll send a text to the device you're calling from, so you can easily synchronize your TV programming through MyBell. Is that alright?"
+    }
+  }, {
+    "userUtterance": {
+    
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_global_error_count_check",
+      "inputActionParameters": {
+        "global_error_counter": "0",
+        "language": "en"
+      },
+      "outputActionParameters": {
+        "global_error_counter": "1",
+        "language": "en"
+      }
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_aqd",
+      "inputActionParameters": {
+        "language": "en",
+        "lob": "TV"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer asking about a missing channel in their tv",
+    "actionParameters": {
+      "brand": "bell",
+      "global_error_counter": "0",
+      "language": "en",
+      "route": "tech_missing_channel_package",
+      "utterance": "I think I'm missing a channel in my package"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Customer declines for the instruction given VA so, will be sent to aqd",
+    "actionParameters": {
+      "global_error_counter": "1",
+      "language": "en",
+      "route": "tech_missing_channel_package"
+    }
+  },
+  "displayName": "EN_tech_missing_channel_package_TV_IAmHavingAnIssueWithMyTVChannel_No input",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 411,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

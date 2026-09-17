@@ -1,0 +1,171 @@
+{
+  "name": "ddf39638-9c8f-473e-9713-e3286516547b",
+  "displayName": "HI_equipment",
+  "transitionRoutes": [ {
+    "intent": "equipment_report_lost_device",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "utterance",
+        "value": "$request.user-utterance"
+      }, {
+        "parameter": "route",
+        "value": ""
+      } ]
+    },
+    "name": "492176f7-d4f1-4ec3-8b14-089e0a09044a",
+    "targetPlaybook": "bell_NLU_Query_Rewriter"
+  }, {
+    "intent": "equipment_request_sim",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "utterance",
+        "value": "$request.user-utterance"
+      }, {
+        "parameter": "route",
+        "value": ""
+      } ]
+    },
+    "name": "80fdad39-f083-4bd6-9c10-7709114a153c",
+    "targetPlaybook": "bell_NLU_Query_Rewriter"
+  }, {
+    "intent": "equipment_vague",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "utterance",
+        "value": "$request.user-utterance"
+      }, {
+        "parameter": "route",
+        "value": ""
+      } ]
+    },
+    "name": "14676523-bc22-4ed1-b389-c083c479c650",
+    "targetPlaybook": "bell_NLU_Query_Rewriter"
+  }, {
+    "intent": "equipment_cancel_order",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "utterance",
+        "value": "$request.user-utterance"
+      }, {
+        "parameter": "active_services",
+        "value": "$sys.func.FILTER(\"$session.params. billing_account_info_list\",\"$[*].services[*].service_type\")"
+      }, {
+        "parameter": "unique_services",
+        "value": "$sys.func.UNIQUE($session.params.active_services)"
+      }, {
+        "parameter": "number_of_services",
+        "value": "$sys.func.COUNT($session.params.unique_services)"
+      }, {
+        "parameter": "lob",
+        "value": "$sys.func.IF($session.params.number_of_services=1, $session.params.number_of_services[0], null)"
+      }, {
+        "parameter": "device_type",
+        "value": "$sys.func.IF($session.params.number_of_services=1, $session.params.number_of_services[0], null)"
+      }, {
+        "parameter": "route",
+        "value": ""
+      } ],
+      "nextActionOverride": {
+      
+      }
+    },
+    "name": "ee8d8192-e4e7-43a1-8adc-99840926f1ed",
+    "targetPlaybook": "bell_NLU_Query_Rewriter"
+  }, {
+    "intent": "equipment_change_order_address",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "utterance",
+        "value": "$request.user-utterance"
+      }, {
+        "parameter": "route",
+        "value": ""
+      } ],
+      "nextActionOverride": {
+      
+      }
+    },
+    "name": "33d3d22c-f8fe-4779-a4b8-b6d24ec522ee",
+    "targetPlaybook": "bell_NLU_Query_Rewriter"
+  }, {
+    "intent": "equipment_order_status",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "utterance",
+        "value": "$request.user-utterance"
+      }, {
+        "parameter": "route",
+        "value": ""
+      } ],
+      "nextActionOverride": {
+      
+      }
+    },
+    "name": "925b3f14-a017-4548-8010-879953d6416f",
+    "targetPlaybook": "bell_NLU_Query_Rewriter"
+  }, {
+    "intent": "equipment_return_device",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "utterance",
+        "value": "$request.user-utterance"
+      }, {
+        "parameter": "route",
+        "value": ""
+      } ],
+      "nextActionOverride": {
+      
+      }
+    },
+    "name": "ac57d78e-56e5-41ba-a4f0-c6e64110055b",
+    "targetPlaybook": "bell_NLU_Query_Rewriter"
+  }, {
+    "intent": "equipment_store_pickup",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "utterance",
+        "value": "$request.user-utterance"
+      }, {
+        "parameter": "route",
+        "value": ""
+      } ],
+      "nextActionOverride": {
+      
+      }
+    },
+    "name": "1319b804-ab8c-4416-b8cc-f45626803041",
+    "targetPlaybook": "bell_NLU_Query_Rewriter"
+  }, {
+    "intent": "equipment_upgrade_device",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "utterance",
+        "value": "$request.user-utterance"
+      }, {
+        "parameter": "route",
+        "value": ""
+      } ],
+      "nextActionOverride": {
+      
+      }
+    },
+    "name": "0942d8bd-af30-4622-b136-b5b406da2404",
+    "targetPlaybook": "bell_NLU_Query_Rewriter"
+  }, {
+    "intent": "equipment_warranty_claim",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "utterance",
+        "value": "$request.user-utterance"
+      }, {
+        "parameter": "route",
+        "value": ""
+      } ],
+      "nextActionOverride": {
+      
+      }
+    },
+    "name": "f727ee06-b0f8-4a79-bdd2-095ae924222a",
+    "targetPlaybook": "bell_NLU_Query_Rewriter"
+  } ]
+}

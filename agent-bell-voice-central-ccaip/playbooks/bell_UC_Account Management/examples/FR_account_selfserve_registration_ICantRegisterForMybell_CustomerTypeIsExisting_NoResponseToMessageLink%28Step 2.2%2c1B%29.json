@@ -1,0 +1,64 @@
+{
+  "name": "8ab4a74f-8024-4e14-a53f-24455fa55152",
+  "actions": [ {
+    "agentUtterance": {
+      "text": " L'utilisation  de MonBell est un excellent moyen de gérer vos services au moment qui vous convient. Je vais envoyer un texto à l'appareil au moyen duquel vous appelez, afin que vous puissiez créer votre compte. Est-ce que ça vous convient ?"
+    }
+  }, {
+    "userUtterance": {
+    
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_get_sdl_mapping_url",
+      "inputActionParameters": {
+        "brand": "bell",
+        "customer_type": "Existing",
+        "language": "fr-ca",
+        "sms_send_status": "Declined"
+      },
+      "outputActionParameters": {
+        "brand": "bell",
+        "language": "fr-ca"
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Pas de problème. Pour toute autre question, vous pouvez toujours consulter notre site web à l'adresse {faq_link}."
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_Feedback",
+      "inputActionParameters": {
+        "brand": "bell",
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "The customer is trying to register in the MyBell Application.",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "Existing",
+      "language": "fr-ca",
+      "route": "account_selfserve_registration",
+      "utterance": "j'arrive pas à m'inscrire à Mon Bell"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "If the customer doesn't give any response then reroute the user to bell_SMS trigger flow.",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca",
+      "route": "account_selfserve_registration"
+    }
+  },
+  "displayName": "FR_account_selfserve_registration_ICantRegisterForMybell_CustomerTypeIsExisting_NoResponseToMessageLink(Step 2.2,1B)",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 416,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

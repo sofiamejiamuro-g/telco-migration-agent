@@ -1,0 +1,74 @@
+{
+  "name": "3e21fa7d-5f88-4e8e-b0e1-765c7aba219e",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "language": "en"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Sure, let me help you with that. \nLet's check if we offer Internet and Home phone service in your area. In which province are you looking to get service?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "alberta"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Get blazing-fast speeds on the Bell network with Bell Mobile Internet. Where you can get up to 5G internet connectivity with a mobile hotspot device so you can stay connected at home or on the go.\nI'll send a text to the device you're calling from, so that you can learn more and easily place an order on our website. Is that alright?\n"
+    }
+  }, {
+    "userUtterance": {
+      "text": "yes"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "en",
+        "lob": "Internet",
+        "sms_content": "Bell: You can visit bell.ca/mobileinternetdevices to view our Mobile Internet devices.( bell.ca/about-us )",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+        "language": "en"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "The Customer wants to sign up or open a new account for an internet service",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "New",
+      "identification_status": "Fail",
+      "language": "en",
+      "lob": "Internet",
+      "province": "AB",
+      "route": "sales_new_account",
+      "utterance": "I want to open a new account for an internet service"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "customer is asked {province} and if province is among AB, BC or ROC the user is asked about sms and as user agrees to sms we are transferring user to bell_SMS Trigger flow",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "New",
+      "identification_status": "Fail",
+      "language": "en",
+      "lob": "Internet",
+      "province": "AB",
+      "route": "sales_new_account"
+    }
+  },
+  "displayName": "EN sales_new_account- ID Fail, customer_type-new- Internet(ROC-AB)",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 547,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

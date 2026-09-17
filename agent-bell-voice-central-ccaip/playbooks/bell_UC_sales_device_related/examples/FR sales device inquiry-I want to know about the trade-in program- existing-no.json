@@ -1,0 +1,65 @@
+{
+  "name": "0484795c-1c74-446e-b02f-d2ed0ae16193",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Vous souhaitez vous renseigner sur un nouveau service ou apporter des modifications à votre service actuel ?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Service existant"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "J'enverrai un SMS à l'appareil d'où vous appelez, afin que vous puissiez consulter toutes les options de reprise et en savoir plus sur le programme de reprise de Bell. Ça vous convient ?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "non"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "fr-ca",
+        "route": "sales_device_inquiry",
+        "sms_send_status": "Declined"
+      },
+      "outputActionParameters": {
+        "language": "fr-ca"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "customer wants to know about the trade in program, customer type is existing and we don't know the line_type",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "fr-ca",
+      "route": "sales_device_inquiry",
+      "utterance": "Je souhaite en savoir plus sur le programme de reprise"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "As we don't know the line type, we need to ask the customer, if the customer says \"Existing Line\" then we should ask the customer if we can send the text, if customer disagrees then reroute to Bell feedback",
+    "actionParameters": {
+      "language": "fr-ca",
+      "line_type": "Existing"
+    }
+  },
+  "displayName": "FR sales device inquiry-I want to know about the trade-in program- existing-no",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 442,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

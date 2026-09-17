@@ -1,0 +1,84 @@
+{
+  "name": "4987cb1b-0976-4c83-a140-cce7bf6ae765",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_global_error_count_check",
+      "inputActionParameters": {
+        "global_error_counter": "0"
+      },
+      "outputActionParameters": {
+        "global_error_counter": "1"
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Je n'ai pas bien compris. Pouvez-vous réessayer ?"
+    }
+  }, {
+    "userUtterance": {
+    
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_global_error_count_check",
+      "inputActionParameters": {
+        "global_error_counter": "1"
+      },
+      "outputActionParameters": {
+        "global_error_counter": "2"
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Vous êtes toujours là ? Pouvez-vous répéter, s'il vous plaît ?"
+    }
+  }, {
+    "userUtterance": {
+    
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_global_error_count_check",
+      "inputActionParameters": {
+        "global_error_counter": "2"
+      },
+      "outputActionParameters": {
+        "global_error_counter": "3"
+      }
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_No_Match_3",
+      "inputActionParameters": {
+        "brand": "bell",
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+        "brand": "bell",
+        "language": "fr-ca"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "The customer is not giving any input",
+    "actionParameters": {
+      "brand": "bell",
+      "global_error_counter": "0",
+      "language": "fr-ca",
+      "utterance": ""
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "The customer provides no  information 3 times so flow bell_global_error_count_check is called each time and VA responds as per instructions ,   was routed to No_Input_3 flow",
+    "actionParameters": {
+      "brand": "bell",
+      "global_error_counter": "3",
+      "language": "fr-ca"
+    }
+  },
+  "displayName": "FR - NO INPUT",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 515,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

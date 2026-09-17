@@ -1,0 +1,133 @@
+{
+  "name": "78d28471-91dc-4db5-8931-e5fcea54259e",
+  "displayName": "Create Reserve Input",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "v1/dfcx_support/omf_calendar#selected-interval",
+    "tag": "selected-interval",
+    "setParameterActions": [ {
+      "parameter": "day",
+      "value": "$session.params.day"
+    }, {
+      "parameter": "calendarIdentifier",
+      "value": "$session.params.calendarIdentifier"
+    }, {
+      "parameter": "interval",
+      "value": "$session.params.interval"
+    }, {
+      "parameter": "estimatedStartTime",
+      "value": "$session.params.estimatedStartTime"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "omf_selected_interval_response_raw",
+        "value": "$session.params.omf_selected_interval_response"
+      }, {
+        "parameter": "omf_selected_interval_response",
+        "value": "$sys.func.TO_OBJECT($session.params.omf_selected_interval_response_raw)"
+      }, {
+        "parameter": "omf_selections_obj",
+        "value": "$session.params.omf_selected_interval_response.omf_selections"
+      }, {
+        "parameter": "omf_selections",
+        "value": "[$session.params.omf_selections_obj]"
+      } ]
+    },
+    "name": "561a701f-fb90-460f-8533-6e3f1408d049"
+  }, {
+    "condition": "$session.params.webhook_success = true",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Parfait. Votre $session.params.line_of_business_selected rendez-vous est prévu le $session.params.day_of_week, $session.params.date de $session.params.start_time à $session.params.end_time. Continuons." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "Great. Your $session.params.line_of_business_selected appointment is on $session.params.day_of_week, $session.params.date from $session.params.start_time to $session.params.end_time, Let's continue." ]
+        },
+        "languageCode": "en"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "appointment_counter",
+        "value": "$sys.func.ADD(1, $session.params.appointment_counter)"
+      } ]
+    },
+    "targetPage": "Offer Appointments",
+    "name": "bf993d1f-82d7-4f38-bb5e-bd69e34391f1"
+  }, {
+    "condition": "$session.params.webhook_success = false",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Failure - OMF",
+    "name": "c605b5d5-a874-4f5e-b404-508942649a7e"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "78d28471-91dc-4db5-8931-e5fcea54259e"
+      }, {
+        "parameter": "flow_id",
+        "value": "3cb06ee0-48c8-49e1-8be4-96461dd61130"
+      }, {
+        "parameter": "page_name",
+        "value": "Create Reserve Input"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Webhook Failure - OMF",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+    
+    },
+    "name": "b9705852-196f-46b5-919c-559fc3d51c06"
+  }, {
+    "targetPage": "Webhook Failure - OMF",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+    
+    },
+    "name": "8ba7615a-7bbd-41a6-a5b2-701b085a66ba"
+  }, {
+    "targetPage": "Webhook Failure - OMF",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+    
+    },
+    "name": "649f4de0-2abd-4c15-9525-81eeeb481d94"
+  }, {
+    "targetPage": "Webhook Failure - OMF",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+    
+    },
+    "name": "e4619b93-45c1-4ddd-8a87-d6f020362441"
+  }, {
+    "targetPage": "Webhook Failure - OMF",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+    
+    },
+    "name": "516450d3-3305-4b9c-a8e4-aa070aa22729"
+  }, {
+    "targetPage": "Webhook Failure - OMF",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+    
+    },
+    "name": "e0ad1850-957b-4efe-aafb-b703572e6567"
+  } ]
+}

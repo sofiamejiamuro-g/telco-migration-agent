@@ -1,0 +1,80 @@
+{
+  "name": "815e3f7c-dfd3-4135-8db5-d5dbdc82e3bf",
+  "displayName": "Check LOB (Main Flow)",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "setParameterActions": [ {
+      "parameter": "services_list_temp",
+      "value": "$sys.func.GET_FIELD($sys.func.GET($sys.func.GET_FIELD($sys.func.GET($sys.func.GET_FIELD($session.params.customer_id_search_response, \"users\"), 0), \"billing_accounts\"), 0), \"services\")"
+    }, {
+      "parameter": "services_object_temp",
+      "value": "[$session.params.services_list]"
+    }, {
+      "parameter": "services_list",
+      "value": "\"$sys.func.IF(\"$session.params.billing_account_info_list[0] != null\", $session.params.billing_account_info_list[0].services, $session.params.billing_account_info_list.services)\""
+    }, {
+      "parameter": "services_object",
+      "value": "$session.params.services_list"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.test3101 = true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Failed Outage Check",
+    "name": "3483502b-cef5-4a67-91ec-e3cd1037e862"
+  }, {
+    "condition": "$session.params.tv_sub_type = \"fibe\" OR $session.params.tv_sub_type = \"fibe tv app\"",
+    "triggerFulfillment": {
+      "generators": [ {
+        "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/6cfb061d-2e22-4096-a3dc-23c6ded04b23",
+        "inputParameters": [ {
+          "key": "services_json",
+          "value": "$session.params.services_object"
+        } ],
+        "outputParameter": "$request.generative.filtered_services"
+      } ]
+    },
+    "targetPage": "LOB exists under cx's Postal code? (Main Flow)",
+    "name": "01ac230a-3a7b-492f-bffa-f2f6b95951a0"
+  }, {
+    "condition": "$session.params.lob = \"Mobility\" OR $session.params.lob = \"Internet\" OR $session.params.lob = \"Homephone\" OR $session.params.tv_sub_type = \"sat\" OR $session.params.lob = \"TV\" OR $session.params.lob = \"internet\" OR $session.params.lob = \"homephone\" OR $session.params.lob = \"tv\" OR $session.params.lob = \"mobility\"",
+    "triggerFulfillment": {
+      "generators": [ {
+        "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/2e82e50e-c332-4633-89af-ab3f46cf3474",
+        "inputParameters": [ {
+          "key": "lob_value",
+          "value": "$session.params.lob"
+        }, {
+          "key": "services_json",
+          "value": "$session.params.services_object"
+        } ],
+        "outputParameter": "$request.generative.filtered_services"
+      } ]
+    },
+    "targetPage": "LOB exists under cx's Postal code? (Main Flow)",
+    "name": "e7ae8273-b0f1-458a-bb5d-536894b7d6ee"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "815e3f7c-dfd3-4135-8db5-d5dbdc82e3bf"
+      }, {
+        "parameter": "flow_id",
+        "value": "94d32e37-496f-4fa3-81e8-18fd95281a52"
+      }, {
+        "parameter": "page_name",
+        "value": "Check LOB (Main Flow)"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

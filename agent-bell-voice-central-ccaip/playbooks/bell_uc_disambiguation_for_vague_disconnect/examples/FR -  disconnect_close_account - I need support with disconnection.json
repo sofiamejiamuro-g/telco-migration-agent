@@ -1,0 +1,48 @@
+{
+  "name": "946a4082-eeae-4cfa-82c8-1ed492fada1a",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "De quel type d’assistance spécifique avez-vous besoin en cas de déconnexion ? Vous n'êtes pas sûr du processus ou avez-vous besoin d'aide pour autre chose ?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Je veux annuler son compte et payer mon solde."
+    }
+  }, {
+    "playbookInvocation": {
+      "playbook": "bell_UC_Disconnect",
+      "playbookInput": {
+        "precedingConversationSummary": "Customer looking to cancel something from their account",
+        "actionParameters": {
+          "language": "fr-ca",
+          "route": "disconnect_close_account",
+          "utterance": "Je veux annuler son compte et payer mon solde."
+        }
+      },
+      "playbookOutput": {
+        "executionSummary": "Customer query is addressed and then transferred to \"bell_UC_Disconnect\" playbook for further details",
+        "actionParameters": {
+          "language": "fr-ca",
+          "route": "disconnect_close_account"
+        }
+      },
+      "playbookState": "OUTPUT_STATE_OK"
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer query about \"I need support with disconnection\" is addressed",
+    "actionParameters": {
+      "language": "fr-ca",
+      "route": "disconnect_vague",
+      "utterance": "J'ai besoin d'aide pour la déconnexion"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Customer query is addressed and transferred to \"bell_UC_Disconnect\" playbook"
+  },
+  "displayName": "FR -  disconnect_close_account - I need support with disconnection",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 325,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

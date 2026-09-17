@@ -1,0 +1,59 @@
+{
+  "name": "bef3ac84-7c35-4d2f-850c-a13584e2fa0d",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "language": "en",
+        "lob": "internet",
+        "province": "ROC"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Sure, let me help you with that.\nLet's check if we offer Internet and Home phone service in your area. In which province are you looking to get service?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Squamish"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_aqd",
+      "inputActionParameters": {
+        "special_queue": "cornerstone"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "The customer is asking whether the provider's internet service is offered at an address or location. {lob} is \"internet\" and province is \"ROC\" OR any synonym like \"AB\" or \"BC\"",
+    "actionParameters": {
+      "language": "en",
+      "lob": "Internet",
+      "province": "BC",
+      "route": "sales_confirm_service_coverage",
+      "utterance": "Do you have internet service at my location",
+      "wml_eligible": "1"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "When the province is anything other than \"ON\" or \"QC\", or the province value is null or empty, the playbook prompts the user to provide their province. Once the province is validated, the playbook confirms that the wml_eligible parameter is set to \"1\", that the LOB is \"internet\" and the province is \"BC\". Based on these conditions, the request is routed to the bell_aqd flow with the special_queue parameter set to \"cornerstone\".",
+    "actionParameters": {
+      "language": "en",
+      "lob": "Internet",
+      "province": "BC",
+      "utterance": "Do you have internet service at my location"
+    }
+  },
+  "displayName": "EN-sales_service_coverage- Internet | not_roc | BC - wml_eligible",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 476,
+  "languageCode": "en"
+}

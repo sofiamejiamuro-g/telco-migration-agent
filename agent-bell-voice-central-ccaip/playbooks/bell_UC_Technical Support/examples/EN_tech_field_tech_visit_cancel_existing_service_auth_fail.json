@@ -1,0 +1,94 @@
+{
+  "name": "56bf5102-b7c9-40b5-a1a2-d6588fc2de68",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70012"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "playbookInvocation": {
+      "playbook": "bell_uc_ask_LOB",
+      "playbookInput": {
+        "precedingConversationSummary": "Customer wants to cancel the appointment, but does not mention lob",
+        "actionParameters": {
+          "language": "en",
+          "route": "tech_field_tech_visit_cancel"
+        }
+      },
+      "playbookOutput": {
+        "executionSummary": "When user does not provide lob, prompt them to understand what kind of service they are looking for, if the user mentions lob then return lob to the originating Playbook, if not set the default lob and return back",
+        "actionParameters": {
+          "language": "en",
+          "lob": "Internet",
+          "route": "tech_field_tech_visit_cancel"
+        }
+      },
+      "playbookState": "OUTPUT_STATE_OK"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "\nIs this to repair an existing service?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "existing service"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_authentication",
+      "inputActionParameters": {
+      
+      },
+      "outputActionParameters": {
+        "auth_status": "Fail"
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Did you know that you can view, reschedule, or cancel your appointment in the manage your Appointment app. I'll send you a text to the device you are calling from, so that you can get started. Is that alright?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Yes"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "sms_content": "You can visit https://m.bell.ca/mylogin and click the tile with your appointment information to manage your appointment in the My Bell app.   ( bell.ca/about-us )",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer wants to cancel the appointment",
+    "actionParameters": {
+      "language": "en",
+      "route": "tech_field_tech_visit_cancel",
+      "utterance": "I want to cancel my appointment"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "User does notmention lob so call bell_uc_ask_LOB playbook and extract the lob, and return to this playbook . \nTrigger bell_SMS trigger flow at the end",
+    "actionParameters": {
+      "auth_status": "Fail",
+      "language": "en",
+      "lob": "Internet",
+      "route": "tech_field_tech_visit_cancel",
+      "utterance": "I want to cancel my appointment"
+    }
+  },
+  "displayName": "EN_tech_field_tech_visit_cancel_existing_service_auth_fail",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 695,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

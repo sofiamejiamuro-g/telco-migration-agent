@@ -1,0 +1,52 @@
+{
+  "name": "0dfc3730-b15a-483b-a5a4-ed8d9ee75905",
+  "displayName": "Check No Match Counter",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.global_error_counter \u003e= 3",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "identification_status",
+        "value": "Fail"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "d39476d5-ed69-4753-a663-717eb49960f3"
+  }, {
+    "condition": "$session.params.no_match_counter = 2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Sorry, I can’t find your account. But don't worry, let's continue." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ " Je ne parviens malheureusement pas à trouver votre compte. Soyez sans crainte, on continue." ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "identification_status",
+        "value": "Fail"
+      } ]
+    },
+    "targetPage": "End Flow",
+    "name": "cac4ef42-556e-4e87-b648-65fe1af7a90a"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "entry_route",
+        "value": null
+      } ]
+    },
+    "targetPage": "Account Number",
+    "name": "19b62422-aa5a-4314-9ca1-625dd285c978"
+  } ]
+}

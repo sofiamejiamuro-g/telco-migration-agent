@@ -1,0 +1,83 @@
+{
+  "name": "e0a6fb33-ed6b-4dfa-8f05-90afb9acf63b",
+  "displayName": "check_user_input",
+  "form": {
+    "parameters": [ {
+      "displayName": "cx_input_wait1",
+      "required": true,
+      "entityType": "@sys.any",
+      "fillBehavior": {
+        "initialPromptFulfillment": {
+        
+        },
+        "repromptEventHandlers": [ {
+          "targetFlow": "bell_aqd",
+          "event": "sys.no-input-1",
+          "triggerFulfillment": {
+          
+          },
+          "name": "56165140-52e6-4c12-ae3c-3abdc19c2f56"
+        }, {
+          "targetFlow": "bell_aqd",
+          "event": "sys.no-match-1",
+          "triggerFulfillment": {
+          
+          },
+          "name": "7a1f4af1-0015-4600-b34c-03dde570477c"
+        } ]
+      }
+    } ]
+  },
+  "entryFulfillment": {
+    "messages": [ {
+      "text": {
+        "text": [ "For example, you can say \"I have a question about my bill\"" ]
+      },
+      "languageCode": "en"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$page.params.cx_input_wait1 = 1",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_aqd",
+    "name": "f777d90c-a8d6-492d-bf15-b7c0833af64e"
+  } ],
+  "eventHandlers": [ {
+    "targetFlow": "bell_aqd",
+    "event": "sys.no-input-1",
+    "triggerFulfillment": {
+    
+    },
+    "name": "70657a6a-fe69-4383-833c-753a838cc912"
+  }, {
+    "targetFlow": "bell_aqd",
+    "event": "sys.no-match-1",
+    "triggerFulfillment": {
+    
+    },
+    "name": "1a60f90d-288e-4c58-9ce1-5cc239ba15db"
+  } ],
+  "advancedSettings": {
+    "speechSettings": {
+      "endpointerSensitivity": 90,
+      "noSpeechTimeout": {
+        "seconds": 7
+      },
+      "models": [ {
+        "key": "en",
+        "value": "telephony_short"
+      }, {
+        "key": "fr-ca",
+        "value": "telephony_short"
+      } ]
+    },
+    "speechAdaptationSettings": {
+      "enableManualSpeechAdaptation": true
+    }
+  },
+  "speakerIdSettings": {
+  
+  }
+}

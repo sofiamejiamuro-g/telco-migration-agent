@@ -1,0 +1,66 @@
+{
+  "name": "8c794813-5db8-4e2a-b0c0-85dd6383a81c",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Vous souhaitez vous renseigner sur un nouveau service ou apporter des modifications à votre service actuel ?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Nouveau service"
+    }
+  }, {
+    "playbookInvocation": {
+      "playbook": "bell_UC_Sales",
+      "playbookInput": {
+        "precedingConversationSummary": "follow the instructions under the route \"sales_add_to_existing_account\"",
+        "actionParameters": {
+          "customer_type": "Existing",
+          "language": "fr-ca",
+          "line_type": "New",
+          "route": "sales_add_to_existing_account",
+          "utterance": "new service"
+        }
+      },
+      "playbookOutput": {
+        "actionParameters": {
+          "language": "fr-ca"
+        }
+      },
+      "playbookState": "OUTPUT_STATE_OK"
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "customer wants to know about the trade in program, customer type is existing and we don't know the line_type",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "fr-ca",
+      "route": "sales_device_inquiry",
+      "utterance": "Je souhaite en savoir plus sur le programme de reprise"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "As we don't know the line type, we need to ask the customer, if the customer says \"New Line\" then we should reroute to \"sales_add_to_existing_account\" ",
+    "actionParameters": {
+      "language": "fr-ca",
+      "line_type": "New",
+      "route": "sales_add_to_existing_account"
+    }
+  },
+  "displayName": "FR sales device inquiry-I want to know about the trade-in program- new service",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 447,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

@@ -1,0 +1,50 @@
+{
+  "name": "0adc8cbc-4134-4354-b782-a871cb8bda23",
+  "displayName": "Fraud flag check",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.statActvRsnCode = \"FRD\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "special_status",
+        "value": "bell_finals_fraud"
+      }, {
+        "parameter": "special_queue",
+        "value": "bell_collections"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "a3bf152d-d915-4877-90b6-4f9ae73feef4"
+  }, {
+    "condition": "$session.params.statActvRsnCode != \"FRD\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "webhook check account balance",
+    "name": "1760bb71-67cc-4e93-b35e-c4e154121e35"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "0adc8cbc-4134-4354-b782-a871cb8bda23"
+      }, {
+        "parameter": "flow_id",
+        "value": "d35b61b6-c884-44f8-b5c7-aed63cc356ab"
+      }, {
+        "parameter": "page_name",
+        "value": "Fraud flag check"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

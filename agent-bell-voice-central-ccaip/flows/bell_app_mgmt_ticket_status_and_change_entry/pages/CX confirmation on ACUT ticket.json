@@ -1,0 +1,87 @@
+{
+  "name": "09765907-176b-4bb9-afe8-a616de7dce1c",
+  "displayName": "CX confirmation on ACUT ticket",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "messages": [ {
+      "text": {
+        "text": [ "I see you have a ticket that was opened on $session.params.date_formatted. Is this the ticket you are calling about?" ]
+      },
+      "languageCode": "en"
+    }, {
+      "text": {
+        "text": [ "Je vois que vous avez un billet qui a été ouvert le $session.params.date_formatted. S’agit-il du billet pour lequel vous appelez?" ]
+      },
+      "languageCode": "fr-ca"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "intent": "context.confirm_yes",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "ticket_number",
+        "value": "$session.params.ticket_number1"
+      }, {
+        "parameter": "ticket_state",
+        "value": "$session.params.ticket_state1"
+      }, {
+        "parameter": "ticket_number_ref",
+        "value": "$sys.func.CONCATENATE(\"REF\", $sys.func.TO_TEXT($session.params.ticket_number))"
+      } ]
+    },
+    "targetFlow": "Bell_appt_mgmt_acut_ticket_chk",
+    "name": "a6f784f3-68ee-471f-92cb-8ca99c813d49"
+  }, {
+    "intent": "context.confirm_no",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I see you have another ticket that was opened on $session.params.date_formatted2. Is this the ticket you are calling about?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je vois que vous avez un billet qui a été ouvert le $session.params.date_formatted2. S’agit-il du billet pour lequel vous appelez?" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetPage": "CX confirmation on ACUT ticket 2",
+    "name": "f547b840-9cd5-4560-ba9c-f1d14c490c3c"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Local Error Handling (CX confirmation on ACUT ticket)",
+    "event": "sys.no-input-default",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "global_error_counter",
+        "value": "$sys.func.ADD($session.params.global_error_counter,1)"
+      }, {
+        "parameter": "local_trigger",
+        "value": "no_input"
+      }, {
+        "parameter": "local_noinput_counter",
+        "value": "$sys.func.ADD($session.params.local_noinput_counter,1)"
+      } ]
+    },
+    "name": "f03c0cb1-30aa-4112-8f5e-d1c6153bf9a6"
+  }, {
+    "targetPage": "Local Error Handling (CX confirmation on ACUT ticket)",
+    "event": "sys.no-match-default",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "global_error_counter",
+        "value": "$sys.func.ADD($session.params.global_error_counter,1)"
+      }, {
+        "parameter": "local_trigger",
+        "value": "no_match"
+      }, {
+        "parameter": "local_nomatch_counter",
+        "value": "$sys.func.ADD($session.params.local_nomatch_counter,1)"
+      } ]
+    },
+    "name": "28a468b7-17b7-48ad-8f07-4b5dd9023963"
+  } ]
+}

@@ -1,0 +1,62 @@
+{
+  "name": "719ddfee-48fd-4acf-ad37-495e8d1eaf83",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Désirez-vous ajouter un nouveau service ou modifier votre service actuel?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "oui je recherche un nouveau service"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "sales_add_to_existing_account_flow",
+      "inputActionParameters": {
+        "customer_type": "Existing",
+        "identification_status": "Pass",
+        "language": "fr-ca",
+        "province": "SK",
+        "route": "sales_add_to_existing_account"
+      },
+      "outputActionParameters": {
+        "language": "fr-ca"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customers want to know about different plans or compare different plans that Bell has and lob identified as \" Internet\" OR \"TV\" OR \"Homephone\"",
+    "actionParameters": {
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "fr-ca",
+      "province": "SK",
+      "route": "sales_plans_inquiry",
+      "utterance": "j'ai besoin d'un plan"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "from the identification flow, know the customer_type as \"Existing\",  set \"line_type\" as \"New\" and reroute to \"bell_sales_routing_flow\" in this playbook",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca",
+      "line_type": "New",
+      "route": "sales_add_to_existing_account"
+    }
+  },
+  "displayName": "FR - sales plans inquiry- ID Pass,line type-not mentioned",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 413,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "fr"
+}

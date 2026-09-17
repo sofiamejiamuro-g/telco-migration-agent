@@ -1,0 +1,41 @@
+{
+  "name": "cddcbff2-39b7-478d-a97a-460be25951f1",
+  "displayName": "Check issue_type (Main Flow)",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.issue_type = \"device\" OR $session.params.device_type != null",
+    "triggerFulfillment": {
+    
+    },
+    "name": "7cb2242b-8348-49bb-9716-9f893bc32a04",
+    "targetPlaybook": "Bell_UC_Technical_Support_Infobot"
+  }, {
+    "condition": "$session.params.issue_type = \"connection\" OR $session.params.issue_type = null",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Postal Code (Main Flow)",
+    "name": "d9cc1dea-265b-43ca-b262-3d091261f565"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "cddcbff2-39b7-478d-a97a-460be25951f1"
+      }, {
+        "parameter": "flow_id",
+        "value": "94d32e37-496f-4fa3-81e8-18fd95281a52"
+      }, {
+        "parameter": "page_name",
+        "value": "Check issue_type (Main Flow)"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

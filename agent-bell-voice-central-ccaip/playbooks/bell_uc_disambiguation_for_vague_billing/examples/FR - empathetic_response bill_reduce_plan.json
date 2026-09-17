@@ -1,0 +1,52 @@
+{
+  "name": "3ac1553b-2991-4c83-a3e4-631ccc364876",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Cette situation est vraiment difficile, et vos sentiments sont légitimes. Sur quels frais de facture spécifiques demandez-vous ?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Pourriez-vous m'expliquer comment je peux réduire ma facture en modifiant mon forfait ou en supprimant certains services, et également me dire s'il existe des promotions ou des économies dont je peux profiter pour réduire davantage les coûts ?"
+    }
+  }, {
+    "playbookInvocation": {
+      "playbook": "bell_UC_Billing",
+      "playbookInput": {
+        "precedingConversationSummary": "Customers is looking to reduce the bill",
+        "actionParameters": {
+          "language": "fr-ca",
+          "route": "bill_reduce_plan",
+          "utterance": "Pourriez-vous m'expliquer comment je peux réduire ma facture en modifiant mon forfait ou en supprimant certains services, et également me dire s'il existe des promotions ou des économies dont je peux profiter pour réduire davantage les coûts ?"
+        }
+      },
+      "playbookOutput": {
+        "executionSummary": "Customer query got resolved",
+        "actionParameters": {
+          "language": "fr-ca",
+          "route": "bill_reduce_plan"
+        }
+      },
+      "playbookState": "OUTPUT_STATE_OK"
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer query about \"I want to ask about bill charges\" is addressed also they are facing a challenging situation.",
+    "actionParameters": {
+      "language": "fr-ca",
+      "route": "bill_vague",
+      "utterance": "Je veux poser des questions sur les frais de facturation j'ai perdu mon emploi"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "VA follows as per given instructions and also is empathetic as the user is in a difficult situation.  Customer query is addressed and then directed to \"lucky_uc_billing\" playbook",
+    "actionParameters": {
+      "language": "fr-ca",
+      "route": "bill_view_bill"
+    }
+  },
+  "displayName": "FR - empathetic_response bill_reduce_plan",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 428,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

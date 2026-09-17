@@ -1,0 +1,133 @@
+{
+  "name": "de3d7248-4b87-44ee-a4e5-f3b4a96f7b8c",
+  "displayName": "bell_ticket_mgmt_webhook_failure",
+  "transitionRoutes": [ {
+    "intent": "Default Welcome Intent",
+    "triggerFulfillment": {
+    
+    },
+    "name": "c4db759b-d62f-499f-9be9-e9c2e6ee19a1"
+  }, {
+    "condition": "$session.params.ticket_mgmt_webhook_failure_type = \"1\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Sorry, due to an unexpected system issue, I am unable to verify your appointment." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Désolé, en raison d’un problème de système imprévu, je ne suis pas en mesure de vérifier votre rendez-vous." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetPage": "Webhook Failure 1",
+    "name": "49e7939a-f007-4c91-88ac-6372ce3a6034"
+  }, {
+    "condition": "$session.params.ticket_mgmt_webhook_failure_type = \"acut\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Failure ACUT",
+    "name": "fa043f5e-73f7-4754-99a5-0c05a627c959"
+  }, {
+    "condition": "$session.params.ticket_mgmt_webhook_failure_type = \"omf\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Failure OMF",
+    "name": "000d4ad3-fb1d-4713-b335-271bcce482f8"
+  }, {
+    "condition": "$session.params.ticket_mgmt_webhook_failure_type = \"tech_intent\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Failure Tech Intent",
+    "name": "fcc869c5-b5ba-4baf-98f0-5dc1610ca25c"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Failure ACUT",
+    "name": "22164e0b-8513-472b-b03d-cb12d6f665d3"
+  } ],
+  "eventHandlers": [ {
+    "event": "sys.no-match-default",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I didn't get that. Can you say it again?", "I missed what you said. What was that?", "Sorry, could you say that again?", "Sorry, can you say that again?", "Can you say that again?", "Sorry, I didn't get that. Can you rephrase?", "Sorry, what was that?", "One more time?", "What was that?", "Say that one more time?", "I didn't get that. Can you repeat?", "I missed that, say that again?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "J'ai du mal à comprendre cette question.", "J'ai mal compris votre demande.", "Je n'ai pas saisi ce que vous avez dit.", "Je crois que je ne vous suis pas.", "Je ne comprends pas de quoi vous me parlez." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "J'ai du mal à comprendre cette question.", "J'ai mal compris votre demande.", "Je n'ai pas saisi ce que vous avez dit.", "Je crois que je ne vous suis pas.", "Je ne comprends pas de quoi vous me parlez." ]
+        },
+        "languageCode": "fr"
+      } ]
+    },
+    "name": "8dd74e85-cde2-435b-a568-a6d21e5f2b0b"
+  }, {
+    "event": "sys.no-input-default",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I didn't get that. Can you say it again?", "I missed what you said. What was that?", "Sorry, could you say that again?", "Sorry, can you say that again?", "Can you say that again?", "Sorry, I didn't get that. Can you rephrase?", "Sorry, what was that?", "One more time?", "What was that?", "Say that one more time?", "I didn't get that. Can you repeat?", "I missed that, say that again?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "J'ai du mal à comprendre cette question.", "J'ai mal compris votre demande.", "Je n'ai pas saisi ce que vous avez dit.", "Je crois que je ne vous suis pas.", "Je ne comprends pas de quoi vous me parlez." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "J'ai du mal à comprendre cette question.", "J'ai mal compris votre demande.", "Je n'ai pas saisi ce que vous avez dit.", "Je crois que je ne vous suis pas.", "Je ne comprends pas de quoi vous me parlez." ]
+        },
+        "languageCode": "fr"
+      } ]
+    },
+    "name": "051f8125-7185-485a-9d10-f3ae4014e8ed"
+  }, {
+    "targetPage": "End Session",
+    "event": "wrapup",
+    "triggerFulfillment": {
+    
+    },
+    "name": "53a5f8db-855a-470b-b59a-b488d0ee11ca"
+  } ],
+  "nluSettings": {
+    "modelType": "MODEL_TYPE_CUSTOM",
+    "classificationThreshold": 0.30000001,
+    "modelTrainingMode": "MODEL_TRAINING_MODE_MANUAL"
+  },
+  "advancedSettings": {
+    "enabled": true,
+    "playbackInterruptionSettings": {
+    
+    }
+  },
+  "nluSettingsList": [ {
+    "modelType": "MODEL_TYPE_CUSTOM",
+    "classificationThreshold": 0.30000001,
+    "modelTrainingMode": "MODEL_TRAINING_MODE_MANUAL",
+    "customConfigKey": "2085d031-8e33-4fc7-a40f-bc350769b4e2",
+    "languageCode": "en"
+  }, {
+    "modelType": "MODEL_TYPE_CUSTOM",
+    "classificationThreshold": 0.30000001,
+    "modelTrainingMode": "MODEL_TRAINING_MODE_MANUAL",
+    "customConfigKey": "2085d031-8e33-4fc7-a40f-bc350769b4e2",
+    "languageCode": "fr-ca"
+  } ],
+  "multiLanguageSettings": {
+  
+  }
+}

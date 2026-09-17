@@ -1,0 +1,58 @@
+{
+  "name": "ca71d2f1-0b1a-404b-bb99-7bc6259a2c50",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "language": "en"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Sure, let me help you with that. Which service are you inquiring about?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "i'm inquiring about netflix"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_aqd",
+      "inputActionParameters": {
+      
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "The Customer wants to sign up or open a new account with Bell",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "New",
+      "language": "en",
+      "route": "sales_new_account",
+      "utterance": "I want to join Bell services"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "from the identification flow, know the customer_type as \"New\", as we don't know the swrvice, we need to ask the customer, which service they are inquiring about? if streaming service are captured then we should reroute to aqd flow or if in the utterance directly streaming services are found then also we can reroute to \"bell_aqd\"",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "New",
+      "identification_status": "Fail",
+      "language": "en",
+      "streaming_services": "Netflix"
+    }
+  },
+  "displayName": "EN sales_new_account- ID Fail, customer_type-new- streaming",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 382,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

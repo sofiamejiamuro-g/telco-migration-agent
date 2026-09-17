@@ -1,0 +1,173 @@
+{
+  "name": "78629b3f-59e9-4738-8d52-2dcd600f15f0",
+  "tags": [ "#Main_flow", "#Tech_connection_issue", "#Auth_fail", "#Failed_auth_flow" ],
+  "displayName": "Outage Main Flow Test Case 1",
+  "notes": "preset auth_status as fail",
+  "testCaseConversationTurns": [ {
+    "userInput": {
+      "injectedParameters": {
+        "clid": "+14162989570",
+        "tfn": "+18338858259"
+      },
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "hi"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "sessionParameters": {
+        "clid": "+14162989570",
+        "tfn": "+18338858259"
+      },
+      "triggeredIntent": {
+        "name": "Default Welcome Intent"
+      },
+      "currentPage": {
+        "name": "Get CX Input",
+        "flow": "bell_Identification"
+      },
+      "textResponses": [ {
+        "text": [ "\u003cspeak\u003eI'm Bell's virtual assistant, I use artificial intelligence to learn. \u003cbreak time=\"1s\"/\u003e\u003c/speak\u003e" ]
+      }, {
+        "text": [ "Are you calling about the account associated with the number you’re calling from?" ],
+        "allowPlaybackInterruption": true
+      } ],
+      "currentFlow": {
+        "name": "bell_Identification"
+      }
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "yes"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "textResponses": [ {
+        "text": [ "\u003cspeak\u003eThanks! \u003cbreak time=\"1s\"/\u003e\u003c/speak\u003e" ],
+        "allowPlaybackInterruption": true
+      }, {
+        "text": [ "I found several accounts related to your number. So I know we’re talking about the right one, could you please tell me which service you need help with?" ],
+        "allowPlaybackInterruption": true
+      } ]
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "558190263"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "triggeredIntent": {
+        "name": "Default Welcome Intent"
+      },
+      "currentPage": {
+        "name": "Account Number",
+        "flow": "bell_multiban"
+      },
+      "textResponses": [ {
+        "text": [ "Could you also tell me the account number you're calling about?" ]
+      } ],
+      "currentFlow": {
+        "name": "bell_multiban"
+      }
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "4162989570"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "currentPage": {
+        "name": "Routing Page",
+        "flow": "Default Start Flow"
+      },
+      "textResponses": [ {
+        "text": [ "Sorry, I can’t find your account. But don't worry, let's continue." ]
+      }, {
+        "text": [ "How can I help you?" ]
+      } ],
+      "currentFlow": {
+        "name": "Default Start Flow"
+      }
+    }
+  }, {
+    "userInput": {
+      "injectedParameters": {
+        "digital_tools_phase2": true
+      },
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "outage"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "sessionParameters": {
+        "digital_tools_phase2": true
+      },
+      "triggeredIntent": {
+        "name": "dummy testing"
+      },
+      "currentPage": {
+        "name": "9e8500ed-7468-4e9d-a5bb-c083d9e2a7ac",
+        "flow": "Default Start Flow"
+      },
+      "textResponses": [ {
+        "text": [ "You can communicate your concern here." ]
+      } ],
+      "currentFlow": {
+        "name": "Default Start Flow"
+      }
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "my sat tv is showing error"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "triggeredIntent": {
+        "name": "tech_connection_issue"
+      },
+      "currentPage": {
+        "name": "Check LOB(Failed Auth)",
+        "flow": "bell_tech_service_outage_\u0026_Tech_connection_issue"
+      },
+      "currentFlow": {
+        "name": "bell_tech_service_outage_\u0026_Tech_connection_issue"
+      }
+    }
+  } ],
+  "creationTime": {
+    "seconds": 1758743417,
+    "nanos": 626792000
+  },
+  "testConfig": {
+    "flow": "Default Start Flow",
+    "page": "Start Page"
+  },
+  "languageCode": "en"
+}

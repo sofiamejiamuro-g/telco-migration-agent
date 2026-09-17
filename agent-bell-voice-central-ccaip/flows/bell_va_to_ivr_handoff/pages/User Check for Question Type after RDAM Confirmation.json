@@ -1,0 +1,97 @@
+{
+  "name": "87f0f233-418f-49c8-acd5-aabb0e20faf5",
+  "displayName": "User Check for Question Type after RDAM Confirmation",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "conditionalCases": [ {
+      "cases": [ {
+        "condition": "$session.params.onebillindicator = \"Y\"",
+        "caseContent": [ {
+          "message": {
+            "text": {
+              "text": [ "I see you’ve consolidated your Bell Mobility and Bell Aliant services on one bill. To get you the best support, I’ll transfer you to our Bell Aliant support system.  Do you have any other questions before I transfer you?" ]
+            },
+            "languageCode": "en"
+          }
+        }, {
+          "message": {
+            "text": {
+              "text": [ "Selon votre compte, vous avez regroupé vos services Bell Mobilité et Bell Aliant en une seule facture. Afin de vous offrir le meilleur soutien possible, je vais vous transférer à notre système de soutien Bell Aliant.  Avez-vous d’autres questions avant que je vous transfère?" ]
+            },
+            "languageCode": "fr-ca"
+          }
+        } ]
+      }, {
+        "condition": "$session.params.onebillindicator = \"M\"",
+        "caseContent": [ {
+          "message": {
+            "text": {
+              "text": [ "I see you’ve consolidated your Bell Mobility and Bell MTS services on one bill. To get you the best support, I’ll transfer you to our Bell MTS support system.  Do you have any other questions before I transfer you?" ]
+            },
+            "languageCode": "en"
+          }
+        }, {
+          "message": {
+            "text": {
+              "text": [ "Selon votre compte, vous avez regroupé vos services Bell Mobilité et Bell MTS en une seule facture. Afin de vous offrir le meilleur soutien possible, je vais vous transférer à notre système de soutien Bell MTS.  Avez-vous d’autres questions avant que je vous transfère?" ]
+            },
+            "languageCode": "fr-ca"
+          }
+        } ]
+      } ]
+    } ]
+  },
+  "transitionRoutes": [ {
+    "intent": "custom.yes",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_Feedback",
+    "name": "da0e578c-7a5b-4c4f-95df-1a247c5bced1"
+  }, {
+    "intent": "context.va_to_ivr_no",
+    "triggerFulfillment": {
+      "conditionalCases": [ {
+        "cases": [ {
+          "condition": "$session.params.onebillindicator = \"Y\"",
+          "caseContent": [ {
+            "message": {
+              "text": {
+                "text": [ "\u003cspeak\u003eOkay, I’ll connect you now. You’ll need to use your phone keypad instead of talking to the virtual assistant. Next time, you can call \u003cprosody rate=\"slow\"\u003e\u003csay-as interpret-as=\"telephone\"\u003e1-866-425-4268\u003c/say-as\u003e \u003c/prosody\u003e for support. Just a moment while I connect you.\u003c/speak\u003e" ]
+              },
+              "languageCode": "en"
+            }
+          }, {
+            "message": {
+              "text": {
+                "text": [ "\u003cspeak\u003eJe vous mets en contact. Vous devrez vous servir du clavier de votre téléphone au lieu de parler à l’assistant virtuel. La prochaine fois, veuillez composer le \u003cprosody rate=\"x-slow\"\u003e\u003csay-as interpret-as=\"telephone\"\u003e1-866-425-4268\u003c/say-as\u003e \u003c/prosody\u003e pour soutien. Veuillez patienter un moment. \u003c/speak\u003e" ]
+              },
+              "languageCode": "fr-ca"
+            }
+          } ]
+        }, {
+          "condition": "$session.params.onebillindicator = \"M\"",
+          "caseContent": [ {
+            "message": {
+              "text": {
+                "text": [ "\u003cspeak\u003eOkay, I’ll connect you now. You’ll need to use your phone keypad instead of talking to the virtual assistant. Next time, you can call \u003cprosody rate=\"slow\"\u003e\u003csay-as interpret-as=\"telephone\"\u003e 1-800-883-2054\u003c/say-as\u003e \u003c/prosody\u003e for support. Just a moment while I connect you.\u003c/speak\u003e" ]
+              },
+              "languageCode": "en"
+            }
+          }, {
+            "message": {
+              "text": {
+                "text": [ "\u003cspeak\u003eJe vous mets en contact. Vous devrez vous servir du clavier de votre téléphone au lieu de parler à l’assistant virtuel. La prochaine fois, veuillez composer le \u003cprosody rate=\"x-slow\"\u003e\u003csay-as interpret-as=\"telephone\"\u003e1-800-883-2054\u003c/say-as\u003e \u003c/prosody\u003e pour soutien. Veuillez patienter un moment. \u003c/speak\u003e" ]
+              },
+              "languageCode": "fr-ca"
+            }
+          } ]
+        } ]
+      } ]
+    },
+    "targetPage": "Check OnebillIndicator value",
+    "name": "c79e0533-218a-483d-9b1f-c57554388bf5"
+  } ]
+}

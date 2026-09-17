@@ -1,0 +1,64 @@
+{
+  "name": "e69a9f43-8c5e-4661-8943-a23deb2381e9",
+  "displayName": "Check CX input? (Active outage)",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "intent": "context.sms_yes",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "SMS content (Active Outage)",
+    "name": "d4b6a638-31a8-4573-b962-7585fa35e273"
+  }, {
+    "intent": "context.sms_no",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "link",
+        "value": "$session.params.intent_sdl_map_response.url"
+      }, {
+        "parameter": "sms_send_status",
+        "value": "Declined"
+      }, {
+        "parameter": "sms_type",
+        "value": "Public"
+      } ]
+    },
+    "targetFlow": "bell_SMS Trigger",
+    "name": "9f92e39a-eb8e-42ac-a5ea-286657f5a04e"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Local Error handling (Active Outage)",
+    "event": "sys.no-input-1",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "global_error_counter",
+        "value": "$sys.func.ADD($session.params.global_error_counter,1)"
+      }, {
+        "parameter": "local_noinput_counter",
+        "value": "$sys.func.ADD($session.params.local_noinput_counter,1)"
+      }, {
+        "parameter": "local_trigger",
+        "value": "no_input"
+      } ]
+    },
+    "name": "ef9ddc98-eaca-4d52-9479-2f7659db402f"
+  }, {
+    "targetPage": "Local Error handling (Active Outage)",
+    "event": "sys.no-match-1",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "global_error_counter",
+        "value": "$sys.func.ADD($session.params.global_error_counter,1)"
+      }, {
+        "parameter": "local_nomatch_counter",
+        "value": "$sys.func.ADD($session.params.local_nomatch_counter,1)"
+      }, {
+        "parameter": "local_trigger",
+        "value": "no_match"
+      } ]
+    },
+    "name": "b8cb4bbf-a45a-4b38-8ddf-65bf356e75f8"
+  } ]
+}

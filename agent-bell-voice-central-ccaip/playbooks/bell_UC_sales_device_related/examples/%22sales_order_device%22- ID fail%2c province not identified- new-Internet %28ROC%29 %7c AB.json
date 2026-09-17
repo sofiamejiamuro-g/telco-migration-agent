@@ -1,0 +1,78 @@
+{
+  "name": "b75ed956-0f54-4fef-a4bd-852f295f9901",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "brand": "bell",
+        "language": "en"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Which service are you Inquiring about?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Internet"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Let's check if we offer Internet and Home phone service in your area. In which province are you looking to get service?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "North Vancouver"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Get blazing-fast speeds on the Bell network with Bell Mobile Internet. Where you can get up to 5G internet connectivity with a mobile hotspot device so you can stay connected at home or on the go. I'll send a text to the device you're calling from, so that you can learn more and easily place an order on our website. Is that alright?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Yes"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "brand": "bell",
+        "language": "en",
+        "sms_content": "Bell: You can visit bell.ca/mobileinternetdevices to view our Mobile Internet devices. ( bell.ca/about-us )",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer has questions about needing a new device, device availability, device features, cost, related to devices that Bell sells and province is ROC or AB or BC",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "New",
+      "identification_status": "Fail",
+      "language": "en",
+      "province": "ROC",
+      "route": "sales_order_device",
+      "utterance": "I want to order a new device"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "We need to check the result from identification flow from the webhook NPANXX, if not present then ask the user for province and capture it from user response, if it is \"BC\" then if the customer agreed to send the message call bell_SMS Trigger",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "province": "BC"
+    }
+  },
+  "displayName": "\"sales_order_device\"- ID fail, province not identified- new-Internet (ROC) | AB",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 560,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

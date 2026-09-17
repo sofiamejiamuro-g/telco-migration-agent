@@ -1,0 +1,98 @@
+{
+  "name": "06e38f41-bc21-45e0-99b2-7274f539d44a",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "language": "en",
+        "lob": "homephone"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Sure, let me help you with that.\nWhich service are you inquiring about?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "New service"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "In order to assist you better."
+    }
+  }, {
+    "playbookInvocation": {
+      "playbook": "bell_uc_ask_LOB",
+      "playbookInput": {
+        "precedingConversationSummary": "User's lob is to be captured",
+        "actionParameters": {
+          "language": "en",
+          "route": "sales_confirm_service_coverage"
+        }
+      },
+      "playbookOutput": {
+        "executionSummary": "User's lob is captured and stored in parameter {lob}",
+        "actionParameters": {
+          "language": "en",
+          "lob": "homephone",
+          "route": "sales_confirm_service_coverage"
+        }
+      },
+      "playbookState": "OUTPUT_STATE_OK"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Let's check if we offer Internet and Home phone service in your area. In which province are you looking to get service?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "ROC"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Sorry, we don't offer Home phone service in your area just yet. But, good news, Bell offers amazing mobile phone service, which covers over 99 percent of the population. I can connect you with one of our agents to learn more. Would you like that?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "No"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_Feedback",
+      "inputActionParameters": {
+        "language": "en",
+        "lob": "homephone"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "The user wants to know about service coverage in their area",
+    "actionParameters": {
+      "language": "en",
+      "province": "AB",
+      "route": "sales_confirm_service_coverage",
+      "utterance": "I want to check coverage in my area"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "If any of the streaming services is NOT captured like Disney, Netflix or crave and service type {lob} is internet or tv or homephone, {province} is anything other than ROC, then ask the user which province are they looking for and if user responds and province captured is {province}=ROC and {lob}=homephone or internet or tv then ask agent if they want to connect to agent and if user replies no or disagrees then call bell_Feedback flow.",
+    "actionParameters": {
+      "language": "en",
+      "lob": "Homephone",
+      "province": "ROC",
+      "utterance": "Do you have internet service at my location"
+    }
+  },
+  "displayName": "EN-sales_service_coverage- homephone | province_not_roc | homephone | uxno (Lob not identified)",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 697,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

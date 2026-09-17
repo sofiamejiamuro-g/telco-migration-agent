@@ -1,0 +1,31 @@
+{
+  "name": "403f9fec-bc87-44c9-848a-1ba711750949",
+  "displayName": "Set Home Phone Service Id",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.internet_homephone_service_id_flag \u003e 0",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "service_id",
+        "value": "$session.params.internet_homephone_service_id[0]"
+      } ]
+    },
+    "name": "974b952d-555a-47bb-99c4-f89447a00d72",
+    "targetPlaybook": "bell_vr_consent"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "service_id",
+        "value": "$session.params.service_homephone[0]"
+      } ]
+    },
+    "name": "79fba845-43e3-4f14-a08c-8da5359b49a6",
+    "targetPlaybook": "bell_vr_consent"
+  } ]
+}

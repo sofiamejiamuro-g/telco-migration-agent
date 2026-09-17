@@ -1,0 +1,137 @@
+{
+  "name": "883210f6-ac9f-44b1-be3e-05d4988c8ca9",
+  "displayName": "Prompt expiry date",
+  "form": {
+    "parameters": [ {
+      "displayName": "expiry_date",
+      "required": true,
+      "entityType": "@sys.number-sequence",
+      "fillBehavior": {
+        "initialPromptFulfillment": {
+        
+        },
+        "repromptEventHandlers": [ {
+          "event": "sys.no-input-1",
+          "triggerFulfillment": {
+            "messages": [ {
+              "text": {
+                "text": [ "I didn't get the expiry date from you. Could you enter your expiry date using your phone keypad when you're ready?" ]
+              },
+              "languageCode": "en"
+            }, {
+              "text": {
+                "text": [ "Je n’ai pas reçu de date d’expiration de votre part. Pourriez-vous entrer votre date d’expiration à l’aide du clavier de votre téléphone lorsque vous êtes prêt?" ]
+              },
+              "languageCode": "fr-ca"
+            } ]
+          },
+          "name": "dcdbad59-6b9f-4f4d-881b-9ba473d4e6c1"
+        }, {
+          "event": "sys.no-input-2",
+          "triggerFulfillment": {
+            "messages": [ {
+              "text": {
+                "text": [ "I didn't get the expiry date from you. Could you enter your expiry date using your phone keypad when you're ready?" ]
+              },
+              "languageCode": "en"
+            }, {
+              "text": {
+                "text": [ "Je n’ai pas reçu de date d’expiration de votre part. Pourriez-vous entrer votre date d’expiration à l’aide du clavier de votre téléphone lorsque vous êtes prêt?" ]
+              },
+              "languageCode": "fr-ca"
+            } ]
+          },
+          "name": "952b149f-9ebb-43f8-882e-9cd774add5a1"
+        }, {
+          "targetPage": "Prompt CX SMS",
+          "event": "sys.no-input-3",
+          "triggerFulfillment": {
+            "messages": [ {
+              "text": {
+                "text": [ "Since I didn't get a number from you, I won't be able to proceed with this step. You can call back later or you can also easily complete this step using the MyBell app." ]
+              },
+              "languageCode": "en"
+            }, {
+              "text": {
+                "text": [ "Comme je n’ai pas obtenu de numéro de votre part, je ne pourrai pas effectuer cette étape. Vous pouvez rappeler plus tard ou vous pouvez aussi facilement effectuer cette étape à l’aide de l’appli MonBell." ]
+              },
+              "languageCode": "fr-ca"
+            } ]
+          },
+          "name": "d873b3b6-576c-47af-8ca4-916de05cd172"
+        }, {
+          "event": "sys.no-match-1",
+          "triggerFulfillment": {
+            "messages": [ {
+              "text": {
+                "text": [ "I didn't get the expiry date from you. Could you enter your expiry date using your phone keypad when you're ready?" ]
+              },
+              "languageCode": "en"
+            }, {
+              "text": {
+                "text": [ "Je n’ai pas reçu de date d’expiration de votre part. Pourriez-vous entrer votre date d’expiration à l’aide du clavier de votre téléphone lorsque vous êtes prêt?" ]
+              },
+              "languageCode": "fr-ca"
+            } ]
+          },
+          "name": "8c73c0e1-f875-4fda-b871-5e94e6a9b019"
+        }, {
+          "event": "sys.no-match-2",
+          "triggerFulfillment": {
+            "messages": [ {
+              "text": {
+                "text": [ "I didn't get the expiry date from you. Could you enter your expiry date using your phone keypad when you're ready?" ]
+              },
+              "languageCode": "en"
+            }, {
+              "text": {
+                "text": [ "Je n’ai pas reçu de date d’expiration de votre part. Pourriez-vous entrer votre date d’expiration à l’aide du clavier de votre téléphone lorsque vous êtes prêt?" ]
+              },
+              "languageCode": "fr-ca"
+            } ]
+          },
+          "name": "291de271-42f7-42b7-99b5-9527b24ee3e8"
+        }, {
+          "targetPage": "Prompt CX SMS",
+          "event": "sys.no-match-3",
+          "triggerFulfillment": {
+            "messages": [ {
+              "text": {
+                "text": [ "Since I didn't get a number from you, I won't be able to proceed with this step. You can call back later or you can also easily complete this step using the MyBell app." ]
+              },
+              "languageCode": "en"
+            }, {
+              "text": {
+                "text": [ "Comme je n’ai pas obtenu de numéro de votre part, je ne pourrai pas effectuer cette étape. Vous pouvez rappeler plus tard ou vous pouvez aussi facilement effectuer cette étape à l’aide de l’appli MonBell." ]
+              },
+              "languageCode": "fr-ca"
+            } ]
+          },
+          "name": "4a1e98d4-2012-4dae-8c4b-57f952a1103e"
+        } ]
+      },
+      "redact": true,
+      "description": "CC Expiry Date"
+    } ]
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.expiry_date != null AND $page.params.status = \"FINAL\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "len_card_expiry_date",
+        "value": "$sys.func.LEN($sys.func.TO_TEXT($session.params.expiry_date))"
+      }, {
+        "parameter": "expiry_month",
+        "value": "$sys.func.TO_NUMBER($sys.func.MID($sys.func.TO_TEXT($session.params.expiry_date),1,2))"
+      }, {
+        "parameter": "expiry_year",
+        "value": "$sys.func.TO_NUMBER($sys.func.MID($sys.func.TO_TEXT($session.params.expiry_date),3,2))"
+      } ]
+    },
+    "targetPage": "Expiry Date Validation",
+    "name": "254b478c-bbd7-40f4-9b5b-4c15d3883740"
+  } ]
+}

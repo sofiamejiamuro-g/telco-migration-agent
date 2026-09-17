@@ -1,0 +1,72 @@
+{
+  "name": "68fc8688-1b32-4db0-a3b9-952b71c003c5",
+  "displayName": "COL_SUS_status_check",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.statActvRsnCode = \"CSN\" OR $session.params.statActvRsnCode = \"NSPC\" OR $session.params.statActvRsnCode = \"SNP1\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "special_status",
+        "value": "bell_col_sus"
+      }, {
+        "parameter": "special_queue",
+        "value": "bell_collections"
+      } ]
+    },
+    "targetFlow": "bell_authentication",
+    "name": "52c8c12e-e2cc-45cd-b33c-ab897fc44b31"
+  }, {
+    "condition": "$session.params.auth_status = \"Pass\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I see your account is currently suspended." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je vois que votre compte est actuellement suspendu." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetFlow": "bell_payment_account_balance_and_last_payment_details",
+    "name": "9996691d-e7d4-4e68-8335-49c53f0adc54"
+  }, {
+    "condition": "$session.params.auth_status = \"Fail\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Don't worry, Let's continue." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Ne vous inquiétez pas, continuons !" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "6c2798e0-5916-49af-a526-db74ce0b5996"
+  }, {
+    "condition": "$session.params.statActvRsnCode != \"CSN\" AND $session.params.statActvRsnCode != \"NSPC\" AND $session.params.statActvRsnCode != \"SNP1\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "COL_AUL_Check",
+    "name": "9f053ea4-e547-4510-a5f0-cdfe9e0cc0e9"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "returnsFromPayment",
+    "name": "0e4e3533-7e64-4bc0-bbc5-a6560bfaf246"
+  } ]
+}

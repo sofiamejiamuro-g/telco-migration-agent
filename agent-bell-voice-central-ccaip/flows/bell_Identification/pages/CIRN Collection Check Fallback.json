@@ -1,0 +1,41 @@
+{
+  "name": "e97d6939-952b-4fb8-afde-c15741ae2799",
+  "displayName": "CIRN Collection Check Fallback",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.PHN_Invalid_Counter \u003e= 3",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Désolé, je ne parviens pas à trouver ce numéro dans nos dossiers. Soyez sans crainte, je ferai quand même de mon mieux pour vous servir." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "I'm sorry, I can't seem to find this number in our records. But don’t worry, I'll still help you however I can." ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "09af8e64-0553-47e1-8d8e-2df04f3da368"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "$request.generative.response" ]
+        },
+        "languageCode": "en"
+      } ],
+      "generators": [ {
+        "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/85105abd-9d74-4f1b-90a7-c0fd71998805",
+        "outputParameter": "$request.generative.response"
+      } ]
+    },
+    "targetPage": "Previous Page",
+    "name": "53fff2af-a0fb-4a8b-835c-0cb06886364e"
+  } ]
+}

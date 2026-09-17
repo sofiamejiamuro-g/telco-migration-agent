@@ -1,0 +1,121 @@
+{
+  "name": "819732d4-c1b6-4a48-912e-642fb6517715",
+  "displayName": "add_promo / inquire_promo Offer SMS",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "messages": [ {
+      "text": {
+        "text": [ "Nous avons des offres pour les nouveaux clients ainsi que les clients actuels. Je vais vous envoyer un texto à l'appareil depuis lequel vous appelez avec un lien pour les consulter. Est-ce que ça vous convient?" ]
+      },
+      "languageCode": "fr-ca"
+    }, {
+      "text": {
+        "text": [ "We have offers for both new and existing customers. I'll send a text to the device you're calling from with a link to view them. Is that alright?" ]
+      },
+      "languageCode": "en"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "intent": "context.confirm_yes",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "SMS Content",
+    "name": "4fe9ef0c-774f-4ed4-a247-96768f61b187"
+  }, {
+    "intent": "context.confirm_no",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Vanity Check",
+    "name": "6eb189d5-3211-4bac-80bb-7e1f8f34fee6"
+  }, {
+    "intent": "context.different_number",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "SMS Content",
+    "name": "71bf2f60-5537-4e02-8a98-8438ecf5a7c2"
+  } ],
+  "eventHandlers": [ {
+    "event": "sys.no-input-1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Je n'ai pas tout à fait compris. Pouvez-vous réessayer?" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "I didn't quite get that. Can you try again?" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "81d2a6ee-4e37-4b60-a0fe-abed68694bec"
+  }, {
+    "event": "sys.no-input-2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Je n'ai toujours pas compris." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "I still didnt get that" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "1b8228b2-64f1-4ac0-971a-2b92373f4df2"
+  }, {
+    "targetPage": "Vanity Check",
+    "event": "sys.no-input-3",
+    "triggerFulfillment": {
+    
+    },
+    "name": "fc994f0f-712d-4152-a9c0-6610a0935781"
+  }, {
+    "event": "sys.no-match-1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Je n'ai pas tout à fait compris. Pouvez-vous réessayer?" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "I didn't quite get that. Can you try again?" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "3333e1d3-38b8-4f7b-a379-a7fbd6ccd415"
+  }, {
+    "event": "sys.no-match-2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Je n'ai toujours pas compris." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "I still didnt get that" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "4272a7cc-2946-4861-b9b9-81c0a41db1b0"
+  }, {
+    "targetPage": "Vanity Check",
+    "event": "sys.no-match-3",
+    "triggerFulfillment": {
+    
+    },
+    "name": "db844d0a-ee0f-4f17-9149-2b62cc49b194"
+  } ]
+}

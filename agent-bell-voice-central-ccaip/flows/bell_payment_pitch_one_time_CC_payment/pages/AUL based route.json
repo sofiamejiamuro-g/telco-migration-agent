@@ -1,0 +1,158 @@
+{
+  "name": "46c3463b-2890-4723-9bee-202a7bc89aa3",
+  "displayName": "AUL based route",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "messages": [ {
+      "text": {
+        "text": [ "Souhaitez-vous effectuer un paiement par carte de crédit maintenant pour régler le solde de votre limite\nde crédit afin de pouvoir effectuer de nouveau des appels sortants?" ]
+      },
+      "languageCode": "fr-ca"
+    }, {
+      "text": {
+        "text": [ "Would you like to make a credit card payment now to pay down your Credit Limit balance so you can make outbound calls again?" ]
+      },
+      "languageCode": "en"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "intent": "context.confirm_yes",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "D'accord, je peux vous aider avec cela." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "Sure, I can help you with that." ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "targetFlow": "bell_payment_one_time_CC_payment",
+    "name": "f1f2579c-dae2-4d53-8af2-4e9bfcce53ca"
+  }, {
+    "intent": "context.confirm_no",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "D'accord, mais vous ne pourrez pas effectuer d'appels sortants tant que vous n'aurez pas ramené le solde de votre limite de crédit à moins de $session.params.clp_aul_limit $" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "Ok, but you won't be able to use your phone until you bring your Credit Limit Balance below $session.params.clp_aul_limit" ]
+        },
+        "languageCode": "en"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "speciality_flow",
+        "value": "true"
+      } ]
+    },
+    "targetFlow": "bell_specialty_flow",
+    "name": "0720194e-c3e0-4113-980c-b6b02a4acf8a"
+  } ],
+  "eventHandlers": [ {
+    "event": "sys.no-match-1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Je n'ai pas tout à fait compris. Pouvez-vous réessayer?" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "I didn't quite get that. Can you try again? " ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "9695bb07-ad4d-46fd-9efc-60c6b1605b85"
+  }, {
+    "event": "sys.no-match-2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Je n'ai toujours pas compris" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "I still didn't get that." ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "4890d9bc-ad42-425f-82c6-0124dd89ba44"
+  }, {
+    "targetFlow": "bell_Feedback",
+    "event": "sys.no-match-3",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Vous ne pourrez pas faire d'appels sortants tant que vous n'aurez pas ramené le solde de votre limite de crédit\nau-dessous de $session.params.clp_aul_limit $. Pour rétablir votre service, vous pouvez réduire le solde de votre limite de crédit sur bell.ca ou appeler de nouveau pour connaître les détails de votre limite de crédit." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "You won't be able to make outbound calls until you bring your Credit Limit Balance Below $ $session.params.clp_aul_limit . To restore\nyour service, you can pay down your credit limit balance on bell.ca or call again to learn about your Credit Limit details" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "22308eaf-f2e2-4ad0-8213-3bdeadb7debb"
+  }, {
+    "event": "sys.no-input-1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Je n'ai pas tout à fait compris. Pouvez-vous réessayer?" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "I didn't quite get that. Can you try again?" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "d517660d-a5bc-4e0e-9686-259a26542c52"
+  }, {
+    "event": "sys.no-input-2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Je n'ai toujours pas compris" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "I still didn't get that." ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "bdf5726b-3df5-4997-ade6-c0a66a71b0bd"
+  }, {
+    "targetFlow": "bell_Feedback",
+    "event": "sys.no-input-3",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Vous ne pourrez pas faire d'appels sortants tant que vous n'aurez pas ramené le solde de votre limite de crédit\nau-dessous de $session.params.clp_aul_limit $. Pour rétablir votre service, vous pouvez réduire le solde de votre limite de crédit sur bell.ca ou appeler de nouveau pour connaître les détails de votre limite de crédit." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "You won't be able to make outbound calls until you bring your Credit Limit Balance Below $ $session.params.clp_aul_limit . To restore\nyour service, you can pay down your credit limit balance on bell.ca or call again to learn about your Credit Limit details" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "10279daf-1d7a-431f-8c10-ca7fd225f386"
+  } ]
+}

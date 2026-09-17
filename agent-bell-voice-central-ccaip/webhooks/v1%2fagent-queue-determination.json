@@ -1,0 +1,27 @@
+{
+  "name": "56cb51c7-9fb3-4e96-ba7d-987023a6fa9b",
+  "displayName": "v1/agent-queue-determination",
+  "timeout": {
+    "seconds": 30
+  },
+  "serviceDirectory": {
+    "service": "projects/gcp-it-npe-pltfm-apigee/locations/us-central1/namespaces/apigee-nb-usc1-service-dir-namespace/services/apigee-nb-usc1-service",
+    "genericWebService": {
+      "uri": "https://apigee-nane1-uat.int.bell.ca/v1/agent-queue-determination",
+      "requestHeaders": [ {
+        "key": "x-apikey",
+        "value": "npZmDivP6Hxes3wtQ0tC9RqItjJTY8TgZHbOPNeFwvSYSKPI"
+      } ],
+      "webhookType": "FLEXIBLE",
+      "httpMethod": "POST",
+      "requestBody": "{\n  \"sessionInfo\": {\n    \"dfcx_session_id\": \"$session.params.dfcx_session_id\",\n    \"agent_id\": \"$session.params.agent_id\",\n    \"parameters\": {\n      \"brand\": \"$session.params.brand\",\n      \"intent\": \"$session.params.intent\",\n      \"domain\": \"$session.params.domain\",\n      \"menu_type\": \"$session.params.menu_type\",\n      \"l2_brand\": \"$session.params.l2_brand\",\n      \"customer_type\": \"$session.params.customer_type\"\n    }\n  },\n  \"fulfillmentInfo\": {\n    \"tag\": \"N/A\"\n  },\n  \"languageCode\": \"$request.language\"\n}",
+      "parameterMapping": [ {
+        "key": "aqd_response",
+        "value": "sessionInfo.parameters.aqd_response"
+      }, {
+        "key": "webhook_success",
+        "value": "sessionInfo.parameters.webhook_success"
+      } ]
+    }
+  }
+}

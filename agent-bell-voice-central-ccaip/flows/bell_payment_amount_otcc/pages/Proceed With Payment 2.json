@@ -1,0 +1,162 @@
+{
+  "name": "3b62fea1-c482-4580-9462-30fde47237ae",
+  "displayName": "Proceed With Payment 2",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.from_already_provided = true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "from_already_provided",
+        "value": false
+      } ]
+    },
+    "targetFlow": "bell_payment_cc_details_input",
+    "name": "bdd1e086-1ab5-40ad-a663-79b14dbc4cf7"
+  }, {
+    "condition": "$session.params.other_payment_amount != null AND $session.params.other_payment_amount \u003c $session.params.due_amount",
+    "triggerFulfillment": {
+      "conditionalCases": [ {
+        "cases": [ {
+          "condition": "$session.params.message_type_group = 1",
+          "caseContent": [ {
+            "message": {
+              "text": {
+                "text": [ "OK $ $session.params.other_payment_amount.  We can proceed with your payment but it won't be enough to restore you services." ]
+              },
+              "languageCode": "en"
+            }
+          }, {
+            "message": {
+              "text": {
+                "text": [ "OK, $session.params.other_payment_amount $. Nous pouvons procéder à votre paiement, mais ce ne sera pas suffisant pour rétablir vos services." ]
+              },
+              "languageCode": "fr-ca"
+            }
+          } ]
+        }, {
+          "condition": "$session.params.message_type_group = 2",
+          "caseContent": [ {
+            "message": {
+              "text": {
+                "text": [ "OK $ $session.params.other_payment_amount, we can proceed with your payment but it won't be enough to cover the past due amount.  To avoid possible suspension of your services, please consider an additional payment." ]
+              },
+              "languageCode": "en"
+            }
+          }, {
+            "message": {
+              "text": {
+                "text": [ "D’accord, $session.params.other_payment_amount $, nous pouvons procéder à votre paiement, mais ce ne sera pas suffisant pour couvrir le montant en souffrance. Pour éviter une éventuelle suspension de vos services, veuillez envisager un paiement supplémentaire." ]
+              },
+              "languageCode": "fr-ca"
+            }
+          } ]
+        }, {
+          "caseContent": [ {
+            "message": {
+              "text": {
+                "text": [ "Ok $ $session.params.other_payment_amount" ]
+              },
+              "languageCode": "en"
+            }
+          }, {
+            "message": {
+              "text": {
+                "text": [ "D’accord, $session.params.other_payment_amount $" ]
+              },
+              "languageCode": "fr-ca"
+            }
+          } ]
+        } ]
+      } ]
+    },
+    "targetFlow": "bell_payment_cc_details_input",
+    "name": "750d58e1-2f9a-45c6-97df-aa4233219c13"
+  }, {
+    "condition": "$session.params.other_payment_amount != null AND $session.params.other_payment_amount \u003e $session.params.due_amount",
+    "triggerFulfillment": {
+      "conditionalCases": [ {
+        "cases": [ {
+          "condition": "$session.params.message_type_group = 1",
+          "caseContent": [ {
+            "message": {
+              "text": {
+                "text": [ "OK, $ $session.params.other_payment_amount." ]
+              },
+              "languageCode": "en"
+            }
+          }, {
+            "message": {
+              "text": {
+                "text": [ "D’accord, $session.params.other_payment_amount $." ]
+              },
+              "languageCode": "fr-ca"
+            }
+          } ]
+        }, {
+          "condition": "$session.params.message_type_group = 2",
+          "caseContent": [ {
+            "message": {
+              "text": {
+                "text": [ "OK, $ $session.params.other_payment_amount." ]
+              },
+              "languageCode": "en"
+            }
+          }, {
+            "message": {
+              "text": {
+                "text": [ "D’accord,  $session.params.other_payment_amount $." ]
+              },
+              "languageCode": "fr-ca"
+            }
+          } ]
+        }, {
+          "caseContent": [ {
+            "message": {
+              "text": {
+                "text": [ "Sure, $ $session.params.other_payment_amount" ]
+              },
+              "languageCode": "en"
+            }
+          }, {
+            "message": {
+              "text": {
+                "text": [ "Bien sûr,  $session.params.other_payment_amount $." ]
+              },
+              "languageCode": "fr-ca"
+            }
+          } ]
+        } ]
+      } ]
+    },
+    "targetFlow": "bell_payment_cc_details_input",
+    "name": "e1402357-8fe8-4f8e-9fdc-78e0eff4d6be"
+  }, {
+    "condition": "$session.params.other_payment_amount = $session.params.due_amount",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_payment_cc_details_input",
+    "name": "ef20d77d-e039-4e28-8627-650348ee82d1"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "3b62fea1-c482-4580-9462-30fde47237ae"
+      }, {
+        "parameter": "flow_id",
+        "value": "5f9ad0a8-5f25-4bd1-96dd-a2b5b74312df"
+      }, {
+        "parameter": "page_name",
+        "value": "Proceed With Payment 2"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

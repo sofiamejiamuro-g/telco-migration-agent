@@ -1,0 +1,34 @@
+{
+  "name": "aad08be1-3276-4a3d-a4b7-67aff258a3b4",
+  "displayName": "CX confirmation on OMF ticket 2",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "intent": "context.confirm_yes",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "order_identifier",
+        "value": "$session.params.order_identifier2"
+      }, {
+        "parameter": "internet_order_reference",
+        "value": "$session.params.internet_order_reference2"
+      } ]
+    },
+    "targetFlow": "bell_ticket_mgmt_omf_ticket_check_appointment_mgmt",
+    "name": "5b15c4d0-e277-409d-875a-7f8840918f73"
+  }, {
+    "intent": "context.confirm_no",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "specialty queue",
+        "value": "tech_to_care"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "50a6033c-dc20-44b6-89ba-a8769c137441"
+  } ]
+}

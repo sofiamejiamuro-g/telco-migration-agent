@@ -1,0 +1,62 @@
+{
+  "name": "ca020ac5-6a2d-49c2-a415-568c9b9af730",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "language": "en"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "sales_add_to_existing_account_flow",
+      "inputActionParameters": {
+        "customer_type": "Existing",
+        "identification_status": "Pass",
+        "language": "en",
+        "line_type": "New",
+        "province": "NB",
+        "route": "sales_add_to_existing_account",
+        "utterance_raw": "I'm calling to order a new internet service and I also need to update my current plan.."
+      },
+      "outputActionParameters": {
+        "language": "en",
+        "utterance_raw": "I'm calling to order a new internet service and I also need to update my current plan.."
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customers want to know about d plans or compare plans that Bell has",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "Existing",
+      "language": "en",
+      "line_type": "New",
+      "province": "NB",
+      "route": "sales_plans_inquiry",
+      "utterance": "I'm calling to order a new internet service and I also need to update my current plan..",
+      "utterance_raw": "I'm calling to order a new internet service and I also need to update my current plan.."
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "customer_type as \"Existing\", as the user mentions they need NEW service as well as update their CURRENT plan, set the \"line_type\"=\"New\", and inform the user \"Let’s help with your new service request first.\" and route to \"sales_add_to_existing_account_flow\" flow",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "line_type": "New",
+      "province": "NB",
+      "route": "sales_add_to_existing_account",
+      "utterance": "I'm calling to order a new internet service and I also need to update my current plan..",
+      "utterance_raw": "I'm calling to order a new internet service and I also need to update my current plan.."
+    }
+  },
+  "displayName": "EN - sales plans inquiry- ID Pass,line type-not mentioned- NEW AND EXISTING BOTH _ 1",
+  "retrievalStrategy": "STATIC",
+  "tokenCount": 530,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

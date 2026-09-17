@@ -1,0 +1,47 @@
+{
+  "name": "47b79d4d-618a-45be-a573-552ae8d4ae0a",
+  "displayName": "Follow-up 2",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "messages": [ {
+      "text": {
+        "text": [ "I'll send a text to the device you're calling from for more information on TV troubleshooting. Is that alright?" ]
+      },
+      "languageCode": "en"
+    }, {
+      "text": {
+        "text": [ "Je vais envoyer un texto à l’appareil au moyen duquel vous appelez pour vous donner plus d’information sur le dépannage du service Télé. Est-ce que ça vous convient?" ]
+      },
+      "languageCode": "fr-ca"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "intent": "context.confirm_no",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Message 4",
+    "name": "adf1b1a9-0040-4b56-9204-336a3a9a05f4"
+  }, {
+    "intent": "context.confirm_yes",
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "CHECK LOB",
+    "name": "529d2177-5da8-42ab-9867-2154cf130da1"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Message 4",
+    "event": "sys.no-input-1",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "global_error_counter",
+        "value": "$sys.func.ADD($session.params.global_error_counter,1)"
+      } ]
+    },
+    "name": "984c8e1c-db5d-41ca-bdce-4e8410b9d3ef"
+  } ]
+}

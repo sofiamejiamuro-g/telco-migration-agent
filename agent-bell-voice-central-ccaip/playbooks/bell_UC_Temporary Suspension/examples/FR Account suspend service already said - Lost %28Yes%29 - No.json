@@ -1,0 +1,79 @@
+{
+  "name": "61fc5a0f-fe61-449e-8970-0e560080b32d",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Bien sûr, je peux vous aider. Quelle est la raison de la suspension de votre service?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "J'ai perdu mon cellulaire."
+    }
+  }, {
+    "agentUtterance": {
+      "text": "C’est noté. Avez-vous essayé d’utiliser une option de suivi comme « Trouver mon iPhone » ou « Trouver mon appareil »?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "oui"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Compris, je suggérerais de suspendre temporairement votre service pour éviter une utilisation non autorisée. Je vais envoyer un texte à l’appareil depuis lequel vous appelez, avec un lien pour le faire vous-même, est-ce que ça va ? "
+    }
+  }, {
+    "userUtterance": {
+      "text": "Non"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "brand": "bell",
+        "language": "fr-ca",
+        "sms_send_status": "Declined",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Pas de problème du tout. Pour toute autre question, vous pouvez toujours visiter notre site web à {faq_link}"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_Feedback",
+      "inputActionParameters": {
+        "brand": "bell",
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer trying to suspend their service as there device is lost",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca",
+      "route": "account_suspend_service",
+      "unique_services": "Mobility, Internet, Tv",
+      "utterance": "Je veux suspendre mon service mobility"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Customer query is resolved and we update the {route} as \"equipment_report_lost_device\"",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca",
+      "route": "equipment_report_lost_device"
+    }
+  },
+  "displayName": "FR Account suspend service already said - Lost (Yes) - No",
+  "retrievalStrategy": "NEVER",
+  "tokenCount": 510,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

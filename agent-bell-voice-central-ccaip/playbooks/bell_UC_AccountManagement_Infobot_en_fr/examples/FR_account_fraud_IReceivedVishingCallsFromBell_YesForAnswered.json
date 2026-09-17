@@ -1,0 +1,75 @@
+{
+  "name": "631b61e1-33e9-439b-a53f-ba653c6ded80",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70024",
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+        "language": "fr-ca"
+      }
+    }
+  }, {
+    "toolUse": {
+      "tool": "FR_Bell_AccountManagement",
+      "action": "FR_Bell_AccountManagement",
+      "inputActionParameters": {
+        "requestBody": {
+          "query": "Que faire si vous suspectez une tentative de fraude"
+        }
+      },
+      "outputActionParameters": {
+        "200": {
+          "answer": "If you suspect a fraudulent email, forward it to hameconnage@bell.ca and then delete it. If it's a text message, forward it to 7726 (SPAM), and delete it. Bell will never ask for personal information like passwords, PINs, bank details or credit card numbers unless you have requested it.",
+          "snippets": [ {
+            "text": "* Si vous recevez un courriel suspect qui semble provenir de Bell, transmettez -le à [hameconnage@bell.ca](mailto:hameconnage@bell.ca), puis supprimez-le. * Si vous recevez un message texte ou multimédia suspect, transmettez-le au 7726 (SPAM), puis supprimez-le.",
+            "title": "Comment vous protéger contre la fraude",
+            "uri": "https://soutien.bell.ca/Facturation-et-comptes/Securite_et_confidentialite/Comment_vous_proteger_contre_la_fraude#:~:text=*%20Si%20vous,(SPAM)%2C%20puis%20supprimez%2Dle."
+          } ]
+        }
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Si vous recevez un courriel frauduleux, transférez-le à hameconnage@bell.ca, puis supprimez-le. Si vous recevez un message texte frauduleux, transférez-le au 7726 (SPAM), puis supprimez-le. Pourriez-vous s'il vous plaît me faire savoir si votre question a reçu une réponse ?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Oui"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_Feedback",
+      "inputActionParameters": {
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer is asking about fraud email",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca",
+      "route": "account_fraud",
+      "utterance": "J’ai reçu un courriel de Bell, mais je crois qu’il s’agit d’une fraude"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Customer is given a crisp answer from datastore",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca",
+      "route": "account_fraud"
+    }
+  },
+  "displayName": "FR_account_fraud_IReceivedVishingCallsFromBell_YesForAnswered",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 714,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

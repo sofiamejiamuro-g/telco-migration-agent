@@ -1,0 +1,34 @@
+{
+  "name": "6ebe9029-1510-461c-950c-1e3d69c490fb",
+  "displayName": "is longest_etr available? (Active Outage)",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "setParameterActions": [ {
+      "parameter": "longest_etr",
+      "value": "$session.params.oc_details_response.longest_etr"
+    }, {
+      "parameter": "is_available",
+      "value": "$session.params.oc_details_response.longest_etr.is_available"
+    }, {
+      "parameter": "etr",
+      "value": "$session.params.oc_details_response.failing_services[0].etr"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.is_available = true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "webhook current_date_time (Active Outage)",
+    "name": "de188499-d4c8-4730-9972-d9910dfe1d58"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Check LOB #2 (Active Outage)",
+    "name": "bcb26e1d-bb0e-479f-b526-8671364e5a8c"
+  } ]
+}

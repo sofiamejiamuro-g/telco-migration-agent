@@ -1,0 +1,107 @@
+{
+  "name": "0e79f039-2fc3-4c07-8d1c-d396845d8df9",
+  "displayName": "Validate due date",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "setParameterActions": [ {
+      "parameter": "input_time_string",
+      "value": "$sys.func.FORMAT_DATE($sys.func.NOW(), \"yyyy-MM-dd'T'HH:mm:ssXXX\")"
+    }, {
+      "parameter": "input_date_string",
+      "value": "$sys.func.NOW()"
+    } ],
+    "generators": [ {
+      "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/cd3d6f08-0412-43c3-b04a-d354c348e691",
+      "inputParameters": [ {
+        "key": "input_time_string",
+        "value": "$session.params.input_time_string"
+      } ],
+      "outputParameter": "$request.generative.current_time"
+    }, {
+      "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/1c952ea5-26e0-45e2-a082-58b65e67719b",
+      "inputParameters": [ {
+        "key": "text",
+        "value": "$session.params.input_date_string"
+      } ],
+      "outputParameter": "$request.generative.current_date"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "current_time_utc",
+        "value": "$request.generative.current_time"
+      }, {
+        "parameter": "cutoff_time_utc",
+        "value": "$session.params.cutoff_time"
+      }, {
+        "parameter": "current_date_utc",
+        "value": "$request.generative.current_date"
+      }, {
+        "parameter": "cutoff_date_utc",
+        "value": "$sys.func.MID($session.params.order_detail_response.calendar_context[0].date, 1, 10)"
+      } ]
+    },
+    "name": "a3192bd5-cb72-4aa0-87ab-21ae64c4a6c2"
+  }, {
+    "condition": "$session.params.current_date_utc \u003e $session.params.cutoff_date_utc",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_aqd",
+    "name": "bacb0952-e932-41af-8dfd-012acabf9204",
+    "description": "This represents the \"After Due Date\" condition."
+  }, {
+    "condition": "$session.params.current_date_utc \u003c $session.params.cutoff_date_utc",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "special_queue",
+        "value": "tech_to_ait"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "c56484ab-a4da-4629-9fc0-09d264cc7bc3",
+    "description": "This represents the \"Before Due Date\" condition."
+  }, {
+    "condition": "$session.params.current_date_utc = $session.params.cutoff_date_utc AND $session.params.current_time_utc \u003e $session.params.cutoff_time_utc",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_aqd",
+    "name": "39811363-9a7c-4d8e-aaca-40ef5731ca52",
+    "description": "This represents the \"On Due Date and After Cutoff Time\" condition."
+  }, {
+    "condition": "$session.params.current_date_utc = $session.params.cutoff_date_utc AND $session.params.current_time_utc \u003c= $session.params.cutoff_time_utc",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "special_queue",
+        "value": "tech_to_ait"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cd7d594f-2985-4fdf-ba6a-8b079638d039",
+    "description": "This represents the \"On Due Date and Before Cutoff Time\" condition."
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "0e79f039-2fc3-4c07-8d1c-d396845d8df9"
+      }, {
+        "parameter": "flow_id",
+        "value": "fa281dc6-7e0a-47dd-91d3-8f778cbb16e2"
+      }, {
+        "parameter": "page_name",
+        "value": "Validate due date"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

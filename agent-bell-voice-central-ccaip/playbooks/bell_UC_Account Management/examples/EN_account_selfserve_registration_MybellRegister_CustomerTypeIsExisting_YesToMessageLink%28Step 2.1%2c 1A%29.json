@@ -1,0 +1,51 @@
+{
+  "name": "91a2a2d3-a96a-4b70-a465-1036698f77fc",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Using MyBell is a great way to manage your service on your time. I'll send you a text to the device you are calling from, with a link to sign up for you account. Is that alright?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Yes"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "brand": "bell",
+        "customer_type": "Existing",
+        "language": "en",
+        "sms_content": "You can visit https://m.bell.ca/getapp to sign up for the MyBell app. (bell.ca/about-us)",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+        "brand": "bell",
+        "language": "en"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "The customer is trying to register in the MyBell Application.",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "Existing",
+      "language": "en",
+      "route": "account_selfserve_registration",
+      "utterance": "mybell register"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "If the customer agrees and says yes then reroute to bell_SMS Trigger flow",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "route": "account_selfserve_registration",
+      "utterance": "mybell register"
+    }
+  },
+  "displayName": "EN_account_selfserve_registration_MybellRegister_CustomerTypeIsExisting_YesToMessageLink(Step 2.1, 1A)",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 317,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

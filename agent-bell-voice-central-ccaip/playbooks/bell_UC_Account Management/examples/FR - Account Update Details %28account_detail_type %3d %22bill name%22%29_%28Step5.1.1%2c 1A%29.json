@@ -1,0 +1,47 @@
+{
+  "name": "1a93a93b-af12-47b7-8d4f-68ed48e778d6",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "N'oubliez pas que le changement de nom dans MonBell n'a aucune incidence sur vos renseignements de facturation. Si vous devez changer le nom sur votre facture en raison d’un changement de nom légal, ou si vous souhaitez transférer la propriété du compte, vous devrez parler à un agent. Voulez-vous changer votre nom d’affichage MonBell ou le nom figurant sur votre facture ?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "nom du projet de loi"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_aqd",
+      "inputActionParameters": {
+        "account_detail_type": "bill name",
+        "brand": "bell",
+        "language": "fr-ca",
+        "utterance": "Je veux un changement de nom"
+      },
+      "outputActionParameters": {
+        "brand": "bell",
+        "language": "fr-ca"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "The customer wants to make update to their account information - including updating name, emails, address, billing address.",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca",
+      "route": "account_update_details",
+      "utterance": "Je veux un changement de nom"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "The {update_detail_type} parameter is empty so we prompt the user with appropriate response then the customer says they want to update their bill name and are routed to bell_aqd flow.",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca"
+    }
+  },
+  "displayName": "FR - Account Update Details (account_detail_type = \"bill name\")_(Step5.1.1, 1A)",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 351,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

@@ -1,0 +1,65 @@
+{
+  "name": "6dc05f61-2a2c-43bd-a20d-a3e9fa5264f5",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+        "language": "fr-ca"
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Bien sûr, laissez-moi vous aider.\nVérifions si nous offrons des services Internet ou de téléphonie résidentielle dans votre secteur. Dans quelle province avez-vous besoin de services?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "in manitoba"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_aqd",
+      "inputActionParameters": {
+        "language": "fr-ca",
+        "line_type": "New",
+        "lob": "Internet",
+        "province": "MTS",
+        "special_queue": "bell_sales_to_mts"
+      },
+      "outputActionParameters": {
+        "language": "fr-ca"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "customer wants to add a new internet line and {province} is \"ROC\" or null from identification flow",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "fr-ca",
+      "line_type": "New",
+      "lob": "Internet",
+      "province": "ROC",
+      "route": "sales_add_to_existing_account",
+      "utterance": "A mon compte existant, je veux ajouter internet résidentiel."
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "AS {LOB} IS INTERNET we ask the customer about province and he mentioned it as {province}=\"ON\". so we are transferring customer to aqd",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca",
+      "line_type": "New",
+      "lob": "Internet",
+      "province": "MTS"
+    }
+  },
+  "displayName": "FR-sales_add_to_existing-account-Existing-ROC(internet)(province-mts)",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 447,
+  "languageCode": "en"
+}

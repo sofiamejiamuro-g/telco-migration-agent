@@ -1,0 +1,90 @@
+{
+  "name": "576f9763-fbab-4934-b4c1-4aa13ee3a7eb",
+  "displayName": "Dispatch Status Check",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.dispatch_status = \"ENROUTE\" AND $session.params.dispatch_type = \"FIELD\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Unfortunately you cannot change your appointment as the technician is already on their way. You can advise the technician upon arrival with your concerns." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Malheureusement, vous ne pouvez pas changer votre rendez-vous, car le ou la technicien(ne) est déjà en route. Vous pouvez faire part de vos préoccupations au ou à la technicien(ne) dès son arrivée." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetPage": "Parameters Cleanup - En Route or Onsite",
+    "name": "d8a852e6-d1c8-40d6-b641-374ed11994a9"
+  }, {
+    "condition": "$session.params.dispatch_status = \"ONSITE\" AND $session.params.dispatch_type = \"FIELD\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Unfortunately you cannot change your appointment as the technician has already arrived, and is probably working outside in the neighborhood connection box. You can advise the technician with your concerns." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Malheureusement, vous ne pouvez pas changer votre rendez-vous, car le ou la technicien(ne) est déjà arrivé(e) et travaille probablement à l’extérieur, dans le boîtier de raccordement du voisinage. Vous pouvez faire part de vos préoccupations au ou à la technicien(ne)." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetPage": "Parameters Cleanup - En Route or Onsite",
+    "name": "1fcc9285-6814-473f-a493-8632abe4bb19"
+  }, {
+    "condition": "($session.params.dispatch_status = \"OPEN\" OR $session.params.dispatch_status = \"SCHEDULED\" OR $session.params.dispatch_status = \"ASSIGNED\") AND $session.params.dispatch_type = \"FIELD\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "mya_pitch",
+        "value": "true"
+      } ]
+    },
+    "targetFlow": "bell_appt_mgmt_mya_pitch_1",
+    "name": "5a443f69-70c1-49ff-b0a7-9d10308cdb3f"
+  }, {
+    "condition": "$session.params.mya_pitch = \"true\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "mya_pitch",
+        "value": null
+      }, {
+        "parameter": "stored_contact_number",
+        "value": "$session.params.number"
+      }, {
+        "parameter": "stored_contact_type",
+        "value": "$session.params.type"
+      } ]
+    },
+    "targetPage": "Contact Data Check",
+    "name": "9cae31d4-8a17-45a7-9391-8c0f2ea120b8"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "576f9763-fbab-4934-b4c1-4aa13ee3a7eb"
+      }, {
+        "parameter": "flow_id",
+        "value": "031a2487-034f-49de-b40d-b5a7062d61c6"
+      }, {
+        "parameter": "page_name",
+        "value": "Dispatch Status Check"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

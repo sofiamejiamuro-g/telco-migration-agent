@@ -1,0 +1,64 @@
+{
+  "name": "54ee1aa6-f6c6-41a8-be5b-38ab2c66c4aa",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_tech_intent_apb",
+      "inputActionParameters": {
+        "language": "fr-ca",
+        "lob": "TV",
+        "utterance": "Je ne vois pas les chaînes promises dans mon forfait actuellement"
+      },
+      "outputActionParameters": {
+        "language": "fr-ca",
+        "lob": "TV"
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Je vais envoyer un texto à l'appareil au moyen duquel vous appelez, afin que vous puissiez facilement synchroniser votre programmation télé à partir de MonBell. Est-ce que ça vous convient?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Oui, envoie-moi le texte"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "fr-ca",
+        "sms_content": "Mess. de Bell: Visitez https://m.bell.ca/supportsynchprogf et suivez les instructions à l'écran pour synchronisez votre programmation ( bell.ca/apropos )",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+        "language": "fr-ca"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer asking about TV service related issue",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca",
+      "lob": "TV",
+      "route": "tech_missing_channel_package",
+      "utterance": "Je ne vois pas les chaînes promises dans mon forfait actuellement"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Customer is given the resolution for TV or TV channel packge issue",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca",
+      "lob": "TV",
+      "route": "tech_missing_channel_package",
+      "sms_content": "Mess. de Bell: Visitez https://m.bell.ca/supportsynchprogf et suivez les instructions à l'écran pour synchronisez votre programmation ( bell.ca/apropos )",
+      "sms_type": "Public",
+      "utterance": "Je ne vois pas les chaînes promises dans mon forfait actuellement"
+    }
+  },
+  "displayName": "FR_tech_missing_channel_package_TV_IAmHavingAnIssueWithMyTVChannel_Yes_text",
+  "retrievalStrategy": "NEVER",
+  "tokenCount": 481,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

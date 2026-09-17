@@ -1,0 +1,90 @@
+{
+  "name": "4dd9f9a4-2bed-4693-9ce5-807a74963b1a",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70012"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "playbookInvocation": {
+      "playbook": "bell_uc_ask_LOB",
+      "playbookInput": {
+        "precedingConversationSummary": "User wants to know about the ticket status, but does not mention lob",
+        "actionParameters": {
+          "language": "en",
+          "route": "tech_ticket_status"
+        }
+      },
+      "playbookOutput": {
+        "executionSummary": "When user does not provide lob, prompt them to understand what kind of service they are looking for, if the user mentions lob then return lob to the originating Playbook, if not set the default lob and return back",
+        "actionParameters": {
+          "language": "en",
+          "lob": "Internet",
+          "route": "tech_ticket_status"
+        }
+      },
+      "playbookState": "OUTPUT_STATE_OK"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_authentication",
+      "inputActionParameters": {
+      
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70014"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_tech_change_appointment_flow",
+      "inputActionParameters": {
+      
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "New User wants to know about the ticket status",
+    "actionParameters": {
+      "customer_type": "New",
+      "identification_status": "Fail",
+      "language": "en",
+      "route": "tech_ticket_status",
+      "utterance": "I want to know about my ticket status update"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "User does not mention lob so call bell_uc_ask_LOB playbook and extract the lob, and return to this playbook . \nTrigger bell_tech_change_appointment_flow trigger flow at the end",
+    "actionParameters": {
+      "customer_type": "New",
+      "identification_status": "Fail",
+      "language": "en",
+      "lob": "Internet",
+      "route": "tech_ticket_status",
+      "utterance": "I want to cancel my appointment"
+    }
+  },
+  "displayName": "EN_tech_ticket_status | NEW user",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 633,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

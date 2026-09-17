@@ -1,0 +1,92 @@
+{
+  "name": "8011048c-4efa-486d-8aa4-9b7a64c8882a",
+  "displayName": "CX Input - Before cutoff time",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "messages": [ {
+      "text": {
+        "text": [ "Souhaitiez-vous replanifier votre rendez-vous?" ]
+      },
+      "languageCode": "fr-ca"
+    }, {
+      "text": {
+        "text": [ "Were you looking to reschedule your appointment?" ]
+      },
+      "languageCode": "en"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "intent": "context.confirm_yes",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_app_mgmt_omf_change_reschedule_ticket",
+    "name": "27992ef9-a2fe-4fb0-96a9-e8074b1fef01"
+  }, {
+    "intent": "context.confirm_no",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_Feedback",
+    "name": "1d2c3126-232e-4534-a231-cc24996fb063"
+  }, {
+    "intent": "context.modify.appointment",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_app_mgmt_omf_change_reschedule_ticket",
+    "name": "29b2821f-52c0-4e0a-a4e1-4614e9dc55cc"
+  }, {
+    "intent": "context.technician.setup",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "CX Input - AQD confirmation",
+    "name": "37f975b6-c3ae-4e35-9119-5366d481a732"
+  }, {
+    "intent": "context.something.else",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "event_type",
+        "value": "anything else start over"
+      } ]
+    },
+    "targetFlow": "Default Start Flow",
+    "name": "c57dbeab-090f-42aa-b2cc-fb1b9a7fd9cb"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Local Error Handling",
+    "event": "sys.no-input-1",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "global_error_counter",
+        "value": "$sys.func.ADD($session.params.global_error_counter,1)"
+      }, {
+        "parameter": "local_noinput_counter",
+        "value": "$sys.func.ADD($session.params.global_error_counter,1)"
+      }, {
+        "parameter": "local_trigger",
+        "value": "no_input"
+      } ]
+    },
+    "name": "d67fe80c-ede2-478e-b4eb-20fc250d8047"
+  }, {
+    "targetPage": "Local Error Handling",
+    "event": "sys.no-match-1",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "global_error_counter",
+        "value": "$sys.func.ADD($session.params.global_error_counter,1)"
+      }, {
+        "parameter": "local_nomatch_counter",
+        "value": "$sys.func.ADD($session.params.local_nomatch_counter,1)"
+      }, {
+        "parameter": "local_trigger",
+        "value": "no_match"
+      } ]
+    },
+    "name": "832136a0-8a19-49e0-9eeb-49d25ec67d78"
+  } ]
+}

@@ -1,0 +1,85 @@
+{
+  "name": "be7f4c23-dfde-4bf7-83b3-b8a734449b38",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "brand": "bell",
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "À propos de quel service communiquez-vous avec nous?\n"
+    }
+  }, {
+    "userUtterance": {
+      "text": "c'est pour un nouveau service"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Pour mieux vous aider."
+    }
+  }, {
+    "playbookInvocation": {
+      "playbook": "bell_uc_ask_LOB",
+      "playbookInput": {
+        "precedingConversationSummary": "Customer has questions about device availability, device features, cost, related to devices that Bell sells",
+        "actionParameters": {
+          "language": "fr-ca",
+          "route": "sales_order_device"
+        }
+      },
+      "playbookOutput": {
+        "executionSummary": "Customer does not mention lob so route to bell_uc_ask_LOB and extract the lob and return back to this playbook.",
+        "actionParameters": {
+          "language": "fr-ca",
+          "lob": "Internet",
+          "route": "sales_order_device"
+        }
+      },
+      "playbookState": "OUTPUT_STATE_OK"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_aqd",
+      "inputActionParameters": {
+        "brand": "bell",
+        "language": "fr-ca",
+        "lob": "Internet"
+      },
+      "outputActionParameters": {
+        "language": "fr-ca"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer has questions about device availability, device features, cost, related to devices that Bell sells",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "New",
+      "identification_status": "Fail",
+      "language": "fr-ca",
+      "province": "ON",
+      "route": "sales_order_device",
+      "utterance": "Je veux commander un appareil"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "We need to check the result from identification flow from the webhook NPANXX, if it is \"ON\" but lob is not mentioned, so call bell_uc_ask_LOB and extract lob and return to this playbook, then call bell_aqd flow",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca",
+      "lob": "Internet"
+    }
+  },
+  "displayName": "FR-sales order device- ID fail | ON | lob not mentioned | extract LOB",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 568,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

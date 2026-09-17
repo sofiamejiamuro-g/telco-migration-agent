@@ -1,0 +1,91 @@
+{
+  "name": "46f903d2-8b16-46ac-80c4-71bb717480bc",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_global_error_count_check",
+      "inputActionParameters": {
+        "global_error_counter": "0",
+        "language": "en"
+      },
+      "outputActionParameters": {
+        "global_error_counter": "1",
+        "language": "en"
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "I didn’t quite get that. Can you try again?"
+    }
+  }, {
+    "userUtterance": {
+    
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_global_error_count_check",
+      "inputActionParameters": {
+        "global_error_counter": "1",
+        "language": "en"
+      },
+      "outputActionParameters": {
+        "global_error_counter": "2",
+        "language": "en"
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Are you still there? Can you repeat please?"
+    }
+  }, {
+    "userUtterance": {
+    
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_global_error_count_check",
+      "inputActionParameters": {
+        "global_error_counter": "2",
+        "language": "en"
+      },
+      "outputActionParameters": {
+        "global_error_counter": "3",
+        "language": "en"
+      }
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_No_Input_3",
+      "inputActionParameters": {
+        "brand": "bell",
+        "global_error_counter": "3",
+        "language": "en"
+      },
+      "outputActionParameters": {
+        "brand": "bell",
+        "language": "en"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "The customer is not giving any input",
+    "actionParameters": {
+      "brand": "bell",
+      "global_error_counter": "0",
+      "language": "en",
+      "utterance": "\"\""
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "The agent informed the user that he didn't understand the query, and then asked if the user is still here. The user didn't reply so he was routed to No_Input_3 flow",
+    "actionParameters": {
+      "brand": "bell",
+      "global_error_counter": "3",
+      "route": "en"
+    }
+  },
+  "displayName": "EN - No Input",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 541,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "fr"
+}

@@ -1,0 +1,44 @@
+{
+  "name": "bc92a014-a63c-4f3a-af1c-0953578ca2df",
+  "displayName": "Expiry Date Processing",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$sys.func.LEN($session.params.nm1_get_cust_profile_response.ccExpiryDate) = 3",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "expiry_month",
+        "value": "$sys.func.MID($session.params.nm1_get_cust_profile_response.ccExpiryDate, 1, 1)"
+      }, {
+        "parameter": "expiry_year",
+        "value": "$sys.func.MID($session.params.nm1_get_cust_profile_response.ccExpiryDate, 2, 2)"
+      } ]
+    },
+    "targetPage": "Logic Router",
+    "name": "b4638629-06b2-4323-aa75-e7ce2f72972c"
+  }, {
+    "condition": "$sys.func.LEN($session.params.nm1_get_cust_profile_response.ccExpiryDate) = 4",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "expiry_month",
+        "value": "$sys.func.MID($session.params.nm1_get_cust_profile_response.ccExpiryDate, 1, 2)"
+      }, {
+        "parameter": "expiry_year",
+        "value": "$sys.func.MID($session.params.nm1_get_cust_profile_response.ccExpiryDate, 3, 2)"
+      } ]
+    },
+    "targetPage": "Logic Router",
+    "name": "d8190e7c-ef7e-4444-9dcd-4ba86d2fd4ed"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Get Propensity To Sell Then End Flow",
+    "name": "974f3c4a-d0fc-4d7c-9176-c75e47fefe1f"
+  } ]
+}

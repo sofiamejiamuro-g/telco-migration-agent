@@ -1,0 +1,166 @@
+{
+  "name": "551e38a0-d586-4478-b401-28acb9e13126",
+  "displayName": "OTP Auth - Start",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "setParameterActions": [ {
+      "parameter": "is_clid_wsn",
+      "value": "$sys.func.CONTAIN($session.params.otp_number_list, $session.params.clid)"
+    }, {
+      "parameter": "len_otp_number_list",
+      "value": "$sys.func.COUNT($session.params.otp_number_list)"
+    }, {
+      "parameter": "billing_contact_number",
+      "value": "$sys.func.FILTER(\"$session.params.customer_id_search_response\",$sys.func.CONCATENATE(\"$.users[*].billing_accounts[?(@.billing_account_number == '\",$sys.func.TO_TEXT($session.params.billing_account_number),\"')].billing_contact_number\"))"
+    }, {
+      "parameter": "billing_contact_number",
+      "value": "$sys.func.GET($session.params.billing_contact_number,0)"
+    }, {
+      "parameter": "len_billing_contact_number",
+      "value": "$sys.func.LEN($session.params.billing_contact_number)"
+    }, {
+      "parameter": "auth_method",
+      "value": "OTP"
+    }, {
+      "parameter": "billing_contact_number1",
+      "value": "$sys.func.FILTER(\"$session.params.customer_id_search_response\",$sys.func.CONCATENATE(\"$..billing_accounts[?(@.billing_account_number == '\",$sys.func.TO_TEXT($session.params.billing_account_number),\"')].billing_contact_number\"))"
+    }, {
+      "parameter": "local_noinput_counter",
+      "value": 0
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "service_types",
+        "value": "$sys.func.FILTER(\"$session.params.customer_id_search_response\",\"$.users[*].billing_accounts[?(@.billing_account_number == $session.params.billing_account_number)].services[?(@.service_type == 'Mobility' || @.service_type == 'MOBILITY' || @.service_type == 'mobility')].service_type\")"
+      }, {
+        "parameter": "len_services",
+        "value": "$sys.func.COUNT($session.params.service_types)"
+      } ]
+    },
+    "name": "fac6b0c4-4aa2-4297-88ca-71724a91c651"
+  }, {
+    "condition": "$session.params.is_clid_wsn = True OR $session.params.nm1_account_found = \"true\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "D'accord, l'envoi du code à 6 chiffres est en cours. " ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "Okay, sending the 6-digit code now." ]
+        },
+        "languageCode": "en"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "telephone_number",
+        "value": "$session.params.clid"
+      } ]
+    },
+    "targetPage": "Webhook send-otp",
+    "name": "82959409-38f2-4be5-b19b-8d20fe3d8f12"
+  }, {
+    "condition": "$session.params.len_services = 1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Je vais texter un code de six chiffres au numéro de téléphone mobile associé à votre compte." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ " I’ll text a 6-digit code to the mobile phone on your account." ]
+        },
+        "languageCode": "en"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "telephone_number",
+        "value": "$sys.func.GET($session.params.otp_number_list, 0)"
+      } ]
+    },
+    "targetPage": "Webhook send-otp",
+    "name": "e8ee518b-0e7e-4aeb-b159-e9917c4d0e90"
+  }, {
+    "condition": "$session.params.len_services \u003e 1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "D'accord." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "Okay." ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "targetPage": "Prompt Phone Number",
+    "name": "3f7327fd-eb1c-45f4-b081-32a86b36afdb"
+  }, {
+    "condition": "$session.params.is_home_phone = True OR $session.params.is_home_phone = true OR $session.params.is_home_phone = \"True\" OR $session.params.is_home_phone = \"true\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "On dirait cependant que vous appelez d’une ligne fixe. Je dois envoyer le code de vérification à un numéro de téléphone mobile associé à votre compte." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ " It looks like you're calling from a landline. I need to send the verification code to a mobile phone number on your account." ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "targetPage": "Prompt Phone Number",
+    "name": "4f8b8ef0-aa41-4cbe-8e33-c7d637fb6393"
+  }, {
+    "condition": "$session.params.len_billing_contact_number = 10",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Je vais texter un code de six chiffres au numéro de téléphone faisant partie des coordonnées associées à votre compte." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "I'll text a 6-digit code to the contact number on your account." ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "targetPage": "Prompt Phone Number",
+    "name": "9f88587d-96bb-4475-b3ce-090818477042"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "551e38a0-d586-4478-b401-28acb9e13126"
+      }, {
+        "parameter": "flow_id",
+        "value": "5f8f4b4a-558a-4e66-9d28-a31389981b36"
+      }, {
+        "parameter": "page_name",
+        "value": "OTP Auth - Start"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  }, {
+    "condition": "$session.params.nm1_account = true",
+    "triggerFulfillment": {
+    
+    },
+    "name": "21680de1-6dd3-4e7b-ace1-9f729fd5a09f"
+  } ],
+  "description": "Determine Phone Number to send OTP"
+}

@@ -1,0 +1,27 @@
+{
+  "name": "ccc0eadb-152e-44f1-b85b-e61372037f1c",
+  "displayName": "v1/payment-arrangement#get-eligibility-criteria",
+  "timeout": {
+    "seconds": 30
+  },
+  "serviceDirectory": {
+    "service": "projects/gcp-it-npe-pltfm-apigee/locations/us-central1/namespaces/apigee-nb-usc1-service-dir-namespace/services/apigee-nb-usc1-service",
+    "genericWebService": {
+      "uri": "https://apigee-nane1-uat.int.bell.ca/v1/payment-arrangement",
+      "requestHeaders": [ {
+        "key": "x-apikey",
+        "value": "npZmDivP6Hxes3wtQ0tC9RqItjJTY8TgZHbOPNeFwvSYSKPI"
+      } ],
+      "webhookType": "FLEXIBLE",
+      "httpMethod": "POST",
+      "requestBody": "{\n  \"sessionInfo\": {\n    \"dfcx_session_id\": \"$session.params.dfcx_session_id\",\n    \"agent_id\": \"$session.params.agent_id\",\n    \"parameters\": {\n      \"brand\": \"$session.params.brand\",\n      \"billing_account\": \"$session.params.billing_account\",\n      \"menu_type\": \"$session.params.menu_type\",\n      \"callKey\": \"$session.params.callKey\"\n    }\n  },\n  \"fulfillmentInfo\": {\n    \"tag\": \"get-eligibility-criteria\"\n  },\n  \"languageCode\": \"$request.language\"\n}",
+      "parameterMapping": [ {
+        "key": "pmt_arrangement_eligibility_response",
+        "value": "sessionInfo.parameters.pmt_arrangement_eligibility_response"
+      }, {
+        "key": "webhook_success",
+        "value": "sessionInfo.parameters.webhook_success"
+      } ]
+    }
+  }
+}

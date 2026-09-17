@@ -1,0 +1,75 @@
+{
+  "name": "854b421c-830e-43e9-98f8-e4fd1b739b4c",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "brand": "bell",
+        "language": "en"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Are you inquiring about a new service or do you want to make\nchanges to your current service?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "new service"
+    }
+  }, {
+    "playbookInvocation": {
+      "playbook": "bell_UC_Sales",
+      "playbookInput": {
+        "precedingConversationSummary": "follow the instructions under the route \"sales_add_to_existing_account\"",
+        "actionParameters": {
+          "brand": "bell",
+          "customer_type": "Existing",
+          "identification_status": "Pass",
+          "language": "en",
+          "line_type": "New",
+          "province": "ON",
+          "route": "equipment_upgrade_device",
+          "utterance": "I want to upgrade my new phone"
+        }
+      },
+      "playbookOutput": {
+        "executionSummary": "customer query is resolved",
+        "actionParameters": {
+        
+        }
+      },
+      "playbookState": "OUTPUT_STATE_OK"
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer is asking to buy a new phone and {lob} is \"Mobility\" , {lob} has been captured from the customer first utterance ",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "en",
+      "lob": "Mobility",
+      "province": "ON",
+      "route": "sales_order_device",
+      "utterance": "like to buy a new phone"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "The customer is asked about line type and mentions line_type as  new and lob is  already identified as Mobility  , hence {route}  is set to \"equipment_upgrade_device\" and transferred  bell_UC_sales Playbook ",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "lob": "Mobility",
+      "route": "equipment_upgrade_device"
+    }
+  },
+  "displayName": " \"sales_order_device\"- ID Pass,line type-not mentioned-phone",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 499,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

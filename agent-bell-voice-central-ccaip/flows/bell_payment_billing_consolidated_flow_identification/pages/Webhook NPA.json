@@ -1,0 +1,100 @@
+{
+  "name": "2691d1fc-a8e4-49c3-a7da-6213f5ac8937",
+  "displayName": "Webhook NPA",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "v1/npa-nxx-lookup",
+    "tag": "NA",
+    "setParameterActions": [ {
+      "parameter": "temp_number",
+      "value": "$sys.func.IF(\"$session.params.CIRN = null\" , $sys.func.TO_TEXT($session.params.clid), $sys.func.TO_TEXT($session.params.CIRN))"
+    }, {
+      "parameter": "npa",
+      "value": "$sys.func.MID($sys.func.TO_TEXT($session.params.temp_number), 1, 3)"
+    }, {
+      "parameter": "nxx",
+      "value": "$sys.func.MID($sys.func.TO_TEXT($session.params.temp_number), 4, 3)"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.webhook_success = true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Province Check",
+    "name": "663c94c6-aac7-4c7a-8af5-7c1bbd6a2dd9"
+  }, {
+    "condition": "$session.params.webhook_status = false",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "npa_status",
+        "value": "Fail"
+      }, {
+        "parameter": "consolidated_status",
+        "value": "Fail"
+      } ]
+    },
+    "targetPage": "End Flow",
+    "name": "74c7e50d-a2e9-47cb-9e81-620f22c3004a"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "End Flow",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "consolidated_status",
+        "value": "Fail"
+      } ]
+    },
+    "name": "24c5ab17-983b-42c8-8bc1-25ad7badc3c1"
+  }, {
+    "targetPage": "End Flow",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "consolidated_status",
+        "value": "Fail"
+      } ]
+    },
+    "name": "06ab7b7f-1fef-4ded-bc44-69d1157921df"
+  }, {
+    "targetPage": "End Flow",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "consolidated_status",
+        "value": "Fail"
+      } ]
+    },
+    "name": "818976f2-4a0e-4164-9bc2-115fec636998"
+  }, {
+    "targetPage": "End Flow",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "consolidated_status",
+        "value": "Fail"
+      } ]
+    },
+    "name": "71f92592-f969-4eac-9df3-fa3e3a368e2e"
+  }, {
+    "targetPage": "End Flow",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+    
+    },
+    "name": "a7f1372f-58f7-46e0-a0cc-5bf8a8adcfda"
+  }, {
+    "targetPage": "End Flow",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "consolidated_status",
+        "value": "Fail"
+      } ]
+    },
+    "name": "3408e746-2ca5-4601-a24c-3c31c557447b"
+  } ]
+}

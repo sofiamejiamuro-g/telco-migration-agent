@@ -1,0 +1,121 @@
+{
+  "name": "829e18b3-ef44-4f43-95bd-616fea04379c",
+  "displayName": "Check Identification Status",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "/v1/ibm_mw/nm1_get#customer-profile",
+    "tag": "customer-profile",
+    "setParameterActions": [ {
+      "parameter": "phone",
+      "value": "$session.params.cirn"
+    }, {
+      "parameter": "ibm_application_id",
+      "value": "BCE_Entry"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.nm1_get_cust_profile_response.initActvDate = null",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "is_old",
+        "value": false
+      } ]
+    },
+    "targetPage": "Check Authentication Triggered",
+    "name": "f1b548ca-b290-4575-b120-2ce2be8f36cb"
+  }, {
+    "condition": "$session.params.identification_status = \"Pass\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "_temp_date_parts_list",
+        "value": "$sys.func.SPLIT($session.params.nm1_get_cust_profile_response.initActvDate, \"-\")"
+      }, {
+        "parameter": "_temp_year_num",
+        "value": "$sys.func.TO_NUMBER($sys.func.GET($session.params._temp_date_parts_list, 0))"
+      }, {
+        "parameter": "_temp_month_num",
+        "value": "$sys.func.TO_NUMBER($sys.func.GET($session.params._temp_date_parts_list, 1))"
+      }, {
+        "parameter": "___temp_day_num",
+        "value": "$sys.func.GET($session.params._temp_date_parts_list, 2)"
+      }, {
+        "parameter": "__temp_day_num",
+        "value": "$sys.func.SPLIT($session.params.___temp_day_num, \"T\")"
+      }, {
+        "parameter": "_temp_day_num",
+        "value": "$sys.func.TO_NUMBER($sys.func.GET($session.params.__temp_day_num, 0))"
+      }, {
+        "parameter": "_temp_date_obj",
+        "value": "$sys.func.TO_OBJECT(\"{'year': $session.params._temp_year_num, 'month': $session.params._temp_month_num, 'day': $session.params._temp_day_num}\")"
+      }, {
+        "parameter": "_temp_date_plus_45",
+        "value": "$sys.func.ADD_DATE($session.params._temp_date_obj, 45, \"DAYS\")\t"
+      }, {
+        "parameter": "_temp_date_plus_45_parts",
+        "value": "$sys.func.SPLIT($session.params._temp_date_plus_45, \"-\")"
+      }, {
+        "parameter": "_temp_year_plus_45_num",
+        "value": "$sys.func.TO_NUMBER($sys.func.GET($session.params._temp_date_plus_45_parts, 0))"
+      }, {
+        "parameter": "_temp_month_plus_45_num",
+        "value": "$sys.func.TO_NUMBER($sys.func.GET($session.params._temp_date_plus_45_parts, 1))"
+      }, {
+        "parameter": "___temp_day_plus_45_num",
+        "value": "$sys.func.GET($session.params._temp_date_plus_45_parts, 2)"
+      }, {
+        "parameter": "__temp_day_plus_45_num",
+        "value": "$sys.func.SPLIT($session.params.___temp_day_plus_45_num, \" \")"
+      }, {
+        "parameter": "_temp_day_plus_45_num",
+        "value": "$sys.func.TO_NUMBER($sys.func.GET($session.params.__temp_day_plus_45_num, 0))"
+      }, {
+        "parameter": "_temp_date_plus_45_obj",
+        "value": "$sys.func.TO_OBJECT(\"{'year': $session.params._temp_year_plus_45_num, 'month': $session.params._temp_month_plus_45_num, 'day': $session.params._temp_day_plus_45_num}\")"
+      }, {
+        "parameter": "is_old",
+        "value": "$sys.func.IS_PAST_DATE($session.params._temp_date_plus_45_obj)"
+      }, {
+        "parameter": "auth_status",
+        "value": "$sys.func.IF($session.params.cx_cornerstone=true, \"Fail\", $session.params.auth_status)"
+      } ]
+    },
+    "targetPage": "Check Authentication Triggered",
+    "name": "122e99b7-3a47-44ec-ba41-827950e9abe0"
+  }, {
+    "condition": "$session.params.idenfication_status = null OR $session.params.idenfication_status = \"Fail\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "authentication_status",
+        "value": "Fail"
+      } ],
+      "advancedSettings": {
+        "dtmfSettings": {
+          "useSystemEntityRule": false
+        }
+      }
+    },
+    "targetPage": "End Flow",
+    "name": "46b0c572-f9fa-4a23-ad22-1eb9f95e320c"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "829e18b3-ef44-4f43-95bd-616fea04379c"
+      }, {
+        "parameter": "flow_id",
+        "value": "87797521-bad6-4ad0-8ba5-2ff3b1d9bab2"
+      }, {
+        "parameter": "page_name",
+        "value": "Check Identification Status"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

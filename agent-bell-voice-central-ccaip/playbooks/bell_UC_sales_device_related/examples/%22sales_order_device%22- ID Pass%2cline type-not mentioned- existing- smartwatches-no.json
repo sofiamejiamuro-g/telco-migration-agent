@@ -1,0 +1,77 @@
+{
+  "name": "50731099-f6bf-4ca7-aa99-0ad6e54cc920",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "brand": "bell",
+        "language": "en"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Are you inquiring about a new service or do you want to make changes to your current service?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "I want to know about current service"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Which service are you inquiring about?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Smartwatches, Tablets, Mobile Internet, SIM cards, pre-owned"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "I'll send a text to the device you're calling from, so that you can check out Bell's mobility devices such as phones, tablets, smartwatches, and mobile internet. Is that alright?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "no thanks"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "brand": "bell",
+        "language": "en",
+        "route": "sales_order_device",
+        "sms_send_status": "Declined"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer has questions about needing a device, device availability, device features, cost, related to devices that Bell sells",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "en",
+      "route": "sales_order_device",
+      "utterance": "I want to order a device"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "if lob is Homephone then give corresponding response and route to bell_SMS Trigger",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "line_type": "Existing"
+    }
+  },
+  "displayName": "\"sales_order_device\"- ID Pass,line type-not mentioned- existing- smartwatches-no",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 464,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

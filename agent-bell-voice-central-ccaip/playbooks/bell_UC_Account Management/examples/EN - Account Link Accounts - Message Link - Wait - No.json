@@ -1,0 +1,60 @@
+{
+  "name": "e72cdf77-37ec-46fb-80f6-826448ac6faf",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "I'll send a text to the device you're calling from, so that you can easily link accounts and services to MyBell. Is that alright?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "allow me some time"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Absolutely. Take your time.\n\nIf you'd like me to send the text with the link to easily link your accounts and services to MyBell, just let me know when you're ready."
+    }
+  }, {
+    "userUtterance": {
+      "text": "No"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "brand": "bell",
+        "language": "en",
+        "sms_content": "You can visit https://m.bell.ca/accountlink to link an account in the MyBell app. (bell.ca/about-us)",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+        "brand": "bell",
+        "language": "en",
+        "sms_content": "You can visit https://m.bell.ca/accountlink to link an account in the MyBell app. (bell.ca/about-us)",
+        "sms_type": "Public"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "The customer is looking to link their accounts.",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "route": "account_link_accounts",
+      "utterance": "I want to link my accounts"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "The user asks to link accounts and is prompted with an appropriate response the user disagrees to receive a message and is routed to bell_SMS trigger flow",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "route": "account_link_accounts",
+      "sms_content": "Bell msg: You can visit https://m.bell.ca/accountlink to link accounts in the MyBell. (bell.ca/about-us)",
+      "sms_type": "Public"
+    }
+  },
+  "displayName": "EN - Account Link Accounts - Message Link - Wait - No",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 458,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

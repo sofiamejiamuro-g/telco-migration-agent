@@ -1,0 +1,27 @@
+{
+  "name": "fbd54591-6e06-4721-9ef6-a0b280756b55",
+  "displayName": "/v1/ticket_management/wfas_check_availability",
+  "timeout": {
+    "seconds": 30
+  },
+  "serviceDirectory": {
+    "service": "projects/gcp-it-npe-pltfm-apigee/locations/us-central1/namespaces/apigee-nb-usc1-service-dir-namespace/services/apigee-nb-usc1-service",
+    "genericWebService": {
+      "uri": "https://apigee-nane1-uat.int.bell.ca/v1/ticket_management/wfas_check_availability",
+      "requestHeaders": [ {
+        "key": "x-apikey",
+        "value": "npZmDivP6Hxes3wtQ0tC9RqItjJTY8TgZHbOPNeFwvSYSKPI"
+      } ],
+      "webhookType": "FLEXIBLE",
+      "httpMethod": "POST",
+      "requestBody": "{\n  \"sessionInfo\": {\n    \"dfcx_session_id\": \"$session.params.dfcx_session_id\",\n    \"agent_id\": \"$session.params.agent_id\",\n    \"parameters\": {\n      \"brand\": \"$session.params.brand\",\n      \"menu_type\": \"$session.params.menu_type\",\n      \"date_range_begin\": \"$session.params.date_range_begin\",\n      \"date_range_end\": \"$session.params.date_range_end\",\n      \"acut_context\": \"$session.params.acut_context\",\n      \"telephone_number\": \"$session.params.telephone_number\"\n    }\n  },\n  \"fulfillmentInfo\": {\n    \"tag\": \"availability\"\n  },\n  \"languageCode\": \"$request.language\"\n}",
+      "parameterMapping": [ {
+        "key": "webhook_success",
+        "value": "sessionInfo.parameters.webhook_success"
+      }, {
+        "key": "wfas_availability_response",
+        "value": "sessionInfo.parameters.wfas_availability_response"
+      } ]
+    }
+  }
+}

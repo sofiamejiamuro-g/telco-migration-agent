@@ -1,0 +1,51 @@
+{
+  "name": "5286bee4-60bc-4717-9ca5-6d4d7f505607",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Sure, I can help with that. You can easily view and track your internet data usage in MyBell. I'll send a text to the device you're calling from, with a link explaining the steps to follow. Is that alright?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "What is the fees of the SMS?"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "There will be no charge for SMS. Would you still like me to send it?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "yes"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "en",
+        "sms_content": "Bell: You can visit https://m.bell.ca/myinternetusage to view your usage in the MyBell app. ( bell.ca/about-us )",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "User wants to check their internet usage history and also more information about SMS",
+    "actionParameters": {
+      "language": "en",
+      "route": "account_usage_history",
+      "utterance": "I want to check my internet usage history "
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Customer already stated LOB (internet) so no need to disambiguate for LOB so VA offers sms. customer said yes so we route accordingly",
+    "actionParameters": {
+      "language": "en"
+    }
+  },
+  "displayName": "EN account_usage_history - Internet - SMS - Yes - Contextual ",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 342,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

@@ -1,0 +1,70 @@
+{
+  "name": "3e6ae2de-b056-4747-919c-d4ae319f1d98",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70011",
+        "brand": "bell",
+        "language": "en",
+        "route": "service_change_plan"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "You can easily manage your Internet package and features at anytime using MyBell. I'll send a text to the device you're calling from, so that you can easily make changes to your Internet package. Is that alright?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "no don't send me message"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "en",
+        "route": "service_change_plan",
+        "sms_send_status": "Declined"
+      },
+      "outputActionParameters": {
+        "language": "en"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "The {identification_status} is \"Pass\", {customer_type} is \"Existing\", {streaming_services} is null and {lob} is \"Internet\" so, we will prompt user for send SMS confirmation and if user say \"yes\" or anything affirmative then route to \"bell_SMS Trgigger\" flow.",
+    "actionParameters": {
+      "apb_location_id": "70011",
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "en",
+      "lob": "Internet",
+      "route": "service_change_plan",
+      "sms_content": "Bell: You can visit https://m.bell.ca/chatchangepackagee to view or make changes to your Internet plan in the MyBell app. ( bell.ca/about-us )",
+      "sms_type": "Public",
+      "utterance": "I'm calling to request to change my internet."
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "As the {lob} is \"Internet\" and {streaming_services} is null then we will prompt user to send SMS and if user say \"yes\" or anything affirmative then send the user to \"bell_SMS Trigger\" flow",
+    "actionParameters": {
+      "apb_location_id": "70011",
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "en",
+      "lob": "Internet",
+      "route": "service_change_plan",
+      "utterance": "I'm calling to request to change my internet."
+    }
+  },
+  "displayName": "EN - service_change_plan- streaming_services - null-lob-Internet-sms-no",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 598,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

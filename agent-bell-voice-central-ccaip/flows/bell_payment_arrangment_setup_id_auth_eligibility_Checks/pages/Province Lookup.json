@@ -1,0 +1,95 @@
+{
+  "name": "5dc23d9c-e4b0-4043-bb24-60e7bfb396d4",
+  "displayName": "Province Lookup",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "province",
+        "value": "$session.params.npa_nxx_lookup_response.province"
+      } ]
+    },
+    "name": "696c32ba-5a23-494e-9c9a-c3534b7397d0"
+  }, {
+    "condition": "$session.params.oneBillIndicator = \"M\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "oneBillIndicator",
+        "value": "M"
+      } ]
+    },
+    "targetFlow": "bell_va_to_ivr_handoff",
+    "name": "df534b06-dd26-4e7a-a3fb-b6af4e8ab0ce"
+  }, {
+    "condition": "$session.params.oneBillIndicator = \"Y\" AND ($session.params.npa_nxx_lookup_response.province = \"PE\" OR $session.params.npa_nxx_lookup_response.province = \"NS\" OR $session.params.npa_nxx_lookup_response.province = \"NL\" OR $session.params.npa_nxx_lookup_response.province = \"NB\")",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "oneBillIndicator",
+        "value": "Y"
+      } ]
+    },
+    "targetFlow": "bell_va_to_ivr_handoff",
+    "name": "6ec173d2-fe4e-4d96-8be7-b49fd3f65180"
+  }, {
+    "condition": "$session.params.auth_status = null AND $session.params.identification_status = \"Pass\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_authentication",
+    "name": "08f083e6-501d-44a8-a6f6-cca0e5c5c905"
+  }, {
+    "condition": "$session.params.auth_status = \"Fail\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "ID/Auth Fail",
+    "name": "fe3aab01-01c8-4580-8fc9-53298dbd588d"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Delinquency Eligibility Check",
+    "name": "719d3fd1-560f-40d0-930d-de8ff2e2ddf1"
+  } ],
+  "eventHandlers": [ {
+    "event": "webhook.error",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I'm unable to proceed with your payment arrangement at this time.  I'll send a text to the device you're calling from so that you can set up your payment arrangement on the MyAccount app. Is that alright?\r\n" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "79719fac-ab13-4079-8f36-c6d262b76e18"
+  }, {
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I'm unable to proceed with your payment arrangement at this time.  I'll send a text to the device you're calling from so that you can set up your payment arrangement on the MyAccount app. Is that alright?\r\n" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "2b564731-11ad-4681-8619-3937f5b96e80"
+  }, {
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I'm unable to proceed with your payment arrangement at this time.  I'll send a text to the device you're calling from so that you can set up your payment arrangement on the MyAccount app. Is that alright?\r\n" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "c60b4225-d732-4d1d-a0e2-2c1c3e306226"
+  } ]
+}

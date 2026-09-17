@@ -1,0 +1,51 @@
+{
+  "name": "5c2780fe-e1ff-40f0-ae18-cdd3216915fe",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Which specific bill charges are you inquiring about?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Could you explain how I can reduce my bill by modifying my plan or removing certain services, and also tell me if there are any promotions or savings I can take advantage of to further cut costs?"
+    }
+  }, {
+    "playbookInvocation": {
+      "playbook": "bell_UC_Billing",
+      "playbookInput": {
+        "precedingConversationSummary": "Customers is looking to reduce the bill",
+        "actionParameters": {
+          "language": "en",
+          "route": "bill_reduce_plan",
+          "utterance": "Could you explain how I can reduce my bill by modifying my plan or removing certain services, and also tell me if there are any promotions or savings I can take advantage of to further cut costs?"
+        }
+      },
+      "playbookOutput": {
+        "executionSummary": "Customer query got resolved",
+        "actionParameters": {
+          "language": "en",
+          "route": "bill_reduce_plan"
+        }
+      },
+      "playbookState": "OUTPUT_STATE_OK"
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer query about \"I want to ask about bill charges\" is addressed",
+    "actionParameters": {
+      "language": "en",
+      "route": "bill_vague",
+      "utterance": "I want to ask about bill charges"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Customer query is addressed and then directed to \"lucky_uc_billing\" playbook",
+    "actionParameters": {
+      "route": "bill_view_bill"
+    }
+  },
+  "displayName": "EN - bill_reduce_plan",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 343,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

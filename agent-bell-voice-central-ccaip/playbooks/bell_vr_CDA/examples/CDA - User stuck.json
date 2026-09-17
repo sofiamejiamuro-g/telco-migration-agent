@@ -1,0 +1,51 @@
+{
+  "name": "4fb1b38f-16a5-4bfe-b3fa-782056ec608e",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "To fix this issue, you need to perform this step now. Please unplug and replug all cables that are in use, like power, phone, and Ethernet cables, to reset the connections. Do not unplug the fibre optic cable connected to the port labelled Fibre, but make sure it's securely connected. Remove any unused cables. Please perform that step and let me know when you are done.\n"
+    }
+  }, {
+    "userUtterance": {
+      "text": "I am confused what exactly do I need to do?"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "No worries at all. If that step isn't clear or isn't working, let's see if we can try a different approach."
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_vr_post_answer",
+      "inputActionParameters": {
+        "customer_answer1_id": "1"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "The session was initialized as a CDA playbook execution for an Internet line of business (lob: \"Internet\"). The agent presented the troubleshooting instruction derived from the title.",
+    "actionParameters": {
+      "acceptable_answers": [ {
+        "choice": "user_completed_entire_solution",
+        "id": "0"
+      }, {
+        "choice": "user_is_stuck_further_help_requested",
+        "id": "1"
+      } ],
+      "description": "",
+      "eta_CDA": "Approx. 7 minutes",
+      "language": "en",
+      "lob": "Internet",
+      "title": "Unplug and replug all cables that are in use, like power, phone, and Ethernet cables, to reset the connections. Do not unplug the fibre optic cable connected to the port labelled Fibre, but make sure it's securely connected. Remove any unused cables.",
+      "utterance": "I am facing issue with internet services"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "The user's response, \"I am confused what exactly do I need to do?\", was evaluated against the CDA playbook's priority list and matched Priority Rule #2 (Customer is stuck/doesn't know how). As a result, the system mapped the response to the acceptable_answers entry for \"stuck/help requested\" (id=\"1\"). The final output, \"No worries at all. If that step isn't clear or isn't working, let's see if we can try a different approach.\" was generated strictly adhering to the \"Instructions for Accepted Answers\" rule, which mandates this specific phrase whenever a valid answer ID is identified, effectively ending the turn and triggering ${FLOW:bell_vr_post_answer}."
+  },
+  "displayName": "CDA - User stuck",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 588,
+  "languageCode": "en"
+}

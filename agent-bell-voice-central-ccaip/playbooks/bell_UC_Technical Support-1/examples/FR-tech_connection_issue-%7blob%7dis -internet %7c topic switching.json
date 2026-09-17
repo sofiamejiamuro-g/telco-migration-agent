@@ -1,0 +1,58 @@
+{
+  "name": "87717283-8e4d-4cef-b131-45a169a36a42",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_tech_intent_apb",
+      "inputActionParameters": {
+        "language": "en",
+        "lob": "internet",
+        "utterance": "I do not have any signal"
+      },
+      "outputActionParameters": {
+        "lob": "internet"
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Vous pouvez utiliser notre outil de réparation virtuelle pour vérifier les pannes de service et dépanner votre équipement. Je vous enverrai un SMS sur l'appareil depuis lequel vous appelez afin que vous puissiez y accéder rapidement.\n\nÇa vous convient ?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Non, pour le moment puis-je vérifier les nouveaux forfaits internet ?"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "Routing only",
+      "inputActionParameters": {
+        "language": "fr-ca",
+        "utterance": "Non, pour le moment puis-je vérifier les nouveaux forfaits internet?"
+      },
+      "outputActionParameters": {
+        "language": "fr-ca",
+        "utterance": "Non, pour le moment puis-je vérifier les nouveaux forfaits internet?"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "customer is having issues with his internet",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca",
+      "lob": "internet",
+      "route": "tech_connection_issue",
+      "utterance": "Ma connexion internet est instable."
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "VA follows the playbook instructions, but user wants to check for new internet plans first, so route them to Routing only flow",
+    "actionParameters": {
+      "language": "fr-ca",
+      "lob": "internet"
+    }
+  },
+  "displayName": "FR-tech_connection_issue-{lob}is -internet | topic switching",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 394,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

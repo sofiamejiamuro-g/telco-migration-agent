@@ -1,0 +1,82 @@
+{
+  "name": "aad1e7ca-e4c9-4060-9371-8ecc40959a6d",
+  "displayName": "Webhook:get-configs",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "v2/get-configs-for-dialogflow",
+    "tag": "default",
+    "setParameterActions": [ {
+      "parameter": "webhook_success",
+      "value": "null"
+    }, {
+      "parameter": "domain",
+      "value": "consumer"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.webhook_success = true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "menu_id",
+        "value": "$session.params.config.DEFAULT_MENU_ID"
+      }, {
+        "parameter": "menu_id_ref",
+        "value": "$sys.func.CONCATENATE(\"REF\", $sys.func.TO_TEXT($session.params.menu_id))"
+      } ]
+    },
+    "targetPage": "Webhook: get-dept id",
+    "name": "1df848bd-ecb6-4db3-b627-fa34afc2c915"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook get config failure",
+    "name": "fe6e4083-152d-46f4-88bd-6370c42eb734"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Webhook get config failure",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+    
+    },
+    "name": "01fcc500-2abb-464c-8a51-9426290c75b8"
+  }, {
+    "targetPage": "Webhook get config failure",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+    
+    },
+    "name": "6558096e-6050-4e79-9368-661c9010e52c"
+  }, {
+    "targetPage": "Webhook get config failure",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+    
+    },
+    "name": "4c888055-e632-44ce-8d45-14d7acfb703a"
+  }, {
+    "targetPage": "Webhook get config failure",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+    
+    },
+    "name": "8a2bcac4-309a-45ef-9c96-8250a925b471"
+  }, {
+    "targetPage": "Webhook get config failure",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+    
+    },
+    "name": "a0f2406c-c667-415e-8932-b9df50f79fef"
+  }, {
+    "targetPage": "Webhook get config failure",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+    
+    },
+    "name": "76683602-d06b-4843-8c2b-f33ec25ce16e"
+  } ]
+}

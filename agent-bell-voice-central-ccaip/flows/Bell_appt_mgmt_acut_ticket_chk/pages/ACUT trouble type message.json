@@ -1,0 +1,80 @@
+{
+  "name": "3e7b6e30-39cb-4a9b-b810-e028954997f0",
+  "displayName": "ACUT trouble type message",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$request.generative.isPast_patternTime != true",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "$session.params.acut_trouble_type_response.trouble_type_message " ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "$request.generative.patternTimeResponse" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "$session.params.acut_trouble_type_response.trouble_type_message " ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "$request.generative.patternTimeResponse" ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "generators": [ {
+        "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/e8965a1f-ac07-4834-9897-677bbaacd7e7",
+        "inputParameters": [ {
+          "key": "patternTime",
+          "value": "$session.params.notificationDetails[0].characteristicSpecification.patternTime"
+        }, {
+          "key": "service",
+          "value": "$session.params.lob"
+        } ],
+        "outputParameter": "$request.generative.patternTimeResponse"
+      } ]
+    },
+    "targetFlow": "bell_Feedback",
+    "name": "ad0737f1-7cbf-4a5d-b564-2a765b853470"
+  }, {
+    "condition": "$request.generative.isPast_patternTime = true",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "$session.params.acut_trouble_type_response.trouble_type_message" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "It looks like there is an active $session.params.lob outage in your area. But don't worry. Our teams are working to restore your service as soon as possible." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "$session.params.acut_trouble_type_response.trouble_type_message" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "Il semble qu’il y ait une panne $session.params.lob active dans votre secteur. Mais ne vous inquiétez pas, nos équipes s’efforcent de rétablir votre service dans les plus brefs délais." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetFlow": "bell_Feedback",
+    "name": "623e0985-3384-4bd6-8148-dbecc9bd0c52"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_Feedback",
+    "name": "d91e7ce0-5114-4fdb-a5d9-3f36dfcc34bf"
+  } ]
+}

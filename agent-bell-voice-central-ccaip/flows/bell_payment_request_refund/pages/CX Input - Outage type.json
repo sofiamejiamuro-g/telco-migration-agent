@@ -1,0 +1,113 @@
+{
+  "name": "17273628-7e3a-401f-bfbc-3b2d0162d524",
+  "displayName": "CX Input - Outage type",
+  "form": {
+    "parameters": [ {
+      "displayName": "outage_type",
+      "required": true,
+      "entityType": "@outage_type",
+      "fillBehavior": {
+        "initialPromptFulfillment": {
+        
+        }
+      }
+    } ]
+  },
+  "entryFulfillment": {
+    "messages": [ {
+      "text": {
+        "text": [ "S'agit-il d'une panne actuelle ou passée?" ]
+      },
+      "languageCode": "fr-ca"
+    }, {
+      "text": {
+        "text": [ "Is this a current or past outage?" ]
+      },
+      "languageCode": "en"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.outage_type = \"past outage\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_aqd",
+    "name": "de14547a-39f1-4288-ae42-c72647236e3a"
+  }, {
+    "condition": "$session.params.outage_type = \"current outage\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Je suis désolé d'apprendre que vous rencontrez une panne. Je vais vous aider avec ça." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "I'm sorry to hear you are experiencing an outage. Let's get you some support." ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "targetFlow": "bell_tech_service_outage_connection_issue_main",
+    "name": "39d7a7ce-7b51-4a77-8c1f-82c08cb39094"
+  } ],
+  "eventHandlers": [ {
+    "event": "sys.no-input-1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Je n'ai pas tout à fait compris. Pouvez-vous réessayer?" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "ccf1d20e-5fff-4f21-b113-7471e832d69f"
+  }, {
+    "event": "sys.no-input-2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Je n'ai toujours pas compris." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "03714e07-048d-4a97-ae24-135c182c6f2b"
+  }, {
+    "targetFlow": "bell_Feedback",
+    "event": "sys.no-input-3",
+    "triggerFulfillment": {
+    
+    },
+    "name": "b1e196c2-99bd-4a36-8b34-1baca03507f1"
+  }, {
+    "event": "sys.no-match-1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Je n'ai pas tout à fait compris. Pouvez-vous réessayer?" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "f136323e-ccc7-4f4f-848c-ab58f1898f3b"
+  }, {
+    "event": "sys.no-match-2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Je n'ai toujours pas compris." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "983d70d5-9ae4-4821-9a54-d911984a2652"
+  }, {
+    "targetFlow": "bell_Feedback",
+    "event": "sys.no-match-3",
+    "triggerFulfillment": {
+    
+    },
+    "name": "59c4034a-5bb3-4310-8338-7d5a5daf2666"
+  } ]
+}

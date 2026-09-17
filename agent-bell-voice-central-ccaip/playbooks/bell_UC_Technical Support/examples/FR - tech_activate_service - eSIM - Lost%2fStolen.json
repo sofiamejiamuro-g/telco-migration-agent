@@ -1,0 +1,56 @@
+{
+  "name": "1a587f52-b2bf-4e7d-a7b3-b65f2c5d5e54",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Je peux certainement vous aider à activer votre service.\n\nActivez-vous une carte SIM électronique pour une ligne existante ou une nouvelle ligne?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Ma carte SIM a été volée"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Vous pouvez facilement transférer une ligne existante vers une nouvelle carte SIM électronique dans l'application MonBell. Je vais vous envoyer un message texte à l'instant avec des instructions supplémentaires."
+    }
+  }, {
+    "userUtterance": {
+      "text": "oui"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "BAN": "4162675927163",
+        "CLID": "4169705061",
+        "brand": "bell",
+        "language": "fr-ca",
+        "route": "tech_activate_service",
+        "sms_content": "Mess. Bell: Voici un lien dans l’application MonBell où vous pouvez transférer votre service vers une nouvelle carte SIM ou SIM électronique: https://mybell.bell.ca/Login?lang=fr\u0026refreshlink=https://mybell.bell.ca/sso/ssoauth.aspx?ReturnUrl=/PunchInOut/punchin?DirectAccess=ChangeSIM\u0026Inserttrackingcode (bell.ca/apropos)",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+        "brand": "bell",
+        "language": "fr-ca"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer wants to activate an eSIM as Physical SIM is lost or stolen",
+    "actionParameters": {
+      "BAN": "4162675927163",
+      "CLID": "4155547622",
+      "brand": "bell",
+      "language": "fr-ca",
+      "route": "tech_activate_service",
+      "sim_type": "eSIM"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Customer has been redirected to \"Steering_SMS Trigger\" playbook and then has been directed to \"Steering_Wrap-up\" playbook"
+  },
+  "displayName": "FR - tech_activate_service - eSIM - Lost/Stolen",
+  "retrievalStrategy": "NEVER",
+  "tokenCount": 487,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

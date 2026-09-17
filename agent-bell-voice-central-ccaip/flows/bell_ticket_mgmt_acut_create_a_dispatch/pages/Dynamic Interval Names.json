@@ -1,0 +1,31 @@
+{
+  "name": "b1e3f311-a5f0-4a24-bbc0-5cf3adaa8d60",
+  "displayName": "Dynamic Interval Names",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "generators": [ {
+      "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/043e1b66-f23d-48cd-b947-c276b6d4c777",
+      "inputParameters": [ {
+        "key": "availability",
+        "value": "$session.params.availability"
+      }, {
+        "key": "full_date",
+        "value": "$session.params.full_date"
+      } ],
+      "outputParameter": "$request.generative.dynamic_intervals"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "dynamic_intervals",
+        "value": "$request.generative.dynamic_intervals"
+      } ]
+    },
+    "targetPage": "Ask Time Slot",
+    "name": "61647131-4879-4e0f-b012-289a848b93f7"
+  } ]
+}

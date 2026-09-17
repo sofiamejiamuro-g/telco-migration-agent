@@ -1,0 +1,53 @@
+{
+  "name": "71909c01-3947-40a0-bbe0-322e89cf3ac8",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Bien sûr, je peux vous aider. Souhaitez-vous obtenir des renseignements sur l'utilisation excédentaire d’Internet ou des services de mobilité?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "mobilite"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Des frais excédentaires se produisent lorsque vous dépassez votre allocation mensuelle d’utilisation de données, de minutes d’appel ou de textos. Vous pouvez facilement consulter et suivre votre utilisation des services de mobilité dans MonBell. Je vais envoyer un texto sur l’appareil à partir duquel vous appelez, avec un lien expliquant les étapes à suivre. Est-ce que cela vous convient?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "oui"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "fr-ca",
+        "sms_content": "Bell : Vous pouvez visiter https://m.bell.ca/verifierutilisation pour voir votre utilisation téléphonique dans l'appli MonBell. ( bell.ca/apropos )",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "User has a question regarding their usage overage.",
+    "actionParameters": {
+      "language": "fr-ca",
+      "route": "account_usage_overage",
+      "utterance": "J’ai une question au sujet d’une utilisation excédentaire sur mon compte"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Disambiguate for LOB then VA offers sms. Customer said yes so we route accordingly",
+    "actionParameters": {
+      "language": "fr-ca",
+      "sms_content": "Bell : Vous pouvez visiter https://m.bell.ca/verifierutilisation pour voir votre utilisation téléphonique dans l'appli MonBell. ( bell.ca/apropos )",
+      "sms_type": "Public"
+    }
+  },
+  "displayName": "FR account_usage_overage - Mobility - SMS - Yes",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 432,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

@@ -1,0 +1,95 @@
+{
+  "name": "d26d3dcd-b236-461b-a831-482b9f8ccbc7",
+  "displayName": "[whk] Acut search retrieve",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "v1/ticket_management/acut/search#retrieve",
+    "tag": "\"retrieve\""
+  },
+  "transitionRoutes": [ {
+    "condition": "$sys.func.UPPER($session.params.ticket_state) = \"ACTIVE\" AND $session.params.webhook_success = true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Check ticket retrieved",
+    "name": "077328ce-6a13-4c9a-bfcf-0ff07da08c2f"
+  }, {
+    "condition": "$sys.func.UPPER($session.params.ticket_state) = \"FINALIZED\" AND $session.params.webhook_success = true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "[whk] ACUT trouble type - historical tickets",
+    "name": "f9af9c22-6bb9-4598-9879-5d5cb5c91bf2"
+  }, {
+    "condition": "$session.params.webhook_success = false",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Failure - ACUT",
+    "name": "1febb0e7-623e-4118-a256-bdfff0f3650a"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "d26d3dcd-b236-461b-a831-482b9f8ccbc7"
+      }, {
+        "parameter": "flow_id",
+        "value": "8ac2c857-8d2c-4fa2-8970-f1c302db570b"
+      }, {
+        "parameter": "page_name",
+        "value": "[whk] Acut search retrieve"
+      } ]
+    },
+    "targetPage": "Webhook Failure - ACUT",
+    "name": "cleanup-hardstop-route"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Webhook Failure - ACUT",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+    
+    },
+    "name": "95df1984-3789-42e8-b5e0-d92492855d64"
+  }, {
+    "targetPage": "Webhook Failure - ACUT",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+    
+    },
+    "name": "3b03244c-3399-4b68-b65f-a1de132f1382"
+  }, {
+    "targetPage": "Webhook Failure - ACUT",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+    
+    },
+    "name": "60ef4fce-8524-45b2-a79a-ca2ee6688f32"
+  }, {
+    "targetPage": "Webhook Failure - ACUT",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+    
+    },
+    "name": "1dbe8f74-ea55-4cdb-9cde-6e1fe5ba46a8"
+  }, {
+    "targetPage": "Webhook Failure - ACUT",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+    
+    },
+    "name": "022819c6-a0af-48da-ad20-89c29bd099f5"
+  }, {
+    "targetPage": "Webhook Failure - ACUT",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+    
+    },
+    "name": "582dd372-0ca3-4b25-b012-58b7d543af7c"
+  } ]
+}

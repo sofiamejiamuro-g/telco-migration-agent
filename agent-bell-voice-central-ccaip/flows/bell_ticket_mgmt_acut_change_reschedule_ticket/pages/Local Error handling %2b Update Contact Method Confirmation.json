@@ -1,0 +1,120 @@
+{
+  "name": "46236527-81e8-425c-8bfd-aa2c8fe76d68",
+  "displayName": "Local Error handling + Update Contact Method Confirmation",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.global_error_counter \u003e= 3",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_aqd",
+    "name": "c69174fb-e91f-4146-94a1-021fafd534d0"
+  }, {
+    "condition": "$session.params.local_trigger = \"no_input\" AND $session.params.local_noinput_counter = 1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I didn't quite get that. Would you like me to update your contact method?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je n'ai pas bien compris." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "Souhaitez-vous que je mette à jour votre méthode de contact?" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "60324e37-0f61-4cba-b344-6e37cbd300e1"
+  }, {
+    "condition": "$session.params.local_trigger = \"no_input\" AND $session.params.local_noinput_counter = 2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I still didn't get that. Would you like me to update your contact method?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je n'ai toujours pas compris." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "Souhaitez-vous que je mette à jour votre méthode de contact?" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "2d95e0e5-7578-4e7e-b89f-ada9b6f68f9c"
+  }, {
+    "condition": "$session.params.local_trigger = \"no_input\" AND $session.params.local_noinput_counter = 3",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook - WFAS Check Availability",
+    "name": "431fb6c6-9255-4354-9a56-dc75794b3fd5"
+  }, {
+    "condition": "$session.params.local_trigger = \"no_match\" AND $session.params.local_nomatch_counter = 1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I didn't quite get that. Would you like me to update your contact method?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je n'ai pas bien compris." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "Souhaitez-vous que je mette à jour votre méthode de contact?" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "4f6b8809-385b-4e71-8e85-797b0aab47cb"
+  }, {
+    "condition": "$session.params.local_trigger = \"no_match\" AND $session.params.local_nomatch_counter = 2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I still didn't get that. Would you like me to update your contact method?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je n'ai toujours pas compris." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "Souhaitez-vous que je mette à jour votre méthode de contact?" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "8637449d-6dcf-493b-97f8-c86369293466"
+  }, {
+    "condition": "$session.params.local_trigger = \"no_match\" AND $session.params.local_nomatch_counter = 3",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook - WFAS Check Availability",
+    "name": "d716db4e-8e8c-4db5-9662-76037e5cfd23"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Previous Page",
+    "name": "22da6c1e-905d-4836-9802-23a9c246cbee"
+  } ]
+}

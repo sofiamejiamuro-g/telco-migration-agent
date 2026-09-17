@@ -1,0 +1,189 @@
+{
+  "name": "101d8901-6e31-408a-81e8-257aa4e6f94e",
+  "displayName": "Single Consumer BAN",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "setParameterActions": [ {
+      "parameter": "consumer_ban_count_ccc",
+      "value": "$sys.func.COUNT($sys.func.REMOVE($session.params.billing_account_number_list, $session.params.ccc_ban))"
+    }, {
+      "parameter": "consumer_ban_count_smb",
+      "value": "$sys.func.COUNT($sys.func.REMOVE($session.params.billing_account_number_list, $session.params.smb_ban))"
+    }, {
+      "parameter": "consumer_count_all",
+      "value": "$sys.func.COUNT($sys.func.REMOVE($sys.func.REMOVE($session.params.billing_account_number_list, $session.params.ccc_ban), $session.params.smb_ban))"
+    }, {
+      "parameter": "a_test",
+      "value": "$sys.func.TO_STRING($session.params.billing_account_number_list)"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.consumer_ban_count_ccc = 1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Thank you. I found the account." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Merci. J’ai trouvé le compte." ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "temp_list",
+        "value": "$sys.func.REMOVE($session.params.billing_account_number_list, $session.params.ccc_ban)"
+      }, {
+        "parameter": "billing_account_number",
+        "value": "$session.params.temp_list[0]"
+      }, {
+        "parameter": "customer_type",
+        "value": "Existing"
+      }, {
+        "parameter": "customer_data",
+        "value": "$sys.func.FILTER(\"$session.params.customer_id_search_response\",$sys.func.CONCATENATE(\"$..billing_accounts[?(@.billing_account_number == '\",$sys.func.TO_TEXT($session.params.billing_account_number),\"')]\"))"
+      }, {
+        "parameter": "billing_account_info_list",
+        "value": "$sys.func.TO_OBJECT(   $sys.func.TO_TEXT($session.params.customer_data[0]) )"
+      }, {
+        "parameter": "is_prepaid",
+        "value": "$session.params.billing_account_info_list.services[0].is_prepaid"
+      }, {
+        "parameter": "billing_account_number_ref",
+        "value": "$sys.func.CONCATENATE(\"REF\", $sys.func.TO_TEXT($session.params.billing_account_number))"
+      }, {
+        "parameter": "identification_status",
+        "value": "Pass"
+      }, {
+        "parameter": "_subscriber_number",
+        "value": "$sys.func.FILTER(\"$session.params.customer_data\", \"$..service_account_number\")\""
+      }, {
+        "parameter": "subscriber_number",
+        "value": "$sys.func.GET($session.params._subscriber_number, 0)"
+      } ]
+    },
+    "targetPage": "Is Prepaid?",
+    "name": "f9d68173-d253-4b47-8028-f750288980bf"
+  }, {
+    "condition": "$session.params.consumer_ban_count_smb = 1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Thank you. I found the account." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Merci. J’ai trouvé le compte." ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "billing_account_number",
+        "value": "$sys.func.REMOVE($session.params.billing_account_number_list, $session.params.smb_ban)[0]"
+      }, {
+        "parameter": "customer_data",
+        "value": "$sys.func.FILTER(\"$session.params.customer_id_search_response\",$sys.func.CONCATENATE(\"$..billing_accounts[?(@.billing_account_number == '\",$sys.func.TO_TEXT($session.params.billing_account_number),\"')]\"))"
+      }, {
+        "parameter": "billing_account_info_list",
+        "value": "$sys.func.TO_OBJECT(   $sys.func.TO_TEXT($session.params.customer_data[0]) )"
+      }, {
+        "parameter": "is_prepaid",
+        "value": "$session.params.billing_account_info_list.services[0].is_prepaid"
+      }, {
+        "parameter": "identification_status",
+        "value": "Pass"
+      }, {
+        "parameter": "customer_type",
+        "value": "Existing"
+      }, {
+        "parameter": "billing_account_number_ref",
+        "value": "$sys.func.CONCATENATE(\"REF\", $sys.func.TO_TEXT($session.params.billing_account_number))"
+      } ]
+    },
+    "targetPage": "Is Prepaid?",
+    "name": "4c766a72-7a5d-46a3-a623-2f3573de39ec"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Could you also tell me your account number, please?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Pourriez-vous également fournir votre numéro de compte?" ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "consumer",
+        "value": true
+      } ]
+    },
+    "targetPage": "Account Number",
+    "name": "4f387a86-439c-4924-8b35-56be74e3f0a1"
+  }, {
+    "condition": "$session.params.consumer_ban_count_ccc = 1 AND $session.params.consumer_ban_count_smb = 1",
+    "triggerFulfillment": {
+    
+    },
+    "name": "6a537100-5192-4a9c-8430-1998a6e48fb4"
+  }, {
+    "condition": "$session.params.consumer_count_all = 1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Thank you. I found the account." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Merci. J’ai trouvé le compte." ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "billing_account_number",
+        "value": "$sys.func.REMOVE($sys.func.REMOVE($session.params.billing_account_number_list, $session.params.ccc_ban), $session.params.smb_ban)[0]"
+      }, {
+        "parameter": "identification_status",
+        "value": "Pass"
+      }, {
+        "parameter": "customer_type",
+        "value": "Existing"
+      }, {
+        "parameter": "customer_data",
+        "value": "$sys.func.FILTER(\"$session.params.customer_id_search_response\",$sys.func.CONCATENATE(\"$..billing_accounts[?(@.billing_account_number == '\",$sys.func.TO_TEXT($session.params.billing_account_number),\"')]\"))"
+      }, {
+        "parameter": "billing_account_info_list",
+        "value": "$sys.func.TO_OBJECT(   $sys.func.TO_TEXT($session.params.customer_data[0]) )"
+      } ]
+    },
+    "targetPage": "Is Prepaid?",
+    "name": "47ab21d0-b4f5-4c70-80bd-52c14e5f4540"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "101d8901-6e31-408a-81e8-257aa4e6f94e"
+      }, {
+        "parameter": "flow_id",
+        "value": "1ecd0a71-8b39-47fa-8bfa-16c0e2425d74"
+      }, {
+        "parameter": "page_name",
+        "value": "Single Consumer BAN"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

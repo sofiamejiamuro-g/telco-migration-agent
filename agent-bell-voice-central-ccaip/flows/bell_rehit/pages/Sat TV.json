@@ -1,0 +1,56 @@
+{
+  "name": "c61b90db-f236-4bc6-bdf4-10412e6c123d",
+  "displayName": "Sat TV",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "setParameterActions": [ {
+      "parameter": "sat_tv_obj_raw",
+      "value": "$request.generative.sat_tv_id_count"
+    }, {
+      "parameter": "sat_tv_obj",
+      "value": "$sys.func.TO_OBJECT($session.params.sat_tv_obj_raw)"
+    }, {
+      "parameter": "sat_tv_count",
+      "value": "$session.params.sat_tv_obj.sat_tv_count"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.sat_tv_count = \"1\" OR $session.params.SAT_COUNT = 1",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "tv_account_number",
+        "value": "$session.params.sat_tv_obj.sat_tv_service_id"
+      } ]
+    },
+    "targetFlow": "bell_rehit_Sat_TV",
+    "name": "efaf8d5c-777f-4967-987b-489f54f16235"
+  }, {
+    "condition": "$session.params.sat_tv_count != \"1\" OR $session.params.SAT_COUNT != 1",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_rehit_SMS",
+    "name": "838f277b-b626-4547-ad58-a46c092b021a"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "c61b90db-f236-4bc6-bdf4-10412e6c123d"
+      }, {
+        "parameter": "flow_id",
+        "value": "29168022-af9d-47b0-8051-575528402df8"
+      }, {
+        "parameter": "page_name",
+        "value": "Sat TV"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

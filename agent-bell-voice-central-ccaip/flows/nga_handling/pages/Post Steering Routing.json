@@ -1,0 +1,43 @@
+{
+  "name": "8dcfacdc-0033-455a-9dd3-dcadb10960ea",
+  "displayName": "Post Steering Routing",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "setParameterActions": [ {
+      "parameter": "handoff_to",
+      "value": null
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.route = \"nga_no_input\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_No_Input_3",
+    "name": "121a2ee0-172c-4433-8f09-f96f6a0d4d29"
+  }, {
+    "condition": "$session.params.route = \"no_route_found\" OR $session.params.route = null OR $session.params.route = \"nga_no_match\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_No_Match_3",
+    "name": "b4125fc4-2311-434e-9cfa-95516091d8a9"
+  }, {
+    "condition": "$session.params.route = \"other_speak_to_agent\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_aqd",
+    "name": "8378ed28-612f-43aa-9acc-c7794214438e"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "name": "c766f8f2-032d-4ee6-9139-80e1baa284a7",
+    "targetPlaybook": "nga_nlu_entity_extraction"
+  } ],
+  "transitionRouteGroups": [ "Route - NGA - account", "Route - NGA - billing ", "Route - NGA - disconnect ", "Route - NGA - other ", "Route - NGA - payment ", "Route - NGA - sales  ", "Route - NGA - service", "Route - NGA - techsupport  ", "Route - NGA - faq", "Route - NGA - equipment" ]
+}

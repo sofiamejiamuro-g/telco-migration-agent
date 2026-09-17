@@ -1,0 +1,57 @@
+{
+  "name": "f6b30fb6-2765-4e82-b968-963931e1d4c4",
+  "displayName": "Get Phone Number Invalid Number fallback",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.invalid_clid_counter \u003e= 3",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Désolé, je ne parviens pas à trouver ce numéro dans nos dossiers. Soyez sans crainte, je ferai quand même de mon mieux pour vous servir." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "I'm sorry, I can't seem to find this number in our records. But don’t worry, I'll still help you however I can." ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "0bcc8a2c-7b74-4bba-8d5f-67426713d569"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "$request.generative.response" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "$request.generative.response" ]
+        },
+        "languageCode": "en"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "CLID",
+        "value": null
+      }, {
+        "parameter": "invalid_clid_counter",
+        "value": "$sys.func.ADD($session.params.invalid_clid_counter,1)"
+      } ],
+      "generators": [ {
+        "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/a20a1a2c-c714-4855-983d-6bea880440fa",
+        "inputParameters": [ {
+          "key": "prev_agent_response",
+          "value": "$request"
+        } ],
+        "outputParameter": "$request.generative.response"
+      } ]
+    },
+    "targetPage": "Get Phone Number",
+    "name": "bad31113-d8d5-4fae-81ec-426caa71a4da"
+  } ]
+}

@@ -1,0 +1,171 @@
+{
+  "name": "e2158d0f-da03-47d7-9fc6-1ba07e1e89bd",
+  "displayName": "Check for LOB in Conversation",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "setParameterActions": [ {
+      "parameter": "unique_service_count",
+      "value": "$sys.func.COUNT($session.params.unique_services)"
+    } ],
+    "generators": [ {
+      "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/95ad4ef7-1c50-4e24-adf2-5859b97bce94",
+      "inputParameters": [ {
+        "key": "device_type",
+        "value": "$session.params.device_type"
+      } ],
+      "outputParameter": "$request.generative.aqd_lob"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.unique_services != null",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "unique_service_count",
+        "value": "$sys.func.COUNT($session.params.unique_services)"
+      } ]
+    },
+    "name": "61688485-eefc-43a4-9404-3f50e2598d2a"
+  }, {
+    "condition": "$request.generative.aqd_lob != null",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "aqd_lob",
+        "value": "$request.generative.aqd_lob"
+      } ]
+    },
+    "name": "3534dab6-59b6-40ad-9902-7484fe7b1c7a"
+  }, {
+    "condition": "$session.params.aqd_lob != null",
+    "triggerFulfillment": {
+      "generators": [ {
+        "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/65ec0b14-c3fb-449a-bd3c-54f1470bb0a2",
+        "inputParameters": [ {
+          "key": "aqd_lob",
+          "value": "$session.params.aqd_lob"
+        } ],
+        "outputParameter": "$request.generative.lob"
+      } ]
+    },
+    "name": "6de89948-e24b-451c-9df5-795d2f730c18"
+  }, {
+    "condition": "$session.params.lob = null AND $session.params.aqd_lob != null",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "lob",
+        "value": "$session.params.aqd_lob"
+      } ]
+    },
+    "name": "b7015393-67c1-4f28-95c9-06d4cc93d2d2"
+  }, {
+    "condition": "$session.params.device_type != null AND $session.params.aqd_lob = null",
+    "triggerFulfillment": {
+      "generators": [ {
+        "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/95ad4ef7-1c50-4e24-adf2-5859b97bce94",
+        "inputParameters": [ {
+          "key": "device_type",
+          "value": "$session.params.device_type"
+        } ],
+        "outputParameter": "$request.generative.lob"
+      } ]
+    },
+    "name": "8531ab16-efa3-46b2-95e6-11f587490247"
+  }, {
+    "condition": "$session.params.lob = null AND $session.params.unique_service_count = 1",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "lob",
+        "value": "$sys.func.LOWER($session.params.unique_services[0])"
+      } ]
+    },
+    "name": "2f4fd294-9c27-482f-8d7b-332ac9b96290"
+  }, {
+    "condition": "$request.generative.lob : \"Mobility\" OR $session.params.lob = \"Mobility\" OR $session.params.lob = \"MOBILITY\" OR $session.params.lob = \"mobility\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "lob",
+        "value": "Mobility"
+      }, {
+        "parameter": "apb_location_id",
+        "value": 70016
+      }, {
+        "parameter": "l2_brand",
+        "value": "Bell Mobility"
+      } ]
+    },
+    "targetPage": "Check Prepaid",
+    "name": "0462f3cb-8ab3-4af5-a578-6247a8d531cd"
+  }, {
+    "condition": "$request.generative.lob : \"Internet\" OR $session.params.lob = \"Internet\" OR $session.params.lob = \"INTERNET\" OR $session.params.lob = \"internet\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "lob",
+        "value": "Internet"
+      }, {
+        "parameter": "apb_location_id",
+        "value": 70014
+      }, {
+        "parameter": "l2_brand",
+        "value": "Bell Residential Services"
+      } ]
+    },
+    "targetPage": "Set params for v1/agent-queue-determination",
+    "name": "e8e9861d-d9b2-47aa-9024-30b22620f1b6"
+  }, {
+    "condition": "$request.generative.lob : \"Homephone\" OR $session.params.lob = \"Homephone\" OR $session.params.lob = \"HOMEPHONE\" OR $session.params.lob = \"homephone\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "lob",
+        "value": "Homephone"
+      }, {
+        "parameter": "apb_location_id",
+        "value": 70013
+      }, {
+        "parameter": "l2_brand",
+        "value": "Bell Residential Services"
+      } ]
+    },
+    "targetPage": "Set params for v1/agent-queue-determination",
+    "name": "a6a17359-d3ef-4fc6-9b45-0a296244e7c8"
+  }, {
+    "condition": "$request.generative.lob : \"TV\" OR $session.params.lob = \"TV\" OR $session.params.lob = \"tv\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "lob",
+        "value": "TV"
+      }, {
+        "parameter": "apb_location_id",
+        "value": 70015
+      }, {
+        "parameter": "l2_brand",
+        "value": "Bell Residential Services"
+      } ]
+    },
+    "targetPage": "Set params for v1/agent-queue-determination",
+    "name": "9925afca-bad6-425a-87a6-74c8448b2674"
+  }, {
+    "condition": "$request.generative.lob : \"Smart Home\" OR $session.params.lob : \"Smart Home\" OR $session.params.lob = \"smart home\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "lob",
+        "value": "Smart Home"
+      }, {
+        "parameter": "apb_location_id",
+        "value": 70017
+      } ]
+    },
+    "targetFlow": "bell_va_to_ivr_smarthome",
+    "name": "c39defbb-f898-4f06-b6d1-eccb4d35c292"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "lob",
+        "value": null
+      } ]
+    },
+    "targetPage": "Check LOB",
+    "name": "ba595cd1-2a47-4fb9-b04d-2e33444b2f75"
+  } ]
+}

@@ -1,0 +1,101 @@
+{
+  "name": "a787d712-2b8c-472a-a44c-27d31ee49461",
+  "displayName": "Home Connection - check due date ",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "setParameterActions": [ {
+      "parameter": "input_time_string",
+      "value": "$sys.func.FORMAT_DATE($sys.func.NOW(), \"yyyy-MM-dd'T'HH:mm:ssXXX\")"
+    }, {
+      "parameter": "input_date_string",
+      "value": "$sys.func.NOW()"
+    } ],
+    "generators": [ {
+      "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/cd3d6f08-0412-43c3-b04a-d354c348e691",
+      "inputParameters": [ {
+        "key": "input_time_string",
+        "value": "$session.params.input_time_string"
+      } ],
+      "outputParameter": "$request.generative.current_time"
+    }, {
+      "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/1c952ea5-26e0-45e2-a082-58b65e67719b",
+      "inputParameters": [ {
+        "key": "text",
+        "value": "$session.params.input_date_string"
+      } ],
+      "outputParameter": "$request.generative.current_date"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "current_time_utc",
+        "value": "$request.generative.current_time"
+      }, {
+        "parameter": "cutoff_time_utc",
+        "value": "$session.params.cutoff_time"
+      }, {
+        "parameter": "current_date_utc",
+        "value": "$request.generative.current_date"
+      }, {
+        "parameter": "cutoff_date_utc",
+        "value": "$sys.func.MID($session.params.order_detail_response.calendar_context[0].date, 1, 10)"
+      } ]
+    },
+    "name": "e222619a-a79f-4b1b-9738-634a6d2b10a2"
+  }, {
+    "condition": "$session.params.current_date_utc \u003e $session.params.cutoff_date_utc",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "After cutoff time",
+    "name": "f6da8779-4064-41b9-ab6d-a082c0b38f8c",
+    "description": "This represents the \"After Due Date\" condition."
+  }, {
+    "condition": "$session.params.current_date_utc \u003c $session.params.cutoff_date_utc",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Before cutoff time",
+    "name": "8b153d01-7249-4624-8ea1-d554efbca74b",
+    "description": "This represents the \"Before Due Date\" condition."
+  }, {
+    "condition": "$session.params.current_date_utc = $session.params.cutoff_date_utc AND $session.params.current_time_utc \u003e $session.params.cutoff_time_utc",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "After cutoff time",
+    "name": "cec35b37-42f5-42cd-9e33-8bd2e191b28a",
+    "description": "This represents the \"On Due Date and After Cutoff Time\" condition."
+  }, {
+    "condition": "$session.params.current_date_utc = $session.params.cutoff_date_utc AND $session.params.current_time_utc \u003c= $session.params.cutoff_time_utc",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Before cutoff time",
+    "name": "c2c5429a-8949-4fbb-8ba8-8b5e0f5a90dc",
+    "description": "This represents the \"On Due Date and Before Cutoff Time\" condition."
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "a787d712-2b8c-472a-a44c-27d31ee49461"
+      }, {
+        "parameter": "flow_id",
+        "value": "fa281dc6-7e0a-47dd-91d3-8f778cbb16e2"
+      }, {
+        "parameter": "page_name",
+        "value": "Home Connection - check due date "
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

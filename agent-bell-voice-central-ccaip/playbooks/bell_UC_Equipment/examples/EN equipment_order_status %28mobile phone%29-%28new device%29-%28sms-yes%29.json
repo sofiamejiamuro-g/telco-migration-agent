@@ -1,0 +1,64 @@
+{
+  "name": "e4332bcc-6ede-442e-b723-0262feea4bca",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Which device are you looking to check the status of?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "its regarding my mobile phone"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Are you inquiring about device upgrade, new device, or a repair order?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "new device"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Got it, you can view and check the status of your device order in MyBell. I'll send a text to the device you are calling from, so that you can track your shipment. Is that alright?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "yes"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "en",
+        "sms_content": "Bell: You can visit bell.ca/shipping-tracker to view the status of your device order.",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+        "language": "en",
+        "sms_content": "Bell: You can visit bell.ca/shipping-tracker to view the status of your device order.",
+        "sms_type": "Public"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "customer is inquiring about their order status and lob and {device_type} are null",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "route": "equipment_order_status",
+      "utterance": "I want to track my order"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "customer is asked device_type and then proceeds as per instructions",
+    "actionParameters": {
+      "brand": "bell",
+      "device_type": "Mobile Phone",
+      "language": "en"
+    }
+  },
+  "displayName": "EN equipment_order_status (mobile phone)-(new device)-(sms-yes)",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 389,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

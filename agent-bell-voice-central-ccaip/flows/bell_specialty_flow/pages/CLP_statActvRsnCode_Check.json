@@ -1,0 +1,84 @@
+{
+  "name": "5cf96d9a-254c-49da-99d0-2ed342b43dcb",
+  "displayName": "CLP_statActvRsnCode_Check",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.statActvRsnCode = \"SPC\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "CLP_colInd_check",
+    "name": "7b028138-0784-45ad-9c0a-efba0fbc8807"
+  }, {
+    "condition": "$session.params.statActvRsnCode != \"SPC\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "CLP_AUL_Check",
+    "name": "093f1efb-9b53-4665-88cc-3297ef51089a"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "5cf96d9a-254c-49da-99d0-2ed342b43dcb"
+      }, {
+        "parameter": "flow_id",
+        "value": "d35b61b6-c884-44f8-b5c7-aed63cc356ab"
+      }, {
+        "parameter": "page_name",
+        "value": "CLP_statActvRsnCode_Check"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "CLP_AUL_Check",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+    
+    },
+    "name": "ff06b250-e854-449b-bc43-3068adacca65"
+  }, {
+    "targetPage": "CLP_AUL_Check",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+    
+    },
+    "name": "3a61ba7b-3115-4ff1-ae1f-2249c3ab55fb"
+  }, {
+    "targetPage": "CLP_AUL_Check",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+    
+    },
+    "name": "63c5a045-0c27-4e82-852e-c3279ded41a6"
+  }, {
+    "targetPage": "CLP_AUL_Check",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+    
+    },
+    "name": "a428cc0a-a110-4f35-b7c0-871aae2cb259"
+  }, {
+    "targetPage": "CLP_AUL_Check",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+    
+    },
+    "name": "830cc909-f422-4e36-b0ba-e054a8f07236"
+  }, {
+    "targetPage": "CLP_AUL_Check",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+    
+    },
+    "name": "bb74cd44-5bbc-4568-b708-cb96928f7fd6"
+  } ]
+}

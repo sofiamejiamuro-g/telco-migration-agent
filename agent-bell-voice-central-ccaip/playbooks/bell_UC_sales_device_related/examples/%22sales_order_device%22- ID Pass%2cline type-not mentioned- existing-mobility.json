@@ -1,0 +1,71 @@
+{
+  "name": "15ec13ad-9b84-4f67-9e78-09bbd637ad09",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "brand": "bell",
+        "language": "en"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Are you inquiring about a new service or do you want to make changes to your current service?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "existing service"
+    }
+  }, {
+    "playbookInvocation": {
+      "playbook": "bell_UC_Equipment",
+      "playbookInput": {
+        "precedingConversationSummary": "follow instructions under \"equipment_upgrade_device\"",
+        "actionParameters": {
+          "brand": "bell",
+          "language": "en",
+          "lob": "Mobility",
+          "route": "equipment_upgrade_device"
+        }
+      },
+      "playbookOutput": {
+        "actionParameters": {
+          "language": "en"
+        }
+      },
+      "playbookState": "OUTPUT_STATE_OK"
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer says he wants to order a phone and {lob} is \"Mobility\" OR {device_type} is \"Mobile phone\"",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "en",
+      "line_type": "Existing",
+      "lob": "Mobility",
+      "route": "sales_order_device",
+      "utterance": "I want to order a phone"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "from the identification flow, know the customer_type as \"Existing\",In the query customer says new phone which means {device_type}= \"Phones\". The user is asked if they are talking about a new or existing service, which they respond with \"existing\", hence reroute to \"equipment_upgrade_device\" route and call \"bell_UC_Equipment\"",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "line_type": "Existing",
+      "lob": "Mobility",
+      "route": "equipment_upgrade_device"
+    }
+  },
+  "displayName": "\"sales_order_device\"- ID Pass,line type-not mentioned- existing-mobility",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 476,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

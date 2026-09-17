@@ -1,0 +1,50 @@
+{
+  "name": "437a262b-6e54-4091-833b-3e89d227b484",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Vous pouvez facilement consulter les renseignements de votre compte, comme votre numéro de compte et vos coordonnées, dans MonBell. Je vais envoyer un texto à l'appareil au moyen duquel vous appelez, afin que vous puissiez facilement consulter les renseignements de votre compte. Est-ce que ça vous convient ?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Oui"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "brand": "bell",
+        "language": "fr-ca",
+        "sms_content": "Vous pouvez visiter https://m.bell.ca/mafacture pour voir vos informations de compte dans l’appli MonBell. (bell.ca/apropos)",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+        "brand": "bell",
+        "language": "fr-ca"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "The customer is looking for information on their account like account number in French language",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca",
+      "route": "account_access_information",
+      "utterance": "quel est mon numéro de compte"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "The customer wants to find their account information if the customer agrees and says YES route them to then bell_SMS Trigger flow.",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca",
+      "route": "account_access_information",
+      "sms_content": "Vous pouvez visiter https://m.bell.ca/mafacture pour voir vos informations de compte dans l’appli MonBell. (bell.ca/apropos)",
+      "utterance": "quel est mon numéro de compte"
+    }
+  },
+  "displayName": "FR_account_access_information_CustomerTypeIsNull_YesToMessageLink",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 387,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

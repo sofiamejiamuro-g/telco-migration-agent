@@ -1,0 +1,70 @@
+{
+  "name": "4994e0fd-0142-4b6b-a013-3930011a0453",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Sure, I can help with that. Could you please confirm which service you are looking to restore?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Internet"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Thank you. You can easily restore your residential services in MyBell. I will send a text to the device you're calling from, with a link to do it yourself. Is that alright?\nCX: Yes"
+    }
+  }, {
+    "userUtterance": {
+    
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_global_error_count_check",
+      "inputActionParameters": {
+        "global_error_counter": "2"
+      },
+      "outputActionParameters": {
+        "global_error_counter": "3"
+      }
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "brand": "bell",
+        "language": "en",
+        "route": "account_restore_service",
+        "sms_send_status": "Declined",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "User wants to restore their service",
+    "actionParameters": {
+      "brand": "bell",
+      "global_error_counter": "2",
+      "language": "en",
+      "route": "account_restore_service",
+      "unique_services": "MOBILITY, INTERNET, TV",
+      "utterance": "I want to restore my service"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "User didn't said anything and routed to sms flow",
+    "actionParameters": {
+      "brand": "bell",
+      "global_error_counter": "3",
+      "language": "en",
+      "route": "account_restore_service",
+      "sms_send_status": "Declined"
+    }
+  },
+  "displayName": "Restore Service : Ask service - Internet - No Input",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 427,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

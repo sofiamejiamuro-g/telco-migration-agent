@@ -1,0 +1,39 @@
+{
+  "name": "fb13c99c-dbab-4758-98d3-637ee212ce44",
+  "displayName": "Webhook get department-id",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "/v1/ivr-transfer/get-department-id",
+    "tag": "N/A",
+    "setParameterActions": [ {
+      "parameter": "menu_id",
+      "value": "$session.params.menu_id"
+    }, {
+      "parameter": "menu_id_ref",
+      "value": "$sys.func.CONCATENATE(\"REF\", $sys.func.TO_TEXT($session.params.menu_id))"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.webhook_success = true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "department_id",
+        "value": "$session.params.get_department_id_response.department_id"
+      }, {
+        "parameter": "department_id_ref",
+        "value": "$sys.func.CONCATENATE(\"REF\", $sys.func.TO_TEXT($session.params.department_id))"
+      } ]
+    },
+    "targetPage": "IVR Handover",
+    "name": "91abffad-0fa7-4316-8012-573d984ff59b"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "IVR Handover",
+    "name": "26b1b33d-2966-47a1-ae6c-d56f4b8e543d"
+  } ]
+}

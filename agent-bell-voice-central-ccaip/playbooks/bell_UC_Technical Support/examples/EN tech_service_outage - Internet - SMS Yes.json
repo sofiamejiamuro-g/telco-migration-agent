@@ -1,0 +1,72 @@
+{
+  "name": "3daffa77-9c60-4b07-821e-53cd54727824",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Could you tell me which service you're having trouble with?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Internet"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70014",
+        "language": "en"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "You can use our Virtual Repair tool to check for service outages and troubleshoot your equipment. I'll send a text to the device you're calling from so you can access it quickly. Is that alright?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "yes"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "en",
+        "route": "tech_service_outage",
+        "sms_content": "Bell msg: You can visit https://m.bell.ca/chatvirtualrepaire to access the Virtual repair tool. ( bell.ca/about-us )",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+        "language": "en",
+        "sms_content": "Bell msg: You can visit https://m.bell.ca/chatvirtualrepaire to access the Virtual repair tool. ( bell.ca/about-us )",
+        "sms_type": "Public"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customers are facing outage in their area, they reported this issue for {lob} = Internet when asked used said yes to the sms",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "lob": "Internet",
+      "route": "tech_service_outage",
+      "utterance": "Is there outage in my area?"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "User is redirected sms_trigger flow",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "lob": "Internet",
+      "route": "tech_service_outage",
+      "sms_content": "Bell msg: You can visit https://m.bell.ca/chatvirtualrepaire to access the Virtual repair tool. ( bell.ca/about-us )",
+      "sms_type": "Public",
+      "utterance": "Is there outage in my area?"
+    }
+  },
+  "displayName": "EN tech_service_outage - Internet - SMS Yes",
+  "retrievalStrategy": "NEVER",
+  "tokenCount": 544,
+  "languageCode": "en"
+}

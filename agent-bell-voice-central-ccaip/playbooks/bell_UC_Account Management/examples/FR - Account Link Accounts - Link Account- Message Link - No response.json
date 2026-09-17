@@ -1,0 +1,56 @@
+{
+  "name": "83fff22c-2dd7-45ba-b1e5-ca28d9926261",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Cherchez-vous à lier un nouveau service et une facture à votre compte MonBell? Ou essayez-vous de consolider et de fusionner des services afin d'avoir une seule facture pour tous vos services?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "lier des comptes"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Je vais envoyer un texto à l'appareil au moyen duquel vous appelez, afin que vous puissiez facilement lier les comptes et les services à MonBell. Est-ce que ça vous convient?"
+    }
+  }, {
+    "userUtterance": {
+    
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "fr-ca",
+        "route": "account_link_accounts",
+        "sms_send_status": "Declined"
+      },
+      "outputActionParameters": {
+        "language": "fr-ca",
+        "route": "account_link_accounts",
+        "sms_send_status": "Declined"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "The customer is looking to link their accounts respond in fr-ca only",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca",
+      "route": "account_link_accounts",
+      "utterance": "Je souhaite lier mes comptes"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "The user asks to link accounts and is prompted with an appropriate response the user disagrees to receive a message and is routed to bell_SMS trigger flow, respond in fr-ca only",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca",
+      "route": "account_link_accounts"
+    }
+  },
+  "displayName": "FR - Account Link Accounts - Link Account- Message Link - No response",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 375,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

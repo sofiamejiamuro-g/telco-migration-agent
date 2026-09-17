@@ -1,0 +1,59 @@
+{
+  "name": "506cdf26-3707-4e5f-b6dd-f66864e30652",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "brand": "bell",
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": " À propos de quel service communiquez-vous avec nous?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Internet"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_aqd",
+      "inputActionParameters": {
+        "language": "fr-ca",
+        "lob": "Internet",
+        "special_queue": "bell_sales_to_mts"
+      },
+      "outputActionParameters": {
+        "language": "fr-ca"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer has questions about device availability, device features, cost, related to devices that Bell sells",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "New",
+      "identification_status": "Fail",
+      "language": "fr-ca",
+      "province": "MTS",
+      "route": "sales_device_inquiry"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "We need to check the result from identification flow from the webhook NPANXX, if it is \"MTS\" then call bell_aqd flow and set special_queue =\nbell_sales_to_mts",
+    "actionParameters": {
+      "language": "fr-ca",
+      "lob": "Internet"
+    }
+  },
+  "displayName": "FR sales device inquiry- ID fail, new-MTS",
+  "retrievalStrategy": "NEVER",
+  "tokenCount": 364,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

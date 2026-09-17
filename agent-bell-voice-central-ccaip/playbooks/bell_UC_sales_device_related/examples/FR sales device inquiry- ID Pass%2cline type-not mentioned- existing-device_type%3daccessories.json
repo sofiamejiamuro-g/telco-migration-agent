@@ -1,0 +1,76 @@
+{
+  "name": "4b76aed4-1d44-45b2-9e66-cfadba010f25",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "brand": "bell",
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": " Désirez-vous ajouter un nouveau service ou modifier votre service actuel?\n"
+    }
+  }, {
+    "userUtterance": {
+      "text": "existant"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "À propos de quel service communiquez-vous avec nous?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Accessories"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Je vais envoyer un texto à l'appareil au moyer duquel vous appelez, afin que vous puissiez découvrir les appareils Internet de Bell. Est-се que ça vous convient?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "oui"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "fr-ca",
+        "sms_content": "FR: Mess. de Bell:Vous pouvez consulter le site https://www.bell.ca/Services Internet/Produits/WiFi pour en savoir plus sur les appareils Bell Internet. (bell.ca/apropos)",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+        "language": "fr-ca"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer has questions about device availability, device features, cost, related to devices that Bell sells",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "Existing",
+      "device_type": "Accessories",
+      "identification_status": "Pass",
+      "language": "fr-ca",
+      "route": "sales_device_inquiry"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "we got to know from the utterance that the device type as accessories",
+    "actionParameters": {
+      "device_type": "Accessories",
+      "language": "fr-ca",
+      "line_type": "Existing"
+    }
+  },
+  "displayName": "FR sales device inquiry- ID Pass,line type-not mentioned- existing-device_type=accessories",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 476,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

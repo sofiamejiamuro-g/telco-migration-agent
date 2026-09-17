@@ -1,0 +1,49 @@
+{
+  "name": "dc662cac-f49c-43ee-9b1c-50522871b1e5",
+  "displayName": "Account Number Present",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "conditionalCases": [ {
+      "cases": [ {
+        "condition": "$session.params.no_match_counter = 0",
+        "caseContent": [ {
+          "message": {
+            "text": {
+              "text": [ "$session.params.entry = ban" ]
+            },
+            "languageCode": "en"
+          }
+        }, {
+          "message": {
+            "text": {
+              "text": [ "I found several accounts related to your number. So I know we’re talking about the right one, could you please tell me your account number?" ]
+            },
+            "languageCode": "en"
+          }
+        } ]
+      } ]
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "dc662cac-f49c-43ee-9b1c-50522871b1e5"
+      }, {
+        "parameter": "flow_id",
+        "value": "1ecd0a71-8b39-47fa-8bfa-16c0e2425d74"
+      }, {
+        "parameter": "page_name",
+        "value": "Account Number Present"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

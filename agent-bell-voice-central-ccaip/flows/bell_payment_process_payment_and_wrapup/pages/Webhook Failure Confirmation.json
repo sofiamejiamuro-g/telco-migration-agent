@@ -1,0 +1,73 @@
+{
+  "name": "c810d358-e401-43b6-b033-a2132a809635",
+  "displayName": "Webhook Failure Confirmation",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "messages": [ {
+      "text": {
+        "text": [ "Thanks for your patience. It looks like I'm having trouble processing your credit card payment at this time..There's nothing wrong on your end. I'll send a text to the device you're calling from, so that you can proceed with your payment yourself in the MyBell App. Is that alright?" ]
+      },
+      "languageCode": "en"
+    }, {
+      "text": {
+        "text": [ "Merci de votre patience. Il semble que j'aíe de la difficulté à traiter votre paiement par carte de crédit pour le moment. II n'y a rien de mal de votre côté. Je vais envoyer un Texto à l'appareil à partir duquel vous appelez, afin que vous puissiez effectuer votre paiement vous- même dans l'Appli Mon Compte. Est-ce que cela vous convient?" ]
+      },
+      "languageCode": "fr-ca"
+    } ],
+    "setParameterActions": [ {
+      "parameter": "card_number",
+      "value": null
+    }, {
+      "parameter": "cc_token",
+      "value": null
+    }, {
+      "parameter": "expiry_date",
+      "value": null
+    }, {
+      "parameter": "expiry_month",
+      "value": null
+    }, {
+      "parameter": "expiry_year",
+      "value": null
+    }, {
+      "parameter": "security_code",
+      "value": null
+    }, {
+      "parameter": "cvv_number",
+      "value": null
+    }, {
+      "parameter": "cc_from_utterance",
+      "value": null
+    } ]
+  },
+  "transitionRoutes": [ {
+    "intent": "context.confirm_yes",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Language Based SMS",
+    "name": "a29dc727-d043-4905-ae24-b643401cbb6a"
+  }, {
+    "intent": "context.confirm_no",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "sms_send_status",
+        "value": "declined"
+      } ]
+    },
+    "targetFlow": "bell_SMS Trigger",
+    "name": "6276148f-3530-4d4d-be19-d67361a793ed"
+  }, {
+    "intent": "context.different_number",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "different_number",
+        "value": true
+      } ]
+    },
+    "targetPage": "Language Based SMS",
+    "name": "47e6c7c0-c98f-49bb-8de6-64a0867d4535"
+  } ]
+}

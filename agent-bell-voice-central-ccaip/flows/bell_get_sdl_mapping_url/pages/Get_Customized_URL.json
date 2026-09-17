@@ -1,0 +1,85 @@
+{
+  "name": "3ba7d514-09a4-40a2-a169-a9bd14af651c",
+  "displayName": "Get_Customized_URL",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "v1/intent-sdl-mapping",
+    "tag": "default",
+    "setParameterActions": [ {
+      "parameter": "brand",
+      "value": "bell"
+    }, {
+      "parameter": "language",
+      "value": "$request.language"
+    }, {
+      "parameter": "intent",
+      "value": "$session.params.route"
+    }, {
+      "parameter": "webhook_success",
+      "value": null
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.webhook_success = true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "faq_link",
+        "value": "$sys.func.GET_FIELD($session.params.intent_sdl_map_response, \"url\")"
+      } ]
+    },
+    "targetPage": "End Flow",
+    "name": "5f7d4f99-fe66-4895-a6b1-437a4263c1a8"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "End Flow",
+    "name": "35fdef1c-544c-45cc-bbe6-43d752200a47"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "End Flow",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+    
+    },
+    "name": "403d0dc2-0d71-4d8d-bfa7-eeb42b268870"
+  }, {
+    "targetPage": "End Flow",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+    
+    },
+    "name": "fc14ff67-9030-41d1-94bf-ba3ca0c79c5c"
+  }, {
+    "targetPage": "End Flow",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+    
+    },
+    "name": "c9636221-265c-4abe-9eec-11b9007a183a"
+  }, {
+    "targetPage": "End Flow",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+    
+    },
+    "name": "f377c68e-e09b-4279-aba5-e1c9910c0d1f"
+  }, {
+    "targetPage": "End Flow",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+    
+    },
+    "name": "1ccdcdac-2621-4e01-8c85-9d0fa548d87b"
+  }, {
+    "targetPage": "End Flow",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+    
+    },
+    "name": "1da9e020-b60f-443c-a35b-ab737bdf4423"
+  } ]
+}

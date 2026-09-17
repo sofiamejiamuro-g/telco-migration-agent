@@ -1,0 +1,41 @@
+{
+  "name": "3cb02461-8a2a-41c6-af88-33066e456b3a",
+  "displayName": "Check Payment Method",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.payment_method = null",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Ask CX For Payment Method",
+    "name": "cd7ca2b7-9600-4204-9fbf-7ef7d68d013d"
+  }, {
+    "condition": "$session.params.payment_method != null",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Payment Method",
+    "name": "473a5c5d-567b-4d64-b630-709f841170e6"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "3cb02461-8a2a-41c6-af88-33066e456b3a"
+      }, {
+        "parameter": "flow_id",
+        "value": "6cfb896d-371f-4ad0-b534-840a35dc2828"
+      }, {
+        "parameter": "page_name",
+        "value": "Check Payment Method"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

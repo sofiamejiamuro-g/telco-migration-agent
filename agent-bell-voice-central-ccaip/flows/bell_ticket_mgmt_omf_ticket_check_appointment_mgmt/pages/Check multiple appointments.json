@@ -1,0 +1,83 @@
+{
+  "name": "e4cde79c-18d3-4728-a0a9-bd5a401fddec",
+  "displayName": "Check multiple appointments",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "generators": [ {
+      "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/04cf7949-f31b-40bb-bc24-01850640c2f6",
+      "inputParameters": [ {
+        "key": "merged_calendar_context",
+        "value": "$session.params.merged_calendar_context"
+      } ],
+      "outputParameter": "$request.generative.appt_count"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "len_merged_calendar_context",
+        "value": "$request.generative.appt_count"
+      } ]
+    },
+    "name": "1fb6f429-2527-4ab3-9524-6d2a549ead80"
+  }, {
+    "condition": "$session.params.len_merged_calendar_context = 1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "\u003cspeak\u003eI found an order for your $session.params.line_of_business service. Your appointment is on $session.params.day_of_week, $session.params.month_name \u003csay-as interpret-as=\"ordinal\"\u003e$session.params.date_of_month\u003c/say-as\u003e. The Technician can arrive any time between $session.params.startTime and $session.params.endTime. And remember, an appointment scheduled from $session.params.startTime to $session.params.endTime can start at $session.params.endTimeUpdated and finish later.\u003c/speak\u003e" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "\u003cspeak\u003eJ'ai trouvé une commande pour votre service $session.params.line_of_business est prévu le $session.params.day_of_week, le \u003csay-as interpret-as=\"cardinal\"\u003e$session.params.date_of_month\u003c/say-as\u003e $session.params.month_name. Le ou la technicien(ne) peut arriver à tout moment entre $session.params.startTime et $session.params.endTime. N'oubliez pas qu'un rendez-vous prévu entre $session.params.startTime et $session.params.endTime peut commencer à $session.params.endTimeUpdated et se terminer plus tard.\u003c/speak\u003e" ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "calendar_context",
+        "value": "[$session.params.calendar_context]"
+      }, {
+        "parameter": "merged_calendar_context",
+        "value": "[$session.params.merged_calendar_context]"
+      } ]
+    },
+    "targetPage": "Intent Check - Full Install",
+    "name": "8563b17b-d746-4761-9fc0-e00759b4198f"
+  }, {
+    "condition": "$session.params.len_merged_calendar_context \u003e 1",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "calendar_context",
+        "value": "[$session.params.calendar_context]"
+      }, {
+        "parameter": "merged_calendar_context",
+        "value": "[$session.params.merged_calendar_context]"
+      } ]
+    },
+    "targetPage": "Appointment Details",
+    "name": "570c5b4e-a9b9-4276-b558-3346a971f385"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "e4cde79c-18d3-4728-a0a9-bd5a401fddec"
+      }, {
+        "parameter": "flow_id",
+        "value": "918644a0-f504-4e8f-91eb-c311a5082207"
+      }, {
+        "parameter": "page_name",
+        "value": "Check multiple appointments"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

@@ -1,0 +1,47 @@
+{
+  "name": "214100b7-a3a7-4bff-ad4c-e9d8590bf1b2",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Votre compte Bell est-il compromis ou avez-vous reçu un appel ou un courriel suspect?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "J'ai eu une transaction dont je ne suis pas au courant."
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_aqd",
+      "inputActionParameters": {
+        "brand": "bell",
+        "language": "fr-ca",
+        "route": "account_fraud"
+      },
+      "outputActionParameters": {
+        "brand": "bell",
+        "language": "fr-ca"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "The customer is inquiring about fraudulent activity (unrecognized transactions or account compromised)",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca",
+      "route": "account_fraud",
+      "utterance": "Je pense qu'il pourrait y avoir une arnaque."
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "The customer has responded with an utterance saying \"account compromised\" or \"unrecognized transaction\" then route them to bell_AQD flow.",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca",
+      "route": "account_fraud"
+    }
+  },
+  "displayName": "FR_account_fraud_IThinkThereMightBeAScamHappened_AccountCompromised",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 275,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

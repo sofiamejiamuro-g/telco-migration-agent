@@ -1,0 +1,55 @@
+{
+  "name": "ded32f79-18c7-4e6f-835d-2f99e80f9b62",
+  "displayName": "returnFromPayment",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.route = null",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "How can I help you? For example, you can say \"I want to restore my services\"." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Comment puis-je vous aider ? Par exemple, vous pouvez dire : « J'ai une question concernant ma facture »." ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "speciality",
+        "value": "true"
+      } ]
+    },
+    "targetFlow": "Default Start Flow",
+    "name": "302c8376-4669-4ece-8126-c29e122641f5"
+  }, {
+    "condition": "$session.params.route != null",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "Default Start Flow",
+    "name": "bbacea50-f0b4-4836-94fe-9bfa79a5fef1"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "ded32f79-18c7-4e6f-835d-2f99e80f9b62"
+      }, {
+        "parameter": "flow_id",
+        "value": "d35b61b6-c884-44f8-b5c7-aed63cc356ab"
+      }, {
+        "parameter": "page_name",
+        "value": "returnFromPayment"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

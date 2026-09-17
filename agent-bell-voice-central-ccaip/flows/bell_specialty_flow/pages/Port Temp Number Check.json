@@ -1,0 +1,55 @@
+{
+  "name": "c341155c-a31f-4675-bab0-1ccc505d4cf1",
+  "displayName": "Port Temp Number Check",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "setParameterActions": [ {
+      "parameter": "soc_itp_effDate",
+      "value": "$sys.func.GET_FIELD($sys.func.GET($sys.func.FILTER(\"$session.params.nm1_get_soc_info_list_response.socInfoList\", \"$.[?(@.soc == 'ITP_SOC')]\"), 0), \"effDate\")"
+    }, {
+      "parameter": "eff_year",
+      "value": "$sys.func.TO_NUMBER($sys.func.MID($session.params.soc_itp_effDate, 1, 4))"
+    }, {
+      "parameter": "eff_month",
+      "value": "$sys.func.TO_NUMBER($sys.func.MID($session.params.soc_itp_effDate, 6, 2))"
+    }, {
+      "parameter": "eff_day",
+      "value": "$sys.func.TO_NUMBER($sys.func.MID($session.params.soc_itp_effDate, 9, 2))"
+    }, {
+      "parameter": "eff_hours",
+      "value": "$sys.func.TO_NUMBER($sys.func.MID($session.params.soc_itp_effDate, 12, 2))"
+    }, {
+      "parameter": "eff_minutes",
+      "value": "$sys.func.TO_NUMBER($sys.func.MID($session.params.soc_itp_effDate, 15, 2))"
+    }, {
+      "parameter": "eff_seconds",
+      "value": "$sys.func.TO_NUMBER($sys.func.MID($session.params.soc_itp_effDate, 18, 2))"
+    }, {
+      "parameter": "effDate_struct",
+      "value": "{         \"day\" : $session.params.eff_day,         \"hours\": $session.params.eff_hours,         \"minutes\" : $session.params.eff_minutes,         \"month\" : $session.params.eff_month,         \"nanos\" : 0,         \"seconds\" : $session.params.eff_seconds,         \"year\" : $session.params.eff_year     }"
+    }, {
+      "parameter": "effDate_object",
+      "value": "$sys.func.TO_OBJECT($session.params.effDate_struct)"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.soc_ITP = true AND $sys.func.IS_FUTURE_DATE($sys.func.ADD_DATE($session.params.effDate_object, 7, \"DAYS\")) = true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "special_status",
+        "value": "bell_port_temp_number"
+      } ]
+    },
+    "targetPage": "Number Transfer Check",
+    "name": "7b6f32f9-c9e9-4cc4-9d3c-e7bf467e36b2"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Upfront Sales pitch",
+    "name": "aba3b28a-1389-41e7-9907-03de78bacb2c"
+  } ]
+}

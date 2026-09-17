@@ -1,0 +1,75 @@
+{
+  "name": "2d8ee1f5-9df3-42a6-9264-b7727a4cfa5b",
+  "displayName": "Prompt Retry",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "intent": "context.confirm_yes",
+    "condition": "$session.params.total_cc_attempts \u003c 2",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "$session.params.no_match_counter",
+        "value": 0
+      }, {
+        "parameter": "$session.params.mod_counter",
+        "value": 0
+      }, {
+        "parameter": "$session.params.repeat_flag",
+        "value": 0
+      }, {
+        "parameter": "$session.params.faq_flag",
+        "value": 0
+      }, {
+        "parameter": "$session.params.cc_invalid_counter",
+        "value": 0
+      }, {
+        "parameter": "$session.params.incorrect_cvv",
+        "value": 0
+      }, {
+        "parameter": "$session.params.n_incorrect_date",
+        "value": 0
+      }, {
+        "parameter": "$session.params.card_len_check_counter",
+        "value": 0
+      }, {
+        "parameter": "$session.params.wrong_cc_number_counter",
+        "value": 0
+      }, {
+        "parameter": "$session.params.total_cc_attempts",
+        "value": "$sys.func.ADD($session.params.total_cc_attempts, 1)"
+      }, {
+        "parameter": "$session.params.card_number",
+        "value": null
+      }, {
+        "parameter": "$session.params.expiry_date",
+        "value": null
+      }, {
+        "parameter": "$session.params.cvv_number",
+        "value": null
+      } ]
+    },
+    "targetPage": "Prompt CC Number",
+    "name": "599a58eb-dddc-4891-8ac8-87d607829836"
+  }, {
+    "intent": "context.confirm_no",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Okay. If you'd still like to complete this step, you can do so in the MyBell app. Please visit  bell.ca/support for more information." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "D’accord. Si vous souhaitez toujours effectuer cette étape, vous pouvez le faire dans l’appli MonBell. Veuillez visiter https://bell.ca/soutien pour en savoir plus." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetFlow": "bell_Feedback",
+    "name": "8d95625e-d7d8-4fd2-88e3-fdfce3df85f4"
+  } ]
+}

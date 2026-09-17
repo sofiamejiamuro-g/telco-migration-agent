@@ -1,0 +1,66 @@
+{
+  "name": "f96c02b6-1227-4c98-ad4a-83382b69aae5",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70011",
+        "brand": "bell",
+        "language": "en"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Which service are you calling about?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "I want to remove a mobile feature"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Sure, you can easily manage your Mobility plan and add-ons at anytime using MyBell. I'll send a text to the device you're calling from, so that you can easily make changes to your Mobility plan. Is that alright?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "yeah"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "sms_content": "Bell: You can visit https://m.bell.ca/managemyplan to view or make changes to your mobile plan in the MyBell app. ( bell.ca/about-us )",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "customer wants to remove any additional features/add-ons they have on their plan and if parameter {lob} is null in session then we need to call PLAYBOOK:bell_uc_ask_LOB to extract the lob value",
+    "actionParameters": {
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "en",
+      "route": "service_remove_feature",
+      "utterance": "i want to remove a feature"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "User is rerouted to check lob playbook to extract the parameter \"lob\" and return back",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "lob": "Mobility"
+    }
+  },
+  "displayName": "EN - service_remove_feature - lob null-ask lob",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 460,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

@@ -1,0 +1,145 @@
+{
+  "name": "4274f564-0f8b-4eb2-a399-da03855d8637",
+  "displayName": "Prompt For Phone Number",
+  "form": {
+    "parameters": [ {
+      "displayName": "CIRN",
+      "required": true,
+      "entityType": "@sys.phone-number",
+      "fillBehavior": {
+        "initialPromptFulfillment": {
+        
+        },
+        "repromptEventHandlers": [ {
+          "targetFlow": "Default Start Flow",
+          "event": "sys.no-input-1",
+          "triggerFulfillment": {
+            "messages": [ {
+              "text": {
+                "text": [ "Sorry, I can't seem to find that number in our records. However, I'll still do my best to help you. " ]
+              },
+              "languageCode": "en"
+            }, {
+              "text": {
+                "text": [ "Désolé, je ne parviens pas à trouver ce numéro dans nos dossiers. Soyez sans crainte, je ferai quand même de mon mieux pour vous servir." ]
+              },
+              "languageCode": "fr-ca"
+            } ],
+            "setParameterActions": [ {
+              "parameter": "ivr_va_cpm_check_fail",
+              "value": true
+            }, {
+              "parameter": "identification_status",
+              "value": "Fail"
+            }, {
+              "parameter": "global_error_counter",
+              "value": "$sys.func.ADD($session.params.global_error_counter,1)"
+            } ]
+          },
+          "name": "b9611943-f169-4486-825b-87a70c56f3db"
+        }, {
+          "targetFlow": "Default Start Flow",
+          "event": "sys.no-match-1",
+          "triggerFulfillment": {
+            "messages": [ {
+              "text": {
+                "text": [ "Sorry, I can't seem to find that number in our records. However, I'll still do my best to help you. " ]
+              },
+              "languageCode": "en"
+            }, {
+              "text": {
+                "text": [ "Désolé, je ne parviens pas à trouver ce numéro dans nos dossiers. Soyez sans crainte, je ferai quand même de mon mieux pour vous servir." ]
+              },
+              "languageCode": "fr-ca"
+            } ],
+            "setParameterActions": [ {
+              "parameter": "ivr_va_cpm_check_fail",
+              "value": true
+            }, {
+              "parameter": "identification_status",
+              "value": "Fail"
+            }, {
+              "parameter": "global_error_counter",
+              "value": "$sys.func.ADD($session.params.global_error_counter,1)"
+            } ]
+          },
+          "name": "496a3a3a-6b95-4ed7-ae5d-5a0ce0073590"
+        } ]
+      },
+      "advancedSettings": {
+        "dtmfSettings": {
+          "enabled": true,
+          "maxDigits": 11,
+          "finishDigit": "#",
+          "useSystemEntityRule": false,
+          "interdigitTimeoutDuration": {
+            "seconds": 5
+          },
+          "endpointingTimeoutDuration": {
+            "seconds": 5
+          }
+        }
+      }
+    } ]
+  },
+  "entryFulfillment": {
+    "messages": [ {
+      "text": {
+        "text": [ "I'm not seeing an account associated with that number. Could you please repeat the 10-digit phone number for me? You can also key it in on your phone." ]
+      },
+      "languageCode": "en"
+    }, {
+      "text": {
+        "text": [ "Je ne trouve aucun compte associé à ce numéro. Pourriez-vous répéter le numéro de téléphone de 10 chiffres? Vous pouvez aussi le composer sur votre téléphone." ]
+      },
+      "languageCode": "fr-ca"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.CIRN != null",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "CIRN_1",
+        "value": "$sys.func.SUBSTITUTE($session.params.CIRN, \"[^0-9]\", \"\")"
+      }, {
+        "parameter": "CIRN_Len",
+        "value": "$sys.func.LEN($session.params.CIRN_1)"
+      }, {
+        "parameter": "CIRN_1st_Pos",
+        "value": "$sys.func.MID($session.params.CIRN_1, 1, 1)"
+      }, {
+        "parameter": "CIRN_11_digit_Valid",
+        "value": "$sys.func.IF(\"$session.params.CIRN_1st_Pos =  1  AND $session.params.CIRN_Len = 11\", $sys.func.MID($session.params.CIRN_1,2,10), \"\")"
+      }, {
+        "parameter": "CIRN_11_digit_Invalid",
+        "value": "$sys.func.IF(\"$session.params.CIRN_1st_Pos !=  1 AND $session.params.CIRN_Len = 11\", \"\", \"\")"
+      }, {
+        "parameter": "CIRN_10_digit_Valid",
+        "value": "$sys.func.IF(\"$session.params.CIRN_Len = 10\", $session.params.CIRN_1, \"\")"
+      }, {
+        "parameter": "CIRN_Invalid",
+        "value": "$sys.func.IF(\"$session.params.CIRN_Len != 10 OR $session.params.CIRN_Len != 11\", \"\", \"\")"
+      }, {
+        "parameter": "CIRN_10",
+        "value": "$sys.func.IF(\"$sys.func.LEN($session.params.CIRN_10_digit_Valid) = 10\", \"$session.params.CIRN_10_digit_Valid\", \"\")"
+      }, {
+        "parameter": "CIRN",
+        "value": "$sys.func.IF(\"$sys.func.LEN($session.params.CIRN_11_digit_Valid) = 10\", \"$session.params.CIRN_11_digit_Valid\", \"$session.params.CIRN_10\")"
+      }, {
+        "parameter": "CIRN",
+        "value": "$sys.func.IF(\"($session.params.CIRN:0000000000) OR ($session.params.CIRN:1111111111) OR ($session.params.CIRN:2222222222) OR ($session.params.CIRN:3333333333) OR ($session.params.CIRN:4444444444) OR ($session.params.CIRN:5555555555) OR ($session.params.CIRN:6666666666) OR ($session.params.CIRN:7777777777) OR ($session.params.CIRN:8888888888) OR ($session.params.CIRN:9999999999)\", \"\", $session.params.CIRN)"
+      }, {
+        "parameter": "CIRN_flag",
+        "value": "$sys.func.IS_PHONE_NUMBER($session.params.CIRN, \"CA\")"
+      }, {
+        "parameter": "CIRN_999",
+        "value": "$sys.func.MID($session.params.CIRN_1, 1, 3)"
+      }, {
+        "parameter": "event_type",
+        "value": null
+      } ]
+    },
+    "targetPage": "Phone Or CIRN Validation",
+    "name": "82ac8f8b-c91b-4d5a-876d-eb56a72996cf"
+  } ]
+}

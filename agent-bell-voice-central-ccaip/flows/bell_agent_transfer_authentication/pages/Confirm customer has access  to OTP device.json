@@ -1,0 +1,198 @@
+{
+  "name": "e7ef227e-769b-4e58-9453-1a5737e4bd83",
+  "displayName": "Confirm customer has access  to OTP device",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "intent": "context.repeat",
+    "condition": "$session.params.repeat_attempt_count \u003c 2",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "repeat_attempt_count",
+        "value": "$sys.func.ADD($session.params.repeat_attempt_count, 1)"
+      } ]
+    },
+    "targetPage": "Current Page",
+    "name": "2d11124d-2c60-4f5f-af26-94ff20e32d9a"
+  }, {
+    "intent": "context.repeat",
+    "condition": "$session.params.repeat_attempt_count \u003e= 2",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_determine_handover",
+    "name": "3b9cc624-0d0a-4a44-9661-2a8f8215bf33"
+  }, {
+    "intent": "other_speak_to_agent",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Si vous n’avez pas accès à un téléphone mobile figurant à ce compte, nous ne pourrons pas vous envoyer de code pour vérifier votre identité." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "Since you don’t have access to a mobile phone listed on your account, we can't send a verification code to confirm your identity." ]
+        },
+        "languageCode": "en"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "auth_status",
+        "value": "Fail"
+      } ]
+    },
+    "targetPage": "End Flow",
+    "name": "9d870e6b-1fb8-4301-a1aa-ff9bd1ae4697"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "aqd_device_confirm",
+        "value": true
+      } ]
+    },
+    "name": "b51b21e3-7b0e-40a2-a38c-dc3d3009e735",
+    "targetPlaybook": "bell_UC_Other"
+  }, {
+    "condition": "$session.params.otp_device = 0",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "D'accord, nous allons vous mettre en relation avec un agent." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "Okay, let's get you to an agent." ]
+        },
+        "languageCode": "en"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "auth_status",
+        "value": "Fail"
+      }, {
+        "parameter": "otp_has_phone",
+        "value": false
+      } ]
+    },
+    "targetPage": "End Flow",
+    "name": "4997cc44-5b51-459b-b028-b9016471c40a"
+  }, {
+    "condition": "$session.params.otp_device = 1",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "otp_has_phone",
+        "value": true
+      } ]
+    },
+    "targetPage": "Webhook dfcx_support",
+    "name": "d027c42d-4a2c-4ec1-842b-bfc5060f676f"
+  } ],
+  "eventHandlers": [ {
+    "event": "sys.no-input-1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Avez-vous accès à un téléphone mobile dont le numéro figure à ce compte ?" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "Do you have access to a mobile phone that's listed on your account?" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "a6d74042-c81e-4319-946f-82a70daf4a77"
+  }, {
+    "event": "sys.no-input-2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Avez-vous accès à un téléphone mobile dont le numéro figure à ce compte ?" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "Do you have access to a mobile phone that's listed on your account?" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "c60b491a-b1e1-41ad-87ea-e6948fbc6dba"
+  }, {
+    "targetPage": "End Flow",
+    "event": "sys.no-input-3",
+    "triggerFulfillment": {
+    
+    },
+    "name": "6e5ca385-9871-4812-a50e-be6aacbc9cd5"
+  }, {
+    "event": "sys.no-match-1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Avez-vous accès à un téléphone mobile dont le numéro figure à ce compte ?" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "Do you have access to a mobile phone that's listed on your account?" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "533626bb-ddca-4fc3-b5b4-92e96fc25434"
+  }, {
+    "event": "sys.no-match-2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Je n'ai toujours pas compris. Avez-vous accès à un téléphone mobile dont le numéro figure à ce compte ?" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "I’m having trouble understanding. Do you have access to a mobile phone that's listed on your account?" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "717a18de-e540-4ad6-b1bf-f115daf1cd04"
+  }, {
+    "targetPage": "End Flow",
+    "event": "sys.no-match-3",
+    "triggerFulfillment": {
+    
+    },
+    "name": "fbe349bd-8b72-4eb5-ab77-ffd2d67b7eb0"
+  } ],
+  "advancedSettings": {
+    "speechAdaptationSettings": {
+      "enableManualSpeechAdaptation": true,
+      "biasingPhraseSets": [ {
+        "biasingPhrases": [ {
+          "value": "Fibe TV",
+          "boost": 20
+        }, {
+          "value": "my Fibe TV",
+          "boost": 20
+        }, {
+          "value": "the Fibe TV",
+          "boost": 20
+        }, {
+          "value": "Fibe tv",
+          "boost": 20
+        } ],
+        "displayName": "Fibe-TV"
+      } ]
+    }
+  },
+  "speakerIdSettings": {
+  
+  }
+}

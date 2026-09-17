@@ -1,0 +1,1276 @@
+{
+  "name": "00000000-0000-0000-0000-000000000000",
+  "displayName": "Default Start Flow",
+  "description": "A start flow created along with the agent",
+  "transitionRoutes": [ {
+    "intent": "Default Welcome Intent",
+    "condition": "$session.params.NGA = true OR $session.params.NGA = \"true\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "handoff_from",
+        "value": "Conversation Start"
+      }, {
+        "parameter": "language",
+        "value": "$session.params.language_tmp"
+      }, {
+        "parameter": "dfcx_session_id",
+        "value": "$request.session-id"
+      } ]
+    },
+    "targetFlow": "nga_handling",
+    "name": "7810ef56-ac72-4337-947d-3134458d1b8b"
+  }, {
+    "intent": "Default Welcome Intent",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Salut !", "Bonjour !", "Salutations !", "Bienvenue !" ]
+        },
+        "languageCode": "fr"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "agent_id",
+        "value": "$request.agent-id"
+      }, {
+        "parameter": "dfcx_session_id",
+        "value": "$request.session-id"
+      }, {
+        "parameter": "transferred_call_flag",
+        "value": 0
+      } ],
+      "nextActionOverride": {
+      
+      }
+    },
+    "name": "ca8a3224-debe-40ef-ac2a-5cd8b45c7476"
+  }, {
+    "intent": "context.repeat",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "$request.generative.repeat_response" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "$request.generative.repeat_response" ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "repeat_flag",
+        "value": 1
+      } ],
+      "generators": [ {
+        "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/d2573b7b-849d-43d3-8c64-867837bd84d2",
+        "inputParameters": [ {
+          "key": "request-last-agent-utterance",
+          "value": "$request.last-agent-utterance"
+        } ],
+        "outputParameter": "$request.generative.repeat_response"
+      } ],
+      "nextActionOverride": {
+      
+      }
+    },
+    "name": "0f8876c7-3936-441e-95f2-1a062956ebc3"
+  }, {
+    "condition": "$session.params.route = \"other_speak_to_agent\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Routing Page",
+    "name": "b1b433c0-d694-439b-99b9-708ca8686b3c"
+  }, {
+    "condition": "$session.params.NGA = true OR $session.params.NGA = \"true\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "handoff_from",
+        "value": "Default Start Flow"
+      } ]
+    },
+    "targetFlow": "nga_handling",
+    "name": "77de5a0d-4d9c-45a1-bbb7-a220444ccba1"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "local_nomatch_counter",
+        "value": 0
+      }, {
+        "parameter": "local_noinput_counter",
+        "value": 0
+      }, {
+        "parameter": "global_error_counter",
+        "value": "$sys.func.IF(\"$session.params.global_error_counter\u003e0\",$session.params.global_error_counter,0)"
+      } ]
+    },
+    "name": "ecfe1139-e095-4159-9c18-f134c5e58c26"
+  }, {
+    "condition": "$session.params.no_match_1 = true OR $session.params.no_match_2 = true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "agent_id",
+        "value": "$request.agent-id"
+      } ]
+    },
+    "targetPage": "Routing Page",
+    "name": "ebaaa675-af90-4aeb-8d66-294e0164cbc3"
+  }, {
+    "condition": "$session.params.event_type = \"full start over\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "route",
+        "value": null
+      }, {
+        "parameter": "utterance",
+        "value": null
+      }, {
+        "parameter": "identification_status",
+        "value": null
+      }, {
+        "parameter": "auth_status",
+        "value": null
+      }, {
+        "parameter": "event_type",
+        "value": null
+      }, {
+        "parameter": "pin",
+        "value": null
+      }, {
+        "parameter": "CIRN",
+        "value": null
+      }, {
+        "parameter": "repeat_flag",
+        "value": 0
+      }, {
+        "parameter": "invalid_clid_counter",
+        "value": 0
+      } ],
+      "nextActionOverride": {
+      
+      }
+    },
+    "targetPage": "Get Phone Number",
+    "name": "bd91afdc-cd1f-48ce-989b-cb06aba7f7ca"
+  }, {
+    "condition": "$session.params.event_type = \"partial start over\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "route",
+        "value": null
+      }, {
+        "parameter": "utterance",
+        "value": null
+      }, {
+        "parameter": "repeat_flag",
+        "value": 0
+      }, {
+        "parameter": "event_type",
+        "value": null
+      } ],
+      "nextActionOverride": {
+      
+      }
+    },
+    "targetPage": "Check Identification Status",
+    "name": "0d093ea8-3dd1-4e90-a81a-bb2baed66424"
+  }, {
+    "condition": "$session.params.speciality = \"true\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Routing Page",
+    "name": "11b5ddbd-77cc-4709-a646-db700b8ab35a"
+  }, {
+    "condition": "$session.params.skip_id = true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Routing Page",
+    "name": "79aa21c4-c147-4ad4-8d26-4f92d67ada4e"
+  }, {
+    "condition": "$session.params.event_type = \"anything else start over\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "How can I help you?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Que puis-je faire d’autre pour vous aider aujourd’hui?" ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "route",
+        "value": null
+      }, {
+        "parameter": "utterance",
+        "value": null
+      } ]
+    },
+    "targetPage": "Routing Page",
+    "name": "0fd2ffdb-44bb-4e0f-9dca-f961643e1d70"
+  }, {
+    "condition": "$session.params.bell_speciality = \"true\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Routing Page",
+    "name": "a5863096-a9b1-4f6b-97fe-b5345937e76a"
+  }, {
+    "condition": "$session.params.event_type = \"query_rewriter_smalltalk\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "$session.params.event_type",
+        "value": null
+      }, {
+        "parameter": "$session.params.utterance",
+        "value": null
+      } ]
+    },
+    "targetPage": "Routing Page",
+    "name": "137988e6-794a-4cb9-8193-e4b2acc5e765"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "brand",
+        "value": "$sys.func.IF(\"$session.params.brand = null\", \"bell\", $session.params.brand)"
+      }, {
+        "parameter": "language",
+        "value": "$sys.func.IF(\"$session.params.language = null\", \"$request.language\", $session.params.language)"
+      }, {
+        "parameter": "call_id",
+        "value": "$session.params.call_id"
+      }, {
+        "parameter": "menu_type",
+        "value": "$sys.func.IF(\"$session.params.menu_type = null\", \"ivr_menu\", $session.params.menu_type)"
+      }, {
+        "parameter": "clid",
+        "value": "$sys.func.IF(\"$session.params.clid = null\", \"+10000000000\",$session.params.clid)"
+      }, {
+        "parameter": "tfn",
+        "value": "$sys.func.IF(\"$session.params.tfn = null\", \"+18334880363\",$session.params.tfn)"
+      }, {
+        "parameter": "speak_to_agent_counter",
+        "value": 0
+      }, {
+        "parameter": "repeat_flag",
+        "value": 0
+      }, {
+        "parameter": "call_id_ref",
+        "value": "$sys.func.CONCATENATE(\"REF\", $sys.func.TO_TEXT($session.params.call_id))"
+      }, {
+        "parameter": "global_error_counter",
+        "value": "$sys.func.IF(\"$session.params.global_error_counter\u003e0\",$session.params.global_error_counter,0)"
+      } ],
+      "nextActionOverride": {
+      
+      }
+    },
+    "name": "d5fdcfaf-7a92-4c45-a2c2-db8f6bd38fed"
+  }, {
+    "condition": "$session.params.tfn != null AND $sys.func.LEN($sys.func.TO_TEXT($session.params.tfn)) = 12",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "tfn",
+        "value": "$sys.func.MID($session.params.tfn,3,10)"
+      } ]
+    },
+    "name": "9b035d86-6186-4491-9347-5af36cc6ee18"
+  }, {
+    "condition": "$session.params.clid != null AND $sys.func.LEN($sys.func.TO_TEXT($session.params.clid)) = 12",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "clid",
+        "value": "$sys.func.MID($session.params.clid,3,10)"
+      } ]
+    },
+    "name": "ca70ff1a-61d6-415c-81ab-d77fc49cdfb9"
+  }, {
+    "condition": "$session.params.tfn_tmp != null AND $sys.func.LEN($sys.func.TO_TEXT($session.params.tfn_tmp)) = 12",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "tfn",
+        "value": "$sys.func.MID($session.params.tfn_tmp,3,10)"
+      } ]
+    },
+    "name": "6a0c5bb9-b76a-498b-9f60-8297b447815b"
+  }, {
+    "condition": "$session.params.clid_tmp != null AND $sys.func.LEN($sys.func.TO_TEXT($session.params.clid_tmp)) = 12",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "clid",
+        "value": "$sys.func.MID($session.params.clid_tmp,3,10)"
+      } ]
+    },
+    "name": "74013205-a1ff-4007-a9b2-8dcdbdc749b8"
+  }, {
+    "condition": "$session.params.ivr_va_get_did_fail = true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Entry Point Check",
+    "name": "a00aadac-4528-479d-9de6-9e8f72500c7f"
+  }, {
+    "condition": "$session.params.ivr_va_cpm_check_fail = true",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "In a sentence or two, how can we help you today?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "In a sentence or two, how can we help you today?" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "targetPage": "Routing Page",
+    "name": "e77c1f29-c378-4485-a431-0728ec8668c4"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook dfcx-intake-routing",
+    "name": "910f0e72-42e3-4f0b-bbad-0d72bbce975e"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Global Error Handling",
+    "event": "sys.no-match-default",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "J'ai du mal à comprendre cette question.", "J'ai mal compris votre demande.", "Je n'ai pas saisi ce que vous avez dit.", "Je crois que je ne vous suis pas.", "Je ne comprends pas de quoi vous me parlez." ]
+        },
+        "languageCode": "fr"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "global_error_counter",
+        "value": "$sys.func.ADD($session.params.global_error_counter,1)"
+      }, {
+        "parameter": "local_trigger",
+        "value": "no_match"
+      }, {
+        "parameter": "local_nomatch_counter",
+        "value": "$sys.func.ADD($session.params.local_nomatch_counter,1)"
+      }, {
+        "parameter": "agent_id",
+        "value": "$request.agent-id"
+      } ]
+    },
+    "name": "a9e492c9-a76f-49b9-a861-37cd4afe4d5e"
+  }, {
+    "targetPage": "Global Error Handling",
+    "event": "sys.no-input-default",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "J'ai du mal à comprendre cette question.", "J'ai mal compris votre demande.", "Je n'ai pas saisi ce que vous avez dit.", "Je crois que je ne vous suis pas.", "Je ne comprends pas de quoi vous me parlez." ]
+        },
+        "languageCode": "fr"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "global_error_counter",
+        "value": "$sys.func.ADD($session.params.global_error_counter,1)"
+      }, {
+        "parameter": "local_trigger",
+        "value": "no_input"
+      }, {
+        "parameter": "local_noinput_counter",
+        "value": "$sys.func.ADD($session.params.local_noinput_counter,1)"
+      } ]
+    },
+    "name": "eaef0404-a5d1-4ae1-b93d-1342b803e4d0"
+  }, {
+    "targetPage": "Webhook dfcx-intake-routing",
+    "event": "greet",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "brand",
+        "value": "$sys.func.IF(\"$session.params.brand = null\", \"bell\", $session.params.brand)"
+      }, {
+        "parameter": "language",
+        "value": "$sys.func.IF(\"$session.params.language = null\", \"$request.language\", $session.params.language)"
+      }, {
+        "parameter": "call_id",
+        "value": "$session.params.call_id"
+      }, {
+        "parameter": "menu_type",
+        "value": "$sys.func.IF(\"$session.params.menu_type = null\", \"ivr_menu\", $session.params.menu_type)"
+      }, {
+        "parameter": "clid",
+        "value": "$sys.func.IF(\"$sys.func.LEN($session.params.clid)\u003e10\",$sys.func.MID($session.params.clid,3,10),$session.params.clid)"
+      }, {
+        "parameter": "tfn",
+        "value": "$sys.func.IF(\"$sys.func.LEN($session.params.tfn)\u003e10\",$sys.func.MID($session.params.tfn,3,10),$session.params.tfn)"
+      }, {
+        "parameter": "speak_to_agent_counter",
+        "value": 0
+      }, {
+        "parameter": "repeat_flag",
+        "value": 0
+      }, {
+        "parameter": "call_id_ref",
+        "value": "$sys.func.CONCATENATE(\"REF\", $sys.func.TO_TEXT($session.params.call_id))"
+      } ],
+      "nextActionOverride": {
+      
+      }
+    },
+    "name": "f49f2939-100c-446a-970d-8247e56d3e0f"
+  }, {
+    "targetPage": "End Session",
+    "event": "wrapup",
+    "triggerFulfillment": {
+    
+    },
+    "name": "f9789571-96a1-40e9-9c7c-e30df4c5a5f6"
+  } ],
+  "nluSettings": {
+    "modelType": "MODEL_TYPE_ADVANCED",
+    "classificationThreshold": 0.44999999,
+    "modelTrainingMode": "MODEL_TRAINING_MODE_MANUAL",
+    "multiIntentSettings": {
+    
+    }
+  },
+  "advancedSettings": {
+    "enabled": true,
+    "speechSettings": {
+      "endpointerSensitivity": 90,
+      "noSpeechTimeout": {
+        "seconds": 10
+      },
+      "models": [ {
+        "key": "en",
+        "value": "telephony_short"
+      }, {
+        "key": "fr-ca",
+        "value": "telephony_short"
+      } ]
+    },
+    "speechAdaptationSettings": {
+      "enableManualSpeechAdaptation": true,
+      "biasingPhraseSets": [ {
+        "biasingPhrases": [ {
+          "value": "Fibe television",
+          "boost": 20
+        }, {
+          "value": "Fibe",
+          "boost": 20
+        }, {
+          "value": "Fibe TV",
+          "boost": 20
+        }, {
+          "value": "Fibe TV receiver",
+          "boost": 20
+        }, {
+          "value": "Fibe TV transmitter",
+          "boost": 20
+        } ],
+        "displayName": "fibe_tv"
+      }, {
+        "biasingPhrases": [ {
+          "value": "LAN port",
+          "boost": 20
+        }, {
+          "value": "a new LAN port",
+          "boost": 20
+        } ],
+        "displayName": "LAN_port"
+      }, {
+        "biasingPhrases": [ {
+          "value": "SFP port",
+          "boost": 20
+        }, {
+          "value": "a new SFP port",
+          "boost": 20
+        } ],
+        "displayName": "SFP_port"
+      }, {
+        "biasingPhrases": [ {
+          "value": "please top up my account",
+          "boost": 20
+        }, {
+          "value": "top up my account",
+          "boost": 15
+        }, {
+          "value": "account top up",
+          "boost": 15
+        }, {
+          "value": "can you please top up",
+          "boost": 20
+        }, {
+          "value": "please top up",
+          "boost": 20
+        }, {
+          "value": "top up",
+          "boost": 15
+        }, {
+          "value": "top up phone",
+          "boost": 20
+        }, {
+          "value": "top up my phone",
+          "boost": 20
+        } ],
+        "displayName": "Account_Top_Up"
+      }, {
+        "biasingPhrases": [ {
+          "value": "topping up",
+          "boost": 15
+        } ],
+        "displayName": "topping_up"
+      }, {
+        "biasingPhrases": [ {
+          "value": "Bell Aliant",
+          "boost": 5
+        }, {
+          "value": "Bell mobility",
+          "boost": 5
+        }, {
+          "value": "My Bell",
+          "boost": 10
+        }, {
+          "value": "Bell services",
+          "boost": 10
+        }, {
+          "value": "Bell account",
+          "boost": 10
+        } ],
+        "displayName": "Bell"
+      }, {
+        "biasingPhrases": [ {
+          "value": "$OOV_CLASS_DIGIT_SEQUENCE",
+          "boost": 20
+        } ],
+        "displayName": "Phone_number"
+      }, {
+        "biasingPhrases": [ {
+          "value": "I do not want to tell you",
+          "boost": 20
+        }, {
+          "value": "I don't want to tell you",
+          "boost": 15
+        }, {
+          "value": "I don't wanna tell you",
+          "boost": 15
+        } ],
+        "displayName": "I_do_not_want_to_tell_you"
+      }, {
+        "biasingPhrases": [ {
+          "value": "port in my phone number",
+          "boost": 10
+        }, {
+          "value": "port in",
+          "boost": 20
+        }, {
+          "value": "I want to port in",
+          "boost": 20
+        } ],
+        "displayName": "port_in"
+      }, {
+        "biasingPhrases": [ {
+          "value": "Wi-Fi pods",
+          "boost": 20
+        }, {
+          "value": "Wi-Fi pod",
+          "boost": 20
+        }, {
+          "value": "order Wi-Fi pods",
+          "boost": 15
+        }, {
+          "value": "buy a Wi-Fi pod",
+          "boost": 15
+        }, {
+          "value": "get new Wi-Fi pods",
+          "boost": 15
+        } ],
+        "displayName": "Wifi_pods"
+      }, {
+        "biasingPhrases": [ {
+          "value": "what is the pre-authorized payment status in my account",
+          "boost": 20
+        }, {
+          "value": "what's the pre-authorized payment status in my account",
+          "boost": 15
+        } ],
+        "displayName": "pre-authorized_payment_status"
+      }, {
+        "biasingPhrases": [ {
+          "value": "no sim",
+          "boost": 20
+        }, {
+          "value": "sim gone",
+          "boost": 20
+        } ],
+        "displayName": "no-sim"
+      }, {
+        "biasingPhrases": [ {
+          "value": "locked Bell SIM",
+          "boost": 20
+        }, {
+          "value": "my locked Bell SIM",
+          "boost": 20
+        }, {
+          "value": "the locked Bell SIM",
+          "boost": 20
+        }, {
+          "value": "a locked Bell SIM",
+          "boost": 20
+        }, {
+          "value": "locked Bell SIM card",
+          "boost": 20
+        } ],
+        "displayName": "locked-bell-sim"
+      }, {
+        "biasingPhrases": [ {
+          "value": "roaming",
+          "boost": 20
+        }, {
+          "value": "add roaming",
+          "boost": 20
+        }, {
+          "value": "I want roaming",
+          "boost": 20
+        }, {
+          "value": "roaming plan",
+          "boost": 20
+        }, {
+          "value": "Roam sweet Roam",
+          "boost": 15
+        }, {
+          "value": "roaming option",
+          "boost": 20
+        } ],
+        "displayName": "roaming"
+      }, {
+        "biasingPhrases": [ {
+          "value": "WAN Port",
+          "boost": 20
+        }, {
+          "value": "a new WAN Port",
+          "boost": 20
+        }, {
+          "value": "un port WAN",
+          "boost": 20
+        }, {
+          "value": "port WAN",
+          "boost": 20
+        }, {
+          "value": "un nouveau port WAN",
+          "boost": 20
+        } ],
+        "displayName": "WAN_port"
+      }, {
+        "biasingPhrases": [ {
+          "value": "MxV3 remote",
+          "boost": 20
+        }, {
+          "value": "a new MxV3 remote",
+          "boost": 20
+        } ],
+        "displayName": "MxV3_remote"
+      }, {
+        "biasingPhrases": [ {
+          "value": "Bluetooth remote kit",
+          "boost": 20
+        }, {
+          "value": "a new Bluetooth remote kit",
+          "boost": 20
+        } ],
+        "displayName": "Bluetooth"
+      }, {
+        "biasingPhrases": [ {
+          "value": "pay bill",
+          "boost": 20
+        }, {
+          "value": "I want to pay",
+          "boost": 20
+        }, {
+          "value": "I'd like to pay my bill",
+          "boost": 15
+        }, {
+          "value": "paying my bill",
+          "boost": 15
+        }, {
+          "value": "bill payment",
+          "boost": 15
+        }, {
+          "value": "pay my bill",
+          "boost": 20
+        }, {
+          "value": "bill on",
+          "boost": 20
+        }, {
+          "value": "bill on my account",
+          "boost": 20
+        }, {
+          "value": "trying to pay my damn bill",
+          "boost": 20
+        }, {
+          "value": "billing",
+          "boost": 20
+        }, {
+          "value": "billed",
+          "boost": 20
+        }, {
+          "value": "bill",
+          "boost": 20
+        }, {
+          "value": "Bill",
+          "boost": 20
+        }, {
+          "value": "pay bill and change plan",
+          "boost": 20
+        }, {
+          "value": "pay a bill",
+          "boost": 20
+        }, {
+          "value": "paying",
+          "boost": 20
+        }, {
+          "value": "pay",
+          "boost": 20
+        }, {
+          "value": "paying my bill",
+          "boost": 20
+        } ],
+        "displayName": "bill_payment"
+      }, {
+        "biasingPhrases": [ {
+          "value": "new plan",
+          "boost": 20
+        }, {
+          "value": "plan",
+          "boost": 20
+        }, {
+          "value": "I want new plan ",
+          "boost": 20
+        } ],
+        "displayName": "plan"
+      }, {
+        "biasingPhrases": [ {
+          "value": "accessibility",
+          "boost": 20
+        } ],
+        "displayName": "Accessibility"
+      }, {
+        "biasingPhrases": [ {
+          "value": "mobility",
+          "boost": 20
+        }, {
+          "value": "mobility service",
+          "boost": 20
+        }, {
+          "value": "mobility services",
+          "boost": 20
+        } ],
+        "displayName": "mobility"
+      }, {
+        "biasingPhrases": [ {
+          "value": "Crave",
+          "boost": 20
+        }, {
+          "value": "crave",
+          "boost": 20
+        } ],
+        "displayName": "Crave"
+      }, {
+        "biasingPhrases": [ {
+          "value": "Ahlo",
+          "boost": 20
+        }, {
+          "value": "ahlo",
+          "boost": 20
+        }, {
+          "value": "ahlo smartphone",
+          "boost": 20
+        }, {
+          "value": "ahlo phone",
+          "boost": 20
+        } ],
+        "displayName": "Ahlo"
+      }, {
+        "biasingPhrases": [ {
+          "value": "eSIM",
+          "boost": 20
+        }, {
+          "value": "I want eSIM",
+          "boost": 20
+        }, {
+          "value": "I need an eSIM",
+          "boost": 20
+        }, {
+          "value": "I want to have an eSIM",
+          "boost": 20
+        }, {
+          "value": "I need to have a new eSIM",
+          "boost": 20
+        }, {
+          "value": "e-sim",
+          "boost": 20
+        }, {
+          "value": "E-sim",
+          "boost": 20
+        } ],
+        "displayName": "ESIM"
+      }, {
+        "biasingPhrases": [ {
+          "value": "réseau",
+          "boost": 20
+        }, {
+          "value": "Réseau",
+          "boost": 20
+        } ],
+        "displayName": "Reseau"
+      }, {
+        "biasingPhrases": [ {
+          "value": "deux",
+          "boost": 20
+        }, {
+          "value": "Deux",
+          "boost": 20
+        }, {
+          "value": "DEUX",
+          "boost": 20
+        } ],
+        "displayName": "Deux"
+      }, {
+        "biasingPhrases": [ {
+          "value": "SIM",
+          "boost": 20
+        }, {
+          "value": "sim",
+          "boost": 20
+        } ],
+        "displayName": "SIM"
+      }, {
+        "biasingPhrases": [ {
+          "value": "tablet order",
+          "boost": 20
+        } ],
+        "displayName": "order"
+      }, {
+        "biasingPhrases": [ {
+          "value": "speak to an agent",
+          "boost": 20
+        }, {
+          "value": "transfer to an agent",
+          "boost": 20
+        }, {
+          "value": "I want to speak to an agent",
+          "boost": 20
+        }, {
+          "value": "I want to talk to an agent",
+          "boost": 20
+        }, {
+          "value": "talk to an agent",
+          "boost": 20
+        }, {
+          "value": "to an agent",
+          "boost": 20
+        } ],
+        "displayName": "Agent"
+      }, {
+        "biasingPhrases": [ {
+          "value": "uh-huhhh",
+          "boost": 20
+        }, {
+          "value": "mm-hmmm",
+          "boost": 20
+        }, {
+          "value": "uhmm",
+          "boost": 20
+        }, {
+          "value": "errr",
+          "boost": 20
+        }, {
+          "value": "hmm",
+          "boost": 20
+        }, {
+          "value": "uh",
+          "boost": 20
+        } ],
+        "displayName": "non_lexical_fillers"
+      }, {
+        "biasingPhrases": [ {
+          "value": "un",
+          "boost": 20
+        }, {
+          "value": "Un",
+          "boost": 20
+        } ],
+        "displayName": "un"
+      }, {
+        "biasingPhrases": [ {
+          "value": "to Telus",
+          "boost": 20
+        }, {
+          "value": "I want to transfer this Main Line number to Telus",
+          "boost": 20
+        }, {
+          "value": "I would like to transfer my landline number to Telus",
+          "boost": 20
+        }, {
+          "value": "I want to transfer this landline number to Telus",
+          "boost": 20
+        }, {
+          "value": "Telus",
+          "boost": 20
+        } ],
+        "displayName": "telus"
+      }, {
+        "biasingPhrases": [ {
+          "value": "change plan",
+          "boost": 20
+        }, {
+          "value": "change plans",
+          "boost": 20
+        }, {
+          "value": "change my plan",
+          "boost": 20
+        } ],
+        "displayName": "change_plan"
+      }, {
+        "biasingPhrases": [ {
+          "value": "make a payment",
+          "boost": 20
+        }, {
+          "value": "pay",
+          "boost": 20
+        }, {
+          "value": "underpayment",
+          "boost": 20
+        }, {
+          "value": "paiement",
+          "boost": 20
+        } ],
+        "displayName": "payment"
+      }, {
+        "biasingPhrases": [ {
+          "value": "cancel service",
+          "boost": 20
+        }, {
+          "value": "cancel",
+          "boost": 20
+        } ],
+        "displayName": "cancel_service"
+      }, {
+        "biasingPhrases": [ {
+          "value": "un forfait",
+          "boost": 20
+        }, {
+          "value": "forfait internet",
+          "boost": 20
+        }, {
+          "value": "forfait",
+          "boost": 20
+        }, {
+          "value": "forfait voyage",
+          "boost": 20
+        } ],
+        "displayName": "un_forfait"
+      }, {
+        "biasingPhrases": [ {
+          "value": "make changes",
+          "boost": 20
+        } ],
+        "displayName": "make_changes"
+      }, {
+        "biasingPhrases": [ {
+          "value": "add new service",
+          "boost": 20
+        }, {
+          "value": "add a new service",
+          "boost": 20
+        } ],
+        "displayName": "new-service"
+      }, {
+        "biasingPhrases": [ {
+          "value": "my WiFi is freezing",
+          "boost": 20
+        }, {
+          "value": "my WiFi freezing",
+          "boost": 20
+        }, {
+          "value": "WiFi freezing",
+          "boost": 20
+        }, {
+          "value": "about my WiFi freezing",
+          "boost": 15
+        } ],
+        "displayName": "WiFi"
+      }, {
+        "biasingPhrases": [ {
+          "value": "carte de crédit",
+          "boost": 15
+        }, {
+          "value": "carte crédit",
+          "boost": 15
+        }, {
+          "value": "crédit",
+          "boost": 15
+        } ],
+        "displayName": "credit_card_FR"
+      }, {
+        "biasingPhrases": [ {
+          "value": "MFA",
+          "boost": 20
+        }, {
+          "value": "my MFA isn't working",
+          "boost": 20
+        }, {
+          "value": "my MFA is not working",
+          "boost": 20
+        } ],
+        "displayName": "MFA"
+      }, {
+        "biasingPhrases": [ {
+          "value": "Je veux un nouveau service",
+          "boost": 20
+        } ],
+        "displayName": "je_veux_un_nouveau_service"
+      }, {
+        "biasingPhrases": [ {
+          "value": "suspend",
+          "boost": 20
+        }, {
+          "value": "I'd like to suspend my services due to a natural disaster",
+          "boost": 20
+        }, {
+          "value": "here has been an earthquake I would like to just suspend my services",
+          "boost": 20
+        }, {
+          "value": "I'd like to suspend my service",
+          "boost": 20
+        } ],
+        "displayName": "Suspend"
+      }, {
+        "biasingPhrases": [ {
+          "value": "error",
+          "boost": 20
+        }, {
+          "value": "error code",
+          "boost": 20
+        }, {
+          "value": "error code 2000",
+          "boost": 20
+        }, {
+          "value": "error 2000",
+          "boost": 20
+        } ],
+        "displayName": "Error_arrow_mistranscription"
+      } ]
+    }
+  },
+  "nluSettingsList": [ {
+    "modelType": "MODEL_TYPE_ADVANCED",
+    "classificationThreshold": 0.85000002,
+    "modelTrainingMode": "MODEL_TRAINING_MODE_MANUAL",
+    "multiIntentSettings": {
+    
+    },
+    "languageCode": "en"
+  }, {
+    "modelType": "MODEL_TYPE_ADVANCED",
+    "classificationThreshold": 0.85000002,
+    "modelTrainingMode": "MODEL_TRAINING_MODE_MANUAL",
+    "multiIntentSettings": {
+    
+    },
+    "languageCode": "fr-ca"
+  } ],
+  "inputParameterDefinitions": [ {
+    "name": "event_type",
+    "description": "Event type",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "STRING"
+      }
+    },
+    "parameterType": {
+      "name": "event_type",
+      "openapiJsonSchema": {
+        "type": "string"
+      }
+    }
+  }, {
+    "name": "brand_num",
+    "description": "brand number",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "NUMBER"
+      }
+    },
+    "parameterType": {
+      "name": "brand_num",
+      "openapiJsonSchema": {
+        "type": "number"
+      }
+    }
+  }, {
+    "name": "CLID",
+    "description": "caller id",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "NUMBER"
+      }
+    },
+    "parameterType": {
+      "name": "CLID",
+      "openapiJsonSchema": {
+        "type": "number"
+      }
+    }
+  }, {
+    "name": "language",
+    "description": "language",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "STRING"
+      }
+    },
+    "parameterType": {
+      "name": "language",
+      "openapiJsonSchema": {
+        "type": "string"
+      }
+    }
+  }, {
+    "name": "identification_status",
+    "description": "identification_status of the customer",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "STRING"
+      }
+    },
+    "parameterType": {
+      "name": "identification_status",
+      "openapiJsonSchema": {
+        "type": "string"
+      }
+    }
+  }, {
+    "name": "global_error_counter",
+    "description": "Counts the total number of no matches and no inputs given by the customer throughout the conversation",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "NUMBER"
+      }
+    },
+    "parameterType": {
+      "name": "global_error_counter",
+      "openapiJsonSchema": {
+        "type": "number"
+      }
+    }
+  } ],
+  "outputParameterDefinitions": [ {
+    "name": "event_type",
+    "description": "Event type",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "STRING"
+      }
+    },
+    "parameterType": {
+      "name": "event_type",
+      "openapiJsonSchema": {
+        "type": "string"
+      }
+    }
+  }, {
+    "name": "route",
+    "description": "route/intent",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "STRING"
+      }
+    },
+    "parameterType": {
+      "name": "route",
+      "openapiJsonSchema": {
+        "type": "string"
+      }
+    }
+  }, {
+    "name": "suspension_type",
+    "description": "suspension_type",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "STRING"
+      }
+    },
+    "parameterType": {
+      "name": "suspension_type",
+      "openapiJsonSchema": {
+        "type": "string"
+      }
+    }
+  }, {
+    "name": "language",
+    "description": "language",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "STRING"
+      }
+    },
+    "parameterType": {
+      "name": "language",
+      "openapiJsonSchema": {
+        "type": "string"
+      }
+    }
+  }, {
+    "name": "identification_status",
+    "description": "identification_status of the customer",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "STRING"
+      }
+    },
+    "parameterType": {
+      "name": "identification_status",
+      "openapiJsonSchema": {
+        "type": "string"
+      }
+    }
+  }, {
+    "name": "utterance",
+    "description": "utterance of the user",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "STRING"
+      }
+    },
+    "parameterType": {
+      "name": "utterance",
+      "openapiJsonSchema": {
+        "type": "string"
+      }
+    }
+  }, {
+    "name": "global_error_counter",
+    "description": "Counts the total number of no matches and no inputs given by the customer throughout the conversation",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "NUMBER"
+      }
+    },
+    "parameterType": {
+      "name": "global_error_counter",
+      "openapiJsonSchema": {
+        "type": "number"
+      }
+    }
+  } ],
+  "multiLanguageSettings": {
+  
+  }
+}

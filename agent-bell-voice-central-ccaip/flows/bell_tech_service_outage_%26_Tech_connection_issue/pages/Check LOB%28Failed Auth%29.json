@@ -1,0 +1,95 @@
+{
+  "name": "6a435db1-9f4d-4f04-8663-66e5ee3d6fde",
+  "displayName": "Check LOB(Failed Auth)",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.route = tech_service_outage AND ($session.params.lob = Internet OR $session.params.lob = internet OR $session.params.lob = INTERNET OR $session.params.lob = Homephone OR $session.params.lob = homephone OR $session.params.tv_sub_type = fibe OR $session.params.tv_sub_type = \"fibe tv app\")",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Comme je n'ai pas pu vous authentifier, je ne peux pas vérifier s'il y a une panne en cours dans votre région. La prochaine étape à suivre consiste à utiliser l'outil de réparation virtuelle par l'intermédiaire de l'application mobile MonBell ou de notre site Web pour régler vos problèmes de service. Je peux vous envoyer un lien par message texte pour commencer ou vous mettre en contact avec un agent. Souhaitez vous que je vous envoie le message texte maintenant?" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "Since I wasn't able to authenticate you, I can't verify if there's an active outage in your area. The next best step is to use the Virtual Repair Tool through the MyBell app or on our website to troubleshoot your service. I can text you a link to get started or I can connect you with an agent. Would you like me to send you the text now?" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "targetPage": "CX Confirmation(Failed Auth)",
+    "name": "a49b525c-e24f-4b63-8922-5a6d76421343"
+  }, {
+    "condition": "$session.params.route = tech_service_outage AND ($session.params.lob = Mobility OR $session.params.tv_sub_type = sat)",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Comme je n’ai pas pu vous authentifier, je ne peux pas vérifier s’il y a une panne en cours dans votre région. Mais vous pouvez facilement vérifier vous-même les pannes de service sur notre site Web." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "Je vais envoyer un texto sur l’appareil au moyen duquel vous appelez, afin que vous puissiez y accéder rapidement. Est-ce que ça vous convient?" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "Since I wasn't able to authenticate you, I can't verify if there's an active outage in your area. But you can easily check for service outages yourself" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "I'll send a text to the device you're calling from, so you can access it quickly. Is that alright?" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "targetPage": "Confirmation For MOB \u0026 SAT TV(Failed Auth)",
+    "name": "1b17030c-864e-46c3-a103-25cc397fd6ec"
+  }, {
+    "condition": "$session.params.route = tech_connection_issue AND ($session.params.lob = Internet OR $session.params.lob = internet OR $session.params.lob = Homephone OR $session.params.tv_sub_type = fibe OR $session.params.tv_sub_type = \"fibe tv app\")",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Comme je n'ai pas pu vous authentifier, je ne peux pas exécuter l'outil de réparation virtuelle par téléphone. La prochaine étape à suivre consiste à utiliser l'outil de réparation virtuelle par l'intermédiaire de l'application mobile MonBell ou de notre site Web pour régler vos problèmes de service. Je peux vous envoyer un lien par message texte pour commencer ou vous mettre en contact avec un agent. Souhaitez-vous que je vous envoie le message texte maintenant?" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "Since I wasn't able to authenticate you, I can't run Virtual Repair over the phone. The next best step is to use the Virtual Repair Tool through the MyBell app or on our website to troubleshoot your service. I can text you a link to get started or I can connect you with an agent. Would you like me to send you the text now?" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "targetPage": "CX Confirmation(Failed Auth)",
+    "name": "2d736c3a-4559-4725-b2bd-a6c7cd143ca2"
+  }, {
+    "condition": "$session.params.route = tech_connection_issue AND ($session.params.lob = Mobility OR $session.params.lob = mobility OR $session.params.tv_sub_type = sat)",
+    "triggerFulfillment": {
+    
+    },
+    "name": "25ae49df-5088-4a8f-ac11-ab8aa94160b0",
+    "targetPlaybook": "Bell_UC_Technical_Support_Infobot"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "6a435db1-9f4d-4f04-8663-66e5ee3d6fde"
+      }, {
+        "parameter": "flow_id",
+        "value": "94d32e37-496f-4fa3-81e8-18fd95281a52"
+      }, {
+        "parameter": "page_name",
+        "value": "Check LOB(Failed Auth)"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

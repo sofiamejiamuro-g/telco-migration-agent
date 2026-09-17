@@ -1,0 +1,37 @@
+{
+  "name": "202809df-a0c8-4bf1-9ad7-49498ee7e245",
+  "displayName": "Send Store Location SMS",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.language = \"fr-ca\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "sms_type",
+        "value": "Public"
+      }, {
+        "parameter": "sms_content",
+        "value": "Bell : Vous pouvez visiter bell.ca/localisation_de_magasins pour trouver un magasin près de chez vous. ( bell.ca/apropos )"
+      } ]
+    },
+    "targetFlow": "bell_SMS Trigger",
+    "name": "17e12354-7bf2-4874-94c1-93a619f5ce27"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "sms_type",
+        "value": "Public"
+      }, {
+        "parameter": "sms_content",
+        "value": "Bell msg: You can visit https://www.bell.ca/Store Locator to find the nearest store. (bell.ca/about-us)"
+      } ]
+    },
+    "targetFlow": "bell_SMS Trigger",
+    "name": "c1800ff6-5635-4eae-9a18-70a5b49093be"
+  } ]
+}

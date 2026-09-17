@@ -1,0 +1,402 @@
+{
+  "name": "724c72ca-875c-4046-baff-e425285cca42",
+  "displayName": "HI_smalltalk",
+  "transitionRoutes": [ {
+    "condition": "$session.params.route = \"small_talk\\.hangup_apology\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I’m sorry to hear that your call dropped. Unfortunately I don’t have details about your last communication. Can you please give me context about the reason of that call and I’ll do my best to help you?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je suis désolé d’apprendre que votre appel a été interrompu. Malheureusement, je n’ai pas de détails sur cette communication. Pourriez-vous me préciser la raison de cet appel et je ferai de mon mieux pour vous aider?" ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "route",
+        "value": "small_talk.hangup_apology"
+      }, {
+        "parameter": "event_type",
+        "value": "query_rewriter_smalltalk"
+      } ]
+    },
+    "targetFlow": "Default Start Flow",
+    "name": "3819d3f4-d1cc-46bc-9d0b-23d850cfa634"
+  }, {
+    "condition": "$session.params.route = \"small_talk\\.outbound_call\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Thanks for calling us back. Unfortunately I don’t have any details why we’ve reached out but, if you need help with a specific topic, please let me know." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Merci de nous rappeler. Malheureusement, je n’ai pas de détails sur les raisons pour lesquelles nous avons communiqué avec vous, mais si vous avez besoin d’aide pour un\nsujet précis, s'il vous plaît m’en informer." ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "route",
+        "value": "small_talk.outbound_call"
+      }, {
+        "parameter": "event_type",
+        "value": "query_rewriter_smalltalk"
+      } ]
+    },
+    "targetFlow": "Default Start Flow",
+    "name": "d661fc90-db77-4ca9-bbcc-392a2a7304f5"
+  }, {
+    "condition": "$session.params.route = \"small_talk\\.agent\\.acquaintance\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "$request.generative.acquaintance_response" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "How else can we help you?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "$request.generative.acquaintance_response" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "Que puis-je faire d'autre pour vous aider?" ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "route",
+        "value": "small_talk.agent.acquaintance"
+      }, {
+        "parameter": "event_type",
+        "value": "query_rewriter_smalltalk"
+      } ],
+      "generators": [ {
+        "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/0d0e9c48-7f68-45b5-a777-aa591f2042ad",
+        "outputParameter": "$request.generative.acquaintance_response"
+      } ]
+    },
+    "targetFlow": "Default Start Flow",
+    "name": "a4021571-e17e-48cb-8a56-a07cf3048fda"
+  }, {
+    "condition": "$session.params.route = \"small_talk\\.agent\\.annoying\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I apologize for the trouble you're having. Let's start over. What do you need help with?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je suis désolé pour le problème que vous rencontrez. Recommençons. De quoi avez-vous besoin?" ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "route",
+        "value": "small_talk.agent.annoying"
+      }, {
+        "parameter": "event_type",
+        "value": "query_rewriter_smalltalk"
+      } ]
+    },
+    "targetFlow": "Default Start Flow",
+    "name": "68512bf9-5591-44c6-8684-db92e2514885"
+  }, {
+    "condition": "$session.params.route = \"small_talk\\.agent\\.bad\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I apologize for the trouble you're having. Let's start over. What do you need help with?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je suis désolé pour le problème que vous rencontrez. Recommençons. De quoi avez-vous besoin?" ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "route",
+        "value": "small_talk.agent.bad"
+      }, {
+        "parameter": "event_type",
+        "value": "query_rewriter_smalltalk"
+      } ]
+    },
+    "targetFlow": "Default Start Flow",
+    "name": "0794373d-fd98-4f02-8393-c7060b384665"
+  }, {
+    "condition": "$session.params.route = \"small_talk\\.dialog\\.wrong\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Oh, I’m sorry! I seem to have gotten that wrong. Can you tell me more about it?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Oups, désolé! Je me suis trompé. Pouvez-vous m'en dire plus?" ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "route",
+        "value": "small_talk.dialog.wrong"
+      }, {
+        "parameter": "event_type",
+        "value": "query_rewriter_smalltalk"
+      } ]
+    },
+    "targetFlow": "Default Start Flow",
+    "name": "372cf072-af71-4f7b-a688-3c3850b4cde6"
+  }, {
+    "condition": "$session.params.route = \"small_talk\\.greetings\\.hello\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Hi, How can we help you?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Bonjour, comment puis-je vous aider?" ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "event_type",
+        "value": "query_rewriter_smalltalk"
+      } ]
+    },
+    "targetFlow": "Default Start Flow",
+    "name": "1a93d23a-fdab-418e-a6cf-6857769826db"
+  }, {
+    "condition": "$session.params.route = \"small_talk\\.user\\.angry\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I apologize for the trouble you're having. Let's start over. What do you need help with?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je suis désolé pour le problème que vous rencontrez. Recommençons. De quoi avez-vous besoin?" ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "route",
+        "value": "small_talk.user.angry"
+      }, {
+        "parameter": "event_type",
+        "value": "query_rewriter_smalltalk"
+      } ]
+    },
+    "targetFlow": "Default Start Flow",
+    "name": "f76ea419-cdf7-4e91-9de2-3239ed77833d"
+  }, {
+    "condition": "$session.params.route = \"small_talk\\.agent\\.AI\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "AI, or artificial intelligence, helps our virtual assistant understand your request and quickly give you the information you need or connect you to the right live agent. How else can we help you?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "L'intelligence artificielle, ou IA, aide notre assistant virtuel à comprendre votre demande. Nous pouvons ensuite rapidement vous donner les renseignements dont vous avez besoin ou vous mettre en contact avec le bon agent. Que puis-je faire d'autre pour vous aider?" ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "route",
+        "value": "small_talk.agent.AI"
+      }, {
+        "parameter": "event_type",
+        "value": "query_rewriter_smalltalk"
+      } ]
+    },
+    "targetFlow": "Default Start Flow",
+    "name": "44f70490-29ec-4ade-bf2f-bf2de8c0d58a"
+  }, {
+    "condition": "$session.params.route = \"small_talk\\.appraisal\\.thank_you\" AND $session.params.event_type = \"anything else start over\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "route",
+        "value": "small_talk.appraisal.thank_you"
+      } ]
+    },
+    "name": "ecabd2ea-119a-4440-83eb-5d963a191b41",
+    "targetPlaybook": "bell_Steering_Wrap-up"
+  }, {
+    "condition": "$session.params.route = \"small_talk\\.agent\\.good\" AND $session.params.event_type = \"anything else start over\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "route",
+        "value": "small_talk.appraisal.thank_you"
+      } ]
+    },
+    "name": "e6577553-1658-4fc0-89a6-bfe7f6ba6bb2",
+    "targetPlaybook": "bell_Steering_Wrap-up"
+  }, {
+    "condition": "$session.params.route = \"small_talk\\.appraisal\\.well_done\" AND $session.params.event_type = \"anything else start over\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "route",
+        "value": "small_talk.appraisal.well_done"
+      } ]
+    },
+    "name": "1eb64ba2-e513-4a26-bf63-e8f84b1a9e84",
+    "targetPlaybook": "bell_Steering_Wrap-up"
+  }, {
+    "condition": "$session.params.route = \"small_talk\\.greetings\\.bye\" AND $session.params.event_type = \"anything else start over\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "route",
+        "value": "small_talk.greetings.bye"
+      } ]
+    },
+    "name": "62c73082-e980-4d9c-840b-6bef278fbf03",
+    "targetPlaybook": "bell_Steering_Wrap-up"
+  }, {
+    "condition": "$session.params.route = \"small_talk\\.greetings\\.nice_to_meet_you\" AND $session.params.event_type = \"anything else start over\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "route",
+        "value": "small_talk.greetings.nice_to_meet_you"
+      } ]
+    },
+    "name": "e84de813-be84-4f6d-b99c-645adecbef74",
+    "targetPlaybook": "bell_Steering_Wrap-up"
+  }, {
+    "condition": "$session.params.route = \"small_talk\\.agent\\.good\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ " Glad to hear it! \n" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Super! Qu'est-ce qui vous amène ici aujourd'hui?" ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "route",
+        "value": "small_talk.agent.good"
+      }, {
+        "parameter": "event_type",
+        "value": "query_rewriter_smalltalk"
+      } ]
+    },
+    "targetFlow": "Default Start Flow",
+    "name": "ca5ad03f-bc98-4bb3-b680-693142cc2756"
+  }, {
+    "condition": "$session.params.route = \"small_talk\\.appraisal\\.thank_you\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "You're very welcome! If there's anything else I can assist you with today ?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Ça me fait plaisir! Est-ce qu'il y a autre chose que je peux faire pour vous aider aujourd'hui?" ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "route",
+        "value": "small_talk.appraisal.thank_you"
+      }, {
+        "parameter": "event_type",
+        "value": "query_rewriter_smalltalk"
+      } ]
+    },
+    "targetFlow": "Default Start Flow",
+    "name": "11dadad7-f2a1-472d-a36f-30636be7ead9"
+  }, {
+    "condition": "$session.params.route = \"small_talk\\.appraisal\\.well_done\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Thank you! I'm glad I could assist you." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Merci à vous! Ça me fait plaisir de vous avoir aidé. " ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "route",
+        "value": "small_talk.appraisal.well_done"
+      }, {
+        "parameter": "event_type",
+        "value": "query_rewriter_smalltalk"
+      } ]
+    },
+    "targetFlow": "Default Start Flow",
+    "name": "2dcf67a8-fdae-4965-b9fe-86568dc67a97"
+  }, {
+    "condition": "$session.params.route = \"small_talk\\.greetings\\.bye\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Thanks for calling. Goodbye!" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Merci de votre appel. Au revoir!" ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "route",
+        "value": "small_talk.greetings.bye"
+      }, {
+        "parameter": "event_type",
+        "value": "query_rewriter_smalltalk"
+      } ]
+    },
+    "targetFlow": "Default Start Flow",
+    "name": "55f8f330-20b1-4c35-9cf9-757dbeda3c7c"
+  }, {
+    "condition": "$session.params.route = \"small_talk\\.greetings\\.nice_to_meet_you\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Its nice talking to you, too.\n" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Moi aussi, ça me fait plaisir de vous parler." ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "route",
+        "value": "small_talk.greetings.nice_to_meet_you"
+      }, {
+        "parameter": "event_type",
+        "value": "query_rewriter_smalltalk"
+      } ]
+    },
+    "targetFlow": "Default Start Flow",
+    "name": "cc7316a6-84fe-4de2-bd00-c1affbb849bf"
+  } ]
+}

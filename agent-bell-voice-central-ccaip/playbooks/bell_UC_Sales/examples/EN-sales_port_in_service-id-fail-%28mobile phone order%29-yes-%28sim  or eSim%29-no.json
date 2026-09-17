@@ -1,0 +1,68 @@
+{
+  "name": "7bfd9f51-f02f-470f-9228-277f417e757b",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "language": "en"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Have you already placed a mobile phone order with us?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "yes I did"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Just to make sure, do you already have a SIM card or an eSIM-compatible device?\n"
+    }
+  }, {
+    "userUtterance": {
+      "text": "no I dont"
+    }
+  }, {
+    "playbookInvocation": {
+      "playbook": "Bell_UC_Technical_Support_Infobot_deprecated",
+      "playbookInput": {
+        "actionParameters": {
+          "language": "en",
+          "route": "equipment_request_sim",
+          "utterance": "I dont have a sim or esim compatible device"
+        }
+      },
+      "playbookOutput": {
+        "actionParameters": {
+        
+        }
+      },
+      "playbookState": "OUTPUT_STATE_OK"
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "customer wants to port out or transfer his number",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "route": "sales_port_out_service",
+      "utterance": "I just have a port in request."
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "customer query is addressed",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en"
+    }
+  },
+  "displayName": "EN-sales_port_in_service-id-fail-(mobile phone order)-yes-(sim  or eSim)-no",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 368,
+  "languageCode": "en"
+}

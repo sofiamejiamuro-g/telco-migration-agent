@@ -1,0 +1,78 @@
+{
+  "name": "5433dffc-1d72-49cb-9494-396d553eabe2",
+  "displayName": "Webhook: get-dept id",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "setParameterActions": [ {
+      "parameter": "menu_id",
+      "value": "$session.params.config.DEFAULT_MENU_ID"
+    }, {
+      "parameter": "menu_id_ref",
+      "value": "$sys.func.CONCATENATE(\"REF\", $sys.func.TO_TEXT($session.params.menu_id))"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.route = null OR $session.params.route = \"\" OR $session.params.route = None",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "intent",
+        "value": "other_speak_to_agent"
+      }, {
+        "parameter": "route",
+        "value": "other_speak_to_agent"
+      } ]
+    },
+    "name": "51ddeb58-e907-45be-891a-5758516c8824"
+  }, {
+    "condition": "$session.params.intent = null OR $session.params.intent = \"\" OR $session.params.intent = None OR $session.params.intent = \"$session\\.params\\.route\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "intent",
+        "value": "other_speak_to_agent"
+      } ]
+    },
+    "name": "fd2a7849-eb90-445d-b70a-871f7ae713bf"
+  }, {
+    "condition": "$session.params.business_type = CCC OR $session.params.ivr_ccc = true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook DAM Transfer BBM",
+    "name": "5e19fe61-1ad4-4acb-bbfc-6ffa51c538a3"
+  }, {
+    "condition": "$session.params.region = \"ATL\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook DAM Transfer ATLMAIN",
+    "name": "41ca96e9-021a-43ab-897f-d461caa8f12d"
+  }, {
+    "condition": "$session.params.region = \"MTS\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook DAM Transfer MTSMAIN",
+    "name": "f954e9f2-023b-4e8a-a405-6462cd05e592"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "5433dffc-1d72-49cb-9494-396d553eabe2"
+      }, {
+        "parameter": "flow_id",
+        "value": "7236071c-1553-4217-a18d-0a64a4737a9a"
+      }, {
+        "parameter": "page_name",
+        "value": "Webhook: get-dept id"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

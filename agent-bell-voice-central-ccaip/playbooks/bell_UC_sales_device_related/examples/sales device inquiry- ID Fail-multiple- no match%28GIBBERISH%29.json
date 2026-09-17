@@ -1,0 +1,103 @@
+{
+  "name": "6f022490-ca26-4bee-a42e-b826b0aeb91a",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "brand": "bell",
+        "language": "en"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Which service are you inquiring about?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "lrnglernhrelh"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_global_error_count_check",
+      "inputActionParameters": {
+        "global_error_counter": "3"
+      },
+      "outputActionParameters": {
+        "global_error_counter": "4"
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Sorry, I didn't understand. What was that?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "kdjdthelrngler"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_global_error_count_check",
+      "inputActionParameters": {
+        "global_error_counter": "4"
+      },
+      "outputActionParameters": {
+        "global_error_counter": "5"
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "I’m having trouble understanding. Can you repeat please?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "djgrnhreknre;"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_global_error_count_check",
+      "inputActionParameters": {
+        "global_error_counter": "5"
+      },
+      "outputActionParameters": {
+        "global_error_counter": "6"
+      }
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_No_Match_3",
+      "inputActionParameters": {
+        "language": "en"
+      },
+      "outputActionParameters": {
+        "language": "en"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer has questions about device availability, device features, cost, related to devices that Bell sells and customer_type is \"New\" but there is no input from the customer and user gives gibberish response",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "New",
+      "global_error_counter": "3",
+      "identification_status": "Fail",
+      "language": "en",
+      "utterance": "I have questions about device availability"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Customer says nonsensical/gibberish information 3 times so flow bell_global_error_count_check is called each time and VA responds as per instructions and on 3rd time call the bell_no_match_3 flow.",
+    "actionParameters": {
+      "global_error_counter": "6",
+      "language": "en"
+    }
+  },
+  "displayName": "sales device inquiry- ID Fail-multiple- no match(GIBBERISH)",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 679,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

@@ -1,0 +1,67 @@
+{
+  "name": "561c7cd9-cf24-4e03-9b4a-8aaafb067547",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Je vais envoyer un texto à l’appareil au moyen duquel vous appelez, afin que vous puissiez consulter toutes les options de lecture en continu. Est-ce que ça vous convient?\n\n"
+    }
+  }, {
+    "userUtterance": {
+      "text": "quel sera le tarif des SMS?"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Les SMS ne seront pas facturés. Souhaitez-vous continuer à les recevoir ?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "oui"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "fr-ca",
+        "sms_content": "Bell: Vous pouvez visiter subscription.bell.ca/client pour vous abonner à un service de diffusion en continu dans l'appli MonBell. ( bell.ca/apropos )",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "customer wants to add a new  line and {lob} is null and also more information about SMS",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "fr-ca",
+      "streaming_services": "netflix",
+      "utterance": ""
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "customer is asked about service type and then follows the instructions Customer asked a question regarding SMS so VA answered them and prompted again for SMS. User then said yes so we route accordingly",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca",
+      "streaming_services": "premium"
+    }
+  },
+  "displayName": "FR-(lob-streaming services) asked (sms-yes) Contextual",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 456,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

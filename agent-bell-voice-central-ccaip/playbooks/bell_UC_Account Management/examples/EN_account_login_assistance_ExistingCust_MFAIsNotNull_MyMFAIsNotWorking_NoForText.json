@@ -1,0 +1,62 @@
+{
+  "name": "bb9ee5bd-5c9d-4b40-b55a-29b19797e078",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Each MFA verification code can only be entered 5 times before it expires. If you reach your resend limit, you can click \"try another method\" and select an alternative method to receive your code.\n\nI'll send a text to the device you're calling from. If you have any additional questions about Multi-Factor Authentication, the page has all the information you need. Is that alright?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "No"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_get_sdl_mapping_url",
+      "inputActionParameters": {
+        "brand": "bell",
+        "language": "en",
+        "route": "account_login_assistance"
+      },
+      "outputActionParameters": {
+        "brand": "bell",
+        "language": "en"
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "No problem at all. For any other questions you can always visit our website at {faq_link}"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_Feedback",
+      "inputActionParameters": {
+        "brand": "bell",
+        "language": "en"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "The user wants to login to their account.",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "Existing",
+      "language": "en",
+      "route": "account_login_assistance",
+      "utterance": "My MFA is not working. Can you assist me?"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "The user is an \"Existing\" Customer and has a {mfa} then prompts the user with an appropriate response. If the customer agrees to receive the SMS link and send the user to bell_SMS Trigger flow.",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en"
+    }
+  },
+  "displayName": "EN_account_login_assistance_ExistingCust_MFAIsNotNull_MyMFAIsNotWorking_NoForText",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 435,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

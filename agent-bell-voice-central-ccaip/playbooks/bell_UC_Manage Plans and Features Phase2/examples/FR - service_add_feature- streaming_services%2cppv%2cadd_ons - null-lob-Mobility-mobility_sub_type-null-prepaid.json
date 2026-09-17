@@ -1,0 +1,71 @@
+{
+  "name": "0ffb9f68-e1c4-4c2c-acd0-ed7709c87ba8",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70011",
+        "brand": "bell",
+        "language": "fr-ca",
+        "route": "service_add_feature"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Souhaitez-vous apporter des changements à votre service prépayé ou à votre service mensuel?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "prépayé"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_va_to_ivr_handoff_prepaid",
+      "inputActionParameters": {
+        "identification_status": "Pass",
+        "language": "fr-ca",
+        "lob": "Mobility",
+        "mobility_sub_type": "prepaid",
+        "route": "service_add_feature"
+      },
+      "outputActionParameters": {
+        "language": "fr-ca"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "The {identification_status} is \"Pass\", {customer_type} is \"Existing\", {streaming_services} is null and {ppv} is null and {lob} is \"Mobility\" and {mobility_sub_type} is null then we will prompt user to confirm if they are talking about \"prepaid\" or \"postpaid\" service and then based on user response will set parameter {mobility_sub_type}",
+    "actionParameters": {
+      "apb_location_id": "70011",
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "fr-ca",
+      "lob": "Mobility",
+      "route": "service_add_feature",
+      "utterance": "Je voudrais faire ajouter à mon téléphone l'option outre-mer"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "As the {lob} is \"Mobility\" and {mobility_sub_type} is null then, prompt user with message \"ASK customer \"Are you looking to make changes to your prepaid or monthly service?\" and then based on user response set parameter {mobility_sub_type} based on instruction given in playbook.",
+    "actionParameters": {
+      "apb_location_id": "70011",
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "fr-ca",
+      "lob": "Mobility",
+      "mobility_sub_type": "prepaid",
+      "route": "service_add_feature",
+      "utterance": "Je voudrais faire ajouter à mon téléphone l'option outre-mer"
+    }
+  },
+  "displayName": "FR - service_add_feature- streaming_services,ppv,add_ons - null-lob-Mobility-mobility_sub_type-null-prepaid",
+  "retrievalStrategy": "NEVER",
+  "tokenCount": 584,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

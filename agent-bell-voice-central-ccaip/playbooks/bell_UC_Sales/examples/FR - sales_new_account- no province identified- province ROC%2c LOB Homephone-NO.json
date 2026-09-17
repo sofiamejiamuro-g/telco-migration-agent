@@ -1,0 +1,76 @@
+{
+  "name": "2e82c10b-1b6c-471d-ad06-0480ba60d869",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Bien sûr, laissez-moi vous aider.\nÀ propos de quel service communiquez-vous avec nous?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Téléphone fixe"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Vérifions si nous offrons des services Internet ou de téléphonie résidentielle dans votre secteur. Dans quelle province avez-vous besoin de\nservices?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "ROC"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Malheureusement, nous n'offrons pas encore de services de téléphonie résidentielle dans votre secteur. Bonne nouvelle, cependant: Bell offre un service de téléphonie mobile incroyable qui couvre plus de 99% de\nla population. Est-ce que je vous mets en contact avec nu de nos agents, qui pourra vous en dire davantage?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Non"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_Feedback",
+      "inputActionParameters": {
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "The Customer wants to sign up or open a new account with Bell and lob identified as \" Internet\" OR \"TV\" OR \"Homephone\"",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "New",
+      "identification_status": "Fail",
+      "language": "fr-ca",
+      "province": "AB",
+      "route": "sales_new_account",
+      "utterance": "Je souhaite adhérer aux services Bell"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "We need ask LOB if service is not identified- and if LOB is \"Homephone\" and We need to check the result from identification flow from the webhook NPANXX, If no province is identified then we need ask them and if it is \"ROC\" then call bell_aqd flow ",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "New",
+      "identification_status": "Fail",
+      "language": "fr-ca",
+      "lob": "Homephone"
+    }
+  },
+  "displayName": "FR - sales_new_account- no province identified- province ROC, LOB Homephone-NO",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 565,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

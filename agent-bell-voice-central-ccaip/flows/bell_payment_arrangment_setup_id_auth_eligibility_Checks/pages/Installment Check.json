@@ -1,0 +1,185 @@
+{
+  "name": "20d91d32-4959-4c58-8c82-a96c45c7cb67",
+  "displayName": "Installment Check",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "bill_date",
+        "value": "$session.params.pmt_arrangement_eligibility_response.installmentDetails[0].dueDateOfPayment"
+      }, {
+        "parameter": "countInstallment",
+        "value": "$sys.func.COUNT($session.params.pmt_arrangement_eligibility_response.installmentDetails)"
+      }, {
+        "parameter": "countInsatllment1",
+        "value": "$sys.func.MINUS($session.params.countInstallment , 1)"
+      }, {
+        "parameter": "formatDate",
+        "value": "$sys.func.MID($session.params.bill_date, 1, 10)"
+      }, {
+        "parameter": "amountRemaining",
+        "value": "$session.params.pmt_arrangement_eligibility_response.installmentDetails[0].amount"
+      }, {
+        "parameter": "date",
+        "value": "$sys.func.MID($session.params.formatDate, 6, 5)"
+      } ]
+    },
+    "name": "ef3022c9-4687-45cf-aa08-ccfe136252fd"
+  }, {
+    "condition": "$session.params.installmentCheck = 0",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "There is no existing payment arrangement for your account, connecting to an agent." ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "2651bb30-4657-4166-a08d-487e0e3b2fb2"
+  }, {
+    "condition": "$session.params.installmentCheck \u003e 0",
+    "triggerFulfillment": {
+      "conditionalCases": [ {
+        "cases": [ {
+          "condition": "$session.params.installmentCheck = 1",
+          "caseContent": [ {
+            "message": {
+              "text": {
+                "text": [ "\u003cspeak\u003e Bonne nouvelle! Vous avez déjà configuré une entente de paiement. Votre prochain paiement de $$session.params.amountRemaining est dû le \u003csay-as interpret-as=\"date\" format=\"md\" detail=\"2\"\u003e" ]
+              },
+              "languageCode": "fr-ca"
+            }
+          }, {
+            "message": {
+              "text": {
+                "text": [ "$session.params.date" ]
+              },
+              "languageCode": "fr-ca"
+            }
+          }, {
+            "message": {
+              "text": {
+                "text": [ "\u003c/say-as\u003e \u003c/speak\u003e" ]
+              },
+              "languageCode": "fr-ca"
+            }
+          }, {
+            "message": {
+              "text": {
+                "text": [ "\u003cspeak\u003e Good News! You already have an existing payment arrangement set up. Your next payment of $$session.params.amountRemaining is due on" ]
+              },
+              "languageCode": "en"
+            }
+          }, {
+            "message": {
+              "text": {
+                "text": [ "\u003csay-as interpret-as=\"date\" format=\"md\" detail=\"2\"\u003e" ]
+              },
+              "languageCode": "en"
+            }
+          }, {
+            "message": {
+              "text": {
+                "text": [ "$session.params.date" ]
+              },
+              "languageCode": "en"
+            }
+          }, {
+            "message": {
+              "text": {
+                "text": [ "\u003c/say-as\u003e" ]
+              },
+              "languageCode": "en"
+            }
+          }, {
+            "message": {
+              "text": {
+                "text": [ "\u003c/speak\u003e" ]
+              },
+              "languageCode": "en"
+            }
+          } ]
+        }, {
+          "caseContent": [ {
+            "message": {
+              "text": {
+                "text": [ "\u003cspeak\u003e Bonne nouvelle! Vous avez déjà configuré une entente de paiement. Votre entente de paiement est fixée à $$session.params.amountRemaining, le montant est dû le \u003csay-as interpret-as=\"date\" format=\"md\" detail=\"2\"\u003e" ]
+              },
+              "languageCode": "fr-ca"
+            }
+          }, {
+            "message": {
+              "text": {
+                "text": [ "$session.params.date" ]
+              },
+              "languageCode": "fr-ca"
+            }
+          }, {
+            "message": {
+              "text": {
+                "text": [ "\u003c/say-as\u003e et vous avez un total de $session.params.countInsatllment1 / $session.params.countInstallment. Il reste un versement au CX \u003c/speak\u003e" ]
+              },
+              "languageCode": "fr-ca"
+            }
+          }, {
+            "message": {
+              "text": {
+                "text": [ "\u003cspeak\u003e Good News! You already have an existing payment arrangement set up.Your payment arrangement is set for $$session.params.amountRemaining,the amount is due on" ]
+              },
+              "languageCode": "en"
+            }
+          }, {
+            "message": {
+              "text": {
+                "text": [ "\u003csay-as interpret-as=\"date\" format=\"md\" detail=\"2\"\u003e" ]
+              },
+              "languageCode": "en"
+            }
+          }, {
+            "message": {
+              "text": {
+                "text": [ "$session.params.date" ]
+              },
+              "languageCode": "en"
+            }
+          }, {
+            "message": {
+              "text": {
+                "text": [ "\u003c/say-as\u003e  and you have a total of $session.params.countInstallment payment installments. \u003c/speak\u003e" ]
+              },
+              "languageCode": "en"
+            }
+          } ]
+        } ]
+      } ]
+    },
+    "targetFlow": "bell_Feedback",
+    "name": "5de681d3-e944-4877-a37c-3382f5eaa037"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "20d91d32-4959-4c58-8c82-a96c45c7cb67"
+      }, {
+        "parameter": "flow_id",
+        "value": "57228ada-e06b-4b6d-b615-3f9af36911b6"
+      }, {
+        "parameter": "page_name",
+        "value": "Installment Check"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

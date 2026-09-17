@@ -1,0 +1,146 @@
+{
+  "name": "a2e09d9c-9d3d-438d-ac99-e9773b117ea2",
+  "displayName": "Webhook Control Submit",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "/v1/ticket_management/omf/control#submit",
+    "tag": "submit"
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.webhook_success = true",
+    "triggerFulfillment": {
+      "conditionalCases": [ {
+        "cases": [ {
+          "condition": "$session.params.calendarInformationList = 1",
+          "caseContent": [ {
+            "message": {
+              "text": {
+                "text": [ "Parfait. Votre $session.params.line_of_business rendez-vous est prévu le $session.params.day_of_week $session.params.date." ]
+              },
+              "languageCode": "fr-ca"
+            }
+          }, {
+            "message": {
+              "text": {
+                "text": [ "Le ou la technicien(ne) peut arriver à tout moment entre $session.params.start_time et $session.params.end_time. N’oubliez pas qu’un rendez-vous prévu entre $session.params.start_time à $session.params.end_time peut commencer à $session.params.end_time_5 et se terminer plus tard." ]
+              },
+              "languageCode": "fr-ca"
+            }
+          }, {
+            "message": {
+              "text": {
+                "text": [ "Pour éviter tout retard dans votre installation, veuillez vous assurer qu’un adulte est présent pendant toute la durée de l'intervention, que l’accès complet à la propriété, y compris à la salle informatique ou à la salle des équipements, est disponible, et que votre téléviseur ou votre ordinateur est prêt si une configuration complète est nécessaire, car des travaux de perçage peuvent être requis. La prochaine fois que vous souhaitez gérer vos rendez-vous, n’oubliez pas que vous pouvez utiliser l’appli Gérez votre rendez-vous en téléchargeant l’application mobile MonBell. C’est plus rapide et plus facile à utiliser que d’appeler!" ]
+              },
+              "languageCode": "fr-ca"
+            }
+          }, {
+            "message": {
+              "text": {
+                "text": [ "Great. Your $session.params.line_of_business appointment is on $session.params.day_of_week, $session.params.date." ]
+              },
+              "languageCode": "en"
+            }
+          }, {
+            "message": {
+              "text": {
+                "text": [ "The Technician can arrive any time between $session.params.start_time and $session.params.end_time." ]
+              },
+              "languageCode": "en"
+            }
+          }, {
+            "message": {
+              "text": {
+                "text": [ "And remember, an appointment scheduled from $session.params.start_time to $session.params.end_time can start at $session.params.end_time_5 and finish later." ]
+              },
+              "languageCode": "en"
+            }
+          }, {
+            "message": {
+              "text": {
+                "text": [ "To avoid any delays in your install, please ensure an adult is present throughout, full access to the property including the IT or equipment room is available, and your TV or computer is ready if a full setup is required, as drilling may be involved. The next time you want to manage your appointments, remember you can use the Manage your appointment app by downloading the MyBell app. It's faster and easier to use than calling in!" ]
+              },
+              "languageCode": "en"
+            }
+          } ]
+        }, {
+          "caseContent": [ {
+            "message": {
+              "text": {
+                "text": [ "Parfait, tous vos rendez-vous ont été mis à jour! Pour éviter tout retard dans votre installation, veuillez vous assurer qu’un adulte est présent pendant toute la durée de l'intervention, que l’accès complet à la propriété, y compris à la salle informatique ou à la salle des équipements, est disponible, et que votre téléviseur ou votre ordinateur est prêt si une configuration complète est nécessaire, car des travaux de perçage peuvent être requis. La prochaine fois que vous souhaitez gérer vos rendez-vous, n’oubliez pas que vous pouvez utiliser l’appli Gérez votre rendez-vous en téléchargeant l’application mobile MonBell. C’est plus rapide et plus facile à utiliser que d’appeler!" ]
+              },
+              "languageCode": "fr-ca"
+            }
+          }, {
+            "message": {
+              "text": {
+                "text": [ "Great, all your appointments have been updated! To avoid any delays in your Install, please ensure an adult is present throughout, full access to the property including the IT or equipment room is available, and your TV or computer is ready if a full setup is required, as drilling may be involved. The next time you want to manage your appointments, remember you can use the Manage your appointment app by downloading the MyBell app. It's faster and easier to use than calling in!" ]
+              },
+              "languageCode": "en"
+            }
+          } ]
+        } ]
+      } ]
+    },
+    "targetFlow": "bell_Feedback",
+    "name": "9c8aa7df-4ea1-4755-82a2-4002e4640fae"
+  }, {
+    "condition": "$session.params.webhook_success = false",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Failure - OMF",
+    "name": "095955d6-6f37-4aa8-b09e-e2eedcdd6b66"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Failure - OMF",
+    "name": "cbcbc37b-b592-442f-9be0-daf54b195425"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Webhook Failure - OMF",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+    
+    },
+    "name": "71e52db0-0477-4c4d-8cbb-fc33f001a258"
+  }, {
+    "targetPage": "Webhook Failure - OMF",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+    
+    },
+    "name": "3f64974e-85f5-4bba-8fc7-dd6ee63202d6"
+  }, {
+    "targetPage": "Webhook Failure - OMF",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+    
+    },
+    "name": "48695108-f1bc-4382-87f8-d4413aef2e20"
+  }, {
+    "targetPage": "Webhook Failure - OMF",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+    
+    },
+    "name": "fc42fb96-e8d6-43de-9456-6dedcb28fef4"
+  }, {
+    "targetPage": "Webhook Failure - OMF",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+    
+    },
+    "name": "d465fb62-22a6-47f3-ab50-57261631fd4a"
+  }, {
+    "targetPage": "Webhook Failure - OMF",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+    
+    },
+    "name": "ba1e4d68-ff90-4751-8e7e-549595dda6b6"
+  } ]
+}

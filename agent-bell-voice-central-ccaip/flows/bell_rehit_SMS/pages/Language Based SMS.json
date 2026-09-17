@@ -1,0 +1,53 @@
+{
+  "name": "d3c5a066-d582-4ee3-8936-e77e5ea1d183",
+  "displayName": "Language Based SMS",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.language = \"en\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "sms_type",
+        "value": "Public"
+      }, {
+        "parameter": "sms_content",
+        "value": "Bell: You can visit https://m.bell.ca/supportsynchproge and follow the prompts to synchronize your TV programming. ( bell.ca/about-us )"
+      } ]
+    },
+    "targetFlow": "bell_SMS Trigger",
+    "name": "09ac483f-8fa2-4d22-851a-81b7c9f25ce4"
+  }, {
+    "condition": "$session.params.language = \"fr-ca\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "sms_type",
+        "value": "Public"
+      }, {
+        "parameter": "sms_content",
+        "value": "Bell : Vous pouvez visiter https://m.bell.ca/supportsynchprogf et suivre les instructions pour synchroniser votre programmation télé. ( bell.ca/apropos )"
+      } ]
+    },
+    "targetFlow": "bell_SMS Trigger",
+    "name": "9934fe42-00d5-4c1a-9d04-bdd8c79e9f84"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "d3c5a066-d582-4ee3-8936-e77e5ea1d183"
+      }, {
+        "parameter": "flow_id",
+        "value": "7d59be7c-b788-45cf-9334-717ae70cfc90"
+      }, {
+        "parameter": "page_name",
+        "value": "Language Based SMS"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

@@ -1,0 +1,48 @@
+{
+  "name": "e002f9f1-e1bc-4d99-ad71-98d479604720",
+  "actions": [ {
+    "agentUtterance": {
+      "text": " I can help with several billing topics. To get you to the right place, please tell me more about your request. For example, you could say, 'a specific charge' or 'my total balance.'"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Could you update me on the status of my security deposit refund, as the six-month period has passed, and also, let me know why it hasn't been taken off my account yet?"
+    }
+  }, {
+    "playbookInvocation": {
+      "playbook": "bell_UC_Billing",
+      "playbookInput": {
+        "precedingConversationSummary": "Customers is looking to confirm the due bill date",
+        "actionParameters": {
+          "language": "en",
+          "route": "bill_deposit_inquiry",
+          "utterance": "Could you update me on the status of my security deposit refund, as the six-month period has passed, and also, let me know why it hasn't been taken off my account yet?"
+        }
+      },
+      "playbookOutput": {
+        "executionSummary": "Customer query is addressed and then transferred to \"bell_UC_Billing\" playbook for further conversation",
+        "actionParameters": {
+          "language": "en",
+          "route": "bill_deposit_inquiry"
+        }
+      },
+      "playbookState": "OUTPUT_STATE_OK"
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer query about \"I don't understand my bill\" is addressed",
+    "actionParameters": {
+      "language": "en",
+      "route": "bill_vague",
+      "utterance": "I don't understand my bill"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Customer query is addressed and then transferred to \"bell_UC_Billing\" playbook for further conversation"
+  },
+  "displayName": "EN -  bill_deposit_inquiry",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 386,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

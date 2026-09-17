@@ -1,0 +1,226 @@
+{
+  "name": "49e6415f-9cc1-47d8-a9eb-fc6a0b14d340",
+  "displayName": "Webhook Search-by-tn-cirn",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "v1/customer-identification#search-by-tn",
+    "tag": "search-by-tn",
+    "setParameterActions": [ {
+      "parameter": "telephone_number",
+      "value": "$session.params.cirn"
+    }, {
+      "parameter": "webhook_success",
+      "value": null
+    }, {
+      "parameter": "CIRN",
+      "value": "$session.params.cirn"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.webhook_success = False OR $session.params.webhook_success = false",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Sorry, there was a problem on our side and I can't find your profile.  But don’t worry, I'll still help you however I can." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Malheureusement, un problème est survenu et je ne suis pas en mesure de trouver votre profil.Mais rassurez-vous, je ferai de mon mieux pour vous aider." ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "ivr_va_cpm_check_fail",
+        "value": true
+      }, {
+        "parameter": "identification_status",
+        "value": "Fail"
+      } ]
+    },
+    "targetFlow": "Default Start Flow",
+    "name": "58aed61f-83c1-452c-8616-c21492c9402c"
+  }, {
+    "condition": "$session.params.webhook_success = True OR $session.params.webhook_success = true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "ivr_va_cpm_data",
+        "value": "$sys.func.TO_OBJECT($session.params.customer_id_search_response)"
+      }, {
+        "parameter": "ivr_va_ban_list",
+        "value": "$sys.func.FILTER(\"$session.params.ivr_va_cpm_data\", \"$..billing_account_number\")"
+      }, {
+        "parameter": "ivr_va_ban_count",
+        "value": "$sys.func.COUNT($session.params.ivr_va_ban_list)"
+      } ]
+    },
+    "targetPage": "Check BAN Count",
+    "name": "f6df745e-aa64-4a12-b4c5-8e7ee5b97834"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "49e6415f-9cc1-47d8-a9eb-fc6a0b14d340"
+      }, {
+        "parameter": "flow_id",
+        "value": "01d23b20-9932-49f4-b5ee-333b5eafd8fe"
+      }, {
+        "parameter": "page_name",
+        "value": "Webhook Search-by-tn-cirn"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ],
+  "eventHandlers": [ {
+    "targetFlow": "Default Start Flow",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Sorry, there was a problem on our side and I can't find your profile.  But don’t worry, I'll still help you however I can." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Malheureusement, un problème est survenu et je ne suis pas en mesure de trouver votre profil.Mais rassurez-vous, je ferai de mon mieux pour vous aider." ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "ivr_va_cpm_check_fail",
+        "value": true
+      }, {
+        "parameter": "identification_status",
+        "value": "Fail"
+      } ]
+    },
+    "name": "39c09739-785c-4aee-bf67-3188b401393c"
+  }, {
+    "targetFlow": "Default Start Flow",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Sorry, there was a problem on our side and I can't find your profile.  But don’t worry, I'll still help you however I can." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Malheureusement, un problème est survenu et je ne suis pas en mesure de trouver votre profil.Mais rassurez-vous, je ferai de mon mieux pour vous aider." ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "ivr_va_cpm_check_fail",
+        "value": true
+      }, {
+        "parameter": "identification_status",
+        "value": "Fail"
+      } ]
+    },
+    "name": "20a5bd7b-7e45-4386-bc0c-da5b9eb3931f"
+  }, {
+    "targetFlow": "Default Start Flow",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Sorry, there was a problem on our side and I can't find your profile.  But don’t worry, I'll still help you however I can." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Malheureusement, un problème est survenu et je ne suis pas en mesure de trouver votre profil.Mais rassurez-vous, je ferai de mon mieux pour vous aider." ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "ivr_va_cpm_check_fail",
+        "value": true
+      }, {
+        "parameter": "identification_status",
+        "value": "Fail"
+      } ]
+    },
+    "name": "ebd80f4d-3a3d-4a04-b4b9-850ff7eb2b22"
+  }, {
+    "targetFlow": "Default Start Flow",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Sorry, there was a problem on our side and I can't find your profile.  But don’t worry, I'll still help you however I can." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Malheureusement, un problème est survenu et je ne suis pas en mesure de trouver votre profil.Mais rassurez-vous, je ferai de mon mieux pour vous aider." ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "ivr_va_cpm_check_fail",
+        "value": true
+      }, {
+        "parameter": "identification_status",
+        "value": "Fail"
+      } ]
+    },
+    "name": "af1d32bb-4983-4155-94b5-571cdacf41df"
+  }, {
+    "targetFlow": "Default Start Flow",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Sorry, there was a problem on our side and I can't find your profile.  But don’t worry, I'll still help you however I can." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Malheureusement, un problème est survenu et je ne suis pas en mesure de trouver votre profil.Mais rassurez-vous, je ferai de mon mieux pour vous aider." ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "ivr_va_cpm_check_fail",
+        "value": true
+      }, {
+        "parameter": "identification_status",
+        "value": "Fail"
+      } ]
+    },
+    "name": "2432e2c0-73f4-4abd-addd-ae663af3225f"
+  }, {
+    "targetFlow": "Default Start Flow",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Sorry, there was a problem on our side and I can't find your profile.  But don’t worry, I'll still help you however I can." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Malheureusement, un problème est survenu et je ne suis pas en mesure de trouver votre profil.Mais rassurez-vous, je ferai de mon mieux pour vous aider." ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "ivr_va_cpm_check_fail",
+        "value": true
+      }, {
+        "parameter": "identification_status",
+        "value": "Fail"
+      } ]
+    },
+    "name": "953a611d-eccd-43e7-9047-bd4e56b93722"
+  } ]
+}

@@ -1,0 +1,80 @@
+{
+  "name": "e9140e41-b0dd-4d5c-a532-326d01eb787c",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Un modem de remplacement a été envoyé à votre adresse de service. Pouvez-vous vérifier si vous avez reçu un colis de Bell contenant votre nouveau modem ? Si vous l'avez, veuillez confirmer que vous avez reçu votre modem de remplacement."
+    }
+  }, {
+    "userUtterance": {
+      "text": "J'ai reçu une boîte hier, mais je ne l'ai pas encore ouverte."
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Nous vous recommandons d'installer le modem dès que possible pour assurer un service ininterrompu. Avez-vous reçu votre modem de remplacement ?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "D'accord, je vois la boîte. Mais le coin est tout écrasé. Devrais-je m'inquiéter ?"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Je suis désolé d'apprendre que votre modem est endommagé. Vous n'avez qu'à dire le mot Agent et quelqu'un pourra vous aider. Veuillez confirmer si vous avez le modem de remplacement afin que nous puissions continuer."
+    }
+  }, {
+    "userUtterance": {
+      "text": "Est-ce que l'ancien modem va encore fonctionner si je ne l'échange pas tout de suite ?"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Je comprends que vous avez une question, et bien que je n'aie pas cette information précise, confirmer la réception du modem est l'étape suivante nécessaire pour que nous puissions régler le problème. Pourriez-vous me dire si vous avez reçu le modem de remplacement ?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Bon. J'ai le nouveau ici."
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Merci de me l'avoir fait savoir. Je vérifie maintenant quelle est la prochaine étape."
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_vr_post_answer",
+      "inputActionParameters": {
+        "customer_answer1_id\"": "0"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "User having a problem with the service and initiating Virtual repair session.",
+    "actionParameters": {
+      "acceptable_answers": [ {
+        "choice": "Yes",
+        "id": "0",
+        "sub-choices": [ ],
+        "title": ""
+      }, {
+        "choice": "No",
+        "id": "1",
+        "sub-choices": [ ],
+        "title": ""
+      } ],
+      "dcx_action_code": "6555",
+      "description": "",
+      "faq_question_answer": "Q: Quand mon modem arrivera-t-il ? A: Si vous avez demandé que votre modem soit expédié à votre adresse de service, vous devriez avoir reçu un courriel indiquant l'heure d'arrivée approximative. En règle générale, cela prend de 1 à 3 jours ouvrables. Q: Le colis est arrivé, mais il est endommagé, dois-je l'ouvrir ? A: Désolé d'apprendre que votre modem est endommagé, dites simplement le mot Agent et quelqu'un vous aidera. Q: Comment l'installer ? A: Je vais vous guider, j'ai juste besoin de confirmer si vous avez reçu votre modem de remplacement. Q: Je l'ai reçu mais je ne suis pas à l'aise de le brancher, que puis-je faire ? A: Une fois que j'aurai pu confirmer que vous avez reçu votre modem de remplacement, je pourrai vous guider. Avez-vous reçu votre modem de remplacement ? Q: J'ai reçu le modem, mais il me manque des câbles, que puis-je faire ? A: Désolé d'apprendre qu'il vous manque des câbles, dites simplement le mot Agent et quelqu'un vous aidera. Q: Je l'ai reçu, mais j'ai des difficultés avec les instructions de configuration, pouvez-vous m'aider ? A: Je peux vous aider avec cela, mais nous devons confirmer si vous l'avez reçu. Avez-vous reçu votre modem de remplacement ? Q: Je l'ai reçu, mais je n'ai pas encore eu l'occasion de l'ouvrir ou de l'installer. Y a-t-il une date limite ? A: Nous vous recommandons d'installer le modem dès que possible pour assurer un service ininterrompu. Avez-vous reçu votre modem de remplacement ?",
+      "language": "fr-ca",
+      "title": "Is your TV showing any connection instructions right now?",
+      "utterance": "My internet is not working.",
+      "vr_type": "CFB"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Turn 1: Ambiguous/Vague (\"I got a box... haven't opened it\")\nLogic: The user's statement is not a clear \"Yes\" or \"No\" to the specific question of receiving the replacement modem (it implies yes, but expresses hesitation).\n\nTool Search: The bot treats this as a query/concern and checks the datastore.\n\nSemantic Match: It finds a match with: \"Q: I received it, but I haven't had a chance to open or install it yet. Is there a deadline?\"\n\nAction: It outputs the matched answer (\"We recommend installing...\") and immediately re-asks the confirmation question to get a definitive \"Yes\" or \"No\".\n\nTurn 2: Semantic Match (\"Corner is smashed in\")\nLogic: The user is asking about damage.\n\nTool Search: The bot queries the tool.\n\nSemantic Match: The user's \"smashed in\" phrasing semantically matches the datastore entry: \"Q: The package arrived, but it’s damaged should I open it?\"\n\nAction: The bot returns the specific instruction to ask for an Agent if damaged, then steers back to the main flow.\n\nTurn 3: No Match (\"Will the old modem still work?\")\nLogic: The user asks a technical question about the old modem's functionality.\n\nTool Search: The bot checks the datastore.\n\nResult: The datastore covers arrival times, damage, installation help, and missing cables. It does not contain information about the old modem's active status.\n\nAction: found_answer is null. The bot triggers the Answer Not Found Fallback and uses the mandatory phrase to politely decline and refocus the user.\n\nTurn 4: Success (\"Fine. I have the new one here.\")\nLogic: The user finally gives a clear confirmation.\n\nExact Match Check: \"I have the new one here\" is semantically equivalent to \"Yes\" (confirming receipt).\n\nAction:\n\nThe bot maps this to customer_answer1_id = \"0\" (Yes).\n\nIt outputs the mandatory transition phrase: \"Thanks for letting me know. I'm now checking what the next step is.\"\n\nIt triggers ${FLOW:bell_vr_post_answer}."
+  },
+  "displayName": "CFB - FAQ (Deep) (french)",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 1475,
+  "languageCode": "en"
+}

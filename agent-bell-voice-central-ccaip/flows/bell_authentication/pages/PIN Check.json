@@ -1,0 +1,38 @@
+{
+  "name": "1459dddd-f54e-4a52-9a02-a802bbc989f1",
+  "displayName": "PIN Check",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.pin_available = \"true\" OR $session.params.pin_available = True",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "auth_method",
+        "value": "PIN"
+      }, {
+        "parameter": "local_noinput_counter",
+        "value": 0
+      } ]
+    },
+    "targetPage": "PIN Auth - Start",
+    "name": "dd063b77-09ab-4d10-bb45-a2fc56736940"
+  }, {
+    "condition": "$session.params.pin_available = \"false\" OR $session.params.pin_available = False OR $session.params.pin_available = \"False\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Check OTP Eligibility",
+    "name": "56086ef5-ec59-405b-883a-3d62e14e6dd5"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Check OTP Eligibility",
+    "name": "3aeba325-6d65-417e-96fc-ac1d0f3d93ce"
+  } ]
+}

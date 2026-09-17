@@ -1,0 +1,28 @@
+{
+  "name": "08bcf42c-6ff5-4c52-a806-124bb2bc97f7",
+  "displayName": "Check for Reported By Parameter",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.acut_retrieve_response.reported_by != null AND $session.params.acut_retrieve_response.reported_by != \"\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "reported_by",
+        "value": "$session.params.acut_retrieve_response.reported_by"
+      } ]
+    },
+    "targetPage": "Dispatch Status Check",
+    "name": "67aaf29f-8d21-42b4-8613-4a239192e7fc"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "reported_by",
+        "value": "$session.params.contact_name"
+      } ]
+    },
+    "targetPage": "Dispatch Status Check",
+    "name": "ad174757-b132-4af2-8451-be283b315051"
+  } ]
+}

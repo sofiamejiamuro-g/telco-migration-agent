@@ -1,0 +1,82 @@
+{
+  "name": "1749b91f-76c7-4713-b272-4b55e424a76a",
+  "displayName": "Webhook SDL mapping ",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "v1/intent-sdl-mapping",
+    "tag": "NA"
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.webhook_success = True OR $session.params.webhook_success = \"true\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I didn't receive your response.\nYou can check out our frequently asked questions at $session.params.url. Or you can use the keypad to complete your request." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "e n’ai pas reçu ta réponse.Tu peux consulter notre foire aux questions à l'adresse $session.params.url. Ou tu peux utiliser le clavier pour compléter ta demande." ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "url",
+        "value": "$session.params.intent_sdl_map_response.url"
+      } ]
+    },
+    "name": "e14b3cc1-9b9a-4890-9fb4-2c6678146dc4"
+  }, {
+    "condition": "True",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook start-auth-session Error",
+    "name": "4d4964a7-2bec-46a0-80ac-b8eec9d0f5da"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Webhook start-auth-session Error",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+    
+    },
+    "name": "5676f665-9b9f-4f57-a8eb-d7d977a4ca86"
+  }, {
+    "targetPage": "Webhook start-auth-session Error",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+    
+    },
+    "name": "397478cb-3cbc-4b1c-be33-4ef930a39d13"
+  }, {
+    "targetPage": "Webhook start-auth-session Error",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+    
+    },
+    "name": "71160a72-ad3a-4b7e-b04c-084ee8d60c55"
+  }, {
+    "targetPage": "Webhook start-auth-session Error",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+    
+    },
+    "name": "3d8c785d-bc52-426d-a3ab-cc826e88db43"
+  }, {
+    "targetPage": "Webhook start-auth-session Error",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+    
+    },
+    "name": "0155699b-6923-4a30-af23-0296c1458fd9"
+  }, {
+    "targetPage": "Webhook start-auth-session Error",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+    
+    },
+    "name": "44c9f540-503d-463c-bb77-cdc0ec7d7f43"
+  } ]
+}

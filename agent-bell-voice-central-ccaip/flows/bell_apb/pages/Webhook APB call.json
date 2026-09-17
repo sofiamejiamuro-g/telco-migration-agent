@@ -1,0 +1,140 @@
+{
+  "name": "8768699e-8c64-4737-8ec0-c1d9fc20dc6a",
+  "displayName": "Webhook APB call",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.apb_location_id != null",
+    "triggerFulfillment": {
+      "webhook": "/v1/ras-apb/get-apbs-for-location",
+      "tag": "NA",
+      "setParameterActions": [ {
+        "parameter": "cirn",
+        "value": "$sys.func.IF(\"$session.params.cirn = null\", \"$session.params.clid\", $session.params.cirn)"
+      } ],
+      "returnPartialResponses": true
+    },
+    "name": "d2c096fd-5bd7-4f43-9564-00e5841b1ad5"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "apb_message",
+        "value": "$session.params.get_ras_apb_response.apb_message"
+      }, {
+        "parameter": "hang_up",
+        "value": "$session.params.get_ras_apb_response.hang_up"
+      }, {
+        "parameter": "agent_transfer",
+        "value": "$session.params.get_ras_apb_response.agent_transfer"
+      } ]
+    },
+    "name": "db980a49-a4b5-4249-a212-a06cf9b5a24f"
+  }, {
+    "condition": "$session.params.get_ras_apb_response.department_id != null AND $session.params.webhook_success = true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "department_id",
+        "value": "$session.params.get_ras_apb_response.department_id"
+      }, {
+        "parameter": "department_id_ref",
+        "value": "$sys.func.CONCATENATE(\"REF\", $sys.func.TO_TEXT($session.params.department_id))"
+      } ]
+    },
+    "name": "989be673-61b7-4a2e-8046-045238d5d5bb"
+  }, {
+    "condition": "$session.params.apb_message != \"\" AND $session.params.webhook_success = true AND $session.params.get_ras_apb_response.interruptible = \"Y\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Interruptible",
+    "name": "1adb2429-9a89-45e1-aa76-c8014d198568"
+  }, {
+    "condition": "$session.params.apb_message != \"\" AND $session.params.webhook_success = true AND $session.params.get_ras_apb_response.interruptible != Y",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "$session.params.get_ras_apb_response.apb_message" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "$session.params.get_ras_apb_response.apb_message" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "2a38d569-2a22-4365-a207-5fb060993a51"
+  }, {
+    "condition": "$session.params.hang_up = true AND $session.params.webhook_success = true",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_End the Conversation",
+    "name": "c953957d-51a2-4da0-811a-020140795ba7"
+  }, {
+    "condition": "$session.params.agent_transfer = true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "apb_skip",
+        "value": true
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "b372d3f3-b1ae-40ef-a577-1eb3ee626767"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "apb_status",
+        "value": "complete"
+      } ]
+    },
+    "targetPage": "End Flow",
+    "name": "20d6ba11-7d2b-4ec3-bea4-78c028a3ab6e"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "End Flow",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+    
+    },
+    "name": "31b5c270-af3c-4ada-9683-a871ad6d339e"
+  }, {
+    "targetPage": "End Flow",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+    
+    },
+    "name": "59e04b81-8b3b-4816-a43f-07395f0689f6"
+  }, {
+    "targetPage": "End Flow",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+    
+    },
+    "name": "4b422e72-f084-4090-8fe8-c861275018b6"
+  }, {
+    "targetPage": "End Flow",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+    
+    },
+    "name": "452d46dd-2ad7-4734-b667-f2e276666d33"
+  }, {
+    "targetPage": "End Flow",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+    
+    },
+    "name": "b5bf4efc-cc24-4a9c-9fd2-6e048bd808ed"
+  }, {
+    "targetPage": "End Flow",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+    
+    },
+    "name": "fb51c60a-6f3d-48e5-a6c0-5354853f94d9"
+  } ]
+}

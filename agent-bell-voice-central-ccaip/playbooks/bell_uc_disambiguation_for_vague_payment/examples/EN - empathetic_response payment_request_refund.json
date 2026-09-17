@@ -1,0 +1,46 @@
+{
+  "name": "ac6f7583-a14b-4d59-b956-9344027128b7",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "I completely understand how frustrating payment issues can be, and I am truly sorry for the stress this has caused you. What specific issue are you experiencing with your payment?  Is your payment not processing or is it something else?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "I made a payment to Bell; can I get a refund for that amount?"
+    }
+  }, {
+    "playbookInvocation": {
+      "playbook": "bell_UC_Payments",
+      "playbookInput": {
+        "precedingConversationSummary": "Customer looking to raise a request for a refund",
+        "actionParameters": {
+          "route": "payment_request_refund",
+          "utterance": "I made a payment to Bell; can I get a refund for that amount?"
+        }
+      },
+      "playbookOutput": {
+        "executionSummary": "Customer query is addresses and then routed to \"bell_UC_payment\" playbook for further help",
+        "actionParameters": {
+          "language": "en"
+        }
+      },
+      "playbookState": "OUTPUT_STATE_OK"
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer query about \"Payment issue\" is addressed also they are facing a challenging situation.",
+    "actionParameters": {
+      "langauge": "en",
+      "route": "payment_vague",
+      "utterance": "I am really frustrated with my Payment issue."
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "VA follows as per given instructions and also is empathetic as the user is in a difficult situation.  Customer query is addresses and then routed to \"bell_UC_payment\" playbook for further help"
+  },
+  "displayName": "EN - empathetic_response payment_request_refund",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 351,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

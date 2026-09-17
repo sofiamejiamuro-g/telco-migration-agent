@@ -1,0 +1,56 @@
+{
+  "name": "37854865-eb04-435a-a73e-ad5ccfdbba1c",
+  "displayName": "Language Based SMS",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.language = \"en\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "sms_type",
+        "value": "Public"
+      }, {
+        "parameter": "sms_content",
+        "value": "You can visit https://m.bell.ca/arrangepayment to set up your payment arrangement in MyBell. ( bell.ca/about-us )"
+      } ]
+    },
+    "targetFlow": "bell_SMS Trigger",
+    "name": "0fe7fd2b-c951-4b6d-be61-9f36fc7f2590"
+  }, {
+    "condition": "$session.params.language = \"fr-ca\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "sms_type",
+        "value": "Public"
+      }, {
+        "parameter": "sms_content",
+        "value": "Visitez https://m.bell.ca/ententepaiement pour établir votre entente de paiement dans MonBell. ( bell.ca/apropos )"
+      } ]
+    },
+    "targetFlow": "bell_SMS Trigger",
+    "name": "b7df903b-fe7f-416c-a119-abf7a98c7de5"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "37854865-eb04-435a-a73e-ad5ccfdbba1c"
+      }, {
+        "parameter": "flow_id",
+        "value": "57228ada-e06b-4b6d-b615-3f9af36911b6"
+      }, {
+        "parameter": "page_name",
+        "value": "Language Based SMS"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

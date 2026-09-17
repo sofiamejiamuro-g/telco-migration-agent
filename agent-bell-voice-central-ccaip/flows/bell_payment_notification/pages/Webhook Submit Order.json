@@ -1,0 +1,103 @@
+{
+  "name": "487965d7-254b-453a-a37e-8cdbd2ead2c8",
+  "displayName": "Webhook Submit Order",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "v1/payment-notification#submit-order",
+    "tag": "submit-order"
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.webhook_success = true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "confirmationNumber",
+        "value": "$session.params.submit_pmt_notification_response.confirmationNumber"
+      }, {
+        "parameter": "amountPaid",
+        "value": "$session.params.submit_pmt_notification_response.amountPaid"
+      }, {
+        "parameter": "isAccountSuspended",
+        "value": "$session.params.submit_pmt_notification_response.isAccountSuspended"
+      }, {
+        "parameter": "remaining_balance",
+        "value": "$session.params.submit_pmt_notification_response.balance"
+      }, {
+        "parameter": "amountPaid",
+        "value": "$sys.func.TO_NUMBER($session.params.amountPaid)"
+      } ]
+    },
+    "targetPage": "Webhook Get Past Due Amount",
+    "name": "895fcbf9-8f87-4951-a3a5-422460462de9"
+  }, {
+    "condition": "$session.params.webhook_success = false",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Failure Cannot Proceed with Payment ",
+    "name": "1807516c-d050-482a-adb3-af882f22e218"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "487965d7-254b-453a-a37e-8cdbd2ead2c8"
+      }, {
+        "parameter": "flow_id",
+        "value": "ced63037-f058-4dd0-9269-97742185ea0f"
+      }, {
+        "parameter": "page_name",
+        "value": "Webhook Submit Order"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Webhook Failure Cannot Proceed with Payment ",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+    
+    },
+    "name": "16f7879f-6f98-4685-9002-808dc10993a0"
+  }, {
+    "targetPage": "Webhook Failure Cannot Proceed with Payment ",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+    
+    },
+    "name": "d746ce9a-11c2-441a-b64b-f4ac1c9babe5"
+  }, {
+    "targetPage": "Webhook Failure Cannot Proceed with Payment ",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+    
+    },
+    "name": "8046248b-ea63-46d3-b3c5-cc42edfcfcc1"
+  }, {
+    "targetPage": "Webhook Failure Cannot Proceed with Payment ",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+    
+    },
+    "name": "d984f5dc-e79d-4cfe-a926-cbbe8fd5f0d9"
+  }, {
+    "targetPage": "Webhook Failure Cannot Proceed with Payment ",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+    
+    },
+    "name": "83ef32fd-e57b-4373-853b-65b1ee786aff"
+  }, {
+    "targetPage": "Webhook Failure Cannot Proceed with Payment ",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+    
+    },
+    "name": "c22da78b-232d-49ed-82bd-9b6082602951"
+  } ]
+}

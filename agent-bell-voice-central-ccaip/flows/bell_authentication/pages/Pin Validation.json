@@ -1,0 +1,158 @@
+{
+  "name": "68f10b30-5652-4461-83c9-5306d357d404",
+  "displayName": "Pin Validation",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$sys.func.LEN($session.params.pin) = 6",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook validate-otp",
+    "name": "af875277-a330-434c-ad25-86f829a0de76"
+  }, {
+    "condition": "$sys.func.LEN($session.params.pin) != 6 AND ($session.params.PIN_Invalid_Counter \u003e= 2 OR $session.params.from_custom_fallback \u003e= 2)",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "auth_status",
+        "value": "Fail"
+      }, {
+        "parameter": "customer_authentication",
+        "value": false
+      } ],
+      "conditionalCases": [ {
+        "cases": [ {
+          "condition": "$sys.func.LEN($session.params.pin) = 4",
+          "caseContent": [ {
+            "message": {
+              "text": {
+                "text": [ "Unfortunately, that is not the correct verification code." ]
+              },
+              "languageCode": "en"
+            }
+          }, {
+            "message": {
+              "text": {
+                "text": [ "Malheureusement, ce n'est pas le bon code de vérification." ]
+              },
+              "languageCode": "fr-ca"
+            }
+          } ]
+        }, {
+          "condition": "$sys.func.LEN($session.params.pin) = 6",
+          "caseContent": [ {
+            "message": {
+              "text": {
+                "text": [ "Unfortunately, that's still not the code I sent you" ]
+              },
+              "languageCode": "en"
+            }
+          }, {
+            "message": {
+              "text": {
+                "text": [ "Malheureusement, ce n'est toujours pas le code que je vous ai envoyé" ]
+              },
+              "languageCode": "fr-ca"
+            }
+          } ]
+        } ]
+      } ]
+    },
+    "targetPage": "End Flow Check",
+    "name": "7560909b-dcf3-4732-9dcc-36004a7efe2e"
+  }, {
+    "condition": "$sys.func.LEN($session.params.pin) != 6 AND ($session.params.PIN_Invalid_Counter = 1 OR $session.params.from_custom_fallback = 1)",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "PIN_Invalid_Counter",
+        "value": "$sys.func.ADD(1, $session.params.PIN_Invalid_Counter)"
+      }, {
+        "parameter": "from_custom_fallback",
+        "value": "$sys.func.ADD(1, $session.params.from_custom_fallback)"
+      } ],
+      "conditionalCases": [ {
+        "cases": [ {
+          "condition": "$sys.func.LEN($session.params.pin) = 4",
+          "caseContent": [ {
+            "message": {
+              "text": {
+                "text": [ "Sorry, that still isn't the correct PIN. Can you try again?" ]
+              },
+              "languageCode": "en"
+            }
+          }, {
+            "message": {
+              "text": {
+                "text": [ "Désolé, ce n'est toujours pas le bon NIP. Pouvez-vous réessayer ?" ]
+              },
+              "languageCode": "fr-ca"
+            }
+          } ]
+        }, {
+          "condition": "$sys.func.LEN($session.params.pin) = 6",
+          "caseContent": [ {
+            "message": {
+              "text": {
+                "text": [ "That still doesn't seem to match the code I sent you. Can you give that another try?" ]
+              },
+              "languageCode": "en"
+            }
+          }, {
+            "message": {
+              "text": {
+                "text": [ "Cela ne semble toujours pas correspondre au code que je vous ai envoyé. Pouvez-vous réessayer?" ]
+              },
+              "languageCode": "fr-ca"
+            }
+          } ]
+        } ]
+      } ]
+    },
+    "targetPage": "CX Input Custom Fallback",
+    "name": "f37979db-4d42-4987-ae44-e2318679d728"
+  }, {
+    "condition": "$sys.func.LEN($session.params.pin) != 4 OR $sys.func.LEN($session.params.pin) != 6",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "PIN_Invalid_Counter",
+        "value": "$sys.func.ADD(1, $session.params.PIN_Invalid_Counter)"
+      }, {
+        "parameter": "from_custom_fallback",
+        "value": "$sys.func.ADD(1, $session.params.from_custom_fallback)"
+      } ],
+      "conditionalCases": [ {
+        "cases": [ {
+          "condition": "$sys.func.LEN($session.params.pin) = 4"
+        }, {
+          "condition": "$sys.func.LEN($session.params.pin) = 6"
+        } ]
+      } ]
+    },
+    "targetPage": "CX Input Custom Fallback",
+    "name": "8b8606eb-c94d-403f-a1dd-9dc4cd733f20"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "68f10b30-5652-4461-83c9-5306d357d404"
+      }, {
+        "parameter": "flow_id",
+        "value": "5f8f4b4a-558a-4e66-9d28-a31389981b36"
+      }, {
+        "parameter": "page_name",
+        "value": "Pin Validation"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ],
+  "description": "Check Entered PIN"
+}

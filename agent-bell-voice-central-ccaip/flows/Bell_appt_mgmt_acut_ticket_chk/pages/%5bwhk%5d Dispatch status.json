@@ -1,0 +1,90 @@
+{
+  "name": "4debb474-3b97-45f2-9fee-d9a1aa890441",
+  "displayName": "[whk] Dispatch status",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "v1/dfcx_support/acut_content_lookup#dispatch-task",
+    "tag": "\"dispatch-task\""
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.webhook_success = true AND $sys.func.UPPER($session.params.dispatch_status) = \"MANUALHANDLING\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Dispatch Manual handling message",
+    "name": "78909758-a27a-49ce-bd16-7dbaf6549a42"
+  }, {
+    "condition": "$session.params.webhook_success = true AND ($sys.func.UPPER($session.params.dispatch_type) = \"CO\" OR $sys.func.UPPER($session.params.dispatch_type) = \"CABLE\")",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Dispatch type co/cable - message",
+    "name": "1afdd0c5-fa83-4365-8daf-1817ca5e9f69"
+  }, {
+    "condition": "$session.params.webhook_success = true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Appointment time details",
+    "name": "41afe57a-e74e-4b1a-8512-45d8d4bcb523"
+  }, {
+    "condition": "$session.params.webhook_success = false",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Failure - ACUT",
+    "name": "24cc2d70-79aa-43c4-8795-60ff567d3613"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Failure - ACUT",
+    "name": "cleanup-hardstop-route"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Webhook Failure - ACUT",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+    
+    },
+    "name": "1ab593c6-dd8b-460f-8983-aa0dcead888d"
+  }, {
+    "targetPage": "Webhook Failure - ACUT",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+    
+    },
+    "name": "99fc6208-7ebf-4695-8f00-850eff64b158"
+  }, {
+    "targetPage": "Webhook Failure - ACUT",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+    
+    },
+    "name": "6142435c-d0a1-4e3e-b8ec-81bb19b0d92a"
+  }, {
+    "targetPage": "Webhook Failure - ACUT",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+    
+    },
+    "name": "dcf59cf8-efaf-446f-9c5b-11828a7f5800"
+  }, {
+    "targetPage": "Webhook Failure - ACUT",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+    
+    },
+    "name": "7e725ed2-16cf-4563-9985-46b717a92f77"
+  }, {
+    "targetPage": "Webhook Failure - ACUT",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+    
+    },
+    "name": "85718e1e-8bfa-427d-9a87-7e5b35e68149"
+  } ]
+}

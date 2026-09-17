@@ -1,0 +1,119 @@
+{
+  "name": "8b34b3a8-c78d-4014-a6aa-4c76ef2a278f",
+  "displayName": "Validate OTP",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.pin = 433213",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "That appears to be the phone number that sent the verification code.\n\nPlease open the text we sent to see the 6-digit code." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Il semble que vous ayez entré le numéro de téléphone d’où a été envoyé le code de vérification. \n\nVeuillez ouvrir le message texte que nous vous avons envoyé afin de voir le code de six chiffres." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetPage": "Trigger OTP",
+    "name": "8d0704d8-ae22-4d17-a54f-579115de6d48"
+  }, {
+    "condition": "$session.params.otp_validation_response.is_authenticated = True OR $session.params.otp_validation_response.is_authenticated = \"true\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Great, that's the correct PIN." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Parfait, c'est le bon NIP." ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "auth_status",
+        "value": "Pass"
+      } ]
+    },
+    "targetPage": "End Flow",
+    "name": "6b9dec9c-3038-43f2-94d7-f5ef004d3aa4"
+  }, {
+    "condition": "$session.params.Wrong_PIN_Counter \u003e= 1 AND $session.params.is_authenticated = \"false\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Unfortunately, that is not the correct verification code. " ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Malheureusement, ce n'est pas le bon code de vérification." ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "auth_status",
+        "value": "Fail"
+      }, {
+        "parameter": "status",
+        "value": "SMSTimeout"
+      } ]
+    },
+    "targetPage": "Webhook set-auth-status",
+    "name": "d849ac35-7528-45c5-9261-7100c35bdcab"
+  }, {
+    "condition": "$session.params.is_authenticated = \"false\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "That doesn’t seem right. To continue, please tell me the 6-digit verification code I sent you. You can also enter it using the keypad on your phone." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Cela ne semble pas exact. Pour continuer, veuillez me dire le code de vérification de six chiffres que je vous ai envoyé. Vous pouvez aussi l'entrer au clavier de votre téléphone." ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "Wrong_PIN_Counter",
+        "value": "$sys.func.ADD(1, $session.params.Wrong_PIN_Counter)"
+      } ]
+    },
+    "targetPage": "Trigger OTP",
+    "name": "f72e3610-45d7-44c6-a284-d33c8f08ec83"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook validate-otp Error",
+    "name": "01fd0cfc-7085-4dfe-9e1b-d18feae5f7ab"
+  } ],
+  "advancedSettings": {
+    "speechSettings": {
+      "endpointerSensitivity": 90,
+      "noSpeechTimeout": {
+        "seconds": 60
+      },
+      "models": [ {
+        "key": "en",
+        "value": "telephony_short"
+      }, {
+        "key": "fr-ca",
+        "value": "telephony_short"
+      } ]
+    }
+  },
+  "speakerIdSettings": {
+  
+  }
+}

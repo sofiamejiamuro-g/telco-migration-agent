@@ -1,0 +1,44 @@
+{
+  "name": "09765907-176b-4bb9-afe8-a616de7dce1c",
+  "displayName": "CX confirmation on ACUT ticket",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "intent": "context.confirm_yes",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "ticket_number",
+        "value": "$session.params.ticket_number1"
+      }, {
+        "parameter": "ticket_state",
+        "value": "$session.params.ticket_state1"
+      }, {
+        "parameter": "ticket_number_ref",
+        "value": "$sys.func.CONCATENATE(\"REF\", $sys.func.TO_TEXT($session.params.ticket_number))"
+      } ]
+    },
+    "targetFlow": "bell_app_mgmt_ticket_check_for_cancel_ticket",
+    "name": "a6f784f3-68ee-471f-92cb-8ca99c813d49"
+  }, {
+    "intent": "context.confirm_no",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I see you have another ticket that was opened on $session.params.date_formatted2. Is this the ticket you are calling about?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je vois que vous avez un billet qui a été ouvert le $session.params.date_formatted2. S’agit-il du billet pour lequel vous appelez?" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetPage": "CX confirmation on ACUT ticket 2",
+    "name": "f547b840-9cd5-4560-ba9c-f1d14c490c3c"
+  } ]
+}

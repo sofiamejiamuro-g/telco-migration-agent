@@ -1,0 +1,47 @@
+{
+  "name": "715749d5-cbd7-47ed-809d-7d2f78d6c2b6",
+  "displayName": "Check Intent type ATL/MTS",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "setParameterActions": [ {
+      "parameter": "not_eligible_for_rdam",
+      "value": "$sys.func.CONTAIN([ \"bill_charge_inquiry\",   \"payment_setup_autopay\",   \"payment_update_autopay\",   \"payment_cancel_autopay\",   \"payment_auto_payment_status\",   \"payment_setup_payment_arrangements\",   \"payment_update_payment_arrangements\",   \"payment_make_payment\",   \"bill_view_bill\",   \"bill_add_promo\",   \"bill_inquire_promo\",   \"bill_change_bill_cycle\",   \"bill_confirm_due_date\",   \"bill_missing_promo\",   \"bill_dispute_bill\",   \"bill_switch_format\",   \"bill_missing_bill\",   \"bill_contract_terms\",   \"bill_device_balance\",   \"bill_credit_report_inquiry\",   \"bill_remove_service_charge\",   \"bill_unexpected_after_cancel\",   \"bill_unexpected_after_suspend\",   \"bill_promo_expired\",   \"bill_deposit_inquiry\",   \"payment_restore_service\",   \"bill_reduce_plan\",   \"payment_request_refund\",   \"payment_not_processing\" ] , $session.params.route)"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.not_eligible_for_rdam = true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "User Confirm Question Type",
+    "name": "06c65841-e8f2-42c1-bf51-884025b90879"
+  }, {
+    "condition": "$session.params.not_eligible_for_rdam = false",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Check RDAM Eligibility",
+    "name": "1ec8568b-507a-4fc0-9e67-343e8ee118c3"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "715749d5-cbd7-47ed-809d-7d2f78d6c2b6"
+      }, {
+        "parameter": "flow_id",
+        "value": "7236071c-1553-4217-a18d-0a64a4737a9a"
+      }, {
+        "parameter": "page_name",
+        "value": "Check Intent type ATL/MTS"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

@@ -1,0 +1,109 @@
+{
+  "name": "105bf933-b3b3-4450-a833-2d2c0878c1ac",
+  "displayName": "[whk] Acut trouble type",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "v1/dfcx_support/content_lookup#acut-trouble-types",
+    "tag": "\"acut_trouble_types\""
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.active_dispatch_count \u003e 1 AND $session.params.webhook_success = true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "[whk] Main task status",
+    "name": "790038ac-3c9f-44ae-88f1-333800c8298b"
+  }, {
+    "condition": "$session.params.webhook_success = true AND $session.params.notificationDetails[0].characteristicSpecification.patternClearFlag = \"1\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "If customer experiencing issues?",
+    "name": "50f64299-00c1-4dde-9801-f51a18b0fbca"
+  }, {
+    "condition": "$session.params.webhook_success = true AND $session.params.notificationDetails[0].characteristicSpecification.patternClearFlag = 0",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "ACUT trouble type message",
+    "name": "ceaa99e9-cf88-43e6-b6d0-24f990d5a17a"
+  }, {
+    "condition": "$session.params.trouble_ticket_state = \"606\" AND $session.params.webhook_success = true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "[whk] Main task status",
+    "name": "ee538af5-98ff-4f13-8d18-91adcede65aa"
+  }, {
+    "condition": "$session.params.webhook_success = true AND ($sys.func.UPPER($session.params.dispatch_type) = \"FIELD\" OR $sys.func.UPPER($session.params.dispatch_type) = \"CO\" OR $sys.func.UPPER($session.params.dispatch_type) = \"CABLE\" OR $sys.func.UPPER($session.params.dispatch_status) = \"MANUALHANDLING\")",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "[whk] Dispatch status",
+    "name": "36d51d5a-6e1f-4ae4-a2ca-d89953e54d2f"
+  }, {
+    "condition": "$session.params.webhook_success = true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "[whk] Main task status",
+    "name": "e1e05e7e-6e8f-4163-bc17-aaf42b1b28e5"
+  }, {
+    "condition": "$session.params.webhook_success = false",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Failure - ACUT",
+    "name": "6977ce28-1aff-43b6-a127-01074a6f4e10"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "105bf933-b3b3-4450-a833-2d2c0878c1ac"
+      }, {
+        "parameter": "flow_id",
+        "value": "8ac2c857-8d2c-4fa2-8970-f1c302db570b"
+      }, {
+        "parameter": "page_name",
+        "value": "[whk] Acut trouble type"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Webhook Failure - ACUT",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+    
+    },
+    "name": "a2197767-41dd-45c1-a3ca-99136bd1d056"
+  }, {
+    "targetPage": "Webhook Failure - ACUT",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+    
+    },
+    "name": "abbffc98-9b16-4df5-ba71-52f35369ed6b"
+  }, {
+    "targetPage": "Webhook Failure - ACUT",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+    
+    },
+    "name": "a7cacc51-2cdf-4775-a7f0-6a2416c2b44a"
+  }, {
+    "targetPage": "Webhook Failure - ACUT",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+    
+    },
+    "name": "98b39146-29f1-4c01-a246-eda4f62eacd8"
+  } ]
+}

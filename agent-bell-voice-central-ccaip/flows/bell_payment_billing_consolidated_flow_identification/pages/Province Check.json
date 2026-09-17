@@ -1,0 +1,47 @@
+{
+  "name": "cada4efa-a446-4988-8953-5b32f9e9b186",
+  "displayName": "Province Check",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "province",
+        "value": "$session.params.npa_nxx_lookup_response.province"
+      } ]
+    },
+    "name": "3d0633e7-4e14-44ae-b3ca-6f982471d8e6"
+  }, {
+    "condition": "$session.params.oneBillIndicator = \"Y\" AND ($session.params.province = \"NB\" OR $session.params.province = \"NL\" OR $session.params.province = \"NS\" OR $session.params.province = \"PE\")",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "oneBillIndicator",
+        "value": "Y"
+      } ]
+    },
+    "targetFlow": "bell_va_to_ivr_handoff",
+    "name": "fa1874f4-2c6e-496f-bc60-6607ae9b4252"
+  }, {
+    "condition": "$session.params.oneBillIndicator = \"M\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "oneBillIndicator",
+        "value": "M"
+      } ]
+    },
+    "targetFlow": "bell_va_to_ivr_handoff",
+    "name": "811bc630-58ed-4533-a359-16be27be3eb3"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "consolidated_status",
+        "value": "Pass"
+      } ]
+    },
+    "targetPage": "End Flow",
+    "name": "6e2fb8f5-fc0d-4861-86fd-c9d0a42eb924"
+  } ]
+}

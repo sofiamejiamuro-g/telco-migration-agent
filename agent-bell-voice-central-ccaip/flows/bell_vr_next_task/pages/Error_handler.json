@@ -1,0 +1,58 @@
+{
+  "name": "eb30eed4-6ce5-47e9-b32f-d500d1dff92a",
+  "displayName": "Error_handler",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "setParameterActions": [ {
+      "parameter": "counter_next_task",
+      "value": "$sys.func.ADD($session.params.counter_next_task,1)"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.counter_next_task \u003c= 2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Oups ! Une erreur s'est produite de mon côté. Permettez-moi de réessayer pour vous." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "\u003cspeak\u003e\u003cbreak time=\"5s\"/\u003e\u003c/speak\u003e" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "Oops! Something went wrong on my end. Let me try that again for you." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "\u003cspeak\u003e\u003cbreak time=\"5s\"/\u003e\u003c/speak\u003e" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "targetPage": "Webhook VR-next-task",
+    "name": "96179a89-2fed-41f3-9dc7-f8cd20177a03"
+  }, {
+    "condition": "$session.params.counter_next_task = 3",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "J'ai besoin que vous vous connectiez à un agent." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "I need to connect you to an agent." ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "targetFlow": "bell_vr_api_failure_handler",
+    "name": "5aa46490-1d6f-4a06-9185-ed40018fbc7a"
+  } ]
+}

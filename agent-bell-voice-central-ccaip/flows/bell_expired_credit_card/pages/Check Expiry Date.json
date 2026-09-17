@@ -1,0 +1,81 @@
+{
+  "name": "9c522aaa-03f2-4f11-a89e-139a924db1c7",
+  "displayName": "Check Expiry Date",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$sys.func.TO_NUMBER($session.params.expiry_year) = $sys.func.TO_NUMBER($session.params.current_year) AND $sys.func.TO_NUMBER($session.params.expiry_month) = $sys.func.TO_NUMBER($session.params.current_month)",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I noticed your credit card on file is about to expire. Do you want to update it now?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "J'ai remarqué que votre carte de crédit enregistrée est sur le point d'expirer. Voulez-vous la mettre à jour maintenant ?" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetPage": "Check CX Input",
+    "name": "d9e8d49f-7a71-4ebd-8567-63a2b203b506"
+  }, {
+    "condition": "$sys.func.TO_NUMBER($session.params.expiry_year) = $sys.func.TO_NUMBER($session.params.current_year) AND $sys.func.TO_NUMBER($session.params.expiry_month) \u003c $sys.func.TO_NUMBER($session.params.current_month)",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I noticed your credit card on file is expired. Do you want to update it now?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "J'ai remarqué que votre carte de crédit enregistrée est expirée. Voulez-vous la mettre à jour maintenant ?" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetPage": "Check CX Input",
+    "name": "62f27d9a-f3c4-4f76-978f-8f95afb52f09"
+  }, {
+    "condition": "$sys.func.TO_NUMBER($session.params.expiry_year) \u003c $sys.func.TO_NUMBER($session.params.current_year)",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I noticed your credit card on file is expired. Do you want to update it now?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "J'ai remarqué que votre carte de crédit enregistrée est expirée. Voulez-vous la mettre à jour maintenant ?" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetPage": "Check CX Input",
+    "name": "b79d893f-11e2-478e-ae97-07c3332ab2f7"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "9c522aaa-03f2-4f11-a89e-139a924db1c7"
+      }, {
+        "parameter": "flow_id",
+        "value": "7b79b75c-6cee-409d-b609-9b5561813ec0"
+      }, {
+        "parameter": "page_name",
+        "value": "Check Expiry Date"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

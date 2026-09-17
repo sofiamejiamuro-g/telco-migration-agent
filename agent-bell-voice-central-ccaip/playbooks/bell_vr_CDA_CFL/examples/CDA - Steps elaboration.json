@@ -1,0 +1,47 @@
+{
+  "name": "ece8ba09-6090-4533-ba3c-8bfc40faaaac",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Okay, this is the next step in our virtual repair process. Please perform the following action to see if it resolves the issue. Please check your TV inputs.  When you’re done, just let me know if you were able to complete the step."
+    }
+  }, {
+    "userUtterance": {
+      "text": "I am confused what exactly do I need to do?"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "No worries, I will take care of it."
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_vr_post_answer",
+      "inputActionParameters": {
+        "customer_answer1_id": "1"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "User having a problem with the service and initiating Virtual repair session.",
+    "actionParameters": {
+      "acceptable_answers": [ {
+        "choice": "user_completed_entire_solution",
+        "id": 0
+      }, {
+        "choice": "user_is_stuck_further_help_requested",
+        "id": 1
+      } ],
+      "title": "Check the TV inputs",
+      "vr_type": "CDA"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "System tells the user what to do and then after it, post-answer flow runs with the fetched parameters."
+  },
+  "displayName": "CDA - Steps elaboration",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 303,
+  "languageCode": "en"
+}

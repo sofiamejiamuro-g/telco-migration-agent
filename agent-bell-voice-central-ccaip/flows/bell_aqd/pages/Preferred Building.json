@@ -1,0 +1,79 @@
+{
+  "name": "19c34d99-bc1d-46b4-98ab-d541ba520013",
+  "displayName": "Preferred Building",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "v1/deai-customer-information",
+    "tag": "NA",
+    "setParameterActions": [ {
+      "parameter": "telephone_number",
+      "value": "$sys.func.IF($session.params.cirn=\"0\", $session.params.clid, $session.params.cirn)"
+    }, {
+      "parameter": "aqd_sub_flow",
+      "value": "preferred building"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.deai_search_by_tn_response.preferred_building_internet_flg = 1 OR $session.params.deai_search_by_tn_response.preferred_building_internet_flg = \"1\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "customer_type",
+        "value": "pref_bldg"
+      } ]
+    },
+    "targetPage": "Get queue (﻿menu_id)",
+    "name": "734dc0dc-b9f6-439b-a3f7-8e776da93352"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Check escalation flag",
+    "name": "bd258e70-4731-4ae2-bf4d-4850b8b7ed32"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Check escalation flag",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+    
+    },
+    "name": "99834f2b-ab77-432f-a5d4-c9da1dd4aaa9"
+  }, {
+    "targetPage": "Check escalation flag",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+    
+    },
+    "name": "519bbfbb-3478-4311-a1f5-e71e69ee5d2e"
+  }, {
+    "targetPage": "Check escalation flag",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+    
+    },
+    "name": "e21f9e9b-2bff-4d78-81b6-cb5e3f852fc9"
+  }, {
+    "targetPage": "Check escalation flag",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+    
+    },
+    "name": "9504b8f9-6720-426f-884d-3b16cbfb7f58"
+  }, {
+    "targetPage": "Check escalation flag",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+    
+    },
+    "name": "8a24cd02-ad1e-4a9e-a98b-5510d8cb2936"
+  }, {
+    "targetPage": "Check escalation flag",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+    
+    },
+    "name": "93da8744-c120-421a-9079-d12d0f948f3d"
+  } ]
+}

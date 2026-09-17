@@ -1,0 +1,64 @@
+{
+  "name": "8ccbc140-5e0d-4889-a4cc-c695dfde437d",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "I'm sorry to hear that. Have you tried using a tracking feature like \"Find my iPhone\" or \"Find my Device\"?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Yes"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Understood, I would suggest temporarily suspending your service to prevent unauthorized use. I will send a text to the device you are calling from, with a link to do it yourelf, it that alright?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "How much will it cost me?"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "The SMS is free of charge. I will send a text to the device you are calling from, with a link to temporarily suspend your service, it that alright?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "yes"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "brand": "bell",
+        "language": "en",
+        "route": "equipment_report_lost_device",
+        "sms_content": "You can visit bell.ca/suspendline to temporarily suspend your mobility service in MyBell. (bell.ca/about-us)",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+        "brand": "bell",
+        "language": "en"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer to report about a device lost or stolen and also more information about SMS",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "route": "equipment_report_lost_device",
+      "utterance": "report my phone as stolen"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": ".Customer has been asked about the use of features and they agreed. VA asks user for a SMS and they ask a contextual question on how much will it charge, VA answers and reprompt for SMS, as the user agreed, they are redirected to \"SMS Trigger\" flow",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en"
+    }
+  },
+  "displayName": "Equipment Report Lost Device - Contextual Yes",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 449,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

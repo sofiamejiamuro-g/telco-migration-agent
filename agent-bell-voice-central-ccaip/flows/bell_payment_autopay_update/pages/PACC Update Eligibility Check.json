@@ -1,0 +1,44 @@
+{
+  "name": "a887d007-0ff9-467f-9c61-4c3972198d39",
+  "displayName": "PACC Update Eligibility Check",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.eligInd = \"Y\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Create Order",
+    "name": "14b45eb8-b4a9-4869-baba-4f8ce52a8db6"
+  }, {
+    "condition": "$session.params.eligInd = \"N\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "webhook_success",
+        "value": "null"
+      } ]
+    },
+    "targetPage": "ID or Auth or NM1 or PACC or Webhook Failure Confirmation",
+    "name": "d3629e1b-736e-4b13-8eca-42181f35901a"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "a887d007-0ff9-467f-9c61-4c3972198d39"
+      }, {
+        "parameter": "flow_id",
+        "value": "00208917-47d8-4e61-a709-01d206b91ce4"
+      }, {
+        "parameter": "page_name",
+        "value": "PACC Update Eligibility Check"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

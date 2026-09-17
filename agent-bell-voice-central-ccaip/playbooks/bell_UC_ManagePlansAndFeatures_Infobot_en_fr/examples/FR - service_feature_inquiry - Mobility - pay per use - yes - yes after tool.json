@@ -1,0 +1,87 @@
+{
+  "name": "b8b280f0-7b0b-47fc-896b-9afdb18f5269",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70024",
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+        "language": "fr-ca"
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "la connexion de données en itinérance à la consommation ne sera plus disponible à partir du 1er mai 2026. Cependant, si vous prévoyez un voyage de courte durée, nous avons d'excellentes options telles que les forfaits « Roaming » et « Passes Voyage ». \nSouhaitez-vous en savoir plus ?\n"
+    }
+  }, {
+    "userUtterance": {
+      "text": "oui stp"
+    }
+  }, {
+    "toolUse": {
+      "tool": "FR_Bell_Manage_plans_and_features",
+      "action": "FR_Bell_Manage_plans_and_features",
+      "inputActionParameters": {
+        "requestBody": {
+          "query": "Quelle est la différence entre les forfaits « Roaming » et « Passes Voyage »?"
+        }
+      },
+      "outputActionParameters": {
+        "200": {
+          "answer": "Les forfaits Voyage sont compatibles avec Roam Better et ont priorité sur Roam Better lorsque vous voyagez dans une destination admissible. Si vous utilisez un forfait Voyage actif dans une destination admissible, les frais Roam Better ne vous seront pas facturés pendant la durée de votre forfait.",
+          "snippets": [ ]
+        }
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Les forfaits Voyage sont compatibles avec Roam Better et ont priorité sur Roam Better lorsque vous voyagez dans une destination admissible. Si vous utilisez un forfait Voyage actif dans une destination admissible, les frais Roam Better ne vous seront pas facturés pendant la durée de votre forfait.\nSouhaitez-vous en savoir plus?\n"
+    }
+  }, {
+    "userUtterance": {
+      "text": "oui"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "service_add_feature_flow",
+      "inputActionParameters": {
+        "add_ons": "travel pass",
+        "language": "fr-ca",
+        "lob": "Mobility",
+        "route": "service_add_feature",
+        "utterance": "Quelle est la différence entre les forfaits « Roaming » et « Passes Voyage »?"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "User reports that they want information about data roaming connectivity and data usage consumption.",
+    "actionParameters": {
+      "brand": "bell",
+      "identification_status": "pass",
+      "language": "fr-ca",
+      "lob": "Mobility",
+      "route": "service_feature_inquiry",
+      "utterance": "Je souhaite obtenir des informations sur la connexion de données en itinérance et sur la consommation de données."
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Customer reports that they are traveling and want information about pay-per-use data charges. we set directly the lob = \"mobility\", display hard coded message then ask if further information are needed user said yes we update the query then we call the tool display the message then ask if still need more information user respond by yes so we set add_ons to travel pass then we route to service_add_feature_flow flow.",
+    "actionParameters": {
+      "add_ons": "travel pass",
+      "brand": "bell",
+      "language": "fr-ca",
+      "route": "service_add_feature",
+      "utterance": "Quelle est la différence entre les forfaits « Roaming » et « Passes Voyage »?"
+    }
+  },
+  "displayName": "FR - service_feature_inquiry - Mobility - pay per use - yes - yes after tool",
+  "retrievalStrategy": "STATIC",
+  "tokenCount": 802,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

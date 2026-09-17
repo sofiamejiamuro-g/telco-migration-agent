@@ -1,0 +1,61 @@
+{
+  "name": "713a5b3f-2ae2-40c7-9ff3-1396e257086e",
+  "displayName": "User Confirm Question Type",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "conditionalCases": [ {
+      "cases": [ {
+        "condition": "$session.params.onebillindicator = \"Y\"",
+        "caseContent": [ {
+          "message": {
+            "text": {
+              "text": [ "I see you’ve consolidated your Bell Mobility and Bell Aliant services on one bill. To get you the best support, I’ll connect you to an agent. Do you have any other questions before I transfer you?" ]
+            },
+            "languageCode": "en"
+          }
+        }, {
+          "message": {
+            "text": {
+              "text": [ "Selon votre compte, vous avez regroupé vos services Bell Mobilité et Bell Aliant en une seule facture. Afin de vous offrir le meilleur soutien possible, je vais vous mettre en contact avec un agent. Avez-vous d’autres questions avant que je vous transfère?" ]
+            },
+            "languageCode": "fr-ca"
+          }
+        } ]
+      }, {
+        "condition": "$session.params.onebillindicator = \"M\"",
+        "caseContent": [ {
+          "message": {
+            "text": {
+              "text": [ "I see you’ve consolidated your Bell Mobility and Bell MTS services on one bill. To get you the best support, I’ll transfer you to an agent.  Do you have any other questions before I transfer you?" ]
+            },
+            "languageCode": "en"
+          }
+        }, {
+          "message": {
+            "text": {
+              "text": [ "Selon votre compte, vous avez regroupé vos services Bell Mobilité et Bell MTS en une seule facture. Afin de vous offrir le meilleur soutien possible, je vais vous mettre en contact avec un agent. Avez-vous d’autres questions avant que je vous transfère?" ]
+            },
+            "languageCode": "fr-ca"
+          }
+        } ]
+      } ]
+    } ]
+  },
+  "transitionRoutes": [ {
+    "intent": "custom.no",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Check OneBillIndicator for RDAM User",
+    "name": "5d8b5705-f472-4401-bf11-25edc4b2557e"
+  }, {
+    "intent": "custom.yes",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_Feedback",
+    "name": "9fcb8a3b-a2fc-4f29-b1e0-df1610906eb7"
+  } ]
+}

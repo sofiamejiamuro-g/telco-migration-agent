@@ -1,0 +1,48 @@
+{
+  "name": "084f2287-8570-48c2-a8bc-c327f3539be8",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Je peux vous aider sur plusieurs sujets liés à la facturation. Pour vous diriger au bon endroit, veuillez me donner plus de détails sur votre demande. Par exemple, vous pourriez dire 'un frais particulier' ou 'mon solde total'."
+    }
+  }, {
+    "userUtterance": {
+      "text": "Je souhaite vérifier la date d'échéance de ma facture actuelle pour m'assurer de pouvoir effectuer le paiement avant la date limite."
+    }
+  }, {
+    "playbookInvocation": {
+      "playbook": "bell_UC_Billing",
+      "playbookInput": {
+        "precedingConversationSummary": "Customers is looking to confirm the due bill date",
+        "actionParameters": {
+          "language": "fr-ca",
+          "route": "bill_confirm_due_date",
+          "utterance": "Je souhaite vérifier la date d'échéance de ma facture actuelle pour m'assurer de pouvoir effectuer le paiement avant la date limite."
+        }
+      },
+      "playbookOutput": {
+        "executionSummary": "Customer query is addressed and then transferred to \"bell_UC_Billing\" playbook for further conversation",
+        "actionParameters": {
+          "language": "fr-ca",
+          "route": "bill_confirm_due_date"
+        }
+      },
+      "playbookState": "OUTPUT_STATE_OK"
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer query about \"I need help understanding my bill\" is addressed",
+    "actionParameters": {
+      "language": "fr-ca",
+      "route": "bill_vague",
+      "utterance": "J'ai besoin d'aide pour comprendre ma facture"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Customer query is addressed and then transferred to \"bell_UC_Billing\" playbook for further conversation"
+  },
+  "displayName": "FR -  bill_confirm_due_date",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 378,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

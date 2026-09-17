@@ -1,0 +1,75 @@
+{
+  "name": "b7cdcba7-d068-4607-a671-718d00d23d9f",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70024",
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+        "language": "fr-ca"
+      }
+    }
+  }, {
+    "toolUse": {
+      "tool": "FR_Bell_AccountManagement",
+      "action": "FR_Bell_AccountManagement",
+      "inputActionParameters": {
+        "requestBody": {
+          "query": "Puis-je obtenir une seule facture?"
+        }
+      },
+      "outputActionParameters": {
+        "200": {
+          "answer": "Yes, Bell offers a Facture unique (single bill) which presents information for all your Bell services in an easy-to-consult summary. Eligible clients are automatically enrolled, and if you are not enrolled, you can do so online.",
+          "snippets": [ {
+            "text": "# Qu’est-ce que la Facture unique et comment fonctionne-t-elle? En quoi consiste la Facture unique ?  - s'est effondré ## En quoi consiste la Facture unique? La Facture unique présente l’information relative à tous vos services Bell au moyen d’un sommaire facile à consulter et d’une page détaillée pour chacun. Vous n’avez donc qu’un seul paiement à faire chaque mois. Les clients admissibles sont automatiquement inscrits à la Facture unique. Si vous n’êtes pas inscrit, vous pouvez le faire [en ligne](http://www.bell.ca/support/PrsCSrvBill_OneBill_SignUp.page)en quelques minutes seulement Qui peut bénéficier de la Facture unique ?  - s'est effondré ## Qui peut bénéficier de la Facture unique? Nous offrons la Facture unique aux clients de Bell Téléphonie qui sont abonnés à un ou plusieurs autres services. Comment comprendre ma Facture unique  - s'est effondré",
+            "title": "Qu’est-ce que la Facture unique et comment fonctionne-t-elle?",
+            "uri": "https://soutien.bell.ca/Facturation-et-comptes/Facturation/Qu_est_ce_que_la_Facture_unique_et_comment_fonctionne_t_elle#:~:text=%23%20Qu%E2%80%99est%2Dce%20que,%2D%20s'est%20effondr%C3%A9"
+          } ]
+        }
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Oui, Bell propose une Facture unique qui présente les informations de tous vos services Bell dans un résumé facile à consulter. Les clients éligibles sont automatiquement inscrits, et si vous ne l'êtes pas, vous pouvez le faire en ligne. Pourriez-vous s'il vous plaît me faire savoir si votre question a reçu une réponse ?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Oui"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_Feedback",
+      "inputActionParameters": {
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer is asking whether he can get one bill",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca",
+      "route": "account_link_accounts",
+      "utterance": "Puis-je obtenir une seule facture?"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Here first \"bell_apb\" is called and then Customer is given the answer from datastore",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca",
+      "route": "account_link_accounts"
+    }
+  },
+  "displayName": "FR_account_link_accounts_CanIGetOneBill",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 850,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

@@ -1,0 +1,118 @@
+{
+  "name": "65d53eb8-ada0-4ecd-814b-56e30ea10d95",
+  "displayName": "Route - NGA - sales  ",
+  "transitionRoutes": [ {
+    "condition": "true",
+    "triggerFulfillment": {
+      "generators": [ {
+        "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/1fb3675b-c0a4-4d57-9fab-2aa1e5f4a546",
+        "outputParameter": "$request.generative.is_business"
+      } ]
+    },
+    "name": "55dfb7ef-4b28-4550-996e-b9787aa6dd19"
+  }, {
+    "condition": "$request.generative.is_business : true",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Afin que vous puissiez obtenir le meilleur soutien possible pour votre compte d’entreprise, je vais vous diriger vers notre système de soutien aux entreprises. Vous devrez vous servir du clavier de votre téléphone au lieu de parler à l’assistant virtuel. Veuillez patienter un moment." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "To get you the best support for your business account, I’ll transfer you to our Business support system. You’ll need to use your phone keypad instead of talking to the virtual assistant. Just a moment while I connect you." ]
+        },
+        "languageCode": "en"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "special_queue",
+        "value": "business"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "92fc4868-0479-4147-9a45-f05c795cbeb7"
+  }, {
+    "condition": "$session.params.route = \"sales_add_to_existing_account\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "route",
+        "value": "sales_add_to_existing_account"
+      } ]
+    },
+    "name": "c236aea4-7715-40c5-8bb3-478ceba3ba60",
+    "targetPlaybook": "bell_UC_Sales"
+  }, {
+    "condition": "$session.params.route = \"sales_new_account\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "route",
+        "value": "sales_new_account"
+      } ]
+    },
+    "name": "4e1bd1a0-b8ae-4978-977d-ccaba2db435a",
+    "targetPlaybook": "bell_UC_Sales"
+  }, {
+    "condition": "$session.params.route = \"sales_order_device\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "route",
+        "value": "sales_order_device"
+      } ]
+    },
+    "name": "f8c9af90-6209-49e5-996a-1be50129c0c6",
+    "targetPlaybook": "bell_UC_sales_device_related"
+  }, {
+    "condition": "$session.params.route = \"sales_device_inquiry\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "route",
+        "value": "sales_device_inquiry"
+      } ]
+    },
+    "name": "12500930-f865-478d-828c-fecc81a726fc",
+    "targetPlaybook": "bell_UC_sales_device_related"
+  }, {
+    "condition": "$session.params.route = \"sales_port_in_service\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "route",
+        "value": "sales_port_in_service"
+      }, {
+        "parameter": "apb_location_id",
+        "value": 70018
+      } ]
+    },
+    "name": "5546119e-e475-41fa-a3a0-fc19cb0aeb1c",
+    "targetPlaybook": "bell_UC_Sales"
+  }, {
+    "condition": "$session.params.route = \"sales_confirm_service_coverage\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "route",
+        "value": "sales_confirm_service_coverage"
+      } ]
+    },
+    "name": "ea91b0d8-f162-47c6-9fc8-26ffd0562cfb",
+    "targetPlaybook": "bell_uc_sales_service_coverage"
+  }, {
+    "condition": "$session.params.route = \"sales_plans_inquiry\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "route",
+        "value": "sales_plans_inquiry"
+      } ]
+    },
+    "name": "8dfca81e-0db8-4bfe-99a4-2739137fb6fb",
+    "targetPlaybook": "Bell_UC_Sales_Plans_inquiry"
+  }, {
+    "condition": "$session.params.route = \"sales_vague\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "route",
+        "value": "sales_vague"
+      } ]
+    },
+    "name": "2179b8e1-5121-417e-a49c-d7c6e53ec9d2",
+    "targetPlaybook": "bell_uc_disambiguation_for_vague_sales"
+  } ]
+}

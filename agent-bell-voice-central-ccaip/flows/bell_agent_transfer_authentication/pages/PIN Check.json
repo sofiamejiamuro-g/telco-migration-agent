@@ -1,0 +1,42 @@
+{
+  "name": "3eaad1b9-1624-4e2f-bf77-e7b2ad71e8bf",
+  "displayName": "PIN Check",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.auth_options_response.pin_available = true",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Je vais vous mettre en contact avec un agent. Pour votre sécurité, et pour que l'agent puisse vous aider rapidement, nous allons vérifier votre identité. Je vois que vous avez un NIP dans votre dossier. Veuillez entrer votre NIP à 4 chiffres." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "I will get you to an agent. For your security, and to ensure the agent can quickly assist you, let's verify your identity. I see you have a PIN number on file. Please enter your 4-digit PIN." ]
+        },
+        "languageCode": "en"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "auth_method",
+        "value": "PIN"
+      }, {
+        "parameter": "local_no_match",
+        "value": 0
+      } ]
+    },
+    "targetPage": "PIN Auth - Start",
+    "name": "ce92c414-f5e6-4d0a-bdfb-7e95546213af"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Check OTP Eligibity",
+    "name": "2eafe55c-cd07-46d9-87a7-9af6f2fb4df1"
+  } ]
+}

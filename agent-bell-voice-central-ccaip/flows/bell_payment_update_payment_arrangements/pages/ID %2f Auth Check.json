@@ -1,0 +1,99 @@
+{
+  "name": "65ae5b38-d525-4583-a271-b794853201fb",
+  "displayName": "ID / Auth Check",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.identification_status = null",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_Identification",
+    "name": "37b59eb8-74f6-4bbe-9810-9ba8289611ad"
+  }, {
+    "condition": "$session.params.identification_status = \"Fail\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I am unable to verify your account." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je ne suis pas en mesure de vérifier votre compte." ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "intent",
+        "value": "$session.params.route"
+      }, {
+        "parameter": "brand",
+        "value": "$session.params.brand"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "2472aae1-b1d1-45bf-9371-1644c3689453"
+  }, {
+    "condition": "$session.params.identification_status = \"Pass\" AND (($session.params.banType = \"I\" AND ($session.params.banSubType = \"B\" OR $session.params.banSubType = \"N\" OR $session.params.banSubType = \"5\")) OR ($session.params.banType = \"C\" AND ($session.params.banSubType = \"V\" OR $session.params.banSubType = \"T\" OR $session.params.banSubType = \"P\")))",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Get Customer Profile",
+    "name": "637a8cad-2260-4554-8888-33a2aeba02ba"
+  }, {
+    "condition": "$session.params.identification_status = \"Pass\" AND $session.params.auth_status = null",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Get Ban Profile",
+    "name": "02d84b0b-2937-4b26-b903-b85d8800e1c3"
+  }, {
+    "condition": "$session.params.auth_status = \"Fail\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I am unable to verify your account." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je ne suis pas en mesure de vérifier votre compte." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "5cf047a5-f5a9-4b47-909f-818dd26f4346"
+  }, {
+    "condition": "$session.params.auth_status = \"Pass\" AND $session.params.identification_status = \"Pass\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Eligibility Check",
+    "name": "2577eb3b-292a-43fd-b129-66f72f9ced0f"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "65ae5b38-d525-4583-a271-b794853201fb"
+      }, {
+        "parameter": "flow_id",
+        "value": "27d30ebb-004e-434a-98f4-e2c03fd42fcf"
+      }, {
+        "parameter": "page_name",
+        "value": "ID / Auth Check"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

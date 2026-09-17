@@ -1,0 +1,104 @@
+{
+  "name": "ba302359-1063-4c8f-9674-deb4c24193bc",
+  "displayName": "Check Special Queue ",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "setParameterActions": [ {
+      "parameter": "aqd_sub_flow",
+      "value": "Check special queue IVR VA Handoff +  Collections"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.special_queue = \"sales_pitch\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "customer_type",
+        "value": "sales_pitch"
+      } ]
+    },
+    "targetPage": "Get queue (﻿menu_id)",
+    "name": "69892eda-e354-4829-ab6a-4f2952cfbdc6"
+  }, {
+    "condition": "$session.params.special_queue = \"bell_collections\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "intent",
+        "value": "aqd_collections"
+      } ]
+    },
+    "targetPage": "Get queue (﻿menu_id)",
+    "name": "332a40d2-69ab-436f-96a7-c7ce9883785a"
+  }, {
+    "condition": "$session.params.special_queue = \"bell_auldata\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "intent",
+        "value": "aqd_auldata"
+      } ]
+    },
+    "targetPage": "Get queue (﻿menu_id)",
+    "name": "e912770a-3c7d-4f2d-9fce-b07fee74ec97"
+  }, {
+    "condition": "$session.params.special_queue = \"atl_consolidated\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "brand",
+        "value": "Bell Aliant"
+      }, {
+        "parameter": "l2_brand",
+        "value": "Bell Aliant"
+      } ]
+    },
+    "targetPage": "Get queue (﻿menu_id)",
+    "name": "4b85d6e5-dc2c-4a55-a035-759348df1923"
+  }, {
+    "condition": "$session.params.special_queue = \"mts_consolidated\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "brand",
+        "value": "Bell MTS"
+      }, {
+        "parameter": "l2_brand",
+        "value": "Bell MTS"
+      } ]
+    },
+    "targetPage": "Get queue (﻿menu_id)",
+    "name": "5210cdda-ec55-4de2-b4fa-ff7d2dba4926"
+  }, {
+    "condition": "$session.params.special_queue = \"business\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Check Intent",
+    "name": "7f9ff130-2e97-497c-b007-2b5c9544b5dd"
+  }, {
+    "condition": "$session.params.special_queue = \"bell_sus_fraud\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "intent",
+        "value": "aqd_fraud_prevention"
+      } ]
+    },
+    "targetPage": "Get queue (﻿menu_id)",
+    "name": "a5b24d5b-0d0c-40e0-b637-64cd801e8c26"
+  }, {
+    "condition": "$session.params.special_queue = \"pref_bldg\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "customer_type",
+        "value": "pref_bldg"
+      } ]
+    },
+    "targetPage": "Get queue (﻿menu_id)",
+    "name": "5303cc0f-2cba-4b0f-b180-e3fa325d164e"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Check Special Status | Collections Logic",
+    "name": "56eab6d7-d374-4931-89b9-f7a3d3bb0eec"
+  } ]
+}

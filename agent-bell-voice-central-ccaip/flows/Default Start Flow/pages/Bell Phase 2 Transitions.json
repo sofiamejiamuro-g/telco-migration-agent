@@ -1,0 +1,89 @@
+{
+  "name": "bd01318d-3db6-46e2-a920-ab420b989e32",
+  "displayName": "Bell Phase 2 Transitions",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "messages": [ {
+      "text": {
+        "text": [ "You can communicate your concerns here." ]
+      },
+      "languageCode": "en"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "intent": "tech_missing_channel_package",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_rehit",
+    "name": "da2b57c0-c667-4d04-ad45-b603f6196038"
+  }, {
+    "intent": "tech_ticket_status",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "route",
+        "value": "tech_ticket_status"
+      } ]
+    },
+    "targetFlow": "bell_app_mgmt_ticket_status_and_change_entry",
+    "name": "3796ccb2-e88b-4603-99c8-7d3c72f305f1"
+  }, {
+    "intent": "tech_change_appointment",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "route",
+        "value": "tech_change_appointment"
+      } ]
+    },
+    "targetFlow": "bell_app_mgmt_ticket_status_and_change_entry",
+    "name": "ef6c53a5-b8f0-407c-a9a6-677e032e561f"
+  }, {
+    "intent": "tech_service_outage",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "route",
+        "value": "tech_service_outage"
+      }, {
+        "parameter": "utterance",
+        "value": "$request.user-utterance"
+      } ]
+    },
+    "targetFlow": "bell_tech_service_outage_connection_issue_main",
+    "name": "e070a057-1cd1-4551-bc21-6e867888b97a"
+  }, {
+    "intent": "tech_connection_issue",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "route",
+        "value": "tech_connection_issue"
+      }, {
+        "parameter": "utterance",
+        "value": "$request.user-utterance"
+      } ]
+    },
+    "targetFlow": "bell_tech_service_outage_connection_issue_main",
+    "name": "f6cb421e-4d97-42d9-a043-25a8a39de7cd"
+  }, {
+    "intent": "tech_field_tech_visit_cancel",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "route",
+        "value": "tech_field_tech_visit_cancel"
+      } ]
+    },
+    "targetFlow": "bell_app_mgmt_cancel_ticket_entry",
+    "name": "12e8f315-cfc8-4771-a1ce-0d0c4767e0d5"
+  }, {
+    "intent": "tech_field_tech_visits",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "route",
+        "value": "tech_field_tech_visits"
+      } ]
+    },
+    "targetFlow": "bell_app_mgmt_Tech_visit_Entry",
+    "name": "8ba0f0ed-4a27-4067-918c-57a47b11840e"
+  } ]
+}

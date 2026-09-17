@@ -1,0 +1,117 @@
+{
+  "name": "2f031a8a-0d5f-4a3b-96df-d5f83ae85956",
+  "displayName": "Webhook PA Eligibility Check",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "v1/payment-arrangement#get-eligibility-criteria",
+    "tag": "get-eligibility-criteria",
+    "setParameterActions": [ {
+      "parameter": "billing_account",
+      "value": "$session.params.billing_account_number"
+    }, {
+      "parameter": "menu_type",
+      "value": "$session.params.menu_type"
+    }, {
+      "parameter": "brand",
+      "value": "$session.params.brand"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "eligibilityCriteria",
+        "value": "$session.params.pmt_arrangement_eligibility_response.showPaymentArrangementLink"
+      }, {
+        "parameter": "webhook_success",
+        "value": "$session.params.webhook_success"
+      }, {
+        "parameter": "installmentDetails",
+        "value": "$session.params.pmt_arrangement_eligibility_response.installmentDetails"
+      }, {
+        "parameter": "installmentCheck",
+        "value": "$sys.func.COUNT($session.params.pmt_arrangement_eligibility_response.installmentDetails)"
+      } ]
+    },
+    "name": "84d10471-c525-4f4f-916a-ef614099d7fe"
+  }, {
+    "condition": "$session.params.webhook_success = true AND $session.params.eligibilityCriteria = false",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Installment Check",
+    "name": "b8cddc61-f317-4b98-aa31-048461f84ec5"
+  }, {
+    "condition": "$session.params.webhook_success = false",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Failure Confirmation",
+    "name": "1fccb7c3-812b-42c6-9193-08113d9e7dce"
+  }, {
+    "condition": "$session.params.webhook_success = true AND $session.params.eligibilityCriteria = true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Create Order",
+    "name": "44ab0a27-8357-47a5-a634-b03ceb64b082"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Failure Confirmation",
+    "name": "90070a0b-57ca-4a9d-9398-c57e0c36fde3"
+  } ],
+  "eventHandlers": [ {
+    "event": "webhook.error",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I'm unable to proceed with your payment arrangement at this time. I'll send a text to the device you're calling from so that you can set up your payment arrangement in MyBell. Is that alright?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je ne suis pas en mesure de traiter votre entente de paiement pour le moment. Je vais envoyer un texto à l'appareil au moyen duquel vous appelez afin que vous puissiez configurer votre entente de paiement dans MonBell. Est-ce que ça vous convient?" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "1345f616-a0a2-4b14-bff8-21ddffae2951"
+  }, {
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I'm unable to proceed with your payment arrangement at this time. I'll send a text to the device you're calling from so that you can set up your payment arrangement in MyBell. Is that alright?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je ne suis pas en mesure de traiter votre entente de paiement pour le moment. Je vais envoyer un texto à l'appareil au moyen duquel vous appelez afin que vous puissiez configurer votre entente de paiement dans MonBell. Est-ce que ça vous convient?" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "f0c9ce97-469e-4c18-982b-cfe88c163c38"
+  }, {
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I'm unable to proceed with your payment arrangement at this time. I'll send a text to the device you're calling from so that you can set up your payment arrangement in MyBell. Is that alright?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je ne suis pas en mesure de traiter votre entente de paiement pour le moment. Je vais envoyer un texto à l'appareil au moyen duquel vous appelez afin que vous puissiez configurer votre entente de paiement dans MonBell. Est-ce que ça vous convient?" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "e8825aae-b5a4-4df5-bd7b-0501eb096f93"
+  } ]
+}

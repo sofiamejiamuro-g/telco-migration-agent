@@ -1,0 +1,85 @@
+{
+  "name": "461c7ce2-2baf-47bf-9c63-44e9f594039a",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70012"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "playbookInvocation": {
+      "playbook": "bell_uc_ask_LOB",
+      "playbookInput": {
+        "precedingConversationSummary": "User wants to know about their ticket status, doe snot mention lob",
+        "actionParameters": {
+          "language": "en",
+          "route": "tech_ticket_status"
+        }
+      },
+      "playbookOutput": {
+        "executionSummary": "When user does not provide lob, prompt them to understand what kind of service they are looking for, if the user mentions lob then return lob to the originating Playbook, if not set the default lob and return back",
+        "actionParameters": {
+          "language": "en",
+          "lob": "Internet",
+          "route": "tech_ticket_status"
+        }
+      },
+      "playbookState": "OUTPUT_STATE_OK"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_authentication",
+      "inputActionParameters": {
+      
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70014"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_tech_change_appointment_flow",
+      "inputActionParameters": {
+        "lob": "Internet"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "User wants to know about their ticket status",
+    "actionParameters": {
+      "language": "en",
+      "route": "tech_ticket_status",
+      "utterance": "What is the progress on my ticket ?"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "User wants to know about their ticket status, does not mention lob, route to bell_uc_ask_LOB playbook and retrieve the lob, and return back to this playbook and continue",
+    "actionParameters": {
+      "language": "en",
+      "lob": "Internet",
+      "route": "tech_ticket_status"
+    }
+  },
+  "displayName": "EN_tech_ticket_status_lob",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 585,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

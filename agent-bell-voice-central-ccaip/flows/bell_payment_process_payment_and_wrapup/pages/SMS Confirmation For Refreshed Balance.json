@@ -1,0 +1,73 @@
+{
+  "name": "18ab9c15-c2a3-4690-a57a-a60ef21f881f",
+  "displayName": "SMS Confirmation For Refreshed Balance",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "messages": [ {
+      "text": {
+        "text": [ "Thanks for your patience. It looks like I'm having trouble getting your updated account information at this time. There's nothing wrong on your end. I'll send a text to the device you're calling from, so that you may view your account details yourself in the MyBell App, Is that alright?" ]
+      },
+      "languageCode": "en"
+    }, {
+      "text": {
+        "text": [ "Merci de votre patience. Il semble que j'ai de la difficulté à obtenir les renseignements à jour de votre compte pour le moment. II n'y a rien de mal de votre côté. Je vais envoyer un texto à l'appareil à partir duquel vous appelez, afin que vous puissiez consulter vous-même les détails de votre compte dans l'appli MonBell. Est-ce que cela vous convient?" ]
+      },
+      "languageCode": "fr-ca"
+    } ],
+    "setParameterActions": [ {
+      "parameter": "card_number",
+      "value": null
+    }, {
+      "parameter": "cc_token",
+      "value": null
+    }, {
+      "parameter": "expiry_date",
+      "value": null
+    }, {
+      "parameter": "expiry_month",
+      "value": null
+    }, {
+      "parameter": "expiry_year",
+      "value": null
+    }, {
+      "parameter": "security_code",
+      "value": null
+    }, {
+      "parameter": "cvv_number",
+      "value": null
+    }, {
+      "parameter": "cc_from_utterance",
+      "value": null
+    } ]
+  },
+  "transitionRoutes": [ {
+    "intent": "context.confirm_yes",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Language Based SMS for Refreshed Balance",
+    "name": "52179923-eb1c-42b5-92fd-d32a11de1ade"
+  }, {
+    "intent": "context.confirm_no",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "sms_send_status",
+        "value": "declined"
+      } ]
+    },
+    "targetFlow": "bell_SMS Trigger",
+    "name": "6cd1c0a0-6891-4833-b723-efae1830042b"
+  }, {
+    "intent": "context.different_number",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "different_number",
+        "value": true
+      } ]
+    },
+    "targetPage": "Language Based SMS for Refreshed Balance",
+    "name": "daf4e44c-e2a0-45f5-8a68-33d4c0e0a3c3"
+  } ]
+}

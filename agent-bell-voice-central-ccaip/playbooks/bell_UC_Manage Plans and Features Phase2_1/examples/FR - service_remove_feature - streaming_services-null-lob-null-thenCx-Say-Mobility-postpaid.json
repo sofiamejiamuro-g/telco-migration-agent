@@ -1,0 +1,57 @@
+{
+  "name": "37199f5f-39a7-472f-b123-bd03e1f7d908",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70011",
+        "brand": "bell",
+        "language": "en"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Bien sûr, vous pouvez facilement gérer votre forfait Mobilité et vos options en tout temps au moyen de MonBell. Je vais envoyer un texto à l’appareil au moyen duquel vous appelez, afin que vous puissiez facilement modifier votre forfait Mobilité. Est-ce que ça vous convient?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "oui"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "sms_content": "Bell: Vous pouvez visiter https://m.bell.ca/monoption pour voir ou modifier vos options téléphoniques dans l'appli MonBell. (bell.ca/apropos)",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "The {identification_status} is \"Pass\", {customer_type} is \"Existing\", {streaming_services} is null or {lob} is null so, we will prompt user to ask \"Which service are you calling about?\" and once user reply then please analyze the user response and based on that please set {lob} or {streaming_services} based on instruction provided in playbook on how to set {lob} and {streaming_services} within {route} = \"service_remove_feature\"",
+    "actionParameters": {
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "en",
+      "route": "service_remove_feature",
+      "utterance": "Je veux juste prendre quelques concerts depuis mon mobile"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "As, the {streaming_services} is null or {lob} is null so, we will prompt user to ask \"Which service are you calling about?\" and if user reply then please analyze the user {utterance} and if the response is lob related then SET parameter {lob} and if it is related to streaming service then SET parameter {streaming_services} with correct value provided in playbook instruction within {route} = \"service_remove_feature\"",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en"
+    }
+  },
+  "displayName": "FR - service_remove_feature - streaming_services-null-lob-null-thenCx-Say-Mobility-postpaid",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 560,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

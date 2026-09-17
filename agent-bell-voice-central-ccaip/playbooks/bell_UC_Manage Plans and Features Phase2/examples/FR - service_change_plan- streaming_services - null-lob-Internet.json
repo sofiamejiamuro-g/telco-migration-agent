@@ -1,0 +1,73 @@
+{
+  "name": "d5cb8c97-60d3-40a0-ab62-7894bbc04301",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70011",
+        "brand": "bell",
+        "language": "fr-ca",
+        "route": "service_change_plan"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Vous pouvez facilement gérer votre forfait Internet ou vos options à tout moment en utilisant MonBell. Je vais envoyer un texto à l’appareil au moyen duquel vous appelez, afin que vous puissiez facilement modifier votre forfait Internet. Est-ce que ça vous convient?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "envoyer le texte"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "fr-ca",
+        "route": "service_change_plan",
+        "sms_content": "Bell : Vous pouvez visiter https://m.bell.ca/chatchangepackagef pour voir ou modifier votre forfait Internet dans l'appli MonBell. ( bell.ca/apropos )",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+        "language": "fr-ca"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "The {identification_status} is \"Pass\", {customer_type} is \"Existing\", {streaming_services} is null and {lob} is \"Internet\" so, we will prompt user for send SMS confirmation and if user say \"yes\" or anything affirmative then route to \"bell_SMS Trgigger\" flow.",
+    "actionParameters": {
+      "apb_location_id": "70011",
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "fr-ca",
+      "lob": "Internet",
+      "route": "service_change_plan",
+      "sms_content": "Bell : Vous pouvez visiter https://m.bell.ca/chatchangepackagef pour voir ou modifier votre forfait Internet dans l'appli MonBell. ( bell.ca/apropos )",
+      "sms_type": "Public",
+      "utterance": "C'est pour faire un changement sur mon internet."
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "As the {lob} is \"Internet\" and {streaming_services} is null then we will prompt user to send SMS and if user say \"yes\" or anything affirmative then send the user to \"bell_SMS Trigger\" flow",
+    "actionParameters": {
+      "apb_location_id": "70011",
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "fr-ca",
+      "lob": "Internet",
+      "route": "service_change_plan",
+      "sms_content": "Bell : Vous pouvez visiter https://m.bell.ca/chatchangepackagef pour voir ou modifier votre forfait Internet dans l'appli MonBell. ( bell.ca/apropos )",
+      "sms_type": "Public",
+      "utterance": "C'est pour faire un changement sur mon internet."
+    }
+  },
+  "displayName": "FR - service_change_plan- streaming_services - null-lob-Internet",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 710,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

@@ -1,0 +1,108 @@
+{
+  "name": "984eecc8-b782-4dfe-a8d2-370cdb6525c6",
+  "displayName": "Appointment time details",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "setParameterActions": [ {
+      "parameter": "apptStartTime",
+      "value": "$session.params.acut_retrieve_response.acutContext.appointments.appointment.appointmentStartDate"
+    }, {
+      "parameter": "apptEndTime",
+      "value": "$session.params.acut_retrieve_response.acutContext.appointments.appointment.appointmentEndDate"
+    } ],
+    "generators": [ {
+      "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/c8d9aa7a-0227-4da7-8256-fd4d68a2aa75",
+      "inputParameters": [ {
+        "key": "date-time",
+        "value": "$session.params.apptStartTime"
+      } ],
+      "outputParameter": "$request.generative.apptStartTime"
+    }, {
+      "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/c8d9aa7a-0227-4da7-8256-fd4d68a2aa75",
+      "inputParameters": [ {
+        "key": "date-time",
+        "value": "$session.params.apptEndTime"
+      } ],
+      "outputParameter": "$request.generative.apptEndTime"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "true",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "$session.params.trouble_type_message. $session.params.dispatch_task_status_message Your appointment is on $session.params.ticket_day, $session.params.ticket_month $session.params.ticket_date, $session.params.ticket_year." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "The technician can arrive anytime between $session.params.start_time_hours and $session.params.end_time_hours. And remember, an appointment scheduled from $session.params.start_time_hours to $session.params.end_time_hours can start even 5 minutes before $session.params.end_time_hours and finish later." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "$session.params.trouble_type_message. $session.params.dispatch_task_status_message Votre rendez-vous est prévu $session.params.ticket_day_fr, $session.params.ticket_month_fr $session.params.ticket_date_fr, $session.params.ticket_year_fr." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "Le technicien peut arriver entre $session.params.start_time_hours_fr et $session.params.end_time_hours_fr. Et rappelez-vous, un rendez-vous prévu de $session.params.start_time_hours_fr à $session.params.end_time_hours_fr peut commencer même 5 minutes avant $session.params.end_time_hours_fr et se terminer plus tard." ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "apptStartTimeObj",
+        "value": "$sys.func.TO_OBJECT($request.generative.apptStartTime)"
+      }, {
+        "parameter": "apptEndTimeObj",
+        "value": "$sys.func.TO_OBJECT($request.generative.apptEndTime)"
+      }, {
+        "parameter": "trouble_type_message",
+        "value": "$session.params.acut_trouble_type_response.trouble_type_message"
+      }, {
+        "parameter": "dispatch_task_status_message",
+        "value": "$session.params.acut_task_status_response.dispatch_task_status_message"
+      }, {
+        "parameter": "ticket_day",
+        "value": "$session.params.apptStartTimeObj.day"
+      }, {
+        "parameter": "ticket_month",
+        "value": "$session.params.apptStartTimeObj.month"
+      }, {
+        "parameter": "ticket_date",
+        "value": "$session.params.apptStartTimeObj.date"
+      }, {
+        "parameter": "ticket_year",
+        "value": "$session.params.apptStartTimeObj.year"
+      }, {
+        "parameter": "start_time_hours",
+        "value": "$session.params.apptStartTimeObj.appt_time"
+      }, {
+        "parameter": "end_time_hours",
+        "value": "$session.params.apptEndTimeObj.appt_time"
+      }, {
+        "parameter": "ticket_day_fr",
+        "value": "$session.params.apptStartTimeObj.day_fr"
+      }, {
+        "parameter": "ticket_month_fr",
+        "value": "$session.params.apptStartTimeObj.month_fr"
+      }, {
+        "parameter": "ticket_date_fr",
+        "value": "$session.params.apptStartTimeObj.date"
+      }, {
+        "parameter": "ticket_year_fr",
+        "value": "$session.params.apptStartTimeObj.year"
+      }, {
+        "parameter": "start_time_hours_fr",
+        "value": "$session.params.apptStartTimeObj.appt_time_fr"
+      }, {
+        "parameter": "end_time_hours_fr",
+        "value": "$session.params.apptEndTimeObj.appt_time_fr"
+      } ]
+    },
+    "targetPage": "Intent Check",
+    "name": "e7b99f84-221d-492d-9666-0615299d25c2"
+  } ]
+}

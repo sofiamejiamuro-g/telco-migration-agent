@@ -1,0 +1,29 @@
+{
+  "name": "79e4caf0-ab0b-4d0d-8761-9f6a149a3924",
+  "displayName": "Ban Type Check",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.is_home_phone = true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Province Lookup",
+    "name": "a89c1334-aab7-4e80-9e08-3d51363d5d33"
+  }, {
+    "condition": "($session.params.banType = \"I\" AND ($session.params.banSubType = \"B\" OR $session.params.banSubType = \"N\" OR $session.params.banSubType = \"5\")) OR ($session.params.banType = \"C\" AND ($session.params.banSubType = \"V\" OR $session.params.banSubType = \"T\" OR $session.params.banSubType = \"P\"))",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Get Customer Profile",
+    "name": "157870b5-1267-468c-ab9f-af8192b17712"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Get Ban Profile",
+    "name": "9430389c-f60b-4a70-8a1a-8f81ff7d2c37"
+  } ]
+}

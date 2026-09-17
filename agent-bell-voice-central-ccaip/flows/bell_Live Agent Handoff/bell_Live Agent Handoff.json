@@ -1,0 +1,327 @@
+{
+  "name": "dc1d62a7-bbdc-4622-964c-03393de3b963",
+  "displayName": "bell_Live Agent Handoff",
+  "transitionRoutes": [ {
+    "condition": "$session.params.va_to_ccaip = true",
+    "triggerFulfillment": {
+      "messages": [ {
+        "payload": {
+          "ujet": {
+            "action": "escalation",
+            "escalation_reason": "by_virtual_agent",
+            "language": "$session.params.language",
+            "menu_id": "$session.params.menu_id",
+            "session_variable": {
+              "capture_target": "payload",
+              "display_order_in_adapter": [ "Langue", "Marque", "ID d’appel", "Type de menu", "ANI", "DNIS/TFN", "CIRN", "Nom du client", "Indicateur d’authentification", "Numéro de compte", "Type de compte", "Intention", "Ligne d’activité", "Indicateur Cornerstone", "Résumé VA" ],
+              "payload": {
+                "ANI": "$session.params.clid",
+                "CIRN": "$session.params.cirn",
+                "DNIS/TFN": "$session.params.tfn",
+                "ID d’appel": "$session.params.call_id",
+                "Indicateur Cornerstone": "$session.params.cx_cornerstone",
+                "Indicateur d’authentification": "$session.params.customer_authentication",
+                "Intention": "$session.params.intent",
+                "Langue": "$session.params.language",
+                "Ligne d’activité": "$session.params.aqd_lob",
+                "Marque": "$session.params.brand",
+                "Nom du client": "$session.params.customer_name",
+                "Numéro de compte": "$session.params.billing_account_number",
+                "Résumé VA": "\n$request.generative.conversation_summary",
+                "Type de compte": "$session.params.account_type",
+                "Type de menu": "$session.params.menu_type"
+              }
+            },
+            "type": "action"
+          }
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "payload": {
+          "ujet": {
+            "action": "escalation",
+            "escalation_reason": "by_virtual_agent",
+            "language": "$session.params.language",
+            "menu_id": "$session.params.menu_id",
+            "session_variable": {
+              "capture_target": "payload",
+              "display_order_in_adapter": [ "Language", "Brand", "Call ID", "Menu Type", "ANI", "DNIS/TFN", "CIRN", "Customer Name", "Authentication Flag", "Account Number", "Account Type", "Intent", "Line of Business", "Cornerstone Flag", "VA Summary" ],
+              "payload": {
+                "ANI": "$session.params.clid",
+                "Account Number": "$session.params.billing_account_number",
+                "Account Type": "$session.params.account_type",
+                "Authentication Flag": "$session.params.customer_authentication",
+                "Brand": "$session.params.brand",
+                "CIRN": "$session.params.cirn",
+                "Call ID": "$session.params.call_id",
+                "Cornerstone Flag": "$session.params.cx_cornerstone",
+                "Customer Name": "$session.params.customer_name",
+                "DNIS/TFN": "$session.params.tfn",
+                "Intent": "$session.params.intent",
+                "Language": "$session.params.language",
+                "Line of Business": "$session.params.aqd_lob",
+                "Menu Type": "$session.params.menu_type",
+                "VA Summary": "\n$request.generative.conversation_summary"
+              }
+            },
+            "type": "action"
+          }
+        },
+        "languageCode": "en"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "customer_name",
+        "value": "$sys.func.GET_FIELD($session.params.first_user_account, \"user_name\")"
+      }, {
+        "parameter": "language",
+        "value": "$sys.func.IF(\"$session.params.language = null\", \"None\", \"$session.params.language\")"
+      }, {
+        "parameter": "brand",
+        "value": "$sys.func.IF(\"$session.params.brand = null\", \"None\", \"$session.params.brand\")"
+      }, {
+        "parameter": "call_id",
+        "value": "$sys.func.IF(\"$session.params.call_id = null\", \"None\", \"$session.params.call_id\")"
+      }, {
+        "parameter": "menu_type",
+        "value": "$sys.func.IF(\"$session.params.menu_type = null\", \"None\", \"$session.params.menu_type\")"
+      }, {
+        "parameter": "clid",
+        "value": "$sys.func.IF(\"$session.params.clid = null\", \"None\", \"$session.params.clid\")"
+      }, {
+        "parameter": "tfn",
+        "value": "$sys.func.IF(\"$session.params.tfn = null\", \"None\", \"$session.params.tfn\")"
+      }, {
+        "parameter": "cirn",
+        "value": "$sys.func.IF(\"$session.params.cirn = null\", \"None\", \"$session.params.cirn\")"
+      }, {
+        "parameter": "customer_name",
+        "value": "$sys.func.IF(\"$session.params.customer_name = null\", \"None\", \"$session.params.customer_name\")"
+      }, {
+        "parameter": "customer_authentication",
+        "value": "$sys.func.IF(\"$session.params.customer_authentication = null\", \"None\", \"$session.params.customer_authentication\")"
+      }, {
+        "parameter": "billing_account_number",
+        "value": "$sys.func.IF(\"$session.params.billing_account_number = null\", \"None\", \"$session.params.billing_account_number\")"
+      }, {
+        "parameter": "account_type",
+        "value": "$sys.func.IF(\"$session.params.account_type = null\", \"None\", \"$session.params.account_type\")"
+      }, {
+        "parameter": "intent",
+        "value": "$sys.func.IF(\"$session.params.intent = null\", \"None\", \"$session.params.intent\")"
+      }, {
+        "parameter": "aqd_lob",
+        "value": "$sys.func.IF(\"$session.params.aqd_lob = null\", \"None\", \"$session.params.aqd_lob\")"
+      }, {
+        "parameter": "cx_cornerstone",
+        "value": "$sys.func.IF(\"$session.params.cx_cornerstone = null\", \"false\", \"$session.params.cx_cornerstone\")"
+      } ],
+      "generators": [ {
+        "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/31548c82-5f75-4632-a396-0d7889a47897",
+        "outputParameter": "$request.generative.conversation_summary"
+      } ]
+    },
+    "targetPage": "End Session",
+    "name": "74335cae-d0f5-4da5-a00c-f3e37891e64f"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "messages": [ {
+        "payload": {
+          "ujet": {
+            "action": "deflection",
+            "deflection_type": "sip",
+            "sip_parameters": {
+              "X-DNIS": "$session.params.X_DNIS",
+              "X-G2Mkey": "$session.params.X_G2Mkey"
+            },
+            "sip_refer": true,
+            "sip_uri": "$session.params.sip_uri",
+            "type": "action"
+          }
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "payload": {
+          "ujet": {
+            "action": "deflection",
+            "deflection_type": "sip",
+            "sip_parameters": {
+              "X-DNIS": "$session.params.X_DNIS",
+              "X-G2Mkey": "$session.params.X_G2Mkey"
+            },
+            "sip_refer": true,
+            "sip_uri": "$session.params.sip_uri",
+            "type": "action"
+          }
+        },
+        "languageCode": "en"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "X_DNIS",
+        "value": "$sys.func.CONCATENATE(\"1\", $session.params.tfn)"
+      }, {
+        "parameter": "X_G2Mkey",
+        "value": "$session.params.call_id"
+      }, {
+        "parameter": "sip_uri",
+        "value": "$session.params.config.sip_uri"
+      } ],
+      "generators": [ {
+        "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/31548c82-5f75-4632-a396-0d7889a47897",
+        "outputParameter": "$request.generative.conversation_summary"
+      } ],
+      "nextActionOverride": {
+      
+      }
+    },
+    "targetPage": "End Session",
+    "name": "5999caaa-a963-454a-bef3-951479ebec79"
+  } ],
+  "eventHandlers": [ {
+    "event": "sys.no-match-default",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "J'ai du mal à comprendre cette question.", "J'ai mal compris votre demande.", "Je n'ai pas saisi ce que vous avez dit.", "Je crois que je ne vous suis pas.", "Je ne comprends pas de quoi vous me parlez." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "I didn't get that. Can you say it again?", "I missed what you said. What was that?", "Sorry, could you say that again?", "Sorry, can you say that again?", "Can you say that again?", "Sorry, I didn't get that. Can you rephrase?", "Sorry, what was that?", "One more time?", "What was that?", "Say that one more time?", "I didn't get that. Can you repeat?", "I missed that, say that again?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "J'ai du mal à comprendre cette question.", "J'ai mal compris votre demande.", "Je n'ai pas saisi ce que vous avez dit.", "Je crois que je ne vous suis pas.", "Je ne comprends pas de quoi vous me parlez." ]
+        },
+        "languageCode": "fr"
+      } ]
+    },
+    "name": "8a610329-ed04-47ff-9c50-6fa3a81bd618"
+  }, {
+    "event": "sys.no-input-default",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "J'ai du mal à comprendre cette question.", "J'ai mal compris votre demande.", "Je n'ai pas saisi ce que vous avez dit.", "Je crois que je ne vous suis pas.", "Je ne comprends pas de quoi vous me parlez." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "I didn't get that. Can you say it again?", "I missed what you said. What was that?", "Sorry, could you say that again?", "Sorry, can you say that again?", "Can you say that again?", "Sorry, I didn't get that. Can you rephrase?", "Sorry, what was that?", "One more time?", "What was that?", "Say that one more time?", "I didn't get that. Can you repeat?", "I missed that, say that again?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "J'ai du mal à comprendre cette question.", "J'ai mal compris votre demande.", "Je n'ai pas saisi ce que vous avez dit.", "Je crois que je ne vous suis pas.", "Je ne comprends pas de quoi vous me parlez." ]
+        },
+        "languageCode": "fr"
+      } ]
+    },
+    "name": "d41439dc-a58c-41f4-a20d-ece7162a7ed9"
+  }, {
+    "event": "sys.no-match-1",
+    "triggerFulfillment": {
+      "nextActionOverride": {
+      
+      }
+    },
+    "name": "5e16673a-b3cd-4adf-9fd7-26751ad2e881"
+  }, {
+    "event": "sys.no-match-2",
+    "triggerFulfillment": {
+      "nextActionOverride": {
+      
+      }
+    },
+    "name": "987b8c17-b625-4c3c-984a-01570758618b"
+  }, {
+    "event": "sys.no-input-1",
+    "triggerFulfillment": {
+      "nextActionOverride": {
+      
+      }
+    },
+    "name": "5e427330-0976-4e40-a440-8e694df1ff17"
+  }, {
+    "event": "sys.no-input-2",
+    "triggerFulfillment": {
+      "nextActionOverride": {
+      
+      }
+    },
+    "name": "4163a869-f760-4ef5-b62a-cad131cbc352"
+  }, {
+    "targetFlow": "bell_End the Conversation",
+    "event": "sys.no-input-3",
+    "triggerFulfillment": {
+      "nextActionOverride": {
+      
+      }
+    },
+    "name": "5d3466e7-e115-408f-b74b-f7d2d8801bbe"
+  }, {
+    "targetFlow": "bell_End the Conversation",
+    "event": "sys.no-match-3",
+    "triggerFulfillment": {
+      "nextActionOverride": {
+      
+      }
+    },
+    "name": "290c6edb-8434-4dbc-af24-bb332d6faa04"
+  }, {
+    "targetPage": "End Session",
+    "event": "wrapup",
+    "triggerFulfillment": {
+    
+    },
+    "name": "89ac9c16-172a-4ecd-8cb6-0f315985f353"
+  } ],
+  "nluSettings": {
+    "modelType": "MODEL_TYPE_CUSTOM",
+    "classificationThreshold": 0.30000001,
+    "modelTrainingMode": "MODEL_TRAINING_MODE_MANUAL"
+  },
+  "advancedSettings": {
+    "enabled": true,
+    "playbackInterruptionSettings": {
+    
+    },
+    "speechAdaptationSettings": {
+      "enableManualSpeechAdaptation": true,
+      "biasingPhraseSets": [ {
+        "biasingPhrases": [ {
+          "value": "Bell Aliant account",
+          "boost": 20
+        }, {
+          "value": "my Bell Aliant account",
+          "boost": 20
+        }, {
+          "value": "the Bell Aliant account",
+          "boost": 20
+        }, {
+          "value": "bell aliant account",
+          "boost": 20
+        }, {
+          "value": "about my Bell Aliant account",
+          "boost": 20
+        } ],
+        "displayName": "Bell-Aliant"
+      } ]
+    }
+  },
+  "nluSettingsList": [ {
+    "modelType": "MODEL_TYPE_CUSTOM",
+    "classificationThreshold": 0.30000001,
+    "modelTrainingMode": "MODEL_TRAINING_MODE_MANUAL",
+    "languageCode": "fr-ca"
+  }, {
+    "modelType": "MODEL_TYPE_CUSTOM",
+    "classificationThreshold": 0.30000001,
+    "modelTrainingMode": "MODEL_TRAINING_MODE_MANUAL",
+    "languageCode": "en"
+  } ],
+  "multiLanguageSettings": {
+  
+  }
+}

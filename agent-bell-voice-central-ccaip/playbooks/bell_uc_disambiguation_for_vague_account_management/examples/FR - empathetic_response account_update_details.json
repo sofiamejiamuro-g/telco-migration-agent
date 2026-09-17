@@ -1,0 +1,51 @@
+{
+  "name": "42cdfc6b-f5e9-4ee6-b66f-b31d57e1fecc",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Je suis tellement désolé pour votre perte. J'espère que les choses reviendront à la normale bientôt. Pourriez-vous décrire le problème que vous rencontrez avec votre compte ?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Les détails de ma carte Visa ont changé et j'appelle pour mettre à jour le nouveau numéro ou la date d'expiration."
+    }
+  }, {
+    "playbookInvocation": {
+      "playbook": "bell_UC_Account Management",
+      "playbookInput": {
+        "precedingConversationSummary": "Customer trying to update their account details",
+        "actionParameters": {
+          "language": "fr-ca",
+          "route": "account_update_details",
+          "utterance": "Les détails de ma carte Visa ont changé et j'appelle pour mettre à jour le nouveau numéro ou la date d'expiration."
+        }
+      },
+      "playbookOutput": {
+        "executionSummary": "Customer query is addressed and then transferred to \"bell_UC_account_management\" playbook for further conversation",
+        "actionParameters": {
+          "language": "fr-ca",
+          "route": "account_update_details"
+        }
+      },
+      "playbookState": "OUTPUT_STATE_OK"
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer query about \"Account issue\" is addressed and also they are facing a challenging situation.",
+    "actionParameters": {
+      "language": "fr-ca",
+      "route": "account_vague",
+      "utterance": "Problème de compte. J'ai perdu mon père et je dois changer de compte."
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "VA follows as per given instructions and also is empathetic as the user is in a difficult situation. Customer query is addressed and then transferred to \"bell_UC_account_management\" playbook for further conversation",
+    "actionParameters": {
+      "language": "fr-ca"
+    }
+  },
+  "displayName": "FR - empathetic_response account_update_details",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 401,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

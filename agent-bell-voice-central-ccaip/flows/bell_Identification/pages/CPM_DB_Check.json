@@ -1,0 +1,76 @@
+{
+  "name": "1c8299f4-7e1d-43f4-a4e0-63bb6c8a03bf",
+  "displayName": "CPM_DB_Check",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "conditionalCases": [ {
+      "cases": [ {
+        "condition": "($session.params.ivr_handoff != true OR $session.params.fallback_flag = true) AND $session.params.ivr_to_va_entry != true",
+        "caseContent": [ {
+          "message": {
+            "text": {
+              "text": [ "\u003cspeak\u003eThanks! \u003cbreak time=\"1s\"/\u003e\u003c/speak\u003e" ]
+            },
+            "languageCode": "en"
+          }
+        }, {
+          "message": {
+            "text": {
+              "text": [ "\u003cspeak\u003e Merci \u003cbreak time=\"1s\"/\u003e\u003c/speak\u003e" ]
+            },
+            "languageCode": "fr-ca"
+          }
+        } ]
+      } ]
+    } ],
+    "nextActionOverride": {
+    
+    }
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.global_error_counter \u003e= 3",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_aqd",
+    "name": "b9491e23-1e23-43c1-bd4e-f2f0c9b8d92e"
+  }, {
+    "condition": "$session.params.regional_identity = true AND $session.params.ivr_handoff != true",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_va_to_ivr_handoff",
+    "name": "44181572-d700-413b-9fea-1dcb71e6bc5c"
+  }, {
+    "condition": "$session.params.CCC_asked = yes AND $session.params.ivr_handoff != true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "is_business",
+        "value": false
+      }, {
+        "parameter": "business_type",
+        "value": "CCC"
+      } ]
+    },
+    "targetFlow": "bell_va_to_ivr_handoff",
+    "name": "3ae06d5f-4ba4-435e-a453-02d51155ddb3"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "telephone_number",
+        "value": "$sys.func.TO_NUMBER($session.params.CIRN)"
+      }, {
+        "parameter": "brand",
+        "value": "bell"
+      }, {
+        "parameter": "fallback_flag",
+        "value": false
+      } ]
+    },
+    "targetPage": "Route by TN or BAN",
+    "name": "0d6d8f8d-7b1e-4383-9cc4-b8f37fc35f51"
+  } ]
+}

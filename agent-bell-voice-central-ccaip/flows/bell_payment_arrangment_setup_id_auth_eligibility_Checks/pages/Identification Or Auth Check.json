@@ -1,0 +1,78 @@
+{
+  "name": "eceb9e1b-9223-4f02-9d88-9b136ba24db9",
+  "displayName": "Identification Or Auth Check",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.identification_status = \"Fail\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "intent",
+        "value": "$session.params.route"
+      }, {
+        "parameter": "brand",
+        "value": "$session.params.brand"
+      } ]
+    },
+    "targetPage": "ID/Auth Fail",
+    "name": "6556961f-264f-4c89-9586-c89d9c3ae150"
+  }, {
+    "condition": "$session.params.identification_status = null",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_Identification",
+    "name": "38b0b0ba-2f30-41a8-92e9-4fd23e7b211a"
+  }, {
+    "condition": "$session.params.identification_status = \"Pass\" AND (($session.params.banType = \"I\" AND ($session.params.banSubType = \"B\" OR $session.params.banSubType = \"N\" OR $session.params.banSubType = \"5\")) OR ($session.params.banType = \"C\" AND ($session.params.banSubType = \"V\" OR $session.params.banSubType = \"T\" OR $session.params.banSubType = \"P\")))",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Get Customer Profile",
+    "name": "9af03167-256c-43d3-8c8b-b814f926a7ce"
+  }, {
+    "condition": "$session.params.identification_status = \"Pass\" AND $session.params.auth_status = null",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Get Ban Profile",
+    "name": "ca1d2160-09a3-4fdf-9edb-b90539d9ff64"
+  }, {
+    "condition": "$session.params.auth_status = \"Fail\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "ID/Auth Fail",
+    "name": "26eb246c-b7f3-4800-9bec-a8626d4144ab"
+  }, {
+    "condition": "$session.params.auth_status = \"Pass\" AND $session.params.identification_status = \"Pass\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Delinquency Eligibility Check",
+    "name": "e76741be-208c-4a2b-a231-c0ab67045319"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "eceb9e1b-9223-4f02-9d88-9b136ba24db9"
+      }, {
+        "parameter": "flow_id",
+        "value": "57228ada-e06b-4b6d-b615-3f9af36911b6"
+      }, {
+        "parameter": "page_name",
+        "value": "Identification Or Auth Check"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

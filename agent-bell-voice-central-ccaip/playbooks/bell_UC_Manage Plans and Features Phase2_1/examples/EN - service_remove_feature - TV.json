@@ -1,0 +1,60 @@
+{
+  "name": "8ca7c0e1-8507-4343-8ec3-a4623969fc57",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70011",
+        "brand": "bell",
+        "language": "en"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "You can modify your Bell TV programming package at any time using MyBell. I'll send a text to the device you're calling from, so that you can easily make changes to your programming. Is that alright?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "yes"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "sms_content": "Bell: You can visit https://m.bell.ca/modifychannels to make changes to your TV programming in the MyBell app. ( bell.ca/about-us)",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "The {identification_status} is \"Pass\", {customer_type} is \"Existing\", {streaming_services} is null and {lob} is \"TV\" so, we will prompt user for send SMS confirmation and if user say \"yes\" or anything affirmative then route to \"bell_SMS Trgigger\" flow.",
+    "actionParameters": {
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "en",
+      "lob": "TV",
+      "route": "service_remove_feature",
+      "sms_content": "Bell: You can visit https://m.bell.ca/modifychannels to make changes to your TV programming in the MyBell app. ( bell.ca/about-us)",
+      "utterance": "I'd like to cancel the sports package in my TV plan"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "As the {lob} is \"Internet\" and {streaming_services} is null then we will prompt user to send SMS and if user say \"yes\" or anything affirmative then send the user to \"bell_SMS Trigger\" flow",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "sms_content": "Bell: You can visit https://m.bell.ca/modifychannels to make changes to your TV programming in the MyBell app. ( bell.ca/about-us)"
+    }
+  },
+  "displayName": "EN - service_remove_feature - TV",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 560,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

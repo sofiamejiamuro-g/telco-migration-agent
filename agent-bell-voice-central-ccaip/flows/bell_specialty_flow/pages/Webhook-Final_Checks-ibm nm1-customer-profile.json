@@ -1,0 +1,148 @@
+{
+  "name": "8aaa6747-dd6a-411e-b615-c868f145c4b3",
+  "displayName": "Webhook-Final_Checks-ibm nm1-customer-profile",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "setParameterActions": [ {
+      "parameter": "billing_status_list",
+      "value": "$sys.func.FILTER(   \"$session.params.customer_id_search_response\",   \"$..billing_accounts[*].billing_account_status\" )"
+    }, {
+      "parameter": "billing_account_status",
+      "value": "$sys.func.CONTAIN(   $session.params.billing_status_list,   \"inactive\" )"
+    }, {
+      "parameter": "billing_reason_code_list",
+      "value": "$sys.func.FILTER(   \"$session.params.customer_id_search_response\",   \"$..billing_accounts[*].billing_status_reason_code\" )"
+    }, {
+      "parameter": "code_frd",
+      "value": "$sys.func.CONTAIN(   $session.params.billing_reason_code_list,   \"FRD\" )"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.CIRN != null",
+    "triggerFulfillment": {
+      "webhook": "/v1/ibm_mw/nm1_get#customer-profile",
+      "tag": "customer-profile",
+      "setParameterActions": [ {
+        "parameter": "phone",
+        "value": "$session.params.CIRN"
+      }, {
+        "parameter": "ibm_application_id",
+        "value": "$session.params.intake_routing_lookup_response.va_ibm_id"
+      } ]
+    },
+    "name": "8e1e2ac3-c8dc-4154-bf2d-e2a4eb896c24"
+  }, {
+    "condition": "$session.params.CIRN = null",
+    "triggerFulfillment": {
+      "webhook": "/v1/ibm_mw/nm1_get#customer-profile",
+      "tag": "customer-profile",
+      "setParameterActions": [ {
+        "parameter": "phone",
+        "value": "$session.params.clid"
+      } ]
+    },
+    "name": "e2df02c1-7f63-438a-a132-2d2881239c4a"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "webhook_success",
+        "value": "$session.params.webhook_success"
+      }, {
+        "parameter": "arBalance",
+        "value": "$sys.func.TO_NUMBER($session.params.nm1_get_cust_profile_response.arBalance)"
+      }, {
+        "parameter": "banStatus",
+        "value": "$session.params.nm1_get_cust_profile_response.banStatus"
+      }, {
+        "parameter": "statActvRsnCode",
+        "value": "$session.params.nm1_get_cust_profile_response.statActvRsnCode"
+      }, {
+        "parameter": "colInd",
+        "value": "$session.params.nm1_get_cust_profile_response.colInd"
+      } ]
+    },
+    "name": "d139620d-c389-48f3-baf0-8c0a22ea8ffd"
+  }, {
+    "condition": "$session.params.banStatus = \"N\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Fraud flag check",
+    "name": "2aada9fc-984f-4fe3-9617-c05d319c0751"
+  }, {
+    "condition": "$session.params.banStatus != \"N\" OR $session.params.webhook_success = false",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Privilege",
+    "name": "0daef597-d8ab-40fd-b2c5-c6e0e290f56d"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "8aaa6747-dd6a-411e-b615-c868f145c4b3"
+      }, {
+        "parameter": "flow_id",
+        "value": "d35b61b6-c884-44f8-b5c7-aed63cc356ab"
+      }, {
+        "parameter": "page_name",
+        "value": "Webhook-Final_Checks-ibm nm1-customer-profile"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Privilege",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+    
+    },
+    "name": "e2bf98ba-9f85-45c4-ba2d-494074c948b6"
+  }, {
+    "targetPage": "Privilege",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+    
+    },
+    "name": "73f31dcc-b10b-4608-956b-4ea0f4add717"
+  }, {
+    "targetPage": "Privilege",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+    
+    },
+    "name": "820ae335-60b1-4188-a01d-77812b4aa422"
+  }, {
+    "targetPage": "Privilege",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+    
+    },
+    "name": "48a130bb-ec83-445d-867d-1b82ae8423fa"
+  }, {
+    "targetPage": "Privilege",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+    
+    },
+    "name": "3143ab85-dd12-40ce-90d0-bb6a3267fbbb"
+  }, {
+    "targetPage": "Privilege",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+    
+    },
+    "name": "d6dca7cc-1abf-4d20-b7a9-88b030d5ad90"
+  } ],
+  "speakerIdSettings": {
+  
+  }
+}

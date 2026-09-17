@@ -1,0 +1,97 @@
+{
+  "name": "d3aa700d-f2d5-4bf6-b547-bd7f57974418",
+  "displayName": "Webhook - order details",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "/v1/ticket_management/omf/order#detail",
+    "tag": "detail"
+  },
+  "transitionRoutes": [ {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "webhook_success",
+        "value": "$session.params.webhook_success"
+      } ]
+    },
+    "name": "99f81ee0-8fb6-442b-aa87-32e22fa666c3"
+  }, {
+    "condition": "$session.params.webhook_success = True OR $session.params.webhook_success = \"true\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Fetch ticket status",
+    "name": "b5c17ffa-95b7-4707-a88a-03285c19bf46"
+  }, {
+    "condition": "$session.params.webhook_success = False OR $session.params.webhook_success = \"false\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Failure 2 - OMF",
+    "name": "b55a4ff2-bf2d-4e35-b0cc-0ed34d158227"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "flow_id",
+        "value": "918644a0-f504-4e8f-91eb-c311a5082207"
+      }, {
+        "parameter": "page_id",
+        "value": "d3aa700d-f2d5-4bf6-b547-bd7f57974418"
+      }, {
+        "parameter": "page_name",
+        "value": "Webhook - order details"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "b052fa55-5522-4089-a71f-61917f74bd05"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Webhook Failure 2 - OMF",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+    
+    },
+    "name": "ba69eaef-0bca-4c7b-a46a-30d44556e283"
+  }, {
+    "targetPage": "Webhook Failure 2 - OMF",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+    
+    },
+    "name": "2d321dcf-2f62-41eb-b23e-fb6049435881"
+  }, {
+    "targetPage": "Webhook Failure 2 - OMF",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+    
+    },
+    "name": "a97b819c-9683-4b07-9e1f-69f6ff951c48"
+  }, {
+    "targetPage": "Webhook Failure 2 - OMF",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+    
+    },
+    "name": "9168ceee-24fc-404c-9124-f54565cf592a"
+  }, {
+    "targetPage": "Webhook Failure 2 - OMF",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+    
+    },
+    "name": "2539bbb3-5b4a-4f13-9de6-946f35cfe933"
+  }, {
+    "targetPage": "Webhook Failure 2 - OMF",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+    
+    },
+    "name": "a560a501-9ef0-4844-bb69-543599c04d02"
+  } ]
+}

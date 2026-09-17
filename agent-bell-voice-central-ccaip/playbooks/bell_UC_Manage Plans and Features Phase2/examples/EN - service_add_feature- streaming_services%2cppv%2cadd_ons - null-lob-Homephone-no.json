@@ -1,0 +1,69 @@
+{
+  "name": "1e8c3562-2138-43fa-9442-ff86ae35f017",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70011",
+        "brand": "bell",
+        "language": "en",
+        "route": "service_add_feature"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "I'll send a text to the device you're calling from, so that you can easily manage your home phone package, features, or long-distance plan at any time using MyBell. Is that alright?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "nope"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "brand": "bell",
+        "language": "en",
+        "route": "service_add_feature",
+        "sms_send_status": "Declined"
+      },
+      "outputActionParameters": {
+        "language": "en"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "The {identification_status} is \"Pass\", {customer_type} is \"Existing\", {streaming_services} is null and {ppv} is null and {add_ons} is null and {lob} is \"Homephone\" so, we will prompt user for send SMS confirmation and if user say \"yes\" or anything affirmative then route to \"bell_SMS Trgigger\" flow.",
+    "actionParameters": {
+      "apb_location_id": "70011",
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "en",
+      "lob": "Homephone",
+      "route": "service_add_feature",
+      "utterance": "I want to call forwarding to my home phone."
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "As the {lob} is \"Homephone\" and {streaming_services}, {add_ons}, {ppv} is null then we will prompt user to send SMS and if user say \"yes\" or anything affirmative then send the user to \"bell_SMS Trigger\" flow",
+    "actionParameters": {
+      "apb_location_id": "70011",
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "en",
+      "lob": "Homephone",
+      "route": "service_add_feature",
+      "utterance": "I want call forwarding to my home phone."
+    }
+  },
+  "displayName": "EN - service_add_feature- streaming_services,ppv,add_ons - null-lob-Homephone-no",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 563,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

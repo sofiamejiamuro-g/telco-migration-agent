@@ -1,0 +1,41 @@
+{
+  "name": "e09ace37-ec9e-459d-a480-a085de4b9cb6",
+  "displayName": "Check Special Status | Collections Logic",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "setParameterActions": [ {
+      "parameter": "aqd_sub_flow",
+      "value": "Collections"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.special_status = \"bell_finals\" OR $session.params.special_status = \"bell_finals_fraud\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "customer_type",
+        "value": "finals"
+      } ]
+    },
+    "targetPage": "Check Intent",
+    "name": "2238c91b-ac1b-42d5-86ab-977b6d838f37"
+  }, {
+    "condition": "$session.params.special_status = \"bell_clp_delinquent\" OR $session.params.special_status = \"bell_col_delinquent\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "customer_type",
+        "value": "delinquent"
+      } ]
+    },
+    "targetPage": "Check Intent",
+    "name": "2c723a6b-8db6-498e-919b-ff96f6757ad3"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "MTS consolidated bill",
+    "name": "99420cf4-4314-4061-9234-fb3190575985"
+  } ]
+}

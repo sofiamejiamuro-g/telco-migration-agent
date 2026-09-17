@@ -1,0 +1,48 @@
+{
+  "name": "6546c60a-bdc5-4033-b8a3-83ee234aae85",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "What specific aspect of your account are you inquiring about? Are you looking for your account number, or something else?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "My service is suspended, and I haven't missed any payments. Can you explain why this is happening?"
+    }
+  }, {
+    "playbookInvocation": {
+      "playbook": "bell_UC_Account Management",
+      "playbookInput": {
+        "precedingConversationSummary": "Customer trying to inquiry about a suspended account",
+        "actionParameters": {
+          "language": "en",
+          "route": "account_inquire_about_suspended_account",
+          "utterance": "My service is suspended, and I haven't missed any payments. Can you explain why this is happening?"
+        }
+      },
+      "playbookOutput": {
+        "executionSummary": "Customer query is addressed and then transferred to \"bell_UC_account_management\" playbook for further conversation",
+        "actionParameters": {
+          "language": "en",
+          "route": "account_inquire_about_suspended_account"
+        }
+      },
+      "playbookState": "OUTPUT_STATE_OK"
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer query about \"Question about my account\" is addressed",
+    "actionParameters": {
+      "language": "en",
+      "route": "account_vague",
+      "utterance": "Question about my account"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Customer query is addressed and then transferred to \"bell_UC_account_management\" playbook for further conversation"
+  },
+  "displayName": "EN - account_inquire_about_suspended_account ",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 331,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

@@ -1,0 +1,69 @@
+{
+  "name": "5d3408ef-325f-459a-b140-f282467c27b9",
+  "displayName": "Route_By_Identification_Status",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.identification_status = null",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "auth_status",
+        "value": "Fail"
+      } ]
+    },
+    "targetPage": "End Flow Check",
+    "name": "30ff7ffd-70d1-40f4-9013-a68b03c264cb"
+  }, {
+    "condition": "$session.params.identification_status = \"Pass\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "auth_status",
+        "value": "$sys.func.IF($session.params.cx_cornerstone=true, \"Fail\", $session.params.auth_status)"
+      } ]
+    },
+    "targetPage": "Route_By_Authentication_Status",
+    "name": "e2db2993-a63e-4eec-810f-3b67d78f8bab"
+  }, {
+    "condition": "$session.params.identification_status = \"Fail\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Désolé, nous n'avons pas pu t'authentifier" ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "auth_status",
+        "value": "Fail"
+      }, {
+        "parameter": "customer_authentication",
+        "value": false
+      } ]
+    },
+    "targetPage": "End Flow Check",
+    "name": "559cb001-eda0-4550-af21-7a3b749b2102"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "5d3408ef-325f-459a-b140-f282467c27b9"
+      }, {
+        "parameter": "flow_id",
+        "value": "5f8f4b4a-558a-4e66-9d28-a31389981b36"
+      }, {
+        "parameter": "page_name",
+        "value": "Route_By_Identification_Status"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

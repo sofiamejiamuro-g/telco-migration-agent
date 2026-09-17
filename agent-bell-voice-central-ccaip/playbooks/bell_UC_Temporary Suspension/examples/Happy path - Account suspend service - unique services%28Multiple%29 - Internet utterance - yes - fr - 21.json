@@ -1,0 +1,44 @@
+{
+  "name": "71576f19-460d-4772-83ac-4e8d953aae27",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Bien sûr, je peux vous aider. Vous pouvez suspendre temporairement vos services résidentiels via MonBell. Je vais envoyer un SMS sur l'appareil depuis lequel vous appelez, contenant un lien pour le faire vous-même. Cela vous convient-il ?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Oui"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+      
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer wants to suspend his internet service",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca",
+      "route": "account_suspend_service",
+      "unique_services": "Internet, Tv, WIRELINE",
+      "utterance": "Je veux suspendre mon service d'internet"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "VA understood the {utterance}, checked the {unique_services} parameter, found multiple values, rechecked the {utterance} and found it mentions Internet related term, VA asks if it can send a text to the device he's calling from, user confirms, it routed the user to bell_SMS Trigger flow",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca"
+    }
+  },
+  "displayName": "Happy path - Account suspend service - unique services(Multiple) - Internet utterance - yes - fr - 21",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 303,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "fr"
+}

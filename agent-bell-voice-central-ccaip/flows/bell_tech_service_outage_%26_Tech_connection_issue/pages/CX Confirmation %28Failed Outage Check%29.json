@@ -1,0 +1,64 @@
+{
+  "name": "bbf8d46a-bb50-4cf5-9700-aabf9bd6cb00",
+  "displayName": "CX Confirmation (Failed Outage Check)",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "intent": "context.confirm_yes",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "SMS content (Failed Outage Check)",
+    "name": "9c42dadc-ee54-44b6-8d29-862627d022c4"
+  }, {
+    "intent": "context.confirm_no",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "sms_send_status",
+        "value": "Declined"
+      } ]
+    },
+    "targetFlow": "bell_SMS Trigger",
+    "name": "dd3ed4aa-f481-4f6c-9c31-fce6f59092ec"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Local Error handling (Failed outage check)",
+    "event": "sys.no-input-1",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "sms_send_status",
+        "value": "Declined"
+      }, {
+        "parameter": "global_error_counter",
+        "value": "$sys.func.ADD($session.params.global_error_counter,1)"
+      }, {
+        "parameter": "local_noinput_counter",
+        "value": "$sys.func.ADD($session.params.local_noinput_counter,1)"
+      }, {
+        "parameter": "local_trigger",
+        "value": "no_input"
+      } ]
+    },
+    "name": "d4dafd39-990f-4090-9c8f-46d228b901cc"
+  }, {
+    "targetPage": "Local Error handling (Failed outage check)",
+    "event": "sys.no-match-1",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "global_error_counter",
+        "value": "$sys.func.ADD($session.params.global_error_counter,1)"
+      }, {
+        "parameter": "local_nomatch_counter",
+        "value": "$sys.func.ADD($session.params.local_nomatch_counter,1)"
+      }, {
+        "parameter": "local_trigger",
+        "value": "no_match"
+      }, {
+        "parameter": "sms_send_status",
+        "value": "Declined"
+      } ]
+    },
+    "name": "9f48ccc9-4be2-43fe-bb58-445dc8686bc2"
+  } ]
+}

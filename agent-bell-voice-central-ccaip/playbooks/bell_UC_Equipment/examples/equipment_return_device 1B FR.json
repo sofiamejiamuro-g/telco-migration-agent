@@ -1,0 +1,51 @@
+{
+  "name": "f7d90e28-13e8-4d98-8eec-26463d8f1dee",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Veuillez noter que le retour des articles à notre entrepôt et leur traitement peut prendre de 7 à 10 jours à compter du moment où vous avez envoyé le colis. Si des frais de non-retour de l'équipement vous ont été facturés, il peut s'écouler 1 à 2 cycles de facturation pour que le retour apparaisse à votre facture.\n\nAvez-vous votre numéro de suivi?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "oui"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Le suivi des retours d'équipement peut être effectué sur le site Web de Postes Canada ou de Purolator. Une fois l'appareil reçu, le traitement prend normalement de 7 à 10 jours. Je peux également vous envoyer un texto contenant un lien pour faire le suivi de votre envoi. Cela vous convient-il?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "non"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "fr-ca",
+        "route": "equipment_return_device",
+        "sms_send_status": "Declined"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "le client souhaite une mise à jour du statut de retour",
+    "actionParameters": {
+      "language": "fr-ca",
+      "route": "equipment_return_device",
+      "utterance": "avez-vous déjà reçu mon retour"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "le client a demandé un numéro de suivi puis a demandé s'il voulait recevoir des SMS et ils ont dit non",
+    "actionParameters": {
+      "language": "fr-ca"
+    }
+  },
+  "displayName": "equipment_return_device 1B FR",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 393,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

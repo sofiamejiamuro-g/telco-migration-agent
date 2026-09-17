@@ -1,0 +1,102 @@
+{
+  "name": "cfb0b41e-4f0b-4292-bd93-974fe30dbfc5",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Bein sûr, laissez-moi vous aider.\n\nÀ propos de quel service communiquez-vous avec nous?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "le ciel est bleu"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_global_error_count_check",
+      "inputActionParameters": {
+        "global_error_counter": "2"
+      },
+      "outputActionParameters": {
+        "global_error_counter": "3"
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Je ne suis pas en mesure de fournir des renseignements sur ce sujet. Toutefois, je serais heureux de répondre à toute question que vous pourriez avoir concernant les produits et services de Bell."
+    }
+  }, {
+    "userUtterance": {
+      "text": "le Canada est grand"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_global_error_count_check",
+      "inputActionParameters": {
+        "global_error_counter": "3"
+      },
+      "outputActionParameters": {
+        "global_error_counter": "4"
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Je m’excuse, j’ai toujours de la difficulté à comprendre votre demande. Pour mieux vous aider, pourriez-vous reformuler votre question ou fournir plus de détails sur ce que vous recherchez concernant les produits et services de Bell?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "le Canada est grand"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_global_error_count_check",
+      "inputActionParameters": {
+        "global_error_counter": "4"
+      },
+      "outputActionParameters": {
+        "global_error_counter": "5"
+      }
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_No_Match_3",
+      "inputActionParameters": {
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "The customer is giving Irrelevant response",
+    "actionParameters": {
+      "customer_type": "New",
+      "global_error_counter": "2",
+      "language": "fr-ca",
+      "route": "sales_plans_inquiry",
+      "utterance": "j'ai besoin d'un nouveau plan"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "As Customer says irrelevant information to bell mobile products and services, so flow bell_global_error_count_check is called each time and VA respond as per instructions and when 3nd time they say irrelevant things, we send them to bell_no_match3 flow",
+    "actionParameters": {
+      "brand": "bell",
+      "global_error_counter": "5",
+      "language": "fr-ca"
+    }
+  },
+  "displayName": "FR - sales plans inquiry- ID Fail, customer_type-new-No match(IRRELAVANT)",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 729,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "fr"
+}

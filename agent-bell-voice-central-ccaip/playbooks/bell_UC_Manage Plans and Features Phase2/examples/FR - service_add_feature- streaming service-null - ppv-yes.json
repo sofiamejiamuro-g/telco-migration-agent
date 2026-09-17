@@ -1,0 +1,73 @@
+{
+  "name": "3168cdf7-9c0f-4d4e-82ee-9db6a880b9d7",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70011"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Vous pouvez commander la programmation Télé à la carte jusqu’à 24 heures à l’avance. Pour les événements majeurs, cette période peut être prolongée à 72 heures. La façon la plus simple de commander serait d’utiliser l’application Télé Fibe ou de visiter fibetv.ca. Et si vous êtes un client de la télé satellite, veuillez composer le 1 866 686-7337 et suivre les instructions. Avez-vous d'autres questions concernant le service Télé à la carte?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "oui"
+    }
+  }, {
+    "playbookInvocation": {
+      "playbook": "bell_UC_ManagePlansAndFeatures_Infobot_en_fr_deprecated",
+      "playbookInput": {
+        "precedingConversationSummary": "identification_status = \"Pass\" and ppv = \"ppv\" and route = \"service_feature_inquiry\"",
+        "actionParameters": {
+          "identification_status": "Pass",
+          "language": "fr-ca",
+          "ppv": "ppv",
+          "route": "service_feature_inquiry",
+          "utterance": "Mon enfant essaie de commander un événement de nuit de combat sur votre chaine de paiement à la demande "
+        }
+      },
+      "playbookOutput": {
+        "executionSummary": "Follow the instructions provided in this playbook for {route} = \"service_feature_inquiry\"",
+        "actionParameters": {
+          "language": "fr-ca"
+        }
+      },
+      "playbookState": "OUTPUT_STATE_OK"
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "As, {identification_status} is \"Pass\" and {streaming_services} is null and {ppv} = \"ppv\" then we will prompt customer with message and based on user response will proceed.",
+    "actionParameters": {
+      "apb_location_id": "70011",
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "fr-ca",
+      "ppv": "ppv",
+      "route": "service_add_feature",
+      "utterance": "Mon enfant essaie de commander un événement de nuit de combat sur votre chaine de paiement à la demande "
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Customer with {streaming_services} = null and {lob} = null and {identification_status} = Pass and {ppv} = \"ppv\" then will prompt user with some message and if user reply with yes or anything affirmative then set {route} = \"service_feature_inquiry\" and CALL PLAYBOOK: \"bell_UC_ManagePlansAndFeatures_Infobot_en_fr\"",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "fr-ca",
+      "ppv": "ppv",
+      "route": "service_feature_inquiry",
+      "utterance": "Mon enfant essaie de commander un événement de nuit de combat sur votre chaine de paiement à la demande "
+    }
+  },
+  "displayName": "FR - service_add_feature- streaming service-null - ppv-yes",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 725,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

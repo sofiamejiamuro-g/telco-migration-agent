@@ -1,0 +1,56 @@
+{
+  "name": "f4573335-c347-41e8-9399-1106e95b7b6d",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "I'd be happy to help you activate your service\n\nAre you activating an eSIM for an existing line or a new line?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "I'm just trying to transfer to an esim"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "You can easily transfer an existing line to a new eSIM in the MyBell app. I'll send you a text now with further instructions."
+    }
+  }, {
+    "userUtterance": {
+      "text": "yes"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "BAN": "4162675927163",
+        "CLID": "4169705061",
+        "brand": "bell",
+        "language": "en",
+        "route": "tech_activate_service",
+        "sms_content": "Bell msg: Here's a link in the MyBell app where you can transfer your service to a new eSIM or SIM Card: https://mybell.bell.ca/Login?lang=en\u0026refreshlink=https://mybell.bell.ca/sso/ssoauth.axsp?ReturnUrl=/PunchInOut/punchin?DirectAccess=ChangeSIM\u0026inserttrackingcode if you've previously suspended your service, you'll need to restore it here first before transferring: https://mybell.bell.caLogin?lang=en\u0026refreshLink=https://mybell.bell.ca/Punchin.aspx?DirectAccess=RestoreSubscriber (bell.ca/about-us)",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+        "brand": "bell",
+        "language": "en"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer wants to activate an eSIM from an existing Physical SIM",
+    "actionParameters": {
+      "BAN": "4162675927163",
+      "CLID": "4155547622",
+      "brand": "bell",
+      "language": "en",
+      "route": "tech_activate_service",
+      "sim_type": "eSIM"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Customer has been redirected to \"Steering_SMS Trigger\" playbook and then has been directed to \"Steering_Wrap-up\" playbook"
+  },
+  "displayName": "EN - tech_activate_service - eSIM - Existing Line",
+  "retrievalStrategy": "NEVER",
+  "tokenCount": 531,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

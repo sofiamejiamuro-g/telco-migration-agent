@@ -1,0 +1,138 @@
+{
+  "name": "04b236c3-45bf-4656-8f0e-ebf581583c43",
+  "displayName": "Check Account type",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "conditionalCases": [ {
+      "cases": [ {
+        "condition": "$session.params.region = \"ATL\"",
+        "caseContent": [ {
+          "message": {
+            "text": {
+              "text": [ "It looks like you're calling about a Bell Aliant account. To get you the best support, I’ll transfer you to our Bell Aliant support system. Do you want to discuss this account or a different one?" ]
+            },
+            "languageCode": "en"
+          }
+        }, {
+          "message": {
+            "text": {
+              "text": [ "On dirait que vous appelez au sujet d’un compte Bell Aliant. Afin que vous puissiez obtenir le meilleur soutien possible, je vais vous transférer à notre système de soutien Bell Aliant. Souhaitez-vous discuter de ce compte ou d’un autre?" ]
+            },
+            "languageCode": "fr-ca"
+          }
+        } ]
+      }, {
+        "condition": "$session.params.region = \"MTS\"",
+        "caseContent": [ {
+          "message": {
+            "text": {
+              "text": [ "It looks like you're calling about a Bell MTS account. To get you the best support, I’ll transfer you to our Bell MTS support system. Do you want to discuss this account or a different one?" ]
+            },
+            "languageCode": "en"
+          }
+        }, {
+          "message": {
+            "text": {
+              "text": [ "On dirait que vous appelez au sujet d’un compte Bell MTS. Afin de vous offrir le meilleur soutien possible, je vais vous transférer à notre système de soutien Bell MTS. Souhaitez-vous discuter de ce compte ou d’un autre?" ]
+            },
+            "languageCode": "fr-ca"
+          }
+        } ]
+      } ]
+    } ]
+  },
+  "transitionRoutes": [ {
+    "intent": "context.regional_account",
+    "triggerFulfillment": {
+      "conditionalCases": [ {
+        "cases": [ {
+          "condition": "$session.params.region = \"ATL\"",
+          "caseContent": [ {
+            "message": {
+              "text": {
+                "text": [ "\u003cspeak\u003eOkay, I’ll connect you now. You’ll need to use your phone keypad instead of talking to the virtual assistant. Next time, you can call \u003cprosody rate=\"slow\"\u003e\u003csay-as interpret-as=\"telephone\"\u003e1-866-425-4268\u003c/say-as\u003e \u003c/prosody\u003e for support. Just a moment while I connect you.\u003c/speak\u003e" ]
+              },
+              "languageCode": "en"
+            }
+          }, {
+            "message": {
+              "text": {
+                "text": [ "\u003cspeak\u003eJe vous mets en contact. Vous devrez vous servir du clavier de votre téléphone au lieu de parler à l’assistant virtuel. La prochaine fois, veuillez composer le \u003cprosody rate=\"slow\"\u003e\u003csay-as interpret-as=\"telephone\"\u003e1-866-425-4268\u003c/say-as\u003e \u003c/prosody\u003e pour soutien. Veuillez patienter un moment.\u003c/speak\u003e" ]
+              },
+              "languageCode": "fr-ca"
+            }
+          } ]
+        }, {
+          "condition": "$session.params.region = \"MTS\"",
+          "caseContent": [ {
+            "message": {
+              "text": {
+                "text": [ "\u003cspeak\u003eOkay, I’ll connect you now. You’ll need to use your phone keypad instead of talking to the virtual assistant. Next time, you can call \u003cprosody rate=\"slow\"\u003e\u003csay-as interpret-as=\"telephone\"\u003e1-800-883-2054\u003c/say-as\u003e \u003c/prosody\u003e for support. Just a moment while I connect you.\u003c/speak\u003e" ]
+              },
+              "languageCode": "en"
+            }
+          }, {
+            "message": {
+              "text": {
+                "text": [ "\u003cspeak\u003eJe vous mets en contact. Vous devrez vous servir du clavier de votre téléphone au lieu de parler à l’assistant virtuel. La prochaine fois, veuillez composer le \u003cprosody rate=\"slow\"\u003e\u003csay-as interpret-as=\"telephone\"\u003e1-800-883-2054\u003c/say-as\u003e \u003c/prosody\u003e pour soutien. Veuillez patienter un moment. \u003c/speak\u003e" ]
+              },
+              "languageCode": "fr-ca"
+            }
+          } ]
+        } ]
+      } ]
+    },
+    "targetPage": "Confirmation on Account ATL/MTS",
+    "name": "615ee96b-c1f5-4171-95a3-418a0242ff9c"
+  }, {
+    "intent": "context.other_account",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ " Okay, what’s the 10-digit phone number associated with your service?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "D'accord, quel est le numéro de téléphone de 10 chiffres associé à votre service?" ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "CIRN",
+        "value": null
+      } ]
+    },
+    "targetPage": "Phone number collection",
+    "name": "e8db3192-8f08-41a3-a629-ebf4b6ad8240"
+  } ],
+  "advancedSettings": {
+    "speechAdaptationSettings": {
+      "enableManualSpeechAdaptation": true,
+      "biasingPhraseSets": [ {
+        "biasingPhrases": [ {
+          "value": "Bell Aliant account",
+          "boost": 20
+        }, {
+          "value": "my Bell Aliant account",
+          "boost": 20
+        }, {
+          "value": "the Bell Aliant account",
+          "boost": 20
+        }, {
+          "value": "bell aliant ",
+          "boost": 20
+        }, {
+          "value": "bell aliant account",
+          "boost": 20
+        } ],
+        "displayName": "Bell-Aliant"
+      } ]
+    }
+  },
+  "speakerIdSettings": {
+  
+  }
+}

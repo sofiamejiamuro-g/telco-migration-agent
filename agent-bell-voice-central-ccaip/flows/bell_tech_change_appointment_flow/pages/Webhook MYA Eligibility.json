@@ -1,0 +1,131 @@
+{
+  "name": "30a69d88-a0fc-48fc-af37-78806b591134",
+  "displayName": "Webhook MYA Eligibility",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "/v1/ticket_management/cpm#mya_information",
+    "tag": "mya_information"
+  },
+  "transitionRoutes": [ {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "mya_links",
+        "value": "$sys.func.FILTER(\"$session.params.mya_information_response\", \"$.notification[*].MYAApplicationUrl\")"
+      }, {
+        "parameter": "arr_size",
+        "value": "$sys.func.COUNT($session.params.mya_links)"
+      }, {
+        "parameter": "mya_link",
+        "value": "$sys.func.GET($session.params.mya_links, 0)"
+      }, {
+        "parameter": "mya_eligible",
+        "value": "$sys.func.IF(\"$session.params.arr_size \u003e 0\", true, false)"
+      } ]
+    },
+    "name": "4a0edf72-7c61-4b14-bb3c-8b4ca01d1cd6"
+  }, {
+    "condition": "$session.params.mya_eligible = true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "route",
+        "value": "tech_change_appointment_mya_true"
+      } ]
+    },
+    "name": "a96a88c4-fdc1-4c90-b666-8f0e7a275ab9"
+  }, {
+    "condition": "$session.params.mya_eligible = false",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "route",
+        "value": "tech_change_appointment_mya_false"
+      }, {
+        "parameter": "auth_status",
+        "value": "session.params.auth_status"
+      } ]
+    },
+    "name": "15e012b0-4999-45e5-b2f0-b445cda3ffae"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "30a69d88-a0fc-48fc-af37-78806b591134"
+      }, {
+        "parameter": "flow_id",
+        "value": "d770f33a-0ab5-4e29-b301-247610e55291"
+      }, {
+        "parameter": "page_name",
+        "value": "Webhook MYA Eligibility"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ],
+  "eventHandlers": [ {
+    "event": "webhook.error",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "route",
+        "value": "tech_change_appointment_mya_false"
+      } ]
+    },
+    "name": "29fe9505-842f-428a-b699-978669032e49",
+    "targetPlaybook": "bell_UC_Technical Support"
+  }, {
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "route",
+        "value": "tech_change_appointment_mya_false"
+      } ]
+    },
+    "name": "5869d904-6c79-4cbe-b8be-b24292d6ff3c",
+    "targetPlaybook": "bell_UC_Technical Support"
+  }, {
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "route",
+        "value": "tech_change_appointment_mya_false"
+      } ]
+    },
+    "name": "a65d4dd5-bc51-4095-8186-cf7fd53227f1",
+    "targetPlaybook": "bell_UC_Technical Support"
+  }, {
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "route",
+        "value": "tech_change_appointment_mya_false"
+      } ]
+    },
+    "name": "d3567f7c-fb25-4e15-9f16-b86e5c23e42e",
+    "targetPlaybook": "bell_UC_Technical Support"
+  }, {
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "route",
+        "value": "tech_change_appointment_mya_false"
+      } ]
+    },
+    "name": "7c6c20d3-014d-439a-8828-b357e97cb253",
+    "targetPlaybook": "bell_UC_Technical Support"
+  }, {
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "route",
+        "value": "tech_change_appointment_mya_false"
+      } ]
+    },
+    "name": "ebf0e68c-7fae-4bf9-aae6-8783c191ea3a",
+    "targetPlaybook": "bell_UC_Technical Support"
+  } ]
+}

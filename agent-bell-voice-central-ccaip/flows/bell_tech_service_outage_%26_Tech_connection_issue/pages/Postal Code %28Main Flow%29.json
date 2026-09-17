@@ -1,0 +1,34 @@
+{
+  "name": "4b3f95e0-69ee-434b-8415-2f25c6b92215",
+  "displayName": "Postal Code (Main Flow)",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "setParameterActions": [ {
+      "parameter": "postalcode",
+      "value": "$sys.func.FILTER(     \"$session.params.customer_id_search_response\",     \"$..services[*].service_address.postcode\" )"
+    }, {
+      "parameter": "postcode",
+      "value": "$sys.func.UNIQUE($session.params.postalcode)"
+    }, {
+      "parameter": "postal_code",
+      "value": "$session.params.postcode[0]"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$sys.func.COUNT($session.params.postcode) = 1",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Check LOB (Main Flow)",
+    "name": "0208cba7-46b4-499d-bf29-54d0a36ef43c"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Did CX already provide a postal code (Main Flow)",
+    "name": "4299cb6d-f801-4b41-a613-7f5c0d88ab04"
+  } ]
+}

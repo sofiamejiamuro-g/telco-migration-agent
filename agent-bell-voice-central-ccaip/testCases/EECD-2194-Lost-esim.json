@@ -1,0 +1,181 @@
+{
+  "name": "21f37edd-d3c6-49ad-a4f1-6d7a6d33d31f",
+  "tags": [ "#bell", "#tech_activate_service" ],
+  "displayName": "EECD-2194-Lost-esim",
+  "testCaseConversationTurns": [ {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "languageCode": "en",
+        "event": {
+          "event": "greet"
+        }
+      }
+    },
+    "virtualAgentOutput": {
+      "sessionParameters": {
+        "Agent_Counter": 0,
+        "CLID": 4155547622,
+        "brand": "bell",
+        "caller_channel": "TFN",
+        "language": "en"
+      },
+      "currentPage": {
+        "name": "Routing Page",
+        "flow": "Default Start Flow"
+      },
+      "textResponses": [ {
+        "text": [ "Welcome. I’m Bell’s virtual assistant. it’s nice to e-meet you. I use AI to offer you help quickly when you need it. How Can I help you?" ]
+      } ],
+      "currentFlow": {
+        "name": "Default Start Flow"
+      },
+      "actions": [ {
+        "event": {
+          "event": "greet"
+        }
+      }, {
+        "agentUtterance": {
+          "text": "Welcome. I’m Bell’s virtual assistant. it’s nice to e-meet you. I use AI to offer you help quickly when you need it. How Can I help you?"
+        }
+      } ]
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "activate esim"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "sessionParameters": {
+        "Agent_Counter": 0,
+        "CLID": 4155547624,
+        "Error_Count": 0,
+        "Zero_Out": 0,
+        "brand": "bell",
+        "brand_num": 2,
+        "caller_channel": "TFN",
+        "language": "en",
+        "route": "tech_activate_service",
+        "sim_type": "eSIM",
+        "utterance": "activate esim"
+      },
+      "differences": [ {
+        "type": "UTTERANCE",
+        "description": "Agent response mismatch",
+        "warning": true,
+        "assertionType": "EQUAL",
+        "expectedValue": "",
+        "actualValue": "I'd be happy to help you activate your service.\nAre you activating an eSIM for an existing line or a new line?"
+      } ],
+      "textResponses": [ {
+        "text": [ "I'd be happy to help you activate your service.\nAre you activating an eSIM for an existing line or a new line?" ]
+      } ],
+      "actions": [ {
+        "userUtterance": {
+          "text": "activate esim"
+        }
+      }, {
+        "playbookInvocation": {
+          "playbook": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/playbooks/e283827c-8820-4398-91fc-dc42d0c18b87",
+          "playbookInput": {
+            "actionParameters": {
+              "CLID": 4155547624,
+              "brand": "bell",
+              "caller_channel": "TFN",
+              "language": "en",
+              "route": "tech_activate_service",
+              "sim_type": "eSIM",
+              "utterance": "activate esim"
+            }
+          },
+          "playbookState": "OUTPUT_STATE_PENDING"
+        }
+      }, {
+        "agentUtterance": {
+          "text": "I'd be happy to help you activate your service.\nAre you activating an eSIM for an existing line or a new line?"
+        }
+      } ]
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "i lost my esim"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "sessionParameters": {
+        "Agent_Counter": 0,
+        "CLID": 4155547624,
+        "Error_Count": 0,
+        "Zero_Out": 0,
+        "brand": "bell",
+        "brand_num": 2,
+        "caller_channel": "TFN",
+        "language": "en",
+        "route": "tech_activate_service",
+        "sim_type": "eSIM",
+        "utterance": "activate esim"
+      },
+      "differences": [ {
+        "type": "UTTERANCE",
+        "description": "Agent response mismatch",
+        "warning": true,
+        "assertionType": "EQUAL",
+        "expectedValue": "",
+        "actualValue": "I'm sorry to hear that. You can easily transfer an existing line to a new eSIM in the MyBell app. I'll send you a text now with further instructions.Would you like to receive a text message with this information?"
+      } ],
+      "textResponses": [ {
+        "text": [ "I'm sorry to hear that. You can easily transfer an existing line to a new eSIM in the MyBell app. I'll send you a text now with further instructions." ]
+      }, {
+        "text": [ "Would you like to receive a text message with this information?" ]
+      } ],
+      "actions": [ {
+        "userUtterance": {
+          "text": "i lost my esim"
+        }
+      }, {
+        "agentUtterance": {
+          "text": "I'm sorry to hear that. You can easily transfer an existing line to a new eSIM in the MyBell app. I'll send you a text now with further instructions."
+        }
+      }, {
+        "playbookInvocation": {
+          "playbook": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/playbooks/bb0845d7-9539-472c-89a2-4f884ec919ef",
+          "playbookInput": {
+            "precedingConversationSummary": "Ask for the customer's confirmation wether they are ok to receive an SMS.",
+            "actionParameters": {
+              "BAN": 4162675927163,
+              "CLID": 4155547624,
+              "brand": "bell",
+              "language": "EN",
+              "sms_content": "Bell msg: Here’s a link in the MyBell app where you can transfer your service to a new eSIM or SIM Card: https://mybell.bell.ca/Login?lang=en\u0026refreshlink=https://mybell.bell.ca/sso/ssoauth.aspx?ReturnUrl=/PunchInOut/punchin?DirectAccess=ChangeSIM\u0026Inserttrackingcode (bell.ca/about-us)",
+              "sms_type": "Public"
+            }
+          },
+          "playbookState": "OUTPUT_STATE_PENDING"
+        }
+      }, {
+        "agentUtterance": {
+          "text": "Would you like to receive a text message with this information?"
+        }
+      } ]
+    }
+  } ],
+  "creationTime": {
+    "seconds": 1730280526,
+    "nanos": 213463000
+  },
+  "testConfig": {
+    "flow": "Default Start Flow",
+    "page": "Start Page"
+  },
+  "languageCode": "en"
+}

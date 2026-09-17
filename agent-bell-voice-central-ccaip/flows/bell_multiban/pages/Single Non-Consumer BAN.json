@@ -1,0 +1,108 @@
+{
+  "name": "24ded255-c269-4d6e-bf83-07aea4f70feb",
+  "displayName": "Single Non-Consumer BAN",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.ccc_present != -1 AND $session.params.smb_present != -1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Could you also tell me your account number, please?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Pourriez-vous également fournir votre numéro de compte?" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetPage": "Account Number",
+    "name": "e62f1966-a489-4842-979f-425c8127421e"
+  }, {
+    "condition": "$session.params.ccc_present != -1",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "billing_account_number",
+        "value": "$session.params.nm1_get_cust_profile_response.banNumber"
+      }, {
+        "parameter": "customer_data",
+        "value": "$sys.func.FILTER(\"$session.params.customer_id_search_response\",$sys.func.CONCATENATE(\"$..billing_accounts[?(@.billing_account_number == '\",$sys.func.TO_TEXT($session.params.billing_account_number),\"')]\"))"
+      }, {
+        "parameter": "billing_account_info_list",
+        "value": "$sys.func.TO_OBJECT(   $sys.func.TO_TEXT($session.params.customer_data[0]) )"
+      }, {
+        "parameter": "is_prepaid",
+        "value": "$session.params.billing_account_info_list.services[0].is_prepaid"
+      }, {
+        "parameter": "identification_status",
+        "value": "Pass"
+      }, {
+        "parameter": "customer_type",
+        "value": "Existing"
+      }, {
+        "parameter": "business_type",
+        "value": "CCC"
+      }, {
+        "parameter": "billing_account_number_ref",
+        "value": "$sys.func.CONCATENATE(\"REF\", $sys.func.TO_TEXT($session.params.billing_account_number))"
+      } ]
+    },
+    "targetFlow": "bell_va_to_ivr_handoff",
+    "name": "563395c6-21bd-42dc-bc6c-71324cde082e"
+  }, {
+    "condition": "$session.params.smb_present != -1",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "billing_account_number",
+        "value": "$session.params.db_get_bbm_mkseg_dip_response.def5"
+      }, {
+        "parameter": "customer_data",
+        "value": "$sys.func.FILTER(\"$session.params.customer_id_search_response\",$sys.func.CONCATENATE(\"$..billing_accounts[?(@.billing_account_number == '\",$sys.func.TO_TEXT($session.params.billing_account_number),\"')]\"))"
+      }, {
+        "parameter": "billing_account_info_list",
+        "value": "$sys.func.TO_OBJECT(   $sys.func.TO_TEXT($session.params.customer_data[0]) )"
+      }, {
+        "parameter": "identification_status",
+        "value": "Pass"
+      }, {
+        "parameter": "customer_type",
+        "value": "existing"
+      }, {
+        "parameter": "is_preapid",
+        "value": "$session.params.billing_account_info_list.services[0].is_prepaid"
+      }, {
+        "parameter": "billing_account_number_ref",
+        "value": "$sys.func.CONCATENATE(\"REF\", $sys.func.TO_TEXT($session.params.billing_account_number))"
+      } ]
+    },
+    "targetFlow": "bell_va_to_ivr_handoff_BBM_BNM_SMB",
+    "name": "af316350-188d-4a6a-bd55-a7f03391ed11"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Could you also tell me your account number, please?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Pourriez-vous également fournir votre numéro de compte?" ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "consumer",
+        "value": true
+      } ]
+    },
+    "targetPage": "Account Number",
+    "name": "3305998a-35c8-477f-9637-0b09bf724a6e"
+  } ]
+}

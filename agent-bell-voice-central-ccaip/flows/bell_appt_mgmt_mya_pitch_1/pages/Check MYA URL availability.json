@@ -1,0 +1,36 @@
+{
+  "name": "788692ed-0135-45cb-8b77-7edf5cfdfc56",
+  "displayName": "Check MYA URL availability",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.mya_information_response.notification[0].MYAApplicationUrl != \"\" AND $session.params.mya_information_response.notification[0].MYAApplicationUrl != null AND $session.params.language = \"en\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Offer SMS - en",
+    "name": "e5be7942-1f13-4ca4-94bd-891d71a94ff1"
+  }, {
+    "condition": "$session.params.mya_information_response.notification[0].MYAApplicationUrl != \"\" AND $session.params.mya_information_response.notification[0].MYAApplicationUrl != null AND $session.params.language = \"fr-ca\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Offer SMS - fr-ca",
+    "name": "75f613f1-3942-4a5f-b2f2-1118fac33ae0"
+  }, {
+    "condition": "$session.params.mya_information_response.notification[0].MYAApplicationUrl = \"\" OR $session.params.mya_information_response.notification[0].MYAApplicationUrl = null",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "End Flow",
+    "name": "13766d0e-2490-48f8-9d71-44388d25aab7"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "End Flow",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

@@ -1,0 +1,27 @@
+{
+  "name": "56582017-adfd-49e4-9a56-d530d6e3e616",
+  "displayName": "/v1/ticket_management/wfas#appointment",
+  "timeout": {
+    "seconds": 30
+  },
+  "serviceDirectory": {
+    "service": "projects/gcp-it-npe-pltfm-apigee/locations/us-central1/namespaces/apigee-nb-usc1-service-dir-namespace/services/apigee-nb-usc1-service",
+    "genericWebService": {
+      "uri": "https://apigee-nane1-uat.int.bell.ca/v1/ticket_management/wfas",
+      "requestHeaders": [ {
+        "key": "x-apikey",
+        "value": "npZmDivP6Hxes3wtQ0tC9RqItjJTY8TgZHbOPNeFwvSYSKPI"
+      } ],
+      "webhookType": "FLEXIBLE",
+      "httpMethod": "POST",
+      "requestBody": "{\n  \"sessionInfo\": {\n    \"dfcx_session_id\": \"$session.params.dfcx_session_id\",\n    \"agent_id\": \"$session.params.agent_id\",\n    \"parameters\": {\n      \"menu_type\": \"$session.params.menu_type\",\n      \"wfas_context\": \"$session.params.wfas_context\",\n      \"selected_date\": \"$session.params.selected_date\",\n      \"selected_start_time\": \"$session.params.selected_start_time\",\n      \"selected_end_time\": \"$session.params.selected_end_time\",\n      \"selected_interval_name\": \"$session.params.selected_interval_name\"\n    }\n  },\n  \"fulfillmentInfo\": {\n    \"tag\": \"appointment\"\n  },\n  \"languageCode\": \"$request.language\"\n}",
+      "parameterMapping": [ {
+        "key": "makeAppointment_response",
+        "value": "sessionInfo.parameters.makeAppointment_response"
+      }, {
+        "key": "webhook_success",
+        "value": "sessionInfo.parameters.webhook_success"
+      } ]
+    }
+  }
+}

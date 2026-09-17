@@ -1,0 +1,132 @@
+{
+  "name": "abe03ce5-301d-4ba2-ab0e-037bd7ff3925",
+  "displayName": "Fetch ticket status",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "order_status",
+        "value": "$session.params.order_detail_response.requestState.orderStatus"
+      }, {
+        "parameter": "account_action",
+        "value": "$session.params.order_detail_response.bceOrderList[0].customerAccountRequests[0].accountAction"
+      }, {
+        "parameter": "is_siahcc",
+        "value": "$session.params.order_detail_response.isSiahcc"
+      }, {
+        "parameter": "start_time",
+        "value": "$session.params.order_detail_response.calendar_context[0].startTime"
+      }, {
+        "parameter": "end_time",
+        "value": "$session.params.order_detail_response.calendar_context[0].endTime"
+      }, {
+        "parameter": "field_work",
+        "value": "$session.params.order_detail_response.fieldWorkFlag"
+      }, {
+        "parameter": "customer_work",
+        "value": "$session.params.order_detail_response.customerWorkFlag"
+      } ]
+    },
+    "name": "74b28575-7efb-4d83-9cab-11fdd28dca57"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "onebox_shipping_required",
+        "value": "$session.params.order_detail_response.OneBoxShippingRequired"
+      }, {
+        "parameter": "state_restriction",
+        "value": "$session.params.order_detail_response.bceOrderList[0].stateRestrictionList.stateRestriction"
+      }, {
+        "parameter": "cutoff_time",
+        "value": "$session.params.order_detail_response.calendar_context[0].cutoffTime"
+      }, {
+        "parameter": "early_termination_penalty",
+        "value": "$session.params.order_detail_response.earlyTerminationPenalty"
+      }, {
+        "parameter": "contains_coded_orders",
+        "value": "$session.params.order_detail_response.contains_coded_orders"
+      }, {
+        "parameter": "line_of_business",
+        "value": "$session.params.order_detail_response.calendar_context[0].lineOfBusiness"
+      } ]
+    },
+    "name": "3999f230-fe5f-47f3-a193-34656c903152"
+  }, {
+    "condition": "$session.params.order_status = \"HeldInOCS\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Held Orders",
+    "name": "c4ebc372-fc96-49e6-9bd4-aa78cf90aa58"
+  }, {
+    "condition": "$session.params.account_action = \"Create\" AND $session.params.is_siahcc = \"N\" AND ($session.params.field_work = true OR $session.params.customer_work = true)",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Full Install (Tech Visit)",
+    "name": "e5fcb6f4-886b-485f-8413-f7bba2ed1469"
+  }, {
+    "condition": "$session.params.onebox_shipping_required = \"Y\" AND $session.params.account_action = \"Create\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Self Install Mailout - check shipping status",
+    "name": "00ea3c9b-ae7c-4fa5-abde-6da0a8325f69"
+  }, {
+    "condition": "$session.params.account_action = \"Create\" AND $session.params.is_siahcc = \"Y\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Home Connection - check due date ",
+    "name": "e1432a51-0ab7-45ab-991b-0b54f898adc4"
+  }, {
+    "condition": "$session.params.account_action = \"Change\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Change Orders",
+    "name": "d2c77e51-2426-4484-9044-c1d57f0b7446"
+  }, {
+    "condition": "$session.params.account_action = \"Move\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Move Orders",
+    "name": "3ee1109a-e80c-4801-962f-a3c9c0d45038",
+    "description": "Move Orders"
+  }, {
+    "condition": "$session.params.account_action = \"Remove\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Disconnect orders",
+    "name": "ad65a5f1-7c79-4b32-b51a-554e94e5471a",
+    "description": "Disconnect orders"
+  }, {
+    "condition": "$session.params.early_termination_penalty = true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Early Termination penalty",
+    "name": "ae840cec-989c-416c-836c-2ede9bae0223",
+    "description": "Early Termination penalty"
+  }, {
+    "condition": "$session.params.contains_coded_orders = true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "OMF coded orders",
+    "name": "afb6964e-b9f9-4a9e-b6f1-77768cf10d76"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_tech_service_outage_\u0026_Tech_connection_issue",
+    "name": "b230f89f-a273-4b1b-91c6-789146b5c701"
+  } ]
+}

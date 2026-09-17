@@ -1,0 +1,286 @@
+{
+  "name": "54f8d687-ee6e-4f66-969a-389ec21ae274",
+  "displayName": "EEPA-2015-Happy Path-WSC",
+  "testCaseConversationTurns": [ {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "hi"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "sessionParameters": {
+        "Agent_Counter": 0,
+        "CLID": 4164204109,
+        "brand": "bell",
+        "caller_channel": "TFN",
+        "language": "en",
+        "speak_to_agent_counter": 0
+      },
+      "differences": [ {
+        "type": "PAGE",
+        "description": "Page mismatch:\nExpected: \nActual:   Routing Page",
+        "assertionType": "EQUAL",
+        "expectedValue": "",
+        "actualValue": "Routing Page"
+      }, {
+        "type": "INTENT",
+        "description": "Intent mismatch:\nExpected: \nActual:   Default Welcome Intent",
+        "assertionType": "EQUAL",
+        "expectedValue": "",
+        "actualValue": "Default Welcome Intent"
+      }, {
+        "type": "UTTERANCE",
+        "description": "Agent response mismatch",
+        "warning": true,
+        "assertionType": "EQUAL",
+        "expectedValue": "",
+        "actualValue": "Welcome. I’m Bell’s virtual assistant. it’s nice to e-meet you. I use AI to offer you help quickly when you need it. How Can I help you?"
+      } ],
+      "triggeredIntent": {
+        "name": "Default Welcome Intent"
+      },
+      "currentPage": {
+        "name": "Routing Page",
+        "flow": "Default Start Flow"
+      },
+      "textResponses": [ {
+        "text": [ "Welcome. I’m Bell’s virtual assistant. it’s nice to e-meet you. I use AI to offer you help quickly when you need it. How Can I help you?" ]
+      } ],
+      "currentFlow": {
+        "name": "Default Start Flow"
+      },
+      "actions": [ {
+        "userUtterance": {
+          "text": "hi"
+        }
+      }, {
+        "agentUtterance": {
+          "text": "Welcome. I’m Bell’s virtual assistant. it’s nice to e-meet you. I use AI to offer you help quickly when you need it. How Can I help you?"
+        }
+      } ]
+    }
+  }, {
+    "userInput": {
+      "injectedParameters": {
+        "caller_channel": "WSC"
+      },
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "make payment"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "sessionParameters": {
+        "Agent_Counter": 0,
+        "CLID": 4164204109,
+        "CPM_Invalid_Counter": 0,
+        "Loud_Counter": 0,
+        "Mistake_Counter": 0,
+        "More_Time_Counter": 0,
+        "PHN_Incorrect_Counter": 0,
+        "PHN_Invalid_Counter": 0,
+        "brand": "bell",
+        "caller_channel": "WSC",
+        "language": "en",
+        "route": "payment_make_payment",
+        "speak_to_agent_counter": 0,
+        "utterance": "make payment"
+      },
+      "differences": [ {
+        "type": "PAGE",
+        "description": "Page mismatch:\nExpected: \nActual:   CIRN Collection Check",
+        "assertionType": "EQUAL",
+        "expectedValue": "",
+        "actualValue": "CIRN Collection Check"
+      }, {
+        "type": "INTENT",
+        "description": "Intent mismatch:\nExpected: \nActual:   Default Welcome Intent",
+        "assertionType": "EQUAL",
+        "expectedValue": "",
+        "actualValue": "Default Welcome Intent"
+      }, {
+        "type": "UTTERANCE",
+        "description": "Agent response mismatch",
+        "warning": true,
+        "assertionType": "EQUAL",
+        "expectedValue": "",
+        "actualValue": "Is this concerning the number you are calling from?"
+      } ],
+      "triggeredIntent": {
+        "name": "Default Welcome Intent"
+      },
+      "currentPage": {
+        "name": "CIRN Collection Check",
+        "flow": "bell_Identification"
+      },
+      "textResponses": [ {
+        "text": [ "Is this concerning the number you are calling from?" ],
+        "allowPlaybackInterruption": true
+      } ],
+      "currentFlow": {
+        "name": "bell_Identification"
+      },
+      "actions": [ {
+        "userUtterance": {
+          "text": "make payment"
+        }
+      }, {
+        "playbookInvocation": {
+          "playbook": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/playbooks/e9fcb1fb-7f21-41be-a85d-5b0a1d2e77fe",
+          "playbookInput": {
+            "actionParameters": {
+              "CLID": 4164204109,
+              "brand": "bell",
+              "caller_channel": "WSC",
+              "language": "en",
+              "utterance": "make payment"
+            }
+          },
+          "playbookState": "OUTPUT_STATE_PENDING"
+        }
+      }, {
+        "playbookInvocation": {
+          "playbook": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/playbooks/290ba230-488e-4e69-83f6-f04f72fc6f15",
+          "playbookInput": {
+            "precedingConversationSummary": "The user wants to make a payment, the bell_NLU_Payments playbook is invoked for further processing.",
+            "actionParameters": {
+              "CLID": 4164204109,
+              "brand": "bell",
+              "caller_channel": "WSC",
+              "language": "en",
+              "utterance": "make payment"
+            }
+          },
+          "playbookState": "OUTPUT_STATE_PENDING"
+        }
+      }, {
+        "flowInvocation": {
+          "flow": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/flows/d470a3c5-4aea-4b69-a102-493160e56227",
+          "flowState": "OUTPUT_STATE_PENDING",
+          "inputActionParameters": {
+            "route": "payment_make_payment"
+          }
+        }
+      }, {
+        "agentUtterance": {
+          "text": "Is this concerning the number you are calling from?"
+        }
+      } ]
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "yes"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "sessionParameters": {
+        "Agent_Counter": 0,
+        "CIRN": "4164204109",
+        "CLID": 4164204109,
+        "CPM_Invalid_Counter": 0,
+        "Loud_Counter": 0,
+        "Mistake_Counter": 0,
+        "More_Time_Counter": 0,
+        "PHN_Incorrect_Counter": 0,
+        "PHN_Invalid_Counter": 0,
+        "PIN_Invalid_Counter": 0,
+        "PIN_Not_Received": 0,
+        "PIN_Resend_Counter": 0,
+        "auth_status": "Pass",
+        "brand": "bell",
+        "caller_channel": "WSC",
+        "customer_id_search_response": "{\"users\":[{\"user_name\":\"FBellCELRik LBellCELRik\",\"first_name\":\"FBellCELRik\",\"last_name\":\"LBellCELRik\",\"contact_email\":\"test4w@bell.com\",\"contact_number\":\"4164204109\",\"billing_accounts\":[{\"billing_account_number\":\"41642041090\",\"billing_account_type\":\"NM1\",\"billing_account_status\":\"active\",\"billing_date\":null,\"billing_address\":{\"@type\":\"GeographicAddress\",\"streetNr\":\"9\",\"streetName\":\"BellCELOne\",\"streetType\":\"AVE\",\"postcode\":\"M5P3B8\",\"city\":\"TORONTO\",\"stateOrProvince\":\"ON\",\"country\":\"Canada\"},\"billing_contact_number\":\"4164204109\",\"billing_media\":null,\"billing_invoicing_language\":\"En\",\"collection_agency_code\":null,\"status_reason_code\":\"active\",\"delinquent_flag\":\"Do\",\"delinquency_date\":\"2021-12-27T23:04:59.723Z\",\"billing_status_reason_code\":null,\"billing_account_balance\":null,\"last_payment_amount\":null,\"last_payment_date\":null,\"services\":[{\"service_id\":\"4164204109\",\"service_status\":\"active\",\"service_code\":\"MOBILITY\",\"service_account_number\":\"4164204109\",\"is_prepaid\":false,\"service_type\":\"MOBILITY\",\"brand\":\"BELL\",\"service_billing_account_type\":\"NM1\",\"service_address\":null,\"network_type\":null,\"technology_type\":\"Unknown\",\"market_segment\":\"Residential\",\"market_subsegment\":\"Residential\",\"service_status_reason_code\":\"\"}]}]}]}",
+        "from_custom_fallback": 0,
+        "identification_status": "Pass",
+        "language": "en",
+        "route": "payment_make_payment",
+        "speak_to_agent_counter": 0,
+        "telephone_number": 4164204109,
+        "utterance": "make payment"
+      },
+      "differences": [ {
+        "type": "UTTERANCE",
+        "description": "Agent response mismatch",
+        "warning": true,
+        "assertionType": "EQUAL",
+        "expectedValue": "",
+        "actualValue": "Thanks!You have been IdentifiedYou have been authenticatedWhat else can I help you with today?"
+      } ],
+      "textResponses": [ {
+        "text": [ "Thanks!" ],
+        "allowPlaybackInterruption": true
+      }, {
+        "text": [ "You have been Identified" ],
+        "allowPlaybackInterruption": true
+      }, {
+        "text": [ "You have been authenticated" ],
+        "allowPlaybackInterruption": true
+      }, {
+        "text": [ "What else can I help you with today?" ],
+        "allowPlaybackInterruption": true
+      } ],
+      "actions": [ {
+        "userUtterance": {
+          "text": "yes"
+        }
+      }, {
+        "agentUtterance": {
+          "text": "Thanks!\nYou have been Identified\nYou have been authenticated"
+        }
+      }, {
+        "playbookInvocation": {
+          "playbook": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/playbooks/5de122dc-8c9a-4a4a-8332-c5df65125a22",
+          "playbookInput": {
+            "actionParameters": {
+              "CLID": 4164204109,
+              "auth_status": "Pass",
+              "brand": "bell",
+              "caller_channel": "WSC",
+              "identification_status": "Pass",
+              "language": "en"
+            }
+          },
+          "playbookState": "OUTPUT_STATE_PENDING"
+        }
+      }, {
+        "playbookInvocation": {
+          "playbook": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/playbooks/f0990574-1922-4ced-9892-cf29d8060947",
+          "playbookInput": {
+            "precedingConversationSummary": "User is authenticated and identified",
+            "actionParameters": {
+              "auth_status": "Pass",
+              "identification_status": "Pass",
+              "language": "en"
+            }
+          },
+          "playbookState": "OUTPUT_STATE_PENDING"
+        }
+      }, {
+        "agentUtterance": {
+          "text": "What else can I help you with today?"
+        }
+      } ]
+    }
+  } ],
+  "creationTime": {
+    "seconds": 1737650909,
+    "nanos": 523925000
+  },
+  "testConfig": {
+    "flow": "Default Start Flow",
+    "page": "Start Page"
+  },
+  "languageCode": "en"
+}

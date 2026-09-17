@@ -1,0 +1,61 @@
+{
+  "name": "b57fb2c9-f1a1-4c63-ad8a-566404dfcf15",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Bien sûr, je peux vous aider. Vous pouvez facilement rétablir vos services résidentiels dans MonBell. Je vais envoyer un texto à l’appareil à partir duquel vous appelez qui contient un lien pour le faire vous-même. Est-ce que cela vous convient?"
+    }
+  }, {
+    "userUtterance": {
+    
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_global_error_count_check",
+      "inputActionParameters": {
+        "global_error_counter": "0",
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+        "global_error_counter": "1",
+        "language": "fr-ca"
+      }
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "brand": "bell",
+        "language": "fr-ca",
+        "sms_content": "Mess. de Bell: Vous pouvez visiter m.bell.ca/modifiersuspensiontemporaire pour rétablir votre service residentiel dans MonBell. ( bell.ca/apropos )",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "User wants to restore their service",
+    "actionParameters": {
+      "brand": "bell",
+      "global_error_counter": "0",
+      "language": "fr-ca",
+      "route": "account_restore_service",
+      "unique_services": "INTERNET, TV",
+      "utterance": "Je veux rétablir mon ou mes service internet"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "User is offered for sms and routed to sms flow",
+    "actionParameters": {
+      "brand": "bell",
+      "global_error_counter": "1",
+      "language": "fr-ca"
+    }
+  },
+  "displayName": "FR Restore Service : Internet, TV - No Input",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 418,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

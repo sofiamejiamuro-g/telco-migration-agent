@@ -1,0 +1,114 @@
+{
+  "name": "3219be86-9c71-4fd2-8542-80ef2fdbc4a1",
+  "displayName": "Capture Amount",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "setParameterActions": [ {
+      "parameter": "payment_amount_number",
+      "value": "$sys.func.TO_NUMBER($session.params.payment_amount)"
+    }, {
+      "parameter": "currentBalance_number",
+      "value": "$sys.func.TO_NUMBER($session.params.currentBalance)"
+    }, {
+      "parameter": "pastDueAmount_number",
+      "value": "$sys.func.TO_NUMBER($session.params.pastDueAmount)"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.payment_amount_number \u003c $session.params.pastDueAmount_number",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "To set up payment arrangement, the minimum amount required is $session.params.pastDueAmount, would you like to commit to paying this amount?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Pour établir des modalités de paiement, le montant minimum requis est de $session.params.pastDueAmount, Souhaitez-vous vous engager à payer ce montant?" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetPage": "Due Amount Check",
+    "name": "1b15dfda-bea5-4880-9a99-4144cc09dd0b"
+  }, {
+    "condition": "$session.params.payment_amount_number \u003e= $session.params.pastDueAmount_number AND $session.params.payment_amount_number \u003c $session.params.currentBalance_number",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "To confirm, the payment arrangement amount you're committing to is $$session.params.payment_amount ?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Pour confirmer, le montant de l'entente de paiement auquel vous vous engagez est de $$session.params.payment_amount." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetPage": "User Confirm PA",
+    "name": "aa7cfd9d-044b-4a91-a486-12c61e4c3a79"
+  }, {
+    "condition": "$session.params.payment_amount_number \u003c 10",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "payment_attempt",
+        "value": "$sys.func.ADD(1, $session.params.payment_attempt)"
+      } ]
+    },
+    "targetPage": "Amount Check",
+    "name": "bdf132be-098a-4ce5-b897-6c427f6ac4ee"
+  }, {
+    "condition": "$session.params.payment_amount \u003e $session.params.currentBalance_number",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "The maximum amount you can set up for Payment Arrangement is $session.params.currentBalance. Would you like to commit to $session.params.currentBalance instead?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ " Le montant maximal que vous pouvez établir pour un arrangement de paiement est de $session.params.currentBalance. Souhaitez-vous plutôt vous engager à payer $session.params.currentBalance?" ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "payment_amount",
+        "value": "$session.params.currentBalance"
+      } ]
+    },
+    "targetPage": "User Confirm PA for greater amount",
+    "name": "b584278c-e510-471f-93f0-4b59b1cdd24a"
+  }, {
+    "condition": "$session.params.substituted_amount \u003e= $session.params.decimalx1000",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "decimal_payment_attempt",
+        "value": "$sys.func.ADD(1, $session.params.decimal_payment_attempt)"
+      } ]
+    },
+    "targetPage": "Amount Check",
+    "name": "a73e578e-b1bb-4cf9-ad46-8587565c4a4a"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "3219be86-9c71-4fd2-8542-80ef2fdbc4a1"
+      }, {
+        "parameter": "flow_id",
+        "value": "f769e9bc-195d-4bb3-a5d0-6244de842e69"
+      }, {
+        "parameter": "page_name",
+        "value": "Capture Amount"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

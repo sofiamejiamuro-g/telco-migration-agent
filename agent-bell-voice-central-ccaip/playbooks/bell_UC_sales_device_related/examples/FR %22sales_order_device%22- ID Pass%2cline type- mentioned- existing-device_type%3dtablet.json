@@ -1,0 +1,72 @@
+{
+  "name": "123c66e6-6f6d-4c1e-aa52-aafcfffe9537",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "brand": "bell",
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Désirez-vous ajouter un nouveau service ou modifier votre service actuel?\n"
+    }
+  }, {
+    "userUtterance": {
+      "text": "existant"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Je vais envoyer un texto à l’appareil au moyen duquel vous appelez, afin que vous puissiez découvrir les appareils mobiles de Bell, comme les téléphones, les tablettes et les montres intelligentes, ainsi que le service Internet mobile. Est-ce que ça vous convient?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "oui"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "brand": "bell",
+        "language": "fr-ca",
+        "sms_content": "Bell : Vous pouvez visiter bell.ca/accessoirestelephones pour découvrir nos accessoires pour les téléphones cellulaires. ( bell.ca/apropos )",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+        "language": "fr-ca"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer has questions about needing a new device, device availability, device features, cost, related to devices that Bell sells",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "Existing",
+      "device_type": "Tablet",
+      "identification_status": "Pass",
+      "language": "fr-ca",
+      "line_type": "New",
+      "route": "sales_order_device",
+      "utterance": "Je voudrais commander un nouvel iPad"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "we got to know from the utterance that the device type as tablet",
+    "actionParameters": {
+      "brand": "bell",
+      "device_type": "Tablet",
+      "language": "fr-ca",
+      "line_type": "New"
+    }
+  },
+  "displayName": "FR \"sales_order_device\"- ID Pass,line type- mentioned- existing-device_type=tablet",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 483,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

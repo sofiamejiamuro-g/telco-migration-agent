@@ -1,0 +1,101 @@
+{
+  "name": "f145ab76-6077-4167-a5cd-59b9a4396cb3",
+  "displayName": "CX Input",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "messages": [ {
+      "text": {
+        "text": [ "Were you looking to modify your appointment?" ]
+      },
+      "languageCode": "en"
+    }, {
+      "text": {
+        "text": [ "Souhaitiez-vous modifier votre rendez-vous?" ]
+      },
+      "languageCode": "fr-ca"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "intent": "context.confirm_yes",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_ticket_mgmt_change_cancel_ticket",
+    "name": "3c5bccc5-bc6d-48d3-b24c-6a61121b6277"
+  }, {
+    "intent": "context.confirm_no",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_Feedback",
+    "name": "951fe032-8899-4186-af41-de76290c90c5"
+  }, {
+    "intent": "context.modify.appointment",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_ticket_mgmt_change_cancel_ticket",
+    "name": "21ccf08b-2f01-45bd-a305-b406e39205b8"
+  }, {
+    "intent": "context.something.else",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "event_type",
+        "value": "anything else start over"
+      } ]
+    },
+    "targetFlow": "Default Start Flow",
+    "name": "913c7c13-c29b-4b45-a06e-f1b5fa9d6ce2"
+  }, {
+    "intent": "context.create_appointment",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "global_error_counter",
+        "value": "$sys.func.ADD($session.params.global_error_counter,1)"
+      }, {
+        "parameter": "local_nomatch_counter",
+        "value": "$sys.func.ADD($session.params.local_nomatch_counter,1)"
+      }, {
+        "parameter": "local_trigger",
+        "value": "no_match"
+      } ]
+    },
+    "targetPage": "Local Error Handling",
+    "name": "176b1aba-8089-4228-be91-a17cceda6b4b"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Local Error Handling",
+    "event": "sys.no-input-default",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "global_error_counter",
+        "value": "$sys.func.ADD($session.params.global_error_counter,1)"
+      }, {
+        "parameter": "local_noinput_counter",
+        "value": "$sys.func.ADD($session.params.local_noinput_counter,1)"
+      }, {
+        "parameter": "local_trigger",
+        "value": "no_input"
+      } ]
+    },
+    "name": "2f98d919-2eb8-47d1-a82f-a1fe27891591"
+  }, {
+    "targetPage": "Local Error Handling",
+    "event": "sys.no-match-default",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "global_error_counter",
+        "value": "$sys.func.ADD($session.params.global_error_counter,1)"
+      }, {
+        "parameter": "local_nomatch_counter",
+        "value": "$sys.func.ADD($session.params.local_nomatch_counter,1)"
+      }, {
+        "parameter": "local_trigger",
+        "value": "no_match"
+      } ]
+    },
+    "name": "72382ef6-6d49-4dc4-b60b-ddd9fcd89dbc"
+  } ]
+}

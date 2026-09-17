@@ -1,0 +1,159 @@
+{
+  "name": "0eabd80a-8d37-476a-82f0-3ef377324bef",
+  "displayName": "CX input",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "messages": [ {
+      "text": {
+        "text": [ "You can now cancel pre-authorized payments at your own convenience. I'll send a text to the device you're calling from with a link to proceed. Is this alright?" ]
+      },
+      "languageCode": "en"
+    }, {
+      "text": {
+        "text": [ "Vous pouvez maintenant annuler les prélèvements automatiques à votre convenance. Je vais vous envoyer un SMS sur l'appareil que vous utilisez actuellement avec un lien pour poursuivre.Est-ce que cela vous va?" ]
+      },
+      "languageCode": "fr-ca"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "intent": "context.confirm_yes",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "sms_type",
+        "value": "Public"
+      }, {
+        "parameter": "sms_content",
+        "value": "You can visit https://m.bell.ca/chatmanagepaymente to cancel Pre Authorized payments in MyBell. (bell.ca/about-us )"
+      } ]
+    },
+    "targetPage": "Lang based SMS",
+    "name": "de239410-c2e6-454c-9cf9-b09cb17b3d66"
+  }, {
+    "intent": "context.confirm_no",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Unfortunately, Pre-Authorized cancellation can only be done in MyBell. Please visit bell.ca/support  on how to cancel Pre-Authorized payments." ]
+        },
+        "languageCode": "en"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "sms_send_status",
+        "value": "Declined"
+      } ]
+    },
+    "targetFlow": "bell_Feedback",
+    "name": "a8496824-a5a9-48c4-93fd-b3973a88956a"
+  }, {
+    "intent": "context.different_number",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "different_number",
+        "value": true
+      } ]
+    },
+    "targetPage": "Lang based SMS",
+    "name": "3d65b49d-a9e0-4f00-962c-be28756828ec"
+  } ],
+  "eventHandlers": [ {
+    "event": "sys.no-input-1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I didn't quite get that. Can you try again?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je n'ai pas tout à fait compris. Pouvez-vous réessayer?" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "cf4125eb-519b-436e-9c49-1e7fa7aabfb2"
+  }, {
+    "event": "sys.no-match-1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I didn't quite get that. Can you try again?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je n'ai pas tout à fait compris. Pouvez-vous réessayer?" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "6e2e0433-aa60-412f-86d6-a2ee01d31f01"
+  }, {
+    "event": "sys.no-input-2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I still didn't get that." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je n'ai toujours pas compris." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "50d5806c-de59-4f8a-ba7e-1b146b1b5a3e"
+  }, {
+    "event": "sys.no-match-2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I still didn't get that." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je n'ai toujours pas compris." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "fa6acdc7-437c-4314-9a54-2d1bbd7b5f4d"
+  }, {
+    "targetFlow": "bell_Feedback",
+    "event": "sys.no-input-3",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "If you’d still like to cancel Pre-Authorized payment, you can do so in MyBell. Please visit bell.ca/support for more information." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Si vous souhaitez toujours annuler le paiement préautorisé, vous pouvez le faire dans MonBell. Veuillez consulter bell.ca/soutien pour plus s’information." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "b14201e7-6be4-476a-8319-61ade7ce5ce9"
+  }, {
+    "targetFlow": "bell_Feedback",
+    "event": "sys.no-match-3",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "If you’d still like to cancel Pre-Authorized payment, you can do so in MyBell. Please visit bell.ca/support for more information." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Si vous souhaitez toujours annuler le paiement préautorisé, vous pouvez le faire dans MonBell. Veuillez consulter bell.ca/soutien pour plus s’information." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "35960ff8-9ca4-466f-abb7-ef0c2d19beb7"
+  } ]
+}

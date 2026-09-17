@@ -1,0 +1,55 @@
+{
+  "name": "f803a543-9111-4305-a050-025a5db8bfef",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_tech_intent_apb",
+      "inputActionParameters": {
+        "language": "en",
+        "utterance": "I do not have any signal"
+      },
+      "outputActionParameters": {
+        "lob": "internet"
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "You can use our Virtual repair tool to check for service outages and troubleshoot your equipment. I'll send a text to the device you're calling from so you can access it quickly. \nIs that alright?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "yes"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "sms_content": "Bell msg: You can visit https://m.bell.ca/chatvirtualrepaire to access the Virtual repair tool. (bell.ca/about-us)",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "CUSTOMER IS HAVING AN ISSUE WITH THE SIGNAL",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "route": "tech_connection_issue",
+      "utterance": "I am having some connection issue"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "VA follows the playbook instructions",
+    "actionParameters": {
+      "language": "en",
+      "lob": "internet"
+    }
+  },
+  "displayName": "EN-tech_connection_issue-{lob}is null-internet",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 335,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

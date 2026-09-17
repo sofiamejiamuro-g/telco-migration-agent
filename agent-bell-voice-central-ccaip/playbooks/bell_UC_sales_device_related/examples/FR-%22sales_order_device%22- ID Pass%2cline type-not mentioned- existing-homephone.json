@@ -1,0 +1,78 @@
+{
+  "name": "d743d429-526c-429b-9a60-b74ceb0e2c73",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "brand": "bell",
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Désirez-vous ajouter un nouveau service ou modifier votre service\nactuel?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Je veux en savoir plus sur le service actuel"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "À propos de quel service communiquez- vous avec nous?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "téléphone résidentiel"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Malheureusement, nous ne vendons pas d’équipement de téléphonie résidentielle. Cependant, nous offrons le service de téléphonie résidentielle. Est-ce que je vous mets en contact avec un de nos agents, qui pourra vous en dire davantage sur nos forfaits de téléphonie résidentielle?\n"
+    }
+  }, {
+    "userUtterance": {
+      "text": "oui"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_aqd",
+      "inputActionParameters": {
+        "brand": "bell",
+        "language": "fr-ca",
+        "lob": "homephone"
+      },
+      "outputActionParameters": {
+        "language": "fr-ca"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer has questions about needing a new device, device availability, device features, cost, related to devices that Bell sells",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "fr-ca",
+      "province": "BC",
+      "route": "sales_order_device",
+      "utterance": "Je souhaite commander un nouvel appareil"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "if lob captured is Homephone then give appropriate response and reroute to bell_aqd",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca",
+      "line_type": "Existing",
+      "lob": "Homephone"
+    }
+  },
+  "displayName": "FR-\"sales_order_device\"- ID Pass,line type-not mentioned- existing-homephone",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 501,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

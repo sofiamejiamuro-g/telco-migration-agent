@@ -1,0 +1,100 @@
+{
+  "name": "a95b5d1c-a6d4-4df2-b8cf-6e3a92e3f0f8",
+  "displayName": "No Match Handling",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.card_len_check_counter \u003c 2",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "card_len_check_counter",
+        "value": "$sys.func.ADD($session.params.card_len_check_counter,1)"
+      }, {
+        "parameter": "card_number",
+        "value": null
+      } ],
+      "conditionalCases": [ {
+        "cases": [ {
+          "condition": "$session.params.card_len_check_counter = 0",
+          "caseContent": [ {
+            "message": {
+              "text": {
+                "text": [ "The card number isn't complete. You can try using your phone's keypad to enter it. Can you give it another try?" ]
+              },
+              "languageCode": "en"
+            }
+          }, {
+            "message": {
+              "text": {
+                "text": [ "Le numéro de carte est incomplet. Vous pouvez le saisir à l’aide du clavier de votre téléphone. Pouvez-vous réessayer?" ]
+              },
+              "languageCode": "fr-ca"
+            }
+          } ]
+        }, {
+          "caseContent": [ {
+            "message": {
+              "text": {
+                "text": [ "Sorry, but the card number entered is not valid. Could you please double-check the number and try again?" ]
+              },
+              "languageCode": "en"
+            }
+          }, {
+            "message": {
+              "text": {
+                "text": [ "Désolée, mais le numéro de carte entré n’est pas valide. Pourriez-vous vérifier le numéro et réessayer?" ]
+              },
+              "languageCode": "fr-ca"
+            }
+          } ]
+        } ]
+      } ]
+    },
+    "targetPage": "Prompt CC Number",
+    "name": "a1b75887-6406-4dff-a82d-8729aee09b13"
+  }, {
+    "condition": "$session.params.card_len_check_counter \u003e= 2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "To keep things secure, we ask that you call back later or you can also easily complete this step using the MyBell app." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Pour assurer la sécurité, nous vous demandons de réessayer plus tard. Vous pouvez également effectuer un paiement à tout moment à l’aide de l’Appli MonBell." ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "card_number",
+        "value": null
+      } ]
+    },
+    "targetPage": "Prompt CX SMS",
+    "name": "c2a6898d-6394-4ee2-a146-9590b1b0abb9"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "a95b5d1c-a6d4-4df2-b8cf-6e3a92e3f0f8"
+      }, {
+        "parameter": "flow_id",
+        "value": "a059ee3e-a2ae-4118-bc6a-65f7330baa63"
+      }, {
+        "parameter": "page_name",
+        "value": "No Match Handling"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

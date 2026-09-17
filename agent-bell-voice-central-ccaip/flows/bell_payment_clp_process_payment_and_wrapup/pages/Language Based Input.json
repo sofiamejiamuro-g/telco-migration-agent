@@ -1,0 +1,53 @@
+{
+  "name": "58eda75a-8a52-4a2c-8079-ef97482ce733",
+  "displayName": "Language Based Input",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.language = \"en\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "sms_type",
+        "value": "Public"
+      }, {
+        "parameter": "sms_content",
+        "value": "Bell msg: You can visitm.bell.ca/setupautopayment to complete setting up Pre Authorized payment in MyBell. (bell.ca/about-us )"
+      } ]
+    },
+    "targetFlow": "bell_SMS Trigger",
+    "name": "037abfce-efbc-4fc3-b63f-fd8ebcefc9ec"
+  }, {
+    "condition": "$session.params.language = \"fr-ca\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "sms_type",
+        "value": "Public"
+      }, {
+        "parameter": "sms_content",
+        "value": "Mess. de Bell: Vous pouvez visiter le m.bell.ca/effectuerautopaiement pour terminer la configuration du prelevement automatique dans MonBell. ( bell.ca/apropos )"
+      } ]
+    },
+    "targetFlow": "bell_SMS Trigger",
+    "name": "a046c2ce-44fa-4a50-b9c7-129c6e221b14"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "58eda75a-8a52-4a2c-8079-ef97482ce733"
+      }, {
+        "parameter": "flow_id",
+        "value": "d810bc76-3e37-4bbb-a2ef-ad430f390435"
+      }, {
+        "parameter": "page_name",
+        "value": "Language Based Input"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

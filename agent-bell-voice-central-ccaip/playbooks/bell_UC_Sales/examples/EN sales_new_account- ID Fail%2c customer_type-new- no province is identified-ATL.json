@@ -1,0 +1,61 @@
+{
+  "name": "9793e18f-88c2-445e-a802-90d8e929965f",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "language": "en"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Sure, let me help you with that.\nLet's check if we offer Internet and Home phone service in your area. In\nwhich province are you looking to get service?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "ATL"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_aqd",
+      "inputActionParameters": {
+        "language": "en",
+        "special_queue": "bell_sales_to_atl"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "The Customer wants to sign up or open a new account with Bell",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "New",
+      "language": "en",
+      "lob": "Internet",
+      "province": "BC",
+      "route": "sales_new_account",
+      "utterance": "I want to open a new account for my internet service"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "We need to check the result from identification flow from the webhook NPANXX, If no province is identified then we need ask them and if it is \"ATL\" then call bell_aqd flow and set special_queue = \"bell_sales_to_atl\"",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "New",
+      "identification_status": "Fail",
+      "language": "en",
+      "lob": "Internet"
+    }
+  },
+  "displayName": "EN sales_new_account- ID Fail, customer_type-new- no province is identified-ATL",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 409,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

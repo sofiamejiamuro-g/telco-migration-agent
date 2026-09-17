@@ -1,0 +1,81 @@
+{
+  "name": "bf011de9-1101-4c05-a964-b18653777bbf",
+  "displayName": "Self Install Mailout",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.order_detail_response.bceOrderList[0].stateRestrictionList = \"null\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I found a pending self install order for your $session.params.line_of_business service. We are in the process of sending your equipment to install your bell services. Once your equipment has been shipped we will send an email confirmation with tracking information." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "J’ai trouvé une commande d’auto-installation en attente pour votre service $session.params.line_of_business. Nous préparons l’envoi de votre équipement pour l’installation de vos services Bell. Une fois que votre équipement aura été expédié, nous vous enverrons une confirmation par courriel avec les renseignements de suivi." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetFlow": "bell_Feedback",
+    "name": "6dfcad91-62ee-4c5b-8571-42760572b0ff"
+  }, {
+    "condition": "$session.params.order_detail_response.bceOrderList[0].shippingChangesRestricted != \"Y\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I found a pending self install order for your $session.params.line_of_business service. We are in the process of sending your equipment to install your bell services. Once your equipment has been shipped we will send an email confirmation with tracking information." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "J’ai trouvé une commande d’auto-installation en attente pour votre service $session.params.line_of_business. Nous préparons l’envoi de votre équipement pour l’installation de vos services Bell. Une fois que votre équipement aura été expédié, nous vous enverrons une confirmation par courriel avec les renseignements de suivi." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetFlow": "bell_Feedback",
+    "name": "b0fe8681-75ff-4dc1-b3af-76a59acefe1b"
+  }, {
+    "condition": "$session.params.order_detail_response.bceOrderList[0].shippingChangesRestricted = \"Y\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I found a pending self install order for your $session.params.line_of_business service. Have you received your equipment yet?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "J’ai trouvé une commande d’auto-installation en attente pour votre service $session.params.line_of_business. Avez-vous déjà reçu votre équipement?" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetPage": "CX input - Equipment",
+    "name": "4a3fe222-5493-469f-b090-381a3d1a3b07"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "bf011de9-1101-4c05-a964-b18653777bbf"
+      }, {
+        "parameter": "flow_id",
+        "value": "918644a0-f504-4e8f-91eb-c311a5082207"
+      }, {
+        "parameter": "page_name",
+        "value": "Self Install Mailout"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

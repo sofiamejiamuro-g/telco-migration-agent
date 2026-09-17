@@ -1,0 +1,55 @@
+{
+  "name": "26f4fe6a-c97a-4385-924c-6ddd6706fa63",
+  "actions": [ {
+    "playbookInvocation": {
+      "playbook": "bell_uc_ask_LOB",
+      "playbookInput": {
+        "precedingConversationSummary": "Passing the user {utterance} to extract the parameter {lob} when {identification_status} is \"Pass\"",
+        "actionParameters": {
+          "brand": "bell",
+          "identification_status": "Pass",
+          "language": "en",
+          "route": "service_change_plan",
+          "utterance": "I want to upgrade my mobility package"
+        }
+      },
+      "playbookOutput": {
+        "executionSummary": "returns the parameter {lob} based on user input provided or {utterance}",
+        "actionParameters": {
+          "identification_status": "Pass",
+          "language": "en",
+          "lob": "Mobility",
+          "utterance": "I want to upgrade my mobility package"
+        }
+      },
+      "playbookState": "OUTPUT_STATE_OK"
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "The customer requesting to modify there existing service plan and if parameter {lob} is null in session then we need to call PLAYBOOK:bell_uc_ask_LOB to extract the lob value",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "en",
+      "route": "service_change_plan",
+      "utterance": "I want to upgrade my mobility package"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "User is rerouted to check lob playbook to extract the parameter \"lob\" and return back",
+    "actionParameters": {
+      "brand": "bell",
+      "identification_status": "Pass",
+      "language": "en",
+      "lob": "Mobility",
+      "route": "service_change_plan",
+      "utterance": "I want to upgrade my mobility package"
+    }
+  },
+  "displayName": "EN - service_change_plan - lob null",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 373,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "undetected"
+}

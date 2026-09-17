@@ -1,0 +1,45 @@
+{
+  "name": "1d276112-3bed-44e4-a752-60b3e1ce653e",
+  "displayName": "Multiple service id",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.n_service_homephone \u003e 1 AND ($session.params.lob = \"Homephone\" OR $session.params.lob = \"homephone\" OR $session.params.lob = \"HOMEPHONE\" OR $session.params.lob = \"WIRELINE\")",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "multiple_services",
+        "value": true
+      } ]
+    },
+    "name": "5cc57f9a-ae09-4861-bef3-e9c0217eaceb"
+  }, {
+    "condition": "$session.params.n_service_tv \u003e 1 AND $session.params.lob = \"TV\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "multiple_services",
+        "value": true
+      } ]
+    },
+    "name": "29521485-732c-47c3-a325-2719541d2d05"
+  }, {
+    "condition": "$session.params.n_service_internet \u003e 1 AND ($session.params.lob = \"Internet\" OR $session.params.lob = \"internet\" OR $session.params.lob = \"INTERNET\")",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "multiple_services",
+        "value": true
+      } ]
+    },
+    "name": "409b3b79-367e-4bf0-95f6-53b3e8256089"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Find service ids",
+    "name": "00bb7c3c-ed1a-474b-aa6b-23c48a3f7f57"
+  } ]
+}

@@ -1,0 +1,87 @@
+{
+  "name": "af6569b0-38df-45e8-975b-5cef37344268",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70011",
+        "brand": "bell",
+        "language": "fr-ca",
+        "route": "service_add_feature"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Pour quel service appelez-vous?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "mon téléphone mobile"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Vous pouvez consulter les options de voyage offertes dans MonBell. Je vais envoyer un texto avec un lien à l’appareil au moyen duquel vous appelez. Est-ce que ça vous convient?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "oui"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "add_ons": "roaming",
+        "language": "fr-ca",
+        "route": "service_add_feature",
+        "sms_content": "Bell : Vous pouvez visiter https://m.bell.ca/voyage pour voir vos options de voyage dans l'appli MonBell. ( bell.ca/apropos )",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+        "language": "fr-ca"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "The {identification_status} is \"Pass\", {customer_type} is \"Existing\", {streaming_services} is null and {ppv} is null and {add_ons} is \"roaming\" and {lob} is null so, we will prompt user for send SMS confirmation and if user say \"yes\" or anything affirmative then route to \"bell_SMS Trigger\" flow.",
+    "actionParameters": {
+      "add_ons": "roaming",
+      "apb_location_id": "70011",
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "is_prepaid": "false",
+      "language": "fr-ca",
+      "mobility_sub_type": "postpaid",
+      "route": "service_add_feature",
+      "sms_content": "Bell : Vous pouvez visiter https://m.bell.ca/voyage pour voir vos options de voyage dans l'appli MonBell. ( bell.ca/apropos )",
+      "sms_type": "Public",
+      "utterance": "Je voyage à l'extérieur du pays et je souhaite ajouter une option d'itinérance."
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "As the {lob} is null and {streaming_services}, {ppv} is null and {add_ons} = \"roaming\" then we will prompt user to send SMS and if user say \"yes\" or anything affirmative then send the user to \"bell_SMS Trigger\" flow",
+    "actionParameters": {
+      "add_ons": "roaming",
+      "apb_location_id": "70011",
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "is_prepaid": "false",
+      "language": "fr-ca",
+      "lob": "Mobility",
+      "mobility_sub_type": "postpaid",
+      "route": "service_add_feature",
+      "sms_content": "Bell : Vous pouvez visiter https://m.bell.ca/voyage pour voir vos options de voyage dans l'appli MonBell. ( bell.ca/apropos )",
+      "sms_type": "Public",
+      "utterance": "Je voyage à l'extérieur du pays et je souhaite ajouter une option d'itinérance."
+    }
+  },
+  "displayName": "FR - service_add_feature- international Roaming | Mobility",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 812,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

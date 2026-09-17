@@ -1,0 +1,140 @@
+{
+  "name": "400517de-b93f-405e-b7b9-391b2f4b699c",
+  "displayName": "Local Error handling - Check CX Input",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.global_error_counter \u003e= 3",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_aqd",
+    "name": "d8eb490d-3f4f-4fc3-8dfe-b452ef900553"
+  }, {
+    "condition": "$session.params.local_trigger = \"no_input\" AND $session.params.local_noinput_counter = 1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I didn't quite get that." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "\u003cspeak\u003e That was \u003csay-as interpret-as=\"telephone\"\u003e$session.params.Contact_Number\u003c/say-as\u003e, right? \u003c/speak\u003e" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je n'ai pas bien compris." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "\u003cspeak\u003e C’était le \u003csay-as interpret-as=\"telephone\"\u003e$session.params.Contact_Number\u003c/say-as\u003e, n’est-ce pas?\u003c/speak\u003e" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "5702de7f-1fd1-4075-bb5b-df016fa9494d"
+  }, {
+    "condition": "$session.params.local_trigger = \"no_input\" AND $session.params.local_noinput_counter = 2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I still didn't get that." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "\u003cspeak\u003e That was \u003csay-as interpret-as=\"telephone\"\u003e$session.params.Contact_Number\u003c/say-as\u003e, right? \u003c/speak\u003e" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je n'ai pas bien compris." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "\u003cspeak\u003e C’était le \u003csay-as interpret-as=\"telephone\"\u003e$session.params.Contact_Number\u003c/say-as\u003e, n’est-ce pas?\u003c/speak\u003e" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "5ea1ae03-73a6-4b9e-8fce-a963aa6a9a0d"
+  }, {
+    "condition": "$session.params.local_trigger = \"no_input\" AND $session.params.local_noinput_counter \u003e= 3",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_No_Input_3",
+    "name": "a6b9ecc8-c47b-4b07-a832-e8f13c3a6ed3"
+  }, {
+    "condition": "$session.params.local_trigger = \"no_match\" AND $session.params.local_nomatch_counter = 1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I didn't quite get that." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "\u003cspeak\u003e That was \u003csay-as interpret-as=\"telephone\"\u003e$session.params.Contact_Number\u003c/say-as\u003e, right? \u003c/speak\u003e" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je n'ai pas bien compris." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "\u003cspeak\u003e C’était le \u003csay-as interpret-as=\"telephone\"\u003e$session.params.Contact_Number\u003c/say-as\u003e, n’est-ce pas?\u003c/speak\u003e" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "bf193ab8-0e02-4cc9-8393-865de95c87a6"
+  }, {
+    "condition": "$session.params.local_trigger = \"no_match\" AND $session.params.local_nomatch_counter = 2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I still didn't get that." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "\u003cspeak\u003e That was \u003csay-as interpret-as=\"telephone\"\u003e$session.params.Contact_Number\u003c/say-as\u003e, right? \u003c/speak\u003e" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je n'ai pas bien compris." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "\u003cspeak\u003e C’était le \u003csay-as interpret-as=\"telephone\"\u003e$session.params.Contact_Number\u003c/say-as\u003e, n’est-ce pas?\u003c/speak\u003e" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "e6b65a5a-1b1f-4ea2-b1f4-b9b1968d341c"
+  }, {
+    "condition": "$session.params.local_trigger = \"no_match\" AND $session.params.local_nomatch_counter \u003e= 3",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_No_Match_3",
+    "name": "658edbd6-ceca-46a4-a04a-21302ec8578a"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Previous Page",
+    "name": "86c0e45f-abb0-420c-9dbf-85bf50e5410c"
+  } ]
+}

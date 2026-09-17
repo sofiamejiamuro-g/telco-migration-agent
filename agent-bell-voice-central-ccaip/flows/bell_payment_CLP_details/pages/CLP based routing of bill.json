@@ -1,0 +1,62 @@
+{
+  "name": "637c283b-77ea-43a4-b9d1-68525959f358",
+  "displayName": "CLP based routing of bill",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.special_status = \"bell_clp_aul\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "You're on our Credit Limit Program; with a limit of $ $session.params.clp_program and you're now above $ $session.params.clp_aul_limit. You won't be able to make any outbound calls until you get below $ $session.params.clp_aul_limit, so please make a payment so we can get you back to full service. I can help you make a payment with a credit card, it'll come through right away. If you pay another way; it might take up to 5 business days to come through.\nAt this moment your current credit limit balance is $ $session.params.clp_balance\nYour bill is currently running so your next months charges have already been added to your credit limit balance.\n" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Vous bénéficiez de notre programme de limite de\ncrédit, avec une limite de $session.params.clp_program $ et vous avez\nactuellement dépassé $session.params.clp_aul_limit $. Vous ne pourrez plus\npasser d'appels sortants tant que vous n'aurez pas repassé\nsous la limite de $session.params.clp_aul_limit $. Veuillez effectuer un paiement afin\nque nous puissions rétablir l'intégralité de vos services. Je\npeux vous aider à effectuer un paiement par carte de crédit,\nqui sera traité immédiatement. Si vous payez par un autre\nmoyen, le traitement peut prendre jusqu'à cinq jours\nouvrables.\n\nLe solde actuel de votre limite de crédit est de $ $session.params.clp_balance\n\nVotre facture est en cours, donc les frais du mois\nprochain ont déjà été ajoutés au solde de votre limite de\ncrédit." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetFlow": "bell_payment_pitch_one_time_CC_payment",
+    "name": "72877699-1247-40e0-86e0-a864366e927a"
+  }, {
+    "condition": "$session.params.special_status = \"bell_clp_sus\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "You're on our Credit Limit Program; with a limit of $ $session.params.clp_program , and you're above that now. Once you get below $ $session.params.clp_aul_limit your services will be restored, so please make a payment so we can get you back up and running. I can help you make a payment with a credit card, it'll come through right away. If you pay another way; it might take up to 5 business days to come through.\nAt this moment your current credit limit balance is $ $session.params.clp_balance\nYour bill is currently running so your next months charges have already been added to your credit limit balance." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Vous bénéficiez de notre programme de limite de crédit, avec une limite de $session.params.clp_program $, et vous avez dépassé cette limite. Une fois que vous serez repassé en dessous de $session.params.clp_sus_limit $, vos services seront rétablis. Veuillez effectuer un paiement afin que nous puissions rétablir vos services. Je peux vous aider à effectuer un paiement par carte de crédit, qui sera traité immédiatement. Si vous payez par un autre moyen, le traitement peut prendre jusqu’à cinq jours ouvrables.\n\nLe solde actuel de votre limite de crédit est de $session.params.clp_balance $.\n\nVotre facture est en cours, donc les frais du mois prochain ont déjà été ajoutés au solde de votre limite de crédit." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetFlow": "bell_payment_pitch_one_time_CC_payment",
+    "name": "0f7cfe9b-bb10-4c0c-a37b-ee737d561642"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Good news. You are under your Credit Limit.\nAt this moment your current Credit Limit balance is $ $session.params.clp_balance\nYour bill is currently running so your next months charges have already been added to your Credit Limit balance." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Bonne nouvelle! Vous n’avez pas atteint votre limite de crédit. Le solde actuel de votre limite de crédit est de $session.params.clp_balance $. Votre facture est en cours, donc les frais du mois prochain ont déjà été ajoutés au solde de votre limite de crédit." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetFlow": "bell_payment_pitch_one_time_CC_payment",
+    "name": "00347191-ae60-4121-91f5-09ecfc6cfcb3"
+  } ]
+}

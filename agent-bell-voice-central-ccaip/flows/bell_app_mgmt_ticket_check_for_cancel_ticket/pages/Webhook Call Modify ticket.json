@@ -1,0 +1,83 @@
+{
+  "name": "87cadfe0-b389-4e0b-88e1-6952aa80d84b",
+  "displayName": "Webhook Call Modify ticket",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "/v1/ticket_management/acut/modify#modify_close_ticket",
+    "tag": "modify",
+    "setParameterActions": [ {
+      "parameter": "autofill_template_name",
+      "value": "$sys.func.IF(\"$session.params.task_type = SATTV\", \"TICKET MGMT - SUB SAYS OK - NO MORE TROUBLE - A\", \"UPDATE SUB SAYS OK NOW - A\")"
+    }, {
+      "parameter": "operation_context",
+      "value": "modify_close_ticket"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.webhook_success = true",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_Feedback",
+    "name": "59f20ca1-71da-4e2d-a5a9-c5f06ad10438"
+  }, {
+    "condition": "$session.params.webhook_success = false",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Failure - ACUT",
+    "name": "a3b40cbc-3aca-4b9d-bbea-b05660463794"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Failure - ACUT",
+    "name": "87e14c96-535b-45ed-961a-476137ee65a0"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Webhook Failure - ACUT",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+    
+    },
+    "name": "6eb2594e-b99c-4aae-891f-5f7ce9256d14"
+  }, {
+    "targetPage": "Webhook Failure - ACUT",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+    
+    },
+    "name": "6a734a23-dff0-4fd0-a037-6b34f82218ff"
+  }, {
+    "targetPage": "Webhook Failure - ACUT",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+    
+    },
+    "name": "f2d7c47f-9fb0-4502-aedc-d9f3d9ab718d"
+  }, {
+    "targetPage": "Webhook Failure - ACUT",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+    
+    },
+    "name": "9307f73d-f1ba-46bc-9a3f-7f154764444f"
+  }, {
+    "targetPage": "Webhook Failure - ACUT",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+    
+    },
+    "name": "b3dac79d-0662-4087-8a48-40b7a8f61916"
+  }, {
+    "targetPage": "Webhook Failure - ACUT",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+    
+    },
+    "name": "7c0a022c-82f4-4ed3-86d1-fad78f59d2d3"
+  } ]
+}

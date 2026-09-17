@@ -1,0 +1,69 @@
+{
+  "name": "4b721e42-f776-4358-be42-e5400cab4f49",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Sure, I can help with that. Could you please confirm which service you are looking to suspend?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Mobility"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Sure, I can help with that. What is the reason for suspending your service?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "I lost my device"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Understood. Have you tried using a tracking feature like \"Find my iPhone\" or \"Find my Device\"?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Yes"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Understood, I would suggest temporarily suspending your service to prevent unauthorized use. I will send a text to the device you are calling from, with a link to do it yourelf, is that alright?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Yes"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "sms_content": "You can visit bell.ca/suspendline to temporarily suspend your mobility service in MyBell. (bell.ca/about-us)"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer wants to suspend his services",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "route": "account_suspend_service",
+      "unique_services": "Mobility, WIRELINE, Internet",
+      "utterance": "I want to suspend my service"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "VA understood the {utterance}, checked the {unique_services} parameter, found multiple values, rechecked the {utterance} and didn't find a specific service, asked the user which service is he trying to suspend, user confirms it's mobility and since the {suspension_type} is null, VA asks for the reason behind the suspension, user says he lost his device, VA asks the user if he tried using the features track my phone, user says yes, VA asks if it can send a text to the device he's calling from, user confirms, VA routes the user to bell_SMS Trigger flow",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "suspension_type": "lost"
+    }
+  },
+  "displayName": "Happy path - Account suspend service - unique services(Multiple) - Mobility - lost(yes) - en - 25",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 515,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

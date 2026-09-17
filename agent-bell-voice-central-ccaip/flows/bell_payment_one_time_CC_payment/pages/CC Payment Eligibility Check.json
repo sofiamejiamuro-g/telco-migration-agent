@@ -1,0 +1,42 @@
+{
+  "name": "5fe74bee-8020-4b33-b913-eb51dfc60df8",
+  "displayName": "CC Payment Eligibility Check",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.eligInd = \"Y\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Create Order",
+    "name": "c55e7728-2291-4dfe-acba-f6a251270357"
+  }, {
+    "condition": "$session.params.eligInd = \"N\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Malheureusement, il semble y avoir un problème avec l'acceptation des paiements par carte sur votre compte. Vous pouvez actuellement effectuer vos paiements via votre institution financière. Vous pouvez également souscrire aux prélèvements bancaires pour anticiper votre prochain cycle de facturation." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "Unfortunately, there seems to be an issue with accepting card payments on your account. At this moment you can proceed with making payments through your financial institution. You can also sign up for preauthorized bank payments to stay ahead of your next billing cycle." ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "targetPage": "Preauthorized Debit SMS",
+    "name": "fbb85997-ce79-4995-8fcf-b4fb8f0f39b8"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Failure",
+    "name": "e70c0a46-e071-4227-932c-c1c1b70f178e"
+  } ]
+}

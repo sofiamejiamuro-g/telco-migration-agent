@@ -1,0 +1,109 @@
+{
+  "name": "30a69d88-a0fc-48fc-af37-78806b591134",
+  "displayName": "Webhook MYA Eligibility",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "/v1/ticket_management/cpm#mya_information",
+    "tag": "mya_information"
+  },
+  "transitionRoutes": [ {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "mya_links",
+        "value": "$sys.func.FILTER(\"$session.params.mya_information_response\", \"$.notification[*].MYAApplicationUrl\")"
+      }, {
+        "parameter": "arr_size",
+        "value": "$sys.func.COUNT($session.params.mya_links)"
+      }, {
+        "parameter": "mya_link",
+        "value": "$sys.func.GET($session.params.mya_links, 0)"
+      }, {
+        "parameter": "mya_eligible",
+        "value": "$sys.func.IF(\"$session.params.arr_size \u003e 0\", true, false)"
+      } ]
+    },
+    "name": "4a0edf72-7c61-4b14-bb3c-8b4ca01d1cd6"
+  }, {
+    "condition": "$session.params.mya_eligible = true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "route",
+        "value": "tech_field_tech_visit_cancel_mya"
+      } ]
+    },
+    "name": "b7387c7b-1b50-4967-8d42-1b5066a5ae87",
+    "targetPlaybook": "bell_UC_Technical Support"
+  }, {
+    "condition": "$session.params.mya_eligible = false",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_aqd",
+    "name": "671b3653-559c-4357-ae44-7ede681ad154"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "30a69d88-a0fc-48fc-af37-78806b591134"
+      }, {
+        "parameter": "flow_id",
+        "value": "e6fed7a7-33b0-4b41-8443-92a90435e07c"
+      }, {
+        "parameter": "page_name",
+        "value": "Webhook MYA Eligibility"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ],
+  "eventHandlers": [ {
+    "targetFlow": "bell_aqd",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+    
+    },
+    "name": "29fe9505-842f-428a-b699-978669032e49"
+  }, {
+    "targetFlow": "bell_aqd",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+    
+    },
+    "name": "5869d904-6c79-4cbe-b8be-b24292d6ff3c"
+  }, {
+    "targetFlow": "bell_aqd",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+    
+    },
+    "name": "a65d4dd5-bc51-4095-8186-cf7fd53227f1"
+  }, {
+    "targetFlow": "bell_aqd",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+    
+    },
+    "name": "d3567f7c-fb25-4e15-9f16-b86e5c23e42e"
+  }, {
+    "targetFlow": "bell_aqd",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+    
+    },
+    "name": "7c6c20d3-014d-439a-8828-b357e97cb253"
+  }, {
+    "targetFlow": "bell_aqd",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+    
+    },
+    "name": "ebf0e68c-7fae-4bf9-aae6-8783c191ea3a"
+  } ]
+}

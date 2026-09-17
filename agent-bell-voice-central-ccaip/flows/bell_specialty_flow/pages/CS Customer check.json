@@ -1,0 +1,43 @@
+{
+  "name": "65ae720a-12b7-4417-8fed-6e637ccdd092",
+  "displayName": "CS Customer check",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.test_auth_skip_cshead_intent = true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "End flow handling",
+    "name": "b278f318-0cfc-4b97-a525-ffb9ca728f41"
+  }, {
+    "condition": "$session.params.cx_cornerstone = true OR $session.params.wml_eligible = 1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "How can I help you?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Comment puis-je vous aider?" ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "special_queue",
+        "value": "cornerstone"
+      } ]
+    },
+    "targetPage": "CS Head intent trigger",
+    "name": "7858a95f-1846-40fc-af78-457c9c69abba"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "End flow handling",
+    "name": "83603f4c-4e27-49be-ae06-a39fb52f8caf"
+  } ]
+}

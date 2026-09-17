@@ -1,0 +1,48 @@
+{
+  "name": "18a8d9f5-36c8-42c2-af9d-d2065bfebb3e",
+  "actions": [ {
+    "agentUtterance": {
+      "text": " I can help with several payment topics. To get you to the right place, please tell me more about your request. For example, you could say, 'make a payment' or 'set up preauthorized payments.'"
+    }
+  }, {
+    "userUtterance": {
+      "text": "I made a payment to Bell"
+    }
+  }, {
+    "playbookInvocation": {
+      "playbook": "bell_UC_Payments",
+      "playbookInput": {
+        "precedingConversationSummary": "Customer looking to raise a request for a refund",
+        "actionParameters": {
+          "language": "en",
+          "route": "payment_request_refund",
+          "utterance": "I made a payment to Bell; can I get a refund for that amount?"
+        }
+      },
+      "playbookOutput": {
+        "executionSummary": "Customer query is addresses and then routed to \"bell_UC_payment\" playbook for further help",
+        "actionParameters": {
+          "language": "en",
+          "route": "payment_request_refund"
+        }
+      },
+      "playbookState": "OUTPUT_STATE_OK"
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer query about \"Question about my payment\" is addressed",
+    "actionParameters": {
+      "langauge": "en",
+      "route": "payment_vague",
+      "utterance": "Question about my payment"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Customer query is addresses and then routed to \"bell_UC_payment\" playbook for further help"
+  },
+  "displayName": "EN - payment_request_refund - Question about my payment",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 325,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

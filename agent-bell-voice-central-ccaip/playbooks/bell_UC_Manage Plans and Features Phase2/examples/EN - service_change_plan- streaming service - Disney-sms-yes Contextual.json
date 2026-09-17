@@ -1,0 +1,77 @@
+{
+  "name": "02fdb6f0-0577-4b4f-a372-bda2e127580d",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70011"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "I'll send a text to the device you're calling from, so that you can easily view all streaming options. Is that alright?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Why are you sending an SMS?"
+    }
+  }, {
+    "agentUtterance": {
+      "text": " I'm sending you a text so you can easily access the link to sign up for your account. Would you still like me to send it? "
+    }
+  }, {
+    "userUtterance": {
+      "text": "yes"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "en",
+        "route": "service_change_plan",
+        "sms_send_status": "Declined"
+      },
+      "outputActionParameters": {
+        "language": "en",
+        "route": "service_change_plan"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "As, {identification_status} is \"Pass\" and {streaming_services} is \"disney\" then we will prompt customer and ask to send message. If customer say \"Yes\" or anything affirmative then we will trigger the FLOW: bell_SMS Trigger ",
+    "actionParameters": {
+      "apb_location_id": "70011",
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "en",
+      "route": "service_change_plan",
+      "sms_content": "Bell: You can visit https://subscription.bell.ca/customer to find out more about our streaming options. ( bell.ca/about-us )",
+      "sms_type": "Public",
+      "streaming_services": "disney",
+      "utterance": "I am looking to upgrade my Disney account"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Customer with value such as \"netflix\", \"disney\", \"crave\", \"basic\"  and \"premium\" in the parameter {streaming_services} and {identification_status} = Pass will be prompted to send message and will be routed to bell_SMS Trigger flow.",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "en",
+      "route": "service_change_plan",
+      "sms_content": "Bell: You can visit https://subscription.bell.ca/customer to find out more about our streaming options. ( bell.ca/about-us )",
+      "sms_type": "Public",
+      "streaming_services": "disney",
+      "utterance": "I am looking to upgrade my Disney account"
+    }
+  },
+  "displayName": "EN - service_change_plan- streaming service - Disney-sms-yes Contextual",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 641,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

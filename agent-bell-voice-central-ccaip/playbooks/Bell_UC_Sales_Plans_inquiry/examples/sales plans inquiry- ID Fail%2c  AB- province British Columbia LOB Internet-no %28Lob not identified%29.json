@@ -1,0 +1,92 @@
+{
+  "name": "98ee0880-809f-46f0-8dd4-2c2163717bbd",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "language": "en"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Sure, let me help you with that.\n\nWhich service are you inquiring about?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "what?"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "In order to assist you better."
+    }
+  }, {
+    "playbookInvocation": {
+      "playbook": "bell_uc_ask_LOB",
+      "playbookInput": {
+        "precedingConversationSummary": "User's lob is to be captured",
+        "actionParameters": {
+          "language": "en",
+          "route": "sales_plans_inquiry"
+        }
+      },
+      "playbookOutput": {
+        "executionSummary": "User's lob is captured and stored in {lob}",
+        "actionParameters": {
+          "language": "en",
+          "lob": "internet",
+          "route": "sales_plans_inquiry"
+        }
+      },
+      "playbookState": "OUTPUT_STATE_OK"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Let’s check if we offer Internet and Home phone service in your area. In which province are you looking to get service?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Alberta"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_aqd",
+      "inputActionParameters": {
+        "special_queue": "cornerstone"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customers want to know about different plans or compare different plans that Bell has",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "New",
+      "identification_status": "Fail",
+      "language": "en",
+      "province": "AB",
+      "route": "sales_plans_inquiry",
+      "utterance": "I want to buy a service"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "If lob is not mentioned, ask for it and route to bell_uc_ask_LOB if user does not mention it, \nWhen province is anything other than ON and QC or is null or empty, ask user for province, extract in {province} parameter and further route based on province",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "lob": "internet",
+      "province": "AB",
+      "special_queue": "cornerstone"
+    }
+  },
+  "displayName": "sales plans inquiry- ID Fail,  AB- province British Columbia LOB Internet-no (Lob not identified)",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 587,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

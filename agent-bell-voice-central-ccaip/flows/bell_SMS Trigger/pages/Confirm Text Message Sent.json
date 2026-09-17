@@ -1,0 +1,92 @@
+{
+  "name": "b4b1d381-56ca-4c1b-9521-9482aca00251",
+  "displayName": "Confirm Text Message Sent",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "intent": "context.confirm_yes",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_Feedback",
+    "name": "57e63ef2-636e-48af-9ae2-74a63bda4290"
+  }, {
+    "intent": "context.sms_received",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_Feedback",
+    "name": "2523d11c-ede3-48d7-85a1-d1e0ccd447f7"
+  }, {
+    "intent": "context.sms_not_received",
+    "condition": "$session.params.sms_not_received_counter = 1",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "webhook_succes",
+        "value": null
+      }, {
+        "parameter": "phone_number",
+        "value": null
+      } ]
+    },
+    "targetPage": "SMS Not received 3 times | Webhook intent-sdl-mapping",
+    "name": "9eb17123-a94d-44ed-8f7d-f3d719a53f3b"
+  }, {
+    "intent": "context.sms_not_received",
+    "condition": "$session.params.sms_type = \"Private\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Oh... Let me try sending it again to the same number.\n" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Oh… Je vais essayer de le renvoyer au même numéro." ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "sms_not_received_counter",
+        "value": 1
+      }, {
+        "parameter": "phone_number",
+        "value": null
+      } ]
+    },
+    "targetPage": "Trigger SMS to Provided Number",
+    "name": "715520da-e1a8-482f-b05a-edd84d13536b"
+  }, {
+    "intent": "context.sms_not_received",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "$request.generative.sms" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "D’accord, désolée d’apprendre ça. À quel autre numéro voulez-vous que j’essaie d’envoyer le message texte?" ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "sms_not_received_counter",
+        "value": 1
+      }, {
+        "parameter": "phone_number",
+        "value": null
+      } ],
+      "generators": [ {
+        "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/fb1d7ce4-69f9-40f9-803f-9ac0d8af70c9",
+        "outputParameter": "$request.generative.sms"
+      } ]
+    },
+    "targetPage": "Prompt CX for Phone Number",
+    "name": "9572515b-25b6-4395-97c4-c06c16d3e01d"
+  } ]
+}

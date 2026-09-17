@@ -1,0 +1,72 @@
+{
+  "name": "71198359-49a1-4b52-b763-c59c96d90013",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+        "language": "fr-ca"
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Bien sûr, laissez-moi vous aider.\nDésirez-vous ajouter un nouveau service ou modifier votre service actuel?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "les deux services"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Commençons par vous aideZ avec votre nouvelle demande de service.\nVérifions si nous offrons des services Internet ou de téléphonie résidentielle dans votre secteur. Dans quelle province avez-vous besoin de services?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "ATL"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_aqd",
+      "inputActionParameters": {
+        "language": "fr-ca",
+        "line_type": "New",
+        "lob": "Internet",
+        "province": "ATL",
+        "special_queue": "bell_sales_to_atl"
+      },
+      "outputActionParameters": {
+        "language": "fr-ca"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "customer wants to add a new internet line and {province} is \"ROC\" or \"BC\" OR \"AB\"",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "fr-ca",
+      "lob": "Internet",
+      "province": "ROC",
+      "route": "sales_add_to_existing_account",
+      "utterance": "Je vous appelle parce que je voudrais ajouter Internet à mon compte"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "AS {LOB} IS INTERNET we ask the customer about province and he mentioned it as {province}=\"ATL\". so we are transferring customer to aqd",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca",
+      "line_type": "New",
+      "lob": "Internet",
+      "province": "ATL"
+    }
+  },
+  "displayName": "FR-sales_add_to_existing-account-Existing-ROC(internet)(province-ATL)",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 499,
+  "languageCode": "en"
+}

@@ -1,0 +1,90 @@
+{
+  "name": "4c9d0829-3bf8-4787-bd00-904dfb1f983c",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "De quelle aide avez-vous besoin ?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "le ciel est bleu"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_global_error_count_check",
+      "inputActionParameters": {
+        "global_error_counter": "0"
+      },
+      "outputActionParameters": {
+        "global_error_counter": "1"
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Je ne suis pas en mesure de fournir des renseignements à ce sujet. Cependant, je serais ravie de vous aider avec toute question que vous pourriez avoir concernant les produits et services de Bell."
+    }
+  }, {
+    "userUtterance": {
+      "text": "But I need to make a bolognese"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_global_error_count_check",
+      "inputActionParameters": {
+        "global_error_counter": "1"
+      },
+      "outputActionParameters": {
+        "global_error_counter": "2"
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": " Je m’excuse, j’ai toujours de la difficulté à comprendre votre demande. Pour vous aider au mieux, pourriez-vous, s’il vous plaît, reformuler votre question ou fournir plus de détails sur ce que vous recherchez concernant les produits et services de Bell?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Can you tell the weather?"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_global_error_count_check",
+      "inputActionParameters": {
+        "global_error_counter": "2"
+      },
+      "outputActionParameters": {
+        "global_error_counter": "3"
+      }
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_No_Match_3",
+      "inputActionParameters": {
+        "language": "en"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "The user's input is linguistically correct but completely unrelated to the current conversation or outside the scope of Bell customer support",
+    "actionParameters": {
+      "brand": "bell",
+      "global_error_counter": "0",
+      "language": "fr-ca",
+      "utterance": "le ciel est bleu"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Customer says something Irrelevant information 3 times so flow call bell_global_error_count_check is called each time and VA responds as per instructions and on 3rd time call the bell_No_Match_3 flow",
+    "actionParameters": {
+      "brand": "bell",
+      "global_error_counter": "3",
+      "language": "fr-ca"
+    }
+  },
+  "displayName": "FR - NO MATCH (IRRELEVANT)",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 636,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

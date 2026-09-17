@@ -1,0 +1,217 @@
+{
+  "name": "0147aef1-77ae-4bc8-8c39-0b69bf368eba",
+  "displayName": "EECD-2702 2A",
+  "testCaseConversationTurns": [ {
+    "userInput": {
+      "injectedParameters": {
+        "account_service_transfer_testing": true,
+        "is_mobility_testing": false,
+        "number_of_services_testing": 1
+      },
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "hi"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "sessionParameters": {
+        "account_service_transfer_testing": true,
+        "agent_transfer": "$session.params.get_ras_apb_response.agent_transfer",
+        "apb_location_id": 70009,
+        "apb_message": "$session.params.get_ras_apb_response.apb_message",
+        "brand": "bell",
+        "call_id": "$session.params.call_id",
+        "caller_channel": "TFN",
+        "clid": "$sys.func.TO_NUMBER($sys.func.TO_NUMBER($sys.func.IF(\"$sys.func.LEN($session.params.clid)\u003e10\",$sys.func.MID($session.params.clid,3,10),$session.params.clid)))",
+        "entry_flow": "BCE_Entry",
+        "hang_up": "$session.params.get_ras_apb_response.hang_up",
+        "ibm_application_id": "BCE_Entry",
+        "intake_tfn": "$sys.func.IF(\"$sys.func.LEN($session.params.tfn)\u003e10\",$sys.func.MID($session.params.tfn,3,10),$session.params.tfn)",
+        "is_mobility_testing": false,
+        "language": "en",
+        "menu_type": "ivr_menu",
+        "number_of_services_testing": 1,
+        "repeat_flag": 0,
+        "speak_to_agent_counter": 0,
+        "tag": "N/A",
+        "tfn": "$sys.func.IF(\"$sys.func.LEN($session.params.tfn)\u003e10\",$sys.func.MID($session.params.tfn,3,10),$session.params.tfn)",
+        "va_caller_channel": "TFN",
+        "va_entry_flow": "BCE_Entry",
+        "va_ibm_id": "BCE_Entry"
+      },
+      "triggeredIntent": {
+        "name": "Default Welcome Intent"
+      },
+      "currentPage": {
+        "name": "Routing Page",
+        "flow": "Default Start Flow"
+      },
+      "textResponses": [ {
+        "text": [ "\u003cspeak\u003eI'm Bell's virtual assistant, I use artificial intelligence to learn. \u003cbreak time=\"1s\"/\u003e\u003c/speak\u003e" ]
+      }, {
+        "text": [ "How can I help you?" ]
+      } ],
+      "currentFlow": {
+        "name": "Default Start Flow"
+      },
+      "actions": [ {
+        "userUtterance": {
+          "text": "hi"
+        }
+      }, {
+        "agentUtterance": {
+          "text": "\u003cspeak\u003eI'm Bell's virtual assistant, I use artificial intelligence to learn. \u003cbreak time=\"1s\"/\u003e\u003c/speak\u003e\nHow can I help you?"
+        }
+      } ]
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "I I'm already a customer as well, so I would like to move my service to my new address."
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "sessionParameters": {
+        "$request.generative.aqd_lob": "The user wants to talk about Mobility",
+        "$request.generative.lob": "Mobility",
+        "account_service_transfer_testing": true,
+        "account_type": "Consumer",
+        "active_services": "$sys.func.FILTER(\"$session.params.billing_account_info_list\",\"$[*].services[*].service_type\")",
+        "agent_transfer": "$session.params.get_ras_apb_response.agent_transfer",
+        "apb_location_id": 70009,
+        "apb_message": "$session.params.get_ras_apb_response.apb_message",
+        "apb_transfer_location": "70009",
+        "aqd_response": {
+          "menu_id": 250
+        },
+        "brand": "Virgin",
+        "call_id": "$session.params.call_id",
+        "caller_channel": "TFN",
+        "cirn": "$session.params.CIRN",
+        "clid": "$sys.func.TO_NUMBER($sys.func.TO_NUMBER($sys.func.IF(\"$sys.func.LEN($session.params.clid)\u003e10\",$sys.func.MID($session.params.clid,3,10),$session.params.clid)))",
+        "config": {
+          "ANDROID_MIN_VERSION": "8.2.5",
+          "BBRAND": "V_IVA",
+          "BCE_HOST": "https://www.bce.ca",
+          "BLUEPRINT_URL_SWITCH": "True",
+          "BPI_ENV_BASEPATH": "https://bp.int.bell.ca",
+          "BRAND": "V",
+          "DEFAULT_DEPARTMENT_ID": 2232,
+          "DEFAULT_MENU_ID": 250,
+          "FORUM_VIRGIN_HOST": "https://forum.virginplus.ca",
+          "GLOBAL_CALLBACK_SWITCH": "True",
+          "HOOP_CHECK_QUEUE": "VM_CAREMOBILITY_POSTPAID",
+          "IOS_MIN_VERSION": "8.2.5",
+          "MY_VIRGIN_HOST": "https://myaccount.virginplus.ca",
+          "M_VIRGIN_HOST": "https://m.vpc.ca",
+          "NUANCE_QUEUE_THRESHOLD": "9",
+          "NUANCE_SITEID": "10004321",
+          "URL_PATH_BRAND": "channelvirginext-sgenvSGdSb",
+          "VIRGIN_HOST": "https://www.virginplus.ca",
+          "sip_uri": "7002089000@msp.preprod.sip.ccaip.lab.internetvoice.ca"
+        },
+        "cti_at": "VAAT",
+        "cti_rt": "account_service_transfer",
+        "cti_sd": "$sys.func.IF(\"$sys.func.LEN($session.params.tfn)\u003e10\",$sys.func.MID($session.params.tfn,3,10),$session.params.tfn)",
+        "customer_type": "$session.params.customer_type",
+        "dam_id": "XFER",
+        "department": "2232",
+        "department_id": "2232",
+        "domain": "Consumer",
+        "entry_flow": "BCE_Entry",
+        "get_department_id_response": {
+          "department_id": 2232
+        },
+        "get_segment_response": {
+          "segment": "Care"
+        },
+        "hang_up": "$session.params.get_ras_apb_response.hang_up",
+        "ibm_application_id": "BCE_Entry",
+        "intake_tfn": "$sys.func.IF(\"$sys.func.LEN($session.params.tfn)\u003e10\",$sys.func.MID($session.params.tfn,3,10),$session.params.tfn)",
+        "intent": "account_service_transfer",
+        "is_mobility": false,
+        "is_mobility_testing": false,
+        "l2_brand": "Virgin Mobile",
+        "language": "en",
+        "lob": "",
+        "menu_id": "250",
+        "menu_type": "ivr_menu",
+        "number_of_services": 1,
+        "number_of_services_testing": 1,
+        "repeat_flag": 0,
+        "route": "account_service_transfer",
+        "segment": "Care",
+        "speak_to_agent_counter": 0,
+        "tag": "N/A",
+        "tfn": "$sys.func.IF(\"$sys.func.LEN($session.params.tfn)\u003e10\",$sys.func.MID($session.params.tfn,3,10),$session.params.tfn)",
+        "unique_services": "$sys.func.UNIQUE($sys.func.FILTER(\"$session.params.billing_account_info_list\",\"$[*].services[*].service_type\"))",
+        "utterance": "I I'm already a customer as well, so I would like to move my service to my new address.",
+        "va_caller_channel": "TFN",
+        "va_entry_flow": "BCE_Entry",
+        "va_ibm_id": "BCE_Entry",
+        "webhook_success": true
+      },
+      "triggeredIntent": {
+        "name": "Default Welcome Intent"
+      },
+      "currentPage": {
+        "name": "AQD Error",
+        "flow": "bell_aqd"
+      },
+      "textResponses": [ {
+        "text": [ "Sorry, I'm unable to transfer you to an agent due to an unexpected system issue. Please try calling us back later." ],
+        "allowPlaybackInterruption": true
+      } ],
+      "currentFlow": {
+        "name": "bell_aqd"
+      },
+      "actions": [ {
+        "userUtterance": {
+          "text": "I I'm already a customer as well, so I would like to move my service to my new address."
+        }
+      }, {
+        "playbookInvocation": {
+          "playbook": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/playbooks/fb31aeb0-393b-4807-ac74-9adfb85472f8",
+          "playbookInput": {
+            "actionParameters": {
+              "CLID": "$sys.func.TO_NUMBER($sys.func.TO_NUMBER($sys.func.IF(\"$sys.func.LEN($session.params.clid)\u003e10\",$sys.func.MID($session.params.clid,3,10),$session.params.clid)))",
+              "brand": "bell",
+              "caller_channel": "TFN",
+              "is_mobility": false,
+              "language": "en",
+              "number_of_services": 1,
+              "route": "account_service_transfer",
+              "utterance": "I I'm already a customer as well, so I would like to move my service to my new address."
+            }
+          },
+          "playbookState": "OUTPUT_STATE_PENDING"
+        }
+      }, {
+        "flowInvocation": {
+          "flow": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/flows/a38e03e7-424b-4112-a50c-2776a2676d60",
+          "flowState": "OUTPUT_STATE_PENDING"
+        }
+      }, {
+        "agentUtterance": {
+          "text": "Sorry, I'm unable to transfer you to an agent due to an unexpected system issue. Please try calling us back later."
+        }
+      } ]
+    }
+  } ],
+  "creationTime": {
+    "seconds": 1753279401,
+    "nanos": 582587000
+  },
+  "testConfig": {
+    "flow": "Default Start Flow",
+    "page": "Start Page"
+  },
+  "languageCode": "en"
+}

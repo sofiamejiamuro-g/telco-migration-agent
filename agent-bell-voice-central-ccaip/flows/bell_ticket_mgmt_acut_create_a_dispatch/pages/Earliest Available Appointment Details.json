@@ -1,0 +1,80 @@
+{
+  "name": "34026921-394d-437b-952e-6226d0dcd105",
+  "displayName": "Earliest Available Appointment Details",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "setParameterActions": [ {
+      "parameter": "original_start_date",
+      "value": "$session.params.appointment_start_date"
+    }, {
+      "parameter": "original_end_date",
+      "value": "$session.params.appointment_end_date"
+    } ],
+    "generators": [ {
+      "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/c4dbed3c-93e5-4bf8-b89b-88f0d4b2e883",
+      "inputParameters": [ {
+        "key": "availability",
+        "value": "$session.params.availability"
+      }, {
+        "key": "original_end_date",
+        "value": "$session.params.orginal_end_date"
+      }, {
+        "key": "original_start_date",
+        "value": "$session.params.original_start_date"
+      } ],
+      "outputParameter": "$request.generative.availability_response"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "availability_details",
+        "value": "$sys.func.TO_OBJECT($request.generative.availability_response)"
+      }, {
+        "parameter": "day_of_week",
+        "value": "$sys.func.GET_FIELD($session.params.availability_details, day_of_week)"
+      }, {
+        "parameter": "month",
+        "value": "$sys.func.GET_FIELD($session.params.availability_details, month)"
+      }, {
+        "parameter": "date_of_month",
+        "value": "$sys.func.GET_FIELD($session.params.availability_details, date_of_month)"
+      }, {
+        "parameter": "start_time",
+        "value": "$sys.func.GET_FIELD($session.params.availability_details, start_time)"
+      }, {
+        "parameter": "end_time",
+        "value": "$sys.func.GET_FIELD($session.params.availability_details, end_time)"
+      }, {
+        "parameter": "date",
+        "value": "$sys.func.GET_FIELD($session.params.availability_details, date)"
+      }, {
+        "parameter": "interval_name",
+        "value": "$sys.func.GET_FIELD($session.params.availability_details, interval_name)"
+      }, {
+        "parameter": "day_of_week_fr",
+        "value": "$sys.func.GET_FIELD($session.params.availability_details, day_of_week_fr)"
+      }, {
+        "parameter": "month_fr",
+        "value": "$sys.func.GET_FIELD($session.params.availability_details, month_fr)"
+      }, {
+        "parameter": "start_time_2",
+        "value": "$sys.func.GET_FIELD($session.params.availability_details, start_time_2)"
+      }, {
+        "parameter": "end_time_2",
+        "value": "$sys.func.GET_FIELD($session.params.availability_details, end_time_2)"
+      }, {
+        "parameter": "start_time_fr_2",
+        "value": "$sys.func.GET_FIELD($session.params.availability_details, start_time_fr_2)"
+      }, {
+        "parameter": "end_time_fr_2",
+        "value": "$sys.func.GET_FIELD($session.params.availability_details, end_time_fr_2)"
+      } ]
+    },
+    "targetPage": "Earliest Available Appointment Offering",
+    "name": "3fcd3b91-b76e-4ef6-b8b5-bc00d4cd2b05"
+  } ]
+}

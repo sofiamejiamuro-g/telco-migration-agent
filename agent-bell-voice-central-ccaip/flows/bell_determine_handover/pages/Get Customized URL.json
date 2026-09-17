@@ -1,0 +1,39 @@
+{
+  "name": "73a42b2f-4fa5-4953-9521-8d9beaf359eb",
+  "displayName": "Get Customized URL",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "v1/intent-sdl-mapping",
+    "tag": "\"default\"",
+    "setParameterActions": [ {
+      "parameter": "intent",
+      "value": "$session.params.route"
+    }, {
+      "parameter": "webhook_success",
+      "value": null
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.webhook_success = true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "url",
+        "value": "$session.params.intent_sdl_map_response.url"
+      } ]
+    },
+    "targetPage": "Force Self Serve",
+    "name": "8e631a9e-6a30-4a72-910b-65bb691fc862"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "url",
+        "value": "bell.ca/support"
+      } ]
+    },
+    "targetPage": "Force Self Serve",
+    "name": "ec9b7d5f-dfe0-4b56-93d4-63a5ea4bddfd"
+  } ]
+}

@@ -1,0 +1,72 @@
+{
+  "name": "4a0538ec-a6af-4fe9-907d-74657d284792",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70011",
+        "brand": "bell",
+        "language": "fr-ca",
+        "lob": "Internet",
+        "route": "service_change_plan"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Vous pouvez facilement gérer votre forfait Internet ou vos options à tout moment en utilisant MonBell. Je vais envoyer un texto à l’appareil au moyen duquel vous appelez, afin que vous puissiez facilement modifier votre forfait Internet. Est-ce que ça vous convient?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "oui"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "fr-ca",
+        "route": "service_change_plan",
+        "sms_content": "Bell: Vous pouvez visiter https://m.bell.ca/modifierforfaitinternet pour voir ou modifier votre forfait Internet dans l'appli MoriBell. (bell.ca/apropos)",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+        "language": "fr-ca"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "The {identification_status} is \"Pass\", {customer_type} is \"Existing\", {streaming_services} is null or {lob} is not null so, check for {streaming_services} based on instruction provided in playbook on how to set {streaming_services} within {route} = \"service_change_plan\"",
+    "actionParameters": {
+      "apb_location_id": "70011",
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "fr-ca",
+      "lob": "Internet",
+      "route": "service_change_plan",
+      "utterance": "Quelles sont les possibilités modifier mon plan ?"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "As, the {streaming_services} is null or {lob} is mobility so,{lob} and if it is related to streaming service then SET parameter {streaming_services} with correct value provided in playbook instruction within {route} = \"service_change_plan\"",
+    "actionParameters": {
+      "apb_location_id": "70011",
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "fr-ca",
+      "lob": "Internet",
+      "route": "service_change_plan",
+      "sms_content": "Bell: Vous pouvez visiter https://m.bell.ca/modifierforfaitinternet pour voir ou modifier votre forfait Internet dans l'appli MoriBell. (bell.ca/apropos)",
+      "sms_type": "Public",
+      "utterance": "Je souhaite mettre à niveau mon Internet, s'il vous plaît"
+    }
+  },
+  "displayName": "Fr - service_change_plan- streaming_services-null-lob-Internet",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 660,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

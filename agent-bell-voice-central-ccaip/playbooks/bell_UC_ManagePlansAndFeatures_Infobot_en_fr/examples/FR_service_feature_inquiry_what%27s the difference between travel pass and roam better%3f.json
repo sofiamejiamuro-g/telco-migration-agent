@@ -1,0 +1,102 @@
+{
+  "name": "d967625c-eb38-4780-881e-3dd178dcda36",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70024",
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+        "language": "fr-ca"
+      }
+    }
+  }, {
+    "playbookInvocation": {
+      "playbook": "bell_uc_ask_LOB",
+      "playbookInput": {
+        "actionParameters": {
+          "langauge": "fr-ca",
+          "utterance": "Quelle est la différence entre un pass voyage et un roam better ?"
+        }
+      },
+      "playbookOutput": {
+        "actionParameters": {
+          "langauge": "fr-ca",
+          "lob": "Mobility"
+        }
+      },
+      "playbookState": "OUTPUT_STATE_OK"
+    }
+  }, {
+    "toolUse": {
+      "tool": "FR_Bell_Manage_plans_and_features",
+      "action": "FR_Bell_Manage_plans_and_features",
+      "inputActionParameters": {
+        "requestBody": {
+          "query": "Est-ce qu’on me facturera l’option Voyagez mieux si j’ai un Passeport Voyage actif?"
+        }
+      },
+      "outputActionParameters": {
+        "200": {
+          "answer": "Les Passeports Voyage sont compatibles avec l'option Voyagez mieux et ont priorité sur celle-ci. Si vous utilisez un Passeport Voyage actif dans une destination admissible, aucun frais quotidien de l'option Voyagez mieux ne vous sera facturé pendant la durée de votre passeport.",
+          "snippets": [ {
+            "text": "* Le passeport est compatible avec l'option Voyagez mieux et a priorité sur cette option lorsque vous voyagez dans une destination admissible. En d'autres mots, si vous utilisez un Passeport Voyage actif, on ne vous facturera aucuns frais quotidiens de l'option Voyagez mieux.",
+            "title": "Options voyage | Bell Mobilité | Bell Canada",
+            "uri": "https://www.bell.ca/Mobilite/Carte_de_couverture#:~:text=*%20Le%20passeport,l'option%20Voyagez%20mieux."
+          }, {
+            "text": "* Le Passeport Voyage est compatible avec l'option Voyagez mieux et a priorité sur cette option lorsque vous voyagez dans une destination admissible. En d'autres mots, si vous utilisez un Passeport Voyage actif dans une destination admissible, on ne vous facturera aucuns frais quotidiens de l'option Voyagez mieux.",
+            "title": "Comment utiliser mon téléphone mobile à l'extérieur du Canada et quels seront les frais? Soutien | Bell",
+            "uri": "https://soutien.bell.ca/Mobilite/Reseau_couverture/Ou_puis_je_utiliser_mon_telephone_mobile_a_lexterieur_du_Canada_et_quels_seront_les_frais#:~:text=*%20Le%20Passeport,l'option%20Voyagez%20mieux."
+          } ]
+        }
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Les Passeports Voyage sont compatibles avec l'option Voyagez mieux et ont priorité sur celle-ci. Si vous utilisez un Passeport Voyage actif dans une destination admissible, aucun frais quotidien de l'option Voyagez mieux ne vous sera facturé pendant la durée de votre passeport. \nSouhaitez-vous en savoir plus à ce sujet?\n"
+    }
+  }, {
+    "userUtterance": {
+      "text": "oui"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "service_add_feature_flow",
+      "inputActionParameters": {
+        "add_ons": "travel pass",
+        "lob": "Mobility",
+        "route": "service_add_feature"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "The customer inquired about \"what's the difference between travel pass and roam better?\"",
+    "actionParameters": {
+      "brand": "bell",
+      "identification_status": "pass",
+      "language": "fr-ca",
+      "lob": "Mobility",
+      "route": "service_feature_inquiry",
+      "utterance": "Quelle est la différence entre un pass voyage et un roam better ?"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Information about \"Will I get charged for Roam Better if I have a Travel pass active?\" was provided from data store",
+    "actionParameters": {
+      "add_ons": "travel pass",
+      "brand": "bell",
+      "language": "fr-ca",
+      "route": "service_feature_inquiry",
+      "utterance": "Quelle est la différence entre un pass voyage et un roam better ?"
+    }
+  },
+  "displayName": "FR_service_feature_inquiry_what's the difference between travel pass and roam better?",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 1032,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

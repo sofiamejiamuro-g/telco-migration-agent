@@ -1,0 +1,245 @@
+{
+  "name": "494f23a7-4be0-4d8c-a8dd-2d7865c78efc",
+  "displayName": "Regional Webhook",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "v1/customer-identification#search-region-by-tn",
+    "tag": "search-region-by-tn",
+    "setParameterActions": [ {
+      "parameter": "telephone_number",
+      "value": "$sys.func.IF(\"$session.params.CIRN = null\", $session.params.clid, $session.params.CIRN)"
+    }, {
+      "parameter": "webhook_success",
+      "value": null
+    }, {
+      "parameter": "brand",
+      "value": "Bell"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.webhook_success = True OR $session.params.webhook_success = true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "customer_id_search_response",
+        "value": "$sys.func.TO_OBJECT($session.params.customer_id_search_region_response)"
+      }, {
+        "parameter": "subscriber_number",
+        "value": "$session.params.customer_id_search_response.users[0].billing_accounts[0].services[0].service_account_number"
+      }, {
+        "parameter": "billing_account_number_list",
+        "value": "$sys.func.FILTER(\"$session.params.customer_id_search_response\", \"$..billing_account_number\")"
+      }, {
+        "parameter": "n_billing_account",
+        "value": "$sys.func.COUNT($session.params.billing_account_number_list)"
+      }, {
+        "parameter": "billing_account_info_list",
+        "value": "$sys.func.GET_FIELD($sys.func.GET($sys.func.GET_FIELD($session.params.customer_id_search_response, \"users\"), 0), \"billing_accounts\")"
+      }, {
+        "parameter": "is_prepaid_list",
+        "value": "$sys.func.FILTER(\"$session.params.customer_id_search_response\", \"$[*].users[?(@.contact_number == '$session.params.CIRN')].billing_accounts[*].billing_account_number\")"
+      }, {
+        "parameter": "is_prepaid_list",
+        "value": "$session.params.customer_id_search_response.users[0].billing_accounts[0].services[0].is_prepaid"
+      }, {
+        "parameter": "active_services",
+        "value": "$sys.func.FILTER(\"$session.params.billing_account_info_list\", \"$[*].services[*].service_type\")"
+      }, {
+        "parameter": "unique_services",
+        "value": "$sys.func.UNIQUE($session.params.active_services)"
+      }, {
+        "parameter": "contain_mobility",
+        "value": "$sys.func.CONTAIN($session.params.unique_services, \"MOBILITY\")"
+      }, {
+        "parameter": "province",
+        "value": "$session.params.customer_id_search_response.users[0].billing_accounts[0].billing_address.stateOrProvince"
+      }, {
+        "parameter": "BBM_flag",
+        "value": true
+      }, {
+        "parameter": "service_id",
+        "value": "$session.params.billing_account_info_list[0].services[0].service_id"
+      }, {
+        "parameter": "brand_value",
+        "value": "$sys.func.UNIQUE($sys.func.FILTER(\"$session.params.customer_id_search_region_response\",\"$..services[*].brand\") )"
+      }, {
+        "parameter": "brand",
+        "value": "$sys.func.GET($session.params.brand_value, 0)"
+      }, {
+        "parameter": "regional_flag",
+        "value": true
+      } ]
+    },
+    "name": "8f4d253b-8eeb-4030-bd53-286236d8ec67"
+  }, {
+    "condition": "$session.params.brand = Atlantic AND $session.params.clid_pass = true AND $session.params.ivr_handoff != true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "region",
+        "value": "ATL"
+      }, {
+        "parameter": "brand",
+        "value": "bell aliant"
+      } ]
+    },
+    "targetFlow": "bell_va_to_ivr_handoff",
+    "name": "502da5f6-998a-4f2d-a181-18c1440b524a"
+  }, {
+    "condition": "$session.params.brand = MTS AND $session.params.clid_pass = true AND $session.params.ivr_handoff != true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "region",
+        "value": "MTS"
+      }, {
+        "parameter": "brand",
+        "value": "bell MTS"
+      } ]
+    },
+    "targetFlow": "bell_va_to_ivr_handoff",
+    "name": "c089cd28-874a-431b-9650-d3830f40b556"
+  }, {
+    "condition": "$session.params.brand = Atlantic AND $session.params.ivr_handoff != true",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Are you calling about the account associated with the number you’re calling from?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Communiquez-vous avec nous au sujet du numéro à partir duquel vous nous appelez présentement?" ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "regional_identity",
+        "value": true
+      }, {
+        "parameter": "region",
+        "value": "ATL"
+      }, {
+        "parameter": "brand",
+        "value": "bell aliant"
+      } ]
+    },
+    "targetPage": "CIRN Collection Check",
+    "name": "41bea74a-4cd7-4524-9bdf-403012a5fa3e"
+  }, {
+    "condition": "$session.params.brand = MTS AND $session.params.ivr_handoff != true",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Are you calling about the account associated with the number you’re calling from?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Communiquez-vous avec nous au sujet du numéro à partir duquel vous nous appelez présentement?" ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "regional_identity",
+        "value": true
+      }, {
+        "parameter": "region",
+        "value": "MTS"
+      }, {
+        "parameter": "brand",
+        "value": "bell MTS"
+      } ]
+    },
+    "targetPage": "CIRN Collection Check",
+    "name": "84ec0e11-275b-4544-a553-56233cf8d813"
+  }, {
+    "condition": "($session.params.webhook_success = True OR $session.params.webhook_success = true) AND ($session.params.brand != Atlantic OR $session.params.brand != MTS)",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "NM1 Webhook CIRN",
+    "name": "ca6a5179-5fbc-4c84-8fd8-4f486fdbafd2"
+  }, {
+    "condition": "$session.params.ivr_handoff = true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "aqd_counter",
+        "value": "$sys.func.ADD($session.params.aqd_counter, 1)"
+      }, {
+        "parameter": "semantic_void",
+        "value": "$sys.func.ADD($session.params.semantic_void, 1)"
+      } ]
+    },
+    "targetPage": "Custom Fallback for CPM check",
+    "name": "fe92f937-8318-49b4-8b20-fcd96fc379d7"
+  }, {
+    "condition": "$session.params.webhook_success = \"False\" OR $session.params.webhook_success = \"false\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "NM1 Webhook CIRN",
+    "name": "298a8277-2d96-4ed2-b475-16a551fde445"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "494f23a7-4be0-4d8c-a8dd-2d7865c78efc"
+      }, {
+        "parameter": "flow_id",
+        "value": "8df7f836-8c64-4019-9506-2cedc52519c8"
+      }, {
+        "parameter": "page_name",
+        "value": "Regional Webhook"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "NM1 Webhook CIRN",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+    
+    },
+    "name": "2b7a9618-ed21-48f2-a2af-6baf88cf6760"
+  }, {
+    "targetPage": "NM1 Webhook CIRN",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+    
+    },
+    "name": "1732d382-4d68-46f2-89d2-39e3350e4369"
+  }, {
+    "targetPage": "NM1 Webhook CIRN",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+    
+    },
+    "name": "caed1664-825c-4f9d-b59b-687d461dc4d1"
+  }, {
+    "targetPage": "NM1 Webhook CIRN",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+    
+    },
+    "name": "4d3a8bbe-ad6e-4b2b-ac6f-ce8c0e457bbf"
+  }, {
+    "targetPage": "NM1 Webhook CIRN",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+    
+    },
+    "name": "a0c2402e-f97c-406c-92a5-2a42987510ba"
+  }, {
+    "targetPage": "NM1 Webhook CIRN",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+    
+    },
+    "name": "5c83c087-f919-473e-929a-c92e27df1844"
+  } ]
+}

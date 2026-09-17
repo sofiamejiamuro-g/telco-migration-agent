@@ -1,0 +1,100 @@
+{
+  "name": "8ac8dee2-2b9c-45a1-a15b-4efda68e5dd8",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Can you take a look at your modem and let me know what the lights look like?\n"
+    }
+  }, {
+    "userUtterance": {
+      "text": "What is a internet?"
+    }
+  }, {
+    "toolUse": {
+      "tool": "EN_Bell_vr_cfl_faq",
+      "action": "EN_Bell_vr_cfl_faq",
+      "inputActionParameters": {
+        "requestBody": {
+          "query": "6502"
+        }
+      },
+      "outputActionParameters": {
+        "200": {
+          "answer": "Q: What's a modem? A: A modem is a rectangular device that allows you to connect to the internet. It should be standing up right, and have at least 2 cables plugged into the ports on the back of it. Q: What does my modem look like? A: A modem is a rectangular device that allows you to connect to the internet. It should be standing up right, and have at least 2 cables plugged into the ports on the back of it.",
+          "snippets": [ {
+            "text": "",
+            "title": "6502",
+            "uri": ""
+          } ]
+        }
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "I understand you have a question, and while I don't have that specific information, checking the modem lights is the necessary next step for us to solve the issue. Could you please let me know the color of the lights on your modem?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "No, I am unable to resolve"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "I am sorry for that. Please wait while I check for the next steps."
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_vr_post_answer",
+      "inputActionParameters": {
+        "customer_answer1_id": "1"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer having an issue with the service, starts the Virtual repair process.",
+    "actionParameters": {
+      "acceptable_answers": [ {
+        "choice": "They’re all white.",
+        "id": 0,
+        "sub-choices": [ ],
+        "title": ""
+      }, {
+        "choice": "Some are red.",
+        "id": 1,
+        "sub-choices": [ ],
+        "title": ""
+      }, {
+        "choice": "Some are orange.",
+        "id": 2,
+        "sub-choices": [ ],
+        "title": ""
+      }, {
+        "choice": "A combination of red and orange.",
+        "id": 3,
+        "sub-choices": [ ],
+        "title": ""
+      }, {
+        "choice": "No lights are on.",
+        "id": 4,
+        "sub-choices": [ ],
+        "title": ""
+      }, {
+        "choice": "None of the above.",
+        "id": 5,
+        "sub-choices": [ ],
+        "title": ""
+      } ],
+      "dcx_action_code": "6502",
+      "title": "What colour are the lights on your modem?",
+      "vr_type": "CFB"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Conversation Execution Summary\nThis interaction begins with the agent asking the customer to check the lights on their modem.\n\nThe customer asks a conceptual question, \"What is an internet?\" The vr_cfl_faq_en action is triggered, suggesting an internal process or a search for information.\n\nThe agent acknowledges the customer's question but states they don't have that specific information. The agent then redirects the focus back to the troubleshooting process, re-emphasizing that checking the modem lights is the necessary next step and repeating the request for the light colors.\n\nThe customer responds with \"No, I am unable to resolve,\" which is a statement of frustration or a signal that they cannot proceed with the requested step. The agent apologizes and indicates they will check for the next steps, followed by a virgin_vr_post_answer action, which likely leads to a different troubleshooting path or an escalation.\n\nThis exchange demonstrates the agent's ability to:\n\nAttempt to guide the customer through a troubleshooting process.\n\nHandle a tangential question by redirecting the conversation to the primary objective.\n\nRecognize when a customer is unable or unwilling to perform a requested step and pivot to a different resolution path."
+  },
+  "displayName": "CFB - User asks a question but bot answers it wrong (Answer) - 2",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 953,
+  "languageCode": "en"
+}

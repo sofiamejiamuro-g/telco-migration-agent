@@ -1,0 +1,46 @@
+{
+  "name": "11747248-d438-465f-9970-a7e0a852f6c6",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "What specific issue are you experiencing with your payment?  Is your payment not processing or is it something else?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "I made a payment to Bell; can I get a refund for that amount?"
+    }
+  }, {
+    "playbookInvocation": {
+      "playbook": "bell_UC_Payments",
+      "playbookInput": {
+        "precedingConversationSummary": "Customer looking to raise a request for a refund",
+        "actionParameters": {
+          "route": "payment_request_refund",
+          "utterance": "I made a payment to Bell; can I get a refund for that amount?"
+        }
+      },
+      "playbookOutput": {
+        "executionSummary": "Customer query is addresses and then routed to \"bell_UC_payment\" playbook for further help",
+        "actionParameters": {
+          "language": "en"
+        }
+      },
+      "playbookState": "OUTPUT_STATE_OK"
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer query about \"Payment issue\" is addressed",
+    "actionParameters": {
+      "langauge": "en",
+      "route": "payment_vague",
+      "utterance": "Payment issue"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Customer query is addresses and then routed to \"bell_UC_payment\" playbook for further help"
+  },
+  "displayName": "EN - payment_request_refund",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 293,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

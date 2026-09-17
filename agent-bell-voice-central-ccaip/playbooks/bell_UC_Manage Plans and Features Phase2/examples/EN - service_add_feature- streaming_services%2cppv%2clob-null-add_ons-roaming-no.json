@@ -1,0 +1,85 @@
+{
+  "name": "89327e35-f673-449f-b8d4-92d0cc8f5868",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70011",
+        "brand": "bell",
+        "language": "en",
+        "route": "service_add_feature"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Which service are you calling about?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "phone"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "You can view the travel options available in My Bell. I'll send a text with a link to the device you're calling from. Is that alright?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "no, I don't want text"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "add_ons": "roaming",
+        "brand": "bell",
+        "language": "en",
+        "route": "service_add_feature",
+        "sms_send_status": "Declined"
+      },
+      "outputActionParameters": {
+        "language": "en"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "The {identification_status} is \"Pass\", {customer_type} is \"Existing\", {streaming_services} is null and {ppv} is null and {add_ons} is \"roaming\" and {lob} is null so, we will prompt user for send SMS confirmation and if user say \"yes\" or anything affirmative then route to \"bell_SMS Trgigger\" flow.",
+    "actionParameters": {
+      "add_ons": "roaming",
+      "apb_location_id": "70011",
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "is_prepaid": "false",
+      "language": "en",
+      "mobility_sub_type": "postpaid",
+      "route": "service_add_feature",
+      "sms_content": "Bell: You can visit https://m.bell.ca/trip to view your travel options in the MyBell app. ( bell.ca/about-us )",
+      "sms_type": "Public",
+      "utterance": "I am travelling outside the country and I would like to add a roaming option."
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "As the {lob} is null and {streaming_services}, {ppv} is null and {add_ons} = \"roaming\" then we will prompt user to send SMS and if user say \"yes\" or anything affirmative then send the user to \"bell_SMS Trigger\" flow",
+    "actionParameters": {
+      "add_ons": "roaming",
+      "apb_location_id": "70011",
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "is_prepaid": "false",
+      "language": "en",
+      "lob": "Mobility",
+      "mobility_sub_type": "postpaid",
+      "route": "service_add_feature",
+      "utterance": "I am travelling outside the country and I would like to add a roaming option."
+    }
+  },
+  "displayName": "EN - service_add_feature- streaming_services,ppv,lob-null-add_ons-roaming-no",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 708,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

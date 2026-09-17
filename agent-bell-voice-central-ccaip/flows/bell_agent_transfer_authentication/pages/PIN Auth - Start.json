@@ -1,0 +1,207 @@
+{
+  "name": "bb738508-d1ac-46be-9ddd-2afca16a5e07",
+  "displayName": "PIN Auth - Start",
+  "form": {
+    "parameters": [ {
+      "displayName": "pin",
+      "required": true,
+      "entityType": "@sys.number-sequence",
+      "fillBehavior": {
+        "initialPromptFulfillment": {
+        
+        },
+        "repromptEventHandlers": [ {
+          "targetPage": "Local Error handling for PIN",
+          "event": "sys.no-input-1",
+          "triggerFulfillment": {
+            "setParameterActions": [ {
+              "parameter": "local_no_match",
+              "value": "$sys.func.ADD($session.params.local_no_match,1)"
+            } ]
+          },
+          "name": "366e4f55-ebd1-4e0d-9773-6c60db1a7be7"
+        }, {
+          "targetPage": "Local Error handling for PIN",
+          "event": "sys.no-match-1",
+          "triggerFulfillment": {
+            "setParameterActions": [ {
+              "parameter": "local_no_match",
+              "value": "$sys.func.ADD($session.params.local_no_match,1)"
+            }, {
+              "parameter": "local_trigger",
+              "value": "no_match"
+            } ]
+          },
+          "name": "90cc35e6-a430-472c-bf37-862f7625fe64"
+        }, {
+          "targetPage": "Webhook set-auth-status",
+          "event": "sys.no-match-2",
+          "triggerFulfillment": {
+            "messages": [ {
+              "text": {
+                "text": [ "There seems to be a problem." ]
+              },
+              "languageCode": "en"
+            }, {
+              "text": {
+                "text": [ "Il semble y avoir un problème." ]
+              },
+              "languageCode": "fr-ca"
+            } ],
+            "setParameterActions": [ {
+              "parameter": "auth_status",
+              "value": "Fail"
+            }, {
+              "parameter": "status",
+              "value": "PINTimeout"
+            } ]
+          },
+          "name": "2149f76b-349d-4ea6-88bd-56c2da3cd96b"
+        }, {
+          "targetPage": "Webhook set-auth-status",
+          "event": "sys.no-input-2",
+          "triggerFulfillment": {
+            "messages": [ {
+              "text": {
+                "text": [ "There seems to be a problem." ]
+              },
+              "languageCode": "en"
+            } ]
+          },
+          "name": "1df1952e-28e8-44b5-99dd-dbe32baf6229"
+        } ]
+      }
+    } ]
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "intent": "other_speak_to_agent",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "speak_to_agent_counter",
+        "value": 1
+      }, {
+        "parameter": "local_no_match",
+        "value": "$sys.func.ADD($session.params.local_no_match,1)"
+      }, {
+        "parameter": "route",
+        "value": "other_speak_to_agent"
+      } ]
+    },
+    "targetPage": "Local Error handling for PIN",
+    "name": "6dadec97-42f7-4fb9-a50e-c2563d0667a4"
+  }, {
+    "intent": "context.user_asks_more_time",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "\u003cspeak\u003eAbsolutely. Please take a moment to find your number.\u003cbreak time=\"5s\"/\u003e\u003c/speak\u003e" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "\u003cspeak\u003eAbsolument. Veuillez prendre un moment pour trouver votre numéro. \u003cbreak time=\"5s\"/\u003e \u003c/speak\u003e" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "cf6cdd74-dfa5-4d32-b296-d6c762819ecb"
+  }, {
+    "intent": "context.cant_say_out_loud",
+    "condition": "$session.params.Loud_Counter = 2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "There seems to be a problem." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "il semble y avoir un problème." ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "auth_status",
+        "value": "Fail"
+      }, {
+        "parameter": "status",
+        "value": "PINTimeout"
+      } ]
+    },
+    "name": "5883650c-3d04-4c3a-8309-b6c106315e1b"
+  }, {
+    "intent": "context.cant_say_out_loud",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "No worries, if you can't read your number out loud, you can enter it using your key pad." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Ne t'inquiète pas, si tu ne peux pas lire ton numéro à voix haute, tu peux le saisir à l'aide de ton clavier." ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "Loud_Counter",
+        "value": "$sys.func.ADD($session.params.Loud_Counter,1)"
+      } ]
+    },
+    "name": "d5a2e3e3-8fa6-4d02-8fbd-e182295c40d3"
+  }, {
+    "intent": "context.PIN_don't know",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "from_pin",
+        "value": true
+      }, {
+        "parameter": "repeat_attempt_count",
+        "value": 0
+      } ]
+    },
+    "targetPage": "Check OTP Eligibity",
+    "name": "83aa4bec-aedf-4bad-be44-62fcc8d7fe8b"
+  }, {
+    "condition": "$session.params.pin != null",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Check Entered PIN",
+    "name": "5e0a6ba5-5875-48a0-b4e0-6369969bf8cd"
+  } ],
+  "advancedSettings": {
+    "speechSettings": {
+      "endpointerSensitivity": 90,
+      "noSpeechTimeout": {
+        "seconds": 10
+      },
+      "models": [ {
+        "key": "en",
+        "value": "telephony_short"
+      }, {
+        "key": "fr-ca",
+        "value": "telephony_short"
+      } ]
+    },
+    "speechAdaptationSettings": {
+      "enableManualSpeechAdaptation": true,
+      "biasingPhraseSets": [ {
+        "biasingPhrases": [ {
+          "value": "I do but I want to start over",
+          "boost": 15
+        }, {
+          "value": "I want to start over",
+          "boost": 15
+        } ],
+        "displayName": "start_over"
+      } ]
+    }
+  },
+  "speakerIdSettings": {
+  
+  }
+}

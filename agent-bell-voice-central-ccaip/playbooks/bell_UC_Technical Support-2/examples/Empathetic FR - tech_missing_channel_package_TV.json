@@ -1,0 +1,57 @@
+{
+  "name": "7e731140-2d5c-45f0-9e69-4e4f52fa1312",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_tech_intent_apb",
+      "inputActionParameters": {
+        "language": "fr-ca",
+        "lob": "TV",
+        "utterance": "Je pense qu'il me manque une chaîne dans mon forfait"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Je comprends à quel point cette chaîne était importante pour vous, et je suis sincèrement désolé qu'elle ne fasse plus partie de votre offre actuellement. Je serais tout aussi déçu à votre place. Je vais envoyer un texto à l'appareil au moyen duquel vous appelez, afin que vous puissiez facilement synchroniser votre programmation télé à partir de MonBell. Est-ce que ça vous convient?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "oui"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "fr-ca",
+        "sms_content": "Mess. de Bell: Visitez https://m.bell.ca/supportsynchprogf et suivez les instructions à l'écran pour synchronisez votre programmation ( bell.ca/apropos )",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer asking about a missing channel in their tv",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca",
+      "route": "tech_missing_channel_package",
+      "utterance": "Je crois qu'il me manque une chaîne dans mon forfait. Je suis tellement triste."
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Customer declines for the instruction given VA so, will be sent to aqd",
+    "actionParameters": {
+      "language": "fr-ca",
+      "route": "tech_missing_channel_package"
+    }
+  },
+  "displayName": "Empathetic FR - tech_missing_channel_package_TV",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 432,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

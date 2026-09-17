@@ -1,0 +1,67 @@
+{
+  "name": "1da53523-043f-477b-94ab-86748c65554f",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_tech_intent_apb",
+      "inputActionParameters": {
+        "language": "en",
+        "route": "equipment_request_sim",
+        "utterance": "buy an esim"
+      },
+      "outputActionParameters": {
+        "lob": "mobility"
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Are you an existing customer or a new customer?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "i am new"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Have you already signed up with Bell?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "No"
+    }
+  }, {
+    "playbookInvocation": {
+      "playbook": "Bell_UC_Sales_Plans_inquiry",
+      "playbookInput": {
+        "actionParameters": {
+          "route": "sales_plans_inquiry",
+          "utterance": "buy an esim"
+        }
+      },
+      "playbookOutput": {
+        "actionParameters": {
+        
+        }
+      },
+      "playbookState": "OUTPUT_STATE_OK"
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "User want's to buy an esim, route equipment_request_sim where parameter lob is null or not set",
+    "actionParameters": {
+      "global_error_counter": "0",
+      "route": "equipment_request_sim",
+      "utterance": "buy an esim"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "customer query was answered",
+    "actionParameters": {
+      "langauge": "en"
+    }
+  },
+  "displayName": "Example_equipment_request_sim_buy_an_esim_english_lob_routed_to_sales_plan_inquiry",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 346,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

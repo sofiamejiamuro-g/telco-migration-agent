@@ -1,0 +1,68 @@
+{
+  "name": "3e74d86b-7d73-4593-bc63-aabeafe5e662",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "language": "fr-ca",
+        "lob": "homephone",
+        "province": "ROC"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Bien sûr, laissez-moi vous aider.\nVérifions si nous offrons des services Internet ou de téléphonie résidentielle dans votre secteur. Dans quelle province avez-vous besoin de services?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "ROC"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Malheureusement, nous n'offrons pas encore de services de téléphonie résidentielle dans votre secteur. Bonne nouvelle, cependant : Bell offre un service de téléphonie mobile incroyable qui couvre plus de 99 % de la population. Est-ce que je vous mets en contact avec un de nos agents, qui pourra vous en dire davantage?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "No"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_Feedback",
+      "inputActionParameters": {
+        "language": "fr-ca",
+        "lob": "homephone",
+        "province": "ROC"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "The customer is asking whether the provider's service is offered at an address or location.",
+    "actionParameters": {
+      "language": "fr-ca",
+      "lob": "Homephone",
+      "province": "AB",
+      "route": "sales_confirm_service_coverage",
+      "utterance": "je veux vérifier les services de téléphonie à domicile"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "If any of the streaming services is NOT captured like Disney, Netflix or crave and service type {lob} is internet or tv or homephone, {province} is anything other than ROC, then ask the user which province are they looking for and if user responds and province captured is {province}=ROC and {lob}=homephone then ask agent if they want to connect to agent and if user replies no or disagrees then call bell_Feedback flow.",
+    "actionParameters": {
+      "language": "fr-ca",
+      "lob": "Homephone",
+      "province": "ROC",
+      "utterance": "je veux vérifier les services de téléphonie à domicile"
+    }
+  },
+  "displayName": "FR-sales_service_coverage-streaming | homephone | ROC | uxno",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 553,
+  "languageCode": "en"
+}

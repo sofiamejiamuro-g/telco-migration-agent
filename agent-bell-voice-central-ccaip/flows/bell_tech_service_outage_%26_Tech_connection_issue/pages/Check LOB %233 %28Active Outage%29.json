@@ -1,0 +1,61 @@
+{
+  "name": "fa2ee608-74a3-4c1d-8774-aa0f4ae5205f",
+  "displayName": "Check LOB #3 (Active Outage)",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.lob = \"Homephone\" OR $session.params.lob = \"Internet\" OR $session.params.lob = \"TV\" OR $session.params.lob = \"tv\" OR $session.params.lob = \"internet\" OR $session.params.lob = \"homephone\" OR $session.params.tv_sub_type = \"sat\" OR $session.params.tv_sub_type = \"fibe\" OR $session.params.tv_sub_type = \"five tv app\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I'll send a text to the device you're calling from, so you can easily track the status of this outage. Is that alright?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ " Je vais envoyer un texto sur l’appareil au moyen duquel vous appelez afin que vous puissiez facilement suivre l’évolution de cette panne. Est-ce que ça vous convient?" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetPage": "Check CX input? (Active outage)",
+    "name": "4af25eff-af8f-438a-9db1-0982e34dc584"
+  }, {
+    "condition": "$session.params.lob = \"Mobility\" OR $session.params.lob = \"mobility\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "You can easily check the status of this outage anytime at support.bell.ca/outage-check." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Vous pouvez facilement vérifier l’état de cette panne à tout moment sur m.vpc.ca/ecavisdepanne." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetFlow": "bell_Feedback",
+    "name": "0de8acf7-0759-462f-84c9-281d0a3ee8c3"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "fa2ee608-74a3-4c1d-8774-aa0f4ae5205f"
+      }, {
+        "parameter": "flow_id",
+        "value": "94d32e37-496f-4fa3-81e8-18fd95281a52"
+      }, {
+        "parameter": "page_name",
+        "value": "Check LOB #3 (Active Outage)"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

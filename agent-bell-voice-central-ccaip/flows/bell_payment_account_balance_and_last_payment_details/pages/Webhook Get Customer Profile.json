@@ -1,0 +1,54 @@
+{
+  "name": "9c16e2e5-f885-4f4e-a4d1-7bf07f8f013d",
+  "displayName": "Webhook Get Customer Profile",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "/v1/ibm_mw/nm1_get#customer-profile",
+    "tag": "customer-profile"
+  },
+  "transitionRoutes": [ {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "oneBillIndicator",
+        "value": "$session.params.nm1_get_cust_profile_response.oneBill"
+      }, {
+        "parameter": "accountType",
+        "value": "$session.params.nm1_get_cust_profile_response.banType"
+      }, {
+        "parameter": "accountSubType",
+        "value": "$session.params.nm1_get_cust_profile_response.banSubType"
+      }, {
+        "parameter": "pastDueAmount",
+        "value": "$session.params.nm1_get_cust_profile_response.pastDueAmount"
+      }, {
+        "parameter": "accountBalance",
+        "value": "$session.params.nm1_get_cust_profile_response.arBalance"
+      } ]
+    },
+    "name": "55c9d1f8-698e-49b2-b815-4bc765ac451c"
+  }, {
+    "condition": "$session.params.webhook_success = true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Result Check Consolidated Bill",
+    "name": "57fda48a-c22c-4b17-a027-852e7c893bec"
+  }, {
+    "condition": "$session.params.webhook_success = false OR $session.params.nm1_get_cust_profile_response.returnCode = \"0\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Failure NM1 Outage",
+    "name": "215c90cf-b7d6-4885-ae52-f4db7a06b7ec"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_aqd",
+    "name": "bffbb638-cfd9-4f9e-bc31-ad269a0d8441"
+  } ]
+}

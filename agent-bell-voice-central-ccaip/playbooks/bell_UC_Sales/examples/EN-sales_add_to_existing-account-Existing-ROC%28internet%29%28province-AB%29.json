@@ -1,0 +1,72 @@
+{
+  "name": "efc8b5aa-9ffd-488b-a4df-088c027de53e",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "language": "en"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Sure, let me help you with that.\nAre you inquiring about new service or do you want to make changes to your current service?\n"
+    }
+  }, {
+    "userUtterance": {
+      "text": "I'm calling about a new service."
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Let’s check if we offer Internet and Home phone service in your area. In which province are you looking to get service?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Alberta"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_aqd",
+      "inputActionParameters": {
+        "language": "en",
+        "line_type": "New",
+        "lob": "Internet",
+        "special_queue": "cable_internet"
+      },
+      "outputActionParameters": {
+        "language": "en"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "customer wants to add a new internet line and {province} is \"ROC\" or \"BC\" OR \"AB\"",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "en",
+      "lob": "Internet",
+      "province": "BC",
+      "route": "sales_add_to_existing_account",
+      "utterance": "how do I add internet service to my current account?"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "customer is asked {province} and is asked about sms and as user agrees to sms we are transferring user to sms flow",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "line_type": "New",
+      "lob": "Internet",
+      "province": "AB"
+    }
+  },
+  "displayName": "EN-sales_add_to_existing-account-Existing-ROC(internet)(province-AB)",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 454,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

@@ -1,0 +1,32 @@
+{
+  "name": "f405257c-f6ca-436f-b18c-e8b647aa81dc",
+  "displayName": "Check appointment type entity",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.appointment_type = \"Repair\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_aqd",
+    "name": "58c82611-8c6f-499f-8ec4-d8eedac6df24"
+  }, {
+    "condition": "$session.params.appointment_type = \"Install\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "special_queue",
+        "value": "tech_to_care"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "6b49d8a2-d5c1-4466-955b-5e74bd2ae6bf"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Intent determination for AQD",
+    "name": "b6127be1-c7ae-4f1e-b209-de96c7002d8a"
+  } ]
+}

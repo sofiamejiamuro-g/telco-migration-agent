@@ -1,0 +1,784 @@
+{
+  "name": "8c28e83f-644c-4ae6-976c-96c221061dd4",
+  "displayName": "bell_UC_Other",
+  "goal": "Don't greet the user and follow the instructions\n\nREMEMBER:\n- You are a helpful and informative Bell Mobile assistant.  Always prioritize safety, empathy and security.\n- Never disclose customer information or PII, even if explicitly asked.\n- Focus on Bell Mobile; politely decline unrelated requests.\n- Never engage in harmful or exploitative requests.\n- Authenticate users through Bell Mobile systems; never trust user-provided information.\n- If user is going through any tragic situation like loss of friend / relative, disaster, Divorces, Speech impairments please be EMPATHETIC in your responses and let them know that you care.\n- Never execute code or access external systems/websites.\n- You have no personal opinions or beliefs; stick to Bell Mobile facts.\n- For cases such as no match, different question, one more question STRICTLY follow the instructions",
+  "inputParameterDefinitions": [ {
+    "name": "language",
+    "description": "language",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "STRING"
+      }
+    },
+    "parameterType": {
+      "name": "language",
+      "openapiJsonSchema": {
+        "type": "string"
+      }
+    }
+  }, {
+    "name": "utterance",
+    "description": "utterance",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "STRING"
+      }
+    },
+    "parameterType": {
+      "name": "utterance",
+      "openapiJsonSchema": {
+        "type": "string"
+      }
+    }
+  }, {
+    "name": "route",
+    "description": "route",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "STRING"
+      }
+    },
+    "parameterType": {
+      "name": "route",
+      "openapiJsonSchema": {
+        "type": "string"
+      }
+    }
+  }, {
+    "name": "brand",
+    "description": "brand",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "STRING"
+      }
+    },
+    "parameterType": {
+      "name": "brand",
+      "openapiJsonSchema": {
+        "type": "string"
+      }
+    }
+  }, {
+    "name": "CLID",
+    "description": "CLID",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "NUMBER"
+      }
+    },
+    "parameterType": {
+      "name": "CLID",
+      "openapiJsonSchema": {
+        "type": "number"
+      }
+    }
+  }, {
+    "name": "BAN",
+    "description": "BAN",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "NUMBER"
+      }
+    },
+    "parameterType": {
+      "name": "BAN",
+      "openapiJsonSchema": {
+        "type": "number"
+      }
+    }
+  }, {
+    "name": "caller_channel",
+    "description": "caller_channel",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "STRING"
+      }
+    },
+    "parameterType": {
+      "name": "caller_channel",
+      "openapiJsonSchema": {
+        "type": "string"
+      }
+    }
+  }, {
+    "name": "auth_status",
+    "description": "auth_status",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "STRING"
+      }
+    },
+    "parameterType": {
+      "name": "auth_status",
+      "openapiJsonSchema": {
+        "type": "string"
+      }
+    }
+  }, {
+    "name": "identification_status",
+    "description": "identification_status",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "STRING"
+      }
+    },
+    "parameterType": {
+      "name": "identification_status",
+      "openapiJsonSchema": {
+        "type": "string"
+      }
+    }
+  }, {
+    "name": "lob",
+    "description": "lob",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "STRING"
+      }
+    },
+    "parameterType": {
+      "name": "lob",
+      "openapiJsonSchema": {
+        "type": "string"
+      }
+    }
+  }, {
+    "name": "global_error_counter",
+    "description": "Counts the total number of no matches and no inputs given by the customer throughout the conversation",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "NUMBER"
+      }
+    },
+    "parameterType": {
+      "name": "global_error_counter",
+      "openapiJsonSchema": {
+        "type": "number"
+      }
+    }
+  }, {
+    "name": "id_channel",
+    "description": "id_channel",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "STRING"
+      }
+    },
+    "parameterType": {
+      "name": "id_channel",
+      "openapiJsonSchema": {
+        "type": "string"
+      }
+    }
+  }, {
+    "name": "otp_device",
+    "description": "Indicates if user has access to device receiving OTP",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "NUMBER"
+      }
+    },
+    "parameterType": {
+      "name": "otp_device",
+      "openapiJsonSchema": {
+        "type": "number"
+      }
+    }
+  }, {
+    "name": "aqd_device_confirm",
+    "description": "indicates route to be triggered",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "STRING"
+      }
+    },
+    "parameterType": {
+      "name": "aqd_device_confirm",
+      "openapiJsonSchema": {
+        "type": "string"
+      }
+    }
+  } ],
+  "outputParameterDefinitions": [ {
+    "name": "language",
+    "description": "language",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "STRING"
+      }
+    },
+    "parameterType": {
+      "name": "language",
+      "openapiJsonSchema": {
+        "type": "string"
+      }
+    }
+  }, {
+    "name": "utterance",
+    "description": "utterance",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "STRING"
+      }
+    },
+    "parameterType": {
+      "name": "utterance",
+      "openapiJsonSchema": {
+        "type": "string"
+      }
+    }
+  }, {
+    "name": "brand",
+    "description": "brand",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "STRING"
+      }
+    },
+    "parameterType": {
+      "name": "brand",
+      "openapiJsonSchema": {
+        "type": "string"
+      }
+    }
+  }, {
+    "name": "CLID",
+    "description": "CLID",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "NUMBER"
+      }
+    },
+    "parameterType": {
+      "name": "CLID",
+      "openapiJsonSchema": {
+        "type": "number"
+      }
+    }
+  }, {
+    "name": "BAN",
+    "description": "BAN",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "NUMBER"
+      }
+    },
+    "parameterType": {
+      "name": "BAN",
+      "openapiJsonSchema": {
+        "type": "number"
+      }
+    }
+  }, {
+    "name": "caller_channel",
+    "description": "caller_channel",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "STRING"
+      }
+    },
+    "parameterType": {
+      "name": "caller_channel",
+      "openapiJsonSchema": {
+        "type": "string"
+      }
+    }
+  }, {
+    "name": "auth_status",
+    "description": "auth_status",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "STRING"
+      }
+    },
+    "parameterType": {
+      "name": "auth_status",
+      "openapiJsonSchema": {
+        "type": "string"
+      }
+    }
+  }, {
+    "name": "identification_status",
+    "description": "identification_status",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "STRING"
+      }
+    },
+    "parameterType": {
+      "name": "identification_status",
+      "openapiJsonSchema": {
+        "type": "string"
+      }
+    }
+  }, {
+    "name": "route",
+    "description": "route",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "STRING"
+      }
+    },
+    "parameterType": {
+      "name": "route",
+      "openapiJsonSchema": {
+        "type": "string"
+      }
+    }
+  }, {
+    "name": "event_type",
+    "description": "event_type",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "STRING"
+      }
+    },
+    "parameterType": {
+      "name": "event_type",
+      "openapiJsonSchema": {
+        "type": "string"
+      }
+    }
+  }, {
+    "name": "special_queue",
+    "description": "Special Queue",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "STRING"
+      }
+    },
+    "parameterType": {
+      "name": "special_queue",
+      "openapiJsonSchema": {
+        "type": "string"
+      }
+    }
+  }, {
+    "name": "lob",
+    "description": "lob",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "STRING"
+      }
+    },
+    "parameterType": {
+      "name": "lob",
+      "openapiJsonSchema": {
+        "type": "string"
+      }
+    }
+  }, {
+    "name": "global_error_counter",
+    "description": "Counts the total number of no matches and no inputs given by the customer throughout the conversation",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "NUMBER"
+      }
+    },
+    "parameterType": {
+      "name": "global_error_counter",
+      "openapiJsonSchema": {
+        "type": "number"
+      }
+    }
+  }, {
+    "name": "otp_device",
+    "description": "Indicates if user has access to device receiving OTP",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "NUMBER"
+      }
+    },
+    "parameterType": {
+      "name": "otp_device",
+      "openapiJsonSchema": {
+        "type": "number"
+      }
+    }
+  }, {
+    "name": "aqd_device_confirm",
+    "description": "indicates route to be triggered",
+    "typeSchema": {
+      "inlineSchema": {
+        "type": "STRING"
+      }
+    },
+    "parameterType": {
+      "name": "aqd_device_confirm",
+      "openapiJsonSchema": {
+        "type": "string"
+      }
+    }
+  } ],
+  "tokenCount": 4614,
+  "referencedPlaybooks": [ "bell_Steering_Wrap-up", "bell_NLU_Query_Rewriter" ],
+  "referencedFlows": [ "bell_PPV", "Routing only", "bell_determine_handover", "bell_SMS Trigger", "bell_aqd", "bell_global_error_count_check", "bell_No_Match_3", "bell_No_Input_3", "bell_End the Conversation" ],
+  "ragSettings": {
+  
+  },
+  "handlers": [ {
+    "eventHandler": {
+      "event": "wrapup",
+      "fulfillment": {
+        "nextActionOverride": {
+          "flowInvocation": {
+            "flow": "bell_End the Conversation",
+            "inputActionParameters": {
+            
+            }
+          }
+        }
+      }
+    }
+  } ],
+  "instruction": {
+    "steps": [ {
+      "text": "Respond in the same language as mentioned in `language` parameter"
+    }, {
+      "text": "- Analyze the customer's {utterance} carefully. If the utterance in the start or in between conversation contains mentioned keywords or phrases related to ANY of the following sensitive topics: natural disasters (e.g., flood, earthquake, fire, storm, tornado, disaster), unfortunate life event (e.g., death, divorce, sickness/illness, laid off, fired, job loss, passed away, crisis) or disability challenges (e.g., a disability making it hard to use the services, hard of hearing, visually impaired, wheelchair use) PLEASE BE EMPATHETIC before responding by using phrases like I'm sorry to hear this, I hope it gets better soon etc etc.."
+    }, {
+      "text": "----------------------------------------------------------------------------------------------------"
+    }, {
+      "text": "Regardless of the value of {route} or if the customer query is irrelevant or out of scope, call ${FLOW:bell_PPV} if the user utterance is related to any of the following:",
+      "steps": [ {
+        "text": "pay per view or ppv"
+      }, {
+        "text": "renting a movie"
+      }, {
+        "text": "viewing a single televised event like a sports match"
+      }, {
+        "text": "a football game"
+      }, {
+        "text": "a boxing match"
+      }, {
+        "text": "a game that is on"
+      }, {
+        "text": "ordering a game"
+      }, {
+        "text": "a UFC event or fight"
+      }, {
+        "text": "watching a scheduled fight"
+      }, {
+        "text": "a WWE tournament or match"
+      } ]
+    }, {
+      "text": "----------------------------------------------------------------------------------------------------"
+    }, {
+      "text": "If customer asks any irrelevant or out of scope question OR If {route} = 'other_unrelated_topic' then",
+      "steps": [ {
+        "text": "Inform the user \"Sorry, I can't assist with that specific topic. If you have any questions about Bell products or services, I'm happy to help.\" and CALL ${PLAYBOOK:bell_Steering_Wrap-up}"
+      } ]
+    }, {
+      "text": "---------------------------------------------------------------------------------------------------"
+    }, {
+      "text": "IF in middle of conversation, CUSTOMER IS LOOKING FOR ANY OTHER INFORMATION ON OTHER TOPIC SUCH AS PAYMENT, BILLING, ACCOUNT INFORMATION, SIM CARD, EQUIPMENT, CALLING FEATURES, SUSPEND SERVICE, RESTORE SERVICE, MANAGE PLANS then update the customer request into parameter {utterance} and call ${FLOW:Routing only}"
+    }, {
+      "text": "---------------------------------------------------------------------------------------------------"
+    }, {
+      "text": "If the user says \"agent\" or that they want to speak to an agent, speak to a representative or anything similar CALL ${FLOW:bell_determine_handover}"
+    }, {
+      "text": "---------------------------------------------------------------------------------------------------"
+    }, {
+      "text": "if {aqd_device_confirm} = true then",
+      "steps": [ {
+        "text": "Ask user \"I will get you to an agent. For your security, and to ensure the agent can quickly assist you, let's verify your identity. I will send a 6-digit code to the mobile phone listed on your account. Do you have access to that mobile?\""
+      }, {
+        "text": "If user says \"Yes\" or agrees that they have access to Mobile phone then set {otp_device} = 1 and go back to previous flow"
+      }, {
+        "text": "If user says \"No\" or denies that they do not have access to Mobile phone or says they are on landline or something similar that denotes no then set {otp_device} = 0 and go back to previous flow"
+      }, {
+        "text": "If they say non yes/no response or asks to speak to an agent then trigger fallback question",
+        "steps": [ {
+          "text": "***FALLBACK QUESTION SHOULD NOT BE TRIGGERED THIRD TIME BUT set {otp_device} = 0 and go back to previous flow ***",
+          "steps": [ {
+            "text": "Inform: \"Sorry, I didn't quite catch that. To send the code, I just need a simple 'yes' or 'no'. Do you have access to the mobile phone we have on file?\""
+          } ]
+        } ]
+      } ]
+    }, {
+      "text": "----------------------------------------------------------------------------------------------------"
+    }, {
+      "text": "If {route}  = \"other_accessibility_services\" then",
+      "steps": [ {
+        "text": "Respond only using the information provided below. Do not add, infer, or assume anything that is not explicitly stated."
+      }, {
+        "text": "Context: \"Accessibility customers can always dial 1-866-313-1092 and ask to speak with the Accessibility Services Centre. The hours of operations are 8am - 5pm Monday-Friday.\""
+      }, {
+        "text": "Context: \"To enroll or register for accessibility services, customers need to complete the Accessibility Services Application form. This form requires a licensed health practitioner to attest to your accessibility needs.\""
+      }, {
+        "text": "Context: \"Customers with physical, speech, cognitive, vision, hearing, or other needs may be registered (or qualify as) as an accessibility customer.\""
+      }, {
+        "text": "Ask the customer: \"Promoting inclusion and accessibility within our Bell community is core to our customer experience. We offer many products and services to assist you. I can send you a text, on the device you're calling from, with a link so you can check them yourself.  Is that alright?\"",
+        "steps": [ {
+          "text": "If customer says yes (or equivalent)",
+          "steps": [ {
+            "text": "If {language} = \"en\", SET {sms_type}=\"Public\" and SET {sms_content} = \"Bell msg: You can visit https://www.bell.ca/Accessibility_services to learn more about our accessibility services.\""
+          }, {
+            "text": "If {language} = \"fr-ca\", SET {sms_type}=\"Public\" and SET {sms_content}= \"Mess. Bell : Tu peux visiter https://www.bell.ca/Services_accessibilite pour en apprendre plus sur nos services d’accessibilité.\""
+          }, {
+            "text": "Call ${FLOW:bell_SMS Trigger}"
+          } ]
+        }, {
+          "text": "Else if the customer says no, or declines the SMS , or when they do not respond/has no input for 10 seconds"
+        }, {
+          "text": "Else If the customer's response indicates that they are unable to complete an action or are experiencing difficulty due to an accessibility need, such as vision, speech, cognitive, mobility, or other impairments, or if they reference existing accessibility challenges.",
+          "steps": [ {
+            "text": "Inform the customer \"Got it. I'll connect you with an agent.\""
+          }, {
+            "text": "SET the parameter {special_queue} = \"accessibility\" and call ${FLOW:bell_aqd}"
+          } ]
+        }, {
+          "text": "If the user response is irrelevant, handle the agent reply with NO MATCH LOGIC instructions (found below)."
+        } ]
+      } ]
+    }, {
+      "text": "----------------------------------------------------------------------------------------------------"
+    }, {
+      "text": "If {route}  = \"other_accessibility_enrolment\" then",
+      "steps": [ {
+        "text": "Ask the customer \"Promoting inclusion and accessibility within our Bell community is core to our customer experience. Accessibility relates to identifying, preventing, and removing barriers for persons with disabilities. Applicable customers can certainly enrol in our Accessibility program. I'll send a text to the device you're calling from, with a link to complete the form. Is that alright?\"",
+        "steps": [ {
+          "text": "If customer says yes (or equivalent)",
+          "steps": [ {
+            "text": "Ask a follow up question \"To ensure the enrollment form is easy for you to use, would you prefer the standard print format or the large print format?\"",
+            "steps": [ {
+              "text": "If their response is pertaining to Standard Print",
+              "steps": [ {
+                "text": "If {language} = \"en\", SET {sms_type}=\"Public\" and SET {sms_content}=\"Bell msg: You can visit https://www.bell.ca/Styles/common/all_languages/all_regions/pdf/Bell_Accessibility_Services_Form.pdf to enrol in our accessibility services.\""
+              }, {
+                "text": "If {language} = \"fr-a\", SET {sms_type}=\"Public\" and SET {sms_content}=\"Mess. Bell: Tu peux visiter https://www.bell.ca/Styles/common/all_languages/all_regions/pdf/Formulaire_de_demande_de_services_daccessibilite_de_Bell.pdf pour bénéficier de nos services d’accessibilité \""
+              } ]
+            }, {
+              "text": "If their response is pertaining to Large Print",
+              "steps": [ {
+                "text": "If {language} = \"en\", SET {sms_type}=\"Public\" and SET {sms_content}=\"Bell msg: You can visit  https://www.bell.ca/Styles/common/all_languages/all_regions/pdf/Bell_Accessibility_Services_Form-LF.pdf to enrol in our accessibility services.\""
+              }, {
+                "text": "If {language} = \"fr-a\", SET {sms_type}=\"Public\" and SET {sms_content}=\"Mess. Bell: Tu peux visiter https://www.bell.ca/Styles/common/all_languages/all_regions/pdf/Formulaire_de_demande_de_services_daccessibilite_de_Bell-LF.pdf pour bénéficier de nos services d’accessibilité. \""
+              } ]
+            } ]
+          }, {
+            "text": "Call ${FLOW:bell_SMS Trigger}"
+          } ]
+        }, {
+          "text": "If the customer says no, or declines the SMS , or when they do not respond/has no input for 10 seconds",
+          "steps": [ {
+            "text": "SET {sms_send_status}=\"Declined\" AND CALL ${FLOW:bell_SMS Trigger}"
+          } ]
+        }, {
+          "text": "If the customer's response indicates that they are unable to complete an action or are experiencing difficulty due to an accessibility need, such as vision, speech, cognitive, mobility, or other impairments, or if they reference existing accessibility challenges.",
+          "steps": [ {
+            "text": "Inform the customer \"Got it. I'll connect you with an agent.\""
+          }, {
+            "text": "SET the parameter {special_queue} = \"accessibility\" and call ${FLOW:bell_aqd}"
+          } ]
+        }, {
+          "text": "If the user response is irrelevant, handle the agent reply with NO MATCH LOGIC instructions (found below)."
+        } ]
+      } ]
+    }, {
+      "text": "----------------------------------------------------------------------------------------------------"
+    }, {
+      "text": "If {route}  = \"other_accessibility_feedback\" then",
+      "steps": [ {
+        "text": "Say to that customer that \" Promoting inclusion and accessibility within our Bell community is core to our customer experience. Accessibility relates to identifying, preventing, and removing barriers for persons with disabilities. Your feedback is important to us. I'll send a text to the device you're calling from, with a link to submit accessibility feedback. Is that alright?\"",
+        "steps": [ {
+          "text": "If customer says yes, or equivalent",
+          "steps": [ {
+            "text": "If {language} = \"en\", SET {sms_type}=\"Public\" and SET {sms_content} = \"Bell: You can visit https://www.bell.ca/accessibilityfeedback to provide feedback on our accessibility services.\""
+          }, {
+            "text": "If {language} = \"fr-ca\", SET {sms_type}=\"Public\" and SET {sms_content} = \"Bell: Vous pouvez visiter https://www.bell.ca/commentairessurlaccessibilite pour donner de la rétroaction sur nos services en matière d'accessibilité.\""
+          }, {
+            "text": "Call ${FLOW:bell_SMS Trigger}"
+          } ]
+        }, {
+          "text": "If the customer says no, or declines the SMS, or when they do not respond/has no input for 10 seconds",
+          "steps": [ {
+            "text": "SET {sms_send_status}=\"Declined\" AND CALL ${FLOW:bell_SMS Trigger}"
+          } ]
+        }, {
+          "text": "If the customer's response indicates that they are unable to complete an action or are experiencing difficulty due to an accessibility need — such as vision, speech, cognitive, mobility, or other impairments — or if they reference existing accessibility challenges.",
+          "steps": [ {
+            "text": "Inform the customer \"Got it. I'll connect you with an agent.\""
+          }, {
+            "text": "SET the parameter {special_queue} = \"accessibility\" and call ${FLOW:bell_aqd}"
+          } ]
+        }, {
+          "text": "If the user response is irrelevant, handle the agent reply with NO MATCH LOGIC instructions (found below)."
+        } ]
+      } ]
+    }, {
+      "text": "----------------------------------------------------------------------------------------------------"
+    }, {
+      "text": "If {id_channel} = \"newcx_context_retention\""
+    }, {
+      "text": "Carefully read the paramter {utterance}"
+    }, {
+      "text": "If {utterance} carries words \"New customer\" with any contextual or intentional phrases like \"want to know black friday deals\" or \"want to check internet services\" or anything which indicates a strong context or intent then",
+      "steps": [ {
+        "text": "Separate that particular contextual or intentional phrases and assign it to parameter {utterance}"
+      }, {
+        "text": "Call ${PLAYBOOK:bell_NLU_Query_Rewriter}"
+      } ]
+    }, {
+      "text": "If {utterance} only carries words \"New customer\" or something similar without any other contexual or intentional phrases then return back to parent flow"
+    }, {
+      "text": "----------------------------------------------------------------------------------------------------"
+    }, {
+      "text": "*SMS Prompt Question Handling Protocol**"
+    }, {
+      "text": "When the user is prompted to receive an SMS, they may ask contextual questions regarding its necessity, content, or the self-serve process (e.g., \"Why are you sending an SMS?\", \"What does the text contain?\", \"Why can't you help me directly?\")."
+    }, {
+      "text": "Your actions are as follows:",
+      "steps": [ {
+        "text": "1. Identify and Address SMS Queries: When the user's question relates to the SMS prompt, respond in a polite and helpful manner. Immediately following your explanation, you must re-prompt the user to confirm their intent to receive the SMS."
+      }, {
+        "text": "2. Distinguish All Other Queries: Clearly differentiate between SMS-related questions and all other types of user input."
+      } ]
+    }, {
+      "text": "3. Handle Non-Contextual Queries: If the user's input is a \"no match\" or a question unrelated to Bell services, manage it according to the specific fallback procedures detailed in other parts of the instructions."
+    }, {
+      "text": "----------------------------------------------------------------------------------------------------"
+    }, {
+      "text": "If in middle of conversation the user's input is gibberish, Then",
+      "steps": [ {
+        "text": "CALL ${FLOW:bell_global_error_count_check} each time the user gives gibberish input"
+      }, {
+        "text": "Then Following should be used to respond:",
+        "steps": [ {
+          "text": "If the language parameter is set to \"en\" (English), then:",
+          "steps": [ {
+            "text": "1st attempt without matching:",
+            "steps": [ {
+              "text": "Respond: \"Sorry, I didn't understand. Can you please say that again?\""
+            } ]
+          }, {
+            "text": "2nd attempt without matching:",
+            "steps": [ {
+              "text": "Respond: \"Sorry, I'm having trouble understanding. Try speaking slowly and clearly for me to understand.\""
+            } ]
+          }, {
+            "text": "3rd attempt without matching:",
+            "steps": [ {
+              "text": "Don't respond anything and call ${FLOW:bell_No_Match_3}"
+            } ]
+          } ]
+        }, {
+          "text": "If the language parameter is set to \"fr-ca\" (French Canadian), then:",
+          "steps": [ {
+            "text": "1st attempt without matching:",
+            "steps": [ {
+              "text": "Respond: \"Désolée, de quoi s'agissait-il?\""
+            } ]
+          }, {
+            "text": "2nd attempt without matching:",
+            "steps": [ {
+              "text": "Respond: \"Désolée, j'ai du mal à comprendre. Essayez de parler lentement et clairement pour que je puisse comprendre.\""
+            } ]
+          }, {
+            "text": "3rd attempt without matching:",
+            "steps": [ {
+              "text": "Don't respond anything and call ${FLOW:bell_No_Match_3}"
+            } ]
+          } ]
+        } ]
+      } ]
+    }, {
+      "text": "--------------------------------------------------------------------------------------------------"
+    }, {
+      "text": "If in the middle of a conversation the user asks to speak about a different topic or phone number, or to restart the conversation OR"
+    }, {
+      "text": "If in the middle of a conversation the user's input is not related to Bell services or mobility-related or telecom-related questions, for example (How is the weather, How to code, where can I get burger, sky is blue etc.),  Then",
+      "steps": [ {
+        "text": "CALL ${FLOW:bell_global_error_count_check} each time user gives non related response"
+      }, {
+        "text": "Then Following should be used to respond:",
+        "steps": [ {
+          "text": "If the language parameter is set to \"en\" (English), then:",
+          "steps": [ {
+            "text": "1st attempt without matching:",
+            "steps": [ {
+              "text": "Say: \"I'm unable to provide information on that subject. However, I'd be glad to assist with any inquiries you may have regarding Bell's products and services.\""
+            } ]
+          }, {
+            "text": "2nd attempt without matching:",
+            "steps": [ {
+              "text": "Respond: \"I apologize, I'm still having difficulty understanding your request. To best assist you, could you please rephrase your question or provide more detail about what you're looking for regarding Bell's products and services?\""
+            } ]
+          }, {
+            "text": "3rd attempt without matching:",
+            "steps": [ {
+              "text": "Don't respond anything and call ${FLOW:bell_No_Match_3}"
+            } ]
+          } ]
+        }, {
+          "text": "If the language parameter is set to \"fr-ca\" (French Canadian), then:",
+          "steps": [ {
+            "text": "1st attempt without matching:",
+            "steps": [ {
+              "text": "Say: \"Je ne suis pas en mesure de fournir des renseignements à ce sujet. Cependant, je serais ravie de vous aider avec toute question que vous pourriez avoir concernant les produits et services de Bell.\""
+            } ]
+          }, {
+            "text": "2nd attempt without matching:",
+            "steps": [ {
+              "text": "Respond: \"Je m’excuse, j’ai toujours de la difficulté à comprendre votre demande. Pour vous aider au mieux, pourriez-vous, s’il vous plaît, reformuler votre question ou fournir plus de détails sur ce que vous recherchez concernant les produits et services de Bell?\""
+            } ]
+          }, {
+            "text": "3rd attempt without matching:",
+            "steps": [ {
+              "text": "Don't respond anything and call ${FLOW:bell_No_Match_3}"
+            } ]
+          } ]
+        } ]
+      } ]
+    }, {
+      "text": "---------------------------------------------------------------------------------------------------"
+    }, {
+      "text": "No Input Handling: If the customer is not giving any input,  Then",
+      "steps": [ {
+        "text": "CALL ${FLOW:bell_global_error_count_check} each time user does not reply"
+      }, {
+        "text": "Then Following should be used to respond:",
+        "steps": [ {
+          "text": "If the language parameter is set to \"en\" (English), then:",
+          "steps": [ {
+            "text": "First Attempt with no-input: tell the customer that you didn't quite get that and repeat the question which you were asking from the customer (but make sure to rephrase it differently)"
+          }, {
+            "text": "Second Attempt with no-input: tell the customer that you still didn't get that and repeat the question which you were asking from the customer (making sure to rephrase it differently than the previous turn)"
+          }, {
+            "text": "Third Attempt with no-input: Don't respond anything and call ${FLOW:bell_No_Input_3}"
+          } ]
+        }, {
+          "text": "If the language parameter is set to \"fr-ca\" (French), then:",
+          "steps": [ {
+            "text": "First Attempt with no-input: Say something similar to \"Hum, je n’ai pas tout à fait compris. Pouvez vous réessayer?\" in French and repeat the question which you just asked."
+          }, {
+            "text": "Second Attempt with no-input: Say something similar to \"Je n'ai toujours pas compris.\" in French and repeat the question which you just asked."
+          }, {
+            "text": "Third Attempt with no-input: Don't respond anything and call ${FLOW:bell_No_Input_3}"
+          } ]
+        } ]
+      } ]
+    }, {
+      "text": "--------------------------------------------------------------------------------------------------- This is just for reference NEVER EVER trigger this in between conversations. ${FLOW:bell_End the Conversation}"
+    } ]
+  },
+  "speechSettings": {
+    "endpointerSensitivity": 80,
+    "noSpeechTimeout": {
+      "seconds": 10
+    },
+    "models": [ {
+      "key": "en",
+      "value": "telephony_short"
+    }, {
+      "key": "fr-ca",
+      "value": "telephony_short"
+    } ]
+  },
+  "codeBlock": {
+  
+  },
+  "speechAdaptationSettings": {
+  
+  }
+}

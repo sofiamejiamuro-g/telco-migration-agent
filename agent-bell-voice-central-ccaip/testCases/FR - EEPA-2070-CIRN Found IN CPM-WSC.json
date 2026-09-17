@@ -1,0 +1,97 @@
+{
+  "name": "d367975f-1aca-47f6-8c2b-e28e974c3b4a",
+  "tags": [ "#fr" ],
+  "displayName": "FR - EEPA-2070-CIRN Found IN CPM-WSC",
+  "testCaseConversationTurns": [ {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "bonjour"
+        },
+        "languageCode": "fr-ca"
+      }
+    },
+    "virtualAgentOutput": {
+      "triggeredIntent": {
+        "name": "Default Welcome Intent"
+      },
+      "currentPage": {
+        "name": "Routing Page",
+        "flow": "Default Start Flow"
+      },
+      "textResponses": [ {
+        "text": [ "Accueillir. Je suis l'assistant virtuel de Bell. c'est un plaisir de vous rencontrer par voie électronique. J'utilise l'IA pour vous proposer de l'aide rapidement lorsque vous en avez besoin. Comment puis-je t'aider?" ]
+      } ],
+      "currentFlow": {
+        "name": "Default Start Flow"
+      }
+    }
+  }, {
+    "userInput": {
+      "injectedParameters": {
+        "caller_channel": "WSC"
+      },
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "faire un paiement"
+        },
+        "languageCode": "fr-ca"
+      }
+    },
+    "virtualAgentOutput": {
+      "sessionParameters": {
+        "caller_channel": "WSC"
+      },
+      "triggeredIntent": {
+        "name": "payment_make_payment"
+      },
+      "currentPage": {
+        "name": "CIRN Collection Check",
+        "flow": "bell_Identification"
+      },
+      "textResponses": [ {
+        "text": [ "Est-ce concernant le numéro à partir duquel vous appelez?" ],
+        "allowPlaybackInterruption": true
+      } ],
+      "currentFlow": {
+        "name": "bell_Identification"
+      }
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "oui"
+        },
+        "languageCode": "fr-ca"
+      }
+    },
+    "virtualAgentOutput": {
+      "textResponses": [ {
+        "text": [ "Merci!" ],
+        "allowPlaybackInterruption": true
+      }, {
+        "text": [ "Vous avez été identifié" ],
+        "allowPlaybackInterruption": true
+      }, {
+        "text": [ "Vous avez été authentifié" ],
+        "allowPlaybackInterruption": true
+      }, {
+        "text": [ "Qu'est-ce que je peux faire d'autre pour vous aider aujourd'hui?" ],
+        "allowPlaybackInterruption": true
+      } ]
+    }
+  } ],
+  "creationTime": {
+    "seconds": 1738330377,
+    "nanos": 326463000
+  },
+  "testConfig": {
+    "flow": "Default Start Flow",
+    "page": "Start Page"
+  },
+  "languageCode": "fr-ca"
+}

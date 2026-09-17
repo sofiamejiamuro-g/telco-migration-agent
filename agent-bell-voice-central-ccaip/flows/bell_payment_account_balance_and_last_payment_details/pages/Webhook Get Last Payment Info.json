@@ -1,0 +1,141 @@
+{
+  "name": "8eefe70f-c964-4e68-a8ed-06e98873ab6c",
+  "displayName": "Webhook Get Last Payment Info",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "/v1/ibm_mw/nm1_get#last-payment-info",
+    "tag": "last-payment-info",
+    "setParameterActions": [ {
+      "parameter": "billing_account",
+      "value": "$session.params.billing_account"
+    }, {
+      "parameter": "ibm_application_id ",
+      "value": "$sys.func.IF(\"$session.params.intake_routing_lookup_response.va_ibm_id = null\", BCE_Entry, $session.params.intake_routing_lookup_response.va_ibm_id)"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "last_payment_date",
+        "value": "$session.params.nm1_get_last_payment_info_response.lastPaymentDate"
+      }, {
+        "parameter": "last_payment_amount",
+        "value": "$session.params.nm1_get_last_payment_info_response.lastPaymentAmount"
+      }, {
+        "parameter": "formatDate",
+        "value": "$sys.func.MID($session.params.last_payment_date, 1, 10)"
+      }, {
+        "parameter": "date",
+        "value": "$sys.func.MID($session.params.formatDate, 6, 5)"
+      }, {
+        "parameter": "md_list",
+        "value": "$sys.func.SPLIT($session.params.date, \"-\")"
+      }, {
+        "parameter": "month",
+        "value": "$session.params.md_list[0]"
+      }, {
+        "parameter": "day",
+        "value": "$session.params.md_list[1]"
+      }, {
+        "parameter": "fr_date",
+        "value": "$sys.func.CONCATENATE($session.params.day, \"-\", $session.params.month)"
+      }, {
+        "parameter": "error_return_code",
+        "value": "$session.params.nm1_get_last_payment_info_response.returnCode"
+      } ]
+    },
+    "name": "2ca97952-8194-4910-b08a-34c8262b2dd0"
+  }, {
+    "condition": "$session.params.webhook_success = true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Check Balance",
+    "name": "80fa1d9b-fa2b-46df-a1da-df40678adbfa"
+  }, {
+    "condition": "$session.params.webhook_success = false AND ($session.params.error_return_code = \"0\" OR $session.params.error_return_code = 0)",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "last_payment_amount",
+        "value": null
+      }, {
+        "parameter": "last_payment_date",
+        "value": null
+      } ]
+    },
+    "targetPage": "Check Balance",
+    "name": "72badb0d-9d9e-40ec-8210-659a21247ee3"
+  }, {
+    "condition": "$session.params.webhook_success = false",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Failure Balance Details",
+    "name": "13aed2ff-2e53-45d5-bd82-6eab88505001"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "8eefe70f-c964-4e68-a8ed-06e98873ab6c"
+      }, {
+        "parameter": "flow_id",
+        "value": "518d29f3-b868-4b90-b9a7-421847b47a19"
+      }, {
+        "parameter": "page_name",
+        "value": "Webhook Get Last Payment Info"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Webhook Failure Balance Details",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+    
+    },
+    "name": "da442c68-f173-4a8b-93f0-ced337c2393b"
+  }, {
+    "targetPage": "Webhook Failure Balance Details",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+    
+    },
+    "name": "a82d8892-f0a3-4e21-bd1d-bc15903d2435"
+  }, {
+    "targetPage": "Webhook Failure Balance Details",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+    
+    },
+    "name": "c76a2ef8-442a-4ddd-a67e-d9aab712342a"
+  }, {
+    "targetPage": "Webhook Failure Balance Details",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+    
+    },
+    "name": "f0e316d7-7a95-47dd-b0cc-de4989d31cea"
+  }, {
+    "targetPage": "Webhook Failure Balance Details",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+    
+    },
+    "name": "879f66a8-3739-4ecd-a753-7050ff686d46"
+  }, {
+    "targetPage": "Webhook Failure Balance Details",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+    
+    },
+    "name": "f3c7b998-72bf-4e14-a9e0-863503708d67"
+  } ]
+}

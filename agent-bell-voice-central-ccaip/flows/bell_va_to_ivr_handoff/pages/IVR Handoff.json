@@ -1,0 +1,73 @@
+{
+  "name": "c904d291-8d4b-4725-aad1-f82b49b6cda2",
+  "displayName": "IVR Handoff",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "/v1/ivr-transfer/send-transfer-data#dam-transfer",
+    "tag": "dam-transfer",
+    "setParameterActions": [ {
+      "parameter": "dam_id",
+      "value": "BBM"
+    }, {
+      "parameter": "tag",
+      "value": "dam-transfer"
+    }, {
+      "parameter": "brand",
+      "value": "Bell Residential Services"
+    }, {
+      "parameter": "account_type",
+      "value": "B"
+    }, {
+      "parameter": "cti_at",
+      "value": "BUSMENU"
+    }, {
+      "parameter": "cti_rt",
+      "value": "$sys.func.IF(\"$session.params.route = null\", other_speak_to_agent, $session.params.route)"
+    }, {
+      "parameter": "cti_sd",
+      "value": "$session.params.tfn"
+    }, {
+      "parameter": "cirn",
+      "value": "$sys.func.IF(\"$session.params.cirn = null\", \"$session.params.clid\", $session.params.cirn)"
+    }, {
+      "parameter": "department",
+      "value": "955"
+    }, {
+      "parameter": "department_id_ref",
+      "value": "$sys.func.CONCATENATE(\"REF\", $session.params.department)"
+    }, {
+      "parameter": "_empty_string",
+      "value": ""
+    }, {
+      "parameter": "cti_rt",
+      "value": "$sys.func.IF(\"$session.params.route = $session.params._empty_string\" , other_speak_to_agent, $session.params.route)"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.webhook_success = true",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_Live Agent Handoff",
+    "name": "b76ad6c1-1ca1-4c44-b73a-d9c7dff2ac34"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Je n’ai malheureusement pas pu effectuer le transfert. Veuillez communiquer avec nous par clavardage à l’adresse suivante : bell.ca/entreprise_pournousjoindre" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "Sorry, I couldn’t transfer you just now. Please connect with us by chat at bell.ca/business_contactus\n" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "targetFlow": "bell_wrapup",
+    "name": "7ded10a7-f6d4-4f7d-bca2-5855bd82cf77"
+  } ]
+}

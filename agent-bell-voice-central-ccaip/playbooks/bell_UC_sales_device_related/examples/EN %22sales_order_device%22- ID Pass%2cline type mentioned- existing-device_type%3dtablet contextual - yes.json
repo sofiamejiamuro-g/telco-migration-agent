@@ -1,0 +1,71 @@
+{
+  "name": "af8cb4af-31ce-4c6c-ac43-58916ff91db3",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "brand": "bell",
+        "language": "en"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "I'll send a text to the device you're calling from, so that you can check out Bell's mobility devices such as phones, tablets, smartwatches, and mobile internet. Is that alright?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "What does SMS contains?"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "The SMS will provide you with a link to our website where you can browse and purchase devices. Is that alright?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "ok"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "brand": "bell",
+        "language": "en",
+        "sms_content": "Bell: You can visit bell.ca/mobilitydevices to learn more about our devices. ( bell.ca/about-us )",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "customer want to order a new ipad, as the utterance contains \"new\" line_type is set as \"new\" and then customer also asked for more information about SMS",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "Existing",
+      "device_type": "Tablet",
+      "identification_status": "Pass",
+      "language": "en",
+      "line_type": "New",
+      "route": "sales_order_device",
+      "utterance": "I want to get the new ipad"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "we got to know from the utterance that the device type Customer asked a question regarding SMS so VA answered them and prompted again for SMS. User then said yes so we route to bell_SMS Trigger",
+    "actionParameters": {
+      "device_type": "Tablet",
+      "language": "en",
+      "line_type": "New"
+    }
+  },
+  "displayName": "EN \"sales_order_device\"- ID Pass,line type mentioned- existing-device_type=tablet contextual - yes",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 497,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

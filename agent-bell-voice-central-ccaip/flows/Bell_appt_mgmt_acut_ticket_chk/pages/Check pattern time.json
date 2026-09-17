@@ -1,0 +1,51 @@
+{
+  "name": "e13d13de-6122-4000-b39b-f19091d13756",
+  "displayName": "Check pattern time",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "generators": [ {
+      "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/a6f77390-638b-4826-ac33-bb9b505a1b6f",
+      "inputParameters": [ {
+        "key": "patternTime",
+        "value": "$session.params.notificationDetails[0].characteristicSpecification.patternTime"
+      } ],
+      "outputParameter": "$request.generative.isPast_patternTime"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$request.generative.isPast_patternTime = true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "[whk] Acut trouble type",
+    "name": "d4494877-2755-4b87-b5ab-a45948f3ce9a"
+  }, {
+    "condition": "$request.generative.isPast_patternTime != true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "[whk] Acut trouble type",
+    "name": "7a40970d-cce6-4e6c-bbb5-721f2e712bca"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "e13d13de-6122-4000-b39b-f19091d13756"
+      }, {
+        "parameter": "flow_id",
+        "value": "8a90f25b-071b-4fb8-b4f6-490bf1aaf589"
+      }, {
+        "parameter": "page_name",
+        "value": "Check pattern time"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

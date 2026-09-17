@@ -1,0 +1,41 @@
+{
+  "name": "64ff9872-91e9-4dc1-9fb7-c7879d4b6d37",
+  "displayName": "Balance Checker",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.accountBalance \u003e= 1",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Get Payment Method",
+    "name": "c09a299d-e0ca-42dd-b769-32092a7a3944"
+  }, {
+    "condition": "$session.params.accountBalance \u003c 1",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_Feedback",
+    "name": "dd9cd649-8db7-4a15-a986-e0fdaaffacd7"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "64ff9872-91e9-4dc1-9fb7-c7879d4b6d37"
+      }, {
+        "parameter": "flow_id",
+        "value": "722e5c31-76ff-46be-b88e-97e4715d454e"
+      }, {
+        "parameter": "page_name",
+        "value": "Balance Checker"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

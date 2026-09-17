@@ -1,0 +1,77 @@
+{
+  "name": "a7ad2eb3-d198-4849-a426-0f50cedecc5e",
+  "displayName": "Balance Check",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "current_account_balance",
+        "value": "$sys.func.TO_NUMBER($session.params.accountBalance)"
+      }, {
+        "parameter": "due_amount",
+        "value": "$session.params.pastDueAmount"
+      }, {
+        "parameter": "other_amount_counter",
+        "value": 0
+      } ]
+    },
+    "name": "53716483-9568-4c3a-a76a-524e27e5c4a4"
+  }, {
+    "condition": "$session.params.due_amount = \"$session\\.params\\.pastDueAmount\" OR $session.params.due_amount = \"\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "due_amount",
+        "value": "0"
+      } ]
+    },
+    "name": "4ece90d2-3066-4081-98f2-0dce5ff5d8b8",
+    "description": "This condition will only be triggered when value for parameter due_amount is a literal text \"$session.params.pastDueAmount\". Setting the value to \"0\" to avoid hardstop in the page Proceed with Payment 2"
+  }, {
+    "condition": "$session.params.auth_status = \"Fail\" OR $session.params.auth_status = \"fail\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Prompt Other Amount : Not in Collection/Current Balance is less",
+    "name": "61404626-ded3-4668-93ec-e3302c204ffc"
+  }, {
+    "condition": "$session.params.current_account_balance \u003c= 0",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Check amount Balance Less",
+    "name": "7a40b2f8-bec4-46d1-b71c-fd6d5cb77519"
+  }, {
+    "condition": "$session.params.current_account_balance \u003e 0",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Prompt Pay Full Balance",
+    "name": "195ec1d3-4fdc-46ef-a9e2-85ed15c04fc5"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "a7ad2eb3-d198-4849-a426-0f50cedecc5e"
+      }, {
+        "parameter": "flow_id",
+        "value": "5f9ad0a8-5f25-4bd1-96dd-a2b5b74312df"
+      }, {
+        "parameter": "page_name",
+        "value": "Webhook Get Customer Profile"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ],
+  "description": "This page was previously named Webhook Get Customer Profile."
+}

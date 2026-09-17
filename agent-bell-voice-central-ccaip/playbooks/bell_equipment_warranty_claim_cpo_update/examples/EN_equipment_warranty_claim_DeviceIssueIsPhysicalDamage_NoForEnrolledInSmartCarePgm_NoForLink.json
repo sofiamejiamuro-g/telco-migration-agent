@@ -1,0 +1,55 @@
+{
+  "name": "f9539d60-203c-4088-8465-732530801a03",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Yes, all certified Pre-owned phone come with a one-year limited warranty from Bell. This warranty covers manufacturer's defects for one year. The warranty does not cover physical, liquid damage or the charging cable. For added protection you can also add a Smart/Phone Care plan to your Certified Pre-owned phone at time of purchase which covers lost, theft, physical damage or defects outside the warranty.\nHave you enrolled in our smart care program?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "No"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "I can send you an email with a link to learn more about our in-store device repair process or additional options. Is that alright?\n"
+    }
+  }, {
+    "userUtterance": {
+      "text": "No"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "brand": "bell",
+        "language": "en",
+        "sms_send_status": "Declined"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer asking about Certified Preowned device being broken with route \"equipment_warranty_claim\"",
+    "actionParameters": {
+      "brand": "bell",
+      "device_issue": "Physical Damage",
+      "language": "en",
+      "route": "equipment_warranty_claim",
+      "utterance": "Certified Preowned device is broken"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Customer is responded with apt message for Physical Damage and then SMART CARE COVERAGE LOGIC is triggered",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "route": "equipment_warranty_claim"
+    }
+  },
+  "displayName": "EN_equipment_warranty_claim_DeviceIssueIsPhysicalDamage_NoForEnrolledInSmartCarePgm_NoForLink",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 377,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

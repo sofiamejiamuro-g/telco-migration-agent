@@ -1,0 +1,62 @@
+{
+  "name": "45c89747-5e51-4eb8-acba-433b6e733fda",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+        "language": "fr-ca"
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Bien sûr, laissez-moi vous aider.\nDésirez-vous ajouter un nouveau service ou modifier votre service actuel?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "nouveau plan"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_aqd",
+      "inputActionParameters": {
+        "language": "fr-ca",
+        "line_type": "New",
+        "lob": "Internet",
+        "province": "ON"
+      },
+      "outputActionParameters": {
+        "language": "fr-ca"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "customer is inquiring about adding a new internet line and {province} is \"ON\" from id flow",
+    "actionParameters": {
+      "brand": "bell",
+      "identification_status": "Pass",
+      "language": "fr-ca",
+      "lob": "Internet",
+      "province": "ON",
+      "route": "sales_add_to_existing_account",
+      "utterance": "Je m'intéresse désormais aussi aux services internet."
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "as {lob} is Internet and {province} is ontorio we are transferring to aqd",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca",
+      "line_type": "New",
+      "lob": "Internet",
+      "province": "ON"
+    }
+  },
+  "displayName": "FR-sales_add_to_existing-account-Existing-(province-ON)(internet)",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 388,
+  "languageCode": "fr"
+}

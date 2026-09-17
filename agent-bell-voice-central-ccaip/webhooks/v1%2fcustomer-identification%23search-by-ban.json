@@ -1,0 +1,27 @@
+{
+  "name": "e5b2d23f-12db-4161-84b7-1134ea70e00c",
+  "displayName": "v1/customer-identification#search-by-ban",
+  "timeout": {
+    "seconds": 15
+  },
+  "serviceDirectory": {
+    "service": "projects/gcp-it-npe-pltfm-apigee/locations/us-central1/namespaces/apigee-nb-usc1-service-dir-namespace/services/apigee-nb-usc1-service",
+    "genericWebService": {
+      "uri": "https://apigee-nane1-uat.int.bell.ca/v1/customer-identification",
+      "requestHeaders": [ {
+        "key": "x-apikey",
+        "value": "npZmDivP6Hxes3wtQ0tC9RqItjJTY8TgZHbOPNeFwvSYSKPI"
+      } ],
+      "webhookType": "FLEXIBLE",
+      "httpMethod": "POST",
+      "requestBody": "{\n  \"sessionInfo\": {\n    \"dfcx_session_id\": \"$session.params.dfcx_session_id\",\n    \"agent_id\": \"$session.params.agent_id\",\n    \"parameters\": {\n      \"brand\": \"bell\",\n      \"billing_account_number\": \"$session.params.billing_account_number\"\n    }\n  },\n  \"fulfillmentInfo\": {\n    \"tag\": \"search-by-ban\"\n  },\n  \"languageCode\": \"$request.language\"\n}",
+      "parameterMapping": [ {
+        "key": "customer_id_search_response",
+        "value": "sessionInfo.parameters.customer_id_search_response"
+      }, {
+        "key": "webhook_success",
+        "value": "sessionInfo.parameters.webhook_success"
+      } ]
+    }
+  }
+}

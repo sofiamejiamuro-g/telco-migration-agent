@@ -1,0 +1,36 @@
+{
+  "name": "0525c199-7257-4b93-8a1d-bf24148f1d08",
+  "displayName": "webhook-get-config",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "v2/get-configs-for-dialogflow",
+    "tag": "default",
+    "setParameterActions": [ {
+      "parameter": "domain",
+      "value": "Consumer"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.webhook_success = true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "menu_id",
+        "value": "$session.params.config.DEFAULT_MENU_ID"
+      }, {
+        "parameter": "menu_id_ref",
+        "value": "$sys.func.CONCATENATE(\"REF\", $sys.func.TO_TEXT($session.params.menu_id))"
+      } ]
+    },
+    "targetPage": "Webhook get department-id",
+    "name": "a440b058-cb13-46cd-b0e4-c8b79a5e3a61"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "IVR Handover",
+    "name": "7ba1ef67-1386-462e-bb77-bdd01694d1bc"
+  } ]
+}

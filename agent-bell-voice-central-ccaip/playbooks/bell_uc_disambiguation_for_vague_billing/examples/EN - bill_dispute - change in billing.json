@@ -1,0 +1,48 @@
+{
+  "name": "a8232970-9f17-42ef-a0fd-5afb695e6403",
+  "actions": [ {
+    "agentUtterance": {
+      "text": " I can help with several billing topics. To get you to the right place, please tell me more about your request. For example, you could say, 'a specific charge' or 'my total balance'."
+    }
+  }, {
+    "userUtterance": {
+      "text": "change in billing\n"
+    }
+  }, {
+    "playbookInvocation": {
+      "playbook": "bell_UC_Billing",
+      "playbookInput": {
+        "precedingConversationSummary": "Customers are looking to know about their incorrect charges or charge related disputes",
+        "actionParameters": {
+          "language": "en",
+          "route": "bill_dispute",
+          "utterance": "change in billing"
+        }
+      },
+      "playbookOutput": {
+        "executionSummary": "Customer query got resolved",
+        "actionParameters": {
+          "language": "en",
+          "route": "bill_dispute"
+        }
+      },
+      "playbookState": "OUTPUT_STATE_OK"
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer query about \"I need to talk about my bill.\" is addressed",
+    "actionParameters": {
+      "language": "en",
+      "route": "bill_vague",
+      "utterance": "I need to talk about my bill."
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Customer query is addressed and then transferred to \"lucky_UC_Billing\" playbook for further conversation"
+  },
+  "displayName": "EN - bill_dispute - change in billing",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 303,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

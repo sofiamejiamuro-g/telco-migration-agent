@@ -1,0 +1,78 @@
+{
+  "name": "f89dfb35-4eab-4edd-a4aa-d5d970465adc",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Who is the manufacturer?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "apple"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Most devices purchased through Bell come within the limited manufacturer's warranty. Did you purchase your device within the last 12 months?\n"
+    }
+  }, {
+    "userUtterance": {
+      "text": "20 months"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Have you enrolled in our SmartCare Program?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "yes"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "When submitting a request online or calling the Smart Phone Care Center, your request will be processed by Asurion, the administrator of the Smartphone Care program. I can send you a link to submit your request. Is that alright?\n"
+    }
+  }, {
+    "userUtterance": {
+      "text": "yes"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "en",
+        "sms_content": "Bell: You can visit asur.me/bellclaims to submit a Smart/Phone Care request. ( bell.ca/about-us ) ",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "customer is inquiring about device_issue=\"defective\"",
+    "actionParameters": {
+      "brand": "bell",
+      "device_issue": "Defective",
+      "language": "en",
+      "noinput_flag": "True",
+      "route": "equipment_warranty_claim",
+      "utterance": "Hi my phone is having a poor battery life I need a replacement, is it covered under warranty"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "customer is asked manufacturer and proceed further manufacturer warranty logic",
+    "actionParameters": {
+      "brand": "bell",
+      "device_issue": "Defective",
+      "email_indicator": "true",
+      "language": "en",
+      "manufacturer": "Apple",
+      "noinput_flag": "True",
+      "route": "equipment_warranty_claim",
+      "sms_content": "Bell msg: You can visit asur.me/bellclaims to submit your Smartphone Care request online. (bell.ca/about-us)",
+      "sms_type": "Public"
+    }
+  },
+  "displayName": "EN-equipment_warranty_claim-id-pass-device-issue-defective-no-manufacturer-apple(smartcare-yes)(sms-yes)",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 504,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

@@ -1,0 +1,99 @@
+{
+  "name": "faec111a-3d13-4a46-aeb6-9b2c5616abce",
+  "displayName": "Webhook Check PreAuth Payment",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "/v1/pre-auth-payment#get-existing",
+    "tag": "get-existing",
+    "setParameterActions": [ {
+      "parameter": "webhook_success",
+      "value": null
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "payment_method",
+        "value": "$session.params.get_pre_auth_payment_response.paymentMethod"
+      }, {
+        "parameter": "apb_location_id",
+        "value": 70010
+      } ]
+    },
+    "targetFlow": "bell_apb",
+    "name": "57cc9963-77c4-40d0-b9e1-a8ad040fa1e2"
+  }, {
+    "condition": "$session.params.payment_method = \"PreAuthBank\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "You are currently set up with Pre-Authorized Debit." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Vous êtes actuellement inscrit au débit pré-autorisé." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetFlow": "bell_Feedback",
+    "name": "2236003c-6e93-4b1b-9d58-345424e48316"
+  }, {
+    "condition": "$session.params.payment_method = \"PreAuthCreditCard\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "You are currently set up with Pre-Authorized Credit Card." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Vous êtes actuellement inscrit au paiement pré- autorisé par carte de crédit." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetFlow": "bell_Feedback",
+    "name": "5b66c312-f75d-42d1-9f93-683344f91c53"
+  }, {
+    "condition": "$session.params.payment_method = \"Regular\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "You are currently not set up with Pre-Authorized payments. To set up pre-authorized payment, you can do so in MyBell. Please visit bell.ca/support for more information" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Vous n'êtes actuellement pas inscrit aux paiements pré-autorisés. Vous pouvez configurer les paiements pré- autorisés dans MonBell. Veuillez visiter le site Web bell.ca/soutien pour en savoir plus." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetFlow": "bell_Feedback",
+    "name": "620201cc-60f1-414d-b4f5-42583bd73381"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "faec111a-3d13-4a46-aeb6-9b2c5616abce"
+      }, {
+        "parameter": "flow_id",
+        "value": "2270f500-41b4-45fb-89ed-e16938ec3cea"
+      }, {
+        "parameter": "page_name",
+        "value": "Webhook Check PreAuth Payment"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

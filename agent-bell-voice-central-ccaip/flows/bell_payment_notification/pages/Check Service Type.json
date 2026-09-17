@@ -1,0 +1,111 @@
+{
+  "name": "7faf6aad-3641-4d0e-88ff-a1bd5df00cc1",
+  "displayName": "Check Service Type",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "active_service",
+        "value": "$sys.func.FILTER(\"$session.params.billing_account_info_list[0]\", \"$.services[*].service_type\")"
+      }, {
+        "parameter": "contains_mobility",
+        "value": "$sys.func.CONTAIN($session.params.active_service, \"MOBILITY\")"
+      }, {
+        "parameter": "contains_tv",
+        "value": "$sys.func.CONTAIN($session.params.active_service, \"TV\")"
+      }, {
+        "parameter": "contains_internet",
+        "value": "$sys.func.CONTAIN($session.params.active_service, \"INTERNET\")"
+      }, {
+        "parameter": "active_service2",
+        "value": "$sys.func.FILTER(\"$session.params.billing_account_info_list\", \"$.services[*].service_type\")"
+      }, {
+        "parameter": "contains_mobility2",
+        "value": "$sys.func.CONTAIN($session.params.active_service2, \"MOBILITY\")"
+      }, {
+        "parameter": "contains_tv2",
+        "value": "$sys.func.CONTAIN($session.params.active_service2, \"TV\")"
+      }, {
+        "parameter": "contains_internet2",
+        "value": "$sys.func.CONTAIN($session.params.active_service2, \"INTERNET\")"
+      } ]
+    },
+    "name": "d4602e0c-d056-42e8-9f60-4567556481b8"
+  }, {
+    "condition": "($session.params.contains_mobility = true AND $session.params.contains_internet = false AND $session.params.contains_tv = false) OR ($session.params.contains_mobility2 = true AND $session.params.contains_internet2 = false AND $session.params.contains_tv2 = false)",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Your payment was sufficient enough that your services will now be restored.  You will need to restart your phone in 30 minutes to resume service and there will be a $50 fee per line." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Votre paiement était suffisant pour que vos services soient maintenant rétablis. Vous devrez redémarrer votre téléphone dans 30 minutes pour reprendre le service et des frais de $50 par ligne s'appliqueront." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetFlow": "bell_Feedback",
+    "name": "6fbd1fbc-4839-41f7-a92a-654d26364244"
+  }, {
+    "condition": "(($session.params.contains_internet = true OR $session.params.contains_tv = true) AND $session.params.contains_mobility = false) OR (($session.params.contains_internet2 = true OR $session.params.contains_tv2 = true) AND $session.params.contains_mobility2 = false)",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Your payment was sufficient enough that your services will now be restored in 30 mins.  There will be a $50 fee per service.  Please note, our agents cannot restore the service more quickly." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Votre paiement était suffisant pour que vos services soient maintenant rétablis dans 30 minutes. Des frais de $50 par service s'appliqueront. Veuillez noter que nos agents ne peuvent pas rétablir le service plus rapidement." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetFlow": "bell_Feedback",
+    "name": "3e1cb26c-e63b-40c2-aced-55a70bc6f4c9"
+  }, {
+    "condition": "($session.params.contains_mobility = true AND ($session.params.contains_internet = true OR $session.params.contains_tv = true)) OR ($session.params.contains_mobility2 = true AND ($session.params.contains_internet2 = true OR $session.params.contains_tv2 = true))",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Your payment was sufficient enough that your services will now be restored. You will need to restart your phone in 30 minutes to resume service, and your internet or TV service will be restored in 30 mins.  There will be a $50 fee per service.  Please note, our agents cannot restore the service more quickly." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Votre paiement était suffisant pour que vos services soient maintenant rétablis. Vous devrez redémarrer votre téléphone dans 30 minutes pour reprendre le service, et votre service Internet ou Télé sera rétabli dans 30 minutes. Des frais de $50 par service s'appliqueront. Veuillez noter que nos agents ne peuvent pas rétablir le service plus rapidement." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetFlow": "bell_Feedback",
+    "name": "a6e83b7f-f4a9-42f7-ab5c-7a962d870ad3"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "7faf6aad-3641-4d0e-88ff-a1bd5df00cc1"
+      }, {
+        "parameter": "flow_id",
+        "value": "ced63037-f058-4dd0-9269-97742185ea0f"
+      }, {
+        "parameter": "page_name",
+        "value": "Check Service Type"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

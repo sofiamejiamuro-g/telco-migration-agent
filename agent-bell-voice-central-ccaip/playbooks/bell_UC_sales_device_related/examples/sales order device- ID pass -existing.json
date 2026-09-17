@@ -1,0 +1,69 @@
+{
+  "name": "9ed04e50-3fbe-45bc-92d1-b3e3cba51349",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "brand": "bell",
+        "language": "en"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Are you inquiring about a new service or do you want to make changes to your current service?\n"
+    }
+  }, {
+    "userUtterance": {
+      "text": "existing"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Which service are you inquiring about?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "smarthome"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_va_to_ivr_smarthome",
+      "inputActionParameters": {
+        "brand": "bell",
+        "language": "en",
+        "lob": "smarthome"
+      },
+      "outputActionParameters": {
+        "language": "en"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer has questions about needing a new device,device availability, device features, cost, related to devices that Bell sells",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "en",
+      "route": "sales_order_device",
+      "utterance": "I want to order a new device"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "from the identification flow, know the customer_type as \"New\", and if we don't know the lob we need to ask them regarding that too, if it is smart home then reroute to bell_ivr_handoff",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "line_type": "Existing",
+      "lob": "Smarthome"
+    }
+  },
+  "displayName": "sales order device- ID pass -existing",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 413,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

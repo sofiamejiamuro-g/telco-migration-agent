@@ -1,0 +1,71 @@
+{
+  "name": "9a671187-aaa7-44e0-8c5f-2ce641118194",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "language": "en"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Bien sûr, je peux vous aider.\n\nVérifions si nous offrons des services Internet et de téléphonie résidentielle dans votre région. Dans quelle province souhaitez-vous obtenir le service ?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "ROC"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Obtenez des vitesses ultra rapides sur le réseau de Bell grâce au service Internet mobile de Bell. Vous pouvez bénéficier d’une connectivité Internet allant jusqu'à 5G avec un point d'accès sans fil mobile afin de rester connecté à la maison ou lors de vos déplacements.\n\nJe vais envoyer un texto à l'appareil au moyen duquel vous appelez, afin que vous puissiez en savoir plus sur le service Internet mobile sur notre site Web. Est-ce que ça vous convient?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "oui"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "fr-ca",
+        "sms_content": "Bell: Vous pouvez visiter bell.ca/mobileinternetdevices pour consulter nos appareils avec Internet mobile. ( bell.ca/apropos )",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "customer wants to add a new internet line and {province} is \"ROC\" or \"BC\" OR \"AB\" and the {line_type} is \"New\"",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "fr-ca",
+      "line_type": "New",
+      "lob": "Internet",
+      "province": "AB",
+      "route": "sales_add_to_existing_account",
+      "utterance": "Je souhaite ajouter un nouveau service"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "customer is asked {province} and is routed to bell_aqd",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca",
+      "lob": "Internet",
+      "province": "AB"
+    }
+  },
+  "displayName": "FR-sales_add_to_existing-account-Existing-BC(internet)(province-AB)",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 554,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

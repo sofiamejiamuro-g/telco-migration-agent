@@ -1,0 +1,301 @@
+{
+  "name": "f543e356-14da-48bf-bcd0-92629220df53",
+  "displayName": "EECD_2596_EN_Exit2",
+  "testCaseConversationTurns": [ {
+    "userInput": {
+      "injectedParameters": {
+        "clid": 4505633344,
+        "digital_tools_phase2": true,
+        "has_outage": "true",
+        "tfn": "+18338858259"
+      },
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "hi"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "sessionParameters": {
+        "clid": 4505633344,
+        "digital_tools_phase2": true,
+        "has_outage": "true",
+        "tfn": "+18338858259"
+      },
+      "triggeredIntent": {
+        "name": "Default Welcome Intent"
+      },
+      "currentPage": {
+        "name": "Get CX Input",
+        "flow": "bell_Identification"
+      },
+      "textResponses": [ {
+        "text": [ "\u003cspeak\u003eI'm Bell's virtual assistant, I use artificial intelligence to learn. \u003cbreak time=\"1s\"/\u003e\u003c/speak\u003e" ]
+      }, {
+        "text": [ "Are you calling about the account associated with the number you’re calling from?" ],
+        "allowPlaybackInterruption": true
+      } ],
+      "currentFlow": {
+        "name": "bell_Identification"
+      }
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "yes"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "triggeredIntent": {
+        "name": "context.confirm_yes"
+      },
+      "currentPage": {
+        "name": "9e8500ed-7468-4e9d-a5bb-c083d9e2a7ac",
+        "flow": "Default Start Flow"
+      },
+      "textResponses": [ {
+        "text": [ "\u003cspeak\u003eThanks! \u003cbreak time=\"1s\"/\u003e\u003c/speak\u003e" ],
+        "allowPlaybackInterruption": true
+      }, {
+        "text": [ "How can I help you?" ],
+        "allowPlaybackInterruption": true
+      }, {
+        "text": [ "You can communicate your concern here." ],
+        "allowPlaybackInterruption": true
+      } ],
+      "currentFlow": {
+        "name": "Default Start Flow"
+      }
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "Is there an Internet outage in my area?"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "triggeredIntent": {
+        "name": "tech_service_outage"
+      },
+      "currentPage": {
+        "name": "Confirm Customer has OTP device",
+        "flow": "bell_authentication"
+      },
+      "textResponses": [ {
+        "text": [ "To help with that, I need to make sure I'm talking to the right person. We now use a 6-digit code to verify you. Do you have access to a mobile phone that’s listed on your account?" ]
+      } ],
+      "currentFlow": {
+        "name": "bell_authentication"
+      }
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "yes"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "triggeredIntent": {
+        "name": "custom.yes"
+      },
+      "currentPage": {
+        "name": "Prompt Phone Number",
+        "flow": "bell_authentication"
+      },
+      "textResponses": [ {
+        "text": [ "I'll text a 6-digit code to the contact number on your account." ]
+      }, {
+        "text": [ "What phone number would you like me to send it to?" ],
+        "allowPlaybackInterruption": true
+      } ],
+      "currentFlow": {
+        "name": "bell_authentication"
+      }
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "4505633344"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "currentPage": {
+        "name": "Trigger_OTP",
+        "flow": "bell_authentication"
+      },
+      "textResponses": [ {
+        "text": [ "Thanks!" ],
+        "allowPlaybackInterruption": true
+      }, {
+        "text": [ "Once you receive the verification code by text, please say it back to me or enter it on your phone keypad." ],
+        "allowPlaybackInterruption": true
+      } ],
+      "currentFlow": {
+        "name": "bell_authentication"
+      }
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "581781"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "currentPage": {
+        "name": "Check CX input? (Active outage)",
+        "flow": "bell_tech_service_outage_\u0026_Tech_connection_issue"
+      },
+      "textResponses": [ {
+        "text": [ "Thanks, that's the correct code." ],
+        "allowPlaybackInterruption": true
+      }, {
+        "text": [ "Just a moment while I check if there are any outage in your area." ],
+        "allowPlaybackInterruption": true
+      }, {
+        "text": [ "2025-09-25T06:26:57.000Z" ],
+        "allowPlaybackInterruption": true
+      }, {
+        "text": [ "Unfortunately, there is currently an Internet outage in your area. But don't worry, our teams are working to restore your service as soon as possible." ],
+        "allowPlaybackInterruption": true
+      }, {
+        "text": [ "I'll send a text to the device you're calling from, so you can easily track the status of this outage. Is that alright?" ],
+        "allowPlaybackInterruption": true
+      } ],
+      "currentFlow": {
+        "name": "bell_tech_service_outage_\u0026_Tech_connection_issue"
+      }
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "I want to talk to an agent."
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "triggeredIntent": {
+        "name": "other_speak_to_agent"
+      },
+      "currentPage": {
+        "name": "Check CX input agent handling",
+        "flow": "bell_tech_service_outage_\u0026_Tech_connection_issue"
+      },
+      "textResponses": [ {
+        "text": [ "Could you tell me why you'd like to speak to an agent?" ]
+      } ],
+      "currentFlow": {
+        "name": "bell_tech_service_outage_\u0026_Tech_connection_issue"
+      }
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "I want to be compensated for this."
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "triggeredIntent": {
+        "name": "compenation_request"
+      },
+      "currentPage": {
+        "name": "Check_CX_Inp_1",
+        "flow": "bell_tech_service_outage_\u0026_Tech_connection_issue"
+      },
+      "textResponses": [ {
+        "text": [ " I’m sorry, but I can only offer compensation once the outage has been restored." ]
+      } ],
+      "currentFlow": {
+        "name": "bell_tech_service_outage_\u0026_Tech_connection_issue"
+      }
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "agent"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "triggeredIntent": {
+        "name": "other_speak_to_agent"
+      },
+      "currentPage": {
+        "name": "Check_CX_Inp_2",
+        "flow": "bell_tech_service_outage_\u0026_Tech_connection_issue"
+      },
+      "textResponses": [ {
+        "text": [ "I understand, but our agents can't offer any compensation at the moment." ]
+      } ],
+      "currentFlow": {
+        "name": "bell_tech_service_outage_\u0026_Tech_connection_issue"
+      }
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": " I still want an agent."
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "triggeredIntent": {
+        "name": "other_speak_to_agent"
+      },
+      "currentPage": {
+        "name": "Start Page",
+        "flow": "bell_Live Agent Handoff"
+      },
+      "textResponses": [ {
+        "text": [ "Let me check for an available agent. I'll likely be silent for some time during the transfer. You'll know it's successful when you're greeted again. Please stay on the line. Thanks!" ],
+        "allowPlaybackInterruption": true
+      } ],
+      "currentFlow": {
+        "name": "bell_Live Agent Handoff"
+      }
+    }
+  } ],
+  "creationTime": {
+    "seconds": 1758796142,
+    "nanos": 88750000
+  },
+  "testConfig": {
+    "flow": "Default Start Flow",
+    "page": "Start Page"
+  },
+  "languageCode": "en"
+}

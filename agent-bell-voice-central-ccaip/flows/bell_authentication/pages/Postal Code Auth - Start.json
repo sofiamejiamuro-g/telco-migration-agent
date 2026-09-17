@@ -1,0 +1,127 @@
+{
+  "name": "dcc1d10d-1da3-4898-b63b-2dec6c62ed5e",
+  "displayName": "Postal Code Auth - Start",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "setParameterActions": [ {
+      "parameter": "init_getpos",
+      "value": true
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$sys.func.COUNT($session.params.billing_account_info_list) != 1",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "billing_account_info_list",
+        "value": "$session.params.billing_account_info_list"
+      }, {
+        "parameter": "billing_account_info_list",
+        "value": "$sys.func.TO_OBJECT($session.params.billing_account_info_list)"
+      } ]
+    },
+    "name": "5331b04b-5a9c-467d-8106-08e20a97cd11"
+  }, {
+    "condition": "$sys.func.COUNT($session.params.billing_account_info_list) = 1",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "billing_account_info_list",
+        "value": "$session.params.billing_account_info_list[0]"
+      }, {
+        "parameter": "billing_account_info_list",
+        "value": "$sys.func.TO_OBJECT($session.params.billing_account_info_list)"
+      } ]
+    },
+    "name": "7a420422-638d-4f4c-91ac-5b810ef83b61"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "billing_account_info_list2",
+        "value": "$sys.func.TO_OBJECT($session.params.billing_account_info_list)"
+      }, {
+        "parameter": "s_postcodes",
+        "value": "$sys.func.FILTER(\"$session.params.billing_account_info_list\",\"$.services[*].service_address.postcode\")"
+      }, {
+        "parameter": "sp0",
+        "value": "$sys.func.LOWER($sys.func.SUBSTITUTE($session.params.s_postcodes[0],\" \",\"\"))"
+      }, {
+        "parameter": "sp1",
+        "value": "$sys.func.LOWER($sys.func.SUBSTITUTE($session.params.s_postcodes[1],\" \",\"\"))"
+      }, {
+        "parameter": "sp2",
+        "value": "$sys.func.LOWER($sys.func.SUBSTITUTE($session.params.s_postcodes[2],\" \",\"\"))"
+      }, {
+        "parameter": "sp3",
+        "value": "$sys.func.LOWER($sys.func.SUBSTITUTE($session.params.s_postcodes[3],\" \",\"\"))"
+      }, {
+        "parameter": "sp4",
+        "value": "$sys.func.LOWER($sys.func.SUBSTITUTE($session.params.s_postcodes[4],\" \",\"\"))"
+      }, {
+        "parameter": "sp5",
+        "value": "$sys.func.LOWER($sys.func.SUBSTITUTE($session.params.s_postcodes[5],\" \",\"\"))"
+      }, {
+        "parameter": "sp6",
+        "value": "$sys.func.LOWER($sys.func.SUBSTITUTE($session.params.s_postcodes[6],\" \",\"\"))"
+      }, {
+        "parameter": "sp7",
+        "value": "$sys.func.LOWER($sys.func.SUBSTITUTE($session.params.s_postcodes[7],\" \",\"\"))"
+      }, {
+        "parameter": "sp8",
+        "value": "$sys.func.LOWER($sys.func.SUBSTITUTE($session.params.s_postcodes[8],\" \",\"\"))"
+      }, {
+        "parameter": "sp9",
+        "value": "$sys.func.LOWER($sys.func.SUBSTITUTE($session.params.s_postcodes[9],\" \",\"\"))"
+      }, {
+        "parameter": "sp0",
+        "value": "$sys.func.MID($session.params.sp0,$sys.func.MINUS($sys.func.LEN($session.params.sp0), 2), 3)"
+      }, {
+        "parameter": "sp1",
+        "value": "$sys.func.MID($session.params.sp1,$sys.func.MINUS($sys.func.LEN($session.params.sp1), 2), 3)"
+      }, {
+        "parameter": "sp2",
+        "value": "$sys.func.MID($session.params.sp2,$sys.func.MINUS($sys.func.LEN($session.params.sp2), 2), 3)"
+      }, {
+        "parameter": "sp3",
+        "value": "$sys.func.MID($session.params.sp3,$sys.func.MINUS($sys.func.LEN($session.params.sp3), 2), 3)"
+      }, {
+        "parameter": "sp4",
+        "value": "$sys.func.MID($session.params.sp4,$sys.func.MINUS($sys.func.LEN($session.params.sp4), 2), 3)"
+      }, {
+        "parameter": "sp5",
+        "value": "$sys.func.MID($session.params.sp5,$sys.func.MINUS($sys.func.LEN($session.params.sp5), 2), 3)"
+      }, {
+        "parameter": "sp6",
+        "value": "$sys.func.MID($session.params.sp6,$sys.func.MINUS($sys.func.LEN($session.params.sp6), 2), 3)"
+      }, {
+        "parameter": "sp7",
+        "value": "$sys.func.MID($session.params.sp7,$sys.func.MINUS($sys.func.LEN($session.params.sp7), 2), 3)"
+      }, {
+        "parameter": "sp8",
+        "value": "$sys.func.MID($session.params.sp8,$sys.func.MINUS($sys.func.LEN($session.params.sp8), 2), 3)"
+      }, {
+        "parameter": "sp9",
+        "value": "$sys.func.MID($session.params.sp9,$sys.func.MINUS($sys.func.LEN($session.params.sp9), 2), 3)"
+      } ]
+    },
+    "name": "bcfe07b3-67d6-4ee4-85bc-2a0bbbd6b382"
+  }, {
+    "condition": "$session.params.CLID != $session.params.CIRN",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "auth_status",
+        "value": "Fail"
+      } ]
+    },
+    "targetPage": "End Flow Check",
+    "name": "59d644a1-037d-4f1a-9423-e5c31a5b3ee2"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Get Postal Code",
+    "name": "e5446314-6efc-44f6-857d-da6998788e2f"
+  } ]
+}

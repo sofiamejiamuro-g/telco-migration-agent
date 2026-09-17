@@ -1,0 +1,44 @@
+{
+  "name": "fa065b19-214d-4d28-aa43-c85b81cc60c1",
+  "displayName": "CLP Balance",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.clp_balance \u003e= 1",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "CLP Status",
+    "name": "b56ea678-d6a2-46ab-a31b-bd130dc5dd95"
+  }, {
+    "condition": "$session.params.clp_balance \u003c 1",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Entry check",
+    "name": "c5acd206-1af7-4f7e-bc3f-02da085c814e"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "fa065b19-214d-4d28-aa43-c85b81cc60c1"
+      }, {
+        "parameter": "flow_id",
+        "value": "3c7a6898-5854-41b5-900b-4554be02d70d"
+      }, {
+        "parameter": "page_name",
+        "value": "CLP Balance"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

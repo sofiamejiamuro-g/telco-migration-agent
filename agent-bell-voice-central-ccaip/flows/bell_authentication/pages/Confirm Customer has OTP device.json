@@ -1,0 +1,159 @@
+{
+  "name": "e5455e84-0d73-42b4-95e5-b102446db398",
+  "displayName": "Confirm Customer has OTP device",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "conditionalCases": [ {
+      "cases": [ {
+        "condition": "$session.params.from_pin = true",
+        "caseContent": [ {
+          "message": {
+            "text": {
+              "text": [ "Nous utilisons maintenant un code de six chiffres pour vérifier votre compte. Avez-vous accès à un téléphone mobile dont le numéro figure à ce compte?" ]
+            },
+            "languageCode": "fr-ca"
+          }
+        }, {
+          "message": {
+            "text": {
+              "text": [ "We now use a 6-digit code to verify you. Do you have access to a mobile phone that's listed on your account?" ]
+            },
+            "languageCode": "en"
+          }
+        } ]
+      }, {
+        "caseContent": [ {
+          "message": {
+            "text": {
+              "text": [ "Afin de vous aider, je dois m'assurer de parler à la bonne personne. Nous utilisons maintenant un code de six chiffres pour vérifier votre compte. Avez-vous accès à un téléphone mobile dont le numéro figure à ce compte?" ]
+            },
+            "languageCode": "fr-ca"
+          }
+        }, {
+          "message": {
+            "text": {
+              "text": [ "To help with that, I need to make sure I'm talking to the right person. We now use a 6-digit code to verify you. Do you have access to a mobile phone that's listed on your account?" ]
+            },
+            "languageCode": "en"
+          }
+        } ]
+      } ]
+    } ]
+  },
+  "transitionRoutes": [ {
+    "intent": "custom.yes",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "otp_has_phone",
+        "value": true
+      } ]
+    },
+    "targetPage": "Webhook dfcx_support",
+    "name": "6288f777-96fb-425c-b612-29de18a39fab"
+  }, {
+    "intent": "custom.no",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Si vous n’avez pas accès à un téléphone mobile figurant à ce compte, nous ne pourrons pas vous envoyer de code pour vérifier votre identité." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "Since you don't have access to a mobile phone associated with your account, we can't send a verification code to confirm your identity." ]
+        },
+        "languageCode": "en"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "auth_status",
+        "value": "Fail"
+      }, {
+        "parameter": "authentication_status",
+        "value": "Fail"
+      }, {
+        "parameter": "otp_has_phone",
+        "value": false
+      } ]
+    },
+    "targetPage": "End Flow Check",
+    "name": "eadd10cb-08e2-4a79-bd34-f537ca072df3"
+  }, {
+    "intent": "context.why_phone",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Je comprends votre hésitation. Cette étape permet de protéger votre compte et vos informations personnelles et garantit que vous seul(e) pouvez apporter des modifications ou accéder à vos données. Pour continuer, avez-vous accès au numéro de téléphone mobile associé à votre compte ?" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "I understand the hesitation. This step helps protect your account and personal information and ensures only you can make changes or access details. To continue, do you have access to a mobile phone listed on your account?" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "177cc331-8e07-4eff-b70a-d223d280592e"
+  }, {
+    "intent": "context.phone_away",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Comme vous n'avez pas accès au numéro de téléphone portable associé à votre compte, nous ne pouvons pas vous envoyer de code de vérification pour confirmer votre identité." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "Since you don’t have access to a mobile phone listed on your account, we can't send a verification code to confirm your identity." ]
+        },
+        "languageCode": "en"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "auth_status",
+        "value": "Fail"
+      }, {
+        "parameter": "authentication_status",
+        "value": "Fail"
+      }, {
+        "parameter": "otp_has_phone",
+        "value": false
+      } ]
+    },
+    "targetPage": "End Flow Check",
+    "name": "ce132e70-2561-4f55-b034-8dd0f81f781c"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Local Error handling - OTP device",
+    "event": "sys.no-input-default",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "global_error_counter",
+        "value": "$sys.func.ADD($session.params.global_error_counter,1)"
+      }, {
+        "parameter": "local_noinput_counter",
+        "value": "$sys.func.ADD($session.params.local_noinput_counter,1)"
+      }, {
+        "parameter": "local_trigger",
+        "value": "no_input"
+      } ]
+    },
+    "name": "f46148ab-b6e0-4024-a9d5-64d6708196f3"
+  }, {
+    "targetPage": "Local Error handling - OTP device",
+    "event": "sys.no-match-default",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "global_error_counter",
+        "value": "$sys.func.ADD($session.params.global_error_counter,1)"
+      }, {
+        "parameter": "local_nomatch_counter",
+        "value": "$sys.func.ADD($session.params.local_nomatch_counter,1)"
+      }, {
+        "parameter": "local_trigger",
+        "value": "no_match"
+      } ]
+    },
+    "name": "3e2b1e04-416a-4fc6-8c81-60563a89235c"
+  } ]
+}

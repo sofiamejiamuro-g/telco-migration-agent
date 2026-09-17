@@ -1,0 +1,59 @@
+{
+  "name": "65276a24-5f85-4c49-bb3e-1dd94d7c3ce9",
+  "displayName": "Home phone Check",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "v1/dfcx_support/cpm_profile_info",
+    "tag": "hp-in-ban",
+    "setParameterActions": [ {
+      "parameter": "customer_profile",
+      "value": "$session.params.customer_id_search_response"
+    }, {
+      "parameter": "clid",
+      "value": "$session.params.Contact_Number"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "is_home_phone",
+        "value": "$session.params.hp_in_ban_response.is_home_phone"
+      }, {
+        "parameter": "clid",
+        "value": "$session.params.temp_clid"
+      } ]
+    },
+    "name": "56264196-7932-41d8-8025-84e15ff38708"
+  }, {
+    "condition": "$session.params.webhook_success = true AND $session.params.is_home_phone = true",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_aqd",
+    "name": "5d1a329f-ac9a-4a83-aa2a-ea728cea116d"
+  }, {
+    "condition": "$session.params.webhook_success = true AND $session.params.is_home_phone = false",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Phone Number Validation",
+    "name": "bf2158d7-e729-4842-8632-4f83a7a5d1c2"
+  }, {
+    "condition": "$session.params.webhook_success = false",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_aqd",
+    "name": "a392f5f9-1803-445d-a6dd-bf449a4a5609"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_aqd",
+    "name": "c5de9d98-d708-4f2d-b3ce-60016acf833c"
+  } ]
+}

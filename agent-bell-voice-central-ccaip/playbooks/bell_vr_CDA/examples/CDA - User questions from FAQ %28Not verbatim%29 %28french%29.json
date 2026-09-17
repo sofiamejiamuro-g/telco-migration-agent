@@ -1,0 +1,59 @@
+{
+  "name": "38b5b6c5-5e5a-43c2-893c-24086bac8e48",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Pour régler ce problème, vous devez effectuer cette étape maintenant. Veuillez essayer de redémarrer l'appareil avec lequel vous rencontrez des problèmes, comme votre téléphone ou votre ordinateur, et reconnectez-vous à votre réseau Wi-Fi Bell. Une fois connecté, essayez d'utiliser Internet. Veuillez effectuer cette étape et dites-moi quand vous aurez terminé."
+    }
+  }, {
+    "userUtterance": {
+      "text": "Je ne trouve pas le bouton de mise en marche sur mon téléphone."
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Le bouton de redémarrage varie selon l'appareil. Pour les appareils mobiles, vous pouvez glisser votre doigt vers le bas depuis le haut de l'écran et il devrait y avoir une option de redémarrage, ou vous pouvez essayer de l'éteindre puis de le rallumer. Une fois que vous aurez réussi à le redémarrer, veuillez vous reconnecter à votre Wi-Fi Bell et dites-moi si Internet fonctionne."
+    }
+  }, {
+    "userUtterance": {
+      "text": "D'accord... Internet fonctionne maintenant."
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Parfait. Je mets à jour le statut maintenant pour voir ce que nous devons faire ensuite."
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_vr_post_answer",
+      "inputActionParameters": {
+        "customer_answer1_id": "0"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "User having a problem with the service and initiating Virtual repair session.",
+    "actionParameters": {
+      "acceptable_answers": [ {
+        "choice": "user_completed_entire_solution",
+        "id": "0"
+      }, {
+        "choice": "user_is_stuck_further_help_requested",
+        "id": "1"
+      } ],
+      "dcx_action_code": "6020",
+      "description": "",
+      "eta_CDA": "Approx. 2 minutes",
+      "faq_question_answer": "Q: Combien de temps dois-je attendre avant de le rebrancher ? R: Veuillez attendre 15 secondes avant de rebrancher le bloc d'alimentation. Q: Quels voyants ou messages devrais-je voir pendant le redémarrage ? R: Les voyants varieront et clignoteront différemment selon l'état de l'appareil pendant le redémarrage. Les différents états indiquent le statut de l'appareil durant le processus. Q: Combien de temps cela peut-il prendre ? R: Le redémarrage peut varier selon l'appareil. Cela prend généralement de 3 à 5 minutes pour que le redémarrage se termine et que l'appareil soit reconfiguré. Q: Quel site Web puis-je consulter ? R: Vous pouvez essayer de naviguer sur le site www.bell.ca Q: Quel site Web voulez-vous que je vérifie ? R: Vous pouvez essayer de vérifier le site Web www.bell.ca Q: Sur quel appareil voulez-vous que je vérifie ? R: Vous pouvez essayer celui avec lequel nous faisons le dépannage, êtes-vous capable de naviguer ? Q: Quel navigateur devrais-je utiliser ? R: Vous pouvez choisir n'importe quel navigateur que vous aimez. Q: Qu'est-ce qu'un navigateur ? R: Un navigateur est une application que vous utilisez pour accéder à des sites Web. Par exemple Chrome, Edge ou Safari. Q: Comment puis-je redémarrer mon appareil ? R: Vous pouvez redémarrer votre appareil en sélectionnant l'option de redémarrage ou en l'éteignant puis en le rallumant. Q: Où se trouve le bouton de redémarrage ? R: Le bouton de redémarrage varie selon l'appareil. Pour les appareils mobiles, vous pouvez glisser votre doigt vers le bas depuis le haut de l'écran et il devrait y avoir une option de redémarrage, ou vous pouvez essayer de l'éteindre puis de le rallumer.",
+      "language": "fr-ca",
+      "title": "Try restarting the device you’re having issues with, such as your phone or computer, and reconnect to your Bell WiFi network. Once you're connected, try using the Internet."
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Tool Evaluation (Stage A): The system successfully called the FAQ tool and received a valid JSON response containing multiple Q\u0026A pairs.\n\nSemantic Search (Stage B, Step 1): The system iterated through the tool's response, comparing the user's query (\"I can't find the power button...\") against the Q field of each snippet.\n\nMatch Identification: A high-confidence semantic match was identified with the question: \"Q: Where is the restart button?\". The system stored the corresponding answer: \"The restart button varies by device...\".\n\nResponse Generation (Stage B, Step 2): Since found_answer was not null, the system output the answer exactly as retrieved from the tool.\n\nFlow Constraint: Immediately after the answer, the system applied the mandatory rule to \"gently re-ask the initial troubleshooting question,\" appending a directive based on the current title to steer the conversation back to the main task."
+  },
+  "displayName": "CDA - User questions from FAQ (Not verbatim) (french)",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 1122,
+  "languageCode": "en"
+}

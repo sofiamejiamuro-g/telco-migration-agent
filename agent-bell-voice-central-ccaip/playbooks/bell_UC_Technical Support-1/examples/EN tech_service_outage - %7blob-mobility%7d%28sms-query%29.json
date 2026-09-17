@@ -1,0 +1,68 @@
+{
+  "name": "3347ac5c-dad1-47fe-abcf-038aa1d033bf",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_tech_intent_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70012",
+        "language": "en",
+        "lob": "mobility",
+        "utterance": "my phone is not getting any signal."
+      },
+      "outputActionParameters": {
+        "lob": "mobility"
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "You can easily check for service outages on our website. I'll send a text to the device you're calling from so you can access it quickly. Is that alright?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Will the text contain direct link?"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Yes, you can directly click on the link and check for service outage status. Would you like me to send the text?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "yes"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "en",
+        "sms_content": "Bell msg: You can visit https://support.bell.ca/outage-check to check for service outages in your area. ( bell.ca/about-us )",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "customer is having no phone signals and also asked for more information about SMS",
+    "actionParameters": {
+      "apb_location_id": "70012",
+      "language": "en",
+      "lob": "mobility",
+      "route": "tech_service_outage",
+      "utterance": "my phone is not getting any signal."
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "customer is transferred to tech_intent_apb for lob Customer asked a question regarding SMS so VA answered them and prompted again for SMS. User then said yes so we route accordingly",
+    "actionParameters": {
+      "apb_location_id": "70012",
+      "language": "en",
+      "lob": "mobility"
+    }
+  },
+  "displayName": "EN tech_service_outage - {lob-mobility}(sms-query)",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 483,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

@@ -1,0 +1,44 @@
+{
+  "name": "f49cacb8-c1ad-4946-a0c5-12159ccefc9d",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Bien sûr, je peux vous aider avec ça. Vous pouvez facilement voir et suivre votre utilisation de la mobilité dans MyBell. J’enverrai un texte à l’appareil d’où vous appelez, avec un lien expliquant les étapes à suivre. Est-ce que ça va ?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "oui"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "brand": "bell",
+        "language": "fr-ca",
+        "sms_send_status": "Declined"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "User wants to check their mobility usage history.",
+    "actionParameters": {
+      "language": "fr-ca",
+      "route": "account_usage_history",
+      "utterance": "Je veux vérifier mon historique d’utilisation de SMS "
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Customer already stated LOB (Mobility) so no need to disambiguate for LOB so VA offers sms. customer doesn't say anything so we route accordingly",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca"
+    }
+  },
+  "displayName": "FR account_usage_history - Mobility - No Input",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 280,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

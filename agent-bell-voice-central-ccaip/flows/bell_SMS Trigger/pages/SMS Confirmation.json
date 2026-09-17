@@ -1,0 +1,216 @@
+{
+  "name": "78e339ac-de31-47d9-b324-c8cdb88d82fe",
+  "displayName": "SMS Confirmation",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "setParameterActions": [ {
+      "parameter": "fallback_counter",
+      "value": 0
+    } ]
+  },
+  "transitionRoutes": [ {
+    "intent": "context.sms_not_received",
+    "condition": "$session.params.sms_type = \"Private\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Oh... Laisse-moi essayer de l'envoyer à nouveau au même numéro." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "Oh... Let me try sending it again to the same number." ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "targetPage": "Trigger SMS to Provided Number",
+    "name": "b7729a64-9376-463c-9e88-ee2b7eb4aa91"
+  }, {
+    "intent": "context.sms_not_received",
+    "condition": "$session.params.sms_type = \"Public\" OR $session.params.sms_type = null",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "$request.generative.response" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "$request.generative.response" ]
+        },
+        "languageCode": "en"
+      } ],
+      "generators": [ {
+        "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/fb1d7ce4-69f9-40f9-803f-9ac0d8af70c9",
+        "outputParameter": "$request.generative.response"
+      } ]
+    },
+    "targetPage": "Prompt CX for Phone Number",
+    "name": "e211c4c8-95bc-49bc-96fd-77288da56398"
+  }, {
+    "intent": "context.sms_received",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_Feedback",
+    "name": "fbde93dc-4144-46a8-8ef7-80fa422b2ba4"
+  }, {
+    "intent": "context.sms_link_not_working",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "webhook_success",
+        "value": null
+      } ]
+    },
+    "targetPage": "Webhook intent-sdl-mapping | Link doesn't work",
+    "name": "2ca52d80-34b4-4a43-97a3-04e56ad1f3c4"
+  }, {
+    "intent": "context.sms_link_rejected",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "webhook_success",
+        "value": null
+      } ]
+    },
+    "targetPage": "Webhook intent-sdl-mapping | Link Rejected",
+    "name": "4172efde-c053-462b-848d-bb3577fd6e9f"
+  }, {
+    "intent": "context.user_asks_more_time",
+    "condition": "$session.params.More_Time_Counter = 1",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "More_Time_Counter",
+        "value": 0
+      } ]
+    },
+    "targetFlow": "bell_Feedback",
+    "name": "3ce15d9b-cf3b-465e-bf45-595109e4f7b3"
+  }, {
+    "intent": "context.user_asks_more_time",
+    "condition": "$session.params.More_Time_Counter = 0",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Absolument, prenez votre temps" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "Absolutely, take your time" ]
+        },
+        "languageCode": "en"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "$session.params.More_Time_Counter",
+        "value": 1
+      } ]
+    },
+    "name": "b4e69e4d-9377-4b55-9b4d-37906e56651e"
+  }, {
+    "intent": "context.confirm_no",
+    "condition": "$session.params.sms_type = \"Private\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Oh... Laisse-moi essayer de l'envoyer à nouveau au même numéro." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "Oh... Let me try sending it again to the same number." ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "targetPage": "Trigger SMS to Provided Number",
+    "name": "5b5ed100-32b2-4e19-9f78-52cfa1a2bdf2"
+  }, {
+    "intent": "context.confirm_no",
+    "condition": "$session.params.sms_type = \"Public\" OR $session.params.sms_type = null",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "$request.generative.response" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "$request.generative.response" ]
+        },
+        "languageCode": "en"
+      } ],
+      "generators": [ {
+        "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/fb1d7ce4-69f9-40f9-803f-9ac0d8af70c9",
+        "outputParameter": "$request.generative.response"
+      } ]
+    },
+    "targetPage": "Prompt CX for Phone Number",
+    "name": "0c654eeb-a8a0-4756-8b55-6322d2b3abe0"
+  }, {
+    "intent": "context.confirm_yes",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_Feedback",
+    "name": "54ed8af7-4acf-4b28-9ee5-4a976e4ff6b9"
+  }, {
+    "intent": "context.sms_different_number",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Use different Number",
+    "name": "05dcd02f-6636-4763-843f-cd8bf2f7c86d"
+  } ],
+  "eventHandlers": [ {
+    "targetFlow": "bell_Feedback",
+    "event": "sys.no-input-1",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "global_error_counter",
+        "value": "$sys.func.ADD($session.params.global_error_counter,1)"
+      } ]
+    },
+    "name": "5319f8b4-2db3-4dd4-9de2-827dc6978309"
+  }, {
+    "targetPage": "Local Error handling - SMS Confirmation",
+    "event": "sys.no-match-1",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "global_error_counter",
+        "value": "$sys.func.ADD($session.params.global_error_counter,1)"
+      }, {
+        "parameter": "local_trigger",
+        "value": "no_match"
+      }, {
+        "parameter": "local_nomatch_counter",
+        "value": "$sys.func.ADD($session.params.local_nomatch_counter,1)"
+      } ]
+    },
+    "name": "d6992a08-da98-49b3-8bdf-6017c54c505d"
+  } ],
+  "advancedSettings": {
+    "speechSettings": {
+      "endpointerSensitivity": 90,
+      "noSpeechTimeout": {
+        "seconds": 10
+      },
+      "models": [ {
+        "key": "en",
+        "value": "telephony_short"
+      }, {
+        "key": "fr",
+        "value": ""
+      }, {
+        "key": "fr-ca",
+        "value": "telephony_short"
+      } ]
+    }
+  },
+  "speakerIdSettings": {
+  
+  },
+  "description": "This is Cx did not receive an SMS flow check."
+}

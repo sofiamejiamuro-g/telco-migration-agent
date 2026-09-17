@@ -1,0 +1,136 @@
+{
+  "name": "f674770b-b421-47ef-8472-c597004c3177",
+  "displayName": "Expiry Date Validation",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.len_card_expiry_date = 4",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "date_today",
+        "value": "$sys.func.NOW()"
+      }, {
+        "parameter": "month_today",
+        "value": "$sys.func.TO_NUMBER($session.params.date_today.month)"
+      }, {
+        "parameter": "year_today",
+        "value": "$sys.func.TO_NUMBER($sys.func.MID( $sys.func.TO_TEXT($session.params.date_today.year),3,2))"
+      } ]
+    },
+    "targetPage": "Date Present/Future Check",
+    "name": "52a8a85c-3b73-47ac-8df9-de7cfa5ccf31"
+  }, {
+    "condition": "$session.params.no_match_counter \u003c 2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "That doesn't seem right. Could you enter the month and year as four digits? For example, if your expiry date is January 2030, you can let me know by saying or entering 0130." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Cela ne semble pas exact. Pourriez-vous entrer le mois et l’année en quatre chiffres? Par exemple, si votre date d’expiration est janvier 2030, vous pouvez me l’indiquer en disant ou en entrant 0130." ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "no_match_counter",
+        "value": "$sys.func.ADD($session.params.no_match_counter,1)"
+      }, {
+        "parameter": "expiry_date",
+        "value": null
+      } ]
+    },
+    "targetPage": "Prompt expiry date",
+    "name": "a7440180-4fae-4e00-881c-5904bf1ff96a"
+  }, {
+    "condition": "$session.params.no_match_counter \u003e= 2",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "no_match_counter",
+        "value": "$sys.func.ADD($session.params.no_match_counter,1)"
+      }, {
+        "parameter": "expiry_date",
+        "value": null
+      } ],
+      "conditionalCases": [ {
+        "cases": [ {
+          "condition": "$session.params.route = \"payment_make_payment\"",
+          "caseContent": [ {
+            "message": {
+              "text": {
+                "text": [ "To keep things secure, we ask that you please try again later. You can also make a payment at any point using the MyBell app." ]
+              },
+              "languageCode": "en"
+            }
+          }, {
+            "message": {
+              "text": {
+                "text": [ "Pour assurer la sécurité, nous vous demandons d’essayer de nouveau plus tard. Vous pouvez également effectuer un paiement à tout moment à l’aide de l’appli MonBell." ]
+              },
+              "languageCode": "fr-ca"
+            }
+          } ]
+        }, {
+          "condition": "$session.params.route = \"payment_update_autopay\" OR \"payment_setup_autopay\"",
+          "caseContent": [ {
+            "message": {
+              "text": {
+                "text": [ "To keep things secure, we ask that you please try again later. You can also set up your pre-authorized payment at any point using the MyBell app." ]
+              },
+              "languageCode": "en"
+            }
+          }, {
+            "message": {
+              "text": {
+                "text": [ "Pour assurer la sécurité, nous vous demandons d’essayer de nouveau plus tard. Vous pouvez également effectuer un paiement à tout moment à l’aide de l’appli MonBell." ]
+              },
+              "languageCode": "fr-ca"
+            }
+          } ]
+        }, {
+          "caseContent": [ {
+            "message": {
+              "text": {
+                "text": [ "To keep things secure, we ask that you please try again later. You can call back later or you can also easily complete this step using the MyBell app." ]
+              },
+              "languageCode": "en"
+            }
+          }, {
+            "message": {
+              "text": {
+                "text": [ "Pour assurer la sécurité, nous vous demandons d’essayer de nouveau plus tard. Vous pouvez également effectuer un paiement à tout moment à l’aide de l’appli MonBell." ]
+              },
+              "languageCode": "fr-ca"
+            }
+          } ]
+        } ]
+      } ]
+    },
+    "targetPage": "Prompt CX SMS",
+    "name": "4678b044-489d-4db7-a443-0df31a3e5ed7"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "f674770b-b421-47ef-8472-c597004c3177"
+      }, {
+        "parameter": "flow_id",
+        "value": "a059ee3e-a2ae-4118-bc6a-65f7330baa63"
+      }, {
+        "parameter": "page_name",
+        "value": "Expiry Date Validation"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

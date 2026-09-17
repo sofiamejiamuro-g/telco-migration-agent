@@ -1,0 +1,88 @@
+{
+  "name": "8bfd25c6-180f-4271-85cd-0074593b6f56",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "language": "en"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Sure, Let me help you with that.\nWhich service are you inquiring about?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "want to add new line"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "In order to assist you better."
+    }
+  }, {
+    "playbookInvocation": {
+      "playbook": "bell_uc_ask_LOB",
+      "playbookInput": {
+        "precedingConversationSummary": "customer is inquiring about adding a new line and {province} is \"MTS\" from id flow, but does not provide lob",
+        "actionParameters": {
+          "language": "en",
+          "line_type": "New",
+          "route": "sales_add_to_existing_account"
+        }
+      },
+      "playbookOutput": {
+        "executionSummary": "When user does not provide lob, prompt them to understand what kind of service they are looking for, if the user mentions lob then return lob to the originating Playbook, if not set the default lob and return back",
+        "actionParameters": {
+          "language": "en",
+          "line_type": "New",
+          "lob": "Internet",
+          "rouet": "sales_add_to_existing_account"
+        }
+      }
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_aqd",
+      "inputActionParameters": {
+        "language": "en",
+        "line_type": "New",
+        "lob": "Internet",
+        "province": "MTS",
+        "special_queue": "bell_sales_to_mts"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "customer is inquiring about adding a tv line and {province} is \"MTS\" from id flow",
+    "actionParameters": {
+      "brand": "bell",
+      "identification_status": "Pass",
+      "language": "en",
+      "line_type": "New",
+      "province": "MB",
+      "route": "sales_add_to_existing_account",
+      "utterance": "I want to add a line"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "as {lob} is tv and {province} is MTS we are transferring to aqd",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "line_type": "New",
+      "lob": "Internet",
+      "province": "MTS"
+    }
+  },
+  "displayName": "EN-sales_add_to_existing-account-Existing-(province-MTS)(internet)",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 594,
+  "languageCode": "en"
+}

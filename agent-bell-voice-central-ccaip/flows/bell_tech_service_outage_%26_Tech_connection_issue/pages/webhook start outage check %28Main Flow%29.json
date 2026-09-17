@@ -1,0 +1,55 @@
+{
+  "name": "2b1fc530-49f6-4b50-9901-603ee8dd3e02",
+  "displayName": "webhook start outage check (Main Flow)",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "v1/digital-tools/outage-check#start-process",
+    "tag": "start-process",
+    "setParameterActions": [ {
+      "parameter": "brand",
+      "value": "$session.params.brand"
+    }, {
+      "parameter": "services",
+      "value": "$request.generative.filtered_services"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.webhook_success = False OR $session.params.webhook_success = \"False\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Failed Outage Check",
+    "name": "f87b99b0-35de-4e80-92dd-8a888514cda6"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Just a moment while I check if there are any outages in your area." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Veuillez patienter un instant pendant que je vérifie s’il y a des pannes dans votre région." ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "outage_counter",
+        "value": 0
+      } ]
+    },
+    "targetPage": "Webhook Get Outage Status Update (Main Flow)",
+    "name": "34c59416-4b53-41db-a36f-7d3b90b0e74f"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Failed Outage Check",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+    
+    },
+    "name": "7124eebe-06e1-4142-ae1f-8afa09bcde99"
+  } ]
+}

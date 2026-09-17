@@ -1,0 +1,64 @@
+{
+  "name": "0b7624f0-d5cc-4675-be8b-79e1e8d5c2e9",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "De quel appareil souhaitez-vous vérifier l’état ?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Mobilité"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Avez-vous des questions sur un surclassement d'appareil, un nouvel appareil ou une commande de réparation?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Commande de réparation"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "D'accord. Vous pouvez consulter le statut de votre réparation mobile sur l'appli MonBell. Je vais envoyer un texto sur l'appareil au moyen duquel vous appelez afin que vous puissiez faire le suivi de votre envoi. Est-ce que ça vous convient?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Oui"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "fr-ca",
+        "sms_content": "Bell: Vous pouvez visiter bell.ca/reparationsuivi pour vérifier le statut de votre demande de réparation en ligne.",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+        "language": "fr-ca",
+        "sms_content": "Bell: Vous pouvez visiter bell.ca/reparationsuivi pour vérifier le statut de votre demande de réparation en ligne.",
+        "sms_type": "Public"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "customer is inquiring about their order status and lob and {device_type} are null",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca",
+      "route": "equipment_order_status",
+      "utterance": "Je veux vérifier l'état de ma commande"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "customer is asked device_type and then proceeds as per instructions",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca",
+      "lob": "Mobility"
+    }
+  },
+  "displayName": "FR - equipment_order_status (mobility)-(repair)-(sms-yes)",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 421,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

@@ -1,0 +1,51 @@
+{
+  "name": "b37e375f-9bb6-4cfc-a5c4-c069c938e993",
+  "displayName": "Check CX Input",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "messages": [ {
+      "text": {
+        "text": [ "Avez-vous déjà eu accès aux chaînes manquantes?" ]
+      },
+      "languageCode": "fr-ca"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "intent": "context.confirm_yes",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Follow-up 1",
+    "name": "0c8f3788-bc8b-497b-836c-6abb15603e97"
+  }, {
+    "intent": "context.confirm_no",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_rehit_Check_Subscription",
+    "name": "64d76bfe-e05f-4081-8e72-fe72418b2483"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Local Error handling",
+    "event": "sys.no-input-1",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "bell_rehit_Sat_TV",
+        "value": "Check CX input "
+      } ]
+    },
+    "name": "77630986-a650-451c-bfb1-30c4669f9037"
+  }, {
+    "targetPage": "Local Error handling",
+    "event": "sys.no-match-1",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "bell_rehit_Sat_TV",
+        "value": "Check CX input "
+      } ]
+    },
+    "name": "71e318dc-459f-42bb-a69e-67a3360b0710"
+  } ]
+}

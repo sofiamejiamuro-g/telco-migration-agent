@@ -1,0 +1,66 @@
+{
+  "name": "e74f31e3-4ce3-41d2-98ff-112b0d4f6d7d",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "À propos de quel service communiquez-vous avec nous?\n"
+    }
+  }, {
+    "userUtterance": {
+      "text": "premium crave netflix"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Je vais envoyer un texto à l’appareil au moyen duquel vous appelez, afin que vous puissiez consulter toutes les options de lecture en continu. Est-ce que ça vous convient?\n\n"
+    }
+  }, {
+    "userUtterance": {
+      "text": "oui"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "fr-ca",
+        "sms_content": "Bell: Vous pouvez visiter subscription.bell.ca/client pour vous abonner à un service de diffusion en continu dans l'appli MonBell. ( bell.ca/apropos )",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "customer wants to add a new  line and {lob} is null",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "fr-ca",
+      "utterance": "j'appelle pour ajouter une nouvelle ligne à mon compte"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "customer is asked about service type and then follows the instructions",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca",
+      "streaming_services": "premium"
+    }
+  },
+  "displayName": "FR-(lob-streaming services) asked (sms-yes)",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 423,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

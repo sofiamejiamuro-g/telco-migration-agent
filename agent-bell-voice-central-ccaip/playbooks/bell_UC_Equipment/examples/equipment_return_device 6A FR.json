@@ -1,0 +1,61 @@
+{
+  "name": "3b953384-7a40-40f4-b5fe-f34d918dd4e5",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Veuillez noter que le retour des articles à notre entrepôt et leur traitement peut prendre de 7 à 10 jours à compter du moment où vous avez envoyé le colis. Si des frais de non-retour de l'équipement vous ont été facturés, il peut s'écouler 1 à 2 cycles de facturation pour que le retour apparaisse à votre facture.\n\nAvez-vous votre numéro de suivi?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "non"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Pourquoi avez-vous décidé de retourner votre appareil?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "j'ai l'option de retour"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Le suivi des retours d'équipement peut être effectué sur le site Web de Postes Canada ou de Purolator. Une fois l'appareil reçu, le traitement prend normalement de 7 à 10 jours. Je peux également vous envoyer un texto contenant un lien pour faire le suivi de votre envoi. Cela vous convient-il?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "oui"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "fr-ca",
+        "sms_content": "Bell : Pour suivre votre envoi de retour avec Purolator, rendez-vous au purolator.com/fr. Pour suivre votre envoi avec Postes Canada, rendez-vous au canadapost-postescanada.ca/cpc/fr ( bell.ca/apropos )",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "le client souhaite une mise à jour du statut de retour de son téléphone portable",
+    "actionParameters": {
+      "language": "fr-ca",
+      "lob": "mobility",
+      "route": "equipment_return_device",
+      "utterance": "avez-vous déjà reçu mon retour"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Le client a demandé le numéro de suivi, mais on lui a répondu qu'il ne l'avait pas. On lui a demandé la raison du retour, mais on lui a répondu qu'il avait une option de retour. Le client souhaite recevoir des SMS.",
+    "actionParameters": {
+      "language": "fr-ca",
+      "lob": "Mobility"
+    }
+  },
+  "displayName": "equipment_return_device 6A FR",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 534,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

@@ -1,0 +1,51 @@
+{
+  "name": "2f9b9924-6b1a-474c-901c-bfa119710dbb",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "This situation is really tough, and your feelings are valid. Which specific bill charges are you inquiring about?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Could you explain how I can reduce my bill by modifying my plan or removing certain services, and also tell me if there are any promotions or savings I can take advantage of to further cut costs?"
+    }
+  }, {
+    "playbookInvocation": {
+      "playbook": "bell_UC_Billing",
+      "playbookInput": {
+        "precedingConversationSummary": "Customers is looking to reduce the bill",
+        "actionParameters": {
+          "language": "en",
+          "route": "bill_reduce_plan",
+          "utterance": "Could you explain how I can reduce my bill by modifying my plan or removing certain services, and also tell me if there are any promotions or savings I can take advantage of to further cut costs?"
+        }
+      },
+      "playbookOutput": {
+        "executionSummary": "Customer query got resolved",
+        "actionParameters": {
+          "language": "en",
+          "route": "bill_reduce_plan"
+        }
+      },
+      "playbookState": "OUTPUT_STATE_OK"
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer query about \"I want to ask about bill charges\" is addressed and also they are facing a challenging situation.",
+    "actionParameters": {
+      "language": "en",
+      "route": "bill_vague",
+      "utterance": "I want to ask about bill charges as i lost my job"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "VA follows as per given instructions and also is empathetic as the user is in a difficult situation. Customer query is addressed and then directed to \"bell_UC_billing\" playbook",
+    "actionParameters": {
+      "route": "bill_view_bill"
+    }
+  },
+  "displayName": "EN - empathetic_response bill_reduce_plan",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 388,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

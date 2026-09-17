@@ -1,0 +1,83 @@
+{
+  "name": "ec333c23-697c-4615-9968-a68de5f7a138",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70011",
+        "brand": "bell",
+        "language": "en",
+        "route": "service_add_feature"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Pay-per-use data roamning will no longer be available as of May 1, 2026.\nIf you are looking for travel options, we have roaming and travel passes available, would you like to learn more?"
+    }
+  }, {
+    "userUtterance": {
+    
+    }
+  }, {
+    "agentUtterance": {
+      "text": "No worries, you can easily manage your Mobility plan and add-ons at anytime using MyBell.\nI'll send a text to the device you're calling from, so that you can easily make changes to your Mobility features or add-ons. Is that alright?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "yes sure"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "add_ons": "",
+        "language": "en",
+        "route": "service_add_feature",
+        "sms_content": "You can visit https://m.bell.ca/myfeatures to view or make changes to your phone add-ons in the MyBell app. ( bell.ca/about-us )",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+        "language": "en"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "The {identification_status} is \"Pass\", {customer_type} is \"Existing\"",
+    "actionParameters": {
+      "add_ons": "",
+      "apb_location_id": "70011",
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "is_prepaid": "false",
+      "language": "en",
+      "route": "service_add_feature",
+      "sms_content": "",
+      "sms_type": "Public",
+      "utterance": "i want to add pay per use roaming"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "As the {lob} is null and {streaming_services}, {ppv} is null and {add_ons} = \"roaming\" then we will prompt user to send SMS and if user say \"yes\" or anything affirmative then send the user to \"bell_SMS Trigger\" flow",
+    "actionParameters": {
+      "apb_location_id": "70011",
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "is_prepaid": "false",
+      "language": "en",
+      "mobility_sub_type": "postpaid",
+      "route": "service_add_feature",
+      "sms_type": "Public",
+      "utterance": "i want to add pay per use roaming"
+    }
+  },
+  "displayName": "EN - service_add_feature- PPU - no input - yes",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 681,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

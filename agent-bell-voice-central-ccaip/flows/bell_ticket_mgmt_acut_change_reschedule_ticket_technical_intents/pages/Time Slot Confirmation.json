@@ -1,0 +1,153 @@
+{
+  "name": "f7176c6d-98c3-4ce4-ab98-28ac5e427925",
+  "displayName": "Time Slot Confirmation",
+  "form": {
+    "parameters": [ {
+      "displayName": "selected_timeslot",
+      "required": true,
+      "entityType": "@sys.time-period",
+      "fillBehavior": {
+        "initialPromptFulfillment": {
+          "conditionalCases": [ {
+            "cases": [ {
+              "condition": "$session.params.slot_count \u003e \"1\"",
+              "caseContent": [ {
+                "message": {
+                  "text": {
+                    "text": [ "We have time slots from $session.params.available_slots_string_2. Which one works best for you?" ]
+                  },
+                  "languageCode": "en"
+                }
+              }, {
+                "message": {
+                  "text": {
+                    "text": [ "Nous avons des plages horaires disponibles de $session.params.available_slots_string_fr_2. Laquelle vous convient le mieux?" ]
+                  },
+                  "languageCode": "fr-ca"
+                }
+              } ]
+            }, {
+              "condition": "$session.params.slot_details.slot_count = \"1\"",
+              "caseContent": [ {
+                "message": {
+                  "text": {
+                    "text": [ "We have time slots from $session.params.available_slots_string_2. Does that work for you?" ]
+                  },
+                  "languageCode": "en"
+                }
+              }, {
+                "message": {
+                  "text": {
+                    "text": [ "Nous avons des plages horaires disponibles de $session.params.available_slots_string_fr_2. Est-ce que cela vous convient?" ]
+                  },
+                  "languageCode": "fr-ca"
+                }
+              } ]
+            } ]
+          } ]
+        },
+        "repromptEventHandlers": [ {
+          "targetPage": "Local Error handling + Time Slot Confirmation",
+          "event": "sys.no-input-1",
+          "triggerFulfillment": {
+            "setParameterActions": [ {
+              "parameter": "global_error_counter",
+              "value": "$sys.func.ADD($session.params.global_error_counter,1)"
+            }, {
+              "parameter": "local_noinput_counter",
+              "value": "$sys.func.ADD($session.params.local_noinput_counter,1)"
+            }, {
+              "parameter": "local_trigger",
+              "value": "no_input"
+            } ]
+          },
+          "name": "61d78b1b-a61d-4818-9b8b-3dd6931e6c13"
+        }, {
+          "targetPage": "Local Error handling + Time Slot Confirmation",
+          "event": "sys.no-match-1",
+          "triggerFulfillment": {
+            "setParameterActions": [ {
+              "parameter": "global_error_counter",
+              "value": "$sys.func.ADD($session.params.global_error_counter,1)"
+            }, {
+              "parameter": "local_nomatch_counter",
+              "value": "$sys.func.ADD($session.params.local_nomatch_counter,1)"
+            }, {
+              "parameter": "local_trigger",
+              "value": "no_match"
+            } ]
+          },
+          "name": "384fb483-3a1b-45ca-8c55-e036ba8a1d6f"
+        } ]
+      }
+    } ]
+  },
+  "entryFulfillment": {
+    "setParameterActions": [ {
+      "parameter": "slot_details_raw",
+      "value": "$request.generative.slot_details"
+    }, {
+      "parameter": "slot_details",
+      "value": "$sys.func.TO_OBJECT($session.params.slot_details_raw)"
+    }, {
+      "parameter": "available_slots_string",
+      "value": "$session.params.slot_details.available_slots_string"
+    }, {
+      "parameter": "available_slots_string_fr",
+      "value": "$session.params.slot_details.available_slots_string_fr"
+    }, {
+      "parameter": "available_slots_string_2",
+      "value": "$session.params.slot_details.available_slots_string_2"
+    }, {
+      "parameter": "available_slots_string_fr_2",
+      "value": "$session.params.slot_details.available_slots_string_fr_2"
+    }, {
+      "parameter": "slot_count",
+      "value": "$session.params.slot_details.slot_count"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "intent": "context.confirm_yes",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "time_input",
+        "value": "$session.params.available_slots_string"
+      } ],
+      "generators": [ {
+        "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/2fa2bf9e-45ac-42ee-9e0e-ba8e0f9fb594",
+        "inputParameters": [ {
+          "key": "time_input",
+          "value": "$session.params.time_input"
+        } ],
+        "outputParameter": "$request.generative.time_pair_string"
+      } ]
+    },
+    "targetPage": "Time Slot Object Extraction",
+    "name": "3aed53bf-c270-44b5-9ddc-a560cef2c2e5"
+  }, {
+    "intent": "context.confirm_no",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook - WFAS Cancel",
+    "name": "d7f60ed3-0058-4bb9-8d52-bfe185cf2cc5"
+  }, {
+    "condition": "$session.params.selected_timeslot != null",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "time_input",
+        "value": "$session.params.selected_timeslot"
+      } ],
+      "generators": [ {
+        "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/2fa2bf9e-45ac-42ee-9e0e-ba8e0f9fb594",
+        "inputParameters": [ {
+          "key": "time_input",
+          "value": "$session.params.time_input"
+        } ],
+        "outputParameter": "$request.generative.time_pair_string"
+      } ]
+    },
+    "targetPage": "Time Slot Object Extraction",
+    "name": "75346a7b-6977-4b31-90a3-9fc9f239b42a"
+  } ]
+}

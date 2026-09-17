@@ -1,0 +1,57 @@
+{
+  "name": "acfebcda-28c5-4e19-99f2-07ec65763ae5",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Are you looking to link a New service, a bill to your MyBell Account. Or you are trying to consolidate, merge service so you have a single bill for everything."
+    }
+  }, {
+    "userUtterance": {
+      "text": "link accounts"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "I'll send a text to the device you're calling from, so that you can easily link accounts and services to MyBell. Is that alright?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "No"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "en",
+        "route": "account_link_accounts",
+        "sms_send_status": "Declined"
+      },
+      "outputActionParameters": {
+        "language": "en",
+        "route": "account_link_accounts",
+        "sms_send_status": "Declined"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "The customer is looking to link their accounts.",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "route": "account_link_accounts",
+      "utterance": "I want to link my accounts"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "The user asks to link accounts and is prompted with an appropriate response the user disagrees to receive a message and is routed to bell_SMS trigger flow",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "route": "account_link_accounts",
+      "sms_send_status": "Declined"
+    }
+  },
+  "displayName": "EN - Account Link Accounts - Message Link - No",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 347,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

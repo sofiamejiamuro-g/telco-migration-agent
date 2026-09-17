@@ -1,0 +1,49 @@
+{
+  "name": "27516f6e-6d4f-4ba2-a2ca-d8604a8999a6",
+  "displayName": "Closed ticket message - Historical",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "true",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Cependant, je ne vois aucun rendez-vous actif sur votre compte, " ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "$session.params.acut_trouble_type_response.trouble_type_message . $session.params.acut_main_task_status_response.main_task_status_message le $session.params.closedTimeObj.day_fr, $session.params.closedTimeObj.month_fr $session.params.closedTimeObj.date, $session.params.closedTimeObj.year." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "$session.params.acut_disposition_code_response.disposition_code_message" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "I do not see any active appointments on your account." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "However, $session.params.acut_trouble_type_response.trouble_type_message  $session.params.acut_main_task_status_response.main_task_status_message on $session.params.closedTimeObj.day , $session.params.closedTimeObj.month $session.params.closedTimeObj.date , $session.params.closedTimeObj.year . " ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "$session.params.acut_disposition_code_response.disposition_code_message" ]
+        },
+        "languageCode": "en"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "closedTimeObj",
+        "value": "$sys.func.TO_OBJECT($request.generative.closedTimeObj)"
+      } ]
+    },
+    "targetPage": "Confirm pending issues",
+    "name": "0aeba8d1-928d-4a12-87bf-9074df98ecab"
+  } ]
+}

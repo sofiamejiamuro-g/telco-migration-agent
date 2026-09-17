@@ -1,0 +1,108 @@
+{
+  "name": "68ff8953-5bbe-4680-b934-13850efe739d",
+  "displayName": "Get FAQ",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "setParameterActions": [ {
+      "parameter": "faq_question_answer",
+      "value": ""
+    }, {
+      "parameter": "knowledge.overrides.query",
+      "value": "$session.params.dcx_action_code"
+    }, {
+      "parameter": "prev_ms_dcx_action_code",
+      "value": ""
+    }, {
+      "parameter": "prev_cfb_dcx_action_code",
+      "value": ""
+    }, {
+      "parameter": "prev_cda_dcx_action_code",
+      "value": ""
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.vr_type = \"CFB\" AND $session.params.language = \"en\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "prev_cfb_dcx_action_code",
+        "value": "$session.params.dcx_action_code"
+      } ],
+      "dataStore": {
+        "dataStoreTool": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/tools/619941c8-89a5-4f51-b2bb-72f7c171f01a"
+      }
+    },
+    "name": "c8bc510b-e907-4e9b-90f3-da8e53d02fa4"
+  }, {
+    "condition": "$session.params.vr_type = \"CFB\" AND $session.params.language = \"fr-ca\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "prev_cfb_dcx_action_code",
+        "value": "$session.params.dcx_action_code"
+      } ],
+      "dataStore": {
+        "dataStoreTool": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/tools/d36b83a4-9e18-44e8-824d-9645f2016821"
+      }
+    },
+    "name": "02896910-a39f-457e-8ec6-ef897d9b1ef8"
+  }, {
+    "condition": "$session.params.vr_type = \"CDA\" AND $session.params.language = \"en\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "prev_cda_dcx_action_code",
+        "value": "$session.params.dcx_action_code"
+      } ],
+      "dataStore": {
+        "dataStoreTool": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/tools/f8f4a6ec-cb25-4c5d-9a74-39fedd3f70c5"
+      }
+    },
+    "name": "43854b3b-18dd-4e5d-b4d5-f4ffdb0c666c"
+  }, {
+    "condition": "$session.params.vr_type = \"CDA\" AND $session.params.language = \"fr-ca\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "prev_cda_dcx_action_code",
+        "value": "$session.params.dcx_action_code"
+      } ],
+      "dataStore": {
+        "dataStoreTool": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/tools/8830d18f-2107-49e6-9e8e-a01b16dd423d"
+      }
+    },
+    "name": "f2bd5c16-9a63-4220-b162-09ad0110d026"
+  }, {
+    "condition": "$session.params.vr_type = \"Microservice\" AND $session.params.language = \"en\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "prev_ms_dcx_action_code",
+        "value": "$session.params.dcx_action_code"
+      } ],
+      "dataStore": {
+        "dataStoreTool": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/tools/4ae99322-716d-4cea-9e29-e3e922f432ff"
+      }
+    },
+    "name": "660e4aad-24a6-4482-8c60-0734d0117e3f"
+  }, {
+    "condition": "$session.params.vr_type = \"Microservice\" AND $session.params.language = \"fr-ca\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "prev_ms_dcx_action_code",
+        "value": "$session.params.dcx_action_code"
+      } ],
+      "dataStore": {
+        "dataStoreTool": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/tools/d9ee6de3-2011-45ae-8e0d-352af447dabb"
+      }
+    },
+    "name": "30d82846-5b6b-489f-9e6e-85033f3fc91d"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "faq_question_answer",
+        "value": "$sys.func.IF(   \"$sys.func.COUNT($request.knowledge.answers) \u003e 0 AND $request.knowledge.questions[0] != $session.params.dcx_action_code\",   \"ANSWER_NOT_FOUND\",   $sys.func.IF(     \"$sys.func.COUNT($request.knowledge.answers) \u003e 0\",     $request.knowledge.answers[0],     \"\"   ) )"
+      } ]
+    },
+    "targetPage": "Previous Page",
+    "name": "ba8bf2b4-0da2-4638-9f1b-29622b7f3b58"
+  } ]
+}

@@ -1,0 +1,100 @@
+{
+  "name": "61bb5c87-30c9-45ff-9dda-1610d8749f1f",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Okay, just to help you better, are you having trouble with the image quality, the Bell TV app not working, some channels missing, or is your TV service freezing or not casting properly? Or maybe you're not sure what's wrong, or it’s none of those?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Yeah, I think the app isn’t loading at all."
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Thank you for letting me know. I'm checking now what will be the next step."
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_vr_post_answer",
+      "inputActionParameters": {
+        "customer_answer1_id": "1",
+        "customer_answer2_id": "1"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "User having a problem with the service and initiating Virtual repair session.",
+    "actionParameters": {
+      "acceptable_answers": [ {
+        "choice": "Internet",
+        "id": 0,
+        "sub-choices": [ {
+          "choice": "My modem won't turn on.",
+          "id": 0
+        }, {
+          "choice": "I’m experiencing frequent disconnections.",
+          "id": 1
+        }, {
+          "choice": "My Internet service is slow.",
+          "id": 2
+        }, {
+          "choice": "My streaming services don’t work.",
+          "id": 3
+        }, {
+          "choice": "I'm not sure what's wrong.",
+          "id": 4
+        }, {
+          "choice": "None of the above.",
+          "id": 5
+        } ],
+        "title": "What type of problem are you experiencing with your Internet service?"
+      }, {
+        "choice": "TV",
+        "id": 1,
+        "sub-choices": [ {
+          "choice": "I’m experiencing image quality issues.",
+          "id": 0
+        }, {
+          "choice": "My Bell TV app isn’t working.",
+          "id": 1
+        }, {
+          "choice": "Some of my Bell TV channels are missing.",
+          "id": 2
+        }, {
+          "choice": "My Bell TV service is freezing.",
+          "id": 3
+        }, {
+          "choice": "I can’t cast my Bell TV service.",
+          "id": 4
+        }, {
+          "choice": "None of the above.",
+          "id": 5
+        } ],
+        "title": "What type of problem are you experiencing with your TV service?"
+      }, {
+        "choice": "All services",
+        "id": 2,
+        "sub-choices": [ ],
+        "title": ""
+      } ],
+      "dcx_action_code": "6590",
+      "lob": "TV",
+      "utterance": "TV is not working properly",
+      "vr_type": "CFB"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "System gets the information and invokes another flow",
+    "actionParameters": {
+      "customer_answer1_id": "1",
+      "customer_answer2_id": "1"
+    }
+  },
+  "displayName": "CFB - 6590 (TV)",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 649,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

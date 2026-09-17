@@ -1,0 +1,74 @@
+{
+  "name": "5c6d6ba0-9ab6-4244-a873-638037bd98f8",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Pouvez-vous décrire brièvement le problème de votre appareil?\n"
+    }
+  }, {
+    "userUtterance": {
+      "text": "batterie se décharge"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Quel est le fabricant?\n"
+    }
+  }, {
+    "userUtterance": {
+      "text": "apple"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "La plupart des appareils achetés par l’intermédiaire de Bell sont couverts par une garantie limitée du fabricant. Avez-vous acheté votre appareil au cours des 12 derniers mois?\n"
+    }
+  }, {
+    "userUtterance": {
+      "text": "oui"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Pour toute question sur la garantie de votre iPhone, veuillez visiter un magasin Apple ou leur site Web pour en savoir plus.\nJe peux vous envoyer un lien pour vous aider avec vos questions concernant la garantie d’Apple. Est-ce que ça vous convient?\n\n"
+    }
+  }, {
+    "userUtterance": {
+      "text": "non"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "fr-ca",
+        "route": "equipment_warranty_claim",
+        "sms_send_status": "Declined"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "customer is asking that his device is having an issue and want to claim warranty",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca",
+      "noinput_flag": "True",
+      "route": "equipment_warranty_claim"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "customer is asked device_issue and proceed further manufacturer logic",
+    "actionParameters": {
+      "brand": "bell",
+      "device_issue": "Defective",
+      "language": "fr-ca",
+      "manufacturer": "Apple",
+      "noinput_flag": "True",
+      "route": "equipment_warranty_claim",
+      "sms_send_status": "Declined"
+    }
+  },
+  "displayName": "FR-equipment_warranty_claim-id-pass-no-device_issue-defective-no-manufacturer-apple--sms(no)",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 444,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "fr"
+}

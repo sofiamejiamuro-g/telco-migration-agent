@@ -1,0 +1,248 @@
+{
+  "name": "99d8045b-7d18-47fe-b7ae-27d4679c3d08",
+  "displayName": "Local Error handling + Time Slot Confirmation",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.global_error_counter \u003e= 3",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_aqd",
+    "name": "23498b16-6341-4ae2-9b61-2e29c4abaa19"
+  }, {
+    "condition": "$session.params.local_trigger = \"no_input\" AND $session.params.local_noinput_counter = 1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I didn't quite get that." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je n'ai pas bien compris." ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "conditionalCases": [ {
+        "cases": [ {
+          "condition": "$session.params.slot_count \u003e \"1\"",
+          "caseContent": [ {
+            "message": {
+              "text": {
+                "text": [ "We have time slots from $session.params.available_slots_string_2. Which one works best for you?" ]
+              },
+              "languageCode": "en"
+            }
+          }, {
+            "message": {
+              "text": {
+                "text": [ "Nous avons des plages horaires disponibles de $session.params.available_slots_string_fr_2. Laquelle vous convient le mieux?" ]
+              },
+              "languageCode": "fr-ca"
+            }
+          } ]
+        }, {
+          "condition": "$session.params.slot_details.slot_count = \"1\"",
+          "caseContent": [ {
+            "message": {
+              "text": {
+                "text": [ "We have time slots from $session.params.available_slots_string_2. Does that work for you?" ]
+              },
+              "languageCode": "en"
+            }
+          }, {
+            "message": {
+              "text": {
+                "text": [ "Nous avons des plages horaires disponibles de $session.params.available_slots_string_fr_2. Est-ce que cela vous convient?" ]
+              },
+              "languageCode": "fr-ca"
+            }
+          } ]
+        } ]
+      } ]
+    },
+    "name": "c19aebd6-6fac-4e2b-837d-01c851e287e1"
+  }, {
+    "condition": "$session.params.local_trigger = \"no_input\" AND $session.params.local_noinput_counter = 2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I still didn't get that." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je n'ai toujours pas compris." ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "conditionalCases": [ {
+        "cases": [ {
+          "condition": "$session.params.slot_count \u003e \"1\"",
+          "caseContent": [ {
+            "message": {
+              "text": {
+                "text": [ "We have time slots from $session.params.available_slots_string_2. Which one works best for you?" ]
+              },
+              "languageCode": "en"
+            }
+          }, {
+            "message": {
+              "text": {
+                "text": [ "Nous avons des plages horaires disponibles de $session.params.available_slots_string_fr_2. Laquelle vous convient le mieux?" ]
+              },
+              "languageCode": "fr-ca"
+            }
+          } ]
+        }, {
+          "condition": "$session.params.slot_details.slot_count = \"1\"",
+          "caseContent": [ {
+            "message": {
+              "text": {
+                "text": [ "We have time slots from $session.params.available_slots_string_2. Does that work for you?" ]
+              },
+              "languageCode": "en"
+            }
+          }, {
+            "message": {
+              "text": {
+                "text": [ "Nous avons des plages horaires disponibles de $session.params.available_slots_string_fr_2. Est-ce que cela vous convient?" ]
+              },
+              "languageCode": "fr-ca"
+            }
+          } ]
+        } ]
+      } ]
+    },
+    "name": "7bfb2199-729f-4f43-a972-407e619c6d99"
+  }, {
+    "condition": "$session.params.local_trigger = \"no_input\" AND $session.params.local_noinput_counter = 3",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook - WFAS Cancel",
+    "name": "8dcb4086-b7f5-479c-9d92-1e7f6b9e92fc"
+  }, {
+    "condition": "$session.params.local_trigger = \"no_match\" AND $session.params.local_nomatch_counter = 1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I didn't quite get that." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je n'ai pas bien compris." ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "conditionalCases": [ {
+        "cases": [ {
+          "condition": "$session.params.slot_count \u003e \"1\"",
+          "caseContent": [ {
+            "message": {
+              "text": {
+                "text": [ "We have time slots from $session.params.available_slots_string_2. Which one works best for you?" ]
+              },
+              "languageCode": "en"
+            }
+          }, {
+            "message": {
+              "text": {
+                "text": [ "Nous avons des plages horaires disponibles de $session.params.available_slots_string_fr_2. Laquelle vous convient le mieux?" ]
+              },
+              "languageCode": "fr-ca"
+            }
+          } ]
+        }, {
+          "condition": "$session.params.slot_details.slot_count = \"1\"",
+          "caseContent": [ {
+            "message": {
+              "text": {
+                "text": [ "We have time slots from $session.params.available_slots_string_2. Does that work for you?" ]
+              },
+              "languageCode": "en"
+            }
+          }, {
+            "message": {
+              "text": {
+                "text": [ "Nous avons des plages horaires disponibles de $session.params.available_slots_string_fr_2. Est-ce que cela vous convient?" ]
+              },
+              "languageCode": "fr-ca"
+            }
+          } ]
+        } ]
+      } ]
+    },
+    "name": "7446f3df-339e-4669-a00f-279433d9f31f"
+  }, {
+    "condition": "$session.params.local_trigger = \"no_match\" AND $session.params.local_nomatch_counter = 2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I still didn't get that." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je n'ai toujours pas compris." ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "conditionalCases": [ {
+        "cases": [ {
+          "condition": "$session.params.slot_count \u003e \"1\"",
+          "caseContent": [ {
+            "message": {
+              "text": {
+                "text": [ "We have time slots from $session.params.available_slots_string_2. Which one works best for you?" ]
+              },
+              "languageCode": "en"
+            }
+          }, {
+            "message": {
+              "text": {
+                "text": [ "Nous avons des plages horaires disponibles de $session.params.available_slots_string_fr_2. Laquelle vous convient le mieux?" ]
+              },
+              "languageCode": "fr-ca"
+            }
+          } ]
+        }, {
+          "condition": "$session.params.slot_details.slot_count = \"1\"",
+          "caseContent": [ {
+            "message": {
+              "text": {
+                "text": [ "We have time slots from $session.params.available_slots_string_2. Does that work for you?" ]
+              },
+              "languageCode": "en"
+            }
+          }, {
+            "message": {
+              "text": {
+                "text": [ "Nous avons des plages horaires disponibles de $session.params.available_slots_string_fr_2. Est-ce que cela vous convient?" ]
+              },
+              "languageCode": "fr-ca"
+            }
+          } ]
+        } ]
+      } ]
+    },
+    "name": "4c40cdb2-496f-4c4a-abdb-d88ebb101a48"
+  }, {
+    "condition": "$session.params.local_trigger = \"no_match\" AND $session.params.local_nomatch_counter = 3",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook - WFAS Cancel",
+    "name": "4f39a3e3-1645-4f32-93e2-e11fdbe79f89"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Previous Page",
+    "name": "f673a8ed-f756-4b06-8c08-273dcb081e8a"
+  } ]
+}

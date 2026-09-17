@@ -1,0 +1,48 @@
+{
+  "name": "0a7df4af-c706-490a-8ab6-24abe83758f9",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "D’accord. Vous pouvez consulter et vérifier le statut de votre commande d'appareil sur l'appli MonBell. Je vais envoyer un texto sur l’appareil au moyen duquel vous appelez afin que vous puissiez faire le suivi de votre envoi. Est-ce que ça vous convient?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "oui"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "fr-ca",
+        "sms_content": "Bell: Vous pouvez visiter bell.ca/shipping-tracker pour suivre votre commande.",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+        "language": "fr-ca",
+        "sms_content": "Bell: Vous pouvez visiter bell.ca/shipping-tracker pour suivre votre commande.",
+        "sms_type": "Public"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer has stated that he wants to know the status of his order for tv remote.",
+    "actionParameters": {
+      "identification_status": "Pass",
+      "language": "fr-ca",
+      "lob": "Remote",
+      "route": "equipment_order_status",
+      "utterance": "Je veux faire le suivi de ma commande pour Télécommande de télévision."
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Customer has stated that he wants to know the status of his order related to tv remote, so we DONT need to ask the disambiguation question as he explicitly mentioned remote. ",
+    "actionParameters": {
+      "language": "fr-ca",
+      "lob": "Remote"
+    }
+  },
+  "displayName": "FR equipment_order_status Tv Remote",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 357,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "fr"
+}

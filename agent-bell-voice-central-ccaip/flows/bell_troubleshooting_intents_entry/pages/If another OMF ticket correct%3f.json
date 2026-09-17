@@ -1,0 +1,41 @@
+{
+  "name": "a51a4177-307d-4a3c-9618-0b766caf367d",
+  "displayName": "If another OMF ticket correct?",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "messages": [ {
+      "text": {
+        "text": [ "Je vois que vous avez une autre commande liée à votre $session.params.lineOfBusiness_2. S’agit-il du billet pour lequel vous appelez?" ]
+      },
+      "languageCode": "fr-ca"
+    }, {
+      "text": {
+        "text": [ "I see you have another order related to your $session.params.lineOfBusiness_2. Is this the ticket you're calling about?" ]
+      },
+      "languageCode": "en"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "intent": "context.confirm_yes",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "order_identifier",
+        "value": "$session.params.recent_order_summary_2.orderIdentifier"
+      } ]
+    },
+    "targetFlow": "bell_ticket_mgmt_omf_ticket_check_technical_intents",
+    "name": "5bda002c-5774-4734-ba72-91730d8538ef"
+  }, {
+    "intent": "context.confirm_no",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "special_queue",
+        "value": "tech_to_care"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cf621e90-1e32-40af-99f6-cefe82060b6c"
+  } ]
+}

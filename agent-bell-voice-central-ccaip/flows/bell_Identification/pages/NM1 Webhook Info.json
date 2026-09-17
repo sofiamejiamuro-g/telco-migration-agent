@@ -1,0 +1,218 @@
+{
+  "name": "dbe27ea6-5970-425e-a833-b7bd374564f8",
+  "displayName": "NM1 Webhook Info",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.nm1_get_cust_profile_response.banStatus = O",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "billing_account_status",
+        "value": "active"
+      } ]
+    },
+    "name": "a3936775-ffa6-4f54-be06-e4c2296021ef"
+  }, {
+    "condition": "$session.params.nm1_get_cust_profile_response.banStatus = C",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "billing_account_status",
+        "value": "closed"
+      } ]
+    },
+    "name": "bb1197fb-bc89-4210-a666-b79b5377aa97"
+  }, {
+    "condition": "$session.params.nm1_get_cust_profile_response.banStatus = N",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "billing_account_status",
+        "value": "inactive"
+      } ]
+    },
+    "name": "99e6c063-6cee-4400-9ddf-95a6de6b5421"
+  }, {
+    "condition": "$session.params.nm1_get_cust_profile_response.banStatus = S",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "billing_account_status",
+        "value": "suspended"
+      } ]
+    },
+    "name": "68d3e28c-e8d6-4da8-b217-fbdd792640b2"
+  }, {
+    "condition": "$session.params.nm1_get_cust_profile_response.banStatus = T",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "billing_account_status",
+        "value": "unknown"
+      } ]
+    },
+    "name": "2b915d82-6efd-4609-bc06-ffd9cd5c2d9a"
+  }, {
+    "condition": "$session.params.nm1_get_cust_profile_response.subMarketCode = UAC",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "province",
+        "value": "AB"
+      } ]
+    },
+    "name": "e8bd8ea0-d22c-40a6-9077-67f1ef2c2b52"
+  }, {
+    "condition": "$session.params.nm1_get_cust_profile_response.subMarketCode = UCC",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "province",
+        "value": "BC"
+      } ]
+    },
+    "name": "3a5fde82-e77a-4446-a64e-3cf3a38b6684"
+  }, {
+    "condition": "$session.params.nm1_get_cust_profile_response.subMarketCode = UMC",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "province",
+        "value": "MB"
+      } ]
+    },
+    "name": "022d1436-1615-41f7-b2b1-86f5c6d56e16"
+  }, {
+    "condition": "$session.params.nm1_get_cust_profile_response.subMarketCode = YBY",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "province",
+        "value": "NB"
+      } ]
+    },
+    "name": "beb90fac-d5f3-4168-824b-6cf5dae9e0f1"
+  }, {
+    "condition": "$session.params.nm1_get_cust_profile_response.subMarketCode = YWY",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "province",
+        "value": "NL"
+      } ]
+    },
+    "name": "111269bb-1e43-4ba9-8a6a-d79fd6b6e410"
+  }, {
+    "condition": "$session.params.nm1_get_cust_profile_response.subMarketCode = YUY",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "province",
+        "value": "NS"
+      } ]
+    },
+    "name": "dd12ab35-983d-4ffa-8c72-013a6da5c787"
+  }, {
+    "condition": "$session.params.nm1_get_cust_profile_response.subMarketCode = UOC",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "province",
+        "value": "ON"
+      } ]
+    },
+    "name": "59b662d8-80b7-4afb-920e-5c887bc13956"
+  }, {
+    "condition": "$session.params.nm1_get_cust_profile_response.subMarketCode = YIY",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "province",
+        "value": "PE"
+      } ]
+    },
+    "name": "39059996-9e20-49fb-be54-27f4583e60cc"
+  }, {
+    "condition": "$session.params.nm1_get_cust_profile_response.subMarketCode = UQC",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "province",
+        "value": "QC"
+      } ]
+    },
+    "name": "315ef689-7743-4891-863d-d7dfcfa414c3"
+  }, {
+    "condition": "$session.params.nm1_get_cust_profile_response.subMarketCode = USC",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "province",
+        "value": "SK"
+      } ]
+    },
+    "name": "7c59c4ec-6fc9-4f70-999a-f36e95b4dd0f"
+  }, {
+    "condition": "$session.params.nm1_account = true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "identification_status",
+        "value": "Pass"
+      }, {
+        "parameter": "customer_type",
+        "value": "Existing"
+      }, {
+        "parameter": "billing_account_number",
+        "value": "$session.params.nm1_get_cust_profile_response.banNumber"
+      }, {
+        "parameter": "billing_account",
+        "value": "$session.params.billing_account_number"
+      }, {
+        "parameter": "active_services",
+        "value": [ "MOBILITY" ]
+      }, {
+        "parameter": "unique_services",
+        "value": [ "MOBILITY" ]
+      }, {
+        "parameter": "number_of_services",
+        "value": "$sys.func.COUNT($session.params.unique_services)"
+      }, {
+        "parameter": "n_billing_account",
+        "value": 1
+      }, {
+        "parameter": "is_prepaid",
+        "value": "\"$sys.func.IF(\"$session.params.nm1_get_cust_profile_response.prePaidInd = Y\", \"true\", \"false\")\""
+      }, {
+        "parameter": "contain_mobility",
+        "value": "true"
+      }, {
+        "parameter": "delinquent_flag",
+        "value": "$session.params.nm1_get_cust_profile_response.colInd"
+      }, {
+        "parameter": "billing_account_number_ref",
+        "value": "$sys.func.CONCATENATE(\"REF\", $sys.func.TO_TEXT($session.params.billing_account_number))"
+      }, {
+        "parameter": "subscriber_number",
+        "value": "$session.params.nm1_get_cust_profile_response.subscriberNum"
+      }, {
+        "parameter": "nm1_account_found",
+        "value": "true"
+      } ]
+    },
+    "targetPage": "End Flow Check",
+    "name": "58bd0d51-1a13-44c8-93a1-257720b53d94"
+  }, {
+    "condition": "$session.params.nm1_account != true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Custom Fallback for CPM check",
+    "name": "1dd0f151-384b-4494-b96a-6da196ed04a2"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "dbe27ea6-5970-425e-a833-b7bd374564f8"
+      }, {
+        "parameter": "flow_id",
+        "value": "8df7f836-8c64-4019-9506-2cedc52519c8"
+      }, {
+        "parameter": "page_name",
+        "value": "NM1 Webhook Info"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

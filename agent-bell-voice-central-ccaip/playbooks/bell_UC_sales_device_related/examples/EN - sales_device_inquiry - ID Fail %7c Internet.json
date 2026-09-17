@@ -1,0 +1,55 @@
+{
+  "name": "83942362-dc4e-4b89-ba00-21b1aa332530",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Let's check if we offer Internet and Home phone service in your area. In which province are you looking to get service?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "alberta"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Get blazing-fast speeds on the Bell network with Bell Mobile Internet. Where you can get up to 5G internet connectivity with a mobile hotspot device so you can stay connected at home or on the go. I'll send a text to the device you're calling from,so that you can learn more and easily place an order on our website. Is that alright?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "yes"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "sms_content": "Bell: You can visit bell.ca/mobileinternetdevices to view our Mobile Internet devices.(bell.ca/about-us )",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer is inquiring about internet devices that are available at Bell",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "New",
+      "identification_status": "Fail",
+      "language": "en",
+      "line_type": "New",
+      "route": "sales_device_inquiry",
+      "utterance": "which internet devices are available at Bell?"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "we got to know from the utterance that the province is AB, since wml_eligible is null, the playbook executed **Mobile Internet Flow**",
+    "actionParameters": {
+      "language": "en",
+      "lob": "Internet"
+    }
+  },
+  "displayName": "EN - sales_device_inquiry - ID Fail | Internet",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 386,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

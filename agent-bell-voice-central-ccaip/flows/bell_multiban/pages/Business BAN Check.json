@@ -1,0 +1,108 @@
+{
+  "name": "010c8edb-0828-4f43-8137-4029b813bf3e",
+  "displayName": "Business BAN Check",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "messages": [ {
+      "text": {
+        "text": [ "I found several accounts related to your number. So I know we’re talking about the right one, could you tell me whether you're calling about a business account?" ]
+      },
+      "languageCode": "en"
+    }, {
+      "text": {
+        "text": [ " J’ai trouvé plusieurs comptes associés à votre numéro. Pour nous assurer que nous parlons du bon compte, pourriez-vous confirmer si vous appelez au sujet d’un compte d’entreprise?" ]
+      },
+      "languageCode": "fr-ca"
+    } ],
+    "setParameterActions": [ {
+      "parameter": "billing_account_number_list",
+      "value": "$sys.func.FILTER(\"$session.params.customer_id_search_response\", \"$..billing_account_number\")"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "intent": "context.confirm_yes",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "is_business",
+        "value": true
+      }, {
+        "parameter": "smb_ccc_present",
+        "value": "$session.params.smb_present \u003e= 0 \u0026\u0026 $session.params.ccc_present \u003e= 0"
+      }, {
+        "parameter": "ccc_present",
+        "value": "$sys.func.MATCH($session.params.billing_account_number_list, $session.params.ccc_ban)"
+      }, {
+        "parameter": "smb_present",
+        "value": "$sys.func.MATCH($session.params.billing_account_number_list, $session.params.smb_ban)"
+      } ]
+    },
+    "targetPage": "Single Non-Consumer BAN",
+    "name": "db3f4df5-687f-4a15-a31e-92a5c0d88402"
+  }, {
+    "intent": "custom.no",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "consumer",
+        "value": true
+      }, {
+        "parameter": "is_business",
+        "value": false
+      } ]
+    },
+    "targetPage": "Single Consumer BAN",
+    "name": "794dff3f-fe85-482b-bea6-8b61941992b0"
+  }, {
+    "intent": "context.business_account",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "is_business",
+        "value": true
+      }, {
+        "parameter": "ccc_present",
+        "value": "$sys.func.MATCH($session.params.billing_account_number_list, $session.params.ccc_ban)"
+      }, {
+        "parameter": "smb_present",
+        "value": "$sys.func.MATCH($session.params.billing_account_number_list, $session.params.smb_ban)"
+      } ]
+    },
+    "targetPage": "Single Non-Consumer BAN",
+    "name": "d4730331-56fb-4047-9082-b40657398c7e"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Account Number",
+    "event": "sys.no-match-1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Could you also tell me your account number, please?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Pourriez-vous également fournir votre numéro de compte?" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "73d12068-7ab7-44d5-9c9a-5de2be94cb6f"
+  }, {
+    "targetPage": "Account Number",
+    "event": "sys.no-input-1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Could you also tell me your account number, please?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Pourriez-vous également fournir votre numéro de compte?" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "28927feb-1172-4659-a278-dea7e51244ec"
+  } ]
+}

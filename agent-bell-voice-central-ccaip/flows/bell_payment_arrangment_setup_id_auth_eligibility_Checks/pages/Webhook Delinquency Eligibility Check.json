@@ -1,0 +1,124 @@
+{
+  "name": "26589677-4544-458d-962f-156efaf8c8fd",
+  "displayName": "Webhook Delinquency Eligibility Check",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "v1/payment-arrangement#get-delinquency-details",
+    "tag": "get-delinquency-details",
+    "setParameterActions": [ {
+      "parameter": "billing_account",
+      "value": "$session.params.billing_account_number"
+    }, {
+      "parameter": "menu_type",
+      "value": "$session.params.menu_type"
+    }, {
+      "parameter": "brand",
+      "value": "$session.params.brand"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "delinquentStatus",
+        "value": "$session.params.delinquency_details_response[0].delinquentStatus"
+      }, {
+        "parameter": "webhook_success",
+        "value": "$session.params.webhook_success"
+      }, {
+        "parameter": "delinquentStatus",
+        "value": "$sys.func.FILTER(\"$session.params.delinquency_details_response\",\"$.[?(@.accountNumber == '$session.params.billing_account_number')]\"))"
+      }, {
+        "parameter": "delinquentStatus",
+        "value": "$sys.func.GET($sys.func.TO_OBJECT($session.params.delinquentStatus),0)"
+      }, {
+        "parameter": "delinquentStatus",
+        "value": "$sys.func.GET_FIELD($session.params.delinquentStatus,\"delinquentStatus\")"
+      }, {
+        "parameter": "Y",
+        "value": "$sys.func.GET($session.params.delinquency_details_response,0)"
+      }, {
+        "parameter": "Y",
+        "value": "$sys.func.GET_FIELD($session.params.Y, \"delinquentStatus\")"
+      }, {
+        "parameter": "delinquentStatus",
+        "value": "$sys.func.IF(\"$sys.func.COUNT($session.params.delinquency_details_response) \u003e 1\", $session.params.delinquentStatus, $session.params.Y)"
+      } ]
+    },
+    "name": "cf1905ca-e4d3-4829-a68a-3785ac7a7033"
+  }, {
+    "condition": "$session.params.webhook_success = \"true\" AND $session.params.delinquentStatus = true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook PA Eligibility Check",
+    "name": "18e73d5f-7891-4959-993d-e0e6f8f6d992"
+  }, {
+    "condition": "$session.params.webhook_success = \"true\" AND $session.params.delinquentStatus = false",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Unfortunately, I can't set up payment arrangement for you, as your balance is not yet past due. Once your payment due date has passed, you can set up payment arrangement in MyBell." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Malheureusement, je ne peux pas configurer d'entente de paiement pour vous, car votre solde n'est pas encore en souffrance. Une fois la date d'échéance de votre paiement passée, vous pourrez configurer l'entente de paiement dans MonBell." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetFlow": "bell_Feedback",
+    "name": "ebf48fbb-62bf-4f3b-9e74-98f16c9ed9ee"
+  }, {
+    "condition": "$session.params.webhook_success = false",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Failure Confirmation",
+    "name": "bb36da87-4991-4cbc-a59c-8e6eb4c443ff"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Failure Confirmation",
+    "name": "b0d8716b-c3c3-4907-8b40-e6fb85fbc62a"
+  } ],
+  "eventHandlers": [ {
+    "event": "webhook.error",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I'm unable to proceed with your payment arrangement at this time. I'll send a text to the device you're calling from so that you can set up your payment arrangement on the MyAccount app. Is that alright?\r\n" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "1830fca0-2cc8-4f55-8184-3f32263c2d42"
+  }, {
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I'm unable to proceed with your payment arrangement at this time.  I'll send a text to the device you're calling from so that you can set up your payment arrangement on the MyAccount app. Is that alright?" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "47e032de-4c63-4513-9cf1-c4dcd083cbf8"
+  }, {
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I'm unable to proceed with your payment arrangement at this time.  I'll send a text to the device you're calling from so that you can set up your payment arrangement on the MyAccount app. Is that alright?" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "name": "157a4ffb-468f-497d-9808-43f582bf4b96"
+  } ]
+}

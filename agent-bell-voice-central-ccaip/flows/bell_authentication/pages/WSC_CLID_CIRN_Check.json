@@ -1,0 +1,47 @@
+{
+  "name": "03d9d380-e0d8-4e48-8251-63f40c3fb2a7",
+  "displayName": "WSC_CLID_CIRN_Check",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$sys.func.TO_NUMBER($session.params.CIRN) != $sys.func.TO_NUMBER($session.params.CLID)",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "PIN Check",
+    "name": "5036e6c9-dd5d-4b89-8b94-2e1e86d97a41"
+  }, {
+    "condition": "$sys.func.TO_NUMBER($session.params.CIRN) = $sys.func.TO_NUMBER($session.params.CLID)",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "auth_status",
+        "value": "Pass"
+      } ]
+    },
+    "targetPage": "End Flow Check",
+    "name": "0f56b5b9-9962-44b4-9b19-84453b626b53"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "03d9d380-e0d8-4e48-8251-63f40c3fb2a7"
+      }, {
+        "parameter": "flow_id",
+        "value": "5f8f4b4a-558a-4e66-9d28-a31389981b36"
+      }, {
+        "parameter": "page_name",
+        "value": "WSC_CLID_CIRN_Check"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

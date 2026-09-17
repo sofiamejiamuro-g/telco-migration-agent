@@ -1,0 +1,71 @@
+{
+  "name": "4b33a6fe-f820-4494-be5b-2b8ac623e608",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70011",
+        "brand": "bell",
+        "language": "en",
+        "route": "service_add_feature"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "You can modify your Bell TV programming package at any time using MyBell. I'll send a text to the device you're calling from, so that you can easily make changes to your programming. Is that alright?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "no I don't want text"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "brand": "bell",
+        "language": "en",
+        "lob": "TV",
+        "route": "service_add_feature",
+        "sms_send_status": "Declined"
+      },
+      "outputActionParameters": {
+        "language": "en"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "The {identification_status} is \"Pass\", {customer_type} is \"Existing\", {streaming_services} is null and {ppv} is null and {add_ons} is null and {lob} is \"TV\" so, we will prompt user for send SMS confirmation and if user say \"yes\" or anything affirmative then route to \"bell_SMS Trgigger\" flow.",
+    "actionParameters": {
+      "apb_location_id": "70011",
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "en",
+      "lob": "TV",
+      "route": "service_add_feature",
+      "sms_type": "Public",
+      "utterance": "would you please add few channels to my plan"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "As the {lob} is \"TV\" and {streaming_services}, {add_ons}, {ppv} is null then we will prompt user to send SMS and if user say \"yes\" or anything affirmative then send the user to \"bell_SMS Trigger\" flow",
+    "actionParameters": {
+      "apb_location_id": "70011",
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "en",
+      "lob": "TV",
+      "route": "service_add_feature",
+      "utterance": "would you please add few channels to my plan"
+    }
+  },
+  "displayName": "EN - service_add_feature- streaming_services,ppv,add_ons - null-lob-TV-no",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 577,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

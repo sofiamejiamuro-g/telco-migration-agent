@@ -1,0 +1,54 @@
+{
+  "name": "8dc25e08-3296-4102-b002-4d0cf10b7e1e",
+  "displayName": "Installment Count",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.installmentCheck != 0",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_aqd",
+    "name": "8f012c80-f371-402f-a189-de85ad50239f"
+  }, {
+    "condition": "$session.params.installmentCheck = 0",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ " You currently don't have payment arrangement set up. If you would like to set one up, you can do so in MyBell." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Vous n'avez actuellement aucune entente de paiement établie. Si vous souhaitez en établir une, vous pouvez le faire dans l'appli MonBell." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetFlow": "bell_Feedback",
+    "name": "bf3dd6f4-3d46-454f-9508-bfad1157e382"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "8dc25e08-3296-4102-b002-4d0cf10b7e1e"
+      }, {
+        "parameter": "flow_id",
+        "value": "27d30ebb-004e-434a-98f4-e2c03fd42fcf"
+      }, {
+        "parameter": "page_name",
+        "value": "Installment Count"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

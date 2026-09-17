@@ -1,0 +1,61 @@
+{
+  "name": "f521274d-cfa3-4dcf-a7d4-82770e2bd396",
+  "displayName": "OTP Auth Start - Precond",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "messages": [ {
+      "text": {
+        "text": [ "To help with that, I need to make sure I'm talking to the right person. We now use a 6-digit code to verify you. Do you have access to a mobile phone that’s listed on your account?" ]
+      },
+      "languageCode": "en"
+    }, {
+      "text": {
+        "text": [ "Afin de vous aider, je dois m’assurer de parler à la bonne personne. Nous utilisons maintenant un code de six chiffres pour vérifier votre compte. Avez-vous accès à un téléphone mobile dont le numéro figure à ce compte?" ]
+      },
+      "languageCode": "fr-ca"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "intent": "context.confirm_yes",
+    "triggerFulfillment": {
+    
+    },
+    "name": "46473984-ffa1-4c5b-8e74-a2feebe70c83"
+  }, {
+    "intent": "context.confirm_no",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Since you don’t have access to a mobile phone associated with your account, we can't send a verification code to confirm your identity." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Without access to the phone number registered to your account, we can't send the code needed to verify your identity." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Si vous n’avez pas accès à un téléphone mobile associé à ce compte, nous ne pourrons pas vous envoyer de code pour vérifier votre identité." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "L'envoi d'un code de vérification au téléphone mobile associé à votre compte est requis. Par conséquent, si vous n'y avez pas accès, nous ne serons pas en mesure de confirmer votre identité." ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "auth_status",
+        "value": "Fail"
+      }, {
+        "parameter": "authentication_status",
+        "value": "Fail"
+      } ]
+    },
+    "targetPage": "End Flow Check",
+    "name": "24385772-6ece-41a5-bd5b-ac0b9287187f"
+  } ]
+}

@@ -1,0 +1,38 @@
+{
+  "name": "145c8e59-62e8-4383-abd9-e56a8dd797b9",
+  "displayName": "Offer SMS - fr-ca",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "messages": [ {
+      "text": {
+        "text": [ "Connaissez-vous notre appli Gérez votre rendez-vous? Il s'agit d'un moyen pratique de consulter, de replanifier ou d'annuler votre rendez-vous directement à partir de votre téléphone. Je vais envoyer un texto sur l'appareil au moyen duquel vous appelez, afin de vous permettre de commencer. Est-ce que cela vous convient?" ]
+      },
+      "languageCode": "fr-ca"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "intent": "context.confirm_yes",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "sms_content",
+        "value": "Bell : Vous pouvez visiter $session.params.mya_information_response.notification[0].MYAApplicationUrl pour modifier votre rendez-vous dans l’appli MonBell. (bell.ca/apropos)"
+      } ]
+    },
+    "targetFlow": "bell_SMS Trigger",
+    "name": "cf73835b-7a30-400f-bf4b-d03313bd51e0"
+  }, {
+    "intent": "context.confirm_no",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Pas de problème, continuons" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetPage": "End Flow",
+    "name": "93d49618-3c84-471d-8863-83077b6d5a6a"
+  } ]
+}

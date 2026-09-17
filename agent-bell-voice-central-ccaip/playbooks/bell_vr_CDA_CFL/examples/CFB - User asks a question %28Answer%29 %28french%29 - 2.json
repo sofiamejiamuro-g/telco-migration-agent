@@ -1,0 +1,100 @@
+{
+  "name": "31d441c4-89eb-44f1-a2ed-0ab899615f94",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Pouvez-vous regarder votre modem et me dire à quoi ressemblent les lumières ?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Où puis-je trouver mon modem ?"
+    }
+  }, {
+    "toolUse": {
+      "tool": "FR_Bell_vr_cfl_faq",
+      "action": "FR_Bell_vr_cfl_faq",
+      "inputActionParameters": {
+        "requestBody": {
+          "query": "6801"
+        }
+      },
+      "outputActionParameters": {
+        "200": {
+          "answer": "Q : Où puis-je trouver le code d’erreur ? R : Le code d’erreur doit s’afficher sur l’écran à l’avant de votre modem. Vous pouvez également appuyer sur le bouton d’information situé à l’avant de votre modem pour afficher le message le plus récent. Q : À quoi ressemble mon modem ? R : Un modem est un appareil rectangulaire qui vous permet de vous connecter à Internet. Il doit être debout et avoir au moins 2 câbles branchés sur les ports à l’arrière de celui-ci. Q : Où puis-je trouver mon modem ?  R : Votre modem est probablement situé dans une zone centrale de votre maison, comme un salon, un bureau ou une buanderie, près de l’endroit où le service Internet entre dans la maison.",
+          "snippets": [ {
+            "text": "",
+            "title": "6801",
+            "uri": ""
+          } ]
+        }
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Votre modem est probablement situé dans une zone centrale de votre maison, comme un salon, un bureau ou une buanderie, près de l’endroit où le service Internet entre dans la maison. Maintenant, pour résoudre votre problème, pourriez-vous s'il vous plaît me dire à quoi ressemblent les lumières ?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Pouvez-vous m'expliquer étape par étape ce que je dois faire ?"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Pas de soucis, je m'en occupe."
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_vr_post_answer",
+      "inputActionParameters": {
+        "customer_answer1_id": "1"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer having an issue with the service, starts the Virtual repair process.",
+    "actionParameters": {
+      "acceptable_answers": [ {
+        "choice": "They’re all white.",
+        "id": 0,
+        "sub-choices": [ ],
+        "title": ""
+      }, {
+        "choice": "Some are red.",
+        "id": 1,
+        "sub-choices": [ ],
+        "title": ""
+      }, {
+        "choice": "Some are orange.",
+        "id": 2,
+        "sub-choices": [ ],
+        "title": ""
+      }, {
+        "choice": "A combination of red and orange.",
+        "id": 3,
+        "sub-choices": [ ],
+        "title": ""
+      }, {
+        "choice": "No lights are on.",
+        "id": 4,
+        "sub-choices": [ ],
+        "title": ""
+      }, {
+        "choice": "None of the above.",
+        "id": 5,
+        "sub-choices": [ ],
+        "title": ""
+      } ],
+      "dcx_action_code": "6801",
+      "title": "What colour are the lights on your modem?",
+      "vr_type": "CFB"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "This Dialogflow CX execution outlines a modem troubleshooting flow. The agent initiates by asking the user to describe their modem's lights.\n\nHowever, the user responds by asking, \"What is a modem?\" This immediately triggers a call to the vr_cfl_faq_en tool. Crucially, the vr_cfl_faq_en tool successfully provides the necessary definition for \"modem,\" addressing the user's fundamental knowledge gap. This successful intervention by the tool sets the stage for the conversation to potentially proceed with the original troubleshooting query."
+  },
+  "displayName": "CFB - User asks a question (Answer) (french) - 2",
+  "retrievalStrategy": "NEVER",
+  "tokenCount": 898,
+  "languageCode": "en"
+}

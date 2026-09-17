@@ -1,0 +1,64 @@
+{
+  "name": "c169db24-40ba-4c74-9dc4-564e8d579757",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Using MyBell is a great way to manage your service on your time. I'll send you a text to the device you are calling from, with a link to sign up for your account. Is that alright?"
+    }
+  }, {
+    "userUtterance": {
+    
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_get_sdl_mapping_url",
+      "inputActionParameters": {
+        "brand": "bell",
+        "customer_type": "Existing",
+        "language": "en",
+        "sms_send_status": "Declined"
+      },
+      "outputActionParameters": {
+        "brand": "bell",
+        "language": "en"
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "No problem at all. For any other questions you can always visit our website at {faq_link}."
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_Feedback",
+      "inputActionParameters": {
+        "brand": "bell",
+        "language": "en"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "The customer is trying to register in the MyBell Application.",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "Existing",
+      "language": "en",
+      "route": "account_selfserve_registration",
+      "utterance": "mybell register"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "If the customer doesn't give any response then reroute the user to bell_SMS trigger flow.",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "route": "account_selfserve_registration"
+    }
+  },
+  "displayName": "EN_account_selfserve_registration_MybellRegister_CustomerTypeIsExisting_NoResponseToMessageLink(Step 2.2,1B)",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 384,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

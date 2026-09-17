@@ -1,0 +1,137 @@
+{
+  "name": "238d7ecf-0c48-4178-aa5e-be540c595423",
+  "displayName": "BBM-AQD",
+  "testCaseConversationTurns": [ {
+    "userInput": {
+      "injectedParameters": {
+        "clid": "+16133722524",
+        "tfn": 8000212355
+      },
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "Hi"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "sessionParameters": {
+        "clid": "+16133722524",
+        "tfn": 8000212355
+      },
+      "triggeredIntent": {
+        "name": "Default Welcome Intent"
+      },
+      "currentPage": {
+        "name": "CIRN Collection Check",
+        "flow": "bell_Identification"
+      },
+      "textResponses": [ {
+        "text": [ "\u003cspeak\u003eI'm Bell's virtual assistant, I use artificial intelligence to learn. \u003cbreak time=\"1s\"/\u003e\u003c/speak\u003e" ]
+      }, {
+        "text": [ "If you're looking to order a new service, please say 'new service.'  Otherwise, what’s the 10-digit phone number associated with your service?" ],
+        "allowPlaybackInterruption": true
+      } ],
+      "currentFlow": {
+        "name": "bell_Identification"
+      }
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "16133722524"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "currentPage": {
+        "name": "Get CX Input",
+        "flow": "bell_va_to_ivr_handoff_BBM_BNM_SMB"
+      },
+      "textResponses": [ {
+        "text": [ "\u003cspeak\u003eThanks! \u003cbreak time=\"1s\"/\u003e\u003c/speak\u003e" ],
+        "allowPlaybackInterruption": true
+      }, {
+        "text": [ "I see that this number is associated with a Business account.  Do you want to discuss that account or a different one?" ],
+        "allowPlaybackInterruption": true
+      } ],
+      "currentFlow": {
+        "name": "bell_va_to_ivr_handoff_BBM_BNM_SMB"
+      }
+    }
+  }, {
+    "userInput": {
+      "injectedParameters": {
+        "va_entry_flow": "IBM_transfer"
+      },
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "business account"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "sessionParameters": {
+        "va_entry_flow": "IBM_transfer"
+      },
+      "triggeredIntent": {
+        "name": "context.account_business"
+      },
+      "currentPage": {
+        "name": "Check LOB",
+        "flow": "bell_aqd"
+      },
+      "textResponses": [ {
+        "text": [ "Okay great. To get you the best support, I’ll transfer you to our business support agents.\n\nOkay, I’ll connect you now. You’ll need to use your phone keypad instead of talking to the virtual assistant. Next time, you can call \u003cspeak\u003e\u003cprosody rate=\"x-slow\"\u003e\u003csay-as interpretas='telephone'\u003e888-788-2355\u003c/say-as\u003e\u003c/prosody\u003e\u003c/speak\u003e for business support. Just a moment while I connect you." ],
+        "allowPlaybackInterruption": true
+      }, {
+        "text": [ "To make sure we connect you with the right agent, could you please let me know which service you're inquiring about today?" ],
+        "allowPlaybackInterruption": true
+      } ],
+      "currentFlow": {
+        "name": "bell_aqd"
+      }
+    }
+  }, {
+    "userInput": {
+      "isWebhookEnabled": true,
+      "input": {
+        "text": {
+          "text": "mobility"
+        },
+        "languageCode": "en"
+      }
+    },
+    "virtualAgentOutput": {
+      "currentPage": {
+        "name": "Start Page",
+        "flow": "bell_Live Agent Handoff"
+      },
+      "textResponses": [ {
+        "text": [ "Let me check for an available agent. I'll likely be silent for some time during the transfer. You'll know it's successful when you're greeted again. Please stay on the line. Thanks!" ],
+        "allowPlaybackInterruption": true
+      }, {
+        "text": [ "Please wait. I am connecting you to a live agent. " ],
+        "allowPlaybackInterruption": true
+      } ],
+      "currentFlow": {
+        "name": "bell_Live Agent Handoff"
+      }
+    }
+  } ],
+  "creationTime": {
+    "seconds": 1758082368,
+    "nanos": 760864000
+  },
+  "testConfig": {
+    "flow": "Default Start Flow",
+    "page": "Start Page"
+  },
+  "languageCode": "en"
+}

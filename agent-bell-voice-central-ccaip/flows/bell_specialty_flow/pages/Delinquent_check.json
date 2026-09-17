@@ -1,0 +1,61 @@
+{
+  "name": "898cc559-cdf6-44c4-a70a-0a359ee0d800",
+  "displayName": "Delinquent_check",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "setParameterActions": [ {
+      "parameter": "flag_D",
+      "value": "$sys.func.FILTER(   \"$session.params.customer_id_search_response\",   \"$..billing_accounts[*].delinquent_flag\" )"
+    }, {
+      "parameter": "delinquent_flag",
+      "value": "$sys.func.CONTAIN(   $session.params.flag_D,   \"D\" )"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.colInd = \"D\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "special_status",
+        "value": "bell_col_delinquent"
+      } ]
+    },
+    "targetPage": "Port Temp Number Check",
+    "name": "815b6b61-759b-4447-9cab-aba399305f26"
+  }, {
+    "condition": "$session.params.colInd != \"D\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Port Temp Number Check",
+    "name": "7e4e11a3-172d-431b-9829-42faa6aab259"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "898cc559-cdf6-44c4-a70a-0a359ee0d800"
+      }, {
+        "parameter": "flow_id",
+        "value": "d35b61b6-c884-44f8-b5c7-aed63cc356ab"
+      }, {
+        "parameter": "page_name",
+        "value": "Delinquent_check"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "End Flow",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+    
+    },
+    "name": "395c93fa-fd86-4135-ad3e-4e148d0935ae"
+  } ]
+}

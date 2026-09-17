@@ -1,0 +1,65 @@
+{
+  "name": "12a6483a-e186-4c01-8b8d-b29911586235",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70011",
+        "brand": "bell",
+        "language": "en",
+        "route": "service_add_feature"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Which service are you calling about?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "I need technical support"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "Routing only",
+      "inputActionParameters": {
+        "language": "en",
+        "utterance": "I need technical support"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "The {identification_status} is \"Pass\", {customer_type} is \"Existing\", {streaming_services}, {lob}, {ppv}, {add-ons} is null so, we will prompt user to ask \"Which service are you calling about?\" and once user reply then please analyze the user response and based on that please set {lob} or {streaming_services} or {ppv} or {add_ons} based on instruction provided in playbook on how to set {lob} or {streaming_services} or {ppv} or {add_ons} within {route} = \"service_add_feature\"",
+    "actionParameters": {
+      "apb_location_id": "70011",
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "en",
+      "route": "service_add_feature",
+      "utterance": "I want to add the unlimited data plan to my account"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "customer wanted to switch topic and moved to routing only flow",
+    "actionParameters": {
+      "apb_location_id": "70011",
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "en",
+      "route": "service_add_feature",
+      "utterance": "I need technical support"
+    }
+  },
+  "displayName": "EN - service_add_feature- streaming_services,lob,add_ons,ppv-null-thenCx-Topic switch",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 500,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

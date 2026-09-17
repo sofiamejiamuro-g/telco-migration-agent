@@ -1,0 +1,103 @@
+{
+  "name": "482a75f0-6ca4-4578-ae94-5dc0bdfbc9b8",
+  "displayName": "Webhook BAN Profile",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "/v1/ibm_mw/nm1_get#ban-profile",
+    "tag": "#ban-profile"
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.webhook_success = false OR $session.params.nm1_get_ban_profile_response.returnCode = \"0\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Failure Confirmation",
+    "name": "2a8aa4c5-5f26-4599-8ad7-2b1d59453129"
+  }, {
+    "condition": "$session.params.webhook_success = true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "accountBalance",
+        "value": "$sys.func.TO_NUMBER($session.params.nm1_get_ban_profile_response.accountBalance)"
+      }, {
+        "parameter": "oneBillIndicator",
+        "value": "$session.params.nm1_get_ban_profile_response.oneBillIndicator"
+      }, {
+        "parameter": "accountType",
+        "value": "$session.params.nm1_get_ban_profile_response.accountType"
+      }, {
+        "parameter": "accountSubType",
+        "value": "$session.params.nm1_get_ban_profile_response.accountSubType"
+      }, {
+        "parameter": "pastDueAmount",
+        "value": "$session.params.nm1_get_ban_profile_response.pastDueAmount"
+      } ]
+    },
+    "targetPage": "Check If Status Change",
+    "name": "3b45b1fc-160b-48f7-82b1-321f582caac6"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "482a75f0-6ca4-4578-ae94-5dc0bdfbc9b8"
+      }, {
+        "parameter": "flow_id",
+        "value": "15649ac7-20d9-448b-a12c-b86f9480280b"
+      }, {
+        "parameter": "page_name",
+        "value": "Webhook BAN Profile"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "SMS Confirmation For Refreshed Balance",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+    
+    },
+    "name": "c189351c-78cb-43c0-bef2-3ccdb00bf15d"
+  }, {
+    "targetPage": "SMS Confirmation For Refreshed Balance",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+    
+    },
+    "name": "8bd91222-c179-4765-b74a-8ed17c9089a5"
+  }, {
+    "targetPage": "SMS Confirmation For Refreshed Balance",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+    
+    },
+    "name": "14c06714-753e-47b6-8f83-fd358ea98a39"
+  }, {
+    "targetPage": "SMS Confirmation For Refreshed Balance",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+    
+    },
+    "name": "e2299cf1-1247-4df0-8a29-30235062b96e"
+  }, {
+    "targetPage": "SMS Confirmation For Refreshed Balance",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+    
+    },
+    "name": "62d7c6da-a3a4-4505-95c8-cb2e59f497f4"
+  }, {
+    "targetPage": "SMS Confirmation For Refreshed Balance",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+    
+    },
+    "name": "150794f8-448c-4bbc-898a-07ec19a3e1f5"
+  } ]
+}

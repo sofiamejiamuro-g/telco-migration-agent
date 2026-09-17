@@ -1,0 +1,82 @@
+{
+  "name": "3dfbeb94-e8cd-4a42-a015-687992cb0e01",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Bien sûr, laissez-moi vous aider.\nÀ propos de quel service communiquez-vous avec nous?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Je souhaite adhérer aux services Bell"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Pour mieux vous aider"
+    }
+  }, {
+    "playbookInvocation": {
+      "playbook": "bell_uc_ask_LOB",
+      "playbookInput": {
+        "precedingConversationSummary": "The Customer wants to sign up or open a new account with Bell",
+        "actionParameters": {
+          "language": "en",
+          "route": "sales_new_account"
+        }
+      },
+      "playbookOutput": {
+        "executionSummary": "When user does not provide lob, prompt them to understand what kind of service they are looking for, if the user mentions lob then return lob to the originating Playbook, if not set the default lob and return back",
+        "actionParameters": {
+          "language": "en",
+          "lob": "Smarthome",
+          "route": "sales_new_account"
+        }
+      },
+      "playbookState": "OUTPUT_STATE_OK"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_ivr_to_va_handoff",
+      "inputActionParameters": {
+      
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "The Customer wants to sign up or open a new account with Bell",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "New",
+      "language": "fr-ca",
+      "route": "sales_new_account",
+      "utterance": "Je souhaite adhérer aux services Bell"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "from the identification flow, know the customer_type as \"New\", as we don't know the swrvice, we need to ask the customer, which service they are inquiring about? if {lob} or {device_type} captured is \"smarthome\" service are captured then we should reroute to the flow \"bell_ivr_handoff\"",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "New",
+      "identification_status": "Fail",
+      "language": "fr-ca",
+      "lob": "Smarthome"
+    }
+  },
+  "displayName": "FR sales_new_account- ID Fail, customer_type-new- smarthome",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 588,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

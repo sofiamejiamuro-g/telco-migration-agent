@@ -1,0 +1,64 @@
+{
+  "name": "01abfd67-1000-40f1-9281-c88c9d99e494",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_tech_intent_apb",
+      "inputActionParameters": {
+        "language": "en",
+        "lob": "TV"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "I'll send a text to the device you're calling from, so you can easily synchronize your TV programming through MyBell. Is that alright?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Will i be charged for the SMS?"
+    }
+  }, {
+    "agentUtterance": {
+      "text": " No, you will not be charged for the SMS. I'll send a text to the device you're calling from, so you can easily synchronize your TV programming through MyBell. Is that alright? "
+    }
+  }, {
+    "userUtterance": {
+      "text": "yes"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "en",
+        "sms_content": "Bell msg: Visit https://m.bell.ca/supportsynchproge and follow the onscreen instructions to synchronize your programming. (bell.ca/about-us)",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer asking about a missing channel in their tv and also more information about SMS",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "route": "tech_missing_channel_package",
+      "utterance": "I think I'm missing a channel in my package"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Customer is given the resolution for TV or TV channel package issue and they ask a contextual question on will they be charged for SMS, VA answers and reprompt for SMS, customer agrees and as SMS is sent",
+    "actionParameters": {
+      "language": "en",
+      "route": "tech_missing_channel_package"
+    }
+  },
+  "displayName": "EN_tech_missing_channel_package_TV_IAmHavingAnIssueWithMyTVChannel_Yes(sms-query)",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 451,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

@@ -1,0 +1,368 @@
+{
+  "name": "dd6ffc97-b7e6-4621-8d28-82ca00ef5ce5",
+  "displayName": "Previous Status Check",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "active_services",
+        "value": "$sys.func.FILTER(\"$session.params.billing_account_info_list[0]\", \"$.services[*].service_type\")"
+      }, {
+        "parameter": "contains_mobility",
+        "value": "$sys.func.CONTAIN($session.params.active_service, \"MOBILITY\")"
+      }, {
+        "parameter": "contains_tv",
+        "value": "$sys.func.CONTAIN($session.params.active_service, \"TV\")"
+      }, {
+        "parameter": "contains_internet",
+        "value": "$sys.func.CONTAIN($session.params.active_service, \"INTERNET\")"
+      } ]
+    },
+    "name": "f5a81f2b-8a68-42be-a2b2-32b017acc2bb"
+  }, {
+    "condition": "$session.params.special_status = \"bell_col_delinquent\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "special_status",
+        "value": null
+      } ],
+      "conditionalCases": [ {
+        "cases": [ {
+          "condition": "$session.params.accountBalance = 0",
+          "caseContent": [ {
+            "message": {
+              "text": {
+                "text": [ "Vous avez tout payé et n’avez plus de solde à payer pour le moment." ]
+              },
+              "languageCode": "fr-ca"
+            }
+          }, {
+            "message": {
+              "text": {
+                "text": [ "You are all paid up and don't have any further balance owing at this time." ]
+              },
+              "languageCode": "en"
+            }
+          } ]
+        }, {
+          "condition": "$session.params.accountBalance \u003e 0",
+          "caseContent": [ {
+            "message": {
+              "text": {
+                "text": [ "Il vous reste un solde impayé de $ $session.params.accountBalance. Assurez-vous de le payer avant la date de votre prochaine facture afin d’éviter des frais de retard de paiement." ]
+              },
+              "languageCode": "fr-ca"
+            }
+          }, {
+            "message": {
+              "text": {
+                "text": [ "You still have a remaining balance owing of $ $session.params.accountBalance. Make sure to pay your next bill date in order to avoid being charged late payment fees." ]
+              },
+              "languageCode": "en"
+            }
+          } ]
+        }, {
+          "condition": "$session.params.accountBalance \u003c 0",
+          "caseContent": [ {
+            "message": {
+              "text": {
+                "text": [ "Votre solde créditeur mis à jour est de $session.params.accountBalance" ]
+              },
+              "languageCode": "fr-ca"
+            }
+          }, {
+            "message": {
+              "text": {
+                "text": [ "Your updated credit balance is $$session.params.accountBalance." ]
+              },
+              "languageCode": "en"
+            }
+          } ]
+        } ]
+      } ]
+    },
+    "targetFlow": "bell_payment_pitch_pacc_otcc",
+    "name": "f96678d3-16ca-420e-88ff-2ce4883e9d40"
+  }, {
+    "condition": "$session.params.special_status = \"bell_col_aul\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "special_status",
+        "value": null
+      } ],
+      "conditionalCases": [ {
+        "cases": [ {
+          "condition": "$session.params.accountBalance = 0",
+          "caseContent": [ {
+            "message": {
+              "text": {
+                "text": [ "Vous avez tout payé et votre service sera rétabli. Vous devrez redémarrer votre téléphone dans 30 minutes pour reprendre le service" ]
+              },
+              "languageCode": "fr-ca"
+            }
+          }, {
+            "message": {
+              "text": {
+                "text": [ "You are all paid up and your services will be restored. You can now restart your phone in 30 minutes to resume service." ]
+              },
+              "languageCode": "en"
+            }
+          } ]
+        }, {
+          "condition": "$session.params.accountBalance \u003e 0",
+          "caseContent": [ {
+            "message": {
+              "text": {
+                "text": [ "Vous avez payé suffisamment pour rétablir votre service, mais il vous reste un solde de $$session.params.accountBalance. Assurez-vous de payer ce montant avant la date de votre prochaine facture afin d’éviter des frais de retard de paiement. Vous devrez redémarrer votre téléphone dans 30 minutes pour reprendre le service" ]
+              },
+              "languageCode": "fr-ca"
+            }
+          }, {
+            "message": {
+              "text": {
+                "text": [ "You paid enough to restore your service but you still have a remaining balance owing of $ $session.params.accountBalance. Make sure to pay that before your next bill date in order to avoid being charged late payment fees. You will need restart your phone in 30 minutes to resume service." ]
+              },
+              "languageCode": "en"
+            }
+          } ]
+        }, {
+          "condition": "$session.params.accountBalance \u003c 0",
+          "caseContent": [ {
+            "message": {
+              "text": {
+                "text": [ "Votre solde créditeur mis à jour est de $$session.params.accountBalance" ]
+              },
+              "languageCode": "fr-ca"
+            }
+          }, {
+            "message": {
+              "text": {
+                "text": [ "Your updated credit balance is $$session.params.accountBalance." ]
+              },
+              "languageCode": "en"
+            }
+          } ]
+        } ]
+      } ]
+    },
+    "targetFlow": "bell_payment_pitch_pacc_otcc",
+    "name": "64baf8bb-8ce1-410d-a50b-bf9f693181f2"
+  }, {
+    "condition": "$session.params.special_status = \"bell_col_sus\" AND $session.params.contains_mobility = \"Mobility\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "special_status",
+        "value": null
+      } ],
+      "conditionalCases": [ {
+        "cases": [ {
+          "condition": "$session.params.accountBalance = 0",
+          "caseContent": [ {
+            "message": {
+              "text": {
+                "text": [ "Vous avez tout payé et votre service sera rétabli. Vous devrez redémarrer votre téléphone dans 30 minutes pour reprendre le service et il y aura des frais de 50 $ par ligne." ]
+              },
+              "languageCode": "fr-ca"
+            }
+          }, {
+            "message": {
+              "text": {
+                "text": [ "You're all paid up and your service will be restored. You will need to restart your phone in 30 minutes to resume service and there will be a $50 fee per line." ]
+              },
+              "languageCode": "en"
+            }
+          } ]
+        }, {
+          "condition": "$session.params.accountBalance \u003e 0",
+          "caseContent": [ {
+            "message": {
+              "text": {
+                "text": [ "Vous avez payé suffisamment pour rétablir votre service, mais il vous reste un solde de $$session.params.accountBalance. Assurez-vous de payer ce montant avant la date de votre prochaine facture afin d’éviter des frais de retard de paiement. Vous devrez redémarrer votre téléphone dans 30 minutes pour reprendre le service et il y aura des frais de $50 par ligne." ]
+              },
+              "languageCode": "fr-ca"
+            }
+          }, {
+            "message": {
+              "text": {
+                "text": [ "You paid enough to restore your service but you still have a remaining balance owing of $ $session.params.accountBalance. Make sure to pay that before your next bill date in order to avoid being charged late payment fees. You will need to restart your phone in 30 minutes to resume service and there will be a $50 fee per line" ]
+              },
+              "languageCode": "en"
+            }
+          } ]
+        }, {
+          "condition": "$session.params.accountBalance \u003c 0",
+          "caseContent": [ {
+            "message": {
+              "text": {
+                "text": [ "Votre solde créditeur mis à jour est de $$session.params.accountBalance" ]
+              },
+              "languageCode": "fr-ca"
+            }
+          }, {
+            "message": {
+              "text": {
+                "text": [ "Your updated credit balance is $$session.params.accountBalance." ]
+              },
+              "languageCode": "en"
+            }
+          } ]
+        } ]
+      } ]
+    },
+    "targetFlow": "bell_payment_pitch_pacc_otcc",
+    "name": "602c423a-583a-4aab-a710-2639fb4df1ea"
+  }, {
+    "condition": "$session.params.special_status = \"bell_col_sus\" AND ($session.params.contains_internet = \"Internet\" OR $session.params.contains_tv = TV)",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "special_status",
+        "value": null
+      } ],
+      "conditionalCases": [ {
+        "cases": [ {
+          "condition": "$session.params.accountBalance = 0",
+          "caseContent": [ {
+            "message": {
+              "text": {
+                "text": [ "Votre compte est à jour et votre service sera rétabli dans 30 minutes. Il y aura des frais de 49,95 $. Veuillez noter que nos agents ne peuvent pas rétablir le service plus rapidement." ]
+              },
+              "languageCode": "fr-ca"
+            }
+          }, {
+            "message": {
+              "text": {
+                "text": [ "You're all paid up and your service will be restored in 30 minutes. There will be a fee of $49.95. Please note, our agents cannot restore the service more quickly." ]
+              },
+              "languageCode": "en"
+            }
+          } ]
+        }, {
+          "condition": "$session.params.accountBalance \u003e 0",
+          "caseContent": [ {
+            "message": {
+              "text": {
+                "text": [ "Vous avez payé suffisamment pour rétablir votre service, mais il vous reste un solde dû de $$session.params.accountBalance. Assurez-vous de le payer avant votre prochaine date de facturation afin d'éviter les frais de retard. Votre service sera rétabli dans 30 minutes et Il y aura des frais de 49,95 $. Veuillez noter que nos agents ne peuvent pas rétablir le service plus rapidement." ]
+              },
+              "languageCode": "fr-ca"
+            }
+          }, {
+            "message": {
+              "text": {
+                "text": [ "You paid enough to restore your service you still have a remaining balance owing of $$session.params.accountBalance. . Make sure to pay that before your next bill date in order to avoid being charged late payment fees. You service will be restored in 30 minutes and there will be a fee of $49.95 . Please note, our agents cannot restore the service more quickly." ]
+              },
+              "languageCode": "en"
+            }
+          } ]
+        }, {
+          "condition": "$session.params.accountBalance \u003c 0",
+          "caseContent": [ {
+            "message": {
+              "text": {
+                "text": [ "Votre solde créditeur mis à jour est de $$session.params.accountBalance" ]
+              },
+              "languageCode": "fr-ca"
+            }
+          }, {
+            "message": {
+              "text": {
+                "text": [ "Your updated credit balance is $$session.params.accountBalance." ]
+              },
+              "languageCode": "en"
+            }
+          } ]
+        } ]
+      } ]
+    },
+    "targetFlow": "bell_payment_pitch_pacc_otcc",
+    "name": "7399efd5-5b7a-4951-863e-5d633726ab65"
+  }, {
+    "condition": "$session.params.special_status = \"bell_col_sus\" AND $session.params.contains_mobility AND ($session.params.contains_internet OR $session.params.contains_tv)",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "special_status",
+        "value": null
+      } ],
+      "conditionalCases": [ {
+        "cases": [ {
+          "condition": "$session.params.accountBalance = 0",
+          "caseContent": [ {
+            "message": {
+              "text": {
+                "text": [ "Votre compte est à jour et votre service sera rétabli. Vous devrez redémarrer votre téléphone dans 30 minutes pour reprendre le service. Il y aura des frais de 49,95 $. Veuillez noter que nos agents ne peuvent pas rétablir le service plus rapidement." ]
+              },
+              "languageCode": "fr-ca"
+            }
+          }, {
+            "message": {
+              "text": {
+                "text": [ "You're all paid up and your service will be restored. You will need to restart your phone in 30 minutes to resume service. There will be a fee of $49.95. Please note, our agents cannot restore the service more quickly." ]
+              },
+              "languageCode": "en"
+            }
+          } ]
+        }, {
+          "condition": "$session.params.accountBalance \u003e 0",
+          "caseContent": [ {
+            "message": {
+              "text": {
+                "text": [ "Vous avez payé suffisamment pour rétablir votre service, mais il vous reste un solde dû de $$session.params.accountBalance. Assurez-vous de régler ce montant avant votre prochaine date de facturation afin d'éviter les suppléments de retard. Vous devrez redémarrer votre téléphone d'ici 30 minutes pour que le service soit rétabli. Il y aura des frais de 49,95 $. Veuillez noter que nos agents ne peuvent pas rétablir le service plus rapidement." ]
+              },
+              "languageCode": "fr-ca"
+            }
+          }, {
+            "message": {
+              "text": {
+                "text": [ "You paid enough to restore your service you still have a remaining balance owing of $$session.params.accountBalance. . Make sure to pay that before your next bill date in order to avoid being charged late payment fees. You will need to restart your phone in 30 minutes to resume service. There will be a fee of $49.95. Please note, our agents cannot restore the service more quickly." ]
+              },
+              "languageCode": "en"
+            }
+          } ]
+        }, {
+          "condition": "$session.params.accountBalance \u003c 0",
+          "caseContent": [ {
+            "message": {
+              "text": {
+                "text": [ "Votre solde créditeur mis à jour est de $$session.params.accountBalance" ]
+              },
+              "languageCode": "fr-ca"
+            }
+          }, {
+            "message": {
+              "text": {
+                "text": [ "Your updated credit balance is $$session.params.accountBalance." ]
+              },
+              "languageCode": "en"
+            }
+          } ]
+        } ]
+      } ]
+    },
+    "targetFlow": "bell_payment_pitch_pacc_otcc",
+    "name": "7fe4d7fd-9ed0-4ddf-896d-f0e6e6fd8cfa"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "dd6ffc97-b7e6-4621-8d28-82ca00ef5ce5"
+      }, {
+        "parameter": "flow_id",
+        "value": "15649ac7-20d9-448b-a12c-b86f9480280b"
+      }, {
+        "parameter": "page_name",
+        "value": "Previous Status Check"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

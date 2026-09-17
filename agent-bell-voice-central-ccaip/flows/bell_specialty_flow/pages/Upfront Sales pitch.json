@@ -1,0 +1,40 @@
+{
+  "name": "bcadcf75-f6a1-4a37-aaef-53ca7fe0f911",
+  "displayName": "Upfront Sales pitch",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "setParameterActions": [ {
+      "parameter": "current_time",
+      "value": "$sys.func.NOW()"
+    }, {
+      "parameter": "current_day",
+      "value": "$sys.func.FORMAT_DATE($session.params.current_time, \"E\")"
+    }, {
+      "parameter": "current_hour",
+      "value": "$sys.func.TO_NUMBER($sys.func.FORMAT_DATE($session.params.current_time, \"H\"))"
+    }, {
+      "parameter": "is_weekday",
+      "value": "$sys.func.CONTAIN([\"Mon\",\"Tue\",\"Wed\",\"Thu\",\"Fri\"], $session.params.current_day)"
+    }, {
+      "parameter": "sales_queue_open",
+      "value": "$sys.func.IF(\"$session.params.current_hour \u003e= 9 AND (($session.params.is_weekday = true AND $session.params.current_hour \u003c 19) OR ($session.params.is_weekday = false AND $session.params.current_hour \u003c 18))\", true, false)"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.wml_eligible = 1 AND $session.params.cx_cornerstone != true AND $session.params.mobility = true AND $session.params.sales_queue_open = true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Pitch exposure check",
+    "name": "7a30fdc6-2ba0-4429-837a-fcaaa77f8424"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "CS Customer check",
+    "name": "9215dbed-30f6-4635-91ae-1ed67586c1f6"
+  } ]
+}

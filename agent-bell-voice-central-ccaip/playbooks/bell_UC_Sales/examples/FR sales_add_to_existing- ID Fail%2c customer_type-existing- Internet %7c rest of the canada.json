@@ -1,0 +1,72 @@
+{
+  "name": "75433427-426b-428f-9ee2-74db95cb5a1e",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "language": "en"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Bien sûr, je peux vous aider.\n\nVérifions si nous offrons des services Internet et de téléphonie résidentielle dans votre région. Dans quelle province souhaitez-vous obtenir le service ?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "le reste du Canada"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Obtenez des vitesses ultra rapides sur le réseau de Bell grâce au service Internet mobile de Bell. Vous pouvez bénéficier d’une connectivité Internet allant jusqu'à 5G avec un point d'accès sans fil mobile afin de rester connecté à la maison ou lors de vos déplacements.\n\nJe vais envoyer un texto à l'appareil au moyen duquel vous appelez, afin que vous puissiez en savoir plus sur le service Internet mobile sur notre site Web. Est-ce que ça vous convient?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "oui"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "fr-ca",
+        "lob": "Internet",
+        "sms_content": "Bell: Vous pouvez visiter bell.ca/mobileinternetdevices pour consulter nos appareils avec Internet mobile. ( bell.ca/apropos )",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "The Customer wants to sign up or open a new account for an internet service",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "fr-ca",
+      "lob": "Internet",
+      "route": "sales_add_to_existing_account",
+      "utterance": "Je voudrais souscrire à un service internet."
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "route to bell_SMS Trigger playbook",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "fr-ca",
+      "lob": "Internet",
+      "route": "sales_add_to_existing_account"
+    }
+  },
+  "displayName": "FR sales_add_to_existing- ID Fail, customer_type-existing- Internet | rest of the canada",
+  "retrievalStrategy": "STATIC",
+  "tokenCount": 548,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

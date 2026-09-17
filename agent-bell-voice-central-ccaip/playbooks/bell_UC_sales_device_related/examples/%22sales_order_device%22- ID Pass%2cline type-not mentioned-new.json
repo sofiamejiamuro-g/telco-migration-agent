@@ -1,0 +1,78 @@
+{
+  "name": "b785b985-b9f9-48ad-9aa6-e8c3c12fb4da",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "brand": "bell",
+        "language": "en"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Are you inquiring about a new service or do you want to make\nchanges to your current service?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "I'm calling about a new service."
+    }
+  }, {
+    "playbookInvocation": {
+      "playbook": "bell_UC_Sales",
+      "playbookInput": {
+        "precedingConversationSummary": "follow the instructions under the route \"sales_add_to_existing_account\"",
+        "actionParameters": {
+          "brand": "bell",
+          "customer_type": "Existing",
+          "identification_status": "Pass",
+          "language": "en",
+          "line_type": "New",
+          "lob": "Internet",
+          "province": "SK",
+          "route": "sales_add_to_existing_account",
+          "utterance": "I want to add new Internet line"
+        }
+      },
+      "playbookOutput": {
+        "executionSummary": "customer query is TRANSFERRED to sales playbook with \"route\" sales-add_to_existing-account for further resolution",
+        "actionParameters": {
+        
+        }
+      },
+      "playbookState": "OUTPUT_STATE_OK"
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer wants to order a internet device and province is \"ROC\"or any synonys of this",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "en",
+      "lob": "Internet",
+      "province": "SK",
+      "route": "sales_order_device",
+      "utterance": "I want to order an internet for my home"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "from the identification flow, know the customer_type as \"Existing\", as we don't know the line type, we need to ask the customer, if customer says that they are looking for new service we need to set \"line_type\" as \"New\" and reroute to \"sales_add_to_existing_account\" in this playbook",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "line_type": "New",
+      "lob": "Internet",
+      "province": "SK",
+      "route": "sales_add_to_existing_account"
+    }
+  },
+  "displayName": "\"sales_order_device\"- ID Pass,line type-not mentioned-new",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 564,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

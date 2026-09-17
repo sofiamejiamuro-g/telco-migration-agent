@@ -1,0 +1,45 @@
+{
+  "name": "02d5082a-366d-448c-a45c-1764ac3148e9",
+  "displayName": "Consolidated Customers",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "setParameterActions": [ {
+      "parameter": "webhook_success",
+      "value": null
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.onebillindicator = \"M\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_va_to_ivr_handoff",
+    "name": "7fa6b4af-300d-4729-a6e8-06ca4a150b7e"
+  }, {
+    "condition": "($session.params.Bantype = \"I\" AND ($session.params.Bansubtype = \"R\" OR $session.params.Bansubtype = \"N\" OR $session.params.Bansubtype = \"B\" OR $session.params.Bansubtype = \"5\" OR $session.params.Bansubtype = \"E\" OR $session.params.Bansubtype = \"P\")) OR ($session.params.Bantype = \"C\" AND ($session.params.Bansubtype = \"P\" OR $session.params.Bansubtype = \"T\" OR $session.params.Bansubtype = \"V\"))",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Province Look-up Webhook",
+    "name": "16d3e976-64fd-4b74-a275-80d26a05229e"
+  }, {
+    "condition": "$session.params.Bantype != \"I\" OR $session.params.Bantype != \"C\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Unfortunately, this self serve option is not available for your account" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Malheureusement, cette option libre-service n’est pas disponible pour votre compte." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetFlow": "bell_Feedback",
+    "name": "de7e824b-ad0a-4b82-b0c6-f4fa09fdeffe"
+  } ]
+}

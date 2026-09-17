@@ -1,0 +1,24 @@
+{
+  "name": "87e676ad-3d39-4b7a-a7f7-409af05566c0",
+  "displayName": "Found an ACUT ticket",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "ticket_number",
+        "value": "$session.params.acut_find_response.ticket_summaries[0].acut_trouble_ticket_number"
+      }, {
+        "parameter": "ticket_state",
+        "value": "$session.params.acut_find_response.ticket_summaries[0].ticket_state_category"
+      }, {
+        "parameter": "ticket_number_ref",
+        "value": "$sys.func.CONCATENATE(\"REF\", $sys.func.TO_TEXT($session.params.ticket_number))"
+      } ]
+    },
+    "targetFlow": "bell_acut_ticket_chk_troubleshooting_intents",
+    "name": "ee621737-a63b-4256-b9a2-6eeae38be1bf"
+  } ]
+}

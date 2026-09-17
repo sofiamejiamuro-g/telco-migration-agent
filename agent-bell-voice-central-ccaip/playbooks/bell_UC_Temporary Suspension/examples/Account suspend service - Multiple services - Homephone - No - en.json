@@ -1,0 +1,55 @@
+{
+  "name": "9f979bb2-c1c3-457f-87f7-8345ceec8339",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Sure, I can help with that. Could you please confirm which service you are looking to suspend?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "I want to suspend my Homephone service"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Thank you. You can temporarily suspend your residential services in MyBell. I will send a text to the device you're calling from, with a link to do it yourself. Is that alright?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "No"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "en",
+        "sms_send_status": "Declined"
+      },
+      "outputActionParameters": {
+        "brand": "bell",
+        "language": "en"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer trying to suspend their service",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "route": "account_suspend_service",
+      "unique_services": "Internet, Tv, WIRELINE",
+      "utterance": "Suspend my service"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "VA understood the {utterance} and confirmed that {unique_services} has multiple values, since the user doesn't specify which service in his query , The VA asks the user which service is he inquiring about, the user confirms it's homephone, then the VA says that he can temporarily suspend his residential service and asks if he can send a text to the device he's calling from, user says yes and gets routed to bell_SMS Trigger flow",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "sms_send_status": "Declined"
+    }
+  },
+  "displayName": "Account suspend service - Multiple services - Homephone - No - en",
+  "retrievalStrategy": "NEVER",
+  "tokenCount": 386,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

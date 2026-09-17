@@ -1,0 +1,81 @@
+{
+  "name": "3d0d6c28-e8db-4dc0-9a6b-ae6035bb638d",
+  "displayName": "[whk] OMF Order Summary - Homephone",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "/v1/ticket_management/omf/order#summary-Homephone",
+    "tag": "summary",
+    "setParameterActions": [ {
+      "parameter": "webhook_success",
+      "value": null
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.webhook_success = true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Check OMF Order Summary response",
+    "name": "4720f1cd-cd4d-4729-81a0-4160c90432ca"
+  }, {
+    "condition": "$session.params.webhook_success = false",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Failure - Troubleshooting Intents",
+    "name": "d83693a0-9ea3-4e04-9dba-16b159e6a296"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Failure - Troubleshooting Intents",
+    "name": "cleanup-hardstop-route"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Webhook Failure - Troubleshooting Intents",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+    
+    },
+    "name": "7af5c5d2-79ea-42d2-941c-9648e9abb96a"
+  }, {
+    "targetPage": "Webhook Failure - Troubleshooting Intents",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+    
+    },
+    "name": "11624f33-1873-481a-b3e0-cea7e99827cc"
+  }, {
+    "targetPage": "Webhook Failure - Troubleshooting Intents",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+    
+    },
+    "name": "69715632-9e1a-4fdf-8113-23e52b8c17ad"
+  }, {
+    "targetPage": "Webhook Failure - Troubleshooting Intents",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+    
+    },
+    "name": "2db7cbba-7c2e-438b-908f-2b43cce2fca6"
+  }, {
+    "targetPage": "Webhook Failure - Troubleshooting Intents",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+    
+    },
+    "name": "9d9185b4-cb1f-43be-b431-5dde4b131b12"
+  }, {
+    "targetPage": "Webhook Failure - Troubleshooting Intents",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+    
+    },
+    "name": "37712a72-4649-4eea-b90f-a9677d1ad424"
+  } ],
+  "description": "Note: must have brand and wireline_telephone_number"
+}

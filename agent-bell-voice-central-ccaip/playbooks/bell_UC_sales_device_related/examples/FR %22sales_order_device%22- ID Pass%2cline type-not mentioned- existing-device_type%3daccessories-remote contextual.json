@@ -1,0 +1,86 @@
+{
+  "name": "d6f34369-c8cd-4b72-a632-d9d2e9883d0c",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "brand": "bell",
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Désirez-vous ajouter un nouveau service ou modifier votre service actuel?\n"
+    }
+  }, {
+    "userUtterance": {
+      "text": "existant"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "À propos de quel service communiquez-vous avec nous?\n"
+    }
+  }, {
+    "userUtterance": {
+      "text": "accessoires télé"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Je vais envoyer un texto à l'appareil au moyer duquel vous appelez, afin que vous puissiez découvrir les appareils Internet de Bell. Est-се que ça vous convient?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "que contient le SMS"
+    }
+  }, {
+    "agentUtterance": {
+      "text": " Le SMS vous fournira un lien vers notre site web où vous pourrez parcourir et acheter des accessoires. Est-ce que ça vous convient? "
+    }
+  }, {
+    "userUtterance": {
+      "text": "oui"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "brand": "bell",
+        "language": "fr-ca",
+        "sms_content": "Bell : Vous pouvez visiter bell.ca/accessoirestelephones pour découvrir nos accessoires pour les téléphones cellulaires. ( bell.ca/apropos )",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "customer want to order a new remote and also asked for more information about SMS",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "fr-ca",
+      "route": "sales_order_device",
+      "utterance": "je veux commander une nouvelle télécommande"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "we got to know from the utterance that the device type as accessories Customer asked a question regarding SMS so VA answered them and prompted again for SMS. User then said yes so we route accordingly",
+    "actionParameters": {
+      "brand": "bell",
+      "device_type": "Accessories",
+      "language": "fr-ca",
+      "line_type": "Existing"
+    }
+  },
+  "displayName": "FR \"sales_order_device\"- ID Pass,line type-not mentioned- existing-device_type=accessories-remote contextual",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 555,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

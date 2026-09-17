@@ -1,0 +1,106 @@
+{
+  "name": "64972e67-8de0-4a32-bf88-d5fcba7166d0",
+  "displayName": "Webhook Get Customer Profile",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "/v1/ibm_mw/nm1_get#customer-profile",
+    "tag": "customer-profile"
+  },
+  "transitionRoutes": [ {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "oneBillIndicator",
+        "value": "$session.params.nm1_get_cust_profile_response.oneBill"
+      }, {
+        "parameter": "accountType",
+        "value": "$session.params.nm1_get_cust_profile_response.banType"
+      }, {
+        "parameter": "accountSubType",
+        "value": "$session.params.nm1_get_cust_profile_response.banSubType"
+      }, {
+        "parameter": "pastDueAmount",
+        "value": "$session.params.nm1_get_cust_profile_response.pastDueAmount"
+      }, {
+        "parameter": "accountBalance",
+        "value": "$session.params.nm1_get_cust_profile_response.arBalance"
+      } ]
+    },
+    "name": "309f5995-7d38-4f79-81f8-b3276a2b7e96"
+  }, {
+    "condition": "$session.params.webhook_success = false",
+    "triggerFulfillment": {
+    
+    },
+    "name": "cbfd8b0a-4b0d-49d8-aa1c-22397ab1f920"
+  }, {
+    "condition": "$session.params.nm1_get_cust_profile_response.returnCode = 0",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "profile_not_found",
+        "value": true
+      } ]
+    },
+    "targetPage": "Consolidated Customers",
+    "name": "94c1c29c-e7cb-4ac1-876c-2bb5124f7ead"
+  }, {
+    "condition": "$session.params.webhook_success = true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Consolidated Customers",
+    "name": "e45c01e7-336f-4dc3-a4a9-ebda5249524b"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_aqd",
+    "name": "c8e62b2f-93ed-4ddc-b78e-5ee82f99f119"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Webhook Failure Confirmation",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+    
+    },
+    "name": "eecea680-88f4-4d85-83e0-5bd47b10331f"
+  }, {
+    "targetPage": "Webhook Failure Confirmation",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+    
+    },
+    "name": "434e1e32-8541-4dd9-a05e-103de6780b0f"
+  }, {
+    "targetPage": "Webhook Failure Confirmation",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+    
+    },
+    "name": "94f25f87-e2fc-4e8c-9194-71547494a27b"
+  }, {
+    "targetPage": "Webhook Failure Confirmation",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+    
+    },
+    "name": "2dcca54b-fe2e-4a23-9fce-dc1f1274b191"
+  }, {
+    "targetPage": "Webhook Failure Confirmation",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+    
+    },
+    "name": "31299f4f-afc8-4878-a69c-ce4c738709e5"
+  }, {
+    "targetPage": "Webhook Failure Confirmation",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+    
+    },
+    "name": "507373dd-280e-483e-84fc-8d281cbabf85"
+  } ]
+}

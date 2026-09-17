@@ -1,0 +1,53 @@
+{
+  "name": "94c07372-9d8d-4b9b-a43c-69d7901630eb",
+  "displayName": "SMS Not received 3 times | Webhook intent-sdl-mapping",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "v1/intent-sdl-mapping",
+    "tag": "default",
+    "setParameterActions": [ {
+      "parameter": "brand",
+      "value": "Bell"
+    }, {
+      "parameter": "intent",
+      "value": "$session.params.route"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.webhook_success = True",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Sorry, we’re having difficulty sending the text.\n\nYou can check out our frequently asked questions at $session.params.intent_sdl_map_response.url ." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Désolée, on rencontre des difficultés pour envoyer le texto.\n\nTu peux consulter notre foire aux questions sur $session.params.intent_sdl_map_response.url." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "850e93c5-bca1-44ff-a098-1df81998dba7"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "\u003cspeak\u003eSorry, we’re having difficulty sending the text. You can check out our frequently asked questions at\n\u003csay-as interpret-as=\"url\"\u003ebell.ca/support\u003c/say-as\u003e\u003c/speak\u003e" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Désolée, on rencontre des difficultés pour envoyer le texto.\n\nTu peux consulter notre foire aux questions sur vpc.ca/soutien" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "16461383-a6aa-48cb-80c8-0ed5f455fdcc"
+  } ]
+}

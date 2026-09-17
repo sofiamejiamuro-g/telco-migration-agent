@@ -1,0 +1,47 @@
+{
+  "name": "cdc507d4-01eb-43b8-a70a-c17b61909c82",
+  "displayName": "Route by TN or BAN",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.CIRN != null",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "BBM MkSeg Webhook",
+    "name": "d8844ec4-9f09-4fe3-8ba5-da61bc514359"
+  }, {
+    "condition": "$session.params.BAN != null",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "CIRN",
+        "value": "$session.params.clid"
+      } ]
+    },
+    "targetPage": "Pull Account Information BAN",
+    "name": "418ea962-2708-40c0-a46d-a64f8274007f"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "cdc507d4-01eb-43b8-a70a-c17b61909c82"
+      }, {
+        "parameter": "flow_id",
+        "value": "8df7f836-8c64-4019-9506-2cedc52519c8"
+      }, {
+        "parameter": "page_name",
+        "value": "Route by TN or BAN"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

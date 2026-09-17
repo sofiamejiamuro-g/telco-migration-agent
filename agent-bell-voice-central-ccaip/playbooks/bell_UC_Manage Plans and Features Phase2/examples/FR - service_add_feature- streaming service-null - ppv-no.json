@@ -1,0 +1,63 @@
+{
+  "name": "a53636c4-d6ea-47bf-8896-09b94a4dbf59",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70011"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Vous pouvez commander la programmation Télé à la carte jusqu’à 24 heures à l’avance. Pour les événements majeurs, cette période peut être prolongée à 72 heures. La façon la plus simple de commander serait d’utiliser l’application Télé Fibe ou de visiter fibetv.ca. Et si vous êtes un client de la télé satellite, veuillez composer le 1 866 686-7337 et suivre les instructions."
+    }
+  }, {
+    "userUtterance": {
+      "text": "non"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_Feedback",
+      "inputActionParameters": {
+        "brand": "bell",
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+        "language": "fr-ca"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "As, {identification_status} is \"Pass\" and {streaming_services} is null and {ppv} = \"ppv\" then we will prompt customer with message and based on user response will proceed.",
+    "actionParameters": {
+      "apb_location_id": "70011",
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "fr-ca",
+      "ppv": "ppv",
+      "route": "service_add_feature",
+      "utterance": "Puis-je commander des articles à la carte ici ?"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Customer with {streaming_services} = null and {lob} = null and {identification_status} = Pass and {ppv} = \"ppv\" then will prompt user with some message and if user reply with \"no\" or anything negative then will call FLOW:bell_Feedback",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "fr-ca",
+      "ppv": "ppv",
+      "route": "service_feature_inquiry",
+      "utterance": "Puis-je commander des articles à la carte ici ?"
+    }
+  },
+  "displayName": "FR - service_add_feature- streaming service-null - ppv-no",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 541,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

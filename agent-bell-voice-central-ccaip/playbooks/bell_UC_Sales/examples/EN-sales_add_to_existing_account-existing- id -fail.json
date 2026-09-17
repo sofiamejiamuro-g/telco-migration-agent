@@ -1,0 +1,60 @@
+{
+  "name": "21e67f50-730e-42d7-b1d1-fc98f545ea6d",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "brand": "bell",
+        "language": "en"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "playbookInvocation": {
+      "playbook": "Bell_UC_Sales_Plans_inquiry",
+      "playbookInput": {
+        "precedingConversationSummary": "here we have the identification_status is \"Fail\" and customer_type is \"New\" hence we need to reroute to \"Bell_UC_Sales_Plans_inquiry\" with the route \"sales_plans_inquiry\"",
+        "actionParameters": {
+          "customer_type": "New",
+          "identification_status": "Fail",
+          "language": "en",
+          "route": "sales_plans_inquiry"
+        }
+      },
+      "playbookOutput": {
+        "executionSummary": "Follow the instructions under sales_plans_inquiry",
+        "actionParameters": {
+        
+        }
+      },
+      "playbookState": "OUTPUT_STATE_OK"
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "customer wants to add a new mobile line and the route is \"sales_add_to_existing_account\"  and the identification_status is \"Fail\"  or \"null\" and customer_type is \"New\"",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "New",
+      "identification_status": "Fail",
+      "language": "en",
+      "route": "sales_add_to_existing_account",
+      "utterance": "I want your help to get another service"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "here we have the identification_status is \"Fail\" and customer_type is \"New\" hence we need to reroute to \"Bell_UC_Sales_Plans_inquiry\" with the route \"sales_plans_inquiry\"",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "route": "sales_plans_inquiry"
+    }
+  },
+  "displayName": "EN-sales_add_to_existing_account-existing- id -fail",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 462,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

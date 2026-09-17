@@ -1,0 +1,48 @@
+{
+  "name": "c19b8e35-20f5-461c-ac0d-51c49cdd8b1c",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Je peux vous aider sur plusieurs sujets liés à la facturation. Pour vous diriger au bon endroit, veuillez me donner plus de détails sur votre demande. Par exemple, vous pourriez dire 'un frais particulier' ou 'mon solde total'."
+    }
+  }, {
+    "userUtterance": {
+      "text": "Pourriez-vous me tenir au courant de l'état du remboursement de mon dépôt de garantie, étant donné que la période de six mois est passée, et également me faire savoir pourquoi il n'a pas encore été retiré de mon compte ?"
+    }
+  }, {
+    "playbookInvocation": {
+      "playbook": "bell_UC_Billing",
+      "playbookInput": {
+        "precedingConversationSummary": "Customers is looking to confirm the due bill date",
+        "actionParameters": {
+          "language": "fr-ca",
+          "route": "bill_deposit_inquiry",
+          "utterance": "Pourriez-vous me tenir au courant de l'état du remboursement de mon dépôt de garantie, étant donné que la période de six mois est passée, et également me faire savoir pourquoi il n'a pas encore été retiré de mon compte ?"
+        }
+      },
+      "playbookOutput": {
+        "executionSummary": "Customer query is addressed and then transferred to \"bell_UC_Billing\" playbook for further conversation",
+        "actionParameters": {
+          "language": "fr-ca",
+          "route": "bill_deposit_inquiry"
+        }
+      },
+      "playbookState": "OUTPUT_STATE_OK"
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer query about \"I don't understand my bill\" is addressed",
+    "actionParameters": {
+      "language": "fr-ca",
+      "route": "bill_vague",
+      "utterance": "je ne comprends pas ma facture"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Customer query is addressed and then transferred to \"bell_UC_Billing\" playbook for further conversation"
+  },
+  "displayName": "FR -  bill_deposit_inquiry",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 414,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

@@ -1,0 +1,70 @@
+{
+  "name": "7997c9f4-5712-4836-b8fc-1ca3e319589b",
+  "displayName": "is_finished = true? (Main Flow)",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "setParameterActions": [ {
+      "parameter": "is_finished",
+      "value": "$session.params.oc_status_response.is_finished"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.is_finished != true AND $session.params.outage_counter \u003c 6",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "webhook_success",
+        "value": null
+      } ]
+    },
+    "name": "1c73eb06-f49e-47db-8617-f427a45abbe2"
+  }, {
+    "condition": "$session.params.is_finished != true AND $session.params.outage_counter = 6",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "outage_counter",
+        "value": 0
+      } ]
+    },
+    "targetPage": "User input",
+    "name": "0f0e85bd-c031-4d1f-8cd6-d694c0408242"
+  }, {
+    "condition": "$session.params.is_finished = true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Has outage = true? (Main Flow)",
+    "name": "67ad5eed-3d80-4fad-805e-69f805546023"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Webhook Get Outage Status Update (Main Flow)",
+    "event": "sys.no-input-1",
+    "triggerFulfillment": {
+    
+    },
+    "name": "34af1b2d-6c32-4c1c-bbcc-d0f848022234"
+  }, {
+    "targetPage": "Webhook Get Outage Status Update (Main Flow)",
+    "event": "sys.no-match-1",
+    "triggerFulfillment": {
+    
+    },
+    "name": "2d30b1d0-290f-4468-8b57-c0225c5038e4"
+  } ],
+  "advancedSettings": {
+    "speechSettings": {
+      "endpointerSensitivity": 90,
+      "noSpeechTimeout": {
+        "nanos": 500000000
+      },
+      "models": [ {
+        "key": "en",
+        "value": "telephony_short"
+      } ]
+    }
+  },
+  "speakerIdSettings": {
+  
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "name": "e6509027-c882-4b53-8171-c23234842e7c",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70024",
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+        "language": "fr-ca"
+      }
+    }
+  }, {
+    "playbookInvocation": {
+      "playbook": "bell_uc_ask_LOB",
+      "playbookInput": {
+        "actionParameters": {
+          "language": "fr-ca",
+          "utterance": "Quels sont les modules complémentaires offerts pour le service Télé?"
+        }
+      },
+      "playbookOutput": {
+        "actionParameters": {
+          "language": "fr-ca",
+          "lob": "Internet"
+        }
+      },
+      "playbookState": "OUTPUT_STATE_OK"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "service_add_feature_flow",
+      "inputActionParameters": {
+        "language": "fr-ca",
+        "route": "service_add_feature",
+        "utterance": "Quels sont les modules complémentaires offerts pour le service Télé?"
+      },
+      "outputActionParameters": {
+        "language": "fr-ca"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": ".Customer asking about add-ons available for Internet",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca",
+      "lob": "Internet",
+      "route": "service_feature_inquiry",
+      "utterance": "Quels sont les modules complémentaires offerts pour le service Télé?"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Customer is routed to flow \"service_add_feature_flow\"",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca",
+      "lob": "Internet",
+      "route": "service_feature_inquiry"
+    }
+  },
+  "displayName": "FR_service_feature_inquiry_TV_What add-ons are available for TV",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 415,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

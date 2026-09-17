@@ -1,0 +1,59 @@
+{
+  "name": "667978f3-6490-4ed7-9b9c-33edc324ede1",
+  "displayName": "Webhook send-otp",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "v1/customer-authentication#send-otp",
+    "tag": "send-otp",
+    "setParameterActions": [ {
+      "parameter": "brand",
+      "value": "$session.params.brand"
+    }, {
+      "parameter": "callKey",
+      "value": "$session.params.auth_options_response.callKey"
+    }, {
+      "parameter": "otp_tns",
+      "value": [ "$session.params.auth_options_response.otp_tns" ]
+    }, {
+      "parameter": "skip_validation",
+      "value": "True"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.webhook_success = \"True\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Once you receive the verification code by text, please say it back to me or punch it into your phone." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Quand vous aurez reçu le code par message texte, vous pourrez me le répéter ou le taper au clavier de votre téléphone." ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "webhook_success",
+        "value": null
+      }, {
+        "parameter": "local_no_match_counter",
+        "value": 0
+      }, {
+        "parameter": "local_no_input_counter",
+        "value": 0
+      } ]
+    },
+    "targetPage": "Trigger OTP",
+    "name": "f1ae9da4-df49-40ed-aa46-735324ee41a1"
+  }, {
+    "condition": "True",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhooks send-otp Error",
+    "name": "3c87d521-b992-4dd5-8691-3776a0ee1742"
+  } ]
+}

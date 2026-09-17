@@ -1,0 +1,21 @@
+{
+  "name": "f2f9eb75-fe1c-49b9-906d-8b04820530c7",
+  "displayName": "Check OTP Eligibility",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "True",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "eligibile_for_otp",
+        "value": "$sys.func.IF(\"$sys.func.COUNT($session.params.auth_options_response.otp_tns) \u003e 0\",true, false)"
+      } ]
+    },
+    "targetPage": "Confirm Customer has OTP device",
+    "name": "0c210453-61d1-4040-9caf-401e9a54f5ef"
+  } ]
+}

@@ -1,0 +1,55 @@
+{
+  "name": "feebe644-91a1-463b-9446-62f7ee3af959",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "language": "en"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_sales_routing_flow",
+      "inputActionParameters": {
+        "customer_type": "Existing",
+        "identification_status": "Pass",
+        "language": "en",
+        "route": "sales_add_to_existing_account"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "The Customer wants to sign up or open a new account with Bell",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "en",
+      "route": "sales_new_account",
+      "utterance": "I want to join Bell services"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "from the identification flow, know the customer_type as \"Existing\",  then reroute to \"sales_add_to_existing_account\"",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "en",
+      "line_type": "New",
+      "route": "sales_add_to_existing_account"
+    }
+  },
+  "displayName": "EN sales_new_account- ID Pass,customer_type- Existing",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 339,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

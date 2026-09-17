@@ -1,0 +1,59 @@
+{
+  "name": "a4d7c464-8ea2-4c0a-80e9-42a23176629f",
+  "displayName": "Check Outage Status Compensation Handling",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.outage_status = \"active\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I’m sorry, but I can only offer compensation once the outage has been restored." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je suis désolée, mais je ne peux vous proposer un dédommagement qu’une fois la panne rétablie." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetFlow": "bell_Feedback",
+    "name": "de43915a-da63-4fdd-84f5-5092c13e8f73"
+  }, {
+    "condition": "$session.params.outage_status = \"not active\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I'm not able to offer any compensation at the moment, since there is no active outage." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je ne suis pas en mesure de vous proposer un dédommagement pour le moment, car il n’y a pas de panne en cours." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetFlow": "bell_Feedback",
+    "name": "e9bbeec2-e9b1-454f-a175-bdcc29fbf1a4"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I'm sorry, but I’m unable to offer any compensation right now, as I can’t confirm whether there’s an active outage." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je suis désolée, mais je ne peux vous offrir aucun dédommagement pour le moment, car je ne peux pas confirmer s’il y a une panne en cours." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetFlow": "bell_Feedback",
+    "name": "a7beb5b1-076f-4241-b71b-db023bd5a752"
+  } ]
+}

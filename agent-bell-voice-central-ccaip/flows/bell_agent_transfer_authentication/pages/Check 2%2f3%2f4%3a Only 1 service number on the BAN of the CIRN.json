@@ -1,0 +1,156 @@
+{
+  "name": "eb238499-801c-4aa7-8c85-5232a5fd87b1",
+  "displayName": "Check 2/3/4: Only 1 service number on the BAN of the CIRN",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "setParameterActions": [ {
+      "parameter": "_ban_account",
+      "value": "$sys.func.FILTER(\"$session.params.customer_id_search_response\", \"$.users[*].billing_accounts[?(@.billing_account_number == '$session.params.billing_account')]\")"
+    }, {
+      "parameter": "_wsc_on_ban",
+      "value": "$sys.func.FILTER(\"$session.params._ban_account\", \"$.[*].services[*].service_id\")"
+    }, {
+      "parameter": "n_wsc_on_ban",
+      "value": "$sys.func.COUNT($session.params._wsc_on_ban)"
+    }, {
+      "parameter": "_contact_number_on_ban",
+      "value": "$sys.func.FILTER(\"$session.params._ban_account\", \"$.[*].billing_contact_number\")"
+    }, {
+      "parameter": "n_otp_tns",
+      "value": "$sys.func.COUNT($session.params.auth_options_response.otp_tns)"
+    }, {
+      "parameter": "contact_number_on_ban",
+      "value": "$session.params._contact_number_on_ban[0]"
+    }, {
+      "parameter": "cnban_in_otp_tns",
+      "value": "$sys.func.CONTAIN($session.params.auth_options_response.otp_tns, $session.params.contact_number_on_ban)"
+    }, {
+      "parameter": "local_no_match_phone",
+      "value": 0
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.n_otp_tns = 1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Je vais texter un code de six chiffres au numéro de téléphone mobile associé à votre compte." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "I’ll text a 6-digit code to the mobile phone on your account." ]
+        },
+        "languageCode": "en"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "telephone_number",
+        "value": "$session.params.auth_options_response.otp_tns[0]"
+      } ]
+    },
+    "targetPage": "Webhook send-otp",
+    "name": "da77d254-6e8f-4235-8fba-b3065ec8f52e"
+  }, {
+    "condition": "$session.params.n_otp_tns \u003e 1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "D'accord." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "À quel numéro de téléphone souhaitez-vous que je l'envoie ?" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "Okay." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Which phone number on your account would you like me to send it to?" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "targetPage": "Prompt Phone Number",
+    "name": "8bc85148-06d4-4263-9a82-0e9af1bb708b"
+  }, {
+    "condition": "$session.params.hp_in_ban_response.is_home_phone = true",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "On dirait cependant que vous appelez d’une ligne fixe. Je dois envoyer le code de vérification à un numéro de téléphone mobile associé à votre compte." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "À quel numéro de téléphone souhaitez-vous que je l'envoie ?" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "It looks like you're calling from a landline. I need to send the verification code to a mobile phone number on your account." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Which phone number on your account would you like me to send it to?" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "targetPage": "Prompt Phone Number",
+    "name": "b7181b11-0acf-4c54-b2e5-60facd704270"
+  }, {
+    "condition": "$session.params.cnban_in_otp_tns = true",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Je vais texter un code de six chiffres au numéro de téléphone faisant partie des coordonnées associées à votre compte." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "À quel numéro de téléphone souhaitez-vous que je l'envoie ?" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "I’ll text a 6-digit code to the contact number on your account." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Which phone number on your account would you like me to send it to?" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "targetPage": "Prompt Phone Number",
+    "name": "1189f2dc-04c4-4605-8266-3394115c5e7c"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "eb238499-801c-4aa7-8c85-5232a5fd87b1"
+      }, {
+        "parameter": "flow_id",
+        "value": "87797521-bad6-4ad0-8ba5-2ff3b1d9bab2"
+      }, {
+        "parameter": "page_name",
+        "value": "Check 2/3/4: Only 1 service number on the BAN of the CIRN"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

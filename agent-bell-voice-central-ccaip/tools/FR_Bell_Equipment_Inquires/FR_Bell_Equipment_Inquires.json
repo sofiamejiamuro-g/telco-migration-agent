@@ -1,0 +1,60 @@
+{
+  "name": "d7726814-5b89-4a46-99fc-27c8677adf54",
+  "displayName": "FR_Bell_Equipment_Inquires",
+  "description": "French Datastore for equipment_return_device and equipment_warranty_claim issues",
+  "dataStoreSpec": {
+    "dataStoreConnections": [ {
+      "dataStoreType": "PUBLIC_WEB",
+      "dataStore": "projects/698791718673/locations/us/collections/default_collection/dataStores/bell-global-fr-equipment-inquires_1754026326727",
+      "documentProcessingMode": "DOCUMENTS",
+      "engineType": "CHAT_ENGINE",
+      "connectorConfig": {
+      
+      },
+      "createTime": {
+        "seconds": 1754026332,
+        "nanos": 444992000
+      },
+      "displayName": "bell_global_fr_equipment_inquires",
+      "dialogflowAddTime": {
+        "seconds": 1754026332,
+        "nanos": 444992000
+      }
+    }, {
+      "dataStoreType": "STRUCTURED",
+      "dataStore": "projects/698791718673/locations/us/collections/default_collection/dataStores/bell-global-fr-structured-faq_1768971721762",
+      "documentProcessingMode": "DOCUMENTS",
+      "engineType": "CHAT_ENGINE",
+      "connectorConfig": {
+      
+      },
+      "createTime": {
+        "seconds": 1768971743,
+        "nanos": 798253000
+      },
+      "displayName": "bell_global_fr_structured_faq",
+      "dialogflowAddTime": {
+        "seconds": 1769173546,
+        "nanos": 507000000
+      }
+    } ],
+    "models": {
+      "summarizationModel": {
+        "model": "gemini_25_flash",
+        "promptText": "Given the conversation between a Human and an AI assistant and a list of sources, write a final answer for the AI assistant.\nFollow these guidelines:\n  + Answer the Human's query and make sure you mention all relevant details from the sources, using exactly the same words as the sources if possible.\n  + The answer must be based only on the sources and not introduce any additional information.\n  + All numbers, like price, date, time or phone numbers must appear exactly as they are in the sources.\n  + Give a summarized as short as possible answer given the sources. Include all important details, and any caveats and conditions that apply.\n  + Include the steps or important points in your answer.\n  + the answer MUST be under 70 words.\n  + The answer MUST be in French.\n  + Don't try to make up an answer: If the answer cannot be found in the sources, you admit that you don't know and you answer NOT_ENOUGH_INFORMATION.\n\nYou will be given a few examples before you begin.\n\nExample 1:\nSources:\n[1] \u003cproduct or service\u003e Info Page\nYes, \u003ccompany\u003e offers \u003cproduct or service\u003e in various options or variations.\n\nHuman: Do you sell \u003cproduct or service\u003e?\nAI: Yes, \u003ccompany\u003e sells \u003cproduct or service\u003e. Is there anything else I can\nhelp you with?\n\nExample 2:\nSources:\n[1] Andrea - Wikipedia\nAndrea is a given name which is common worldwide for both males and females.\n\nHuman: How is the weather?\nAI: NOT_ENOUGH_INFORMATION\n\n\nBegin! Let's work this out step by step to be sure we have the right answer.\n\nSources:\n$sources\n\n$conversation\nHuman: $original-query\nAI:\n"
+      },
+      "rewriterModel": {
+        "model": "gemini_25_flash"
+      }
+    },
+    "groundingSettings": {
+    
+    },
+    "payloadSettings": {
+      "enableSnippetsPayload": true,
+      "maxSnippetsCount": 1
+    },
+    "mode": "MODE_CUSTOM"
+  },
+  "toolType": "CUSTOMIZED_TOOL"
+}

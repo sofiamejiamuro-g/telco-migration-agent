@@ -1,0 +1,71 @@
+{
+  "name": "22e93bf4-ca62-4217-8667-d47d84d9ed1a",
+  "displayName": "Global ID Error Check",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.aqd_counter = 3",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Désolé, je ne parviens pas à trouver ce numéro dans nos dossiers. Soyez sans crainte, je ferai quand même de mon mieux pour vous servir." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "I'm sorry, I can't seem to find this number in our records. But don’t worry, I'll still help you however I can." ]
+        },
+        "languageCode": "en"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "identification_status",
+        "value": "Fail"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "5d5e6199-f0fd-4fb1-bc8d-8c3402c9ea1e"
+  }, {
+    "condition": "$session.params.semantic_void = 3 AND ($session.params.CPM_Invalid_Counter \u003c= 2 OR $session.params.PHN_Invalid_Counter \u003c= 2)",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Désolé, je ne parviens pas à trouver ce numéro dans nos dossiers. Soyez sans crainte, je ferai quand même de mon mieux pour vous servir." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "Sorry, I can't seem to find that number in our records.  But don’t worry, I'll still help you however I can." ]
+        },
+        "languageCode": "en"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "identification_status",
+        "value": "Fail"
+      } ]
+    },
+    "targetPage": "End Flow Check",
+    "name": "3cf1149b-208e-491e-8d4d-2a9307f093f2"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "$request.generative.response" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "$request.generative.response" ]
+        },
+        "languageCode": "en"
+      } ],
+      "generators": [ {
+        "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/2a3fc3f6-86bd-4855-a910-e13f5e42dca6",
+        "outputParameter": "$request.generative.response"
+      } ]
+    },
+    "targetPage": "CIRN Collection Check",
+    "name": "75deaba8-cde4-44d9-b4d7-b0da2f618eaa"
+  } ]
+}

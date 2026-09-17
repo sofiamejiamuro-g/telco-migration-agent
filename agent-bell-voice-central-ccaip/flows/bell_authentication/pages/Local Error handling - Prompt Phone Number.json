@@ -1,0 +1,96 @@
+{
+  "name": "a8c92062-16a7-40cf-b5d2-ad66a2aa91d5",
+  "displayName": "Local Error handling - Prompt Phone Number",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.global_error_counter \u003e= 3",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_aqd",
+    "name": "5b40b5b1-bcc8-4771-9faf-e11b86166e18"
+  }, {
+    "condition": "$session.params.local_noinput_counter = 1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Sorry, that doesn't seem right. Please say or key in the 10-digit number you'd like us to send the code to. It needs to be a number listed on your account." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Désolé, cela ne semble pas exact. Veuillez dire ou entrer le numéro de dix chiffres auquel vous souhaitez que le code soit envoyé. Il doit s'agir d'un numéro inscrit à votre compte." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "4faddd32-ca9c-41c9-859b-11f14b333a7a"
+  }, {
+    "condition": "$session.params.local_noinput_counter \u003e= 2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Sorry that still does not seem right." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Désolé, cela ne semble toujours pas exact." ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "auth_status",
+        "value": "Fail"
+      } ]
+    },
+    "targetPage": "End Flow Check",
+    "name": "0c29dc1d-5aa2-43fd-993e-50eb18cb60b8"
+  }, {
+    "condition": "$session.params.local_trigger = \"no_match\" AND $session.params.local_nomatch_counter = 1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Sorry, that doesn't seem right. Please say or key in the 10-digit number you'd like us to send the code to. It needs to be a number listed on your account." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Désolé, cela ne semble pas exact. Veuillez dire ou entrer le numéro de dix chiffres auquel vous souhaitez que le code soit envoyé. Il doit s'agir d'un numéro inscrit à votre compte." ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "13b63911-51c2-41d4-ae3d-f2c595ce01fc"
+  }, {
+    "condition": "$session.params.local_trigger = \"no_match\" AND $session.params.local_nomatch_counter \u003e= 2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Sorry that still does not seem right." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Désolé, cela ne semble toujours pas exact." ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "auth_status",
+        "value": "Fail"
+      } ]
+    },
+    "targetPage": "End Flow Check",
+    "name": "9773d2b5-8fd5-40d3-a4e5-a0c2f99d2fee"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Previous Page",
+    "name": "ec2144b0-9ad1-4ffc-b417-91daf1228801"
+  } ]
+}

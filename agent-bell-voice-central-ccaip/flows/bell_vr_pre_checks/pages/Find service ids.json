@@ -1,0 +1,63 @@
+{
+  "name": "81f022bf-0207-44dd-ade3-f87579719f38",
+  "displayName": "Find service ids",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "clid_home_phone_service_ids",
+        "value": "$sys.func.FILTER(\"$session.params.account_details_payload\", \"$..services[?(@.service_id == '$session.params.search_clid' \u0026\u0026 @.service_type in ['HOMEPHONE', 'WIRELINE'])].service_id\")"
+      }, {
+        "parameter": "clid_home_phone_service_id",
+        "value": "$session.params.clid_home_phone_service_ids[0]"
+      }, {
+        "parameter": "clid_home_phone_service_id_counter",
+        "value": "$sys.func.LEN($session.params.clid_home_phone_service_id)"
+      }, {
+        "parameter": "network_type_flag",
+        "value": "$sys.func.UNIQUE($sys.func.FILTER(\"$session.params.account_details_payload\", \"$..services[?(@.service_id == '$session.params.search_clid' \u0026\u0026 @.service_type in ['HOMEPHONE', 'WIRELINE'])].network_type\"))"
+      }, {
+        "parameter": "network_type_flag",
+        "value": "$session.params.network_type_flag[0]"
+      }, {
+        "parameter": "homephonejson",
+        "value": "$sys.func.FILTER(\"$session.params.account_details_payload\", \"$..services[?(@.service_type in ['HOMEPHONE', 'WIRELINE'])]\")"
+      }, {
+        "parameter": "homephone_access_code",
+        "value": "$session.params.homephonejson[0].service_cfs.access"
+      }, {
+        "parameter": "internet_homephone_service_id",
+        "value": "$sys.func.UNIQUE($sys.func.FILTER(\"$session.params.account_details_payload\", \"$..services[?(@.service_type == 'INTERNET' \u0026\u0026 @.service_cfs.access == '$session.params.homephone_access_code')].service_id\"))"
+      }, {
+        "parameter": "internet_homephone_service_id_flag",
+        "value": "$sys.func.LEN($session.params.internet_homephone_service_id[0])"
+      }, {
+        "parameter": "tvjson",
+        "value": "$sys.func.FILTER(\"$session.params.account_details_payload\", \"$..services[?(@.service_type == 'TV')]\")"
+      }, {
+        "parameter": "tvjson_access_code",
+        "value": "$session.params.tvjson[0].service_cfs.access"
+      }, {
+        "parameter": "internet_tv_service_id",
+        "value": "$sys.func.UNIQUE($sys.func.FILTER(\"$session.params.account_details_payload\", \"$..services[?(@.service_type == 'INTERNET' \u0026\u0026 @.service_cfs.access == '$session.params.tvjson_access_code')].service_id\"))"
+      }, {
+        "parameter": "internet_tv_service_id_flag",
+        "value": "$sys.func.LEN($session.params.internet_tv_service_id[0])"
+      }, {
+        "parameter": "homephone_tv_service_id",
+        "value": "$sys.func.UNIQUE($sys.func.FILTER(\"$session.params.account_details_payload\", \"$..services[?(@.service_type in ['HOMEPHONE', 'WIRELINE'] \u0026\u0026 @.service_cfs.access == '$session.params.tvjson_access_code')].service_id\"))"
+      }, {
+        "parameter": "homephone_tv_service_id_flag",
+        "value": "$sys.func.LEN($session.params.homephone_tv_service_id[0])"
+      } ]
+    },
+    "targetPage": "Calling From Landline?",
+    "name": "fbc0b3b5-5903-4d7b-aef5-dd465991cf9c"
+  } ]
+}

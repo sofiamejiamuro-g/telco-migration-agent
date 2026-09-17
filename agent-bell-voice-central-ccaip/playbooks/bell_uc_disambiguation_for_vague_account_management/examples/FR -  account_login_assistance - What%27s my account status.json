@@ -1,0 +1,48 @@
+{
+  "name": "3db311af-ff2d-432d-9f93-d09d4694291d",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Vous vous demandez si votre compte est suspendu ou s'il s'agit d'autre chose ?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "J'essaie de me connecter à mon compte Bell pour consulter ma facture, mais on me demande de me connecter et je ne peux pas y accéder en utilisant mon numéro de téléphone ou mon adresse e-mail."
+    }
+  }, {
+    "playbookInvocation": {
+      "playbook": "bell_UC_Account Management",
+      "playbookInput": {
+        "precedingConversationSummary": "Customer trying to report about a login assitance",
+        "actionParameters": {
+          "language": "fr-ca",
+          "route": "account_login_assistance",
+          "utterance": "J'essaie de me connecter à mon compte Bell pour consulter ma facture, mais on me demande de me connecter et je ne peux pas y accéder en utilisant mon numéro de téléphone ou mon adresse e-mail."
+        }
+      },
+      "playbookOutput": {
+        "executionSummary": "Customer query is addressed and then transferred to \"bell_UC_account_management\" playbook for further conversation",
+        "actionParameters": {
+          "language": "fr-ca",
+          "route": "account_login_assistance"
+        }
+      },
+      "playbookState": "OUTPUT_STATE_OK"
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer query about \"What's my account status\" is addressed",
+    "actionParameters": {
+      "language": "fr-ca",
+      "route": "account_vague",
+      "utterance": "Quel est le statut de mon compte"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Customer query is addressed and then transferred to \"bell_UC_account_management\" playbook for further conversation"
+  },
+  "displayName": "FR -  account_login_assistance - What's my account status",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 373,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

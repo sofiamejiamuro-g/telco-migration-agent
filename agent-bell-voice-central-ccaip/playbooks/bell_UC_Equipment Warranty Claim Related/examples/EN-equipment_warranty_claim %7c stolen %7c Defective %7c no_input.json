@@ -1,0 +1,94 @@
+{
+  "name": "e5154c25-c49e-475a-890b-81256aea9ae9",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Can you briefly describe your device's issue?\n"
+    }
+  }, {
+    "userUtterance": {
+      "text": "my phone is stolen"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Who is the manufacturer?\n"
+    }
+  }, {
+    "userUtterance": {
+      "text": "apple"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Most devices purchased through Bell come within the limited manufacturer's warranty. Did you purchase your device within the last 12 months?\n"
+    }
+  }, {
+    "userUtterance": {
+    
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_global_error_count_check",
+      "inputActionParameters": {
+        "global_error_counter": "2"
+      },
+      "outputActionParameters": {
+        "global_error_counter": "3"
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Have you enrolled in our SmartCare Program?\n"
+    }
+  }, {
+    "userUtterance": {
+      "text": "no"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "I can send you an email with a link to learn more about our in-store device repair process or additional options. Is that alright?\n"
+    }
+  }, {
+    "userUtterance": {
+      "text": "no"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "en",
+        "route": "equipment_warranty_claim",
+        "sms_send_status": "Declined"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "customer is inquiring about device_issue null",
+    "actionParameters": {
+      "brand": "bell",
+      "global_error_counter": "2",
+      "language": "en",
+      "noinput_disable": "True",
+      "route": "equipment_warranty_claim",
+      "utterance": "Hi, i want to find warranty for my mobile"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "customer is asked manufacturer and proceed further manufacturer warranty logic where  ask the customer if they enrolled in smartcare program and based on response, transition further to bell_sms trigger",
+    "actionParameters": {
+      "brand": "bell",
+      "device_issue": "Defective",
+      "global_error_counter": "3",
+      "language": "en",
+      "manufacturer": "Other",
+      "noinput_flag": "True",
+      "route": "equipment_warranty_claim"
+    }
+  },
+  "displayName": "EN-equipment_warranty_claim | stolen | Defective | no_input",
+  "retrievalStrategy": "STATIC",
+  "tokenCount": 552,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

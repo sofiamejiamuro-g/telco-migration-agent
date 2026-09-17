@@ -1,0 +1,64 @@
+{
+  "name": "856be1f7-6623-4b54-8d15-11b5258aef76",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "De quel appareil souhaitez-vous vérifier l’état?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Téléphone mobile"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Avez-vous des questions sur un surclassement d’appareil, un nouvel appareil ou une commande de réparation? "
+    }
+  }, {
+    "userUtterance": {
+      "text": "commande de réparation"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "D'accord. Vous pouvez consulter le statut de votre réparation mobile sur l'appli MonBell. Je vais envoyer un texto sur l'appareil au moyen duquel vous appelez afin que vous puissiez faire le suivi de votre envoi. Est-ce que ça vous convient?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "oui"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "fr-ca",
+        "sms_content": "Bell: Vous pouvez visiter bell.ca/reparationsuivi pour vérifier le statut de votre demande de réparation en ligne.",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+        "language": "fr-ca",
+        "sms_content": "Bell: Vous pouvez visiter bell.ca/reparationsuivi pour vérifier le statut de votre demande de réparation en ligne.",
+        "sms_type": "Public"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer has stated that he wants to know the status of his order. device_type is unknow so we inform customer about which device type according to the instructions.",
+    "actionParameters": {
+      "identification_status": "Pass",
+      "language": "fr-ca",
+      "route": "equipment_order_status",
+      "utterance": "Je veux savoir le statut de ma commande de"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Customer says Mobile phone so we assign parameter {device_type} as \"Mobile phone\" according to the instructions. We ask the customer about upgrade, new or repair. Customer says repair order. so we inform customer about the SMS according to the instructions. customer says yes so we call bell_SMS_trigger flow according to the instructions.",
+    "actionParameters": {
+      "device_type": "Mobile phone",
+      "language": "fr-ca",
+      "sms_type": "Public"
+    }
+  },
+  "displayName": "FR equipment_order_status No device-type repair order",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 502,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "fr"
+}

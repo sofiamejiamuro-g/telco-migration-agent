@@ -1,0 +1,76 @@
+{
+  "name": "3ce86277-e5b7-42b8-8323-4f69d0651521",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70011",
+        "brand": "bell",
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "playbookInvocation": {
+      "playbook": "bell_uc_ask_LOB",
+      "playbookInput": {
+        "precedingConversationSummary": "Passing the user {utterance} to extract the parameter {lob} when {identification_status} is \"Pass\"",
+        "actionParameters": {
+          "brand": "bell",
+          "language": "fr-ca"
+        }
+      },
+      "playbookOutput": {
+        "executionSummary": "returns the parameter {lob} based on user input provided or {utterance}",
+        "actionParameters": {
+          "lob": "Homephone"
+        }
+      },
+      "playbookState": "OUTPUT_STATE_OK"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Je vais envoyer un texto à l’appareil au moyen duquel vous appelez, afin que vous puissiez facilement gérer votre forfait de téléphonie résidentielle, vos options ou votre forfait interurbain à tout moment à l’aide de MonBell. Est-ce que ça vous convient?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Oui"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "sms_content": "Bell: You can visit https://m.bell.ca/e/changepackage to make changes to your Home phone package and features in the MyBell app. ( bell.ca/about-us )",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "customer wants to remove any additional features/add-ons they have on their plan and if parameter {lob} is null in session then we need to call PLAYBOOK:bell_uc_ask_LOB to extract the lob value",
+    "actionParameters": {
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "fr-ca",
+      "route": "service_remove_feature",
+      "utterance": "je veux supprimer une fonctionnalité"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "User is rerouted to check lob playbook to extract the parameter \"lob\" and return back and ask for sms, if agreed then send sms",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "lob": "Homephone"
+    }
+  },
+  "displayName": "FR - service_remove_feature - lob null- Homephone",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 591,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

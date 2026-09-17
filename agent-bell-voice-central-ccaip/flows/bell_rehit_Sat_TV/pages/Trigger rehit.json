@@ -1,0 +1,93 @@
+{
+  "name": "a2faeb2a-ca6b-4a5a-96c4-b8f1b5029f75",
+  "displayName": "Trigger rehit",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "v1/sat-rehit",
+    "tag": "sat-rehit"
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.webhook_success = true",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Did you have access to the missing channels before?" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "targetPage": "Check CX Input",
+    "name": "768f089a-63e6-4aae-9a52-467d26cae433"
+  }, {
+    "condition": "$session.params.webhook_success = false",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_rehit_SMS",
+    "name": "40753c66-e869-455e-b85f-46daeed0203d"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "a2faeb2a-ca6b-4a5a-96c4-b8f1b5029f75"
+      }, {
+        "parameter": "flow_id",
+        "value": "2492639b-5464-463e-85fd-264ac03bfcd5"
+      }, {
+        "parameter": "page_name",
+        "value": "Trigger rehit"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ],
+  "eventHandlers": [ {
+    "targetFlow": "bell_rehit_SMS",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+    
+    },
+    "name": "f4dcfe0a-c2d4-4dd9-83fc-829d0f189f69"
+  }, {
+    "targetFlow": "bell_rehit_SMS",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+    
+    },
+    "name": "85d48bc2-e61a-44c8-b5d0-4853b8b76e30"
+  }, {
+    "targetFlow": "bell_rehit_SMS",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+    
+    },
+    "name": "b9168040-f4a1-49e3-83b1-0dc8831f03b6"
+  }, {
+    "targetFlow": "bell_rehit_SMS",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+    
+    },
+    "name": "48d13712-5108-4f4e-b60e-351f6570a587"
+  }, {
+    "targetFlow": "bell_rehit_SMS",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+    
+    },
+    "name": "f8f66f61-09e1-4dc0-96fc-ecd9551ef856"
+  }, {
+    "targetFlow": "bell_rehit_SMS",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+    
+    },
+    "name": "f0adeacd-a090-4c8f-b8bf-c397d435157a"
+  } ]
+}

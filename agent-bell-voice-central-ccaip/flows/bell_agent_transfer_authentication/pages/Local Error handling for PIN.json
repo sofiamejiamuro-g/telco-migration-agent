@@ -1,0 +1,65 @@
+{
+  "name": "bec314ca-70c6-4814-be25-8448fa4ea661",
+  "displayName": "Local Error handling for PIN",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.local_no_match = 1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Sorry, that does not seem right. Please say or key in your 4 digit PIN." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Désolé, cela ne semble pas exact. Veuillez dire ou entrer votre NIP de quatre chiffres." ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "route",
+        "value": "other_speak_to_agent"
+      } ]
+    },
+    "name": "59482c53-d02d-4523-82d9-a4f21c6bec59"
+  }, {
+    "condition": "$session.params.local_no_match \u003e= 2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "There seems to be a problem." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "il semble y avoir un problème." ]
+        },
+        "languageCode": "fr-ca"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "auth_status",
+        "value": "Fail"
+      }, {
+        "parameter": "speak_to_agent_counter",
+        "value": 0
+      }, {
+        "parameter": "PINTimeout",
+        "value": "PINTimeout"
+      }, {
+        "parameter": "route",
+        "value": "other_speak_to_agent"
+      } ]
+    },
+    "targetPage": "Webhook set-auth-status",
+    "name": "ebfb211b-8a2c-4b28-985d-2488595a1e74"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Previous Page",
+    "name": "2b574788-e2ee-4158-8448-1caae8c1866a"
+  } ]
+}

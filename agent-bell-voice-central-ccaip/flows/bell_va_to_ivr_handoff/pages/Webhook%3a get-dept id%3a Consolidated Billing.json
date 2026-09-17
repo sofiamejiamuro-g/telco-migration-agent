@@ -1,0 +1,52 @@
+{
+  "name": "6de935b7-715c-4a2e-a4ee-ba8258725e63",
+  "displayName": "Webhook: get-dept id: Consolidated Billing",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "/v1/ivr-transfer/get-department-id",
+    "tag": "N/A",
+    "setParameterActions": [ {
+      "parameter": "menu_id",
+      "value": "$session.params.config.DEFAULT_MENU_ID"
+    }, {
+      "parameter": "menu_id_ref",
+      "value": "$sys.func.CONCATENATE(\"REF\", $sys.func.TO_TEXT($session.params.menu_id))"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.onebillindicator = \"Y\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Dam Transfer ATLBILL",
+    "name": "75154aea-41cf-4c12-bb2e-9f3fdcbe3e30"
+  }, {
+    "condition": "$session.params.onebillindicator = \"M\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook DAM Transfer MTSBILL",
+    "name": "03b764db-46e4-40ea-b9dc-2c296fbc7fcf"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "6de935b7-715c-4a2e-a4ee-ba8258725e63"
+      }, {
+        "parameter": "flow_id",
+        "value": "7236071c-1553-4217-a18d-0a64a4737a9a"
+      }, {
+        "parameter": "page_name",
+        "value": "Webhook: get-dept id: Consolidated Billing"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

@@ -1,0 +1,53 @@
+{
+  "name": "0b0e6475-309a-4e6a-98db-871580358b40",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Je peux vous aider sur plusieurs sujets liés à la facturation. Pour vous diriger au bon endroit, veuillez me donner plus de détails sur votre demande. Par exemple, vous pourriez dire 'un frais particulier' ou 'mon solde total'."
+    }
+  }, {
+    "userUtterance": {
+      "text": "Pourriez-vous m'expliquer comment je peux réduire ma facture en modifiant mon forfait ou en supprimant certains services, et également me dire s'il existe des promotions ou des économies dont je peux profiter pour réduire davantage les coûts ?"
+    }
+  }, {
+    "playbookInvocation": {
+      "playbook": "bell_UC_Billing",
+      "playbookInput": {
+        "precedingConversationSummary": "Customers is looking to reduce the bill",
+        "actionParameters": {
+          "language": "fr-ca",
+          "route": "bill_reduce_plan",
+          "utterance": "Pourriez-vous m'expliquer comment je peux réduire ma facture en modifiant mon forfait ou en supprimant certains services, et également me dire s'il existe des promotions ou des économies dont je peux profiter pour réduire davantage les coûts ?"
+        }
+      },
+      "playbookOutput": {
+        "executionSummary": "Customer query got resolved",
+        "actionParameters": {
+          "language": "fr-ca",
+          "route": "bill_reduce_plan"
+        }
+      },
+      "playbookState": "OUTPUT_STATE_OK"
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer query about \"Question about changes on my bill\" is addressed",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca",
+      "route": "bill_vague",
+      "utterance": "Question sur les changements sur ma facture"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Customer query is addressed and then directed to \"lucky_uc_billing\" playbook",
+    "actionParameters": {
+      "language": "fr-ca",
+      "route": "bill_view_bill"
+    }
+  },
+  "displayName": "FR - bill_reduce_plan - Question about changes on my bill",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 416,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

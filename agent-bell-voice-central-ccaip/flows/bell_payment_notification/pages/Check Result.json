@@ -1,0 +1,90 @@
+{
+  "name": "7bc5fdef-6abe-49fc-a38e-ffda840c16a1",
+  "displayName": "Check Result",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "province",
+        "value": "$session.params.npa_nxx_lookup_response.province"
+      } ]
+    },
+    "name": "dacca009-1470-4b50-966a-2ae8a65237f4"
+  }, {
+    "condition": "$session.params.oneBillIndicator = \"Y\" AND ($session.params.province = \"NB\" OR $session.params.province = \"NL\" OR $session.params.province = \"NS\" OR $session.params.province = \"PE\")",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "oneBillIndicator",
+        "value": "Y"
+      } ]
+    },
+    "targetFlow": "bell_va_to_ivr_handoff",
+    "name": "2cee2179-e353-4f96-9996-d62b7fdc0347"
+  }, {
+    "condition": "$session.params.oneBillIndicator = \"M\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "oneBillIndicator",
+        "value": "M"
+      } ]
+    },
+    "targetFlow": "bell_va_to_ivr_handoff",
+    "name": "8fb2dd1d-0716-41e1-992c-3b44c5fe94da"
+  }, {
+    "condition": "$session.params.auth_status = null",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_authentication",
+    "name": "b7c516e2-0ce5-4924-a104-14483cc42965"
+  }, {
+    "condition": "$session.params.auth_status = \"Fail\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "ID or Auth Failure Confirmation",
+    "name": "84748350-2843-4f99-b927-78c0d79fd077"
+  }, {
+    "condition": "$session.params.auth_status = \"Pass\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "apb_location_id",
+        "value": 70010
+      } ]
+    },
+    "targetFlow": "bell_apb",
+    "name": "74d4b192-99d3-42c4-bb95-20b63f5a8dab"
+  }, {
+    "condition": "$session.params.auth_status = \"Pass\" AND $session.params.apb_location_id = 70010",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Get Eligibility Criteria",
+    "name": "c27d06e3-d06e-4438-8005-8a5c094e02ff"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "7bc5fdef-6abe-49fc-a38e-ffda840c16a1"
+      }, {
+        "parameter": "flow_id",
+        "value": "ced63037-f058-4dd0-9269-97742185ea0f"
+      }, {
+        "parameter": "page_name",
+        "value": "Check Result"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

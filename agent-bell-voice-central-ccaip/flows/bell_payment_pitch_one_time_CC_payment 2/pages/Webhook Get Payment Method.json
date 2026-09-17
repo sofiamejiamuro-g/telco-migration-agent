@@ -1,0 +1,101 @@
+{
+  "name": "4328528c-a4d9-4077-b6aa-263b7343ea64",
+  "displayName": "Webhook Get Payment Method",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "/v1/pre-auth-payment#get-existing",
+    "tag": "get-existing",
+    "setParameterActions": [ {
+      "parameter": "menu_type",
+      "value": "ivr_menu"
+    }, {
+      "parameter": "brand",
+      "value": "bell"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.get_pre_auth_payment_response_override != null",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "get_pre_auth_payment_response",
+        "value": "$sys.func.TO_OBJECT(\"$session.params.get_pre_auth_payment_response_override\")"
+      } ]
+    },
+    "name": "c661f131-fc4e-45cc-af46-7cbfcbc1da33"
+  }, {
+    "condition": "$session.params.webhook_success_override != null",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "webhook_success",
+        "value": "$session.params.webhook_success_override"
+      } ]
+    },
+    "name": "740462a9-2657-4282-ba0c-958a21003d1a"
+  }, {
+    "condition": "$session.params.webhook_success = false OR $session.params.webhook_success = \"false\" OR $session.params.webhook_success = \"False\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Failure",
+    "name": "7a015db8-05a1-4fdf-80c2-1d1520288dec"
+  }, {
+    "condition": "$session.params.get_pre_auth_payment_response.paymentMethod = \"PreAuthCreditCard\" OR $session.params.get_pre_auth_payment_response.paymentMethod = \"PreAuthBank\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_Feedback",
+    "name": "3bc4085f-1960-4ed0-a71a-004004d9ead4"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Account Balance Entry",
+    "name": "75bb3473-0f54-4a73-8c85-9c6f6be3e3af"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Webhook Failure",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+    
+    },
+    "name": "ef494a35-47ee-4ae8-8398-ced0f1a3b174"
+  }, {
+    "targetPage": "Webhook Failure",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+    
+    },
+    "name": "f72ab3c4-70c0-4804-a848-06e22e4e360f"
+  }, {
+    "targetPage": "Webhook Failure",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+    
+    },
+    "name": "2f7e3b77-7bd9-4866-90ab-e3084f79e1a4"
+  }, {
+    "targetPage": "Webhook Failure",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+    
+    },
+    "name": "b2965edf-2799-44b9-b76b-3ae3a41d1315"
+  }, {
+    "targetPage": "Webhook Failure",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+    
+    },
+    "name": "eb50b20d-196c-4e62-80db-66bb3faad1bc"
+  }, {
+    "targetPage": "Webhook Failure",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+    
+    },
+    "name": "df21c9e1-e72d-4bfa-aba9-0370549ee03f"
+  } ]
+}

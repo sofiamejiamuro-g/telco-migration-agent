@@ -1,0 +1,59 @@
+{
+  "name": "fb527e31-7271-4102-ae1f-4e3616c41077",
+  "displayName": "Language Based SMS",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.language = \"en\"",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "You can visit https://m.bell.ca/chatpreauthorizedbanke to complete setting up Pre Authorized payment in MyBell. (bell.ca/about-us )" ]
+        },
+        "languageCode": "en"
+      } ],
+      "setParameterActions": [ {
+        "parameter": "sms_type",
+        "value": "Public"
+      }, {
+        "parameter": "sms_content",
+        "value": "You can visit https://m.bell.ca/chatpreauthorizedbanke to complete setting up Pre Authorized payment in MyBell. (bell.ca/about-us )"
+      } ]
+    },
+    "targetFlow": "bell_SMS Trigger",
+    "name": "a09ed256-78e2-412b-b240-9e71b3ef3739"
+  }, {
+    "condition": "$session.params.language = \"fr-ca\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "sms_type",
+        "value": "Public"
+      }, {
+        "parameter": "sms_content",
+        "value": "Vous pouvez visiter le https://m.bell.ca/chatpreauthorizedbankf pour terminer la configuration du prélèvement automatique dans MonBell. ( bell.ca/apropos )"
+      } ]
+    },
+    "targetFlow": "bell_SMS Trigger",
+    "name": "9479466c-0561-466e-934b-857c834e507e"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "fb527e31-7271-4102-ae1f-4e3616c41077"
+      }, {
+        "parameter": "flow_id",
+        "value": "8dee6c62-dd5f-4e9e-b5a9-935b6719cf4e"
+      }, {
+        "parameter": "page_name",
+        "value": "Language Based SMS"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

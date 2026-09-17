@@ -1,0 +1,77 @@
+{
+  "name": "cd068999-443c-43b5-9587-c6840056dcf7",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70011",
+        "brand": "bell",
+        "language": "en",
+        "route": "service_add_feature"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "You can view the travel options available in My Bell. I'll send a text with a link to the device you're calling. Is that alright?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "yes pls"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "add_ons": "travel pass",
+        "language": "en",
+        "route": "service_add_feature",
+        "sms_content": "Bell: You can visit https://m.bell.ca/trip to view your travel options availeble in the MyBell app. ( bell.ca/about-us )",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+        "language": "en"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "The {identification_status} is \"Pass\", {customer_type} is \"Existing\", {streaming_services} is null and {ppv} is null and {add_ons} is \"travel pass\" and {lob} is \"Mobility\", we will prompt user for send SMS confirmation and if user say \"yes\" or anything affirmative then route to \"bell_SMS Trigger\" flow.",
+    "actionParameters": {
+      "add_ons": "travel pass",
+      "apb_location_id": "70011",
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "en",
+      "lob": "Mobility",
+      "route": "service_add_feature",
+      "sms_content": "Bell: You can visit https://m.bell.ca/trip to view your travel options available in the MyBell app. ( bell.ca/about-us )",
+      "sms_type": "Public",
+      "utterance": "What's the difference between Travel Pass and Roam Better?"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "The {identification_status} is \"Pass\", {customer_type} is \"Existing\", {streaming_services} is null and {ppv} is null and {add_ons} is \"travel pass\" and {lob} is \"Mobility\", we will prompt user for send SMS confirmation and then user say \"yes\"  then route to \"bell_SMS Trigger\" flow with the content.",
+    "actionParameters": {
+      "add_ons": "travel pass",
+      "apb_location_id": "70011",
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "is_prepaid": "false",
+      "language": "en",
+      "lob": "Mobility",
+      "route": "service_add_feature",
+      "sms_content": "Bell: You can visit https://m.bell.ca/trip to view your travel options availeble in the MyBell app. ( bell.ca/about-us )",
+      "sms_type": "Public",
+      "utterance": "What's the difference between Travel Pass and Roam Better?"
+    }
+  },
+  "displayName": "EN - service_add_feature - Roaming - Mobility - pay per use",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 753,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

@@ -1,0 +1,39 @@
+{
+  "name": "011125d5-54ae-41e3-9454-cb27f2bd5ce6",
+  "displayName": "Summarize Updated Appointment",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "messages": [ {
+      "text": {
+        "text": [ "\u003cspeak\u003eGreat. Your $session.params.lob appointment is on $session.params.day_of_week, $session.params.month \u003csay-as interpret-as=\"ordinal\"\u003e$session.params.date_of_month\u003c/say-as\u003e. The Technician can arrive any time between $session.params.start_time_2 and $session.params.end_time_2. And remember, an appointment scheduled from $session.params.start_time_2 to $session.params.end_time_2 can start at $request.generative.end_time_formatted and finish later.\u003c/speak\u003e" ]
+      },
+      "languageCode": "en"
+    }, {
+      "text": {
+        "text": [ "\u003cspeak\u003eParfait. Votre rendez-vous $session.params.lob est prévu le $session.params.day_of_week_fr, le \u003csay-as interpret-as=\"cardinal\"\u003e$session.params.date_of_month\u003c/say-as\u003e $session.params.month_fr. Le ou la technicien(ne) peut arriver à tout moment entre $session.params.start_time_fr_2 et $session.params.end_time_fr_2. N'oubliez pas qu'un rendez-vous prévu entre $session.params.start_time_fr_2 et $session.params.end_time_fr_2 peut commencer à $request.generative.end_time_formatted et se terminer plus tard.\u003c/speak\u003e" ]
+      },
+      "languageCode": "fr-ca"
+    } ],
+    "generators": [ {
+      "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/2457653b-131c-4ab6-9fcb-b9356469cf4f",
+      "inputParameters": [ {
+        "key": "end_time",
+        "value": "$session.params.selected_end_time"
+      }, {
+        "key": "language",
+        "value": "$session.params.language"
+      } ],
+      "outputParameter": "$request.generative.end_time_formatted"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Appointment Prerequisite",
+    "name": "564a6ac7-b314-491b-9a68-8d8db583df74"
+  } ]
+}

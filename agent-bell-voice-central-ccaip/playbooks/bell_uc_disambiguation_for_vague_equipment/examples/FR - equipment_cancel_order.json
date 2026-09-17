@@ -1,0 +1,48 @@
+{
+  "name": "7d818ec9-85fb-4d8d-9cf2-bd3da753ba46",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Que demandez-vous spécifiquement concernant votre modem ? S'agit-il de l'installer, d'en rendre un ou autre chose ?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "J'ai passé une commande d'équipement, mais j'ai décidé de l'annuler. Pouvez-vous vérifier si le paiement a été traité et confirmer que mon annulation est effective ?"
+    }
+  }, {
+    "playbookInvocation": {
+      "playbook": "bell_UC_Equipment",
+      "playbookInput": {
+        "precedingConversationSummary": "Customer is looking cancel the service",
+        "actionParameters": {
+          "language": "fr-ca",
+          "route": "equipment_cancel_order",
+          "utterance": "J'ai passé une commande d'équipement, mais j'ai décidé de l'annuler. Pouvez-vous vérifier si le paiement a été traité et confirmer que mon annulation est effective ?"
+        }
+      },
+      "playbookOutput": {
+        "executionSummary": "Customer query is addressed and then transferred to \"bell_UC_Equipment\" playbook for further conversation",
+        "actionParameters": {
+          "language": "fr-ca",
+          "route": "equipment_cancel_order"
+        }
+      },
+      "playbookState": "OUTPUT_STATE_OK"
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer query about \"It's about my modem\" is addressed",
+    "actionParameters": {
+      "language": "fr-ca",
+      "route": "equipment_vague",
+      "utterance": "Il s'agit de mon modem"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Customer query is addressed and then transferred to \"bell_UC_Equipment\" playbook for further conversation"
+  },
+  "displayName": "FR - equipment_cancel_order",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 379,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

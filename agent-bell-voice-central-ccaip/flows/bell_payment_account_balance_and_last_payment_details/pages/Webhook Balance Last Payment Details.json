@@ -1,0 +1,97 @@
+{
+  "name": "40fce6e2-a162-4781-8c86-452634309a2d",
+  "displayName": "Webhook Balance Last Payment Details",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "v1/account-information/get-account-balance-details",
+    "tag": "N/A"
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.webhook_success = false",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Failure Balance Details",
+    "name": "726294a0-13a7-4d9b-b2be-e2e33ceba431"
+  }, {
+    "condition": "$session.params.webhook_success = true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "last_payment_amount",
+        "value": "$session.params.balance_payment_details_response.brs_postpaid_details.last_payment_amount"
+      }, {
+        "parameter": "last_payment_date",
+        "value": "$session.params.balance_payment_details_response.brs_postpaid_details.last_payment_date"
+      }, {
+        "parameter": "account_balance",
+        "value": "$session.params.balance_payment_details_response.brs_postpaid_details.account_balance"
+      } ]
+    },
+    "targetPage": "Check Balance",
+    "name": "67f81467-d055-4033-baa1-0213885197b5"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "40fce6e2-a162-4781-8c86-452634309a2d"
+      }, {
+        "parameter": "flow_id",
+        "value": "518d29f3-b868-4b90-b9a7-421847b47a19"
+      }, {
+        "parameter": "page_name",
+        "value": "Webhook Balance Last Payment Details"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Webhook Failure Balance Details",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+    
+    },
+    "name": "1be96d4f-394f-468d-ac0a-d70be4e734df"
+  }, {
+    "targetPage": "Webhook Failure Balance Details",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+    
+    },
+    "name": "fb94aad9-4f2c-4830-a46b-969a7e8d87c5"
+  }, {
+    "targetPage": "Webhook Failure Balance Details",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+    
+    },
+    "name": "55df6911-97ff-4480-87c3-4828f9642498"
+  }, {
+    "targetPage": "Webhook Failure Balance Details",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+    
+    },
+    "name": "0b48dc55-9016-4984-a36d-dd27e42a6314"
+  }, {
+    "targetPage": "Webhook Failure Balance Details",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+    
+    },
+    "name": "31364044-fb83-49e2-b59e-8b87b0751070"
+  }, {
+    "targetPage": "Webhook Failure Balance Details",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+    
+    },
+    "name": "f7f4bf56-c3d9-4c34-b6f1-d8a2028cf54d"
+  } ]
+}

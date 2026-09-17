@@ -1,0 +1,56 @@
+{
+  "name": "8f2f6681-ba9b-4784-939f-4eafd167c82a",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "what account details are you making changes to?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "change address"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Great news! You can easily update your MyBell profile online, including your mailing and billing address, language preferences. I'll send a text to the device you're calling from, so that you can easily make the changes. Is that alright?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Yes"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "brand": "bell",
+        "language": "en",
+        "sms_content": "You can visit https://m.bell.ca/profiledetails to update your profile information in the MyBell app. (bell.ca/about-us)",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+        "brand": "bell",
+        "language": "en"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "The customer wants to make update to their account information - including updating name, emails, address, billing address.",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "route": "account_update_details",
+      "utterance": "I want to change my address"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "The {update_detail_type} parameter is empty so we prompt the user with appropriate response then the customer says they want to update their Mybell name so we prompt the user with the message the user accepts to receive a message on their device so we route them to bell_SMS Trigger flow.",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "route": "account_update_details"
+    }
+  },
+  "displayName": "EN - Account Update Details (account_detail_type = \"\") [address]_YesForMessageLink(Step5.2, 2A)",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 392,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

@@ -1,0 +1,59 @@
+{
+  "name": "85993738-4efd-41e7-ab5a-1d5df25b992e",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Have you enrolled in our SmartCare Program?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "yes"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "When submitting a request online or calling the Smart Phone Care Center, your request will be processed by Asurion, the administrator of the Smartphone Care program.I can send you an email with a link to submit your request. Is that alright?\n"
+    }
+  }, {
+    "userUtterance": {
+      "text": "no"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "en",
+        "route": "equipment_warranty_claim",
+        "sms_send_status": "Declined"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "customer is inquiring about device_issue=\"physical\" and manufacturer is apple",
+    "actionParameters": {
+      "brand": "bell",
+      "device_issue": "Physical Damage",
+      "language": "en",
+      "manufacturer": "Apple",
+      "route": "equipment_warranty_claim",
+      "utterance": "my iphone  is cracked. would it be under warranty"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "customer is asked Smart care and follows Smart care logic",
+    "actionParameters": {
+      "brand": "bell",
+      "device_issue": "Physica Damage",
+      "language": "en",
+      "manufacturer": "Apple",
+      "route": "equipment_warranty_claim",
+      "sms_send_status": "Declined"
+    }
+  },
+  "displayName": "EN-equipment_warranty_claim-id-pass-device-issue-physical-manufacturer-apple-(Smart care)-yes-(sms-no)",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 336,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

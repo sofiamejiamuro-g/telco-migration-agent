@@ -1,0 +1,46 @@
+{
+  "name": "2bd4afe0-c7eb-4d63-b2b2-b468b0e4bcd2",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Great news! You can easily update your MyBell profile online. I'll send a text to the device you're calling from, so that you can easily make the changes. Is that alright?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "yes"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "sms_content": "You can visit https://m.bell.ca/manageprofile to update your profile information in the MyBell app. (bell.ca/about-us)"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer want to add an authorized user and is an existing customer (from customer_type=Existing)",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "en",
+      "route": "account_add_authorization",
+      "utterance": "I want to add authorised user to my account"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Existing customer wants to  add authorisation so VA offered the user an easier way to update their MyBell profile by sending an SMS with a link, asking for the user’s consent before proceeding. After the user agrees, the VA routed the interaction to ${FLOW:bell_SMS Trigger} with sms_content as input.",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "route": "account_add_authorization"
+    }
+  },
+  "displayName": "EN - account_add_authorization - Existing - CX wants to add Authorisation - Accepted SMS",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 346,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

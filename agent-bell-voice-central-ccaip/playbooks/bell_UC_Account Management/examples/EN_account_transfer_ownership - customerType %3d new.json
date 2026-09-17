@@ -1,0 +1,58 @@
+{
+  "name": "c388a0b1-f0a4-47c3-862f-9e9ce114a15a",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "What specifically would you like to know about your account?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Something else"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Could you please specify what you would like to know about your account?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "I need to change the plan on one of my cell phones."
+    }
+  }, {
+    "playbookInvocation": {
+      "playbook": "bell_UC_Manage Plans and Features",
+      "playbookInput": {
+        "precedingConversationSummary": "Customer query about their account is identified and their customer_type = New",
+        "actionParameters": {
+        
+        }
+      },
+      "playbookOutput": {
+        "executionSummary": "Customer has a query about service change plan thus transferred to \"bell_UC_Manage Plans and Features\"",
+        "actionParameters": {
+          "route": "service_change_plan"
+        }
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer has param customer_type=\"New\" and wants to add an authorization.",
+    "actionParameters": {
+      "brand": "bell",
+      "customer_type": "New",
+      "route": "account_transfer_ownership",
+      "utterance": "Can I transfer my account to my daughter"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "call bell_UC_Disambiguation playbook",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "route": "service_change_plan"
+    }
+  },
+  "displayName": "EN_account_transfer_ownership - customerType = new",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 321,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

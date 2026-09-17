@@ -1,0 +1,62 @@
+{
+  "name": "027711c1-d744-4dcc-94b9-3e9670d95124",
+  "displayName": "Check Calendar Consistency",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.consistent_calendars = true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Check Appointment Count",
+    "name": "ba937de9-95d7-4d22-af3f-2f29835af3bc"
+  }, {
+    "condition": "$session.params.consistent_calendars = false",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "input_start_date_string",
+        "value": "$sys.func.ADD_DATE($sys.func.NOW(), 14, \"DAYS\")"
+      }, {
+        "parameter": "input_end_date_string",
+        "value": "$sys.func.ADD_DATE($sys.func.NOW(), 28, \"DAYS\")"
+      } ],
+      "generators": [ {
+        "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/7af3e5f9-5a07-49ff-902f-8869de454075",
+        "inputParameters": [ {
+          "key": "input_start_date_string",
+          "value": "$session.params.input_start_date_string"
+        } ],
+        "outputParameter": "$request.generative.start_date_utc"
+      }, {
+        "generator": "projects/gcp-it-npe-auth-va-dlgflw/locations/us-central1/agents/8fb0c680-c945-4186-b6ab-47b4baeba61d/generators/70420655-dc88-4eee-8750-b15a87927a6c",
+        "inputParameters": [ {
+          "key": "input_end_date_string",
+          "value": "$session.params.input_end_date_string"
+        } ],
+        "outputParameter": "$request.generative.end_date_utc"
+      } ]
+    },
+    "targetPage": "Webhook Check Availability",
+    "name": "8507479a-4562-40ac-831b-241d28a45ec2"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "027711c1-d744-4dcc-94b9-3e9670d95124"
+      }, {
+        "parameter": "flow_id",
+        "value": "3cb06ee0-48c8-49e1-8be4-96461dd61130"
+      }, {
+        "parameter": "page_name",
+        "value": "Check Calendar Consistency"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

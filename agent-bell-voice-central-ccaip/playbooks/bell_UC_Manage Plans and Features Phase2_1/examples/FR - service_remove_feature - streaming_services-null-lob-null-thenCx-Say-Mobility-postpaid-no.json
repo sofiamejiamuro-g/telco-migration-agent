@@ -1,0 +1,56 @@
+{
+  "name": "7c27781e-f9a6-4a1a-b820-754e11b7f1b2",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70011",
+        "brand": "bell",
+        "language": "en"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Bien sûr, vous pouvez facilement gérer votre forfait Mobilité et vos options en tout temps au moyen de MonBell. Je vais envoyer un texto à l’appareil au moyen duquel vous appelez, afin que vous puissiez facilement modifier votre forfait Mobilité. Est-ce que ça vous convient?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "non, je ne veux pas de texte"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "sms_send_status": "Declined"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "The {identification_status} is \"Pass\", {customer_type} is \"Existing\", {streaming_services} is null or {lob} is null so, we will prompt user to ask \"Which service are you calling about?\" and once user reply then please analyze the user response and based on that please set {lob} or {streaming_services} based on instruction provided in playbook on how to set {lob} and {streaming_services} within {route} = \"service_remove_feature\"",
+    "actionParameters": {
+      "customer_type": "Existing",
+      "identification_status": "Pass",
+      "language": "fr-ca",
+      "route": "service_remove_feature",
+      "utterance": "Je veux juste prendre quelques concerts depuis mon mobile"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "if customer disagrees to send sms then call sms_trigger playbook with sms_send_status as \"Declined\"",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca"
+    }
+  },
+  "displayName": "FR - service_remove_feature - streaming_services-null-lob-null-thenCx-Say-Mobility-postpaid-no",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 458,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

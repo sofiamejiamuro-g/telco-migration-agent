@@ -1,0 +1,59 @@
+{
+  "name": "f1298674-5e59-4a1d-869d-4f185f949a28",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70018",
+        "language": "fr-ca"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Bien sûr, laissez-moi vous aider.\n\nÀ propos de quel service communiquez- vous aveс пous?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Mobilité"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_aqd",
+      "inputActionParameters": {
+        "language": "fr-ca",
+        "lob": "mobility",
+        "special_queue": "cornerstone"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customers want to know about different plans or compare different plans that Bell has",
+    "actionParameters": {
+      "identification_status": "Fail",
+      "language": "fr-ca",
+      "route": "sales_plans_inquiry",
+      "utterance": "j'ai besoin d'un nouveau plan",
+      "wml_eligible": "1"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "from the identification flow, know the customer_type as \"New\", as we don't know the service, we need to ask the customer, which service they are inquiring about? if {lob} = \"Mobility\" captured, then evaluate the wml_eligible parameter. Since in this case it is 1,  the playbook routed to bell_aqd, with special_queue parameter set to \"cornerstone\".",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca",
+      "lob": "mobility",
+      "special_queue": "cornerstone"
+    }
+  },
+  "displayName": "FR - sales plans inquiry- ID Fail, customer_type-new- Mobility(no-lob)",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 420,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "fr"
+}

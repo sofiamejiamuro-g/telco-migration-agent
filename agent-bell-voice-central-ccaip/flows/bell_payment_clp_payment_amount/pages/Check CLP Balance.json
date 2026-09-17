@@ -1,0 +1,54 @@
+{
+  "name": "284c5f13-c4da-4f9b-a0c1-f70c8919739a",
+  "displayName": "Check CLP Balance",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.clp_balance \u003c= 0",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "How much would you like to pay?" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Quel montant souhaitez-vous payer?" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "targetPage": "CLP Amount Paid",
+    "name": "d0d70c3d-7d21-4f81-aa4e-68cd707c2d99"
+  }, {
+    "condition": "$session.params.clp_balance \u003e 0",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Make Payment?",
+    "name": "dcdbdfc0-9ae5-40b5-89a3-ecd3f689512f"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "284c5f13-c4da-4f9b-a0c1-f70c8919739a"
+      }, {
+        "parameter": "flow_id",
+        "value": "70646c3b-7bf8-461e-8396-107d863a809e"
+      }, {
+        "parameter": "page_name",
+        "value": "Check CLP Balance"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

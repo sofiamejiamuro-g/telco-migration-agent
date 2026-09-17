@@ -1,0 +1,88 @@
+{
+  "name": "98bd8314-6256-48df-9d3f-c8d25f67ed1a",
+  "displayName": "Check collections agency",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "/v1/ibm_mw/nm11_get#auto-col-agncy-info",
+    "tag": "auto-col-agncy-info",
+    "setParameterActions": [ {
+      "parameter": "language",
+      "value": "$session.params.language"
+    }, {
+      "parameter": "dfcx_session_id",
+      "value": "$session.params.dfcx_session_id"
+    }, {
+      "parameter": "billing_account",
+      "value": "$session.params.billing_account_number"
+    }, {
+      "parameter": "ibm_application_id",
+      "value": "$session.params.ibm_application_id"
+    }, {
+      "parameter": "webhook_success",
+      "value": null
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$sys.func.LEN($session.params.nm1_get_col_agency_info_response.colAgencyContactNo) = 10",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "customer_type",
+        "value": "$session.params.nm1_get_col_agency_info_response.colAgencyContactNo"
+      } ]
+    },
+    "targetPage": "Get queue (﻿menu_id)",
+    "name": "53bef52c-aac0-49a5-b37f-8aa9001ecf31"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Check Special Queue ",
+    "name": "66617c20-e397-494a-9af4-baca760795ba"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Check Special Queue ",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+    
+    },
+    "name": "c95fada4-ce71-4176-9d5c-442e1e132db3"
+  }, {
+    "targetPage": "Check Special Queue ",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+    
+    },
+    "name": "e3d735c7-584b-45fb-a747-314083305116"
+  }, {
+    "targetPage": "Check Special Queue ",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+    
+    },
+    "name": "f917a7c1-b617-4dfa-93ff-e4b5c4a1b07b"
+  }, {
+    "targetPage": "Check Special Queue ",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+    
+    },
+    "name": "4e8c7c52-f745-4606-803b-63c75c08a4c4"
+  }, {
+    "targetPage": "Check Special Queue ",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+    
+    },
+    "name": "1c36e952-6864-425e-93d1-2a31651a21d1"
+  }, {
+    "targetPage": "Check Special Queue ",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+    
+    },
+    "name": "6c9e17f3-d4f6-436e-ba54-633221e3746f"
+  } ]
+}

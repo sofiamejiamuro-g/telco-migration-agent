@@ -1,0 +1,51 @@
+{
+  "name": "4e264b43-7f99-48c6-b5eb-f3ebb4d8cb62",
+  "displayName": "Identification Check",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.identification_status = null",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_Identification",
+    "name": "e9d853b9-fdcc-4a0e-bc1f-5bcdcecd9551"
+  }, {
+    "condition": "$session.params.identification_status = \"Fail\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "ID or Auth or Webhook Failure Confirmtion",
+    "name": "907e1ae2-2dff-4051-82a1-7f45a573f7ef"
+  }, {
+    "condition": "$session.params.identification_status = \"Pass\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "webhook_success",
+        "value": null
+      } ]
+    },
+    "targetPage": "Ban Type Check",
+    "name": "a3f3d24b-19d6-4a00-ba43-12d9872495f1"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "4e264b43-7f99-48c6-b5eb-f3ebb4d8cb62"
+      }, {
+        "parameter": "flow_id",
+        "value": "2270f500-41b4-45fb-89ed-e16938ec3cea"
+      }, {
+        "parameter": "page_name",
+        "value": "Identification Check"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ]
+}

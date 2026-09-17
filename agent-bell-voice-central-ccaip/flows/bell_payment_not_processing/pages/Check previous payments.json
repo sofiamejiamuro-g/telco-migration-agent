@@ -1,0 +1,35 @@
+{
+  "name": "ff66cd9d-cbb8-430b-aa60-d9af576dd5b4",
+  "displayName": "Check previous payments",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.last_payment_amount = null OR $session.params.last_payment_amount \u003c= \"0\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "New Cx or No previous payments",
+    "name": "b1f90401-e357-4cd1-be21-291c04c67656"
+  }, {
+    "condition": "$session.params.last_payment_amount != null",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Account Balance MSG",
+    "name": "9f23e78b-b745-4b71-87a7-fc774ad8475d"
+  }, {
+    "condition": "$session.params.last_payment_date = null OR $session.params.last_payment_date = \"\"",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "New Cx or No previous payments",
+    "name": "b764fcbe-7e39-4d81-9630-1f22aed9623f"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "name": "e84b7799-c676-4c70-a36f-536799bbcab4"
+  } ]
+}

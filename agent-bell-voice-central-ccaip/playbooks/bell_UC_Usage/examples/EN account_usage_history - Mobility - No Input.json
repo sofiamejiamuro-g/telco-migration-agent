@@ -1,0 +1,54 @@
+{
+  "name": "7e9276da-3285-4c92-9e25-1bb2c4aa0aa7",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Sure, I can help with that. You can easily view and track your mobility usage in MyBell. I'll send a text to the device you're calling from, with a link explaining the steps to follow. Is that alright?"
+    }
+  }, {
+    "userUtterance": {
+    
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_global_error_count_check",
+      "inputActionParameters": {
+        "global_error_counter": "0"
+      },
+      "outputActionParameters": {
+        "global_error_counter": "1"
+      }
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "brand": "bell",
+        "language": "en",
+        "sms_send_status": "Declined"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "User wants to check their mobility usage history.",
+    "actionParameters": {
+      "global_error_counter": "0",
+      "language": "en",
+      "route": "account_usage_history",
+      "utterance": "I want to check my sms usage history "
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "The customer already stated LOB (Mobility) so no need to disambiguate for LOB so VA offers sms. The customer doesn't say anything so we route to bell_global_error_count_check and increase the parameter {global_error_counter} then routed to  bell_SMS Trigger",
+    "actionParameters": {
+      "global_error_counter": "1"
+    }
+  },
+  "displayName": "EN account_usage_history - Mobility - No Input",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 379,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

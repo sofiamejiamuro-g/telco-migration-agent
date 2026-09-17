@@ -1,0 +1,113 @@
+{
+  "name": "c1c46bb3-fbd8-4f70-8e65-45d4b8b87e24",
+  "displayName": "Get IVR queue based on menu_id",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "/v1/ivr-transfer/get-department-id",
+    "tag": "N/A",
+    "setParameterActions": [ {
+      "parameter": "menu_id",
+      "value": "$session.params.menu_id"
+    }, {
+      "parameter": "language",
+      "value": "$session.params.language"
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.webhook_success = false",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Prepare for CCAIP Transfer",
+    "name": "29847039-e663-4c12-9621-4f517fcba52f"
+  }, {
+    "condition": "$session.params.webhook_success = true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "department_id",
+        "value": "$session.params.get_department_id_response.department_id"
+      }, {
+        "parameter": "department_id_ref",
+        "value": "$sys.func.CONCATENATE(\"REF\", $sys.func.TO_TEXT($session.params.department_id))"
+      } ]
+    },
+    "targetPage": "SKIP_CB ?",
+    "name": "26ce1282-393e-49e6-99c2-98efaaad9cfd"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "department_id",
+        "value": "$session.params.DEFAULT_DEPARTMENT_ID"
+      }, {
+        "parameter": "department_id_ref",
+        "value": "$sys.func.CONCATENATE(\"REF\", $sys.func.TO_TEXT($session.params.department_id))"
+      } ]
+    },
+    "targetPage": "SKIP_CB ?",
+    "name": "7b3a9e93-0775-4e03-a44b-24d467683446"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "SKIP_CB ?",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "deparmtent_id",
+        "value": "$session.params.configs.DEFAULT_DEPARTMENT_ID"
+      } ]
+    },
+    "name": "55555659-0425-4250-9cf4-9c63297c1822"
+  }, {
+    "targetPage": "SKIP_CB ?",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "department_id",
+        "value": "$session.params.configs.DEFAULT_DEPARTMENT_ID"
+      } ]
+    },
+    "name": "a35edaab-76e2-405f-8af9-2775fc26250c"
+  }, {
+    "targetPage": "SKIP_CB ?",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "department_id",
+        "value": "$session.params.configs.DEFAULT_DEPARTMENT_ID"
+      } ]
+    },
+    "name": "f554e811-7829-4da3-8139-08aee898e9ef"
+  }, {
+    "targetPage": "SKIP_CB ?",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "department_id",
+        "value": "$session.params.config.DEFAULT_DEPARTMENT_ID"
+      } ]
+    },
+    "name": "a00cd281-bfaa-459d-aee5-1eb165dfbbb1"
+  }, {
+    "targetPage": "SKIP_CB ?",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "department_id",
+        "value": "$session.params.config.DEFAULT_DEPARTMENT_ID"
+      } ]
+    },
+    "name": "b028b80a-b305-4972-b467-64586154c0b3"
+  }, {
+    "targetPage": "SKIP_CB ?",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "department_id",
+        "value": "$session.params.config.DEFAULT_DEPARTMENT_ID"
+      } ]
+    },
+    "name": "ccb3f86d-0453-4e28-8b03-733eb57b0339"
+  } ]
+}

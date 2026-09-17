@@ -1,0 +1,56 @@
+{
+  "name": "4db051c4-151a-46d2-bbfe-4ea8f1b6a1d6",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Je suis désolé d’entendre cela. Avez-vous essayé d’utiliser une option de suivi comme « Trouver mon iPhone » ou « Trouver mon appareil »?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "oui"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "C’est noté. Je vous suggère de suspendre temporairement votre service pour empêcher toute utilisation non autorisée. Je vais envoyer un texto à l’appareil à partir duquel vous appelez qui contient un lien pour le faire vous-même. Est-ce que cela vous convient?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "oui"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "brand": "bell",
+        "language": "fr-ca",
+        "route": "equipment_report_lost_device",
+        "sms_content": "Mess. de Bell: Vous pouvez visiter bell.ca/suspendreligne pour suspendre temporairement votre service cellulaire dans MonBell. ( bell.ca/apropos )",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+        "brand": "bell",
+        "language": "fr-ca"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer to report about a device lost or stolen",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca",
+      "route": "equipment_report_lost_device",
+      "utterance": "J’ai perdu mon téléphone."
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "First inform the customer Customer \"Je suis désolé d’entendre cela. Avez-vous essayé d’utiliser une option de suivi comme « Trouver mon iPhone » ou « Trouver mon appareil »?\" when user confirm Yes then the user has been redirected to \"Steering_SMS Trigger\" playbook",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "fr-ca"
+    }
+  },
+  "displayName": "FR Equipment Report Lost Device -Yes",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 434,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

@@ -1,0 +1,85 @@
+{
+  "name": "613a5e5b-a346-4ce8-bcab-2a06b599d38f",
+  "actions": [ {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70012",
+        "language": "en"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "playbookInvocation": {
+      "playbook": "bell_uc_ask_LOB",
+      "playbookInput": {
+        "precedingConversationSummary": "Customer wants a technician for existing service ",
+        "actionParameters": {
+          "language": "en",
+          "route": "tech_field_tech_visits"
+        }
+      },
+      "playbookOutput": {
+        "executionSummary": "When user does not provide lob, prompt them to understand what kind of service they are looking for, if the user mentions lob then return lob to the originating Playbook, if not set the default lob and return back",
+        "actionParameters": {
+          "language": "en",
+          "lob": "Mobility",
+          "route": "tech_field_tech_visits"
+        }
+      },
+      "playbookState": "OUTPUT_STATE_OK"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Is this for a new service or do you need help with your existing service?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "existing"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_apb",
+      "inputActionParameters": {
+        "apb_location_id": "70016",
+        "language": "en"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_aqd",
+      "inputActionParameters": {
+        "special_queue": "tech_to_care"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer wants a technician for existing service ",
+    "actionParameters": {
+      "language": "en",
+      "route": "tech_field_tech_visits",
+      "utterance": "I need a technician"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Reroute to tech_connection_issue",
+    "actionParameters": {
+      "language": "en",
+      "route": "tech_field_tech_visits",
+      "utterance": "I need a technician"
+    }
+  },
+  "displayName": "EN_tech_field_tech_visits_existing_service_Mobility",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 550,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

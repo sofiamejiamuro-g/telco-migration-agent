@@ -1,0 +1,38 @@
+{
+  "name": "9759a9a4-d5a8-4f65-a523-e44fcca15a94",
+  "displayName": "Proceed With Payment?",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "intent": "context.confirm_yes",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Proceed With Payment 2",
+    "name": "d1e0a213-db8b-4218-9511-336385868aad"
+  }, {
+    "intent": "context.confirm_no",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Don't Proceed With Payment",
+    "name": "a6067188-b14a-4308-8a5b-ccf1a0c4f137"
+  }, {
+    "intent": "context.pa_amount_and_no",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "other_payment_amount",
+        "value": null
+      }, {
+        "parameter": "other_amount_value",
+        "value": "$session.params.customer_mentioned_amount"
+      }, {
+        "parameter": "amount_correction_required",
+        "value": "$sys.func.IF(\"$session.params.suggest_amount_flag!=0\", $sys.func.ADD($session.params.amount_correction_required, 1), $session.params.amount_correction_required)"
+      } ]
+    },
+    "targetPage": "Check Collection Status",
+    "name": "1bfc1ac4-8989-447d-918f-670ed2c0ad38"
+  } ]
+}

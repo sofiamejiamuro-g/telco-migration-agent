@@ -1,0 +1,156 @@
+{
+  "name": "5b7bb495-6309-4373-9719-f8a47f37c81e",
+  "displayName": "Webhook CC Payment Details",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "v1/pre-auth-payment#cc-payment-details",
+    "tag": "cc-payment-details",
+    "setParameterActions": [ {
+      "parameter": "transaction_id",
+      "value": "$session.params.transaction_id"
+    }, {
+      "parameter": "cc_token",
+      "value": "$session.params.cc_token"
+    }, {
+      "parameter": "expiry_year",
+      "value": "$sys.func.MID($sys.func.TO_TEXT($session.params.expiry_date),3,2)",
+      "redact": true
+    }, {
+      "parameter": "expiry_month",
+      "value": "$sys.func.MID($sys.func.TO_TEXT($session.params.expiry_date),1,2)",
+      "redact": true
+    }, {
+      "parameter": "security_code",
+      "value": "$session.params.cvv_number",
+      "redact": true
+    } ]
+  },
+  "transitionRoutes": [ {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "cc_details_valid",
+        "value": "$session.params.update_pre_auth_cc_details_response.isValid"
+      }, {
+        "parameter": "cc_error_code_id",
+        "value": "$session.params.update_pre_auth_cc_details_response.errorCodeID"
+      } ]
+    },
+    "name": "fb9119df-19b7-440c-a38f-3796a43024ac"
+  }, {
+    "condition": "($session.params.webhook_success = True OR $session.params.webhook_success = true) AND $session.params.cc_details_valid = true",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_payment_process_pacc_registration",
+    "name": "1c60d679-15f8-4394-85d0-af09547ef47a"
+  }, {
+    "condition": "$session.params.cc_details_valid = false AND $session.params.total_cc_attempts \u003e= 2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Malheureusement, je ne suis pas en mesure de traiter votre demande pour le moment. Si vous souhaitez toujours effectuer cette étape, vous pouvez le faire dans l’appli MonBell. Veuillez visiter https://bell.ca/soutien pour en savoir plus." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "Unfortunately I'm unable to proceed with your request right now . If you'd still like to complete this step, you can do so in the MyBell app. Please visit  bell.ca/support for more information." ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "targetFlow": "bell_Feedback",
+    "name": "f59c2ee5-78cc-4446-8c34-3eae7ecbb2ea"
+  }, {
+    "condition": "$session.params.cc_details_valid = false",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "Malheureusement, une erreur système s’est produite. Souhaitez-vous réessayer avec une autre carte?" ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "Unfortunately there was a system error. Would you like to try again using a different card?" ]
+        },
+        "languageCode": "en"
+      } ]
+    },
+    "targetPage": "Prompt Retry",
+    "name": "42b8ee28-3f39-408f-b392-89606b0cb804"
+  }, {
+    "condition": "$session.params.webhook-success = False OR $session.params.webhook-success = false",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook Failure Confirmation",
+    "name": "e5ad6ad6-1d7d-47b5-a16b-d648deef88ef"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "hardstop",
+        "value": true
+      }, {
+        "parameter": "page_id",
+        "value": "5b7bb495-6309-4373-9719-f8a47f37c81e"
+      }, {
+        "parameter": "flow_id",
+        "value": "a059ee3e-a2ae-4118-bc6a-65f7330baa63"
+      }, {
+        "parameter": "page_name",
+        "value": "Webhook CC Payment Details"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "cleanup-hardstop-route"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Webhook Failure Confirmation",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+    
+    },
+    "name": "167f2844-6898-4a28-a719-9861b03083b2"
+  }, {
+    "targetPage": "Webhook Failure Confirmation",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+    
+    },
+    "name": "64abacbd-8fe3-427b-87a3-b92eaa94e9d3"
+  }, {
+    "targetPage": "Webhook Failure Confirmation",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+    
+    },
+    "name": "fab4174e-18fa-4d6f-8fb2-d05e533d14ed"
+  }, {
+    "targetPage": "Webhook Failure Confirmation",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+    
+    },
+    "name": "d1e1a047-26c2-4b66-9358-0c11fb2d2f2f"
+  }, {
+    "targetPage": "Webhook Failure Confirmation",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+    
+    },
+    "name": "d3789b3b-6157-4eab-ac19-0fd9b036278f"
+  }, {
+    "targetPage": "Webhook Failure Confirmation",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+    
+    },
+    "name": "f26cf40a-5533-44a9-bdbf-a148a2e75aa9"
+  } ],
+  "speakerIdSettings": {
+  
+  }
+}

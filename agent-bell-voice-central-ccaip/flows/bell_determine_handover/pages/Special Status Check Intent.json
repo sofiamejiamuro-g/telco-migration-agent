@@ -1,0 +1,38 @@
+{
+  "name": "112cbdd7-467f-416e-ace0-b158798326e4",
+  "displayName": "Special Status Check Intent",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.route = null",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "special_queue",
+        "value": "bell_collections"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "a079b042-b73a-4eec-a30b-3d79a34da2e1"
+  }, {
+    "condition": "$session.params.route = \"bill_amount_due\" OR $session.params.route = \"bill_confirm_due_date\" OR $session.params.route = \"bill_view_bill\" OR $session.params.route = \"bill_missing_bill\" OR $session.params.route = \"bill_account_balance\" OR $session.params.route = \"bill_credit_report_inquiry\" OR $session.params.route = \"bill_deposit_inquiry\" OR $session.params.route = \"bill_switch_format\" OR $session.params.route = \"payment_auto_payment_status\" OR $session.params.route = \"payment_cancel_autopay\" OR $session.params.route = \"payment_confirm_made\" OR $session.params.route = \"payment_make_payment\" OR $session.params.route = \"payment_not_processing\" OR $session.params.route = \"payment_report_made\" OR $session.params.route = \"payment_restore_service\" OR $session.params.route = \"payment_setup_autopay\" OR $session.params.route = \"payment_setup_payment_arrangements\" OR $session.params.route = \"payment_update_autopay\" OR $session.params.route = \"payment_update_payment_arrangements\" OR $session.params.route = \"payment_vague\"",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "special_queue",
+        "value": "bell_collections"
+      } ]
+    },
+    "targetFlow": "bell_aqd",
+    "name": "e4a94e21-7162-4078-8d47-7f62551b15cb"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_aqd",
+    "name": "c4988219-8a65-4809-810b-fcb2e7ce7846"
+  } ]
+}

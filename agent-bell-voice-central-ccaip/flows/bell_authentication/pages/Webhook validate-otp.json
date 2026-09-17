@@ -1,0 +1,78 @@
+{
+  "name": "9ae03600-ef0e-4ee8-8c4d-0ed9ea5dc612",
+  "displayName": "Webhook validate-otp",
+  "form": {
+  
+  },
+  "entryFulfillment": {
+    "webhook": "v1/customer-authentication#validate-otp",
+    "tag": "validate-otp",
+    "setParameterActions": [ {
+      "parameter": "brand",
+      "value": "$session.params.brand"
+    }, {
+      "parameter": "callKey",
+      "value": "$session.params.auth_options_response.callKey"
+    }, {
+      "parameter": "otp",
+      "value": "$session.params.pin"
+    } ],
+    "nextActionOverride": {
+    
+    }
+  },
+  "transitionRoutes": [ {
+    "condition": "True",
+    "triggerFulfillment": {
+      "setParameterActions": [ {
+        "parameter": "is_authenticated",
+        "value": "$session.params.otp_validation_response.is_authenticated"
+      } ]
+    },
+    "targetPage": "Validate OTP",
+    "name": "a88d1f17-b4ca-4278-b3ce-64152e8aa7a1"
+  } ],
+  "eventHandlers": [ {
+    "targetPage": "Webhook validate-otp Error",
+    "event": "webhook.error",
+    "triggerFulfillment": {
+    
+    },
+    "name": "98eeb03c-f4d7-4689-b8c6-f16ceb11fdb2"
+  }, {
+    "targetPage": "Webhook validate-otp Error",
+    "event": "webhook.error.bad-request",
+    "triggerFulfillment": {
+    
+    },
+    "name": "48063eb6-22b7-4b5a-b8fc-e506f4c4e79d"
+  }, {
+    "targetPage": "Webhook validate-otp Error",
+    "event": "webhook.error.not-found",
+    "triggerFulfillment": {
+    
+    },
+    "name": "f8cd86bd-e0c8-4d6e-8261-dafcdc8462e4"
+  }, {
+    "targetPage": "Webhook validate-otp Error",
+    "event": "webhook.error.rejected",
+    "triggerFulfillment": {
+    
+    },
+    "name": "082b427b-6de9-433a-aab8-388585d4613b"
+  }, {
+    "targetPage": "Webhook validate-otp Error",
+    "event": "webhook.error.timeout",
+    "triggerFulfillment": {
+    
+    },
+    "name": "2893aae4-f49b-4e61-a97a-585e0e811490"
+  }, {
+    "targetPage": "Webhook validate-otp Error",
+    "event": "webhook.error.unavailable",
+    "triggerFulfillment": {
+    
+    },
+    "name": "e0ef9d27-aa8d-4214-8bf3-c153eaad2d77"
+  } ]
+}

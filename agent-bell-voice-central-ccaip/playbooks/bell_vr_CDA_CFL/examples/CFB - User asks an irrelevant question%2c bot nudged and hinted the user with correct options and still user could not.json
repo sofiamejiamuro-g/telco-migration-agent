@@ -1,0 +1,117 @@
+{
+  "name": "1aa76c6e-ef5a-44fb-98c1-0ecdfdc7d0df",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Can you take a look at your modem and let me know what the lights look like?\n"
+    }
+  }, {
+    "userUtterance": {
+      "text": "What is internet?"
+    }
+  }, {
+    "toolUse": {
+      "tool": "EN_Bell_vr_cfl_faq",
+      "action": "EN_Bell_vr_cfl_faq",
+      "inputActionParameters": {
+        "requestBody": {
+          "query": "6502"
+        }
+      },
+      "outputActionParameters": {
+        "200": {
+          "answer": "Q: What's a modem? A: A modem is a rectangular device that allows you to connect to the internet. It should be standing up right, and have at least 2 cables plugged into the ports on the back of it. Q: What does my modem look like? A: A modem is a rectangular device that allows you to connect to the internet. It should be standing up right, and have at least 2 cables plugged into the ports on the back of it.",
+          "snippets": [ {
+            "text": "",
+            "title": "6502",
+            "uri": ""
+          } ]
+        }
+      }
+    }
+  }, {
+    "agentUtterance": {
+      "text": "I understand you have a question, and while I don't have that specific information, knowing the color of light on your modem is the next step for us to solve the issue. Could you please let me know the color of the lights on your modem?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "No its not"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Alright, so would you please answer my question of what lights do you see on your modem?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "I see purple lights bro"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "I understand you're seeing a purple light. To help me understand what's happening, could you please tell me if what you're seeing is that all the lights are white, some are red, some are orange, or if it's a combination of red and orange? Perhaps no lights are on at all, or is it none of the above? Please let me know which of these options best describes what you're seeing."
+    }
+  }, {
+    "userUtterance": {
+      "text": "Oh, i  see purple only"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Thanks for letting me know. I'm now checking what the next step is."
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_vr_post_answer",
+      "inputActionParameters": {
+        "customer_answer1_id": "5"
+      },
+      "outputActionParameters": {
+      
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "Customer having an issue with the service, starts the Virtual repair process.",
+    "actionParameters": {
+      "acceptable_answers": [ {
+        "choice": "They’re all white.",
+        "id": 0,
+        "sub-choices": [ ],
+        "title": ""
+      }, {
+        "choice": "Some are red.",
+        "id": 1,
+        "sub-choices": [ ],
+        "title": ""
+      }, {
+        "choice": "Some are orange.",
+        "id": 2,
+        "sub-choices": [ ],
+        "title": ""
+      }, {
+        "choice": "A combination of red and orange.",
+        "id": 3,
+        "sub-choices": [ ],
+        "title": ""
+      }, {
+        "choice": "No lights are on.",
+        "id": 4,
+        "sub-choices": [ ],
+        "title": ""
+      }, {
+        "choice": "None of the above.",
+        "id": 5,
+        "sub-choices": [ ],
+        "title": ""
+      } ],
+      "dcx_action_code": "6502",
+      "more_info": [ ],
+      "title": "What colour are the lights on your modem?",
+      "vr_type": "CFB"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "Modem troubleshooting flow where the agent seeks modem light status. After the agent asks about lights, the user's initial \"What is internet?\" triggers a vr_cfl_faq_en tool call, which fails to provide the definition, forcing the agent to re-prompt the original question. When the user vaguely replies \"No its not\" and then offers \"I see purple lights bro,\" the agent, recognizing \"purple\" is not an acceptable_answer (implied by the subsequent detailed list), guides the user by explicitly presenting a multiple-choice list of valid light states. However, the user then still responds with \"Oh, i see purple only,\" indicating they were unable to select from the acceptable options. This highlights a persistent input mismatch despite the agent's explicit guidance."
+  },
+  "displayName": "CFB - User asks an irrelevant question, bot nudged and hinted the user with correct options and still user could not",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 1029,
+  "languageCode": "en"
+}

@@ -1,0 +1,72 @@
+{
+  "name": "8f184890-4789-4ca5-9863-3cc350ef1e01",
+  "actions": [ {
+    "agentUtterance": {
+      "text": "Which device are you looking to check the status of?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "its regarding my mobile phone"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Are you inquiring about device upgrade, new device, or a repair order?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "repair order"
+    }
+  }, {
+    "agentUtterance": {
+      "text": "Got it, you can view your mobile repair status on the MyBell. I'll send a text to the device you are calling from, so that you can track your shipment. Is that alright?\n"
+    }
+  }, {
+    "userUtterance": {
+      "text": "Why can't you help me directly?"
+    }
+  }, {
+    "agentUtterance": {
+      "text": " I understand your concern. While I can provide general information, MyBell offers a secure and personalized experience to track your specific repair. I'll send a text to the device you are calling from, so that you can track your shipment. Is that alright?"
+    }
+  }, {
+    "userUtterance": {
+      "text": "yes"
+    }
+  }, {
+    "flowInvocation": {
+      "flow": "bell_SMS Trigger",
+      "inputActionParameters": {
+        "language": "en",
+        "sms_content": "Bell: You can visit bell.ca/trackrepair to view the status of your repair order",
+        "sms_type": "Public"
+      },
+      "outputActionParameters": {
+        "language": "en",
+        "sms_content": "Bell: You can visit bell.ca/trackrepair to view the status of your repair order.",
+        "sms_type": "Public"
+      }
+    }
+  } ],
+  "playbookInput": {
+    "precedingConversationSummary": "customer is inquiring about their order status and lob and {device_type} are null and also more information about SMS",
+    "actionParameters": {
+      "brand": "bell",
+      "language": "en",
+      "route": "equipment_order_status",
+      "utterance": "My order has been seriously delayed, I'm waiting for the installation"
+    }
+  },
+  "playbookOutput": {
+    "executionSummary": "customer is asked device_type and then proceeds as per instructions Customer asked a question regarding SMS so VA answered them and prompted again for SMS. User then said yes so we route accordingly",
+    "actionParameters": {
+      "brand": "bell",
+      "device_type": "Mobile Phone",
+      "language": "en"
+    }
+  },
+  "displayName": "EN equipment_order_status (mobile phone)-(repair)-(sms-query)-(sms-yes)",
+  "retrievalStrategy": "DEFAULT",
+  "tokenCount": 509,
+  "conversationState": "OUTPUT_STATE_OK",
+  "languageCode": "en"
+}

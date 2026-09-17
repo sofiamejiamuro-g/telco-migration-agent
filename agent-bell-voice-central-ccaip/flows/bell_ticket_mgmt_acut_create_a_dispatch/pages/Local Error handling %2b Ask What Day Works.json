@@ -1,0 +1,140 @@
+{
+  "name": "79ef82fb-7408-460c-8cbb-be228ca6e400",
+  "displayName": "Local Error handling + Ask What Day Works",
+  "form": {
+  
+  },
+  "transitionRoutes": [ {
+    "condition": "$session.params.global_error_counter \u003e= 3",
+    "triggerFulfillment": {
+    
+    },
+    "targetFlow": "bell_aqd",
+    "name": "97b0dbdc-a930-42a3-8ba8-43b8552e4a11"
+  }, {
+    "condition": "$session.params.local_trigger = \"no_input\" AND $session.params.local_noinput_counter = 1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I didn't quite get that." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "\u003cspeak\u003eI have availability between\u003csay-as interpret-as=\"date\" format=\"md\"\u003e$session.params.first_available_md\u003c/say-as\u003e\u003cbreak time=\"100ms\"/\u003e and \u003csay-as interpret-as=\"date\" format=\"md\"\u003e$session.params.last_available_md\u003c/say-as\u003e. What day works for you?\u003c/speak\u003e" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je n'ai pas bien compris." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "\u003cspeak\u003eJ’ai des disponibilités entre\u003csay-as interpret-as=\"date\" format=\"md\"\u003e$session.params.first_available_md\u003c/say-as\u003e\u003cbreak time=\"100ms\"/\u003e et \u003csay-as interpret-as=\"date\" format=\"md\"\u003e$session.params.last_available_md\u003c/say-as\u003e. Quel jour vous convient?\u003c/speak\u003e" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "d85d0882-6340-40d5-9c8e-53ffe45562b8"
+  }, {
+    "condition": "$session.params.local_trigger = \"no_input\" AND $session.params.local_noinput_counter = 2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I still didn't get that." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "\u003cspeak\u003eI have availability between\u003csay-as interpret-as=\"date\" format=\"md\"\u003e$session.params.first_available_md\u003c/say-as\u003e\u003cbreak time=\"100ms\"/\u003e and \u003csay-as interpret-as=\"date\" format=\"md\"\u003e$session.params.last_available_md\u003c/say-as\u003e. What day works for you?\u003c/speak\u003e" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je n'ai toujours pas compris." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "\u003cspeak\u003eJ’ai des disponibilités entre\u003csay-as interpret-as=\"date\" format=\"md\"\u003e$session.params.first_available_md\u003c/say-as\u003e\u003cbreak time=\"100ms\"/\u003e et \u003csay-as interpret-as=\"date\" format=\"md\"\u003e$session.params.last_available_md\u003c/say-as\u003e. Quel jour vous convient?\u003c/speak\u003e" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "d1376522-b396-4f88-8b7f-9c03ddae39a5"
+  }, {
+    "condition": "$session.params.local_trigger = \"no_input\" AND $session.params.local_noinput_counter \u003e= 3",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook - WFAS Cancel",
+    "name": "0d0a22d1-1c53-4e0e-841d-50bd273036e7"
+  }, {
+    "condition": "$session.params.local_trigger = \"no_match\" AND $session.params.local_nomatch_counter = 1",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I didn't quite get that." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "\u003cspeak\u003eI have availability between\u003csay-as interpret-as=\"date\" format=\"md\"\u003e$session.params.first_available_md\u003c/say-as\u003e\u003cbreak time=\"100ms\"/\u003e and \u003csay-as interpret-as=\"date\" format=\"md\"\u003e$session.params.last_available_md\u003c/say-as\u003e. What day works for you?\u003c/speak\u003e" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je n'ai pas bien compris." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "\u003cspeak\u003eJ’ai des disponibilités entre\u003csay-as interpret-as=\"date\" format=\"md\"\u003e$session.params.first_available_md\u003c/say-as\u003e\u003cbreak time=\"100ms\"/\u003e et \u003csay-as interpret-as=\"date\" format=\"md\"\u003e$session.params.last_available_md\u003c/say-as\u003e. Quel jour vous convient?\u003c/speak\u003e" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "e322f03f-11ec-4557-9c18-f56e4433a312"
+  }, {
+    "condition": "$session.params.local_trigger = \"no_match\" AND $session.params.local_nomatch_counter = 2",
+    "triggerFulfillment": {
+      "messages": [ {
+        "text": {
+          "text": [ "I still didn't get that." ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "\u003cspeak\u003eI have availability between\u003csay-as interpret-as=\"date\" format=\"md\"\u003e$session.params.first_available_md\u003c/say-as\u003e\u003cbreak time=\"100ms\"/\u003e and \u003csay-as interpret-as=\"date\" format=\"md\"\u003e$session.params.last_available_md\u003c/say-as\u003e. What day works for you?\u003c/speak\u003e" ]
+        },
+        "languageCode": "en"
+      }, {
+        "text": {
+          "text": [ "Je n'ai toujours pas compris." ]
+        },
+        "languageCode": "fr-ca"
+      }, {
+        "text": {
+          "text": [ "\u003cspeak\u003eJ’ai des disponibilités entre\u003csay-as interpret-as=\"date\" format=\"md\"\u003e$session.params.first_available_md\u003c/say-as\u003e\u003cbreak time=\"100ms\"/\u003e et \u003csay-as interpret-as=\"date\" format=\"md\"\u003e$session.params.last_available_md\u003c/say-as\u003e. Quel jour vous convient?\u003c/speak\u003e" ]
+        },
+        "languageCode": "fr-ca"
+      } ]
+    },
+    "name": "c687c256-5b18-487f-bda2-109b4baf9aa6"
+  }, {
+    "condition": "$session.params.local_trigger = \"no_match\" AND $session.params.local_nomatch_counter \u003e= 3",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Webhook - WFAS Cancel",
+    "name": "995d17c1-f75a-480e-a575-da45c9b9d05c"
+  }, {
+    "condition": "true",
+    "triggerFulfillment": {
+    
+    },
+    "targetPage": "Previous Page",
+    "name": "980403b6-86bc-40b1-a6a9-bf3442766d7c"
+  } ]
+}
