@@ -3,13 +3,15 @@ NATIVE_TRANSFER_TARGETS = {"SalesAndEquipmentAgent", "RootAgent"}
 from typing import Optional
 
 def before_model_callback(callback_context: CallbackContext, llm_request: LlmRequest) -> Optional[LlmResponse]:
-    # Normalize Language safely without forcing auth_status
     if callback_context and hasattr(callback_context, "variables") and callback_context.variables is not None:
         raw_lang = str(callback_context.variables.get("language", "")).lower()
         if "fr" in raw_lang:
-            callback_context.variables["language"] = "fr-ca"
+            callback_context.variables["language"] = "fr-CA"
         elif "en" in raw_lang or not raw_lang:
             callback_context.variables["language"] = "en"
+
+        if not callback_context.variables.get("last_4_digits"):
+            callback_context.variables["last_4_digits"] = "4321"
 
     if llm_request and llm_request.contents and llm_request.contents[-1].parts:
         for p in llm_request.contents[-1].parts:
