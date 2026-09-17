@@ -1,9 +1,8 @@
-NATIVE_TRANSFER_TARGETS = {"RootAgent", "SalesAndEquipmentAgent"}
+NATIVE_TRANSFER_TARGETS = {"SalesAndEquipmentAgent", "RootAgent"}
 
 from typing import Optional
 
 def after_model_callback(callback_context: CallbackContext, llm_response: LlmResponse) -> Optional[LlmResponse]:
-    # --- MIGRATION AUTO-GENERATED: LLM TRANSFER --- 
     if (
         llm_response
         and llm_response.content
@@ -23,49 +22,4 @@ def after_model_callback(callback_context: CallbackContext, llm_response: LlmRes
             new_parts.append(p)
         if modified:
             return LlmResponse.from_parts(parts=new_parts)
-
-    return None
-
-from typing import Optional
-
-def after_model_callback(callback_context: CallbackContext, llm_response: LlmResponse) -> Optional[LlmResponse]:
-    print('Executing after_model_callback validation')
-    # Note: Tool failure overrides are successfully captured in before_model_callback (Pattern A/B) 
-    # to intercept the function response before the LLM generates a response.
-    return None
-
-from typing import Optional
-
-def after_model_callback(callback_context: CallbackContext, llm_response: LlmResponse) -> Optional[LlmResponse]:
-    return None
-
-from typing import Optional
-
-def after_model_callback(callback_context: CallbackContext, llm_response: LlmResponse) -> Optional[LlmResponse]:
-    return None
-
-from typing import Optional
-
-def after_model_callback(callback_context: CallbackContext, llm_response: LlmResponse) -> Optional[LlmResponse]:
-    print("Executing after_model_callback pass-through.")
-    return None
-
-from typing import Optional
-
-def after_model_callback(callback_context: CallbackContext, llm_response: LlmResponse) -> Optional[LlmResponse]:
-    return None
-
-from typing import Optional
-
-def after_model_callback(callback_context: CallbackContext, llm_response: LlmResponse) -> Optional[LlmResponse]:
-    return None
-
-from typing import Optional
-
-def after_model_callback(callback_context: CallbackContext, llm_response: LlmResponse) -> Optional[LlmResponse]:
-    return None
-
-from typing import Optional
-
-def after_model_callback(callback_context: CallbackContext, llm_response: LlmResponse) -> Optional[LlmResponse]:
     return None
