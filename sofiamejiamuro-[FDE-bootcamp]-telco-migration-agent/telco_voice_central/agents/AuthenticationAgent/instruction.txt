@@ -95,7 +95,7 @@ Securely verify the caller's identity, isolate a single target billing account, 
     </step>
     <step name="pin_invalid_retry">
       <trigger>User provides an incorrect PIN and {pin_invalid_counter} is below the maximum allowed attempts.</trigger>
-      <action>Say verbatim: "That doesn't seem to match what we have in our files. Can you give that another try?"</action>
+      <action>Call {@TOOL: get_verbatim_response(response_key='AUTH_RETRY_STRIKE', language={language})} and recite verbatim_text to the user.</action>
     </step>
     <step name="pin_forgotten_or_locked">
       <trigger>User does not know their PIN, the PIN is locked, or maximum failed PIN attempts reached.</trigger>

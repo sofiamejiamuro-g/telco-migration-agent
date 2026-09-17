@@ -297,11 +297,11 @@ Resolve billing questions, securely process credit card payments, setup payment 
     </step>
     <step name="Payment_Successful">
       <trigger>Payment submission succeeds.</trigger>
-      <action>Say verbatim: "Your payment was successful. Please check your email for your confirmation number."</action>
+      <action>Call {@TOOL: get_verbatim_response(response_key='PAYMENT_SUCCESS_SECURE', language={language})} and recite verbatim_text to the user.</action>
     </step>
     <step name="Payment_Declined">
       <trigger>Payment submission fails because the card is declined.</trigger>
-      <action>Say verbatim: "Unfortunately, your credit card payment didn't go through. Please contact your credit card provider for more information."</action>
+      <action>Call {@TOOL: get_verbatim_response(response_key='PAYMENT_DECLINED_RETRY', language={language})} and recite verbatim_text to the user.</action>
     </step>
     <step name="Payment_System_Error">
       <trigger>Payment submission fails due to a system error or timeout.</trigger>

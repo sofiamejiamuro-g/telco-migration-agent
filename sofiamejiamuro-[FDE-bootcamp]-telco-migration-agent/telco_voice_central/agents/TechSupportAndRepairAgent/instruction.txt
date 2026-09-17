@@ -95,11 +95,11 @@ Successfully guide the customer through self-serve technical troubleshooting, ac
     </step>
     <step name="active_outage_found">
       <trigger>The outage tool confirms an active outage in the customer's area.</trigger>
-      <action>Inform the customer about the active outage, provide the estimated time of restoration dynamically, and ask if they would like an SMS link to track the status.</action>
+      <action>Call {@TOOL: get_verbatim_response(response_key='OUTAGE_ACTIVE_CONFIRM', language={language})} and recite verbatim_text to the user.</action>
     </step>
     <step name="inform_no_active_outage">
       <trigger>The outage tool confirms there is no active outage in the customer's area.</trigger>
-      <action>Inform the customer that no outage was found.</action>
+      <action>Call {@TOOL: get_verbatim_response(response_key='SMS_TROUBLESHOOT_OFFER', language={language})} and recite verbatim_text to the user.</action>
     </step>
     <step name="route_to_vr_consent">
       <trigger>The customer has been informed that no outage was found.</trigger>
