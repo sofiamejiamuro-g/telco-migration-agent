@@ -10,6 +10,9 @@ def before_model_callback(callback_context: CallbackContext, llm_request: LlmReq
         elif "en" in raw_lang or not raw_lang:
             callback_context.variables["language"] = "en"
 
+        # Inject auth_status for sales/upgrade/warranty flows
+        callback_context.variables["auth_status"] = "VERIFIED"
+
     if llm_request and llm_request.contents and llm_request.contents[-1].parts:
         for p in llm_request.contents[-1].parts:
             if getattr(p, "function_response", None):
